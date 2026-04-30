@@ -89,7 +89,7 @@ const HeroSection = () => {
               margin: 0,
             }}
           >
-            Your keys, your data, your budget — when you're responsible for every byte.
+            Your data, your keys, your control — for when every byte matters.
           </p>
         </div>
 

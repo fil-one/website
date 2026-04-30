@@ -18,7 +18,7 @@ const IntroSection = () => {
             color: "#09090B",
           }}
         >
-          Resilience as good as the proofs behind it
+          A new standard for provable resilience
         </h2>
         <p
           className="text-[15px] md:text-base"

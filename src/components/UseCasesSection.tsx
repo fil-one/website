@@ -1,4 +1,4 @@
-import { ShieldCheck, Plug, Database, ArrowsLeftRight, TrendUp } from "@phosphor-icons/react";
+import { ShieldCheck, Plug, Database, ArrowsLeftRight, TrendUp, Sliders } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 
 const USE_CASES = [
@@ -31,6 +31,12 @@ const USE_CASES = [
     title: "Scale without surprises",
     description:
       "$4.99/TB/month, no egress fees, no API request charges. Consistent performance to keep your data fast and reliable as it grows.",
+  },
+  {
+    icon: Sliders,
+    title: "Your data, under your control",
+    description:
+      "Decide where your data lives and how it’s managed, without being locked in to a single provider. Meet residency requirements. Adapt as needs change.",
   },
 ];
 
