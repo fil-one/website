@@ -68,13 +68,13 @@ const ScatterChart = () => (
     style={{
       border: "1px solid rgba(0,0,0,0.07)",
       borderRadius: 16,
-      padding: "8px 24px 32px",
+      padding: "20px 0 0",
       backgroundColor: "#FFFFFF",
       overflowX: "auto",
     }}
   >
     <svg
-      viewBox="0 0 1000 532"
+      viewBox="0 0 1000 548"
       style={{ width: "100%", minWidth: 560, display: "block" }}
       role="img"
       aria-label="Scatter chart: FilOne sits above the cost-performance frontier — fastest throughput at the lowest cost"
@@ -199,20 +199,24 @@ const ScatterChart = () => (
       <text x="130" y="178" fill="#0090FF" fontSize="13" fontFamily="inherit" fontWeight="500">Fastest, lowest cost.</text>
     </svg>
 
-    {/* Meta note */}
-    <p style={{
-      fontFamily: "'Funnel Sans', sans-serif",
-      fontSize: 12,
-      color: "#94a3b8",
-      marginTop: 20,
-      lineHeight: 1.6,
-      textAlign: "left" as const,
-      paddingLeft: "3%",
-      paddingRight: "3%",
+    {/* Meta note — footer strip style */}
+    <div style={{
+      backgroundColor: "#F4F4F5",
+      borderTop: "1px solid rgba(0,0,0,0.06)",
+      borderRadius: "0 0 16px 16px",
+      padding: "12px 24px",
+      marginTop: 0,
     }}>
-      Each dot is one provider. Position reflects list pricing for a 10 TB team with 10 TB of monthly egress, and measured
-      sustained read throughput from Barcelona on a tuned parallel S3 client. Cost axis is logarithmic.
-    </p>
+      <p style={{
+        fontFamily: "'Funnel Sans', sans-serif",
+        fontSize: 12,
+        color: "#52525B",
+        lineHeight: 1.6,
+        margin: 0,
+      }}>
+        Each dot is one provider. Position reflects list pricing for a 10 TB team with 10 TB of monthly egress, and measured sustained read throughput from Barcelona on a tuned parallel S3 client. Cost axis is logarithmic.
+      </p>
+    </div>
   </div>
 );
 
@@ -302,7 +306,7 @@ const FEATURES = [
 const WORKLOADS = [
   {
     tag: "Creative and media",
-    title: "Pull a 50 GB master into your NLE.",
+    title: "Pull a 50 GB master into your NLE",
     desc: "Editors, colorists, and VFX artists load large project files straight into Premiere, DaVinci Resolve, and Nuke. Scrubbing and playback stay snappy.",
     stats: [
       { label: "Load time", rows: [{ name: "FilOne", val: "7 min", win: true }, { name: "AWS Madrid", val: "7 min", win: false }] },
@@ -313,7 +317,7 @@ const WORKLOADS = [
   },
   {
     tag: "AI and ML",
-    title: "Stream a 10 TB dataset, epoch after epoch.",
+    title: "Stream a 10 TB dataset, epoch after epoch",
     desc: "Foundation-model trainers, CV teams, and fine-tuning loops. Sustained parallel throughput across tens of thousands of shards without rate-limit surprises.",
     stats: [
       { label: "Time to stream one full epoch", rows: [{ name: "FilOne", val: "7 hr", win: true }, { name: "AWS Madrid", val: "11 hr", win: false }] },
@@ -324,7 +328,7 @@ const WORKLOADS = [
   },
   {
     tag: "SaaS and consumer apps",
-    title: "Serve user media without watching the meter.",
+    title: "Serve user media without watching the meter",
     desc: "Image platforms, DAM tools, document vaults, media-heavy consumer apps. Every customer request pulls bytes. Every pull is free.",
     stats: [
       { label: "Cost to serve 1M user fetches", rows: [{ name: "FilOne", val: "$0", win: true }, { name: "AWS Madrid", val: "$92", win: false }] },
@@ -335,7 +339,7 @@ const WORKLOADS = [
   },
   {
     tag: "Backup and archive",
-    title: "Ingest at line rate. Retrieve without penalty.",
+    title: "Ingest at line rate. Retrieve without penalty",
     desc: "MSPs, Veeam and Restic customers, photo archives, compliance retention. Object Lock in Compliance mode. Retrieval costs nothing.",
     stats: [
       { label: "Time to ingest 1 TB", rows: [{ name: "FilOne", val: "1.5 hr", win: true }, { name: "AWS Madrid", val: "2.2 hr", win: false }] },
@@ -878,7 +882,7 @@ const BarcelonaLandingPage = () => {
                       </span>
                       <h3 style={{
                         fontFamily: "'Funnel Sans', sans-serif",
-                        fontWeight: 600,
+                        fontWeight: 500,
                         fontSize: 20,
                         color: "#09090B",
                         marginBottom: 10,
@@ -926,7 +930,7 @@ const BarcelonaLandingPage = () => {
                                 <div key={r.name} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
                                   <span style={{
                                     fontFamily: "'Funnel Sans', sans-serif",
-                                    fontWeight: 600,
+                                    fontWeight: r.win ? 600 : 400,
                                     fontSize: 13.5,
                                     color: "#09090B",
                                     width: 100,
@@ -944,7 +948,7 @@ const BarcelonaLandingPage = () => {
                                   </div>
                                   <span style={{
                                     fontFamily: "'Funnel Sans', sans-serif",
-                                    fontWeight: 700,
+                                    fontWeight: r.win ? 700 : 400,
                                     fontSize: 14,
                                     color: r.win ? "#0070CC" : "#09090B",
                                     width: 68,
@@ -1082,7 +1086,7 @@ const BarcelonaLandingPage = () => {
 
               <div style={{ position: "relative" }}>
                 <h2
-                  className="text-[26px] md:text-[40px]"
+                  className="text-[26px] md:text-[32px]"
                   style={{
                     fontFamily: "'Aspekta', sans-serif",
                     fontWeight: 500,
@@ -1092,7 +1096,7 @@ const BarcelonaLandingPage = () => {
                     marginBottom: 12,
                   }}
                 >
-                  Ship your next project on FilOne.
+                  Ship your next project on FilOne
                 </h2>
                 <p
                   style={{

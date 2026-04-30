@@ -14,9 +14,10 @@ const FloatingSupportButton = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Hide on /support and on ads landing pages (/:lang/:city)
+  // Hide on /support and on ads landing pages (/:lang/:city) but not on /lp/* pages
   const segments = pathname.split("/").filter(Boolean);
-  if (pathname === "/support" || segments.length === 2) return null;
+  const isAdsPage = segments.length === 2 && segments[0] !== "lp";
+  if (pathname === "/support" || isAdsPage) return null;
 
   return (
     <a
