@@ -10,6 +10,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ContactSales from "./pages/ContactSales";
 import Support from "./pages/Support";
 import AdsLandingPage from "./pages/AdsLandingPage";
+import BarcelonaLandingPage from "./pages/BarcelonaLandingPage";
 import FloatingSupportButton from "./components/FloatingSupportButton";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/contact-sales" element={<ContactSales />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/lp/barcelona" element={<BarcelonaLandingPage />} />
           <Route path="/:lang/:city" element={<AdsLandingPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

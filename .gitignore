@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Internal working docs
+landing-page-framework.md
+barcelona-preview.html
