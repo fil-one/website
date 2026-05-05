@@ -5,10 +5,12 @@ const LINKS: Record<string, { label: string; href: string }[]> = {
     { label: "Documentation",  href: "https://docs.fil.one" },
     { label: "Contact sales",  href: "/contact-sales" },
     { label: "Support",        href: "/support" },
+    { label: "Status",         href: "https://fil-one.instatus.com/" },
   ],
   Legal: [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Use",   href: "/terms" },
+    { label: "Acceptable Use", href: "/aup" },
   ],
 };
 
