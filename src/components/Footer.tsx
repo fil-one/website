@@ -17,11 +17,13 @@ const Footer = () => {
       { label: "Documentation", href: "https://docs.fil.one" },
       { label: "Contact sales", href: "/contact-sales" },
       { label: "Support", href: "/support" },
+      { label: "Status", href: "https://fil-one.instatus.com/" },
       { label: "Filecoin", href: "https://filecoin.io" },
     ],
     Legal: [
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms of Use", href: "/terms" },
+      { label: "Acceptable Use", href: "/aup" },
     ],
   };
 
