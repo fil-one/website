@@ -30,7 +30,13 @@ const IntroSection = () => {
             maxWidth: 560,
           }}
         >
-          Everything you expect from the cloud, plus three things it was never designed to support: verifying integrity (independently and continuously), keeping a tamper-proof record of everything that's ever happened to your data, and letting you move it anywhere without getting locked in.
+          Everything you expect from the cloud, plus three things it was never designed to support:{" "}
+          <span style={{ color: "#0070CC", fontWeight: 600 }}>verifying integrity</span>{" "}
+          (independently and continuously),{" "}
+          <span style={{ color: "#0070CC", fontWeight: 600 }}>keeping a tamper-proof record</span>{" "}
+          of everything that's ever happened to your data, and{" "}
+          <span style={{ color: "#0070CC", fontWeight: 600 }}>letting you move it anywhere</span>{" "}
+          without getting locked in.
         </p>
       </div>
     </section>

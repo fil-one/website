@@ -47,21 +47,48 @@ const UseCasesSection = () => {
     <section
       id="features"
       className="w-full"
+      style={{ backgroundColor: "#FFFFFF" }}
     >
-      <div className="flex flex-col gap-12 items-start px-5 md:px-8 py-24 md:py-32 w-full max-w-[1120px] mx-auto">
-      {/* Eyebrow */}
-      <span
-        style={{
-          fontFamily: "'DM Mono', monospace",
-          fontWeight: 500,
-          fontSize: 11.5,
-          letterSpacing: "0.08em",
-          color: "#71717A",
-          textTransform: "uppercase",
-        }}
-      >
-        Features
-      </span>
+      <div className="flex flex-col gap-12 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-[1120px] mx-auto">
+      {/* Heading block */}
+      <div className="flex flex-col gap-3 items-center text-center max-w-[560px]">
+        <span
+          style={{
+            fontFamily: "'DM Mono', monospace",
+            fontWeight: 500,
+            fontSize: 11.5,
+            letterSpacing: "0.08em",
+            color: "#52525B",
+            textTransform: "uppercase",
+          }}
+        >
+          Features
+        </span>
+        <h2
+          style={{
+            fontFamily: "'Aspekta', sans-serif",
+            fontWeight: 500,
+            fontSize: "clamp(24px, 4vw, 32px)",
+            lineHeight: 1.2,
+            letterSpacing: "-0.02em",
+            color: "#09090B",
+            margin: 0,
+          }}
+        >
+          Enterprise storage made simple
+        </h2>
+        <p
+          style={{
+            fontFamily: "'Funnel Sans', sans-serif",
+            fontWeight: 400,
+            fontSize: 16,
+            lineHeight: 1.6,
+            color: "#52525B",
+          }}
+        >
+          S3-compatible storage that's easy to set up and easier to scale — built for reliability, portability, and verifiable data integrity, without the egress bill.
+        </p>
+      </div>
 
       {/* Cards */}
       <div
