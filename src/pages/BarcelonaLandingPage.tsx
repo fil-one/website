@@ -127,10 +127,10 @@ const ScatterChart = () => (
 
       {/* Axis titles */}
       <text x="520" y="500" textAnchor="middle" fill="#475569" fontSize="14" fontFamily="inherit" fontWeight="600">
-        Monthly cost per TB (USD)
+        All-in cost per TB (storage + egress)
       </text>
       <text x="520" y="518" textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="inherit">
-        10 TB stored · 10 TB monthly egress · Barcelona client
+        10 TB stored · 10 TB egress · Barcelona client
       </text>
       <text x="32" y="260" textAnchor="middle" fill="#475569" fontSize="14" fontFamily="inherit" fontWeight="600"
         transform="rotate(-90 32 260)">
@@ -153,7 +153,7 @@ const ScatterChart = () => (
 
       {/* Cost-performance frontier line */}
       <path
-        d="M 137,332 L 169,314 L 325,224 L 729,242 L 743,215 L 787,215"
+        d="M 168,332 L 169,314 L 325,224 L 729,242 L 743,215 L 787,215"
         stroke="#CBD5E1" strokeWidth="1.5" strokeDasharray="8,5" fill="none"
       />
       <text x="600" y="258" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit" fontStyle="italic">
@@ -161,14 +161,14 @@ const ScatterChart = () => (
       </text>
 
       {/* ── Backblaze B2 ── */}
-      <circle cx="137" cy="332" r="9" fill="#94a3b8" />
-      <text x="148" y="354" fill="#334155" fontSize="13" fontFamily="inherit" fontWeight="600">Backblaze B2</text>
-      <text x="148" y="368" fill="#64748b" fontSize="11" fontFamily="inherit">Amsterdam</text>
+      <circle cx="168" cy="332" r="9" fill="#94a3b8" />
 
       {/* ── Wasabi ── */}
       <circle cx="169" cy="314" r="9" fill="#94a3b8" />
-      <text x="192" y="311" fill="#334155" fontSize="13" fontFamily="inherit" fontWeight="600">Wasabi</text>
-      <text x="192" y="325" fill="#64748b" fontSize="11" fontFamily="inherit">Paris</text>
+      <text x="192" y="308" fill="#334155" fontSize="13" fontFamily="inherit" fontWeight="600">Wasabi</text>
+      <text x="192" y="322" fill="#64748b" fontSize="11" fontFamily="inherit">Paris</text>
+      <text x="192" y="342" fill="#334155" fontSize="13" fontFamily="inherit" fontWeight="600">Backblaze B2</text>
+      <text x="192" y="356" fill="#64748b" fontSize="11" fontFamily="inherit">Amsterdam</text>
 
       {/* ── Cloudflare R2 ── */}
       <circle cx="325" cy="224" r="9" fill="#94a3b8" />
@@ -214,7 +214,7 @@ const ScatterChart = () => (
         lineHeight: 1.6,
         margin: 0,
       }}>
-        Each dot is one provider. Position reflects list pricing for a 10 TB team with 10 TB of monthly egress, and measured sustained read throughput from Barcelona on a tuned parallel S3 client. Cost axis is logarithmic.
+        Each dot is one provider. Position reflects all-in cost per TB (storage + egress) for a 10 TB team with 10 TB of monthly egress, and measured sustained read throughput from Barcelona on a tuned parallel S3 client. Cost axis is logarithmic.
       </p>
     </div>
   </div>
@@ -231,12 +231,12 @@ const valueColor = (val: string) => {
 
 // ─── Pricing table data ────────────────────────────────────────────────────────
 const PRICING_ROWS = [
-  { provider: "AWS S3 Standard",      region: "eu-south-2 Madrid",          storage: "$230",    egress: "$461", api: "$2.50", total: "$693",   isFilOne: false },
-  { provider: "Google Cloud Storage", region: "europe-southwest1 Madrid",   storage: "$200",    egress: "$614", api: "$2.50", total: "$817",   isFilOne: false },
-  { provider: "Azure Blob",           region: "Spain Central Madrid",        storage: "$208",    egress: "$445", api: "$2.20", total: "$656",   isFilOne: false },
-  { provider: "Wasabi",               region: "eu-west-2 Paris",            storage: "$72",     egress: "$0",   api: "$0",    total: "$72",    isFilOne: false },
-  { provider: "Backblaze B2",         region: "eu-central-003 Amsterdam",   storage: "$60",     egress: "$40",  api: "$0",    total: "$100",   isFilOne: false },
-  { provider: "FilOne",               region: "EU-West",                    storage: "$49.90",  egress: "$0",   api: "$0",    total: "$49.90", isFilOne: true  },
+  { provider: "AWS S3 Standard",      region: "eu-south-2 Madrid",          storage: "$230",    egress: "$922",   api: "$2.50", total: "$1,155",  isFilOne: false },
+  { provider: "Google Cloud Storage", region: "europe-southwest1 Madrid",   storage: "$200",    egress: "$1,228", api: "$2.50", total: "$1,431",  isFilOne: false },
+  { provider: "Azure Blob",           region: "Spain Central Madrid",        storage: "$208",    egress: "$890",   api: "$2.20", total: "$1,100",  isFilOne: false },
+  { provider: "Wasabi",               region: "eu-west-2 Paris",            storage: "$69.90",  egress: "$0",     api: "$0",    total: "$69.90",  isFilOne: false },
+  { provider: "Backblaze B2",         region: "eu-central-003 Amsterdam",   storage: "$69.50",  egress: "$0",     api: "$0",    total: "$69.50",  isFilOne: false },
+  { provider: "FilOne",               region: "EU-West",                    storage: "$49.90",  egress: "$0",     api: "$0",    total: "$49.90",  isFilOne: true  },
 ];
 
 // ─── Feature cards ─────────────────────────────────────────────────────────────
@@ -428,7 +428,7 @@ const BarcelonaLandingPage = () => {
                   color: "#0070CC",
                 }}
               >
-                For creative, AI, and SaaS teams across Southern Europe
+                For creative, AI, and SaaS teams in Barcelona and across the Iberian Peninsula
               </span>
             </div>
 
@@ -462,7 +462,7 @@ const BarcelonaLandingPage = () => {
                 margin: 0,
               }}
             >
-              FilOne is S3-compatible object storage built for European teams — hyperscaler-grade performance, on European fiber, without the hyperscaler invoice. Drop it into your existing stack in minutes.
+              FilOne is S3-compatible object storage built for European teams. You get hyperscaler-grade performance, served from EU infrastructure, without the hyperscaler invoice. Drop it into your existing stack in minutes.
             </p>
 
             {/* CTAs */}
@@ -499,9 +499,9 @@ const BarcelonaLandingPage = () => {
           <div className="flex flex-col gap-10 w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-4 items-center text-center max-w-[560px] mx-auto">
               <SectionLabel>The problem</SectionLabel>
-              <SectionHeading>Cloud storage wasn't designed for European teams.</SectionHeading>
+              <SectionHeading>Cloud storage wasn't designed for Barcelona teams.</SectionHeading>
               <SectionSub>
-                Most S3-compatible storage options are priced for global enterprises — not for a studio in Barcelona, an AI team in Madrid, or a SaaS company in Milan. Every alternative has a real catch.
+                Most S3-compatible storage options are priced for global enterprises, not for a studio in Poblenou, an AI team in 22@, or a SaaS company serving European customers from a Madrid HQ. Every alternative on the market today comes with a real catch.
               </SectionSub>
             </div>
 
@@ -511,21 +511,21 @@ const BarcelonaLandingPage = () => {
                   label: "Hyperscalers",
                   pillBg: "#EFF8FF", pillBorder: "rgba(0,144,255,0.2)", pillColor: "#0070CC",
                   title: "Reliable, but the bill keeps growing.",
-                  body: "AWS, Google Cloud, and Azure are the default — not because they're the best value, but because they're the safest choice. You pay €461/month in egress alone for 10 TB. Every read costs you, and teams rarely audit it until it's out of control.",
+                  body: "AWS, Google Cloud, and Azure win the procurement conversation by default. Not because they offer the best value, but because nobody gets fired for picking them. A 10 TB Barcelona workload running on AWS eu-south-2 Madrid burns $922 a month in egress alone, and most teams never audit the line item until it is already out of hand.",
                   catch: "Egress fees compound silently.",
                 },
                 {
                   label: "Budget alternatives",
                   pillBg: "#F0FDF4", pillBorder: "rgba(21,128,61,0.2)", pillColor: "#15803D",
                   title: "Cheaper storage, worse everything else.",
-                  body: "Wasabi and Backblaze are cheaper on storage, but neither has EU-native infrastructure. From Barcelona or Madrid, you're routing through Amsterdam or Paris. Latency suffers and data sovereignty is unclear.",
+                  body: "Wasabi and Backblaze undercut hyperscalers on storage, but neither runs an EU-sovereign region close to you. From Barcelona or Madrid, your traffic loops through Paris or Amsterdam. Latency goes up, GDPR posture gets murky, and your data sits outside European legal jurisdiction.",
                   catch: "Performance and compliance both suffer.",
                 },
                 {
                   label: "Doing nothing",
                   pillBg: "#FFFBEB", pillBorder: "rgba(180,83,9,0.2)", pillColor: "#B45309",
                   title: "The bill is a line item nobody owns.",
-                  body: "In most teams, storage costs are reviewed quarterly at best. AWS billing is opaque by design. The 14× premium keeps compounding — because switching sounds risky and benchmarking takes time nobody has.",
+                  body: "Storage gets reviewed quarterly, if that. AWS billing is opaque by design, switching sounds risky on a Tuesday afternoon, and benchmarking takes time nobody has on the calendar. Meanwhile the 23× premium keeps compounding.",
                   catch: "Inertia is the most expensive option.",
                 },
               ].map(({ label, pillBg, pillBorder, pillColor, title, body, catch: catchLine }) => (
@@ -592,9 +592,9 @@ const BarcelonaLandingPage = () => {
           >
             <div className="flex flex-col gap-3 items-center text-center">
               <SectionLabel>Positioning</SectionLabel>
-              <SectionHeading>A class of our own.</SectionHeading>
+              <SectionHeading>Outside the tradeoff.</SectionHeading>
               <SectionSub>
-                Every other option forces a tradeoff between price and performance.<br />We sit above the curve.
+                Every other option forces a tradeoff between price and performance. FilOne does not. The chart below shows where we land.
               </SectionSub>
             </div>
             <ScatterChart />
@@ -615,7 +615,7 @@ const BarcelonaLandingPage = () => {
               <SectionLabel>Pricing</SectionLabel>
               <SectionHeading>Your monthly bill, six ways.</SectionHeading>
               <SectionSub maxWidth={600}>
-                A 10 TB team in Barcelona, delivering 5 TB of egress each month, running 500,000 object operations.
+                A 10 TB team in Barcelona, delivering 10 TB of egress each month, running 500,000 object operations.
               </SectionSub>
             </div>
 
@@ -778,7 +778,7 @@ const BarcelonaLandingPage = () => {
                 className="text-[15px] md:text-[17px]"
                 style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", maxWidth: 560, margin: 0 }}
               >
-                Compatible with everything your team already uses. Built for the workloads that made object storage worth paying for.
+                Compatible with everything your team already uses. Priced for the workloads that move real data.
               </p>
             </div>
             <div
@@ -788,7 +788,7 @@ const BarcelonaLandingPage = () => {
               {[
                 { icon: Plug,        title: "Drop-in S3 compatibility",    desc: "Same API, same SDKs, same tools. Point your existing workflow at our endpoint and keep shipping. No migration project." },
                 { icon: ArrowsOut,   title: "Zero egress fees",            desc: "Client pulls, customer downloads, dashboard queries. Every read is included. Your bill stays flat at the end of a busy month." },
-                { icon: Globe,       title: "European-native latency",     desc: "Under 15 ms to Barcelona, Madrid, Paris, Milan. On par with hyperscaler Madrid, sovereign by default." },
+                { icon: Globe,       title: "European-native latency",     desc: "Under 15 ms from Barcelona, Madrid, Paris, and Milan. Matches AWS eu-south-2 Madrid round-trip, with EU data sovereignty and European legal jurisdiction by default." },
                 { icon: ShieldCheck, title: "Eleven nines of durability",  desc: "Distributed storage across an independent provider network. Audit-ready proof that your bytes are intact, every day." },
                 { icon: Lock,        title: "Object Lock and versioning",  desc: "Compliance and governance modes for backup targets. Retention periods. Tamper-evident audit logs. Ready for regulated data." },
                 { icon: ChartLine,   title: "Predictable under load",      desc: "Line-rate ingest at 1.5 Gbps per client. Sustained parallel reads. Tight run-to-run variance so your pipelines stop guessing." },
@@ -833,7 +833,7 @@ const BarcelonaLandingPage = () => {
               <SectionLabel>Workloads</SectionLabel>
               <SectionHeading>Built for what your team actually does.</SectionHeading>
               <SectionSub maxWidth={460}>
-                Speed where it changes the day. Savings where they compound.
+                Speed where it matters. Savings that compound month over month.
               </SectionSub>
             </div>
 
@@ -1107,7 +1107,7 @@ const BarcelonaLandingPage = () => {
                     marginBottom: 32,
                   }}
                 >
-                  Free 5 TB evaluation bucket. Onboarding in under an hour.
+                  Free 1 TB evaluation bucket. Onboarding in under 2 minutes.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
