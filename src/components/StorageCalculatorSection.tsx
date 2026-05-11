@@ -118,50 +118,14 @@ export default function StorageCalculatorSection() {
       {/* ── Body ── */}
       <div
         ref={bodyRef}
-        className={`w-full max-w-[680px] flex flex-col gap-4 reveal${bodyInView ? " in-view" : ""}`}
+        className={`w-full max-w-[680px] flex flex-col gap-5 reveal${bodyInView ? " in-view" : ""}`}
       >
 
         {/* ── Input controls — no card ── */}
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
 
-          {/* Presets + custom input row */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-            <div
-              role="group"
-              aria-label="Storage amount presets"
-              style={{ display: "flex", gap: 5 }}
-            >
-              {PRESETS.map((v) => {
-                const active = tb === v;
-                return (
-                  <button
-                    key={v}
-                    onClick={() => handlePreset(v)}
-                    aria-pressed={active}
-                    className={active ? "" : "calc-chip"}
-                    style={{
-                      ...sans,
-                      fontSize: 11,
-                      fontWeight: active ? 500 : 400,
-                      letterSpacing: "0.02em",
-                      color: active ? "#09090B" : "#3F3F46",
-                      backgroundColor: active ? "#FFFFFF" : "rgba(0,0,0,0.04)",
-                      border: active ? "1px solid rgba(0,0,0,0.10)" : "1px solid rgba(0,0,0,0.06)",
-                      borderRadius: 7,
-                      padding: "5px 5px",
-                      cursor: "pointer",
-                      boxShadow: active ? "0 1px 3px rgba(0,0,0,0.08), 0 0 0 0.5px rgba(0,0,0,0.04)" : "none",
-                      transition: "all 0.15s ease",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {displayTB(v)}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Custom number input */}
+          {/* Custom number input — right-aligned above slider */}
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <div
               style={{
                 display: "flex",
@@ -172,7 +136,6 @@ export default function StorageCalculatorSection() {
                 padding: "4px 8px 4px 10px",
                 boxShadow: inputFocused ? "0 0 0 3px rgba(0,144,255,0.12)" : "none",
                 transition: "border-color 0.15s, box-shadow 0.15s",
-                flexShrink: 0,
                 cursor: "text",
               }}
               onClick={() => inputRef.current?.focus()}
@@ -231,9 +194,10 @@ export default function StorageCalculatorSection() {
         <div
           style={{
             backgroundColor: "#FFFFFF",
-            border: "1px solid rgba(0,0,0,0.08)",
+            border: "1px solid rgba(0,0,0,0.10)",
             borderRadius: 20,
             overflow: "hidden",
+            marginTop: 4,
           }}
         >
           {/* Fil One row */}
@@ -242,12 +206,12 @@ export default function StorageCalculatorSection() {
               display: "flex",
               alignItems: "center",
               gap: 10,
-              padding: "16px 20px",
+              padding: "20px 24px",
               backgroundColor: "rgba(0,144,255,0.05)",
               borderBottom: "1px solid rgba(0,144,255,0.1)",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: 7, flexShrink: 0 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 7, flexShrink: 0, minWidth: 110 }}>
               <span style={{ ...sans, fontWeight: 600, fontSize: 14, color: "#09090B", whiteSpace: "nowrap" }}>
                 Fil One
               </span>
@@ -298,11 +262,11 @@ export default function StorageCalculatorSection() {
                   display: "flex",
                   alignItems: "center",
                   gap: 10,
-                  padding: "12px 20px",
+                  padding: "18px 24px",
                   borderBottom: isLast ? "none" : "1px solid rgba(0,0,0,0.04)",
                 }}
               >
-                <div style={{ flexShrink: 0 }}>
+                <div style={{ flexShrink: 0, minWidth: 110 }}>
                   <span style={{ ...sans, fontWeight: 500, fontSize: 13.5, color: "#3F3F46", whiteSpace: "nowrap" }}>
                     {p.name}
                   </span>
@@ -357,14 +321,14 @@ export default function StorageCalculatorSection() {
         {/* ── Savings CTA ── */}
         <div
           className="flex flex-col items-center gap-5"
-          style={{ paddingTop: 32, textAlign: "center" }}
+          style={{ paddingTop: 44, textAlign: "center" }}
         >
           <p
             className="text-[15px] md:text-[17px]"
             style={{ ...sans, fontWeight: 400, color: "#52525B", lineHeight: 1.5, maxWidth: 480 }}
           >
             Switch to Fil One and save at least{" "}
-            <span style={{ color: "#09090B", fontWeight: 600 }}>
+            <span style={{ color: "#0055CC", fontWeight: 700 }}>
               {fmtSavings(savingsVsAWS)}/year
             </span>{" "}
             vs AWS S3.
