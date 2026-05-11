@@ -6,8 +6,8 @@ import filOneLogo from "../assets/fil-one-logo.svg";
 const NAV_LINKS = [
   { label: "Features", anchor: "features" },
   { label: "Compare", anchor: "compare" },
-  { label: "Pricing", anchor: "pricing" },
   { label: "Calculator", anchor: "calculator" },
+  { label: "Pricing", anchor: "pricing" },
   { label: "FAQ", anchor: "faq" },
   { label: "Docs", href: "https://docs.fil.one", external: true },
 ];

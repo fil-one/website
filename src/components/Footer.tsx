@@ -10,8 +10,8 @@ const Footer = () => {
     Navigation: [
       { label: "Features", href: anchor("features") },
       { label: "Compare", href: anchor("compare") },
-      { label: "Pricing", href: anchor("pricing") },
       { label: "Calculator", href: anchor("calculator") },
+      { label: "Pricing", href: anchor("pricing") },
       { label: "FAQ", href: anchor("faq") },
     ],
     Resources: [
