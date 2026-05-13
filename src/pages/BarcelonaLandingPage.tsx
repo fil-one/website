@@ -77,7 +77,7 @@ const ScatterChart = () => (
       viewBox="0 0 1000 548"
       style={{ width: "100%", minWidth: 560, display: "block" }}
       role="img"
-      aria-label="Scatter chart: FilOne sits above the cost-performance frontier — fastest throughput at the lowest cost"
+      aria-label="Scatter chart: Fil One sits above the cost-performance frontier — fastest throughput at the lowest cost"
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
@@ -92,7 +92,7 @@ const ScatterChart = () => (
         </linearGradient>
       </defs>
 
-      {/* FilOne exclusive zone */}
+      {/* Fil One exclusive zone */}
       <path d="M 100 80 L 300 80 L 300 240 L 100 240 Z" fill="url(#filoneZone)" />
 
       {/* Axis frame */}
@@ -190,12 +190,12 @@ const ScatterChart = () => (
       <text x="806" y="209" fill="#334155" fontSize="13" fontFamily="inherit" fontWeight="600">Google Cloud</text>
       <text x="806" y="223" fill="#64748b" fontSize="11" fontFamily="inherit">europe-sw1 Madrid</text>
 
-      {/* ── FilOne (hero dot) ── */}
+      {/* ── Fil One (hero dot) ── */}
       <circle cx="100" cy="170" r="28" fill="#0090FF" opacity="0.14" />
       <circle cx="100" cy="170" r="18" fill="#0090FF" opacity="0.28" />
       <circle cx="100" cy="170" r="12" fill="#0090FF" />
       <circle cx="100" cy="170" r="5"  fill="#fff" />
-      <text x="130" y="162" fill="#0070CC" fontSize="22" fontFamily="inherit" fontWeight="700" letterSpacing="-0.5">FilOne</text>
+      <text x="130" y="162" fill="#0070CC" fontSize="22" fontFamily="inherit" fontWeight="700" letterSpacing="-0.5">Fil One</text>
       <text x="130" y="178" fill="#0090FF" fontSize="13" fontFamily="inherit" fontWeight="500">Fastest, lowest cost.</text>
     </svg>
 
@@ -236,7 +236,7 @@ const PRICING_ROWS = [
   { provider: "Azure Blob",           region: "Spain Central Madrid",        storage: "$208",    egress: "$890",   api: "$2.20", total: "$1,100",  isFilOne: false },
   { provider: "Wasabi",               region: "eu-west-2 Paris",            storage: "$69.90",  egress: "$0",     api: "$0",    total: "$69.90",  isFilOne: false },
   { provider: "Backblaze B2",         region: "eu-central-003 Amsterdam",   storage: "$69.50",  egress: "$0",     api: "$0",    total: "$69.50",  isFilOne: false },
-  { provider: "FilOne",               region: "EU-West",                    storage: "$49.90",  egress: "$0",     api: "$0",    total: "$49.90",  isFilOne: true  },
+  { provider: "Fil One",               region: "EU-West",                    storage: "$49.90",  egress: "$0",     api: "$0",    total: "$49.90",  isFilOne: true  },
 ];
 
 // ─── Feature cards ─────────────────────────────────────────────────────────────
@@ -309,8 +309,8 @@ const WORKLOADS = [
     title: "Pull a 50 GB master into your NLE",
     desc: "Editors, colorists, and VFX artists load large project files straight into Premiere, DaVinci Resolve, and Nuke. Scrubbing and playback stay snappy.",
     stats: [
-      { label: "Load time", rows: [{ name: "FilOne", val: "7 min", win: true }, { name: "AWS Madrid", val: "7 min", win: false }] },
-      { label: "Monthly bill", rows: [{ name: "FilOne", val: "$50", win: true }, { name: "AWS Madrid", val: "$1,154", win: false }] },
+      { label: "Load time", rows: [{ name: "Fil One", val: "7 min", win: true }, { name: "AWS Madrid", val: "7 min", win: false }] },
+      { label: "Monthly bill", rows: [{ name: "Fil One", val: "$50", win: true }, { name: "AWS Madrid", val: "$1,154", win: false }] },
     ],
     speedBadge: "Same speed your team already loves",
     savingsBadge: "23× cheaper",
@@ -320,8 +320,8 @@ const WORKLOADS = [
     title: "Stream a 10 TB dataset, epoch after epoch",
     desc: "Foundation-model trainers, CV teams, and fine-tuning loops. Sustained parallel throughput across tens of thousands of shards without rate-limit surprises.",
     stats: [
-      { label: "Time to stream one full epoch", rows: [{ name: "FilOne", val: "7 hr", win: true }, { name: "AWS Madrid", val: "11 hr", win: false }] },
-      { label: "Monthly bill at training scale", rows: [{ name: "FilOne", val: "$100", win: true }, { name: "AWS Madrid", val: "$9,660", win: false }] },
+      { label: "Time to stream one full epoch", rows: [{ name: "Fil One", val: "7 hr", win: true }, { name: "AWS Madrid", val: "11 hr", win: false }] },
+      { label: "Monthly bill at training scale", rows: [{ name: "Fil One", val: "$100", win: true }, { name: "AWS Madrid", val: "$9,660", win: false }] },
     ],
     speedBadge: "Faster epochs. Almost no infra bill.",
     savingsBadge: "97× cheaper",
@@ -331,8 +331,8 @@ const WORKLOADS = [
     title: "Serve user media without watching the meter",
     desc: "Image platforms, DAM tools, document vaults, media-heavy consumer apps. Every customer request pulls bytes. Every pull is free.",
     stats: [
-      { label: "Cost to serve 1M user fetches", rows: [{ name: "FilOne", val: "$0", win: true }, { name: "AWS Madrid", val: "$92", win: false }] },
-      { label: "Monthly bill at consumer scale", rows: [{ name: "FilOne", val: "$25", win: true }, { name: "AWS Madrid", val: "$4,723", win: false }] },
+      { label: "Cost to serve 1M user fetches", rows: [{ name: "Fil One", val: "$0", win: true }, { name: "AWS Madrid", val: "$92", win: false }] },
+      { label: "Monthly bill at consumer scale", rows: [{ name: "Fil One", val: "$25", win: true }, { name: "AWS Madrid", val: "$4,723", win: false }] },
     ],
     speedBadge: "Same snappy feel for your users.",
     savingsBadge: "189× cheaper",
@@ -342,8 +342,8 @@ const WORKLOADS = [
     title: "Ingest at line rate. Retrieve without penalty",
     desc: "MSPs, Veeam and Restic customers, photo archives, compliance retention. Object Lock in Compliance mode. Retrieval costs nothing.",
     stats: [
-      { label: "Time to ingest 1 TB", rows: [{ name: "FilOne", val: "1.5 hr", win: true }, { name: "AWS Madrid", val: "2.2 hr", win: false }] },
-      { label: "Monthly bill — 50 TB retention", rows: [{ name: "FilOne", val: "$250", win: true }, { name: "AWS Madrid", val: "$1,242", win: false }] },
+      { label: "Time to ingest 1 TB", rows: [{ name: "Fil One", val: "1.5 hr", win: true }, { name: "AWS Madrid", val: "2.2 hr", win: false }] },
+      { label: "Monthly bill — 50 TB retention", rows: [{ name: "Fil One", val: "$250", win: true }, { name: "AWS Madrid", val: "$1,242", win: false }] },
     ],
     speedBadge: "Faster in. Free to pull out.",
     savingsBadge: "5× cheaper",
@@ -360,7 +360,7 @@ const INTEGRATIONS = [
 // ─── Page ──────────────────────────────────────────────────────────────────────
 const BarcelonaLandingPage = () => {
   useSeo({
-    title: "FilOne for Barcelona — Hyperscaler speed. Budget-tier bills.",
+    title: "Fil One for Barcelona — Hyperscaler speed. Budget-tier bills.",
     description:
       "S3-compatible object storage for creative, AI, and SaaS teams across Southern Europe. European-native latency, zero egress fees, $49.90/month for 10 TB.",
     canonical: "https://filone.io/lp/barcelona",
@@ -462,7 +462,7 @@ const BarcelonaLandingPage = () => {
                 margin: 0,
               }}
             >
-              FilOne is S3-compatible object storage built for European teams. You get hyperscaler-grade performance, served from EU infrastructure, without the hyperscaler invoice. Drop it into your existing stack in minutes.
+              Fil One is S3-compatible object storage built for European teams. You get hyperscaler-grade performance, served from EU infrastructure, without the hyperscaler invoice. Drop it into your existing stack in minutes.
             </p>
 
             {/* CTAs */}
@@ -594,7 +594,7 @@ const BarcelonaLandingPage = () => {
               <SectionLabel>Positioning</SectionLabel>
               <SectionHeading>Outside the tradeoff.</SectionHeading>
               <SectionSub>
-                Every other option forces a tradeoff between price and performance. FilOne does not. The chart below shows where we land.
+                Every other option forces a tradeoff between price and performance. Fil One does not. The chart below shows where we land.
               </SectionSub>
             </div>
             <ScatterChart />
@@ -1096,7 +1096,7 @@ const BarcelonaLandingPage = () => {
                     marginBottom: 12,
                   }}
                 >
-                  Ship your next project on FilOne
+                  Ship your next project on Fil One
                 </h2>
                 <p
                   style={{
