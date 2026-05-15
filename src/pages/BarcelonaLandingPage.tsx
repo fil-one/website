@@ -111,12 +111,12 @@ const ScatterChart = () => (
       <line x1="714" y1="80" x2="714" y2="440" stroke="#E2E8F0" strokeWidth="1" strokeDasharray="3,6" />
 
       {/* X axis labels */}
-      <text x="100" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">$5</text>
-      <text x="242" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">$10</text>
-      <text x="430" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">$25</text>
-      <text x="572" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">$50</text>
-      <text x="714" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">$100</text>
-      <text x="940" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">$300</text>
+      <text x="100" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">€5</text>
+      <text x="242" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">€10</text>
+      <text x="430" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">€25</text>
+      <text x="572" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">€50</text>
+      <text x="714" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">€100</text>
+      <text x="940" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">€300</text>
 
       {/* Y axis labels */}
       <text x="88" y="444" textAnchor="end" fill="#94a3b8" fontSize="12" fontFamily="inherit">0</text>
@@ -127,7 +127,7 @@ const ScatterChart = () => (
 
       {/* Axis titles */}
       <text x="520" y="500" textAnchor="middle" fill="#475569" fontSize="14" fontFamily="inherit" fontWeight="600">
-        All-in cost per TB (storage + egress)
+        All-in cost per TB in € (storage + egress)
       </text>
       <text x="520" y="518" textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="inherit">
         10 TB stored · 10 TB egress · Barcelona client
@@ -223,7 +223,7 @@ const ScatterChart = () => (
 // ─── Pricing table helpers ────────────────────────────────────────────────────
 // Colours egress/API cells: $0 → green, large fees → red, small fees → neutral
 const valueColor = (val: string) => {
-  const n = parseFloat(val.replace(/[$,]/g, ""));
+  const n = parseFloat(val.replace(/[$€,]/g, ""));
   if (n === 0)  return "#16a34a"; // green
   if (n > 50)   return "#dc2626"; // red
   return "#52525B";               // neutral
@@ -231,12 +231,12 @@ const valueColor = (val: string) => {
 
 // ─── Pricing table data ────────────────────────────────────────────────────────
 const PRICING_ROWS = [
-  { provider: "AWS S3 Standard",      region: "eu-south-2 Madrid",          storage: "$230",    egress: "$922",   api: "$2.50", total: "$1,155",  isFilOne: false },
-  { provider: "Google Cloud Storage", region: "europe-southwest1 Madrid",   storage: "$200",    egress: "$1,228", api: "$2.50", total: "$1,431",  isFilOne: false },
-  { provider: "Azure Blob",           region: "Spain Central Madrid",        storage: "$208",    egress: "$890",   api: "$2.20", total: "$1,100",  isFilOne: false },
-  { provider: "Wasabi",               region: "eu-west-2 Paris",            storage: "$69.90",  egress: "$0",     api: "$0",    total: "$69.90",  isFilOne: false },
-  { provider: "Backblaze B2",         region: "eu-central-003 Amsterdam",   storage: "$69.50",  egress: "$0",     api: "$0",    total: "$69.50",  isFilOne: false },
-  { provider: "Fil One",               region: "EU-West",                    storage: "$49.90",  egress: "$0",     api: "$0",    total: "$49.90",  isFilOne: true  },
+  { provider: "AWS S3 Standard",      region: "eu-south-2 Madrid",          storage: "€197",    egress: "€790",   api: "€1.83", total: "€990",    isFilOne: false },
+  { provider: "Google Cloud Storage", region: "europe-southwest1 Madrid",   storage: "€171",    egress: "€1,052", api: "€1.83", total: "€1,226",  isFilOne: false },
+  { provider: "Azure Blob",           region: "Spain Central Madrid",        storage: "€178",    egress: "€763",   api: "€1.89", total: "€943",    isFilOne: false },
+  { provider: "Wasabi",               region: "eu-west-2 Paris",            storage: "€59.90",  egress: "€0",     api: "€0",    total: "€59.90",  isFilOne: false },
+  { provider: "Backblaze B2",         region: "eu-central-003 Amsterdam",   storage: "€59.60",  egress: "€0",     api: "€0",    total: "€59.60",  isFilOne: false },
+  { provider: "Fil One",              region: "EU-West",                    storage: "€49.90",  egress: "€0",     api: "€0",    total: "€49.90",  isFilOne: true  },
 ];
 
 // ─── Feature cards ─────────────────────────────────────────────────────────────
@@ -310,7 +310,7 @@ const WORKLOADS = [
     desc: "Editors, colorists, and VFX artists load large project files straight into Premiere, DaVinci Resolve, and Nuke. Scrubbing and playback stay snappy.",
     stats: [
       { label: "Load time", rows: [{ name: "Fil One", val: "7 min", win: true }, { name: "AWS Madrid", val: "7 min", win: false }] },
-      { label: "Monthly bill", rows: [{ name: "Fil One", val: "$50", win: true }, { name: "AWS Madrid", val: "$1,154", win: false }] },
+      { label: "Monthly bill", rows: [{ name: "Fil One", val: "€50", win: true }, { name: "AWS Madrid", val: "€989", win: false }] },
     ],
     speedBadge: "Same speed your team already loves",
     savingsBadge: "23× cheaper",
@@ -321,7 +321,7 @@ const WORKLOADS = [
     desc: "Foundation-model trainers, CV teams, and fine-tuning loops. Sustained parallel throughput across tens of thousands of shards without rate-limit surprises.",
     stats: [
       { label: "Time to stream one full epoch", rows: [{ name: "Fil One", val: "7 hr", win: true }, { name: "AWS Madrid", val: "11 hr", win: false }] },
-      { label: "Monthly bill at training scale", rows: [{ name: "Fil One", val: "$100", win: true }, { name: "AWS Madrid", val: "$9,660", win: false }] },
+      { label: "Monthly bill at training scale", rows: [{ name: "Fil One", val: "€100", win: true }, { name: "AWS Madrid", val: "€8,278", win: false }] },
     ],
     speedBadge: "Faster epochs. Almost no infra bill.",
     savingsBadge: "97× cheaper",
@@ -331,8 +331,8 @@ const WORKLOADS = [
     title: "Serve user media without watching the meter",
     desc: "Image platforms, DAM tools, document vaults, media-heavy consumer apps. Every customer request pulls bytes. Every pull is free.",
     stats: [
-      { label: "Cost to serve 1M user fetches", rows: [{ name: "Fil One", val: "$0", win: true }, { name: "AWS Madrid", val: "$92", win: false }] },
-      { label: "Monthly bill at consumer scale", rows: [{ name: "Fil One", val: "$25", win: true }, { name: "AWS Madrid", val: "$4,723", win: false }] },
+      { label: "Cost to serve 1M user fetches", rows: [{ name: "Fil One", val: "€0", win: true }, { name: "AWS Madrid", val: "€79", win: false }] },
+      { label: "Monthly bill at consumer scale", rows: [{ name: "Fil One", val: "€25", win: true }, { name: "AWS Madrid", val: "€4,047", win: false }] },
     ],
     speedBadge: "Same snappy feel for your users.",
     savingsBadge: "189× cheaper",
@@ -343,7 +343,7 @@ const WORKLOADS = [
     desc: "MSPs, Veeam and Restic customers, photo archives, compliance retention. Object Lock in Compliance mode. Retrieval costs nothing.",
     stats: [
       { label: "Time to ingest 1 TB", rows: [{ name: "Fil One", val: "1.5 hr", win: true }, { name: "AWS Madrid", val: "2.2 hr", win: false }] },
-      { label: "Monthly bill — 50 TB retention", rows: [{ name: "Fil One", val: "$250", win: true }, { name: "AWS Madrid", val: "$1,242", win: false }] },
+      { label: "Monthly bill — 50 TB retention", rows: [{ name: "Fil One", val: "€250", win: true }, { name: "AWS Madrid", val: "€1,064", win: false }] },
     ],
     speedBadge: "Faster in. Free to pull out.",
     savingsBadge: "5× cheaper",
@@ -362,7 +362,7 @@ const BarcelonaLandingPage = () => {
   useSeo({
     title: "Fil One for Barcelona — Hyperscaler speed. Budget-tier bills.",
     description:
-      "S3-compatible object storage for creative, AI, and SaaS teams across Southern Europe. European-native latency, zero egress fees, $49.90/month for 10 TB.",
+      "S3-compatible object storage for creative, AI, and SaaS teams across Southern Europe. European-native latency, zero egress fees, €4.99/TB per month.",
     canonical: "https://filone.io/lp/barcelona",
   });
 
@@ -511,7 +511,7 @@ const BarcelonaLandingPage = () => {
                   label: "Hyperscalers",
                   pillBg: "#EFF8FF", pillBorder: "rgba(0,144,255,0.2)", pillColor: "#0070CC",
                   title: "Reliable, but the bill keeps growing.",
-                  body: "AWS, Google Cloud, and Azure win the procurement conversation by default. Not because they offer the best value, but because nobody gets fired for picking them. A 10 TB Barcelona workload running on AWS eu-south-2 Madrid burns $922 a month in egress alone, and most teams never audit the line item until it is already out of hand.",
+                  body: "AWS, Google Cloud, and Azure win the procurement conversation by default. Not because they offer the best value, but because nobody gets fired for picking them. A 10 TB Barcelona workload running on AWS eu-south-2 Madrid burns €790 a month in egress alone, and most teams never audit the line item until it is already out of hand.",
                   catch: "Egress fees compound silently.",
                 },
                 {
@@ -754,6 +754,9 @@ const BarcelonaLandingPage = () => {
                 </tbody>
               </table>
             </div>
+            <p className="text-xs text-slate-500 mt-4">
+              Competitor prices converted from USD at €1 = $1.17 (ECB rate, May 2026). FilOne is priced natively in EUR at €4.99/TB.
+            </p>
           </div>
         </section>
 
