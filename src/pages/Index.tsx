@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import UseCasesSection from "@/components/UseCasesSection";
@@ -53,6 +54,13 @@ const softwareSchema = {
 };
 
 const Index = () => {
+  useEffect(() => {
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView();
+  }, []);
+
   useSeo({
     title: "Fil One — S3-Compatible Object Storage Built for the AI Era",
     description:
