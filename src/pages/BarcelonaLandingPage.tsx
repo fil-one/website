@@ -470,7 +470,7 @@ const BarcelonaLandingPage = () => {
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
                 <span className="btn-primary-inner">Try 30 days for free</span>
               </a>
-              <a href="/contact-sales" className="btn-secondary">
+              <a href="/lp/barcelona/contacto" className="btn-secondary">
                 Talk to an expert
               </a>
             </div>
@@ -841,8 +841,7 @@ const BarcelonaLandingPage = () => {
             </div>
 
             <div
-              className="reveal-group"
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="reveal-group grid grid-cols-1 md:grid-cols-2 gap-4"
             >
               {WORKLOADS.map((w, wi) => {
                 // parse numeric value for bar width calculation
@@ -1117,7 +1116,7 @@ const BarcelonaLandingPage = () => {
                   <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark">
                     <span className="btn-primary-inner">Try 30 days for free</span>
                   </a>
-                  <a href="/contact-sales" className="btn-secondary btn-secondary-dark">
+                  <a href="/lp/barcelona/contacto" className="btn-secondary btn-secondary-dark">
                     Talk to an expert
                   </a>
                 </div>
