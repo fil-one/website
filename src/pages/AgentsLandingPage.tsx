@@ -342,9 +342,6 @@ const AgentsLandingPage = () => {
   };
   const { ref: compRef,     inView: compInView     } = useInView({ threshold: 0.04 });
   const { ref: devRef,      inView: devInView      } = useInView({ threshold: 0.04 });
-  const { ref: networkRef,  inView: networkInView  } = useInView({ threshold: 0.04 });
-  const { ref: costRef,     inView: costInView     } = useInView({ threshold: 0.04 });
-  const { ref: sandboxRef,  inView: sandboxInView  } = useInView({ threshold: 0.04 });
   const { ref: useCasesRef, inView: useCasesInView } = useInView({ threshold: 0.04 });
   const { ref: learnRef,    inView: learnInView    } = useInView({ threshold: 0.04 });
 
@@ -540,11 +537,6 @@ const AgentsLandingPage = () => {
                 </thead>
                 <tbody>
                   {COMPARISON_ROWS.map((row) => {
-                    const isPositive =
-                      row.filone === "$0" ||
-                      row.filone === "Included" ||
-                      row.filone === "Yes" ||
-                      row.filone === "None";
                     return (
                       <tr
                         key={row.item}
