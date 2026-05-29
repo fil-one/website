@@ -3,7 +3,7 @@ import LandingNavbar from "@/components/LandingNavbar";
 import LandingFooter from "@/components/LandingFooter";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
-import { ArrowUpRight, Copy, Check, ShieldCheck, Plug, TrendUp } from "@phosphor-icons/react";
+import { ArrowUpRight, Copy, Check, CheckCircle, ShieldCheck, Plug, TrendUp, CaretRight } from "@phosphor-icons/react";
 
 // ─── Grid texture ──────────────────────────────────────────────────────────────
 const GRID_SVG = encodeURIComponent(
@@ -295,9 +295,25 @@ const COST_ROWS = [
 
 // ─── Use cases data ────────────────────────────────────────────────────────────
 const USE_CASES = [
-  { icon: ShieldCheck,     title: "Chain-of-sight evidence",                      description: "Every artefact your agent produces — generated code, audit logs, intermediate reasoning outputs, image outputs — stored with cryptographic integrity. When you need to verify what an agent did, when, and in what state, the record is there. Not in a proprietary log format. In S3-compatible object storage you can pull with any tool." },
-  { icon: Plug,            title: "Control your own cloud workspace",              description: "A persistent, agent-accessible workspace where your coding agent, retrieval pipeline, and toolchain share a single storage layer. One bucket, one set of keys, everything your agent touches in one place. We're building structured tooling around this — for now, it's S3 buckets you own and your agent can reach." },
-  { icon: TrendUp,         title: "Memory at scale",                              description: "Conversation history, long-term context, document corpora for retrieval-augmented generation. Store at volume without per-call fees eroding the economics. A 10M-token conversation history across thousands of sessions is a storage problem, not a database problem. We're building retrieval tooling on top of this foundation — flat pricing applies to the whole stack.", badge: "RAG Coming Soon", waitlist: true },
+  {
+    icon: ShieldCheck,
+    title: "Persistent agent memory and artifacts",
+    description: "Your agents write session state, conversation history, checkpoints, and generated outputs straight to S3 buckets, and read them back on the next run. Flat pricing means the loop doesn't cost you — thousands of small reads and writes price the same as a handful. Keep everything your agents produce instead of deleting it to stay in budget. Plain S3: works today with boto3, the AWS CLI, or any SDK.",
+  },
+  {
+    icon: Plug,
+    title: "A storage tool your agent can call directly",
+    description: "Give your agent read/write/list access to your buckets without hand-writing the S3 glue. The Agent Toolkit exposes storage as a native tool you drop into Claude Desktop, Cursor, or your framework via MCP, so the agent reaches storage through a clean interface, and the data stays in buckets you own, not a third-party SaaS.",
+    badge: "Agent Toolkit coming soon",
+    waitlist: true,
+  },
+  {
+    icon: TrendUp,
+    title: "A queryable knowledge base over your buckets",
+    description: "Point a retrieval agent at a bucket and query it in plain language. Files index as they land and semantic search runs on your own model keys. Store the whole corpus at volume — flat pricing makes a large document set a storage cost, not a per-query tax.",
+    badge: "RAG Coming soon",
+    waitlist: true,
+  },
 ];
 
 // ─── Syntax highlighter ────────────────────────────────────────────────────────
@@ -398,7 +414,7 @@ const AgentsLandingPage = () => {
                   color: "#0070CC",
                 }}
               >
-                For developers building AI agents
+                For developers building with AI agents
               </span>
             </div>
 
@@ -412,13 +428,13 @@ const AgentsLandingPage = () => {
                 letterSpacing: "-0.025em",
                 color: "#09090B",
                 textAlign: "center",
-                maxWidth: 680,
+                maxWidth: 600,
                 margin: 0,
               }}
             >
               Agents need space to run.{" "}
               <span style={{ color: "#0090FF" }}>
-                This won't let them run up your bill.
+                Fil One won't let them run up your bill.
               </span>
             </h1>
 
@@ -436,7 +452,7 @@ const AgentsLandingPage = () => {
               }}
             >
               S3-compatible object storage at{" "}
-              <span style={{ color: "#0090FF", fontWeight: 600 }}>$4.99/TB</span>{" "}flat.<br />No egress. No per-request fees.
+              <span style={{ color: "#0090FF", fontWeight: 600 }}>$4.99/TB per month</span>{" "}flat.<br />No egress. No per-request fees.
             </p>
 
             {/* CTAs */}
@@ -485,14 +501,15 @@ const AgentsLandingPage = () => {
               <SectionHeading>Standard storage keeps the meter running while your agent works</SectionHeading>
               <div className="flex flex-col gap-4" style={{ marginTop: 4 }}>
                 <SectionSub maxWidth={640}>
-                  Agents don't do one task and stop. They fetch, write, retry, and fetch again,
-                  thousands of times for a single task. With traditional S3 pricing, every
-                  operation has a cost. The bill compounds because the work compounds.
+                  Agents behave differently from any workload hyperscalers were designed for.
+                  They fetch, write, retry, and fetch again, thousands of times for a single
+                  task. With traditional S3 pricing, every operation has a cost. The bill
+                  compounds because the work compounds.
                 </SectionSub>
                 <SectionSub maxWidth={640}>
-                  Most teams end up deleting the data their agents generate because keeping it
-                  costs too much. The context, history, and outputs your agent built up last
-                  month — gone.
+                  Most teams end up deleting the data their agents generate because it costs
+                  too much to keep. The valuable context, history, and outputs your agent
+                  built up last month, gone.
                 </SectionSub>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 16, lineHeight: 1.65, color: "#09090B", margin: 0 }}>
                   Fil One changes the model. Let your agents experiment and keep what they generate.
@@ -500,140 +517,7 @@ const AgentsLandingPage = () => {
               </div>
             </div>
 
-            {/* Cost math callout */}
-            <div
-              style={{
-                background: "linear-gradient(135deg, #EBF5FF 0%, #F0F7FF 100%)",
-                border: "1px solid rgba(0,144,255,0.12)",
-                borderRadius: 14,
-                padding: "32px 36px",
-                display: "flex",
-                flexDirection: "column",
-                gap: 28,
-                width: "100%",
-              }}
-            >
-              {/* Label */}
-              <span
-                style={{
-                  fontFamily: "'DM Mono', monospace",
-                  fontWeight: 500,
-                  fontSize: 11,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  color: "#71717A",
-                }}
-              >
-                <span style={{ color: "#0090FF" }}>1M</span> operations (PUT + GET mix) · <span style={{ color: "#0090FF" }}>100 GB</span> egress
-              </span>
-
-              {/* Comparison row */}
-              <div style={{ display: "flex", alignItems: "stretch" }}>
-                {/* AWS column */}
-                <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
-                  <span
-                    style={{
-                      fontFamily: "'DM Mono', monospace",
-                      fontWeight: 500,
-                      fontSize: 10.5,
-                      letterSpacing: "0.07em",
-                      textTransform: "uppercase",
-                      color: "#A1A1AA",
-                    }}
-                  >
-                    AWS S3
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "'Aspekta', sans-serif",
-                      fontWeight: 500,
-                      fontSize: 44,
-                      lineHeight: 1,
-                      letterSpacing: "-0.03em",
-                      color: "#09090B",
-                    }}
-                  >
-                    ~$97
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "'Funnel Sans', sans-serif",
-                      fontSize: 13,
-                      color: "#71717A",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    request + egress fees alone
-                  </span>
-                </div>
-
-                {/* Divider */}
-                <div
-                  style={{
-                    width: 1,
-                    backgroundColor: "rgba(0,144,255,0.15)",
-                    alignSelf: "stretch",
-                    flexShrink: 0,
-                    margin: "0 32px",
-                  }}
-                />
-
-                {/* Fil One column */}
-                <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
-                  <span
-                    style={{
-                      fontFamily: "'DM Mono', monospace",
-                      fontWeight: 500,
-                      fontSize: 10.5,
-                      letterSpacing: "0.07em",
-                      textTransform: "uppercase",
-                      color: "#0090FF",
-                    }}
-                  >
-                    Fil One
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "'Aspekta', sans-serif",
-                      fontWeight: 500,
-                      fontSize: 44,
-                      lineHeight: 1,
-                      letterSpacing: "-0.03em",
-                      color: "#0070CC",
-                    }}
-                  >
-                    $0
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "'Funnel Sans', sans-serif",
-                      fontSize: 13,
-                      color: "#71717A",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    same workload, same fees
-                  </span>
-                </div>
-
-                {/* CTA — same row, right edge, vertically centered */}
-                <div style={{ display: "flex", alignItems: "flex-end", marginLeft: "auto", paddingLeft: 40 }}>
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
-                    <span className="btn-primary-inner">Start for free</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        {/* ── Cost breakdown table ──────────────────────────────────────────── */}
-        <section
-          className="px-5 md:px-8 pb-24 md:pb-32 w-full"
-          style={{ backgroundColor: "#F9FAFB" }}
-        >
-          <div className="w-full max-w-[1120px] mx-auto">
+            {/* Comparison table */}
             <div style={{ overflowX: "auto" }}>
               <table
                 style={{
@@ -688,6 +572,142 @@ const AgentsLandingPage = () => {
                 </tbody>
               </table>
             </div>
+
+            {/* Cost math callout */}
+            <div
+              style={{
+                background: "linear-gradient(135deg, #EBF5FF 0%, #F0F7FF 100%)",
+                border: "1px solid rgba(0,144,255,0.12)",
+                borderRadius: 14,
+                padding: "32px 36px",
+                display: "flex",
+                flexDirection: "column",
+                gap: 28,
+                width: "100%",
+              }}
+            >
+              {/* Label */}
+              <span
+                style={{
+                  fontFamily: "'DM Mono', monospace",
+                  fontWeight: 500,
+                  fontSize: 11,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: "#71717A",
+                }}
+              >
+                <span style={{ color: "#0090FF" }}>2M</span> operations (PUT + GET mix) · <span style={{ color: "#0090FF" }}>1 TB</span> egress · <span style={{ color: "#0090FF" }}>1 TB</span> storage
+              </span>
+
+              {/* Comparison row */}
+              <div style={{ display: "flex", alignItems: "stretch" }}>
+                {/* AWS column */}
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
+                  <span
+                    style={{
+                      fontFamily: "'DM Mono', monospace",
+                      fontWeight: 500,
+                      fontSize: 10.5,
+                      letterSpacing: "0.07em",
+                      textTransform: "uppercase",
+                      color: "#A1A1AA",
+                    }}
+                  >
+                    AWS S3
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "'Aspekta', sans-serif",
+                      fontWeight: 500,
+                      fontSize: 44,
+                      lineHeight: 1,
+                      letterSpacing: "-0.03em",
+                      color: "#09090B",
+                    }}
+                  >
+                    ~$118
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "'Funnel Sans', sans-serif",
+                      fontSize: 13,
+                      color: "#71717A",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    storage + requests + egress
+                  </span>
+                </div>
+
+                {/* Divider */}
+                <div
+                  style={{
+                    width: 1,
+                    backgroundColor: "rgba(0,144,255,0.15)",
+                    alignSelf: "stretch",
+                    flexShrink: 0,
+                    margin: "0 32px",
+                  }}
+                />
+
+                {/* Fil One column */}
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
+                  <span
+                    style={{
+                      fontFamily: "'DM Mono', monospace",
+                      fontWeight: 500,
+                      fontSize: 10.5,
+                      letterSpacing: "0.07em",
+                      textTransform: "uppercase",
+                      color: "#0090FF",
+                    }}
+                  >
+                    Fil One
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "'Aspekta', sans-serif",
+                      fontWeight: 500,
+                      fontSize: 44,
+                      lineHeight: 1,
+                      letterSpacing: "-0.03em",
+                      color: "#0070CC",
+                    }}
+                  >
+                    $4.99
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "'Funnel Sans', sans-serif",
+                      fontSize: 13,
+                      color: "#71717A",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    storage only — requests and egress included
+                  </span>
+                </div>
+
+                {/* CTA — same row, right edge, vertically centered */}
+                <div style={{ display: "flex", alignItems: "flex-end", marginLeft: "auto", paddingLeft: 40 }}>
+                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+                    <span className="btn-primary-inner">Start for free</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <p style={{
+              fontFamily: "'Funnel Sans', sans-serif",
+              fontWeight: 400,
+              fontSize: 12,
+              color: "#52525B",
+              marginTop: 8,
+            }}>
+              AWS S3 Standard pricing as of May 2026, us-east-1. 1 TB = 1,000 GB (decimal). Actual AWS costs vary by tier, region, and volume discounts.
+            </p>
+
           </div>
         </section>
 
@@ -924,7 +944,7 @@ const AgentsLandingPage = () => {
                       </span>
                     )}
                   </div>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 flex-1">
                     <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 15, lineHeight: "1.3", color: "#09090B", margin: 0 }}>
                       {title}
                     </p>
@@ -933,23 +953,22 @@ const AgentsLandingPage = () => {
                     </p>
                   </div>
                   {waitlist && (
-                    <button
+                    <a
+                      href="/waitlist"
+                      className="flex items-center gap-1"
                       style={{
                         fontFamily: "'Funnel Sans', sans-serif",
                         fontWeight: 500,
-                        fontSize: 13,
+                        fontSize: 14,
                         color: "#0090FF",
-                        backgroundColor: "transparent",
-                        border: "1px solid rgba(0,144,255,0.3)",
-                        borderRadius: 9999,
-                        padding: "6px 14px",
-                        cursor: "pointer",
+                        textDecoration: "none",
                         alignSelf: "flex-start",
                         marginTop: 4,
                       }}
                     >
                       Join the waitlist
-                    </button>
+                      <CaretRight size={14} style={{ marginTop: 1 }} />
+                    </a>
                   )}
                 </div>
               ))}
@@ -964,7 +983,7 @@ const AgentsLandingPage = () => {
           style={{ backgroundColor: "#FFFFFF" }}
         >
           <div className="w-full max-w-[1120px] mx-auto">
-          <div className="flex flex-col items-center gap-8 text-center rounded-3xl px-8 py-20 md:py-28"
+          <div className="flex flex-col items-center gap-8 text-center rounded-3xl px-8 py-16 md:py-20 max-w-[560px] mx-auto w-full"
             style={{
               background: "linear-gradient(135deg, #EBF5FF 0%, #EFF8FF 100%)",
               border: "1px solid rgba(0,144,255,0.12)",
@@ -972,6 +991,7 @@ const AgentsLandingPage = () => {
           >
             {/* Big price */}
             <div className="flex flex-col gap-2 items-center">
+              <SectionLabel>Pricing</SectionLabel>
               <span
                 style={{
                   fontFamily: "'Aspekta', sans-serif",
@@ -979,7 +999,7 @@ const AgentsLandingPage = () => {
                   fontSize: "clamp(52px, 10vw, 80px)",
                   lineHeight: 1,
                   letterSpacing: "-0.03em",
-                  color: "#09090B",
+                  color: "#0070CC",
                 }}
               >
                 $4.99
@@ -1047,17 +1067,17 @@ const AgentsLandingPage = () => {
         {/* ── Learn more ───────────────────────────────────────────────────── */}
         <section
           className="px-5 md:px-8 py-24 md:py-32 w-full"
-          style={{ backgroundColor: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.06)" }}
+          style={{ backgroundColor: "#FFFFFF" }}
         >
           <div
             ref={learnRef}
             className={`flex flex-col gap-10 w-full max-w-[1120px] mx-auto reveal${learnInView ? " in-view" : ""}`}
           >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 items-center text-center">
               <SectionLabel>Next steps</SectionLabel>
               <SectionHeading>Learn more</SectionHeading>
-              <SectionSub maxWidth={480}>
-                Start building in minutes, or talk to us first if you're evaluating at scale.
+              <SectionSub maxWidth={380}>
+                Talk to us about your use case, or head to the docs and start building today.
               </SectionSub>
             </div>
 
@@ -1110,8 +1130,7 @@ const AgentsLandingPage = () => {
                     margin: 0,
                   }}
                 >
-                  If you're building something at scale and want to talk through the fit before
-                  committing. No sales pitch. Just engineers.
+                  If you're building something at scale and want to talk through the fit before committing.
                 </p>
               </a>
 
@@ -1153,7 +1172,7 @@ const AgentsLandingPage = () => {
                     lineHeight: "1.3",
                   }}
                 >
-                  docs.fil.one
+                  Docs
                 </p>
                 <p
                   style={{
@@ -1170,19 +1189,6 @@ const AgentsLandingPage = () => {
               </a>
             </div>
 
-            {/* Footer tagline */}
-            <p
-              style={{
-                fontFamily: "'Funnel Sans', sans-serif",
-                fontWeight: 400,
-                fontSize: 14,
-                color: "#A1A1AA",
-                marginTop: 8,
-              }}
-            >
-              S3-compatible object storage. Flat pricing. No egress. Built for the workload,
-              not the vendor relationship.
-            </p>
           </div>
         </section>
 

@@ -15,6 +15,7 @@ import BarcelonaLandingPage from "./pages/BarcelonaLandingPage";
 import ContactSalesBarcelona from "./pages/ContactSalesBarcelona";
 import AiPage from "./pages/AiPage";
 import AgentsLandingPage from "./pages/AgentsLandingPage";
+import WaitlistPage from "./pages/WaitlistPage";
 import FloatingSupportButton from "./components/FloatingSupportButton";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/aup" element={<AcceptableUsePolicy />} />
           <Route path="/ai" element={<AiPage />} />
           <Route path="/lp/agents" element={<AgentsLandingPage />} />
+          <Route path="/waitlist" element={<WaitlistPage />} />
           <Route path="/lp/barcelona" element={<BarcelonaLandingPage />} />
           <Route path="/lp/barcelona/contacto" element={<ContactSalesBarcelona />} />
           <Route path="/:lang/:city" element={<AdsLandingPage />} />
