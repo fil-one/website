@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postbuild": "react-snap",
+    "postbuild": "node -e \"if(!process.env.VERCEL && !process.env.CI) require('child_process').execSync('react-snap', {stdio:'inherit'})\"",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
