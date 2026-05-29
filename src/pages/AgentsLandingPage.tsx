@@ -297,7 +297,7 @@ const COST_ROWS = [
 const USE_CASES = [
   { icon: ShieldCheck,     title: "Chain-of-sight evidence",                      description: "Every artefact your agent produces — generated code, audit logs, intermediate reasoning outputs, image outputs — stored with cryptographic integrity. When you need to verify what an agent did, when, and in what state, the record is there. Not in a proprietary log format. In S3-compatible object storage you can pull with any tool." },
   { icon: Plug,            title: "Control your own cloud workspace",              description: "A persistent, agent-accessible workspace where your coding agent, retrieval pipeline, and toolchain share a single storage layer. One bucket, one set of keys, everything your agent touches in one place. We're building structured tooling around this — for now, it's S3 buckets you own and your agent can reach." },
-  { icon: TrendUp,         title: "Memory at scale",                              description: "Conversation history, long-term context, document corpora for retrieval-augmented generation. Store at volume without per-call fees eroding the economics. A 10M-token conversation history across thousands of sessions is a storage problem, not a database problem. We're building retrieval tooling on top of this foundation — flat pricing applies to the whole stack.", badge: "RAG feature in development" },
+  { icon: TrendUp,         title: "Memory at scale",                              description: "Conversation history, long-term context, document corpora for retrieval-augmented generation. Store at volume without per-call fees eroding the economics. A 10M-token conversation history across thousands of sessions is a storage problem, not a database problem. We're building retrieval tooling on top of this foundation — flat pricing applies to the whole stack.", badge: "RAG Coming Soon", waitlist: true },
 ];
 
 // ─── Syntax highlighter ────────────────────────────────────────────────────────
@@ -435,7 +435,8 @@ const AgentsLandingPage = () => {
                 margin: 0,
               }}
             >
-              S3-compatible object storage at $4.99/TB flat.<br />No egress. No per-request fees.
+              S3-compatible object storage at{" "}
+              <span style={{ color: "#0090FF", fontWeight: 600 }}>$4.99/TB</span>{" "}flat.<br />No egress. No per-request fees.
             </p>
 
             {/* CTAs */}
@@ -499,95 +500,7 @@ const AgentsLandingPage = () => {
               </div>
             </div>
 
-            {/* Comparison table */}
-            <div style={{ overflowX: "auto" }}>
-              <table
-                style={{
-                  width: "100%",
-                  minWidth: 520,
-                  borderCollapse: "collapse",
-                  fontFamily: "'Funnel Sans', sans-serif",
-                }}
-              >
-                <thead>
-                  <tr>
-                    {[
-                      { label: "Cost item", align: "left" },
-                      { label: "AWS S3", align: "right" },
-                      { label: "Fil One", align: "right", blue: true },
-                    ].map(({ label, align, blue }) => (
-                      <th
-                        key={label}
-                        style={{
-                          textAlign: align as "left" | "right",
-                          padding: "11px 16px",
-                          fontSize: 11,
-                          fontWeight: 500,
-                          letterSpacing: "0.06em",
-                          textTransform: "uppercase",
-                          color: blue ? "#0070CC" : "#71717A",
-                          borderBottom: "1px solid rgba(0,0,0,0.08)",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        {label}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {COMPARISON_ROWS.map((row) => {
-                    return (
-                      <tr
-                        key={row.item}
-                        style={{ backgroundColor: "transparent" }}
-                      >
-                        <td
-                          style={{
-                            padding: "14px 16px",
-                            borderBottom: "1px solid rgba(0,0,0,0.06)",
-                            fontSize: 14,
-                            color: "#52525B",
-                          }}
-                        >
-                          {row.item}
-                        </td>
-                        <td
-                          style={{
-                            padding: "14px 16px",
-                            borderBottom: "1px solid rgba(0,0,0,0.06)",
-                            fontSize: 14,
-                            color: "#71717A",
-                            textAlign: "right",
-                          }}
-                        >
-                          {row.aws}
-                        </td>
-                        <td
-                          style={{
-                            padding: "14px 16px",
-                            borderBottom: "1px solid rgba(0,0,0,0.06)",
-                            fontSize: 14,
-                            fontWeight: 600,
-                            color: "#09090B",
-                            textAlign: "right",
-                          }}
-                        >
-                          {row.item === "Storage" ? (
-                            <span style={{ color: "#0070CC", fontWeight: 600 }}>
-                              {row.filone}
-                            </span>
-                          ) : row.filone}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-
             {/* Cost math callout */}
-            <div style={{ marginTop: 16 }}>
             <div
               style={{
                 background: "linear-gradient(135deg, #EBF5FF 0%, #F0F7FF 100%)",
@@ -711,8 +624,70 @@ const AgentsLandingPage = () => {
                 </div>
               </div>
             </div>
-            </div>
 
+          </div>
+        </section>
+
+        {/* ── Cost breakdown table ──────────────────────────────────────────── */}
+        <section
+          className="px-5 md:px-8 pb-24 md:pb-32 w-full"
+          style={{ backgroundColor: "#F9FAFB" }}
+        >
+          <div className="w-full max-w-[1120px] mx-auto">
+            <div style={{ overflowX: "auto" }}>
+              <table
+                style={{
+                  width: "100%",
+                  minWidth: 520,
+                  borderCollapse: "collapse",
+                  fontFamily: "'Funnel Sans', sans-serif",
+                }}
+              >
+                <thead>
+                  <tr>
+                    {[
+                      { label: "Cost item", align: "left" },
+                      { label: "AWS S3", align: "right" },
+                      { label: "Fil One", align: "right", blue: true },
+                    ].map(({ label, align, blue }) => (
+                      <th
+                        key={label}
+                        style={{
+                          textAlign: align as "left" | "right",
+                          padding: "11px 16px",
+                          fontSize: 11,
+                          fontWeight: 500,
+                          letterSpacing: "0.06em",
+                          textTransform: "uppercase",
+                          color: blue ? "#0070CC" : "#71717A",
+                          borderBottom: "1px solid rgba(0,0,0,0.08)",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {label}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {COMPARISON_ROWS.map((row) => (
+                    <tr key={row.item} style={{ backgroundColor: "transparent" }}>
+                      <td style={{ padding: "14px 16px", borderBottom: "1px solid rgba(0,0,0,0.06)", fontSize: 14, color: "#52525B" }}>
+                        {row.item}
+                      </td>
+                      <td style={{ padding: "14px 16px", borderBottom: "1px solid rgba(0,0,0,0.06)", fontSize: 14, color: "#71717A", textAlign: "right" }}>
+                        {row.aws}
+                      </td>
+                      <td style={{ padding: "14px 16px", borderBottom: "1px solid rgba(0,0,0,0.06)", fontSize: 14, fontWeight: 600, color: "#09090B", textAlign: "right" }}>
+                        {row.item === "Storage" ? (
+                          <span style={{ color: "#0070CC", fontWeight: 600 }}>{row.filone}</span>
+                        ) : row.filone}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
 
@@ -913,7 +888,7 @@ const AgentsLandingPage = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 reveal-group">
-              {USE_CASES.map(({ icon: Icon, title, description, badge }) => (
+              {USE_CASES.map(({ icon: Icon, title, description, badge, waitlist }) => (
                 <div
                   key={title}
                   className={`flex flex-col gap-5 p-8 rounded-2xl border reveal${useCasesInView ? " in-view" : ""}`}
@@ -957,6 +932,25 @@ const AgentsLandingPage = () => {
                       {description}
                     </p>
                   </div>
+                  {waitlist && (
+                    <button
+                      style={{
+                        fontFamily: "'Funnel Sans', sans-serif",
+                        fontWeight: 500,
+                        fontSize: 13,
+                        color: "#0090FF",
+                        backgroundColor: "transparent",
+                        border: "1px solid rgba(0,144,255,0.3)",
+                        borderRadius: 9999,
+                        padding: "6px 14px",
+                        cursor: "pointer",
+                        alignSelf: "flex-start",
+                        marginTop: 4,
+                      }}
+                    >
+                      Join the waitlist
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
@@ -967,9 +961,15 @@ const AgentsLandingPage = () => {
         {/* ── Pricing CTA ──────────────────────────────────────────────────── */}
         <section
           className="px-5 md:px-8 py-24 md:py-32 w-full"
-          style={{ backgroundColor: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.06)" }}
+          style={{ backgroundColor: "#FFFFFF" }}
         >
-          <div className="flex flex-col items-center gap-8 w-full max-w-[1120px] mx-auto text-center">
+          <div className="w-full max-w-[1120px] mx-auto">
+          <div className="flex flex-col items-center gap-8 text-center rounded-3xl px-8 py-20 md:py-28"
+            style={{
+              background: "linear-gradient(135deg, #EBF5FF 0%, #EFF8FF 100%)",
+              border: "1px solid rgba(0,144,255,0.12)",
+            }}
+          >
             {/* Big price */}
             <div className="flex flex-col gap-2 items-center">
               <span
@@ -1041,6 +1041,7 @@ const AgentsLandingPage = () => {
               <span className="btn-primary-inner">Start for free</span>
             </a>
           </div>
+          </div>
         </section>
 
         {/* ── Learn more ───────────────────────────────────────────────────── */}
@@ -1052,12 +1053,68 @@ const AgentsLandingPage = () => {
             ref={learnRef}
             className={`flex flex-col gap-10 w-full max-w-[1120px] mx-auto reveal${learnInView ? " in-view" : ""}`}
           >
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               <SectionLabel>Next steps</SectionLabel>
               <SectionHeading>Learn more</SectionHeading>
+              <SectionSub maxWidth={480}>
+                Start building in minutes, or talk to us first if you're evaluating at scale.
+              </SectionSub>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Talk to a person */}
+              <a
+                href="/contact-sales"
+                className="group flex flex-col gap-4 p-7 rounded-2xl border"
+                style={{
+                  borderColor: "rgba(0,0,0,0.07)",
+                  backgroundColor: "#FFFFFF",
+                  boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+                  textDecoration: "none",
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <span
+                    style={{
+                      fontFamily: "'DM Mono', monospace",
+                      fontWeight: 500,
+                      fontSize: 10.5,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      color: "#A1A1AA",
+                    }}
+                  >
+                    Talk to a person
+                  </span>
+                  <ArrowUpRight size={16} color="#A1A1AA" />
+                </div>
+                <p
+                  style={{
+                    fontFamily: "'Funnel Sans', sans-serif",
+                    fontWeight: 500,
+                    fontSize: 18,
+                    color: "#09090B",
+                    margin: 0,
+                    lineHeight: "1.3",
+                  }}
+                >
+                  Get in touch
+                </p>
+                <p
+                  style={{
+                    fontFamily: "'Funnel Sans', sans-serif",
+                    fontWeight: 400,
+                    fontSize: 14,
+                    lineHeight: 1.6,
+                    color: "#71717A",
+                    margin: 0,
+                  }}
+                >
+                  If you're building something at scale and want to talk through the fit before
+                  committing. No sales pitch. Just engineers.
+                </p>
+              </a>
+
               {/* Docs */}
               <a
                 href="https://docs.fil.one"
@@ -1109,59 +1166,6 @@ const AgentsLandingPage = () => {
                   }}
                 >
                   Quickstart, S3 compatibility reference, SDK examples, and API docs.
-                </p>
-              </a>
-
-              {/* Talk to a person */}
-              <a
-                href="/contact-sales"
-                className="group flex flex-col gap-4 p-7 rounded-2xl border"
-                style={{
-                  borderColor: "rgba(0,0,0,0.07)",
-                  backgroundColor: "#FFFFFF",
-                  boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
-                  textDecoration: "none",
-                }}
-              >
-                <div className="flex items-center justify-between">
-                  <span
-                    style={{
-                      fontFamily: "'DM Mono', monospace",
-                      fontWeight: 500,
-                      fontSize: 10.5,
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      color: "#A1A1AA",
-                    }}
-                  >
-                    Talk to a person
-                  </span>
-                  <ArrowUpRight size={16} color="#A1A1AA" />
-                </div>
-                <p
-                  style={{
-                    fontFamily: "'Funnel Sans', sans-serif",
-                    fontWeight: 500,
-                    fontSize: 18,
-                    color: "#09090B",
-                    margin: 0,
-                    lineHeight: "1.3",
-                  }}
-                >
-                  Get in touch
-                </p>
-                <p
-                  style={{
-                    fontFamily: "'Funnel Sans', sans-serif",
-                    fontWeight: 400,
-                    fontSize: 14,
-                    lineHeight: 1.6,
-                    color: "#71717A",
-                    margin: 0,
-                  }}
-                >
-                  If you're building something at scale and want to talk through the fit before
-                  committing. No sales pitch. Just engineers.
                 </p>
               </a>
             </div>
