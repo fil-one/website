@@ -243,6 +243,9 @@ Fil One implements the S3 REST API. Supported operations include:
 ## Pages and documentation
 
 - [Homepage](https://fil.one) — product overview, feature comparison, pricing, FAQ
+- [Fil One for AI Agents](https://fil.one/lp/agents) — dedicated page for AI agent
+  developers; covers agent storage use cases, S3 connection examples, pricing, and
+  free trial details
 - [Documentation](https://docs.fil.one) — quickstart, SDK examples, API reference,
   security, billing, limits
 - [Contact Sales](https://fil.one/contact-sales) — enterprise and high-volume
