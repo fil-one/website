@@ -3,7 +3,7 @@ import LandingNavbar from "@/components/LandingNavbar";
 import LandingFooter from "@/components/LandingFooter";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
-import { ArrowUpRight, Copy, Check, CheckCircle, ShieldCheck, Plug, TrendUp, CaretRight } from "@phosphor-icons/react";
+import { ArrowUpRight, Copy, Check, CheckCircle, ShieldCheck, Plug, TrendUp, CaretRight, CurrencyDollar, LockOpen, HardDrives, Globe } from "@phosphor-icons/react";
 
 // ─── Grid texture ──────────────────────────────────────────────────────────────
 const GRID_SVG = encodeURIComponent(
@@ -854,32 +854,39 @@ const AgentsLandingPage = () => {
               <SectionLabel>Why Fil One</SectionLabel>
               <SectionHeading>Built differently. Built for agents.</SectionHeading>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10 w-full">
               {[
                 {
+                  icon: CurrencyDollar,
                   title: "Know what you'll pay upfront",
                   body: "No per-call charges. No egress. You can read the pricing page once and stop thinking about it. Run your agents as hard as you need.",
                 },
                 {
+                  icon: LockOpen,
                   title: "Go all in without getting locked in",
                   body: "With no proprietary format, vendor-specific API, or migration tax, you can move your data and workloads freely. No surrendering your agents to a model you can't get out of.",
                 },
                 {
+                  icon: HardDrives,
                   title: "Storage your agents can rely on",
                   body: "Routed across independent infrastructure providers worldwide. Distributed and redundant by design. Backed by audit-ready visibility into storage integrity.",
                 },
-                {
-                  title: "Independent infrastructure by design",
-                  body: "Fil One routes your data to a global network of independent infrastructure providers.",
-                },
-              ].map(({ title, body }) => (
-                <div key={title} className="flex flex-col gap-3">
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 15, lineHeight: "1.35", color: "#09090B", margin: 0 }}>
-                    {title}
-                  </p>
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 15, lineHeight: "1.7", color: "#71717A", margin: 0 }}>
-                    {body}
-                  </p>
+              ].map(({ icon: Icon, title, body }) => (
+                <div key={title} className="flex flex-col gap-4">
+                  <div
+                    className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
+                    style={{ backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.18)" }}
+                  >
+                    <Icon size={18} color="#0090FF" />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 15, lineHeight: "1.35", color: "#09090B", margin: 0 }}>
+                      {title}
+                    </p>
+                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 15, lineHeight: "1.7", color: "#71717A", margin: 0 }}>
+                      {body}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
