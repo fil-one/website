@@ -9,7 +9,6 @@ const NAV_LINKS = [
   { label: "Calculator", anchor: "calculator" },
   { label: "Pricing", anchor: "pricing" },
   { label: "FAQ", anchor: "faq" },
-  { label: "For AI", href: "/ai" },
   { label: "Docs", href: "https://docs.fil.one", external: true },
 ];
 
