@@ -1075,7 +1075,7 @@ const AgentsLandingPage = () => {
           >
             <div className="flex flex-col gap-4 items-center text-center">
               <SectionLabel>Next steps</SectionLabel>
-              <SectionHeading>Learn more</SectionHeading>
+              <SectionHeading>Ready to get the most out of your agent storage?</SectionHeading>
               <SectionSub maxWidth={380}>
                 Talk to us about your use case, or head to the docs and start building today.
               </SectionSub>
