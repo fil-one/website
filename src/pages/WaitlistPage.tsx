@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Check } from "@phosphor-icons/react";
-import PlatformNavbar from "@/components/PlatformNavbar";
-import Footer from "@/components/Footer";
+import LandingNavbar from "@/components/LandingNavbar";
+import LandingFooter from "@/components/LandingFooter";
 import { useSeo } from "@/hooks/useSeo";
 import {
   HS_PORTAL_ID,
@@ -179,7 +179,7 @@ const WaitlistPage = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <PlatformNavbar />
+      <LandingNavbar />
 
       <main className="flex flex-col items-center px-5 md:px-8 pt-28 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[560px]">
@@ -393,7 +393,7 @@ const WaitlistPage = () => {
         </div>
       </main>
 
-      <Footer />
+      <LandingFooter />
     </div>
   );
 };

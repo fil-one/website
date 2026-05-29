@@ -23,7 +23,7 @@ const LandingFooter = () => (
       {/* Top row */}
       <div className="flex flex-col md:flex-row md:justify-between gap-10 md:gap-0">
         {/* Left: logo + tagline */}
-        <div className="flex flex-col gap-3 items-start max-w-[220px]">
+        <div className="flex flex-col gap-3 items-start max-w-[340px]">
           <a href="/" style={{ textDecoration: "none" }}>
             <img src={filOneLogo} alt="Fil One" style={{ height: 18, width: "auto", display: "block" }} />
           </a>
