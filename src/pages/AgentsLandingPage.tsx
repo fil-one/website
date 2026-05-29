@@ -633,6 +633,11 @@ const AgentsLandingPage = () => {
               </div>
             </div>
 
+            {/* Full-width callout sentence */}
+            <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 16, lineHeight: 1.65, color: "#09090B", margin: 0 }}>
+              Fil One changes the model. Let your agents experiment and keep what they generate.
+            </p>
+
             {/* Comparison table */}
             <div style={{ overflowX: "auto" }}>
               <table
