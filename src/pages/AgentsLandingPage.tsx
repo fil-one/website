@@ -369,13 +369,13 @@ const AgentsLandingPage = () => {
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section className="relative isolate pt-[58px]" style={{ backgroundColor: "#FFFFFF" }}>
-          {/* Blue radial glow */}
+          {/* Blue radial glow — very subtle */}
           <div
             aria-hidden="true"
             className="absolute inset-0 pointer-events-none -z-10"
             style={{
               background:
-                "radial-gradient(ellipse 55% 40% at 50% 0%, rgba(0,144,255,0.13) 0%, transparent 70%)",
+                "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(0,144,255,0.09) 0%, transparent 70%)",
             }}
           />
           {/* Grid texture */}
@@ -387,31 +387,32 @@ const AgentsLandingPage = () => {
               backgroundSize: "60px 60px",
               backgroundPosition: "center top",
               maskImage:
-                "radial-gradient(ellipse 80% 65% at 50% 0%, black 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 65%, transparent 80%)",
+                "radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.1) 65%, transparent 80%)",
               WebkitMaskImage:
-                "radial-gradient(ellipse 80% 65% at 50% 0%, black 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 65%, transparent 80%)",
+                "radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.1) 65%, transparent 80%)",
             }}
           />
 
-          <div className="flex flex-col items-center gap-6 px-5 md:px-8 w-full max-w-[1120px] mx-auto pt-20 md:pt-[120px] pb-20 md:pb-28">
-            {/* Badge */}
+          <div className="flex flex-col items-center gap-5 px-5 md:px-8 w-full max-w-[1120px] mx-auto pt-20 md:pt-[120px] pb-20 md:pb-28">
+
+            {/* Badge — neutral pill */}
             <div
-              className="hero-fade-1 flex items-center gap-1.5 text-center"
+              className="hero-fade-1"
               style={{
-                backgroundColor: "#EFF8FF",
-                border: "1px solid rgba(0,144,255,0.2)",
-                borderRadius: 14,
-                padding: "10px 14px",
-                maxWidth: "90vw",
+                backgroundColor: "#FFFFFF",
+                border: "1px solid rgba(0,0,0,0.10)",
+                borderRadius: 999,
+                padding: "6px 14px",
+                boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
               }}
             >
               <span
                 style={{
                   fontFamily: "'Funnel Sans', sans-serif",
-                  fontWeight: 500,
-                  fontSize: 13.5,
+                  fontWeight: 400,
+                  fontSize: 13,
                   lineHeight: 1,
-                  color: "#0070CC",
+                  color: "#52525B",
                 }}
               >
                 For developers building with AI agents
@@ -420,7 +421,7 @@ const AgentsLandingPage = () => {
 
             {/* Headline */}
             <h1
-              className="text-[30px] sm:text-[38px] md:text-[52px] hero-fade-2"
+              className="text-[32px] sm:text-[42px] md:text-[56px] hero-fade-2"
               style={{
                 fontFamily: "'Aspekta', sans-serif",
                 fontWeight: 500,
@@ -428,7 +429,7 @@ const AgentsLandingPage = () => {
                 letterSpacing: "-0.025em",
                 color: "#09090B",
                 textAlign: "center",
-                maxWidth: 600,
+                maxWidth: 640,
                 margin: 0,
               }}
             >
@@ -440,23 +441,49 @@ const AgentsLandingPage = () => {
 
             {/* Sub */}
             <p
-              className="text-[15px] md:text-[17px] hero-fade-2"
+              className="text-[15px] md:text-[16px] hero-fade-2"
               style={{
                 fontFamily: "'Funnel Sans', sans-serif",
                 fontWeight: 400,
-                lineHeight: "1.65",
+                lineHeight: "1.6",
                 color: "#71717A",
                 textAlign: "center",
-                maxWidth: 480,
+                maxWidth: 400,
                 margin: 0,
               }}
             >
-              S3-compatible object storage at{" "}
-              <span style={{ color: "#0090FF", fontWeight: 600 }}>$4.99/TB per month</span>{" "}flat.<br />No egress. No per-request fees.
+              S3-compatible object storage. No egress. No per-request fees.
             </p>
 
+            {/* Price callout */}
+            <div className="hero-fade-3 flex items-baseline gap-2" style={{ marginTop: 4 }}>
+              <span
+                style={{
+                  fontFamily: "'Aspekta', sans-serif",
+                  fontWeight: 500,
+                  fontSize: "clamp(38px, 7vw, 52px)",
+                  lineHeight: 1,
+                  letterSpacing: "-0.03em",
+                  color: "#09090B",
+                }}
+              >
+                $4.99
+              </span>
+              <span
+                style={{
+                  fontFamily: "'Funnel Sans', sans-serif",
+                  fontWeight: 400,
+                  fontSize: 16,
+                  color: "#71717A",
+                  paddingBottom: 3,
+                }}
+              >
+                per TB per month
+              </span>
+            </div>
+
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
+            <div className="flex flex-col sm:flex-row items-center gap-3 hero-fade-3" style={{ marginTop: 4 }}>
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
                 <span className="btn-primary-inner">Start for free</span>
               </a>
@@ -478,7 +505,7 @@ const AgentsLandingPage = () => {
                 fontFamily: "'Funnel Sans', sans-serif",
                 fontWeight: 400,
                 fontSize: 13,
-                color: "#71717A",
+                color: "#A1A1AA",
                 textAlign: "center",
               }}
             >
