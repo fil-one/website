@@ -36,7 +36,7 @@ const LandingFooter = () => (
               color: "#71717A",
             }}
           >
-            S3 object storage built for the AI era.
+            S3-compatible object storage built for AI agents.
           </p>
         </div>
 
