@@ -110,6 +110,7 @@ const ROUTES = [
   "/fr/marseille",
   "/es/barcelona",
   "/lp/agents",
+  "/lp/stop-overpaying",
   "/waitlist",
 ];
 

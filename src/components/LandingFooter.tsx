@@ -42,11 +42,11 @@ const LINKS_BCN_EN: Record<string, { label: string; href: string }[]> = {
   ],
 };
 
-const LandingFooter = ({ lang = "en", campaign }: { lang?: "en" | "es"; campaign?: "barcelona" }) => {
+const LandingFooter = ({ lang = "en", campaign, tagline: taglineProp }: { lang?: "en" | "es"; campaign?: "barcelona"; tagline?: string }) => {
   const LINKS = lang === "es" ? LINKS_ES : campaign === "barcelona" ? LINKS_BCN_EN : LINKS_EN;
-  const tagline = lang === "es"
+  const tagline = taglineProp ?? (lang === "es"
     ? "Almacenamiento de objetos S3 diseñado para la era de la IA."
-    : "S3 object storage built for the AI era.";
+    : "S3 object storage built for the AI era.");
   const copyright = lang === "es"
     ? "© 2026 Fil One. Todos los derechos reservados."
     : "© 2026 Fil One. All rights reserved.";

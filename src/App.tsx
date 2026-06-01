@@ -20,6 +20,7 @@ import SupportBcnES from "./pages/SupportBcnES";
 import AiPage from "./pages/AiPage";
 import AgentsLandingPage from "./pages/AgentsLandingPage";
 import WaitlistPage from "./pages/WaitlistPage";
+import StopOverpayingLandingPage from "./pages/StopOverpayingLandingPage";
 import FloatingSupportButton from "./components/FloatingSupportButton";
 
 const queryClient = new QueryClient();
@@ -55,6 +56,7 @@ export const AppContent = () => (
       <Route path="/ai" element={<AiPage />} />
       <Route path="/lp/agents" element={<AgentsLandingPage />} />
       <Route path="/waitlist" element={<WaitlistPage />} />
+      <Route path="/lp/stop-overpaying" element={<StopOverpayingLandingPage />} />
       <Route path="/lp/barcelona" element={<BarcelonaLandingPage />} />
       <Route path="/lp/barcelona/contact" element={<ContactSalesBcnEN />} />
       <Route path="/lp/barcelona/support" element={<SupportBcnEN />} />
