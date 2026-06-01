@@ -111,6 +111,9 @@ const ROUTES = [
   "/es/barcelona",
   "/lp/agents",
   "/waitlist",
+  "/lp/data-sovereignty",
+  "/lp/pricing",
+  "/lp/comics",
 ];
 
 const SSR_OUT_DIR = resolve(rootDir, "dist-ssr");
