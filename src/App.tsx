@@ -12,7 +12,11 @@ import Support from "./pages/Support";
 import AcceptableUsePolicy from "./pages/AcceptableUsePolicy";
 import AdsLandingPage from "./pages/AdsLandingPage";
 import BarcelonaLandingPage from "./pages/BarcelonaLandingPage";
-import ContactSalesBarcelona from "./pages/ContactSalesBarcelona";
+import BarcelonaLandingPageES from "./pages/BarcelonaLandingPageES";
+import ContactSalesBcnEN from "./pages/ContactSalesBcnEN";
+import ContactSalesBcnES from "./pages/ContactSalesBcnES";
+import SupportBcnEN from "./pages/SupportBcnEN";
+import SupportBcnES from "./pages/SupportBcnES";
 import AiPage from "./pages/AiPage";
 import AgentsLandingPage from "./pages/AgentsLandingPage";
 import WaitlistPage from "./pages/WaitlistPage";
@@ -52,7 +56,11 @@ export const AppContent = () => (
       <Route path="/lp/agents" element={<AgentsLandingPage />} />
       <Route path="/waitlist" element={<WaitlistPage />} />
       <Route path="/lp/barcelona" element={<BarcelonaLandingPage />} />
-      <Route path="/lp/barcelona/contacto" element={<ContactSalesBarcelona />} />
+      <Route path="/lp/barcelona/contact" element={<ContactSalesBcnEN />} />
+      <Route path="/lp/barcelona/support" element={<SupportBcnEN />} />
+      <Route path="/lp/es/barcelona" element={<BarcelonaLandingPageES />} />
+      <Route path="/lp/es/contacto" element={<ContactSalesBcnES />} />
+      <Route path="/lp/es/soporte" element={<SupportBcnES />} />
       <Route path="/:lang/:city" element={<AdsLandingPage />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />

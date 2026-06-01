@@ -5,18 +5,15 @@ import LandingFooter from "@/components/LandingFooter";
 import { useSeo } from "@/hooks/useSeo";
 import {
   HS_PORTAL_ID,
-  HS_CONTACT_FORM_GUID as HS_FORM_GUID,
-  HS_MARKETING_SUBSCRIPTION_TYPE_ID,
+  HS_SUPPORT_FORM_GUID,
   getHubSpotContext,
 } from "@/lib/hubspot";
 
-const DATA_OPTIONS = [
-  "0-1 TB",
-  "1-10 TB",
-  "10-100 TB",
-  "100-500 TB",
-  "500-1,000 TB",
-  "1+ PB",
+const CATEGORY_OPTIONS = [
+  { label: "Problema con el producto", value: "PRODUCT_ISSUE" },
+  { label: "Problema de facturación", value: "BILLING_ISSUE" },
+  { label: "Consulta general", value: "GENERAL_INQUIRY" },
+  { label: "Solicitud de funcionalidad", value: "FEATURE_REQUEST" },
 ];
 
 const inputStyle: React.CSSProperties = {
@@ -58,42 +55,52 @@ const Field = ({
   </div>
 );
 
-const ContactSalesBarcelona = () => {
+const SupportBcnES = () => {
   useSeo({
-    title: "Contactar con ventas — Fil One Almacenamiento S3",
-    description: "Habla con el equipo de Fil One sobre almacenamiento de objetos S3 compatible, precios para empresas y acuerdos de nivel de servicio.",
-    canonical: "https://filone.io/lp/barcelona/contacto",
+    title: "Soporte — Fil One Almacenamiento S3",
+    description: "Obtén ayuda del equipo de soporte de Fil One. Envía una solicitud y te responderemos en breve.",
+    canonical: "https://filone.io/lp/es/soporte",
   });
 
   const [form, setForm] = useState({
     firstname: "",
     lastname: "",
-    company: "",
     email: "",
-    dataStorage: "",
-    consent: false,
+    company: "",
+    content: "",
+    categories: [] as string[],
   });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [radioError, setRadioError] = useState(false);
+  const [categoryError, setCategoryError] = useState(false);
 
-  const set = (key: keyof typeof form) => (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => setForm((f) => ({ ...f, [key]: e.target.type === "checkbox" ? e.target.checked : e.target.value }));
+  const set = (key: keyof Omit<typeof form, "categories">) => (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setForm((f) => ({ ...f, [key]: e.target.value }));
+
+  const toggleCategory = (value: string) => {
+    setCategoryError(false);
+    setForm((f) => ({
+      ...f,
+      categories: f.categories.includes(value)
+        ? f.categories.filter((c) => c !== value)
+        : [...f.categories, value],
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.dataStorage) {
-      setRadioError(true);
+    if (form.categories.length === 0) {
+      setCategoryError(true);
       return;
     }
     setLoading(true);
     setError(null);
-    setRadioError(false);
+    setCategoryError(false);
     try {
       const res = await fetch(
-        `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_FORM_GUID}`,
+        `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_SUPPORT_FORM_GUID}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -101,24 +108,12 @@ const ContactSalesBarcelona = () => {
             fields: [
               { objectTypeId: "0-1", name: "firstname", value: form.firstname },
               { objectTypeId: "0-1", name: "lastname", value: form.lastname },
-              { objectTypeId: "0-1", name: "company", value: form.company },
               { objectTypeId: "0-1", name: "email", value: form.email },
-              { objectTypeId: "0-1", name: "how_much_data_are_you_looking_to_store", value: form.dataStorage },
+              { objectTypeId: "0-1", name: "company", value: form.company },
+              { objectTypeId: "0-5", name: "content", value: form.content },
+              { objectTypeId: "0-5", name: "hs_ticket_category", value: form.categories.join(";") },
             ],
-            context: getHubSpotContext("Barcelona Contacto"),
-            legalConsentOptions: {
-              consent: {
-                consentToProcess: true,
-                text: "Al hacer clic en enviar, consientes que Fil One almacene y procese la información enviada.",
-                communications: [
-                  {
-                    value: form.consent,
-                    subscriptionTypeId: HS_MARKETING_SUBSCRIPTION_TYPE_ID,
-                    text: "Acepto recibir otras comunicaciones de Fil One.",
-                  },
-                ],
-              },
-            },
+            context: getHubSpotContext("Barcelona ES Soporte"),
           }),
         }
       );
@@ -139,12 +134,11 @@ const ContactSalesBarcelona = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <LandingNavbar />
+      <LandingNavbar lang="es" />
 
       <main className="flex flex-col items-center px-5 md:px-8 pt-28 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[560px]">
 
-          {/* Header */}
           <div className="flex flex-col gap-3">
             <p
               style={{
@@ -156,7 +150,7 @@ const ContactSalesBarcelona = () => {
                 textTransform: "uppercase",
               }}
             >
-              Contactar con ventas
+              Soporte
             </p>
             <h1
               className="text-[28px] md:text-[36px]"
@@ -168,7 +162,7 @@ const ContactSalesBarcelona = () => {
                 color: "#09090B",
               }}
             >
-              Habla con nuestro equipo
+              Obtén ayuda
             </h1>
             <p
               style={{
@@ -179,14 +173,13 @@ const ContactSalesBarcelona = () => {
                 color: "#71717A",
               }}
             >
-              Cuéntanos sobre tu caso de uso y nos pondremos en contacto contigo pronto.
+              Envía una solicitud y nuestro equipo de soporte te responderá en breve.
             </p>
           </div>
 
           <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
 
           {submitted ? (
-            /* ── Success state ── */
             <div className="flex flex-col gap-3 py-6">
               <div
                 className="flex items-center justify-center w-10 h-10 rounded-full"
@@ -198,14 +191,12 @@ const ContactSalesBarcelona = () => {
                 Nos pondremos en contacto pronto.
               </p>
               <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14.5, color: "#71717A", lineHeight: "1.6" }}>
-                Gracias por ponerte en contacto. Nuestro equipo revisará tu mensaje y te responderá en breve.
+                Gracias por ponerte en contacto. Nuestro equipo revisará tu solicitud y te responderá en breve.
               </p>
             </div>
           ) : (
-            /* ── Form ── */
-            <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
 
-              {/* First / Last name row */}
               <div className="grid grid-cols-2 gap-4">
                 <Field label="Nombre" required>
                   <input
@@ -219,13 +210,12 @@ const ContactSalesBarcelona = () => {
                     onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
                   />
                 </Field>
-                <Field label="Apellido" required>
+                <Field label="Apellido">
                   <input
                     type="text"
                     value={form.lastname}
                     onChange={set("lastname")}
                     placeholder="García"
-                    required
                     style={inputStyle}
                     onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
                     onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
@@ -233,73 +223,88 @@ const ContactSalesBarcelona = () => {
                 </Field>
               </div>
 
-              <Field label="Empresa" required>
-                <input
-                  type="text"
-                  value={form.company}
-                  onChange={set("company")}
-                  placeholder="Acme Inc."
+              <div className="grid grid-cols-2 gap-4">
+                <Field label="Correo electrónico" required>
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={set("email")}
+                    placeholder="ana@empresa.com"
+                    required
+                    style={inputStyle}
+                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
+                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
+                  />
+                </Field>
+                <Field label="Empresa">
+                  <input
+                    type="text"
+                    value={form.company}
+                    onChange={set("company")}
+                    placeholder="Acme Inc."
+                    style={inputStyle}
+                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
+                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
+                  />
+                </Field>
+              </div>
+
+              <Field label="Descripción del ticket" required>
+                <textarea
+                  value={form.content}
+                  onChange={set("content")}
+                  placeholder="Describe tu problema o pregunta…"
                   required
-                  style={inputStyle}
+                  rows={5}
+                  style={{
+                    ...inputStyle,
+                    resize: "vertical",
+                    lineHeight: "1.6",
+                  }}
                   onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
                   onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
                 />
               </Field>
 
-              <Field label="Correo de trabajo" required>
-                <input
-                  type="email"
-                  value={form.email}
-                  onChange={set("email")}
-                  placeholder="ana@empresa.com"
-                  required
-                  style={inputStyle}
-                  onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
-                  onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                />
-              </Field>
-
-              {/* Data storage radio group */}
               <div className="flex flex-col gap-3">
                 <label style={labelStyle}>
-                  ¿Cuántos datos quieres almacenar?
+                  Categoría
                   <span style={{ color: "#DC2626", marginLeft: 2 }}>*</span>
                 </label>
-                {radioError && (
+                {categoryError && (
                   <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626" }}>
-                    Por favor, selecciona una opción.
+                    Por favor, selecciona al menos una categoría.
                   </p>
                 )}
                 <div className="flex flex-col gap-2">
-                  {DATA_OPTIONS.map((option) => {
-                    const checked = form.dataStorage === option;
+                  {CATEGORY_OPTIONS.map(({ label, value }) => {
+                    const checked = form.categories.includes(value);
                     return (
                       <label
-                        key={option}
+                        key={value}
                         className="flex items-center gap-3 cursor-pointer"
                         style={{ userSelect: "none" }}
                       >
-                        <input
-                          type="radio"
-                          name="dataStorage"
-                          value={option}
-                          checked={checked}
-                          onChange={() => { setForm((f) => ({ ...f, dataStorage: option })); setRadioError(false); }}
-                          style={{ display: "none" }}
-                        />
                         <span
+                          onClick={() => toggleCategory(value)}
                           style={{
-                            width: 17,
-                            height: 17,
-                            borderRadius: "50%",
-                            border: checked ? "5px solid #09090B" : "1.5px solid rgba(0,0,0,0.25)",
-                            backgroundColor: "#FFFFFF",
+                            width: 16,
+                            height: 16,
+                            borderRadius: 4,
+                            border: checked ? "none" : "1.5px solid rgba(0,0,0,0.25)",
+                            backgroundColor: checked ? "#09090B" : "#FFFFFF",
                             flexShrink: 0,
-                            transition: "border 150ms ease",
-                            display: "inline-block",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            transition: "background-color 150ms ease, border 150ms ease",
+                            cursor: "pointer",
                           }}
-                        />
+                        >
+                          {checked && <Check size={10} color="#FFFFFF" />}
+                        </span>
                         <span
+                          onClick={() => toggleCategory(value)}
                           style={{
                             fontFamily: "'Funnel Sans', sans-serif",
                             fontWeight: 400,
@@ -308,7 +313,7 @@ const ContactSalesBarcelona = () => {
                             transition: "color 150ms ease",
                           }}
                         >
-                          {option}
+                          {label}
                         </span>
                       </label>
                     );
@@ -318,48 +323,11 @@ const ContactSalesBarcelona = () => {
 
               <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
 
-              {/* Consent text */}
               <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, lineHeight: "1.7", color: "#71717A" }}>
-                Fil One se compromete a proteger tu privacidad. Solo utilizaremos tu información personal para administrar tu cuenta y proporcionarte los productos y servicios que hayas solicitado. De vez en cuando, nos gustaría ponernos en contacto contigo sobre nuestros productos y servicios.
-              </p>
-
-              {/* Consent checkbox */}
-              <label className="flex items-start gap-3 cursor-pointer" style={{ userSelect: "none" }}>
-                <input
-                  type="checkbox"
-                  checked={form.consent}
-                  onChange={set("consent")}
-                  style={{ display: "none" }}
-                />
-                <span
-                  style={{
-                    width: 16,
-                    height: 16,
-                    borderRadius: 4,
-                    border: form.consent ? "none" : "1.5px solid rgba(0,0,0,0.25)",
-                    backgroundColor: form.consent ? "#09090B" : "#FFFFFF",
-                    flexShrink: 0,
-                    marginTop: 2,
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    transition: "background-color 150ms ease, border 150ms ease",
-                  }}
-                >
-                  {form.consent && <Check size={10} color="#FFFFFF" />}
-                </span>
-                <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, color: "#52525B", lineHeight: "1.6" }}>
-                  Acepto recibir otras comunicaciones de Fil One.
-                </span>
-              </label>
-
-              <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: "1.7", color: "#71717A" }}>
-                Puedes darte de baja en cualquier momento. Para más información, consulta nuestra{" "}
+                Fil One necesita la información de contacto que nos proporcionas para ponerse en contacto contigo sobre nuestros productos y servicios. Puedes darte de baja de estas comunicaciones en cualquier momento. Para más información, consulta nuestra{" "}
                 <a href="/privacy" style={{ color: "#71717A", textDecoration: "underline" }}>Política de privacidad</a>.
-                Al hacer clic en enviar, consientes que Fil One almacene y procese la información enviada.
               </p>
 
-              {/* Submit */}
               <div className="flex flex-col gap-2 pt-1">
                 <button
                   type="submit"
@@ -384,9 +352,9 @@ const ContactSalesBarcelona = () => {
         </div>
       </main>
 
-      <LandingFooter />
+      <LandingFooter lang="es" />
     </div>
   );
 };
 
-export default ContactSalesBarcelona;
+export default SupportBcnES;

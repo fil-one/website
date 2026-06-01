@@ -2,8 +2,11 @@ import { useState } from "react";
 import { List, X } from "@phosphor-icons/react";
 import filOneLogo from "../assets/fil-one-logo.svg";
 
-const LandingNavbar = () => {
+const LandingNavbar = ({ lang = "en" }: { lang?: "en" | "es" }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const t = lang === "es"
+    ? { login: "Iniciar sesión", signup: "Registrarse" }
+    : { login: "Login", signup: "Sign up" };
 
   return (
     <>
@@ -26,10 +29,10 @@ const LandingNavbar = () => {
           {/* Desktop right */}
           <div className="hidden md:flex items-center gap-2.5 shrink-0">
             <a href="https://app.fil.one/login" className="btn-secondary">
-              Login
+              {t.login}
             </a>
             <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-sm">
-              <span className="btn-primary-inner">Sign up</span>
+              <span className="btn-primary-inner">{t.signup}</span>
             </a>
           </div>
 
@@ -59,14 +62,14 @@ const LandingNavbar = () => {
               className="btn-secondary w-full text-center"
               onClick={() => setMobileOpen(false)}
             >
-              Login
+              {t.login}
             </a>
             <a
               href="https://app.fil.one/login?screen_hint=signup"
               className="btn-primary w-full"
               onClick={() => setMobileOpen(false)}
             >
-              <span className="btn-primary-inner w-full justify-center">Sign up</span>
+              <span className="btn-primary-inner w-full justify-center">{t.signup}</span>
             </a>
           </div>
         )}
