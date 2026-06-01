@@ -16,6 +16,7 @@ import ContactSalesBarcelona from "./pages/ContactSalesBarcelona";
 import AiPage from "./pages/AiPage";
 import AgentsLandingPage from "./pages/AgentsLandingPage";
 import WaitlistPage from "./pages/WaitlistPage";
+import DataSovereigntyPage from "./pages/DataSovereigntyPage";
 import FloatingSupportButton from "./components/FloatingSupportButton";
 
 const queryClient = new QueryClient();
@@ -53,6 +54,7 @@ export const AppContent = () => (
       <Route path="/waitlist" element={<WaitlistPage />} />
       <Route path="/lp/barcelona" element={<BarcelonaLandingPage />} />
       <Route path="/lp/barcelona/contacto" element={<ContactSalesBarcelona />} />
+      <Route path="/lp/data-sovereignty" element={<DataSovereigntyPage />} />
       <Route path="/:lang/:city" element={<AdsLandingPage />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
