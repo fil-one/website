@@ -12,10 +12,14 @@ import Support from "./pages/Support";
 import AcceptableUsePolicy from "./pages/AcceptableUsePolicy";
 import AdsLandingPage from "./pages/AdsLandingPage";
 import BarcelonaLandingPage from "./pages/BarcelonaLandingPage";
-import ContactSalesBarcelona from "./pages/ContactSalesBarcelona";
-import AiPage from "./pages/AiPage";
-import AgentsLandingPage from "./pages/AgentsLandingPage";
+import VersionA from "./pages/VersionA";
+import VersionB from "./pages/VersionB";
+import StorageProductPage from "./pages/StorageProductPage";
+import RagPipelineProductPage from "./pages/RagPipelineProductPage";
+import AgentToolkitProductPage from "./pages/AgentToolkitProductPage";
+import PricingPage from "./pages/PricingPage";
 import WaitlistPage from "./pages/WaitlistPage";
+import EnterprisePage from "./pages/EnterprisePage";
 import FloatingSupportButton from "./components/FloatingSupportButton";
 
 const queryClient = new QueryClient();
@@ -29,7 +33,29 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      {children}
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <FloatingSupportButton />
+        <Routes>
+          <Route path="/" element={<VersionB />} />
+          <Route path="/legacy" element={<Index />} />
+          <Route path="/terms" element={<TermsOfUse />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/contact-sales" element={<ContactSales />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/aup" element={<AcceptableUsePolicy />} />
+          <Route path="/lp/barcelona" element={<BarcelonaLandingPage />} />
+          <Route path="/v1" element={<VersionA />} />
+          <Route path="/storage" element={<StorageProductPage />} />
+          <Route path="/rag-pipeline" element={<RagPipelineProductPage />} />
+          <Route path="/ai-agent-toolkit" element={<AgentToolkitProductPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/waitlist" element={<WaitlistPage />} />
+          <Route path="/enterprise" element={<EnterprisePage />} />
+          <Route path="/:lang/:city" element={<AdsLandingPage />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
@@ -53,9 +79,6 @@ export const AppContent = () => (
       <Route path="/waitlist" element={<WaitlistPage />} />
       <Route path="/lp/barcelona" element={<BarcelonaLandingPage />} />
       <Route path="/lp/barcelona/contacto" element={<ContactSalesBarcelona />} />
-      <Route path="/lp/data-sovereignty" element={<DataSovereigntyPage />} />
-      <Route path="/lp/pricing" element={<PricingLandingPage />} />
-      <Route path="/lp/comics" element={<ComicsLandingPage />} />
       <Route path="/:lang/:city" element={<AdsLandingPage />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />

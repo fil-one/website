@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Check, ArrowLeft } from "@phosphor-icons/react";
-import LandingNavbar from "@/components/LandingNavbar";
-import LandingFooter from "@/components/LandingFooter";
+import { Check } from "@phosphor-icons/react";
+import PlatformNavbar from "@/components/PlatformNavbar";
+import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import {
   HS_PORTAL_ID,
@@ -179,30 +179,10 @@ const WaitlistPage = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <LandingNavbar />
+      <PlatformNavbar />
 
       <main className="flex flex-col items-center px-5 md:px-8 pt-28 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[560px]">
-
-          {/* Back button */}
-          <a
-            href="/lp/agents"
-            className="flex items-center gap-1.5"
-            style={{
-              fontFamily: "'Funnel Sans', sans-serif",
-              fontWeight: 400,
-              fontSize: 14,
-              color: "#71717A",
-              textDecoration: "none",
-              width: "fit-content",
-              transition: "color 150ms ease",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.color = "#09090B")}
-            onMouseLeave={e => (e.currentTarget.style.color = "#71717A")}
-          >
-            <ArrowLeft size={14} />
-            Back
-          </a>
 
           {/* Header */}
           <div className="flex flex-col gap-3">
@@ -413,7 +393,7 @@ const WaitlistPage = () => {
         </div>
       </main>
 
-      <LandingFooter />
+      <Footer />
     </div>
   );
 };
