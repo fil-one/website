@@ -22,7 +22,8 @@
       "/contact-sales",
       "/fr/marseille",
       "/es/barcelona",
-      "/lp/egress"
+      "/lp/egress",
+      "/lp/backup-dr"
     ],
     "puppeteerArgs": [
       "--no-sandbox",

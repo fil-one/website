@@ -13,6 +13,7 @@ import AcceptableUsePolicy from "./pages/AcceptableUsePolicy";
 import AdsLandingPage from "./pages/AdsLandingPage";
 import BarcelonaLandingPage from "./pages/BarcelonaLandingPage";
 import EgressLandingPage from "./pages/EgressLandingPage";
+import BackupDrLandingPage from "./pages/BackupDrLandingPage";
 import VersionA from "./pages/VersionA";
 import VersionB from "./pages/VersionB";
 import StorageProductPage from "./pages/StorageProductPage";
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/aup" element={<AcceptableUsePolicy />} />
           <Route path="/lp/barcelona" element={<BarcelonaLandingPage />} />
           <Route path="/lp/egress" element={<EgressLandingPage />} />
+          <Route path="/lp/backup-dr" element={<BackupDrLandingPage />} />
           <Route path="/v1" element={<VersionA />} />
           <Route path="/storage" element={<StorageProductPage />} />
           <Route path="/rag-pipeline" element={<RagPipelineProductPage />} />
