@@ -1,4 +1,4 @@
-import PlatformNavbar from "@/components/PlatformNavbar";
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 
@@ -35,7 +35,7 @@ const PrivacyPolicy = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <PlatformNavbar />
+      <Navbar />
 
       <main className="flex flex-col items-center px-5 md:px-8 pt-28 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[720px]">

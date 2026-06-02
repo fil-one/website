@@ -5,16 +5,6 @@ import JsonLd from "@/components/JsonLd";
 
 const faqs = [
   {
-    question: "Is Fil One hot, warm, or cold storage? Is it like Glacier?",
-    answer: (
-      <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Fil One is <strong style={{ color: "#09090B", fontWeight: 500 }}>hot storage</strong> — S3 Standard-class, with millisecond access latency and no retrieval delays or fees. It is not like AWS Glacier or any cold/archive tier.</p>
-        <p>Cold storage (like Glacier) is designed for data you rarely touch — retrieval can take minutes to hours and usually incurs retrieval charges. Fil One is built for the opposite: active data that needs to be available at all times, whether it's an AI pipeline reading training data or a production app serving user files.</p>
-        <p>If you need long-term archival of infrequently accessed data, Fil One is not the right fit for that tier. It's purpose-built for workloads where access latency and data integrity both matter.</p>
-      </div>
-    ),
-  },
-  {
     question: "How does data integrity verification work with Fil One?",
     answer:
       "Each dataset is assigned a unique digital fingerprint (CID) at upload, creating a verifiable record of its contents. The system then automatically checks your data on a recurring basis (about every 24 hours) to confirm that the data still matches that original fingerprint, ensuring nothing has been altered.",
@@ -52,29 +42,6 @@ const faqs = [
     ),
   },
   {
-    question: "What is the RAG Pipeline and how does it work?",
-    answer: (
-      <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>The RAG Pipeline turns your Fil One buckets into searchable knowledge bases without any extra infrastructure. When you upload a file — PDF, Markdown, DOCX, HTML, and more — it's automatically indexed and made available for semantic search.</p>
-        <p>You bring your own LLM API keys (OpenAI, Anthropic, or others), so the AI costs stay with your existing provider. The +$15 / TB / month add-on covers the indexing and retrieval layer on top of your storage plan.</p>
-      </div>
-    ),
-  },
-  {
-    question: "What is the AI Agent Toolkit?",
-    answer: (
-      <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>The AI Agent Toolkit lets AI agents and automation tools interact directly with your Fil One storage. It ships with an MCP server for Claude Desktop and Cursor, OAuth connectors for Zapier, Make.com, and n8n, and native SDK support for LangChain, LlamaIndex, and the Vercel AI SDK.</p>
-        <p>The toolkit is a free add-on included with every storage plan — no extra configuration required beyond enabling it in your account.</p>
-      </div>
-    ),
-  },
-  {
-    question: "Do I need to use all three products together?",
-    answer:
-      "No. Object Storage is the foundation every Fil One account starts with, and it works great on its own as a fully S3-compatible store. RAG Pipeline and AI Agent Toolkit are opt-in add-ons you can enable at any time — they connect directly to your existing buckets with no data migration needed.",
-  },
-  {
     question: "What is Filecoin?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
@@ -85,10 +52,10 @@ const faqs = [
   },
 ];
 
-const buildFaqSchema = (items: typeof faqs) => ({
+const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: items.map((faq) => ({
+  mainEntity: faqs.map((faq) => ({
     "@type": "Question",
     name: faq.question,
     acceptedAnswer: {
@@ -96,19 +63,12 @@ const buildFaqSchema = (items: typeof faqs) => ({
       text: typeof faq.answer === "string" ? faq.answer : faq.question,
     },
   })),
-});
+};
 
-interface FaqSectionProps {
-  include?: string[]; // if provided, only show FAQs whose question is in this list
-}
-
-const FaqSection = ({ include }: FaqSectionProps = {}) => {
-  const visibleFaqs = include ? faqs.filter((f) => include.includes(f.question)) : faqs;
+const FaqSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { ref: headingRef, inView: headingInView } = useInView();
   const { ref: listRef, inView: listInView } = useInView({ threshold: 0.04 });
-
-  const faqSchema = buildFaqSchema(visibleFaqs);
 
   return (
     <>
@@ -155,7 +115,7 @@ const FaqSection = ({ include }: FaqSectionProps = {}) => {
         ref={listRef}
         className={`w-full max-w-[720px] reveal${listInView ? " in-view" : ""}`}
       >
-        {visibleFaqs.map((faq, i) => {
+        {faqs.map((faq, i) => {
           const isOpen = openIndex === i;
           const panelId = `faq-panel-${i}`;
           const buttonId = `faq-btn-${i}`;

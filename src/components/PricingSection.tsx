@@ -6,7 +6,6 @@ const PaygoFeatures = [
   "No egress fees",
   "No API request fees",
   "Data integrity guarantees",
-  "AI Agent Toolkit included",
 ];
 
 const BusinessFeatures = [
@@ -14,7 +13,6 @@ const BusinessFeatures = [
   "No egress or API request fees",
   "Data integrity guarantees",
   "Capacity assurance and deployment SLAs",
-  "AI Agent Toolkit included",
 ];
 
 const PricingSection = () => {
@@ -93,6 +91,18 @@ const PricingSection = () => {
             <div className="flex items-end gap-2 flex-wrap">
               <span
                 style={{
+                  fontFamily: "'Funnel Sans', sans-serif",
+                  fontWeight: 400,
+                  fontSize: 20,
+                  lineHeight: "1",
+                  color: "#71717A",
+                  textDecoration: "line-through",
+                }}
+              >
+                $4.99
+              </span>
+              <span
+                style={{
                   fontFamily: "'Aspekta', sans-serif",
                   fontWeight: 500,
                   fontSize: 28,
@@ -101,7 +111,7 @@ const PricingSection = () => {
                   letterSpacing: "-0.02em",
                 }}
               >
-                $4.99
+                $0
               </span>
               <span
                 style={{
@@ -124,7 +134,7 @@ const PricingSection = () => {
                 color: "#71717A",
               }}
             >
-              Free for the first 30 days, no credit card required.
+              Free for the first 30 days. No credit card required.
             </p>
           </div>
 

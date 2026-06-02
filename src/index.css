@@ -227,21 +227,9 @@
 .reveal-group .reveal:nth-child(5) { transition-delay: 320ms; }
 .reveal-group .reveal:nth-child(6) { transition-delay: 400ms; }
 
-/* Pulsing ring for announcement badge "NEW" pill */
-@keyframes badge-pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(0, 144, 255, 0.45); }
-  70%  { box-shadow: 0 0 0 7px rgba(0, 144, 255, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(0, 144, 255, 0); }
-}
-
-.badge-pulse {
-  animation: badge-pulse 2.2s ease-out infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero-fade-1, .hero-fade-2, .hero-fade-3, .hero-fade-4 { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .badge-pulse { animation: none; }
 }
 
 /* Hide scrollbar on feature card strip */
@@ -372,27 +360,4 @@ input[type="range"]::-moz-range-thumb {
 .calc-chip:hover {
   background-color: rgba(0, 0, 0, 0.08) !important;
   color: #09090B !important;
-}
-
-/* ── Funnel connector draw animation ───────────────────────────────────── */
-@keyframes drawFunnelPath {
-  0%, 5%  { stroke-dashoffset: 1; }
-  38%     { stroke-dashoffset: 0; }
-  85%     { stroke-dashoffset: 0; }
-  96%     { stroke-dashoffset: 1; }
-  100%    { stroke-dashoffset: 1; }
-}
-@keyframes drawFunnelDrop {
-  0%, 40% { stroke-dashoffset: 1; }
-  55%     { stroke-dashoffset: 0; }
-  85%     { stroke-dashoffset: 0; }
-  96%     { stroke-dashoffset: 1; }
-  100%    { stroke-dashoffset: 1; }
-}
-@keyframes fadeFunnelDiamond {
-  0%, 50% { opacity: 0; }
-  62%     { opacity: 1; }
-  85%     { opacity: 1; }
-  96%     { opacity: 0; }
-  100%    { opacity: 0; }
 }

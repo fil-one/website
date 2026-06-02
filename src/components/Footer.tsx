@@ -1,19 +1,22 @@
+import { useLocation } from "react-router-dom";
 import filOneLogo from "../assets/fil-one-logo.svg";
 
 const Footer = () => {
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
+  const anchor = (id: string) => isHome ? `#${id}` : `/#${id}`;
+
   const links: Record<string, { label: string; href: string }[]> = {
-    Products: [
-      { label: "Object Storage", href: "/storage" },
-      { label: "RAG Pipeline", href: "/rag-pipeline" },
-      { label: "AI Agent Toolkit", href: "/ai-agent-toolkit" },
-    ],
-    Company: [
-      { label: "Pricing", href: "/pricing" },
-      { label: "Enterprise", href: "/enterprise" },
-      { label: "Documentation", href: "https://docs.fil.one" },
-      { label: "Contact sales", href: "/contact-sales" },
+    Navigation: [
+      { label: "Features", href: anchor("features") },
+      { label: "Compare", href: anchor("compare") },
+      { label: "Calculator", href: anchor("calculator") },
+      { label: "Pricing", href: anchor("pricing") },
+      { label: "FAQ", href: anchor("faq") },
     ],
     Resources: [
+      { label: "Documentation", href: "https://docs.fil.one" },
+      { label: "Contact sales", href: "/contact-sales" },
       { label: "Support", href: "/support" },
       { label: "Status", href: "https://fil-one.instatus.com/" },
       { label: "Filecoin", href: "https://filecoin.io" },
@@ -52,7 +55,7 @@ const Footer = () => {
           </div>
 
           {/* Right: link groups */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 md:flex md:flex-row md:gap-16 items-start">
+          <div className="grid grid-cols-3 gap-8 md:flex md:flex-row md:gap-16 items-start">
             {Object.entries(links).map(([title, items]) => (
               <div key={title} className="flex flex-col gap-3 items-start">
                 <p
