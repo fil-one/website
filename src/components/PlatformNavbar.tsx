@@ -24,7 +24,7 @@ const PRODUCTS = [
   },
 ];
 
-const UTILITY_LINKS = [
+const UTILITY_LINKS: { label: string; href?: string; anchor?: string; external?: boolean }[] = [
   { label: "Pricing", href: "/pricing" },
   { label: "Enterprise", href: "/enterprise" },
   { label: "Docs", href: "https://docs.fil.one", external: true },

@@ -4,12 +4,10 @@ import LandingFooter from "@/components/LandingFooter";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 
-// ─── Grid texture (matches Index.tsx hero) ─────────────────────────────────────
 const GRID_SVG = encodeURIComponent(
   '<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#000" stroke-opacity="0.16" stroke-width="1"/></svg>'
 );
 
-// ─── Section label ─────────────────────────────────────────────────────────────
 const SectionLabel = ({ children }: { children: React.ReactNode }) => (
   <span
     aria-hidden="true"
@@ -26,7 +24,6 @@ const SectionLabel = ({ children }: { children: React.ReactNode }) => (
   </span>
 );
 
-// ─── Section heading ───────────────────────────────────────────────────────────
 const SectionHeading = ({ children }: { children: React.ReactNode }) => (
   <h2
     className="text-[24px] md:text-[34px]"
@@ -59,10 +56,6 @@ const SectionSub = ({ children, maxWidth = 560 }: { children: React.ReactNode; m
   </p>
 );
 
-// ─── Scatter chart ─────────────────────────────────────────────────────────────
-
-// Exact SVG extracted from the reference at thunderous-concha-70113b.netlify.app
-// viewBox 0 0 1000 560, chart area x:100→940, y:80→440
 const ScatterChart = () => (
   <div
     style={{
@@ -77,40 +70,35 @@ const ScatterChart = () => (
       viewBox="0 0 1000 548"
       style={{ width: "100%", minWidth: 560, display: "block" }}
       role="img"
-      aria-label="Scatter chart: Fil One sits above the cost-performance frontier — fastest throughput at the lowest cost"
+      aria-label="Gráfico de dispersión: Fil One está por encima de la frontera coste-rendimiento — mayor rendimiento al menor coste"
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        <radialGradient id="filoneHalo" cx="50%" cy="50%" r="50%">
+        <radialGradient id="filoneHaloES" cx="50%" cy="50%" r="50%">
           <stop offset="0%"   stopColor="#0090FF" stopOpacity="0.3" />
           <stop offset="55%"  stopColor="#0090FF" stopOpacity="0.1" />
           <stop offset="100%" stopColor="#0090FF" stopOpacity="0" />
         </radialGradient>
-        <linearGradient id="filoneZone" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient id="filoneZoneES" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%"   stopColor="#0090FF" stopOpacity="0.07" />
           <stop offset="100%" stopColor="#0090FF" stopOpacity="0" />
         </linearGradient>
       </defs>
 
-      {/* Fil One exclusive zone */}
-      <path d="M 100 80 L 300 80 L 300 240 L 100 240 Z" fill="url(#filoneZone)" />
+      <path d="M 100 80 L 300 80 L 300 240 L 100 240 Z" fill="url(#filoneZoneES)" />
 
-      {/* Axis frame */}
       <line x1="100" y1="80"  x2="100" y2="440" stroke="#E2E8F0" strokeWidth="1" />
       <line x1="100" y1="440" x2="940" y2="440" stroke="#E2E8F0" strokeWidth="1" />
 
-      {/* Y gridlines */}
       <line x1="100" y1="350" x2="940" y2="350" stroke="#E2E8F0" strokeWidth="1" strokeDasharray="3,6" />
       <line x1="100" y1="260" x2="940" y2="260" stroke="#E2E8F0" strokeWidth="1" strokeDasharray="3,6" />
       <line x1="100" y1="170" x2="940" y2="170" stroke="#E2E8F0" strokeWidth="1" strokeDasharray="3,6" />
 
-      {/* X gridlines */}
       <line x1="242" y1="80" x2="242" y2="440" stroke="#E2E8F0" strokeWidth="1" strokeDasharray="3,6" />
       <line x1="430" y1="80" x2="430" y2="440" stroke="#E2E8F0" strokeWidth="1" strokeDasharray="3,6" />
       <line x1="572" y1="80" x2="572" y2="440" stroke="#E2E8F0" strokeWidth="1" strokeDasharray="3,6" />
       <line x1="714" y1="80" x2="714" y2="440" stroke="#E2E8F0" strokeWidth="1" strokeDasharray="3,6" />
 
-      {/* X axis labels */}
       <text x="100" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">€5</text>
       <text x="242" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">€10</text>
       <text x="430" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">€25</text>
@@ -118,88 +106,76 @@ const ScatterChart = () => (
       <text x="714" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">€100</text>
       <text x="940" y="462" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit">€300</text>
 
-      {/* Y axis labels */}
       <text x="88" y="444" textAnchor="end" fill="#94a3b8" fontSize="12" fontFamily="inherit">0</text>
       <text x="88" y="354" textAnchor="end" fill="#94a3b8" fontSize="12" fontFamily="inherit">100</text>
       <text x="88" y="264" textAnchor="end" fill="#94a3b8" fontSize="12" fontFamily="inherit">200</text>
       <text x="88" y="174" textAnchor="end" fill="#94a3b8" fontSize="12" fontFamily="inherit">300</text>
       <text x="88" y="84"  textAnchor="end" fill="#94a3b8" fontSize="12" fontFamily="inherit">400</text>
 
-      {/* Axis titles */}
       <text x="520" y="500" textAnchor="middle" fill="#475569" fontSize="14" fontFamily="inherit" fontWeight="600">
-        All-in cost per TB in € (storage + egress)
+        Coste total por TB en € (almacenamiento + egreso)
       </text>
       <text x="520" y="518" textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="inherit">
-        10 TB stored · 10 TB egress · Barcelona client
+        10 TB almacenados · 10 TB de egreso · cliente de Barcelona
       </text>
       <text x="32" y="260" textAnchor="middle" fill="#475569" fontSize="14" fontFamily="inherit" fontWeight="600"
         transform="rotate(-90 32 260)">
-        Sustained throughput (MB/s)
+        Rendimiento sostenido (MB/s)
       </text>
 
-      {/* Tier labels */}
       <text x="180" y="410" textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="inherit"
         fontWeight="600" letterSpacing="1" style={{ textTransform: "uppercase" as const }}>
-        Budget tier
+        Gama económica
       </text>
       <text x="370" y="410" textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="inherit"
         fontWeight="600" letterSpacing="1" style={{ textTransform: "uppercase" as const }}>
-        Mid tier
+        Gama media
       </text>
       <text x="760" y="120" textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="inherit"
         fontWeight="600" letterSpacing="1" style={{ textTransform: "uppercase" as const }}>
-        Hyperscaler tier
+        Gama hiperescalador
       </text>
 
-      {/* Cost-performance frontier line */}
       <path
         d="M 168,332 L 169,314 L 325,224 L 729,242 L 743,215 L 787,215"
         stroke="#CBD5E1" strokeWidth="1.5" strokeDasharray="8,5" fill="none"
       />
       <text x="600" y="258" textAnchor="middle" fill="#94a3b8" fontSize="12" fontFamily="inherit" fontStyle="italic">
-        Cost-performance frontier
+        Frontera coste-rendimiento
       </text>
 
-      {/* ── Backblaze B2 ── */}
       <circle cx="168" cy="332" r="9" fill="#94a3b8" />
 
-      {/* ── Wasabi ── */}
       <circle cx="169" cy="314" r="9" fill="#94a3b8" />
       <text x="192" y="308" fill="#334155" fontSize="13" fontFamily="inherit" fontWeight="600">Wasabi</text>
-      <text x="192" y="322" fill="#64748b" fontSize="11" fontFamily="inherit">Paris</text>
+      <text x="192" y="322" fill="#64748b" fontSize="11" fontFamily="inherit">París</text>
       <text x="192" y="342" fill="#334155" fontSize="13" fontFamily="inherit" fontWeight="600">Backblaze B2</text>
-      <text x="192" y="356" fill="#64748b" fontSize="11" fontFamily="inherit">Amsterdam</text>
+      <text x="192" y="356" fill="#64748b" fontSize="11" fontFamily="inherit">Ámsterdam</text>
 
-      {/* ── Cloudflare R2 ── */}
       <circle cx="325" cy="224" r="9" fill="#94a3b8" />
       <text x="348" y="221" fill="#334155" fontSize="13" fontFamily="inherit" fontWeight="600">Cloudflare R2</text>
       <text x="348" y="235" fill="#64748b" fontSize="11" fontFamily="inherit">Global edge</text>
 
-      {/* ── Azure Blob ── */}
       <circle cx="729" cy="242" r="11" fill="#64748b" />
       <text x="742" y="262" fill="#334155" fontSize="13" fontFamily="inherit" fontWeight="600">Azure Blob</text>
       <text x="742" y="276" fill="#64748b" fontSize="11" fontFamily="inherit">Spain Central</text>
 
-      {/* ── AWS S3 ── */}
       <circle cx="743" cy="215" r="11" fill="#64748b" />
       <text x="743" y="182" textAnchor="middle" fill="#334155" fontSize="13" fontFamily="inherit" fontWeight="600">AWS S3</text>
       <text x="743" y="196" textAnchor="middle" fill="#64748b" fontSize="11" fontFamily="inherit">eu-south-2 Madrid</text>
 
-      {/* ── Google Cloud ── */}
       <circle cx="787" cy="215" r="11" fill="#64748b" />
       <text x="806" y="209" fill="#334155" fontSize="13" fontFamily="inherit" fontWeight="600">Google Cloud</text>
       <text x="806" y="223" fill="#64748b" fontSize="11" fontFamily="inherit">europe-sw1 Madrid</text>
 
-      {/* ── Fil One (hero dot) ── */}
       <circle cx="100" cy="170" r="28" fill="#0090FF" opacity="0.14" />
       <circle cx="100" cy="170" r="18" fill="#0090FF" opacity="0.28" />
       <circle cx="100" cy="170" r="12" fill="#0090FF" />
       <circle cx="100" cy="170" r="5"  fill="#fff" />
       <text x="130" y="162" fill="#0070CC" fontSize="22" fontFamily="inherit" fontWeight="700" letterSpacing="-0.5">Fil One</text>
-      <text x="130" y="178" fill="#0090FF" fontSize="13" fontFamily="inherit" fontWeight="500">Fastest, lowest cost.</text>
+      <text x="130" y="178" fill="#0090FF" fontSize="13" fontFamily="inherit" fontWeight="500">El más rápido, al menor coste.</text>
     </svg>
 
-    {/* Meta note — footer strip style */}
     <div style={{
       backgroundColor: "#F4F4F5",
       borderTop: "1px solid rgba(0,0,0,0.06)",
@@ -214,156 +190,87 @@ const ScatterChart = () => (
         lineHeight: 1.6,
         margin: 0,
       }}>
-        Each dot is one provider. Position reflects all-in cost per TB (storage + egress) for a 10 TB team with 10 TB of monthly egress, and measured sustained read throughput from Barcelona on a tuned parallel S3 client. Cost axis is logarithmic.
+        Cada punto es un proveedor. La posición refleja el coste total por TB (almacenamiento + egreso) para un equipo de 10 TB con 10 TB de egreso mensual, y el rendimiento de lectura paralela sostenida medido desde Barcelona con un cliente S3 paralelo optimizado. El eje de costes es logarítmico.
       </p>
     </div>
   </div>
 );
 
-// ─── Pricing table helpers ────────────────────────────────────────────────────
-// Colours egress/API cells: $0 → green, large fees → red, small fees → neutral
 const valueColor = (val: string) => {
   const n = parseFloat(val.replace(/[$€,]/g, ""));
-  if (n === 0)  return "#16a34a"; // green
-  if (n > 50)   return "#dc2626"; // red
-  return "#52525B";               // neutral
+  if (n === 0)  return "#16a34a";
+  if (n > 50)   return "#dc2626";
+  return "#52525B";
 };
 
-// ─── Pricing table data ────────────────────────────────────────────────────────
 const PRICING_ROWS = [
   { provider: "AWS S3 Standard",      region: "eu-south-2 Madrid",          storage: "€197",    egress: "€790",   api: "€1.83", total: "€990",    isFilOne: false },
-  { provider: "Google Cloud Storage", region: "europe-southwest1 Madrid",   storage: "€171",    egress: "€1,052", api: "€1.83", total: "€1,226",  isFilOne: false },
+  { provider: "Google Cloud Storage", region: "europe-southwest1 Madrid",   storage: "€171",    egress: "€1.052", api: "€1.83", total: "€1.226",  isFilOne: false },
   { provider: "Azure Blob",           region: "Spain Central Madrid",        storage: "€178",    egress: "€763",   api: "€1.89", total: "€943",    isFilOne: false },
-  { provider: "Wasabi",               region: "eu-west-2 Paris",            storage: "€59.90",  egress: "€0",     api: "€0",    total: "€59.90",  isFilOne: false },
-  { provider: "Backblaze B2",         region: "eu-central-003 Amsterdam",   storage: "€59.60",  egress: "€0",     api: "€0",    total: "€59.60",  isFilOne: false },
-  { provider: "Fil One",              region: "EU-West",                    storage: "€49.90",  egress: "€0",     api: "€0",    total: "€49.90",  isFilOne: true  },
+  { provider: "Wasabi",               region: "eu-west-2 París",            storage: "€59,90",  egress: "€0",     api: "€0",    total: "€59,90",  isFilOne: false },
+  { provider: "Backblaze B2",         region: "eu-central-003 Ámsterdam",   storage: "€59,60",  egress: "€0",     api: "€0",    total: "€59,60",  isFilOne: false },
+  { provider: "Fil One",              region: "EU-West",                    storage: "€49,90",  egress: "€0",     api: "€0",    total: "€49,90",  isFilOne: true  },
 ];
 
-// ─── Feature cards ─────────────────────────────────────────────────────────────
-const FEATURES = [
-  {
-    title: "Drop-in S3 compatibility",
-    desc: "Same API, same SDKs, same tools. Point your existing workflow at our endpoint and keep shipping. No migration project.",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-        <rect x="2" y="5" width="14" height="9" rx="2" stroke="#0090FF" strokeWidth="1.5" />
-        <path d="M6 5V4a3 3 0 016 0v1" stroke="#0090FF" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Zero egress fees",
-    desc: "Client pulls, customer downloads, dashboard queries. Every read is included. Your bill stays flat at the end of a busy month.",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-        <circle cx="9" cy="9" r="7" stroke="#0090FF" strokeWidth="1.5" />
-        <path d="M9 5v4l2.5 2.5" stroke="#0090FF" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "European-native latency",
-    desc: "Under 15 ms to Barcelona, Madrid, Paris, Milan. On par with hyperscaler Madrid, sovereign by default.",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-        <circle cx="9" cy="9" r="7" stroke="#0090FF" strokeWidth="1.5" />
-        <path d="M9 4c-3 0-5.5 2.2-5.5 5 0 2.5 2 3.8 5.5 3.8s5.5-1.3 5.5-3.8C14.5 6.2 12 4 9 4z" stroke="#0090FF" strokeWidth="1.5" />
-        <path d="M9 4v9.8M3.5 9h11" stroke="#0090FF" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Eleven nines of durability",
-    desc: "Distributed storage across an independent provider network. Audit-ready proof that your bytes are intact, every day.",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-        <path d="M9 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z" fill="rgba(0,144,255,0.12)" stroke="#0090FF" strokeWidth="1.4" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Object Lock and versioning",
-    desc: "Compliance and governance modes for backup targets. Retention periods. Tamper-evident audit logs. Ready for regulated data.",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-        <rect x="3" y="3" width="12" height="12" rx="2" stroke="#0090FF" strokeWidth="1.5" />
-        <path d="M6 9h6M6 6h4M6 12h3" stroke="#0090FF" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Predictable under load",
-    desc: "Line-rate ingest at 1.5 Gbps per client. Sustained parallel reads. Tight run-to-run variance so your pipelines stop guessing.",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-        <polyline points="2,13 6,8 10,10 14,4 16,6" stroke="#0090FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-];
-
-// ─── Workload cards ────────────────────────────────────────────────────────────
 const WORKLOADS = [
   {
-    tag: "Creative and media",
-    title: "Pull a 50 GB master into your NLE",
-    desc: "Editors, colorists, and VFX artists load large project files straight into Premiere, DaVinci Resolve, and Nuke. Scrubbing and playback stay snappy.",
+    tag: "Creativo y media",
+    title: "Carga un master de 50 GB en tu NLE",
+    desc: "Editores, coloristas y artistas de VFX cargan archivos de proyecto grandes directamente en Premiere, DaVinci Resolve y Nuke. El scrubbing y la reproducción siguen siendo fluidos.",
     stats: [
-      { label: "Load time", rows: [{ name: "Fil One", val: "7 min", win: true }, { name: "AWS Madrid", val: "7 min", win: false }] },
-      { label: "Monthly bill", rows: [{ name: "Fil One", val: "€50", win: true }, { name: "AWS Madrid", val: "€989", win: false }] },
+      { label: "Tiempo de carga", rows: [{ name: "Fil One", val: "7 min", win: true }, { name: "AWS Madrid", val: "7 min", win: false }] },
+      { label: "Factura mensual", rows: [{ name: "Fil One", val: "€50", win: true }, { name: "AWS Madrid", val: "€989", win: false }] },
     ],
-    speedBadge: "Same speed your team already loves",
-    savingsBadge: "23× cheaper",
+    speedBadge: "La misma velocidad que ya le gusta a tu equipo",
+    savingsBadge: "23× más barato",
   },
   {
-    tag: "AI and ML",
-    title: "Stream a 10 TB dataset, epoch after epoch",
-    desc: "Foundation-model trainers, CV teams, and fine-tuning loops. Sustained parallel throughput across tens of thousands of shards without rate-limit surprises.",
+    tag: "IA y ML",
+    title: "Transmite un dataset de 10 TB, época tras época",
+    desc: "Entrenadores de modelos fundacionales, equipos de visión por computador y bucles de fine-tuning. Rendimiento paralelo sostenido en decenas de miles de shards sin sorpresas por límites de velocidad.",
     stats: [
-      { label: "Time to stream one full epoch", rows: [{ name: "Fil One", val: "7 hr", win: true }, { name: "AWS Madrid", val: "11 hr", win: false }] },
-      { label: "Monthly bill at training scale", rows: [{ name: "Fil One", val: "€100", win: true }, { name: "AWS Madrid", val: "€8,278", win: false }] },
+      { label: "Tiempo para transmitir una época completa", rows: [{ name: "Fil One", val: "7 h", win: true }, { name: "AWS Madrid", val: "11 h", win: false }] },
+      { label: "Factura mensual a escala de entrenamiento", rows: [{ name: "Fil One", val: "€100", win: true }, { name: "AWS Madrid", val: "€8.278", win: false }] },
     ],
-    speedBadge: "Faster epochs. Almost no infra bill.",
-    savingsBadge: "97× cheaper",
+    speedBadge: "Épocas más rápidas. Casi sin factura de infra.",
+    savingsBadge: "97× más barato",
   },
   {
-    tag: "SaaS and consumer apps",
-    title: "Serve user media without watching the meter",
-    desc: "Image platforms, DAM tools, document vaults, media-heavy consumer apps. Every customer request pulls bytes. Every pull is free.",
+    tag: "SaaS y apps de consumo",
+    title: "Sirve contenido multimedia sin vigilar el contador",
+    desc: "Plataformas de imágenes, herramientas DAM, vaults de documentos, apps de consumo con mucho contenido multimedia. Cada petición de cliente descarga bytes. Cada descarga es gratuita.",
     stats: [
-      { label: "Cost to serve 1M user fetches", rows: [{ name: "Fil One", val: "€0", win: true }, { name: "AWS Madrid", val: "€79", win: false }] },
-      { label: "Monthly bill at consumer scale", rows: [{ name: "Fil One", val: "€25", win: true }, { name: "AWS Madrid", val: "€4,047", win: false }] },
+      { label: "Coste para 1M de peticiones de usuarios", rows: [{ name: "Fil One", val: "€0", win: true }, { name: "AWS Madrid", val: "€79", win: false }] },
+      { label: "Factura mensual a escala de consumo", rows: [{ name: "Fil One", val: "€25", win: true }, { name: "AWS Madrid", val: "€4.047", win: false }] },
     ],
-    speedBadge: "Same snappy feel for your users.",
-    savingsBadge: "189× cheaper",
+    speedBadge: "La misma experiencia ágil para tus usuarios.",
+    savingsBadge: "189× más barato",
   },
   {
-    tag: "Backup and archive",
-    title: "Ingest at line rate. Retrieve without penalty",
-    desc: "MSPs, Veeam and Restic customers, photo archives, compliance retention. Object Lock in Compliance mode. Retrieval costs nothing.",
+    tag: "Backup y archivo",
+    title: "Ingestión a velocidad de línea. Recuperación sin penalización",
+    desc: "MSPs, clientes de Veeam y Restic, archivos de fotos, retención de cumplimiento. Object Lock en modo Compliance. La recuperación no cuesta nada.",
     stats: [
-      { label: "Time to ingest 1 TB", rows: [{ name: "Fil One", val: "1.5 hr", win: true }, { name: "AWS Madrid", val: "2.2 hr", win: false }] },
-      { label: "Monthly bill — 50 TB retention", rows: [{ name: "Fil One", val: "€250", win: true }, { name: "AWS Madrid", val: "€1,064", win: false }] },
+      { label: "Tiempo para ingerir 1 TB", rows: [{ name: "Fil One", val: "1,5 h", win: true }, { name: "AWS Madrid", val: "2,2 h", win: false }] },
+      { label: "Factura mensual — retención de 50 TB", rows: [{ name: "Fil One", val: "€250", win: true }, { name: "AWS Madrid", val: "€1.064", win: false }] },
     ],
-    speedBadge: "Faster in. Free to pull out.",
-    savingsBadge: "5× cheaper",
+    speedBadge: "Más rápido al entrar. Gratis al salir.",
+    savingsBadge: "5× más barato",
   },
 ];
 
-// ─── Integrations ──────────────────────────────────────────────────────────────
 const INTEGRATIONS = [
   "Iconik", "LucidLink", "Veeam", "Rclone", "Restic",
   "MSP360", "Premiere", "DaVinci Resolve", "Hugging Face",
   "PyTorch", "Arq", "Duplicati",
 ];
 
-// ─── Page ──────────────────────────────────────────────────────────────────────
-const BarcelonaLandingPage = () => {
+const BarcelonaLandingPageES = () => {
   useSeo({
-    title: "Fil One for Barcelona — Hyperscaler speed. Budget-tier bills.",
+    title: "Fil One para Barcelona — Velocidad de hiperescalador. Facturas de gama económica.",
     description:
-      "S3-compatible object storage for creative, AI, and SaaS teams across Southern Europe. European-native latency, zero egress fees, €4.99/TB per month.",
-    canonical: "https://filone.io/lp/barcelona",
+      "Almacenamiento de objetos compatible con S3 para equipos creativos, de IA y SaaS en el sur de Europa. Latencia nativa europea, sin tarifas de egreso, €4,99/TB al mes.",
+    canonical: "https://filone.io/lp/es/barcelona",
   });
 
   const { ref: posRef,          inView: posInView          } = useInView({ threshold: 0.05 });
@@ -375,7 +282,7 @@ const BarcelonaLandingPage = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <LandingNavbar />
+      <LandingNavbar lang="es" />
 
       <main id="main-content">
 
@@ -384,7 +291,6 @@ const BarcelonaLandingPage = () => {
           className="relative isolate pt-[58px]"
           style={{ backgroundColor: "#FFFFFF" }}
         >
-          {/* Blue radial glow */}
           <div
             aria-hidden="true"
             className="absolute inset-0 pointer-events-none -z-10"
@@ -392,7 +298,6 @@ const BarcelonaLandingPage = () => {
               background: "radial-gradient(ellipse 55% 40% at 50% 0%, rgba(0,144,255,0.13) 0%, transparent 70%)",
             }}
           />
-          {/* Grid texture */}
           <div
             aria-hidden="true"
             className="absolute inset-0 pointer-events-none -z-10"
@@ -408,7 +313,6 @@ const BarcelonaLandingPage = () => {
           />
 
           <div className="flex flex-col items-center gap-6 px-5 md:px-8 w-full max-w-[1120px] mx-auto pt-20 md:pt-[120px] pb-20 md:pb-28">
-            {/* Announcement badge — matches HeroSection.tsx */}
             <div
               className="hero-fade-1 flex items-center gap-1.5 text-center"
               style={{
@@ -428,11 +332,10 @@ const BarcelonaLandingPage = () => {
                   color: "#0070CC",
                 }}
               >
-                For creative, AI, and SaaS teams in Barcelona and across the Iberian Peninsula
+                Para equipos creativos, de IA y SaaS en Barcelona y la Península Ibérica
               </span>
             </div>
 
-            {/* Headline */}
             <h1
               className="text-[30px] sm:text-[38px] md:text-[54px] hero-fade-2"
               style={{
@@ -442,14 +345,13 @@ const BarcelonaLandingPage = () => {
                 letterSpacing: "-0.025em",
                 color: "#09090B",
                 textAlign: "center",
-                maxWidth: 660,
+                maxWidth: 820,
                 margin: 0,
               }}
             >
-              Hyperscaler speed.<br /><span style={{ color: "#0090FF" }}>Budget-tier bills.</span>
+              Velocidad de hiperescalador.<br /><span style={{ color: "#0090FF" }}>Facturas de gama económica.</span>
             </h1>
 
-            {/* Subheadline */}
             <p
               className="text-[15px] md:text-[17px] hero-fade-2"
               style={{
@@ -462,20 +364,18 @@ const BarcelonaLandingPage = () => {
                 margin: 0,
               }}
             >
-              Fil One is S3-compatible object storage built for European teams. You get hyperscaler-grade performance, served from EU infrastructure, without the hyperscaler invoice. Drop it into your existing stack in minutes.
+              Fil One es almacenamiento de objetos compatible con S3 diseñado para equipos europeos. Rendimiento de nivel hiperescalador, servido desde infraestructura europea, sin la factura del hiperescalador. Intégralo en tu stack existente en minutos.
             </p>
 
-            {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
-                <span className="btn-primary-inner">Try 30 days for free</span>
+                <span className="btn-primary-inner">Prueba 30 días gratis</span>
               </a>
-              <a href="/lp/barcelona/contact" className="btn-secondary">
-                Talk to an expert
+              <a href="/lp/es/contacto" className="btn-secondary">
+                Habla con un experto
               </a>
             </div>
 
-            {/* Trust line */}
             <p
               className="hero-fade-4"
               style={{
@@ -486,49 +386,46 @@ const BarcelonaLandingPage = () => {
                 textAlign: "center",
               }}
             >
-              No credit card required · No egress fees · Connects in minutes
+              Sin tarjeta de crédito · Sin tarifas de egreso · Conecta en minutos
             </p>
           </div>
         </section>
 
-        {/* ── Problem + Why teams are stuck (merged) ───────────────────────── */}
+        {/* ── Problem ───────────────────────────────────────────────────────── */}
         <section
           className="px-5 md:px-8 py-16 md:py-24 w-full"
           style={{ backgroundColor: "#F9FAFB" }}
         >
           <div className="flex flex-col gap-10 w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-4 items-center text-center max-w-[560px] mx-auto">
-              <SectionLabel>The problem</SectionLabel>
-              <SectionHeading>Cloud storage wasn't designed for Barcelona teams.</SectionHeading>
+              <SectionLabel>El problema</SectionLabel>
+              <SectionHeading>El almacenamiento en la nube no fue diseñado para equipos de Barcelona.</SectionHeading>
               <SectionSub>
-                Most S3-compatible storage options are priced for global enterprises, not for a studio in Poblenou, an AI team in 22@, or a SaaS company serving European customers from a Madrid HQ. Every alternative on the market today comes with a real catch.
+                La mayoría de las opciones de almacenamiento compatibles con S3 tienen precios pensados para grandes empresas globales, no para un estudio en Poblenou, un equipo de IA en el 22@, o una empresa SaaS que sirve a clientes europeos desde una sede en Madrid. Cada alternativa del mercado tiene un problema real.
               </SectionSub>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
               {[
                 {
-                  label: "Hyperscalers",
-                  pillBg: "#EFF8FF", pillBorder: "rgba(0,144,255,0.2)", pillColor: "#0070CC",
-                  title: "Reliable, but the bill keeps growing.",
-                  body: "AWS, Google Cloud, and Azure win the procurement conversation by default. Not because they offer the best value, but because nobody gets fired for picking them. A 10 TB Barcelona workload running on AWS eu-south-2 Madrid burns €790 a month in egress alone, and most teams never audit the line item until it is already out of hand.",
-                  catch: "Egress fees compound silently.",
+                  label: "Hiperescaladores",
+                  title: "Las tarifas de egreso se acumulan en silencio.",
+                  body: "AWS, Google Cloud y Azure ganan la conversación de compras por defecto. No porque ofrezcan el mejor valor, sino porque nadie se arriesga eligiéndolos. Un workload de 10 TB en Barcelona sobre AWS eu-south-2 Madrid genera €790 al mes solo en egreso, y la mayoría de los equipos nunca audita esa línea hasta que ya se les ha ido de las manos.",
+                  catch: "Fiables, pero la factura no para de crecer.",
                 },
                 {
-                  label: "Budget alternatives",
-                  pillBg: "#F0FDF4", pillBorder: "rgba(21,128,61,0.2)", pillColor: "#15803D",
-                  title: "Cheaper storage, worse everything else.",
-                  body: "Wasabi and Backblaze undercut hyperscalers on storage, but neither runs an EU-sovereign region close to you. From Barcelona or Madrid, your traffic loops through Paris or Amsterdam. Latency goes up, GDPR posture gets murky, and your data sits outside European legal jurisdiction.",
-                  catch: "Performance and compliance both suffer.",
+                  label: "Alternativas económicas",
+                  title: "Rendimiento y cumplimiento en riesgo.",
+                  body: "Wasabi y Backblaze cuestan menos que los hiperescaladores en almacenamiento, pero ninguno tiene una región soberana en la UE cerca de ti. Desde Barcelona o Madrid, tu tráfico pasa por París o Ámsterdam. La latencia sube, la postura GDPR se complica, y tus datos quedan fuera de la jurisdicción legal europea.",
+                  catch: "Almacenamiento más barato, todo lo demás peor.",
                 },
                 {
-                  label: "Doing nothing",
-                  pillBg: "#FFFBEB", pillBorder: "rgba(180,83,9,0.2)", pillColor: "#B45309",
-                  title: "The bill is a line item nobody owns.",
-                  body: "Storage gets reviewed quarterly, if that. AWS billing is opaque by design, switching sounds risky on a Tuesday afternoon, and benchmarking takes time nobody has on the calendar. Meanwhile the 23× premium keeps compounding.",
-                  catch: "Inertia is the most expensive option.",
+                  label: "No hacer nada",
+                  title: "La inercia es la opción más cara.",
+                  body: "El almacenamiento se revisa trimestralmente, si acaso. La facturación de AWS es opaca por diseño, cambiar parece arriesgado un martes por la tarde, y comparar benchmarks lleva tiempo que nadie tiene en el calendario. Mientras tanto, el sobrecoste de 23× sigue acumulándose.",
+                  catch: "La factura es una línea que nadie gestiona.",
                 },
-              ].map(({ label, pillBg, pillBorder, pillColor, title, body, catch: catchLine }) => (
+              ].map(({ label, title, body, catch: catchLine }) => (
                 <div
                   key={label}
                   className="flex flex-col rounded-2xl overflow-hidden"
@@ -538,7 +435,6 @@ const BarcelonaLandingPage = () => {
                     boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
                   }}
                 >
-                  {/* Card body */}
                   <div className="flex flex-col p-7" style={{ gap: 10, flex: 1 }}>
                     <span style={{
                       display: "inline-block",
@@ -564,7 +460,6 @@ const BarcelonaLandingPage = () => {
                       {body}
                     </p>
                   </div>
-                  {/* Footer strip */}
                   <div
                     className="flex items-center gap-2 px-7 py-4"
                     style={{ backgroundColor: "#F4F4F5", borderTop: "1px solid rgba(0,0,0,0.06)" }}
@@ -580,9 +475,9 @@ const BarcelonaLandingPage = () => {
           </div>
         </section>
 
-        {/* ── Positioning / Scatter Chart ───────────────────────────────────── */}
+        {/* ── Positioning ───────────────────────────────────────────────────── */}
         <section
-          id="positioning"
+          id="posicionamiento"
           className="px-5 md:px-8 py-24 md:py-32 w-full"
           style={{ backgroundColor: "#FFFFFF" }}
         >
@@ -591,19 +486,19 @@ const BarcelonaLandingPage = () => {
             className={`flex flex-col gap-8 w-full max-w-[1120px] mx-auto reveal${posInView ? " in-view" : ""}`}
           >
             <div className="flex flex-col gap-3 items-center text-center">
-              <SectionLabel>Positioning</SectionLabel>
-              <SectionHeading>Outside the tradeoff.</SectionHeading>
+              <SectionLabel>Posicionamiento</SectionLabel>
+              <SectionHeading>Fuera del tradeoff.</SectionHeading>
               <SectionSub>
-                Every other option forces a tradeoff between price and performance. Fil One does not. The chart below shows where we land.
+                Todas las demás opciones te obligan a elegir entre precio y rendimiento. Fil One no. El gráfico muestra dónde estamos.
               </SectionSub>
             </div>
             <ScatterChart />
           </div>
         </section>
 
-        {/* ── Pricing table ─────────────────────────────────────────────────── */}
+        {/* ── Pricing ───────────────────────────────────────────────────────── */}
         <section
-          id="compare"
+          id="precios"
           className="px-5 md:px-8 py-24 md:py-32 w-full"
           style={{ backgroundColor: "#F9FAFB" }}
         >
@@ -612,10 +507,10 @@ const BarcelonaLandingPage = () => {
             className={`flex flex-col gap-8 w-full max-w-[1120px] mx-auto reveal${pricingInView ? " in-view" : ""}`}
           >
             <div className="flex flex-col gap-3">
-              <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>Your monthly bill, six ways.</SectionHeading>
+              <SectionLabel>Precios</SectionLabel>
+              <SectionHeading>Tu factura mensual, de seis maneras.</SectionHeading>
               <SectionSub maxWidth={600}>
-                A 10 TB team in Barcelona, delivering 10 TB of egress each month, running 500,000 object operations.
+                Un equipo de 10 TB en Barcelona, con 10 TB de egreso al mes y 500.000 operaciones de objetos.
               </SectionSub>
             </div>
 
@@ -630,7 +525,7 @@ const BarcelonaLandingPage = () => {
               >
                 <thead>
                   <tr>
-                    {["Provider", "Region", "Storage", "Egress", "API / ops", "Total / month"].map((h) => (
+                    {["Proveedor", "Región", "Almacenamiento", "Egreso", "API / ops", "Total / mes"].map((h) => (
                       <th
                         key={h}
                         style={{
@@ -656,7 +551,6 @@ const BarcelonaLandingPage = () => {
                       key={row.provider}
                       style={{ backgroundColor: row.isFilOne ? "#EFF8FF" : "transparent" }}
                     >
-                      {/* Provider */}
                       <td
                         style={{
                           padding: "14px 16px",
@@ -685,68 +579,23 @@ const BarcelonaLandingPage = () => {
                               whiteSpace: "nowrap",
                             }}
                           >
-                            You
+                            Tú
                           </span>
                         )}
                       </td>
-                      {/* Region */}
-                      <td
-                        style={{
-                          padding: "14px 16px",
-                          borderBottom: "1px solid rgba(0,0,0,0.06)",
-                          fontSize: 13.5,
-                          fontWeight: row.isFilOne ? 500 : 400,
-                          color: row.isFilOne ? "#09090B" : "#52525B",
-                        }}
-                      >
+                      <td style={{ padding: "14px 16px", borderBottom: "1px solid rgba(0,0,0,0.06)", fontSize: 13.5, fontWeight: row.isFilOne ? 500 : 400, color: row.isFilOne ? "#09090B" : "#52525B" }}>
                         {row.region}
                       </td>
-                      {/* Storage */}
-                      <td
-                        style={{
-                          padding: "14px 16px",
-                          borderBottom: "1px solid rgba(0,0,0,0.06)",
-                          fontSize: 13.5,
-                          fontWeight: row.isFilOne ? 600 : 400,
-                          color: row.isFilOne ? "#09090B" : "#52525B",
-                        }}
-                      >
+                      <td style={{ padding: "14px 16px", borderBottom: "1px solid rgba(0,0,0,0.06)", fontSize: 13.5, fontWeight: row.isFilOne ? 600 : 400, color: row.isFilOne ? "#09090B" : "#52525B" }}>
                         {row.storage}
                       </td>
-                      {/* Egress */}
-                      <td
-                        style={{
-                          padding: "14px 16px",
-                          borderBottom: "1px solid rgba(0,0,0,0.06)",
-                          fontSize: 13.5,
-                          fontWeight: row.isFilOne ? 600 : 500,
-                          color: row.isFilOne ? "#09090B" : valueColor(row.egress),
-                        }}
-                      >
+                      <td style={{ padding: "14px 16px", borderBottom: "1px solid rgba(0,0,0,0.06)", fontSize: 13.5, fontWeight: row.isFilOne ? 600 : 500, color: row.isFilOne ? "#09090B" : valueColor(row.egress) }}>
                         {row.egress}
                       </td>
-                      {/* API */}
-                      <td
-                        style={{
-                          padding: "14px 16px",
-                          borderBottom: "1px solid rgba(0,0,0,0.06)",
-                          fontSize: 13.5,
-                          fontWeight: row.isFilOne ? 600 : 500,
-                          color: row.isFilOne ? "#09090B" : valueColor(row.api),
-                        }}
-                      >
+                      <td style={{ padding: "14px 16px", borderBottom: "1px solid rgba(0,0,0,0.06)", fontSize: 13.5, fontWeight: row.isFilOne ? 600 : 500, color: row.isFilOne ? "#09090B" : valueColor(row.api) }}>
                         {row.api}
                       </td>
-                      {/* Total */}
-                      <td
-                        style={{
-                          padding: "14px 16px",
-                          borderBottom: "1px solid rgba(0,0,0,0.06)",
-                          fontSize: row.isFilOne ? 17 : 13.5,
-                          fontWeight: row.isFilOne ? 700 : 400,
-                          color: row.isFilOne ? "#0070CC" : "#52525B",
-                        }}
-                      >
+                      <td style={{ padding: "14px 16px", borderBottom: "1px solid rgba(0,0,0,0.06)", fontSize: row.isFilOne ? 17 : 13.5, fontWeight: row.isFilOne ? 700 : 400, color: row.isFilOne ? "#0070CC" : "#52525B" }}>
                         {row.total}
                       </td>
                     </tr>
@@ -755,33 +604,33 @@ const BarcelonaLandingPage = () => {
               </table>
             </div>
             <p className="text-xs text-slate-500 mt-4">
-              Competitor prices converted from USD at €1 = $1.17 (ECB rate, May 2026). FilOne is priced natively in EUR at €4.99/TB.
+              Precios de la competencia convertidos de USD a €1 = $1,17 (tasa BCE, mayo 2026). FilOne tiene precios nativos en EUR a €4,99/TB.
             </p>
           </div>
         </section>
 
-        {/* ── Features ─────────────────────────────────────────────────────── */}
+        {/* ── Features ──────────────────────────────────────────────────────── */}
         <section
-          id="features"
+          id="caracteristicas"
           className="w-full"
           style={{ backgroundColor: "#FFFFFF" }}
         >
           <div className="flex flex-col gap-12 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-4 items-center text-center">
               <span style={{ fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 11.5, letterSpacing: "0.08em", color: "#71717A", textTransform: "uppercase" }}>
-                Features
+                Características
               </span>
               <h2
                 className="text-[24px] md:text-[34px]"
                 style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, lineHeight: "1.2", letterSpacing: "-0.02em", color: "#09090B", margin: 0 }}
               >
-                The <span style={{ color: "#0090FF" }}>S3 you expected.</span>
+                El <span style={{ color: "#0090FF" }}>S3 que esperabas.</span>
               </h2>
               <p
                 className="text-[15px] md:text-[17px]"
                 style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", maxWidth: 560, margin: 0 }}
               >
-                Compatible with everything your team already uses. Priced for the workloads that move real data.
+                Compatible con todo lo que ya usa tu equipo. Con precios para los workloads que mueven datos de verdad.
               </p>
             </div>
             <div
@@ -789,12 +638,12 @@ const BarcelonaLandingPage = () => {
               className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full reveal-group reveal${featuresInView ? " in-view" : ""}`}
             >
               {[
-                { icon: Plug,        title: "Drop-in S3 compatibility",    desc: "Same API, same SDKs, same tools. Point your existing workflow at our endpoint and keep shipping. No migration project." },
-                { icon: ArrowsOut,   title: "Zero egress fees",            desc: "Client pulls, customer downloads, dashboard queries. Every read is included. Your bill stays flat at the end of a busy month." },
-                { icon: Globe,       title: "European-native latency",     desc: "Under 15 ms from Barcelona, Madrid, Paris, and Milan. Matches AWS eu-south-2 Madrid round-trip, with EU data sovereignty and European legal jurisdiction by default." },
-                { icon: ShieldCheck, title: "Eleven nines of durability",  desc: "Distributed storage across an independent provider network. Audit-ready proof that your bytes are intact, every day." },
-                { icon: Lock,        title: "Object Lock and versioning",  desc: "Compliance and governance modes for backup targets. Retention periods. Tamper-evident audit logs. Ready for regulated data." },
-                { icon: ChartLine,   title: "Predictable under load",      desc: "Line-rate ingest at 1.5 Gbps per client. Sustained parallel reads. Tight run-to-run variance so your pipelines stop guessing." },
+                { icon: Plug,        title: "Compatibilidad S3 directa",      desc: "Misma API, mismos SDK, mismas herramientas. Apunta tu flujo de trabajo actual a nuestro endpoint y sigue produciendo. Sin proyectos de migración." },
+                { icon: ArrowsOut,   title: "Sin tarifas de egreso",           desc: "Descargas de clientes, peticiones de usuarios, consultas del dashboard. Cada lectura está incluida. Tu factura se mantiene estable al final de un mes ajetreado." },
+                { icon: Globe,       title: "Latencia nativa europea",         desc: "Menos de 15 ms desde Barcelona, Madrid, París y Milán. Al nivel de AWS eu-south-2 Madrid, con soberanía de datos en la UE y jurisdicción legal europea por defecto." },
+                { icon: ShieldCheck, title: "Once nueves de durabilidad",      desc: "Almacenamiento distribuido en una red de proveedores independientes. Prueba auditable de que tus bytes están intactos, cada día." },
+                { icon: Lock,        title: "Object Lock y versionado",        desc: "Modos de cumplimiento y gobernanza para destinos de backup. Períodos de retención. Registros de auditoría a prueba de manipulaciones. Listo para datos regulados." },
+                { icon: ChartLine,   title: "Predecible bajo carga",           desc: "Ingestión a velocidad de línea de 1,5 Gbps por cliente. Lecturas paralelas sostenidas. Varianza entre ejecuciones ajustada para que tus pipelines dejen de adivinar." },
               ].map(({ icon: Icon, title, desc }) => (
                 <div
                   key={title}
@@ -824,7 +673,7 @@ const BarcelonaLandingPage = () => {
 
         {/* ── Workloads ─────────────────────────────────────────────────────── */}
         <section
-          id="workloads"
+          id="casos-de-uso"
           className="px-5 md:px-8 py-24 md:py-32 w-full"
           style={{ backgroundColor: "#F9FAFB" }}
         >
@@ -833,18 +682,15 @@ const BarcelonaLandingPage = () => {
             className={`flex flex-col gap-10 w-full max-w-[1120px] mx-auto reveal${workloadsInView ? " in-view" : ""}`}
           >
             <div className="flex flex-col gap-3">
-              <SectionLabel>Workloads</SectionLabel>
-              <SectionHeading>Built for what your team actually does.</SectionHeading>
+              <SectionLabel>Casos de uso</SectionLabel>
+              <SectionHeading>Diseñado para lo que tu equipo hace de verdad.</SectionHeading>
               <SectionSub maxWidth={560}>
-                Speed where it matters. Savings that compound month over month.
+                Velocidad donde importa. Ahorro que se acumula mes a mes.
               </SectionSub>
             </div>
 
-            <div
-              className="reveal-group grid grid-cols-1 md:grid-cols-2 gap-4"
-            >
+            <div className="reveal-group grid grid-cols-1 md:grid-cols-2 gap-4">
               {WORKLOADS.map((w, wi) => {
-                // parse numeric value for bar width calculation
                 const barVal = (s: string) => parseFloat(s.replace(/[^0-9.]/g, "")) || 0;
                 return (
                   <div
@@ -861,9 +707,7 @@ const BarcelonaLandingPage = () => {
                       flexDirection: "column",
                     }}
                   >
-                    {/* ── Header ── */}
                     <div style={{ padding: "28px 28px 24px" }}>
-                      {/* Pill — same as hero announcement badge */}
                       <span style={{
                         display: "inline-flex",
                         alignItems: "center",
@@ -905,7 +749,6 @@ const BarcelonaLandingPage = () => {
                       </p>
                     </div>
 
-                    {/* ── Stats ── */}
                     <div style={{ borderTop: "1px solid rgba(0,0,0,0.06)", padding: "20px 28px 0" }}>
                       {w.stats.map((stat, si) => {
                         const vals = stat.rows.map(r => barVal(r.val));
@@ -913,7 +756,6 @@ const BarcelonaLandingPage = () => {
                         return (
                           <div key={stat.label} style={{ marginBottom: 20 }}>
                             {si > 0 && <div style={{ height: 1, backgroundColor: "rgba(0,0,0,0.06)", margin: "0 0 20px" }} />}
-                            {/* Stat label */}
                             <p style={{
                               fontFamily: "'DM Mono', monospace",
                               fontWeight: 500,
@@ -925,7 +767,6 @@ const BarcelonaLandingPage = () => {
                             }}>
                               {stat.label}
                             </p>
-                            {/* Bar rows */}
                             {stat.rows.map((r, ri) => {
                               const pct = maxVal === 0 ? 100 : Math.max(3, (vals[ri] / maxVal) * 100);
                               return (
@@ -967,7 +808,6 @@ const BarcelonaLandingPage = () => {
                       })}
                     </div>
 
-                    {/* ── Bottom summary strip ── */}
                     <div style={{
                       margin: "4px 16px 16px",
                       borderRadius: 12,
@@ -979,21 +819,10 @@ const BarcelonaLandingPage = () => {
                       gap: 12,
                       marginTop: "auto",
                     }}>
-                      <span style={{
-                        fontFamily: "'Funnel Sans', sans-serif",
-                        fontWeight: 400,
-                        fontSize: 13.5,
-                        color: "#52525B",
-                      }}>
+                      <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, color: "#52525B" }}>
                         {w.speedBadge}
                       </span>
-                      <span style={{
-                        fontFamily: "'Funnel Sans', sans-serif",
-                        fontWeight: 700,
-                        fontSize: 18,
-                        color: "#0070CC",
-                        whiteSpace: "nowrap",
-                      }}>
+                      <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 700, fontSize: 18, color: "#0070CC", whiteSpace: "nowrap" }}>
                         {w.savingsBadge}
                       </span>
                     </div>
@@ -1006,7 +835,7 @@ const BarcelonaLandingPage = () => {
 
         {/* ── Integrations ──────────────────────────────────────────────────── */}
         <section
-          id="integrations"
+          id="integraciones"
           className="px-5 md:px-8 py-24 md:py-32 w-full"
           style={{ backgroundColor: "#FFFFFF" }}
         >
@@ -1015,10 +844,10 @@ const BarcelonaLandingPage = () => {
             className={`flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto reveal${integrationsInView ? " in-view" : ""}`}
           >
             <div className="flex flex-col gap-3 items-center">
-              <SectionLabel>Integrations</SectionLabel>
-              <SectionHeading>Works with your existing stack.</SectionHeading>
+              <SectionLabel>Integraciones</SectionLabel>
+              <SectionHeading>Funciona con tu stack actual.</SectionHeading>
               <SectionSub maxWidth={440}>
-                S3 API compatible. If it talks to AWS, it talks to us.
+                Compatible con la API S3. Si habla con AWS, habla con nosotros.
               </SectionSub>
             </div>
 
@@ -1048,7 +877,7 @@ const BarcelonaLandingPage = () => {
               rel="noopener noreferrer"
               className="btn-secondary"
             >
-              View documentation →
+              Ver documentación →
             </a>
           </div>
         </section>
@@ -1072,7 +901,6 @@ const BarcelonaLandingPage = () => {
               }}
               className="px-6 md:px-12 py-16 md:py-[104px]"
             >
-              {/* White grid texture */}
               <div
                 aria-hidden="true"
                 style={{
@@ -1098,7 +926,7 @@ const BarcelonaLandingPage = () => {
                     marginBottom: 12,
                   }}
                 >
-                  Ship your next project on Fil One
+                  Lanza tu próximo proyecto con Fil One
                 </h2>
                 <p
                   style={{
@@ -1109,15 +937,15 @@ const BarcelonaLandingPage = () => {
                     marginBottom: 32,
                   }}
                 >
-                  Free 1 TB evaluation bucket. Onboarding in under 2 minutes.
+                  Bucket de evaluación de 1 TB gratuito. Integración en menos de 2 minutos.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark">
-                    <span className="btn-primary-inner">Try 30 days for free</span>
+                    <span className="btn-primary-inner">Prueba 30 días gratis</span>
                   </a>
-                  <a href="/lp/barcelona/contact" className="btn-secondary btn-secondary-dark">
-                    Talk to an expert
+                  <a href="/lp/es/contacto" className="btn-secondary btn-secondary-dark">
+                    Habla con un experto
                   </a>
                 </div>
 
@@ -1129,7 +957,7 @@ const BarcelonaLandingPage = () => {
                     marginTop: 16,
                   }}
                 >
-                  No credit card required · No egress fees
+                  Sin tarjeta de crédito · Sin tarifas de egreso
                 </p>
               </div>
             </div>
@@ -1137,9 +965,9 @@ const BarcelonaLandingPage = () => {
         </section>
       </main>
 
-      <LandingFooter campaign="barcelona" />
+      <LandingFooter lang="es" />
     </div>
   );
 };
 
-export default BarcelonaLandingPage;
+export default BarcelonaLandingPageES;

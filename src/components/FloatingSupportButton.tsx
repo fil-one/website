@@ -17,12 +17,16 @@ const FloatingSupportButton = () => {
   // Hide on /support and on ads landing pages (/:lang/:city) but not on /lp/* pages
   const segments = pathname.split("/").filter(Boolean);
   const isAdsPage = segments.length === 2 && segments[0] !== "lp";
-  if (pathname === "/support" || isAdsPage) return null;
+  const isSpanishLP = pathname.startsWith("/lp/es");
+  const isBarcelonaEN = pathname.startsWith("/lp/barcelona");
+  const supportHref = isSpanishLP ? "/lp/es/soporte" : isBarcelonaEN ? "/lp/barcelona/support" : "/support";
+  const supportLabel = isSpanishLP ? "Soporte" : "Support";
+  if (pathname === "/support" || pathname === "/lp/es/soporte" || pathname === "/lp/barcelona/support" || isAdsPage) return null;
 
   return (
     <a
-      href="/support"
-      aria-label="Get support"
+      href={supportHref}
+      aria-label={isSpanishLP ? "Obtener soporte" : "Get support"}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -50,7 +54,7 @@ const FloatingSupportButton = () => {
       }}
     >
       <ChatCircle size={14} />
-      Support
+      {supportLabel}
     </a>
   );
 };
