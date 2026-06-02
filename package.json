@@ -38,7 +38,10 @@
       "/lp/regional-cloud",
       "/lp/media",
       "/lp/gaming",
-      "/lp/genomics"
+      "/lp/genomics",
+      "/lp/web3-fintech",
+      "/lp/web3-pivot",
+      "/lp/web3-native"
     ],
     "puppeteerArgs": [
       "--no-sandbox",

@@ -29,6 +29,9 @@ import RegionalCloudLandingPage from "./pages/RegionalCloudLandingPage";
 import MediaLandingPage from "./pages/MediaLandingPage";
 import GamingLandingPage from "./pages/GamingLandingPage";
 import GenomicsLandingPage from "./pages/GenomicsLandingPage";
+import Web3FintechLandingPage from "./pages/Web3FintechLandingPage";
+import Web3PivotLandingPage from "./pages/Web3PivotLandingPage";
+import Web3NativeLandingPage from "./pages/Web3NativeLandingPage";
 import VersionA from "./pages/VersionA";
 import VersionB from "./pages/VersionB";
 import StorageProductPage from "./pages/StorageProductPage";
@@ -74,6 +77,9 @@ const App = () => (
           <Route path="/lp/media" element={<MediaLandingPage />} />
           <Route path="/lp/gaming" element={<GamingLandingPage />} />
           <Route path="/lp/genomics" element={<GenomicsLandingPage />} />
+          <Route path="/lp/web3-fintech" element={<Web3FintechLandingPage />} />
+          <Route path="/lp/web3-pivot" element={<Web3PivotLandingPage />} />
+          <Route path="/lp/web3-native" element={<Web3NativeLandingPage />} />
           <Route path="/v1" element={<VersionA />} />
           <Route path="/storage" element={<StorageProductPage />} />
           <Route path="/rag-pipeline" element={<RagPipelineProductPage />} />
