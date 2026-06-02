@@ -24,7 +24,8 @@
       "/es/barcelona",
       "/lp/egress",
       "/lp/backup-dr",
-      "/lp/log-retention"
+      "/lp/log-retention",
+      "/lp/startups"
     ],
     "puppeteerArgs": [
       "--no-sandbox",

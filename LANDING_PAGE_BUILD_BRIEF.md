@@ -118,7 +118,7 @@ sources. Build every `todo`.
 | 1 | /lp/egress | EgressLandingPage | Barcelona | done |
 | 2 | /lp/backup-dr | BackupDrLandingPage | Barcelona | blocked |
 | 3 | /lp/log-retention | LogRetentionLandingPage | Agents | done |
-| 4 | /lp/startups | StartupsLandingPage | Agents | todo |
+| 4 | /lp/startups | StartupsLandingPage | Agents | done |
 | 5 | /lp/ml-checkpoints | CheckpointsLandingPage | Agents | todo |
 | 6 | /lp/rag-storage | RagStorageLandingPage | Agents | todo |
 | 7 | /lp/web-scraping | WebScrapingLandingPage | Agents | todo |

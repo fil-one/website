@@ -15,6 +15,7 @@ import BarcelonaLandingPage from "./pages/BarcelonaLandingPage";
 import EgressLandingPage from "./pages/EgressLandingPage";
 import BackupDrLandingPage from "./pages/BackupDrLandingPage";
 import LogRetentionLandingPage from "./pages/LogRetentionLandingPage";
+import StartupsLandingPage from "./pages/StartupsLandingPage";
 import VersionA from "./pages/VersionA";
 import VersionB from "./pages/VersionB";
 import StorageProductPage from "./pages/StorageProductPage";
@@ -46,6 +47,7 @@ const App = () => (
           <Route path="/lp/egress" element={<EgressLandingPage />} />
           <Route path="/lp/backup-dr" element={<BackupDrLandingPage />} />
           <Route path="/lp/log-retention" element={<LogRetentionLandingPage />} />
+          <Route path="/lp/startups" element={<StartupsLandingPage />} />
           <Route path="/v1" element={<VersionA />} />
           <Route path="/storage" element={<StorageProductPage />} />
           <Route path="/rag-pipeline" element={<RagPipelineProductPage />} />
