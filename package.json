@@ -23,7 +23,8 @@
       "/fr/marseille",
       "/es/barcelona",
       "/lp/egress",
-      "/lp/backup-dr"
+      "/lp/backup-dr",
+      "/lp/log-retention"
     ],
     "puppeteerArgs": [
       "--no-sandbox",
