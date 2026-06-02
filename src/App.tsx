@@ -32,6 +32,11 @@ import GenomicsLandingPage from "./pages/GenomicsLandingPage";
 import Web3FintechLandingPage from "./pages/Web3FintechLandingPage";
 import Web3PivotLandingPage from "./pages/Web3PivotLandingPage";
 import Web3NativeLandingPage from "./pages/Web3NativeLandingPage";
+import MlTrainingLandingPage from "./pages/MlTrainingLandingPage";
+import AgentKnowledgeLandingPage from "./pages/AgentKnowledgeLandingPage";
+import DataControlLandingPage from "./pages/DataControlLandingPage";
+import GoGlobalLandingPage from "./pages/GoGlobalLandingPage";
+import AffordableLandingPage from "./pages/AffordableLandingPage";
 import VersionA from "./pages/VersionA";
 import VersionB from "./pages/VersionB";
 import StorageProductPage from "./pages/StorageProductPage";
@@ -80,6 +85,11 @@ const App = () => (
           <Route path="/lp/web3-fintech" element={<Web3FintechLandingPage />} />
           <Route path="/lp/web3-pivot" element={<Web3PivotLandingPage />} />
           <Route path="/lp/web3-native" element={<Web3NativeLandingPage />} />
+          <Route path="/lp/ml-training" element={<MlTrainingLandingPage />} />
+          <Route path="/lp/agent-knowledge-layer" element={<AgentKnowledgeLandingPage />} />
+          <Route path="/lp/data-control" element={<DataControlLandingPage />} />
+          <Route path="/lp/go-global" element={<GoGlobalLandingPage />} />
+          <Route path="/lp/affordable" element={<AffordableLandingPage />} />
           <Route path="/v1" element={<VersionA />} />
           <Route path="/storage" element={<StorageProductPage />} />
           <Route path="/rag-pipeline" element={<RagPipelineProductPage />} />

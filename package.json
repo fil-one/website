@@ -41,7 +41,12 @@
       "/lp/genomics",
       "/lp/web3-fintech",
       "/lp/web3-pivot",
-      "/lp/web3-native"
+      "/lp/web3-native",
+      "/lp/ml-training",
+      "/lp/agent-knowledge-layer",
+      "/lp/data-control",
+      "/lp/go-global",
+      "/lp/affordable"
     ],
     "puppeteerArgs": [
       "--no-sandbox",
