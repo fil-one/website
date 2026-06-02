@@ -119,19 +119,19 @@ sources. Build every `todo`.
 | 2 | /lp/backup-dr | BackupDrLandingPage | Barcelona | blocked |
 | 3 | /lp/log-retention | LogRetentionLandingPage | Agents | done |
 | 4 | /lp/startups | StartupsLandingPage | Agents | done |
-| 5 | /lp/ml-checkpoints | CheckpointsLandingPage | Agents | todo |
-| 6 | /lp/rag-storage | RagStorageLandingPage | Agents | todo |
-| 7 | /lp/web-scraping | WebScrapingLandingPage | Agents | todo |
-| 8 | /lp/multi-cloud | MultiCloudLandingPage | Barcelona | todo |
-| 9 | /lp/data-sovereignty | DataSovereigntyLandingPage | Barcelona | todo |
-| 10 | /lp/migrate-from-s3 | MigrateFromS3LandingPage | Agents | todo |
-| 11 | /lp/compliance | ComplianceLandingPage | Barcelona | todo |
-| 12 | /lp/archival | ArchivalLandingPage | Barcelona | todo |
-| 13 | /lp/versioning | VersioningLandingPage | Agents | todo |
-| 14 | /lp/regional-cloud | RegionalCloudLandingPage | Barcelona | todo |
-| 15 | /lp/media | MediaLandingPage | Barcelona | todo |
-| 16 | /lp/gaming | GamingLandingPage | Barcelona | todo |
-| 17 | /lp/genomics | GenomicsLandingPage | Barcelona | todo |
+| 5 | /lp/ml-checkpoints | CheckpointsLandingPage | Agents | done |
+| 6 | /lp/rag-storage | RagStorageLandingPage | Agents | done |
+| 7 | /lp/web-scraping | WebScrapingLandingPage | Agents | done |
+| 8 | /lp/multi-cloud | MultiCloudLandingPage | Barcelona | done |
+| 9 | /lp/data-sovereignty | DataSovereigntyLandingPage | Barcelona | blocked |
+| 10 | /lp/migrate-from-s3 | MigrateFromS3LandingPage | Agents | done |
+| 11 | /lp/compliance | ComplianceLandingPage | Barcelona | done |
+| 12 | /lp/archival | ArchivalLandingPage | Barcelona | done |
+| 13 | /lp/versioning | VersioningLandingPage | Agents | done |
+| 14 | /lp/regional-cloud | RegionalCloudLandingPage | Barcelona | blocked |
+| 15 | /lp/media | MediaLandingPage | Barcelona | done |
+| 16 | /lp/gaming | GamingLandingPage | Barcelona | done |
+| 17 | /lp/genomics | GenomicsLandingPage | Barcelona | done |
 
 Optional metro batch (clone Barcelona, swap metro + latency/price). Each is
 `blocked` until a real latency number to that metro exists — add rows only if you

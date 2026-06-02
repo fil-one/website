@@ -25,7 +25,20 @@
       "/lp/egress",
       "/lp/backup-dr",
       "/lp/log-retention",
-      "/lp/startups"
+      "/lp/startups",
+      "/lp/ml-checkpoints",
+      "/lp/rag-storage",
+      "/lp/web-scraping",
+      "/lp/multi-cloud",
+      "/lp/data-sovereignty",
+      "/lp/migrate-from-s3",
+      "/lp/compliance",
+      "/lp/archival",
+      "/lp/versioning",
+      "/lp/regional-cloud",
+      "/lp/media",
+      "/lp/gaming",
+      "/lp/genomics"
     ],
     "puppeteerArgs": [
       "--no-sandbox",
