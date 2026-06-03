@@ -40,6 +40,13 @@ import GenomicsLandingPage from "./pages/GenomicsLandingPage";
 import Web3FintechLandingPage from "./pages/Web3FintechLandingPage";
 import Web3PivotLandingPage from "./pages/Web3PivotLandingPage";
 import Web3NativeLandingPage from "./pages/Web3NativeLandingPage";
+import MlTrainingLandingPage from "./pages/MlTrainingLandingPage";
+import AgentKnowledgeLandingPage from "./pages/AgentKnowledgeLandingPage";
+import DataControlLandingPage from "./pages/DataControlLandingPage";
+import GoGlobalLandingPage from "./pages/GoGlobalLandingPage";
+import AffordableLandingPage from "./pages/AffordableLandingPage";
+import MetroLandingPage from "./pages/MetroLandingPage";
+import AgentLoopsLandingPage from "./pages/AgentLoopsLandingPage";
 import FloatingSupportButton from "./components/FloatingSupportButton";
 
 const queryClient = new QueryClient();
@@ -101,6 +108,13 @@ export const AppContent = () => (
       <Route path="/lp/web3-fintech" element={<Web3FintechLandingPage />} />
       <Route path="/lp/web3-pivot" element={<Web3PivotLandingPage />} />
       <Route path="/lp/web3-native" element={<Web3NativeLandingPage />} />
+      <Route path="/lp/ml-training" element={<MlTrainingLandingPage />} />
+      <Route path="/lp/agent-knowledge-layer" element={<AgentKnowledgeLandingPage />} />
+      <Route path="/lp/data-control" element={<DataControlLandingPage />} />
+      <Route path="/lp/go-global" element={<GoGlobalLandingPage />} />
+      <Route path="/lp/affordable" element={<AffordableLandingPage />} />
+      <Route path="/lp/metro" element={<MetroLandingPage />} />
+      <Route path="/lp/agent-loops" element={<AgentLoopsLandingPage />} />
       <Route path="/:lang/:city" element={<AdsLandingPage />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
