@@ -3,6 +3,8 @@ import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
+import { useScrollTracking } from "@/hooks/useScrollTracking";
+import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 import StorageUseCasesSection from "@/components/StorageUseCasesSection";
 import UseCasesSection from "@/components/UseCasesSection";
 import ComparisonSection from "@/components/ComparisonSection";
@@ -11,6 +13,7 @@ import PricingSection from "@/components/PricingSection";
 import FaqSection from "@/components/FaqSection";
 
 const StorageProductPage = () => {
+  const { heroEndRef } = useScrollTracking();
   const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.1 });
 
   useEffect(() => {
@@ -111,10 +114,10 @@ const StorageProductPage = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
-                <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+                <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary" onClick={() => trackCtaClick("Start for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
                   <span className="btn-primary-inner">Start for free</span>
                 </a>
-                <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary" onClick={() => { trackCtaClick("Explore docs", "https://docs.fil.one", "secondary"); trackDocsClick("https://docs.fil.one"); }}>
                   Explore docs
                 </a>
               </div>
@@ -135,7 +138,9 @@ const StorageProductPage = () => {
         </div>
 
         {/* Use cases */}
-        <StorageUseCasesSection />
+        <div ref={heroEndRef}>
+          <StorageUseCasesSection />
+        </div>
 
         {/* Features */}
         <UseCasesSection />
@@ -212,7 +217,7 @@ const StorageProductPage = () => {
                   Start with 1 TB free. No credit card, no egress fees, no surprises.
                 </p>
                 <div className="flex items-center justify-center">
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark">
+                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark" onClick={() => trackCtaClick("Start for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
                     <span className="btn-primary-inner">Start for free</span>
                   </a>
                 </div>

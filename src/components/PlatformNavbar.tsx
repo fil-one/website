@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { List, X, ArrowUpRight, CaretDown } from "@phosphor-icons/react";
 import { useLocation } from "react-router-dom";
 import filOneLogo from "../assets/fil-one-logo.svg";
+import { trackDocsClick } from "@/lib/analytics";
 
 const PRODUCTS = [
   {
@@ -169,6 +170,7 @@ const PlatformNavbar = () => {
                 key={label}
                 href={href ?? anchorHref(anchor!)}
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                onClick={href?.includes("docs.fil.one") ? () => trackDocsClick(href) : undefined}
                 className="flex items-center gap-0.5 px-3.5 py-1.5 rounded-md transition-colors hover:bg-black/[0.04]"
                 style={{
                   fontFamily: "'Funnel Sans', sans-serif",
@@ -263,7 +265,7 @@ const PlatformNavbar = () => {
                 key={label}
                 href={href ?? anchorHref(anchor!)}
                 {...(href ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                onClick={() => setMobileOpen(false)}
+                onClick={() => { setMobileOpen(false); if (href?.includes("docs.fil.one")) trackDocsClick(href); }}
                 className="flex items-center gap-1 px-3 py-2.5 rounded-lg hover:bg-black/[0.04] transition-colors"
                 style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 15, color: "#09090B", textDecoration: "none" }}
               >

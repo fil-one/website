@@ -5,6 +5,8 @@ import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
+import { useScrollTracking } from "@/hooks/useScrollTracking";
+import { trackCtaClick } from "@/lib/analytics";
 
 const PAYGO_FEATURES = [
   "Pay monthly",
@@ -41,6 +43,7 @@ const sharedCard = {
 };
 
 const PricingPage = () => {
+  const { heroEndRef } = useScrollTracking();
   const { ref: heroRef, inView: heroInView } = useInView();
   const { ref: storageRef, inView: storageInView } = useInView({ threshold: 0.05 });
   const { ref: addonsRef, inView: addonsInView } = useInView({ threshold: 0.05 });
@@ -105,6 +108,7 @@ const PricingPage = () => {
           </div>
 
           {/* Object Storage */}
+          <div ref={heroEndRef}>
           <div ref={storageRef} className="flex flex-col gap-8 w-full">
             <div className={`flex flex-col gap-1 reveal${storageInView ? " in-view" : ""}`}>
               <h2
@@ -164,7 +168,7 @@ const PricingPage = () => {
                   ))}
                 </div>
 
-                <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary mt-auto w-full">
+                <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary mt-auto w-full" onClick={() => trackCtaClick("Try for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
                   <span className="btn-primary-inner w-full justify-center">Try for free</span>
                 </a>
               </div>
@@ -203,11 +207,12 @@ const PricingPage = () => {
                   ))}
                 </div>
 
-                <a href="/contact-sales" className="btn-secondary mt-auto w-full justify-center">
+                <a href="/contact-sales" className="btn-secondary mt-auto w-full justify-center" onClick={() => trackCtaClick("Contact sales", "/contact-sales", "secondary")}>
                   Contact sales
                 </a>
               </div>
             </div>
+          </div>
           </div>
 
           {/* Add-ons */}
@@ -284,6 +289,7 @@ const PricingPage = () => {
                   href="/contact-sales"
                   className="flex items-center gap-1.5 mt-auto transition-opacity hover:opacity-70 self-start"
                   style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#0090FF", textDecoration: "none" }}
+                  onClick={() => trackCtaClick("Join waitlist — RAG Pipeline", "/contact-sales", "secondary")}
                 >
                   Join waitlist <ArrowRight size={14} />
                 </a>
@@ -341,6 +347,7 @@ const PricingPage = () => {
                   href="/contact-sales"
                   className="flex items-center gap-1.5 mt-auto transition-opacity hover:opacity-70 self-start"
                   style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#0090FF", textDecoration: "none" }}
+                  onClick={() => trackCtaClick("Join waitlist — AI Agent Toolkit", "/contact-sales", "secondary")}
                 >
                   Join waitlist <ArrowRight size={14} />
                 </a>

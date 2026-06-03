@@ -1,5 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { useInView } from "@/hooks/useInView";
+import { trackEvent, trackCtaClick } from "@/lib/analytics";
 
 const MIN_TB = 1;
 const MAX_TB = 1000;
@@ -75,7 +76,18 @@ export default function StorageCalculatorSection() {
   const handlePreset = (v: number) => {
     setTb(v);
     setInputVal(String(v));
+    trackInteraction(v);
   };
+
+  // Debounced pricing interaction tracking — fires 1s after last change
+  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  const trackInteraction = useCallback((value: number) => {
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      trackEvent("Pricing Interaction", { tb_selected: value });
+    }, 1000);
+  }, []);
+  useEffect(() => () => clearTimeout(timerRef.current), []);
 
   const { ref: headingRef, inView: headingInView } = useInView();
   const { ref: bodyRef,    inView: bodyInView    } = useInView({ threshold: 0.02 });
@@ -176,7 +188,7 @@ export default function StorageCalculatorSection() {
               max={MAX_TB}
               step={1}
               value={tb}
-              onChange={(e) => { const v = Number(e.target.value); setTb(v); setInputVal(String(v)); }}
+              onChange={(e) => { const v = Number(e.target.value); setTb(v); setInputVal(String(v)); trackInteraction(v); }}
               aria-label={`Storage amount: ${displayTB(tb)} per month`}
               aria-valuemin={MIN_TB}
               aria-valuemax={MAX_TB}
@@ -334,10 +346,10 @@ export default function StorageCalculatorSection() {
             vs AWS S3.
           </p>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+            <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary" onClick={() => trackCtaClick("Try 30 days for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
               <span className="btn-primary-inner">Try 30 days for free</span>
             </a>
-            <a href="/contact-sales" className="btn-secondary">Contact sales</a>
+            <a href="/contact-sales" className="btn-secondary" onClick={() => trackCtaClick("Contact sales", "/contact-sales", "secondary")}>Contact sales</a>
           </div>
         </div>
 

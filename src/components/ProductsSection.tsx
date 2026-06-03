@@ -1,5 +1,6 @@
 import { HardDrive, Brain, Robot, Check, ArrowRight } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
+import { trackCtaClick } from "@/lib/analytics";
 
 const STORAGE_FEATURES = [
   "11 nines durability, cryptographically verified daily",
@@ -172,7 +173,7 @@ const ProductsSection = () => {
                   >
                     Learn more
                   </a>
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary" onClick={() => trackCtaClick("Start free trial", "https://app.fil.one/login?screen_hint=signup", "primary")}>
                     <span className="btn-primary-inner">Start free trial</span>
                   </a>
                 </div>
@@ -298,6 +299,7 @@ const ProductsSection = () => {
                 href="/contact-sales"
                 className="flex items-center gap-1.5 shrink-0 transition-opacity hover:opacity-70"
                 style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#0090FF", textDecoration: "none" }}
+                onClick={() => trackCtaClick("Join waitlist", "/contact-sales", "secondary")}
               >
                 Join waitlist <ArrowRight size={14} />
               </a>
@@ -398,6 +400,7 @@ const ProductsSection = () => {
                 href="/contact-sales"
                 className="flex items-center gap-1.5 shrink-0 transition-opacity hover:opacity-70"
                 style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#0090FF", textDecoration: "none" }}
+                onClick={() => trackCtaClick("Join waitlist", "/contact-sales", "secondary")}
               >
                 Join waitlist <ArrowRight size={14} />
               </a>

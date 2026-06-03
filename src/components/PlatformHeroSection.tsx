@@ -1,5 +1,6 @@
 import imgDashboard from "../assets/dashboard-preview.png";
 import { ArrowRight, Play } from "@phosphor-icons/react";
+import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 
 const PlatformHeroSection = () => {
   return (
@@ -105,10 +106,10 @@ const PlatformHeroSection = () => {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center gap-3 mt-10 hero-fade-2">
-          <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+          <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary" onClick={() => trackCtaClick("Start for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
             <span className="btn-primary-inner">Start for free</span>
           </a>
-          <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+          <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary" onClick={() => { trackCtaClick("Explore docs", "https://docs.fil.one", "secondary"); trackDocsClick("https://docs.fil.one"); }}>
             Explore docs
           </a>
         </div>

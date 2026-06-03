@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import { Check } from "@phosphor-icons/react";
 import { CITY_MAP } from "@/data/adsCities";
 import { useSeo } from "@/hooks/useSeo";
+import { useScrollTracking } from "@/hooks/useScrollTracking";
 import filOneLogo from "../assets/fil-one-logo.svg";
 import NotFound from "./NotFound";
+import { trackCtaClick } from "@/lib/analytics";
 
 // ─── Grid texture (matches Index.tsx hero) ────────────────────────────────────
 
@@ -29,8 +31,8 @@ const AdsNavbar = ({ loginLabel, signupLabel }: { loginLabel: string; signupLabe
         <img src={filOneLogo} alt="Fil One" style={{ height: 20, width: "auto", display: "block" }} />
       </a>
       <div className="flex items-center gap-2.5">
-        <a href="https://app.fil.one/login" className="btn-secondary">{loginLabel}</a>
-        <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-sm">
+        <a href="https://app.fil.one/login" className="btn-secondary" onClick={() => trackCtaClick(loginLabel, "https://app.fil.one/login", "secondary")}>{loginLabel}</a>
+        <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-sm" onClick={() => trackCtaClick(signupLabel, "https://app.fil.one/login?screen_hint=signup", "primary")}>
           <span className="btn-primary-inner">{signupLabel}</span>
         </a>
       </div>
@@ -78,6 +80,7 @@ const MonoLabel = ({ children }: { children: React.ReactNode }) => (
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 const AdsLandingPage = () => {
+  const { heroEndRef } = useScrollTracking();
   const { lang, city } = useParams<{ lang: string; city: string }>();
   const config = CITY_MAP[lang ?? ""]?.[city ?? ""];
 
@@ -190,7 +193,7 @@ const AdsLandingPage = () => {
           </p>
 
           <div className="flex flex-col items-center gap-3 mt-2">
-            <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+            <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary" onClick={() => trackCtaClick(ctaLabel, "https://app.fil.one/login?screen_hint=signup", "primary")}>
               <span className="btn-primary-inner">{ctaLabel}</span>
             </a>
             <p style={{
@@ -409,6 +412,7 @@ const AdsLandingPage = () => {
       </div>
 
       {/* ── Why Fil One — simple checklist ── */}
+      <div ref={heroEndRef}>
       <section
         className="flex flex-col items-center px-5 md:px-8 pt-10 md:pt-14 pb-16 md:pb-24"
         style={{ backgroundColor: "#FFFFFF" }}
@@ -452,10 +456,10 @@ const AdsLandingPage = () => {
           {/* CTA */}
           <div className="flex flex-col items-center gap-3 pt-4">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary" onClick={() => trackCtaClick(ctaLabel, "https://app.fil.one/login?screen_hint=signup", "primary")}>
                 <span className="btn-primary-inner">{ctaLabel}</span>
               </a>
-              <a href="/contact-sales" className="btn-secondary">
+              <a href="/contact-sales" className="btn-secondary" onClick={() => trackCtaClick(contactSalesLabel, "/contact-sales", "secondary")}>
                 {contactSalesLabel}
               </a>
             </div>
@@ -471,6 +475,7 @@ const AdsLandingPage = () => {
           </div>
         </div>
       </section>
+      </div>
 
       <AdsFooter privacyLabel={privacyLabel} termsLabel={termsLabel} />
     </div>

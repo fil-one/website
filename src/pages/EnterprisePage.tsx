@@ -3,6 +3,7 @@ import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
+import { useScrollTracking } from "@/hooks/useScrollTracking";
 import {
   Buildings,
   Headset,
@@ -13,6 +14,7 @@ import {
   CaretDown,
   Check,
 } from "@phosphor-icons/react";
+import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 
 const FEATURES = [
   {
@@ -108,6 +110,7 @@ const FAQS = [
 ];
 
 const EnterprisePage = () => {
+  const { heroEndRef } = useScrollTracking();
   const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.1 });
   const { ref: featuresRef, inView: featuresInView } = useInView({ threshold: 0.05 });
   const { ref: statsRef, inView: statsInView } = useInView({ threshold: 0.05 });
@@ -206,10 +209,10 @@ const EnterprisePage = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
-                <a href="/contact-sales" className="btn-primary">
+                <a href="/contact-sales" className="btn-primary" onClick={() => trackCtaClick("Talk to sales", "/contact-sales", "primary")}>
                   <span className="btn-primary-inner">Talk to sales</span>
                 </a>
-                <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary" onClick={() => { trackCtaClick("Explore docs", "https://docs.fil.one", "secondary"); trackDocsClick("https://docs.fil.one"); }}>
                   Explore docs
                 </a>
               </div>
@@ -230,6 +233,7 @@ const EnterprisePage = () => {
         </div>
 
         {/* Cost stats */}
+        <div ref={heroEndRef}>
         <section className="w-full" style={{ backgroundColor: "#FFFFFF" }}>
           <div className="flex flex-col gap-8 px-5 md:px-8 pb-16 md:pb-24 w-full max-w-[1120px] mx-auto">
             <div
@@ -265,6 +269,7 @@ const EnterprisePage = () => {
             </div>
           </div>
         </section>
+        </div>
 
         {/* Enterprise features */}
         <section className="w-full" style={{ backgroundColor: "#FFFFFF" }}>
@@ -342,7 +347,7 @@ const EnterprisePage = () => {
                 ))}
               </div>
 
-              <a href="/contact-sales" className="btn-primary">
+              <a href="/contact-sales" className="btn-primary" onClick={() => trackCtaClick("Talk to sales", "/contact-sales", "primary")}>
                 <span className="btn-primary-inner">Talk to sales</span>
               </a>
             </div>
@@ -434,7 +439,7 @@ const EnterprisePage = () => {
                   We'll prepare a custom quote and migration plan within one business day.
                 </p>
                 <div className="flex items-center justify-center">
-                  <a href="/contact-sales" className="btn-primary btn-primary-dark">
+                  <a href="/contact-sales" className="btn-primary btn-primary-dark" onClick={() => trackCtaClick("Get a demo", "/contact-sales", "primary")}>
                     <span className="btn-primary-inner">Get a demo</span>
                   </a>
                 </div>

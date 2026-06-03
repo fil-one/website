@@ -8,8 +8,11 @@ import FaqSection from "@/components/FaqSection";
 import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
+import { useScrollTracking } from "@/hooks/useScrollTracking";
 
 const VersionB = () => {
+  const { heroEndRef } = useScrollTracking();
+
   useEffect(() => {
     const id = window.location.hash.slice(1);
     if (!id) return;
@@ -44,7 +47,9 @@ const VersionB = () => {
           <HeroGridDots />
           <PlatformHeroSection />
           {/* Products section replaces the features section — this is the platform's core nav anchor */}
-          <ProductsSection />
+          <div ref={heroEndRef}>
+            <ProductsSection />
+          </div>
         </div>
         <DeveloperSection />
         <FaqSection />
