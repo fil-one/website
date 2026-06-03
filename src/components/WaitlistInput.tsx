@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Check } from "@phosphor-icons/react";
+import { trackEvent } from "@/lib/analytics";
 import {
   HS_PORTAL_ID,
   HS_WAITLIST_FORM_GUID as HS_FORM_GUID,
@@ -49,6 +50,7 @@ const WaitlistInput = ({ className = "" }: { className?: string }) => {
         throw new Error();
       }
       setSubmitted(true);
+      trackEvent("Form Submit", { form: "waitlist", page: window.location.pathname });
     } catch {
       setError(true);
     } finally {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { X, Check } from "@phosphor-icons/react";
+import { trackEvent } from "@/lib/analytics";
 import {
   HS_PORTAL_ID,
   HS_WAITLIST_FORM_GUID,
@@ -157,6 +158,7 @@ const ProductWaitlistModal = ({ open, onClose }: Props) => {
       );
       if (!res.ok) throw new Error();
       setSubmitted(true);
+      trackEvent("Form Submit", { form: "product-waitlist", page: window.location.pathname });
     } catch {
       setError(true);
     } finally {

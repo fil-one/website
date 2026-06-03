@@ -1,4 +1,5 @@
 import filOneLogo from "../assets/fil-one-logo.svg";
+import { trackDocsClick } from "@/lib/analytics";
 
 const LINKS: Record<string, { label: string; href: string }[]> = {
   Resources: [
@@ -60,6 +61,7 @@ const LandingFooter = () => (
                   key={label}
                   href={href}
                   {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  onClick={href.includes("docs.fil.one") ? () => trackDocsClick(href) : undefined}
                   style={{
                     fontFamily: "'Funnel Sans', sans-serif",
                     fontWeight: 400,

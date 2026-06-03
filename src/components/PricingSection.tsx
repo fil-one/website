@@ -1,5 +1,6 @@
 import { Check } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
+import { trackCtaClick } from "@/lib/analytics";
 
 const PaygoFeatures = [
   "Pay monthly",
@@ -149,7 +150,7 @@ const PricingSection = () => {
             ))}
           </div>
 
-          <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary mt-auto w-full">
+          <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary mt-auto w-full" onClick={() => trackCtaClick("Try for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
             <span className="btn-primary-inner w-full justify-center">
               Try for free
             </span>
@@ -235,7 +236,7 @@ const PricingSection = () => {
             ))}
           </div>
 
-          <a href="/contact-sales" className="btn-secondary mt-auto w-full justify-center">
+          <a href="/contact-sales" className="btn-secondary mt-auto w-full justify-center" onClick={() => trackCtaClick("Contact sales", "/contact-sales", "secondary")}>
             Contact sales
           </a>
         </div>

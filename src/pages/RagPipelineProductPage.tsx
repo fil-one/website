@@ -3,7 +3,9 @@ import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
+import { useScrollTracking } from "@/hooks/useScrollTracking";
 import { Brain, Check, UploadSimple, MagnifyingGlass, ChatsCircle, CaretDown } from "@phosphor-icons/react";
+import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 
 const FEATURES = [
   {
@@ -78,6 +80,7 @@ const FAQS = [
 ];
 
 const RagPipelineProductPage = () => {
+  const { heroEndRef } = useScrollTracking();
   const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.1 });
   const { ref: stepsRef, inView: stepsInView } = useInView({ threshold: 0.05 });
   const { ref: featuresRef, inView: featuresInView } = useInView({ threshold: 0.05 });
@@ -177,10 +180,10 @@ const RagPipelineProductPage = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
-                <a href="/waitlist" className="btn-primary">
+                <a href="/waitlist" className="btn-primary" onClick={() => trackCtaClick("Join the waitlist", "/waitlist", "primary")}>
                   <span className="btn-primary-inner">Join the waitlist</span>
                 </a>
-                <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary" onClick={() => { trackCtaClick("Explore docs", "https://docs.fil.one", "secondary"); trackDocsClick("https://docs.fil.one"); }}>
                   Explore docs
                 </a>
               </div>
@@ -190,6 +193,7 @@ const RagPipelineProductPage = () => {
         </div>
 
         {/* How it works */}
+        <div ref={heroEndRef}>
         <section className="w-full px-5 md:px-8 pt-6 md:pt-8 pb-16 md:pb-24" style={{ backgroundColor: "#FFFFFF" }}>
           <div className="flex flex-col gap-4 w-full max-w-[1120px] mx-auto">
 
@@ -336,6 +340,7 @@ const RagPipelineProductPage = () => {
 
           </div>
         </section>
+        </div>
 
         {/* Features */}
         <section className="w-full" style={{ backgroundColor: "#FFFFFF" }}>
@@ -445,7 +450,7 @@ const RagPipelineProductPage = () => {
                 ))}
               </div>
 
-              <a href="/waitlist" className="btn-primary w-full">
+              <a href="/waitlist" className="btn-primary w-full" onClick={() => trackCtaClick("Join the waitlist", "/waitlist", "primary")}>
                 <span className="btn-primary-inner w-full justify-center">Join the waitlist</span>
               </a>
             </div>
@@ -564,7 +569,7 @@ const RagPipelineProductPage = () => {
                   Early access is open. Join the waitlist and be first in line.
                 </p>
                 <div className="flex items-center justify-center">
-                  <a href="/waitlist" className="btn-primary btn-primary-dark">
+                  <a href="/waitlist" className="btn-primary btn-primary-dark" onClick={() => trackCtaClick("Join the waitlist", "/waitlist", "primary")}>
                     <span className="btn-primary-inner">Join the waitlist</span>
                   </a>
                 </div>

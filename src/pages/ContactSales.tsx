@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Check } from "@phosphor-icons/react";
+import { trackEvent } from "@/lib/analytics";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
@@ -131,6 +132,7 @@ const ContactSales = () => {
         return;
       }
       setSubmitted(true);
+      trackEvent("Form Submit", { form: "contact-sales", page: window.location.pathname });
     } catch (err) {
       setError("Network error — please check your connection and try again.");
     } finally {

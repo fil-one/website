@@ -2,7 +2,9 @@ import { Check, Plug, ArrowsOut, Globe, ShieldCheck, Lock, ChartLine } from "@ph
 import LandingNavbar from "@/components/LandingNavbar";
 import LandingFooter from "@/components/LandingFooter";
 import { useInView } from "@/hooks/useInView";
+import { useScrollTracking } from "@/hooks/useScrollTracking";
 import { useSeo } from "@/hooks/useSeo";
+import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 
 // ─── Grid texture (matches Index.tsx hero) ─────────────────────────────────────
 const GRID_SVG = encodeURIComponent(
@@ -359,6 +361,8 @@ const INTEGRATIONS = [
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 const BarcelonaLandingPage = () => {
+  const { heroEndRef } = useScrollTracking();
+
   useSeo({
     title: "Fil One for Barcelona — Hyperscaler speed. Budget-tier bills.",
     description:
@@ -467,10 +471,10 @@ const BarcelonaLandingPage = () => {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary" onClick={() => trackCtaClick("Try 30 days for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
                 <span className="btn-primary-inner">Try 30 days for free</span>
               </a>
-              <a href="/contact-sales" className="btn-secondary">
+              <a href="/contact-sales" className="btn-secondary" onClick={() => trackCtaClick("Talk to an expert", "/contact-sales", "secondary")}>
                 Talk to an expert
               </a>
             </div>
@@ -492,6 +496,7 @@ const BarcelonaLandingPage = () => {
         </section>
 
         {/* ── Problem + Why teams are stuck (merged) ───────────────────────── */}
+        <div ref={heroEndRef}>
         <section
           className="px-5 md:px-8 py-16 md:py-24 w-full"
           style={{ backgroundColor: "#F9FAFB" }}
@@ -579,6 +584,7 @@ const BarcelonaLandingPage = () => {
             </div>
           </div>
         </section>
+        </div>
 
         {/* ── Positioning / Scatter Chart ───────────────────────────────────── */}
         <section
@@ -841,8 +847,7 @@ const BarcelonaLandingPage = () => {
             </div>
 
             <div
-              className="reveal-group"
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="reveal-group grid grid-cols-1 md:grid-cols-2 gap-4"
             >
               {WORKLOADS.map((w, wi) => {
                 // parse numeric value for bar width calculation
@@ -1048,6 +1053,7 @@ const BarcelonaLandingPage = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary"
+              onClick={() => { trackCtaClick("View documentation →", "https://docs.fil.one", "secondary"); trackDocsClick("https://docs.fil.one"); }}
             >
               View documentation →
             </a>
@@ -1114,10 +1120,10 @@ const BarcelonaLandingPage = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark">
+                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark" onClick={() => trackCtaClick("Try 30 days for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
                     <span className="btn-primary-inner">Try 30 days for free</span>
                   </a>
-                  <a href="/contact-sales" className="btn-secondary btn-secondary-dark">
+                  <a href="/contact-sales" className="btn-secondary btn-secondary-dark" onClick={() => trackCtaClick("Talk to an expert", "/contact-sales", "secondary")}>
                     Talk to an expert
                   </a>
                 </div>

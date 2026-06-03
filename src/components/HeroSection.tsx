@@ -2,6 +2,7 @@ import { useRef } from "react";
 import imgDashboard from "../assets/dashboard-preview.png";
 import { ArrowRight } from "@phosphor-icons/react";
 import HeroLens from "./HeroLens";
+import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 
 const HeroSection = () => {
   const h1Ref = useRef<HTMLHeadingElement>(null);
@@ -19,6 +20,7 @@ const HeroSection = () => {
             href="https://docs.fil.one"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackDocsClick("https://docs.fil.one")}
             className="flex items-center gap-1.5 transition-opacity hover:opacity-80"
             style={{
               backgroundColor: "#EFF8FF",
@@ -95,10 +97,10 @@ const HeroSection = () => {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center gap-3 mt-10 hero-fade-2">
-          <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+          <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary" onClick={() => trackCtaClick("Try 30 days for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
             <span className="btn-primary-inner">Try 30 days for free</span>
           </a>
-          <a href="/contact-sales" className="btn-secondary">
+          <a href="/contact-sales" className="btn-secondary" onClick={() => trackCtaClick("Talk to an expert", "/contact-sales", "secondary")}>
             Talk to an expert
           </a>
         </div>
