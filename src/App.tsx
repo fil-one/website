@@ -47,6 +47,9 @@ import GoGlobalLandingPage from "./pages/GoGlobalLandingPage";
 import AffordableLandingPage from "./pages/AffordableLandingPage";
 import MetroLandingPage from "./pages/MetroLandingPage";
 import AgentLoopsLandingPage from "./pages/AgentLoopsLandingPage";
+import AgentReadableLandingPage from "./pages/AgentReadableLandingPage";
+import ExitFirstLandingPage from "./pages/ExitFirstLandingPage";
+import CostTickerLandingPage from "./pages/CostTickerLandingPage";
 import FloatingSupportButton from "./components/FloatingSupportButton";
 
 const queryClient = new QueryClient();
@@ -115,6 +118,9 @@ export const AppContent = () => (
       <Route path="/lp/affordable" element={<AffordableLandingPage />} />
       <Route path="/lp/metro" element={<MetroLandingPage />} />
       <Route path="/lp/agent-loops" element={<AgentLoopsLandingPage />} />
+      <Route path="/lp/agent-readable" element={<AgentReadableLandingPage />} />
+      <Route path="/lp/exit-first" element={<ExitFirstLandingPage />} />
+      <Route path="/lp/cost-ticker" element={<CostTickerLandingPage />} />
       <Route path="/:lang/:city" element={<AdsLandingPage />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
