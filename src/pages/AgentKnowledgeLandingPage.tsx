@@ -122,15 +122,25 @@ s3.put_object(
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
               {[
-                { label: "The architecture cost", catch: null, body: "A typical RAG-enabled agent requires several services duct-taped together. A vector database, a retrieval layer, a compute service, and an object store, each with its own integration, its own failure point, and its own bill. You're paying for complexity before your agents run a single query." },
-                { label: "The usage cost",        catch: null, body: "A single agent task triggers dozens of retrieval calls: context lookups, memory reads, state writes. Multiply that across thousands of tasks per hour and the meter runs constantly. Every action your agents take is a billable event." },
-                { label: "A different model",     catch: "Fil One collapses the stack — and the bill.", body: "One platform for agent memory, RAG corpus, and retrieval. No glue code required. You pay for what you store, not what your agents do with it." },
-              ].map(({ label, body, catch: c }) => (
-                <div key={label} className="flex flex-col rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF", boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)" }}>
+                { label: "The architecture cost", catch: null,  highlight: false, body: "A typical RAG-enabled agent requires several services duct-taped together. A vector database, a retrieval layer, a compute service, and an object store, each with its own integration, its own failure point, and its own bill. You're paying for complexity before your agents run a single query." },
+                { label: "The usage cost",        catch: null,  highlight: false, body: "A single agent task triggers dozens of retrieval calls: context lookups, memory reads, state writes. Multiply that across thousands of tasks per hour and the meter runs constantly. Every action your agents take is a billable event." },
+                { label: "A different model",     catch: "Fil One collapses the stack — and the bill.", highlight: true, body: "One platform for agent memory, RAG corpus, and retrieval. No glue code required. You pay for what you store, not what your agents do with it." },
+              ].map(({ label, body, catch: c, highlight }) => (
+                <div key={label} className="flex flex-col rounded-2xl overflow-hidden" style={{
+                  border: highlight ? "1px solid rgba(0,144,255,0.25)" : "1px solid rgba(0,0,0,0.07)",
+                  backgroundColor: highlight ? "#EFF8FF" : "#FFFFFF",
+                  boxShadow: highlight ? "0px 1px 3px rgba(0,144,255,0.08), 0px 4px 16px rgba(0,144,255,0.10)" : "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
+                }}>
                   <div className="flex flex-col p-7" style={{ gap: 10, flex: 1 }}>
-                    <span style={{ display: "inline-block", fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.08em", textTransform: "uppercase", color: "#52525B", backgroundColor: "#F4F4F5", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 9999, padding: "3px 10px", marginBottom: 2, alignSelf: "flex-start" }}>{label}</span>
-                    {c && <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 18, lineHeight: "1.3", letterSpacing: "-0.01em", color: "#09090B" }}>{c}</p>}
-                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: 1.65, color: "#71717A", marginTop: 4 }}>{body}</p>
+                    {c ? (
+                      <>
+                        <span style={{ display: "inline-block", fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.08em", textTransform: "uppercase", color: "#0070CC", backgroundColor: "rgba(0,144,255,0.1)", border: "1px solid rgba(0,144,255,0.2)", borderRadius: 9999, padding: "3px 10px", marginBottom: 2, alignSelf: "flex-start" }}>{label}</span>
+                        <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 18, lineHeight: "1.3", letterSpacing: "-0.01em", color: "#09090B" }}>{c}</p>
+                      </>
+                    ) : (
+                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 18, lineHeight: "1.3", letterSpacing: "-0.01em", color: "#09090B" }}>{label}</p>
+                    )}
+                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: 1.65, color: highlight ? "#1D4ED8" : "#71717A", marginTop: 4 }}>{body}</p>
                   </div>
                 </div>
               ))}
