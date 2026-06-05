@@ -14,6 +14,12 @@ const FEATURES = [
     devLabel: null,
   },
   {
+    icon: ChartLine,
+    title: "Flat cost for loop traffic",
+    desc: "Agents write frequently and read back their own outputs. Per-request billing makes loops expensive. $4.99/TB flat — no PUT fees, no GET fees, no egress.",
+    devLabel: null,
+  },
+  {
     icon: ArrowsOut,
     title: "RAG corpus storage",
     desc: "Store raw documents, chunked text, and embeddings backing a retrieval pipeline. Reads are included in flat storage — no per-retrieval egress counter.",
@@ -24,12 +30,6 @@ const FEATURES = [
     title: "AI toolkit integrations",
     desc: "LangChain, LlamaIndex, and Haystack connectors for direct corpus management, plus agent memory integrations.",
     devLabel: "In development",
-  },
-  {
-    icon: ChartLine,
-    title: "Flat cost for loop traffic",
-    desc: "Agents write frequently and read back their own outputs. Per-request billing makes loops expensive. $4.99/TB flat — no PUT fees, no GET fees, no egress.",
-    devLabel: null,
   },
 ];
 
@@ -93,17 +93,17 @@ s3.put_object(
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse 55% 40% at 50% 0%, rgba(0,144,255,0.13) 0%, transparent 70%)" }} />
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-10" style={{ backgroundImage: `url("data:image/svg+xml,${GRID_SVG}")`, backgroundSize: "60px 60px", backgroundPosition: "center top", maskImage: "radial-gradient(ellipse 80% 65% at 50% 0%, black 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 65%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 65% at 50% 0%, black 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 65%, transparent 80%)" }} />
           <div className="flex flex-col items-center gap-6 px-5 md:px-8 w-full max-w-[1120px] mx-auto pt-20 md:pt-[120px] pb-20 md:pb-28">
-            <div className="hero-fade-1 flex items-center gap-1.5 text-center" style={{ backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.2)", borderRadius: 14, padding: "10px 14px", maxWidth: "90vw" }}>
-              <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 13.5, lineHeight: 1, color: "#0070CC" }}>For AI engineers building RAG pipelines, agent memory, and multi-agent workflows</span>
-            </div>
+            <a href="/waitlist" className="hero-fade-1 flex items-center gap-1.5 text-center" style={{ backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.2)", borderRadius: 14, padding: "10px 14px", maxWidth: "90vw", textDecoration: "none" }}>
+              <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 13.5, lineHeight: 1, color: "#0070CC" }}>NEW RAG Pipeline & Agent Toolkit – join the waitlist</span>
+            </a>
             <h1 className="text-[30px] sm:text-[38px] md:text-[54px] hero-fade-2" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, lineHeight: "1.08", letterSpacing: "-0.025em", color: "#09090B", textAlign: "center", maxWidth: 820, margin: 0 }}>
               Turn object storage into<br /><span style={{ color: "#0090FF" }}>an agent knowledge layer.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 600, margin: 0 }}>
-              S3-compatible storage at $4.99/TB flat. No per-request fees on reads or writes. Agent memory, RAG corpus, model artifacts, and inference traces — one bucket, one bill.
+              S3 object storage with a built-in RAG pipeline. No stitching required, no per-query fees.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
+              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start storing for free</span></a>
               <a href="/contact-sales" className="btn-secondary">Talk to an expert</a>
             </div>
             <p className="hero-fade-4" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A", textAlign: "center" }}>No credit card required · No per-request fees · Connects in minutes</p>
@@ -115,21 +115,21 @@ s3.put_object(
           <div ref={problemRef} className={`flex flex-col gap-10 w-full max-w-[1120px] mx-auto reveal${problemInView ? " in-view" : ""}`}>
             <div className="flex flex-col gap-4 items-center text-center max-w-[640px] mx-auto">
               <SectionLabel>The cost structure problem</SectionLabel>
-              <SectionHeading>Purpose-built AI infra charges per API call. Agents make a lot of them.</SectionHeading>
+              <SectionHeading>You don't just pay to store your data. You pay for every step that makes it usable.</SectionHeading>
               <SectionSub maxWidth={620}>
-                Vector databases, agent memory services, and managed RAG platforms charge per query, per document, or per API call. Agents run in loops — retrieval, tool calls, memory reads, state writes. The bill grows with intelligence, not just storage.
+                Building a knowledge base on standard object storage providers means stitching together multiple services, each billed separately. Then your agents start running, and every query, memory read, and retrieval call adds to the tab. The stack is expensive to build and even more expensive to run.
               </SectionSub>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
               {[
-                { label: "Four vendors",      catch: "One agent pipeline, four billing relationships.",   body: "A typical RAG-enabled agent uses a vector database (corpus), an object store (memory + artifacts), an LLM API, and a trace store. Each has its own pricing model. The storage layer alone has two bills." },
-                { label: "Per-query tax",     catch: "Every retrieval call is a metered event.",           body: "Vector DB and managed RAG platforms charge per query. Agents that retrieve context on every turn generate thousands of queries per hour. The per-call model taxes the thing you are optimising for — more retrieval." },
-                { label: "The write cost",    catch: "High-frequency writes add up.",                     body: "Agents write memory updates, task-queue state, and inference traces continuously. On AWS S3, $0.005 per 1,000 PUTs charges for every agent action. A busy multi-agent system generates millions of writes per day." },
+                { label: "The architecture cost", catch: null, body: "A typical RAG-enabled agent requires several services duct-taped together. A vector database, a retrieval layer, a compute service, and an object store, each with its own integration, its own failure point, and its own bill. You're paying for complexity before your agents run a single query." },
+                { label: "The usage cost",        catch: null, body: "A single agent task triggers dozens of retrieval calls: context lookups, memory reads, state writes. Multiply that across thousands of tasks per hour and the meter runs constantly. Every action your agents take is a billable event." },
+                { label: "A different model",     catch: "Fil One collapses the stack — and the bill.", body: "One platform for agent memory, RAG corpus, and retrieval. No glue code required. You pay for what you store, not what your agents do with it." },
               ].map(({ label, body, catch: c }) => (
                 <div key={label} className="flex flex-col rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF", boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)" }}>
                   <div className="flex flex-col p-7" style={{ gap: 10, flex: 1 }}>
                     <span style={{ display: "inline-block", fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.08em", textTransform: "uppercase", color: "#52525B", backgroundColor: "#F4F4F5", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 9999, padding: "3px 10px", marginBottom: 2, alignSelf: "flex-start" }}>{label}</span>
-                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 18, lineHeight: "1.3", letterSpacing: "-0.01em", color: "#09090B" }}>{c}</p>
+                    {c && <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 18, lineHeight: "1.3", letterSpacing: "-0.01em", color: "#09090B" }}>{c}</p>}
                     <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: 1.65, color: "#71717A", marginTop: 4 }}>{body}</p>
                   </div>
                 </div>
@@ -143,9 +143,9 @@ s3.put_object(
           <div ref={proofRef} className={`flex flex-col gap-10 w-full max-w-[1120px] mx-auto reveal${proofInView ? " in-view" : ""}`}>
             <div className="flex flex-col gap-3">
               <SectionLabel>One bucket</SectionLabel>
-              <SectionHeading>Memory. Corpus. Artifacts. Traces. <span style={{ color: "#0090FF" }}>One endpoint.</span></SectionHeading>
+              <SectionHeading>Memory. Corpus. Traces. <span style={{ color: "#0090FF" }}>One endpoint.</span></SectionHeading>
               <SectionSub maxWidth={620}>
-                Standard S3 PutObject and GetObject cover every agent storage pattern. No new SDK, no per-query pricing — flat storage for the full knowledge layer.
+                Standard S3 PutObject and GetObject cover every agent storage pattern. No new SDK, no per-query pricing. Flat storage for the full knowledge layer.
               </SectionSub>
             </div>
             <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)", backgroundColor: "#0F172A" }}>
@@ -160,8 +160,8 @@ s3.put_object(
           <div ref={featuresRef} className={`flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto reveal${featuresInView ? " in-view" : ""}`}>
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>What's live and what's coming</SectionLabel>
-              <SectionHeading>The storage layer is live. <span style={{ color: "#0090FF" }}>Toolkit integrations are in development.</span></SectionHeading>
-              <SectionSub maxWidth={560}>Standard S3 API covers every agent storage pattern today. Native AI framework integrations are in active development.</SectionSub>
+              <SectionHeading>Storage that works <span style={{ color: "#0090FF" }}>the way agents do.</span></SectionHeading>
+              <SectionSub maxWidth={560}>S3-compatible storage built for agents is live today. Be the first to try native RAG pipeline and AI agents integrations.</SectionSub>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
               {FEATURES.map(({ icon: Icon, title, desc, devLabel }) => (
@@ -202,8 +202,8 @@ s3.put_object(
             <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(135deg, #020D1A 0%, #0D2847 55%, #041525 100%)", borderRadius: 20, textAlign: "center" }} className="px-6 md:px-12 py-16 md:py-[104px]">
               <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1"/></svg>')}")`, backgroundSize: "60px 60px", maskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", pointerEvents: "none" }} />
               <div style={{ position: "relative" }}>
-                <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>One bucket for the whole agent stack.</h2>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>Free 1 TB evaluation. Write agent memory, corpus chunks, and inference traces in one place — no per-request counter anywhere.</p>
+                <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>The only bucket your agents need.</h2>
+                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>Try it free with 1 TB. One place to store your data, retrieve it, and put it to work — without per-request fees.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark"><span className="btn-primary-inner">Start for free</span></a>
                   <a href="/contact-sales" className="btn-secondary btn-secondary-dark">Talk to an expert</a>
