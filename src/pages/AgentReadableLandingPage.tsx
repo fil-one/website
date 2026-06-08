@@ -12,6 +12,18 @@ const FEATURES = [
   { icon: MagnifyingGlass, title: "No gated pricing", desc: "The price is on the page and in llms.txt — not behind a 'contact sales' form. An agent evaluating vendors never hits a wall where the number should be." },
 ];
 
+const LLMS_TXT = `$ curl -s https://fil.one/llms.txt
+
+## Pricing
+- Pay-as-you-go: $4.99/TB/month
+  — no egress fees, no API request fees
+- Free trial: 30 days, 1 TB included, no credit card
+
+## How to connect
+- Endpoint: https://eu-west-1.s3.fil.one
+- Auth: standard AWS Access Key ID + Secret
+- Drop-in S3 replacement — no SDK changes required`;
+
 const AgentReadableLandingPage = () => {
   useSeo({
     title: "Fil One — Priced so plainly your agent can read it",
@@ -24,18 +36,6 @@ const AgentReadableLandingPage = () => {
   const { ref: proofRef, inView: proofInView } = useInView({ threshold: 0.05 });
   const { ref: featuresRef, inView: featuresInView } = useInView({ threshold: 0.05 });
   const { ref: ctaRef, inView: ctaInView } = useInView({ threshold: 0.05 });
-
-  const LLMS_TXT = `$ curl -s https://fil.one/llms.txt
-
-## Pricing
-- Pay-as-you-go: $4.99/TB/month
-  — no egress fees, no API request fees
-- Free trial: 30 days, 1 TB included, no credit card
-
-## How to connect
-- Endpoint: https://eu-west-1.s3.fil.one
-- Auth: standard AWS Access Key ID + Secret
-- Drop-in S3 replacement — no SDK changes required`;
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
@@ -93,12 +93,12 @@ const AgentReadableLandingPage = () => {
         {/* Proof — llms.txt code block */}
         <section className="px-5 md:px-8 py-24 md:py-32 w-full" style={{ backgroundColor: "#FFFFFF" }}>
           <div ref={proofRef} className={`flex flex-col gap-10 w-full max-w-[1120px] mx-auto reveal${proofInView ? " in-view" : ""}`}>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 items-center text-center">
               <SectionLabel>What your agent reads</SectionLabel>
               <SectionHeading>One fetch. <span style={{ color: "#0090FF" }}>The whole answer.</span></SectionHeading>
               <SectionSub maxWidth={620}>The price, the endpoint, and the compatibility statement are published in a structured file at a stable URL. An agent gets a comparable monthly total and an integration path in a single request.</SectionSub>
             </div>
-            <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)", backgroundColor: "#0F172A", maxWidth: 680 }}>
+            <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)", backgroundColor: "#0F172A", width: "100%", maxWidth: 680, margin: "0 auto" }}>
               <div style={{ padding: "10px 16px", backgroundColor: "#1E293B", borderBottom: "1px solid rgba(255,255,255,0.06)", fontFamily: "'DM Mono', monospace", fontSize: 12, color: "#94A3B8" }}>terminal</div>
               <pre style={{ margin: 0, padding: "20px 18px", fontFamily: "'DM Mono', monospace", fontSize: 12.5, lineHeight: 1.65, color: "#E2E8F0", overflowX: "auto" }}>{LLMS_TXT}</pre>
             </div>
@@ -124,30 +124,14 @@ const AgentReadableLandingPage = () => {
           </div>
         </section>
 
-        {/* Pricing */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full" style={{ backgroundColor: "#FFFFFF" }}>
-          <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
-            <div className="flex flex-col gap-3 items-center">
-              <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
-              <SectionSub maxWidth={520}>Storage. That is the whole bill. No egress, no per-request fees, no tiers — a number your agent can read and your finance team can predict.</SectionSub>
-            </div>
-            <div className="flex flex-col sm:flex-row items-center gap-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
-              <a href="/contact-sales" className="btn-secondary">Talk to an expert</a>
-            </div>
-            <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A" }}>No credit card required · No egress fees · Connects in minutes</p>
-          </div>
-        </section>
-
         {/* Dark CTA */}
-        <section className="px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full" style={{ backgroundColor: "#FFFFFF" }}>
+        <section className="px-5 md:px-8 py-24 md:py-32 w-full" style={{ backgroundColor: "#FFFFFF" }}>
           <div ref={ctaRef} className={`w-full max-w-[1120px] mx-auto reveal${ctaInView ? " in-view" : ""}`}>
             <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(135deg, #020D1A 0%, #0D2847 55%, #041525 100%)", borderRadius: 20, textAlign: "center" }} className="px-6 md:px-12 py-16 md:py-[104px]">
               <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1"/></svg>')}")`, backgroundSize: "60px 60px", maskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", pointerEvents: "none" }} />
               <div style={{ position: "relative" }}>
-                <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>A price your agent can read.</h2>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>Free 1 TB evaluation. Point your agent at llms.txt, confirm the parity, and connect against the documented endpoint.</p>
+                <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>One rate. $4.99/TB/month.</h2>
+                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", maxWidth: 560, marginLeft: "auto", marginRight: "auto", marginBottom: 32 }}>Storage. No egress, no per-request fees, no tiers. Free 1 TB evaluation — point your agent at llms.txt, confirm the parity, and connect against the documented endpoint.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark"><span className="btn-primary-inner">Start for free</span></a>
                   <a href="/contact-sales" className="btn-secondary btn-secondary-dark">Talk to an expert</a>

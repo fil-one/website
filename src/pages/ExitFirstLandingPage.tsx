@@ -9,7 +9,7 @@ import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from "@/components
 // AWS S3 us-east-1: 102,400 GB × $0.09 = $9,216. Fil One: $0.
 const EXIT_ROWS = [
   { provider: "AWS S3 Standard", egressRate: "$0.09 / GB", exit100tb: "$9,216", isFilOne: false },
-  { provider: "Google Cloud", egressRate: "up to $0.12 / GB", exit100tb: "$9,831", isFilOne: false },
+  { provider: "Google Cloud", egressRate: "$0.08–$0.12 / GB", exit100tb: "$9,831", isFilOne: false },
   { provider: "Azure Blob (Hot)", egressRate: "up to $0.087 / GB", exit100tb: "$7,602", isFilOne: false },
   { provider: "Fil One", egressRate: "$0", exit100tb: "$0", isFilOne: true },
 ];
@@ -147,30 +147,14 @@ rclone sync filone:my-bucket aws:my-bucket --progress
           </div>
         </section>
 
-        {/* Pricing */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full" style={{ backgroundColor: "#FFFFFF" }}>
-          <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
-            <div className="flex flex-col gap-3 items-center">
-              <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
-              <SectionSub maxWidth={520}>Storage. That is the whole bill. No egress in or out, no per-request fees. Staying is a choice you keep making — not one the exit cost makes for you.</SectionSub>
-            </div>
-            <div className="flex flex-col sm:flex-row items-center gap-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
-              <a href="/contact-sales" className="btn-secondary">Talk to an expert</a>
-            </div>
-            <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A" }}>No credit card required · No egress fees · Connects in minutes</p>
-          </div>
-        </section>
-
         {/* Dark CTA */}
-        <section className="px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full" style={{ backgroundColor: "#FFFFFF" }}>
+        <section className="px-5 md:px-8 py-24 md:py-32 w-full" style={{ backgroundColor: "#FFFFFF" }}>
           <div ref={ctaRef} className={`w-full max-w-[1120px] mx-auto reveal${ctaInView ? " in-view" : ""}`}>
             <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(135deg, #020D1A 0%, #0D2847 55%, #041525 100%)", borderRadius: 20, textAlign: "center" }} className="px-6 md:px-12 py-16 md:py-[104px]">
               <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1"/></svg>')}")`, backgroundSize: "60px 60px", maskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", pointerEvents: "none" }} />
               <div style={{ position: "relative" }}>
                 <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>Know the exit before you commit.</h2>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>Free 1 TB evaluation. Put data in, run the migrate-off command, and watch it cost nothing. Then decide.</p>
+                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", maxWidth: 560, marginLeft: "auto", marginRight: "auto", marginBottom: 32 }}>$4.99/TB/month — storage only, no egress in or out. Free 1 TB evaluation: put data in, run the migrate-off command, and watch it cost nothing. Then decide.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark"><span className="btn-primary-inner">Start for free</span></a>
                   <a href="/contact-sales" className="btn-secondary btn-secondary-dark">Talk to an expert</a>
