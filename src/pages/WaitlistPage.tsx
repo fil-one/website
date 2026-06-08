@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Check, ArrowLeft } from "@phosphor-icons/react";
 import LandingNavbar from "@/components/LandingNavbar";
 import LandingFooter from "@/components/LandingFooter";
@@ -107,6 +108,7 @@ const WaitlistPage = () => {
     canonical: "https://filone.io/waitlist",
   });
 
+  const navigate = useNavigate();
   const [product, setProduct] = useState<Product | null>(null);
   const [productError, setProductError] = useState(false);
   const [email, setEmail] = useState("");
@@ -185,15 +187,18 @@ const WaitlistPage = () => {
         <div className="flex flex-col gap-10 w-full max-w-[560px]">
 
           {/* Back button */}
-          <a
-            href="/lp/agents"
+          <button
+            onClick={() => navigate(-1)}
             className="flex items-center gap-1.5"
             style={{
               fontFamily: "'Funnel Sans', sans-serif",
               fontWeight: 400,
               fontSize: 14,
               color: "#71717A",
-              textDecoration: "none",
+              background: "none",
+              border: "none",
+              padding: 0,
+              cursor: "pointer",
               width: "fit-content",
               transition: "color 150ms ease",
             }}
@@ -202,7 +207,7 @@ const WaitlistPage = () => {
           >
             <ArrowLeft size={14} />
             Back
-          </a>
+          </button>
 
           {/* Header */}
           <div className="flex flex-col gap-3">
