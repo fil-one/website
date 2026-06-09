@@ -12,10 +12,10 @@ import {
 
 type Product = "rag" | "agent" | "both";
 
-const PRODUCTS: { key: Product; label: string }[] = [
-  { key: "rag",   label: "RAG Pipeline" },
-  { key: "agent", label: "AI Agent Toolkit" },
-  { key: "both",  label: "Both" },
+const PRODUCTS: { key: Product; label: string; tooltip: string }[] = [
+  { key: "rag",   label: "RAG Pipeline",      tooltip: "Built-in retrieval-augmented generation pipeline — store, chunk, and retrieve documents without stitching extra services together." },
+  { key: "agent", label: "AI Agent Toolkit",  tooltip: "Native integrations for LangChain, LlamaIndex, and Haystack. Store agent memory, task state, and inference traces in one flat-rate bucket." },
+  { key: "both",  label: "Both",              tooltip: "Get early access to both the RAG Pipeline and AI Agent Toolkit." },
 ];
 
 const USE_CASES = [
@@ -43,11 +43,21 @@ const TIMELINES = [
   "6+ months",
 ];
 
-const TEAM_SIZES = [
+const EMPLOYEE_SIZES = [
+  "Just me",
   "1–10",
   "11–50",
   "51–200",
-  "200+",
+  "201–1,000",
+  "1,000+",
+];
+
+const DATA_VOLUMES = [
+  "Less than 1 TB",
+  "1–10 TB",
+  "10–100 TB",
+  "100 TB–1 PB",
+  "More than 1 PB",
 ];
 
 const inputStyle: React.CSSProperties = {
@@ -109,11 +119,15 @@ const WaitlistPage = () => {
 
   const [product, setProduct] = useState<Product | null>(null);
   const [productError, setProductError] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
   const [useCase, setUseCase] = useState("");
   const [platform, setPlatform] = useState("");
   const [timeline, setTimeline] = useState("");
-  const [teamSize, setTeamSize] = useState("");
+  const [employeeSize, setEmployeeSize] = useState("");
+  const [dataVolume, setDataVolume] = useState("");
   const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -139,12 +153,16 @@ const WaitlistPage = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             fields: [
+              { objectTypeId: "0-1", name: "firstname", value: firstName },
+              { objectTypeId: "0-1", name: "lastname",  value: lastName },
+              ...(company ? [{ objectTypeId: "0-1", name: "company", value: company }] : []),
               { objectTypeId: "0-1", name: "email", value: email },
               { objectTypeId: "0-1", name: "product_interest", value: productLabel },
               ...(useCase  ? [{ objectTypeId: "0-1", name: "primary_use_case",   value: useCase   }] : []),
               ...(platform ? [{ objectTypeId: "0-1", name: "current_platform",   value: platform  }] : []),
               ...(timeline ? [{ objectTypeId: "0-1", name: "migration_timeline", value: timeline  }] : []),
-              ...(teamSize ? [{ objectTypeId: "0-1", name: "team_size",          value: teamSize  }] : []),
+              ...(employeeSize ? [{ objectTypeId: "0-1", name: "employee_size",    value: employeeSize }] : []),
+              ...(dataVolume   ? [{ objectTypeId: "0-1", name: "data_volume",      value: dataVolume   }] : []),
               ...(notes    ? [{ objectTypeId: "0-1", name: "message",            value: notes     }] : []),
             ],
             context: getHubSpotContext("Join Waitlist"),
@@ -277,10 +295,11 @@ const WaitlistPage = () => {
                   </p>
                 )}
                 <div className="flex gap-2 flex-wrap">
-                  {PRODUCTS.map(({ key, label }) => (
+                  {PRODUCTS.map(({ key, label, tooltip }) => (
                     <button
                       key={key}
                       type="button"
+                      title={tooltip}
                       onClick={() => { setProduct(key); setProductError(false); }}
                       style={{
                         fontFamily: "'Funnel Sans', sans-serif",
@@ -300,6 +319,45 @@ const WaitlistPage = () => {
                   ))}
                 </div>
               </div>
+
+              {/* Name + Company */}
+              <div className="grid grid-cols-2 gap-4">
+                <Field label="First name" required>
+                  <input
+                    type="text"
+                    value={firstName}
+                    onChange={e => setFirstName(e.target.value)}
+                    placeholder="Ada"
+                    required
+                    style={inputStyle}
+                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
+                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
+                  />
+                </Field>
+                <Field label="Last name" required>
+                  <input
+                    type="text"
+                    value={lastName}
+                    onChange={e => setLastName(e.target.value)}
+                    placeholder="Lovelace"
+                    required
+                    style={inputStyle}
+                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
+                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
+                  />
+                </Field>
+              </div>
+              <Field label="Company name">
+                <input
+                  type="text"
+                  value={company}
+                  onChange={e => setCompany(e.target.value)}
+                  placeholder="Acme Inc."
+                  style={inputStyle}
+                  onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
+                  onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
+                />
+              </Field>
 
               {/* Work email */}
               <Field label="Work email" required>
@@ -329,7 +387,7 @@ const WaitlistPage = () => {
                     {USE_CASES.map(o => <option key={o} value={o}>{o}</option>)}
                   </select>
                 </Field>
-                <Field label="Where do you run today?">
+                <Field label="What regions do you operate in?">
                   <select
                     value={platform}
                     onChange={e => setPlatform(e.target.value)}
@@ -353,22 +411,34 @@ const WaitlistPage = () => {
                     {TIMELINES.map(o => <option key={o} value={o}>{o}</option>)}
                   </select>
                 </Field>
-                <Field label="Team size">
+                <Field label="Employee size">
                   <select
-                    value={teamSize}
-                    onChange={e => setTeamSize(e.target.value)}
+                    value={employeeSize}
+                    onChange={e => setEmployeeSize(e.target.value)}
                     style={selectStyle}
                     onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
                     onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
                   >
                     <option value="">Select…</option>
-                    {TEAM_SIZES.map(o => <option key={o} value={o}>{o}</option>)}
+                    {EMPLOYEE_SIZES.map(o => <option key={o} value={o}>{o}</option>)}
                   </select>
                 </Field>
               </div>
 
-              {/* Notes */}
-              <Field label="Notes (optional)">
+              <Field label="Data volume">
+                <select
+                  value={dataVolume}
+                  onChange={e => setDataVolume(e.target.value)}
+                  style={selectStyle}
+                  onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
+                  onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
+                >
+                  <option value="">How much data are you looking to store?</option>
+                  {DATA_VOLUMES.map(o => <option key={o} value={o}>{o}</option>)}
+                </select>
+              </Field>
+
+              <Field label="I'm interested in learning more about (optional)">
                 <textarea
                   value={notes}
                   onChange={e => setNotes(e.target.value)}
