@@ -132,7 +132,7 @@ const EnterprisePage = () => {
       <main id="main-content">
 
         {/* Hero */}
-        <div className="relative isolate pt-[58px]" style={{ backgroundColor: "#FFFFFF" }}>
+        <div className="relative isolate pt-[94px]" style={{ backgroundColor: "#FFFFFF" }}>
           <div
             aria-hidden="true"
             className="absolute inset-0 pointer-events-none -z-10"

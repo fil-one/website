@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check } from "@phosphor-icons/react";
+import { Check, ArrowUpRight, Plus, Minus } from "@phosphor-icons/react";
 import { trackEvent } from "@/lib/analytics";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
@@ -55,6 +55,31 @@ const Field = ({
     {children}
   </div>
 );
+
+const FaqItem = ({ q, a }: { q: string; a: string }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center justify-between w-full gap-4 py-3.5 text-left"
+        style={{ background: "none", border: "none", cursor: "pointer" }}
+      >
+        <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#09090B" }}>
+          {q}
+        </span>
+        {open
+          ? <Minus size={14} style={{ color: "#A1A1AA", flexShrink: 0 }} />
+          : <Plus size={14} style={{ color: "#A1A1AA", flexShrink: 0 }} />}
+      </button>
+      {open && (
+        <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13.5, color: "#71717A", lineHeight: "1.65", margin: "0 0 14px" }}>
+          {a}
+        </p>
+      )}
+    </div>
+  );
+};
 
 const Support = () => {
   useSeo({
@@ -138,7 +163,7 @@ const Support = () => {
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
       <PlatformNavbar />
 
-      <main className="flex flex-col items-center px-5 md:px-8 pt-28 pb-24 w-full">
+      <main className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[560px]">
 
           {/* Header */}
@@ -178,6 +203,58 @@ const Support = () => {
             >
               Submit a request and our support team will get back to you shortly.
             </p>
+          </div>
+
+          {/* Quick links */}
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { label: "Documentation", sub: "Guides, API reference & SDKs", href: "https://docs.fil.one" },
+              { label: "Status", sub: "Live system & uptime status", href: "https://status.fil.one" },
+            ].map(({ label, sub, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col gap-1 rounded-xl border p-4 hover:bg-black/[0.02] transition-colors"
+                style={{ borderColor: "rgba(0,0,0,0.08)", textDecoration: "none" }}
+              >
+                <div className="flex items-center gap-1">
+                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#09090B" }}>
+                    {label}
+                  </span>
+                  <ArrowUpRight size={13} style={{ color: "#A1A1AA" }} />
+                </div>
+                <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12.5, color: "#71717A" }}>
+                  {sub}
+                </span>
+              </a>
+            ))}
+          </div>
+
+          {/* FAQ */}
+          <div className="flex flex-col gap-0">
+            <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 16, color: "#09090B", marginBottom: 12 }}>
+              Common questions
+            </p>
+            {[
+              {
+                q: "How do I get my S3 credentials?",
+                a: "Go to the Fil One dashboard and select API Keys from the left menu. Click Create Key, give it a name, then copy your Access Key ID and Secret Access Key. The secret is shown only once — store it securely. If you lose it, you'll need to create a new key pair.",
+              },
+              {
+                q: "Why am I getting 403 errors?",
+                a: "Usually a permissions issue. Check that the API key you're using has the correct bucket policy attached, and that you're hitting the right endpoint (https://s3.fil.one). If using a custom domain or proxy, verify the Host header is being forwarded correctly.",
+              },
+              {
+                q: "How does billing work?",
+                a: "You're billed monthly based on average stored GBs × $4.99/TB. There are no egress or API request fees. Invoices are available under Billing in the dashboard.",
+              },
+              {
+                q: "Can I migrate from AWS S3?",
+                a: "Yes — Fil One is fully S3-compatible. Point rclone, the AWS CLI, or any S3 SDK at https://s3.fil.one with your Fil One credentials and it works with no code changes. See our migration guide in the documentation.",
+              },
+            ].map(({ q, a }) => <FaqItem key={q} q={q} a={a} />)}
           </div>
 
           <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
@@ -337,6 +414,17 @@ const Support = () => {
                 Fil One needs the contact information you provide to us to contact you about our products and services. You may unsubscribe from these communications at any time. For information on how to unsubscribe, as well as our privacy practices and commitment to protecting your privacy, please review our{" "}
                 <a href="/privacy" style={{ color: "#71717A", textDecoration: "underline" }}>Privacy Policy</a>.
               </p>
+
+              {/* Response time */}
+              <div
+                className="flex items-center gap-2.5 rounded-xl px-4 py-3"
+                style={{ backgroundColor: "#F4F4F5", border: "1px solid rgba(0,0,0,0.06)" }}
+              >
+                <div className="shrink-0 w-2 h-2 rounded-full" style={{ backgroundColor: "#22C55E" }} />
+                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13.5, color: "#52525B", margin: 0 }}>
+                  We typically respond within <span style={{ color: "#09090B", fontWeight: 500 }}>1 business day</span>.
+                </p>
+              </div>
 
               {/* Submit */}
               <div className="flex flex-col gap-2 pt-1">

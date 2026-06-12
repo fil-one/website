@@ -20,7 +20,12 @@ import AgentToolkitProductPage from "./pages/AgentToolkitProductPage";
 import PricingPage from "./pages/PricingPage";
 import WaitlistPage from "./pages/WaitlistPage";
 import EnterprisePage from "./pages/EnterprisePage";
-import FloatingSupportButton from "./components/FloatingSupportButton";
+import AiTrainingSolutionPage from "./pages/solutions/AiTrainingSolutionPage";
+import Web3DappsSolutionPage from "./pages/solutions/Web3DappsSolutionPage";
+import MediaArchiveSolutionPage from "./pages/solutions/MediaArchiveSolutionPage";
+import EnterpriseBackupSolutionPage from "./pages/solutions/EnterpriseBackupSolutionPage";
+import PartnersPage from "./pages/PartnersPage";
+import PartnerApplyPage from "./pages/PartnerApplyPage";
 
 const queryClient = new QueryClient();
 
@@ -30,8 +35,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <FloatingSupportButton />
-        <Routes>
+<Routes>
           <Route path="/" element={<VersionB />} />
           <Route path="/legacy" element={<Index />} />
           <Route path="/terms" element={<TermsOfUse />} />
@@ -47,6 +51,12 @@ const App = () => (
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/waitlist" element={<WaitlistPage />} />
           <Route path="/enterprise" element={<EnterprisePage />} />
+          <Route path="/solutions/ai-training" element={<AiTrainingSolutionPage />} />
+          <Route path="/solutions/web3-dapps" element={<Web3DappsSolutionPage />} />
+          <Route path="/solutions/media-archive" element={<MediaArchiveSolutionPage />} />
+          <Route path="/solutions/enterprise-backup" element={<EnterpriseBackupSolutionPage />} />
+          <Route path="/partners" element={<PartnersPage />} />
+          <Route path="/partners/apply" element={<PartnerApplyPage />} />
           <Route path="/:lang/:city" element={<AdsLandingPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

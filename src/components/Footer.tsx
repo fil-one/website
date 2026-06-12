@@ -8,15 +8,22 @@ const Footer = () => {
       { label: "RAG Pipeline", href: "/rag-pipeline" },
       { label: "AI Agent Toolkit", href: "/ai-agent-toolkit" },
     ],
+    Solutions: [
+      { label: "AI Training & Inference", href: "/solutions/ai-training" },
+      { label: "Web3 & dApps", href: "/solutions/web3-dapps" },
+      { label: "Media & Archive", href: "/solutions/media-archive" },
+      { label: "Enterprise Backup & DR", href: "/solutions/enterprise-backup" },
+    ],
     Company: [
       { label: "Pricing", href: "/pricing" },
       { label: "Enterprise", href: "/enterprise" },
-      { label: "Documentation", href: "https://docs.fil.one" },
-      { label: "Contact sales", href: "/contact-sales" },
+      { label: "Partners", href: "/partners" },
+      { label: "Contact Sales", href: "/contact-sales" },
     ],
     Resources: [
+      { label: "Documentation", href: "https://docs.fil.one" },
       { label: "Support", href: "/support" },
-      { label: "Status", href: "https://fil-one.instatus.com/" },
+      { label: "Status", href: "https://status.fil.one" },
       { label: "Filecoin", href: "https://filecoin.io" },
     ],
     Legal: [
