@@ -89,6 +89,39 @@ const Index = () => {
             }}
           />
           <HeroSection />
+          {/* Press bar */}
+          <div className="w-full py-5 px-5 flex flex-col items-center gap-4">
+            <p
+              style={{
+                fontFamily: "'Funnel Sans', sans-serif",
+                fontWeight: 400,
+                fontSize: 12.5,
+                color: "#71717A",
+              }}
+            >
+              Our technology has been featured in
+            </p>
+            <p
+              style={{
+                fontFamily: "'Funnel Sans', sans-serif",
+                fontWeight: 500,
+                fontSize: 16,
+                color: "#52525B",
+                textAlign: "center",
+                lineHeight: "1.5",
+              }}
+            >
+              Fast&nbsp;Company
+              <span style={{ color: "#D4D4D8", margin: "0 14px" }}>·</span>
+              CNBC
+              <span style={{ color: "#D4D4D8", margin: "0 14px" }}>·</span>
+              Bloomberg
+              <span style={{ color: "#D4D4D8", margin: "0 14px" }}>·</span>
+              Yahoo&nbsp;Finance
+              <span style={{ color: "#D4D4D8", margin: "0 14px" }}>·</span>
+              VentureBeat
+            </p>
+          </div>
             <UseCasesSection />
         </div>
         <ComparisonSection />
