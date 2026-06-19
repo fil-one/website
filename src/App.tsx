@@ -41,8 +41,6 @@ import Web3FintechLandingPage from "./pages/Web3FintechLandingPage";
 import Web3PivotLandingPage from "./pages/Web3PivotLandingPage";
 import Web3NativeLandingPage from "./pages/Web3NativeLandingPage";
 import FloatingSupportButton from "./components/FloatingSupportButton";
-import ConsentBanner from "./components/ConsentBanner";
-import ConsentManager from "./components/ConsentManager";
 
 const queryClient = new QueryClient();
 
@@ -66,9 +64,7 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => (
  */
 export const AppContent = () => (
   <>
-    <ConsentManager />
     <FloatingSupportButton />
-    <ConsentBanner />
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/terms" element={<TermsOfUse />} />
