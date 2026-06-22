@@ -3,11 +3,10 @@ import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
 
 const PaygoFeatures = [
+  "1 TB free for 30 days",
   "Pay monthly",
-  "No egress fees",
-  "No API request fees",
+  "No egress or API request fees",
   "Data integrity guarantees",
-  "AI Agent Toolkit included",
 ];
 
 const BusinessFeatures = [
@@ -15,7 +14,6 @@ const BusinessFeatures = [
   "No egress or API request fees",
   "Data integrity guarantees",
   "Capacity assurance and deployment SLAs",
-  "AI Agent Toolkit included",
 ];
 
 const PricingSection = () => {

@@ -9,7 +9,7 @@ const LandingNavbar = () => {
     <>
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <nav
-        className="fixed top-0 left-0 right-0 z-50 border-b"
+        className="fixed top-0 left-0 right-0 z-50 border-b px-6 md:px-12"
         style={{
           backgroundColor: "rgba(255,255,255,0.85)",
           backdropFilter: "blur(20px)",
@@ -17,7 +17,7 @@ const LandingNavbar = () => {
           borderColor: "rgba(0,0,0,0.06)",
         }}
       >
-        <div className="flex items-center justify-between px-5 md:px-8 h-[58px] max-w-[1120px] mx-auto w-full">
+        <div className="flex items-center justify-between h-[58px] max-w-[1400px] mx-auto w-full">
           {/* Logo */}
           <a href="/" className="shrink-0" style={{ textDecoration: "none" }}>
             <img src={filOneLogo} alt="Fil One" style={{ height: 20, width: "auto", display: "block" }} />

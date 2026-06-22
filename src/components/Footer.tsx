@@ -5,7 +5,7 @@ const Footer = () => {
   const links: Record<string, { label: string; href: string }[]> = {
     Products: [
       { label: "Object Storage", href: "/storage" },
-      { label: "RAG Pipeline", href: "/rag-pipeline" },
+      { label: "Bucket Intelligence", href: "/bucket-intelligence" },
       { label: "AI Agent Toolkit", href: "/ai-agent-toolkit" },
     ],
     Solutions: [
@@ -35,10 +35,10 @@ const Footer = () => {
 
   return (
     <footer
-      className="flex flex-col px-5 md:px-8 pt-14 pb-10 w-full border-t"
+      className="flex flex-col px-6 md:px-12 pt-14 pb-10 w-full border-t"
       style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF" }}
     >
-      <div className="flex flex-col gap-12 w-full max-w-[1120px] mx-auto">
+      <div className="flex flex-col gap-12 w-full max-w-[1400px] mx-auto">
         {/* Top row */}
         <div className="flex flex-col md:flex-row md:justify-between gap-10 md:gap-0">
           {/* Left: logo + tagline */}

@@ -9,11 +9,10 @@ import { useScrollTracking } from "@/hooks/useScrollTracking";
 import { trackCtaClick } from "@/lib/analytics";
 
 const PAYGO_FEATURES = [
+  "1 TB free for 30 days",
   "Pay monthly",
-  "No egress fees",
-  "No API request fees",
+  "No egress or API request fees",
   "Data integrity guarantees",
-  "AI Agent Toolkit included",
 ];
 
 const BUSINESS_FEATURES = [
@@ -21,19 +20,20 @@ const BUSINESS_FEATURES = [
   "No egress or API request fees",
   "Data integrity guarantees",
   "Capacity assurance and deployment SLAs",
-  "AI Agent Toolkit included",
 ];
 
 const RAG_FEATURES = [
-  "Auto-indexes files in your bucket on upload",
-  "Semantic search with your own LLM keys",
+  "Turn any bucket into a queryable knowledge base",
+  "Powered by a built-in RAG Pipeline",
+  "Semantic search powered by your own LLM keys",
   "Supports PDF, Markdown, DOCX, HTML, and more",
 ];
 
 const AGENT_FEATURES = [
-  "MCP server for Claude Desktop & Cursor",
-  "OAuth for Zapier, Make.com & n8n",
-  "LangChain, LlamaIndex & Vercel AI SDK support",
+  "Connect AI tools and automations",
+  "Works with your existing buckets",
+  "No egress fees",
+  "Revoke access any time",
 ];
 
 const sharedCard = {
@@ -103,12 +103,12 @@ const PricingPage = () => {
                 margin: 0,
               }}
             >
-              Start with 1 TB free. Pay only for what you use — no egress fees, no surprises.
+              Start with 1 TB free. Pay only for what you use. No egress fees.
             </p>
           </div>
 
           {/* Object Storage */}
-          <div ref={heroEndRef}>
+          <div ref={heroEndRef} className="w-full">
           <div ref={storageRef} className="flex flex-col gap-8 w-full">
             <div className={`flex flex-col gap-1 reveal${storageInView ? " in-view" : ""}`}>
               <h2
@@ -243,7 +243,7 @@ const PricingPage = () => {
               >
                 <div className="flex items-center justify-between gap-3">
                   <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 15, color: "#09090B" }}>
-                    RAG Pipeline
+                    Bucket Intelligence
                   </p>
                   <span
                     style={{
@@ -265,12 +265,11 @@ const PricingPage = () => {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <span style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 24, lineHeight: 1, color: "#09090B", letterSpacing: "-0.02em" }}>
-                    +$15
-                    <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, color: "#71717A", letterSpacing: 0 }}> / TB / month</span>
+                  <span style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 20, lineHeight: 1, color: "#09090B", letterSpacing: "-0.015em" }}>
+                    Free for early testers
                   </span>
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A" }}>
-                    add-on · LLM costs billed by your provider
+                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12, color: "#71717A" }}>
+                    LLM costs billed by your provider
                   </p>
                 </div>
 
@@ -324,12 +323,9 @@ const PricingPage = () => {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <span style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 24, lineHeight: 1, color: "#09090B", letterSpacing: "-0.02em" }}>
-                    Free
+                  <span style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 20, lineHeight: 1, color: "#09090B", letterSpacing: "-0.015em" }}>
+                    Free for early testers
                   </span>
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A" }}>
-                    add-on · included with your storage plan
-                  </p>
                 </div>
 
                 <div className="w-full h-px" style={{ backgroundColor: "rgba(0,0,0,0.06)" }} />

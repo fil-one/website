@@ -1,10 +1,10 @@
-import { HardDrive, Brain, Robot, Check, ArrowRight } from "@phosphor-icons/react";
+import { HardDrive, ChatDots, Robot, Check, ArrowRight } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
 
 const STORAGE_FEATURES = [
-  "11 nines durability, cryptographically verified daily",
-  "Fully S3-compatible — no code changes needed",
+  "11 nines durability, verified daily",
+  "Fully S3-compatible, no code changes needed",
   "No egress fees, no API request charges",
 ];
 
@@ -15,9 +15,10 @@ const RAG_FEATURES = [
 ];
 
 const AGENT_FEATURES = [
-  "MCP server for Claude Desktop & Cursor",
-  "OAuth for Zapier, Make.com & n8n",
-  "LangChain, LlamaIndex & Vercel AI SDK support",
+  "Connect AI tools and automations",
+  "Works with your existing buckets",
+  "No egress fees",
+  "Revoke access any time",
 ];
 
 const ProductsSection = () => {
@@ -72,7 +73,7 @@ const ProductsSection = () => {
               color: "#52525B",
             }}
           >
-            Storage is the foundation. RAG Pipeline and AI Agent Toolkit connect directly to your buckets — no extra infrastructure needed.
+            Storage is the foundation. Bucket Intelligence and AI Agent Toolkit will soon connect directly to your buckets, no extra infrastructure needed.
           </p>
         </div>
 
@@ -125,7 +126,7 @@ const ProductsSection = () => {
                   marginTop: -8,
                 }}
               >
-                S3-compatible, verifiably durable object storage backed by Filecoin's distributed network. Drop-in compatible with every S3 SDK and workflow — and the substrate every other capability runs on.
+                S3-compatible, verifiably durable object storage. Drop-in compatible with every S3 SDK and workflow, and the substrate every other capability runs on.
               </p>
 
               {/* Features */}
@@ -205,7 +206,7 @@ const ProductsSection = () => {
           ref={addonsRef}
           className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full reveal-group"
         >
-          {/* RAG Pipeline */}
+          {/* Bucket Intelligence */}
           <div
             className={`flex flex-col gap-5 p-7 rounded-2xl border reveal${addonsInView ? " in-view" : ""}`}
             style={{
@@ -218,7 +219,7 @@ const ProductsSection = () => {
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0" style={{ backgroundColor: "#EFF8FF" }}>
-                  <Brain size={18} color="#0090FF" />
+                  <ChatDots size={18} color="#0090FF" />
                 </div>
                 <h3
                   style={{
@@ -231,7 +232,7 @@ const ProductsSection = () => {
                     margin: 0,
                   }}
                 >
-                  RAG Pipeline
+                  Bucket Intelligence
                 </h3>
               </div>
               <span
@@ -260,7 +261,7 @@ const ProductsSection = () => {
                 Turn any bucket into a queryable knowledge base
               </p>
               <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: "1.6", color: "#71717A" }}>
-                Auto-index files as they land in your bucket. Ask questions in plain language, powered by your own OpenAI, Anthropic, or Cohere keys.
+                Powered by a built-in RAG Pipeline. Files are auto-indexed as they land in your bucket. Ask questions in plain language using your own OpenAI, Anthropic, or Cohere keys.
               </p>
             </div>
 
@@ -275,7 +276,7 @@ const ProductsSection = () => {
             </div>
 
             <a
-              href="/rag-pipeline"
+              href="/bucket-intelligence"
               className="flex items-center gap-0.5 transition-opacity hover:opacity-70 self-start"
               style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A", textDecoration: "none" }}
             >
@@ -288,18 +289,18 @@ const ProductsSection = () => {
             {/* Footer */}
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <div>
-                <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 18, color: "#09090B", letterSpacing: "-0.015em", lineHeight: 1 }}>
-                  +$15<span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A", letterSpacing: 0 }}> / TB / month</span>
+                <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 15, color: "#09090B", letterSpacing: "-0.015em", lineHeight: 1 }}>
+                  Free for early testers
                 </p>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12, color: "#71717A", marginTop: 3 }}>
-                  add-on · LLM costs billed by your provider
+                  LLM costs billed by your provider
                 </p>
               </div>
               <a
-                href="/contact-sales"
+                href="/waitlist/bucket-intelligence"
                 className="flex items-center gap-1.5 shrink-0 transition-opacity hover:opacity-70"
                 style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#0090FF", textDecoration: "none" }}
-                onClick={() => trackCtaClick("Join waitlist", "/contact-sales", "secondary")}
+                onClick={() => trackCtaClick("Join waitlist", "/waitlist/bucket-intelligence", "secondary")}
               >
                 Join waitlist <ArrowRight size={14} />
               </a>
@@ -358,10 +359,10 @@ const ProductsSection = () => {
             {/* Subtitle + description */}
             <div className="flex flex-col gap-1">
               <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 13.5, lineHeight: "1.4", color: "#52525B" }}>
-                Connect AI agents and automations to your data
+                Connect your AI tools and automations to Fil One
               </p>
               <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: "1.6", color: "#71717A" }}>
-                Native MCP server, OAuth connectors, and SDKs for every major AI framework. Agent data stays in your buckets — not locked in a third-party SaaS.
+                Pick an integration, paste a config block, and your buckets are immediately available for your AI agents to use or to trigger automations from bucket events.
               </p>
             </div>
 
@@ -389,18 +390,15 @@ const ProductsSection = () => {
             {/* Footer */}
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <div>
-                <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 18, color: "#09090B", letterSpacing: "-0.015em", lineHeight: 1 }}>
-                  Free
-                </p>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12, color: "#71717A", marginTop: 3 }}>
-                  add-on · included with your storage plan
+                <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 15, color: "#09090B", letterSpacing: "-0.015em", lineHeight: 1 }}>
+                  Free for early testers
                 </p>
               </div>
               <a
-                href="/contact-sales"
+                href="/waitlist/ai-agent-toolkit"
                 className="flex items-center gap-1.5 shrink-0 transition-opacity hover:opacity-70"
                 style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#0090FF", textDecoration: "none" }}
-                onClick={() => trackCtaClick("Join waitlist", "/contact-sales", "secondary")}
+                onClick={() => trackCtaClick("Join waitlist", "/waitlist/ai-agent-toolkit", "secondary")}
               >
                 Join waitlist <ArrowRight size={14} />
               </a>

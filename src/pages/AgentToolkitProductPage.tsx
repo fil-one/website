@@ -257,7 +257,7 @@ const AgentToolkitProductPage = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
-                <a href="/waitlist" className="btn-primary" onClick={() => trackCtaClick("Join the waitlist", "/waitlist", "primary")}>
+                <a href="/waitlist/ai-agent-toolkit" className="btn-primary" onClick={() => trackCtaClick("Join the waitlist", "/waitlist/ai-agent-toolkit", "primary")}>
                   <span className="btn-primary-inner">Join the waitlist</span>
                 </a>
                 <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary" onClick={() => { trackCtaClick("Explore docs", "https://docs.fil.one", "secondary"); trackDocsClick("https://docs.fil.one"); }}>
@@ -457,7 +457,7 @@ const AgentToolkitProductPage = () => {
               ))}
             </div>
 
-            <a href="/waitlist" className="btn-primary" onClick={() => trackCtaClick("Join the waitlist", "/waitlist", "primary")}>
+            <a href="/waitlist/ai-agent-toolkit" className="btn-primary" onClick={() => trackCtaClick("Join the waitlist", "/waitlist/ai-agent-toolkit", "primary")}>
               <span className="btn-primary-inner">Join the waitlist</span>
             </a>
           </div>
@@ -576,7 +576,7 @@ const AgentToolkitProductPage = () => {
                   Early access is open. Join the waitlist and be first in line.
                 </p>
                 <div className="flex items-center justify-center">
-                  <a href="/waitlist" className="btn-primary btn-primary-dark" onClick={() => trackCtaClick("Join the waitlist", "/waitlist", "primary")}>
+                  <a href="/waitlist/ai-agent-toolkit" className="btn-primary btn-primary-dark" onClick={() => trackCtaClick("Join the waitlist", "/waitlist/ai-agent-toolkit", "primary")}>
                     <span className="btn-primary-inner">Join the waitlist</span>
                   </a>
                 </div>

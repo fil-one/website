@@ -12,9 +12,28 @@ import StorageCalculatorSection from "@/components/StorageCalculatorSection";
 import PricingSection from "@/components/PricingSection";
 import FaqSection from "@/components/FaqSection";
 
+const STATS = [
+  {
+    value: "$4.99",
+    label: "Per TB / month",
+    note: "Flat rate. No egress fees, no API charges, no retrieval penalties.",
+  },
+  {
+    value: "$0",
+    label: "Egress fees",
+    note: "Transfer data out anytime, to anywhere. No lock-in, no exit tax.",
+  },
+  {
+    value: "11 9s",
+    label: "Durability",
+    note: "Backed by an independent global network of storage providers.",
+  },
+];
+
 const StorageProductPage = () => {
   const { heroEndRef } = useScrollTracking();
   const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.1 });
+  const { ref: statsRef, inView: statsInView } = useInView({ threshold: 0.05 });
 
   useEffect(() => {
     const id = window.location.hash.slice(1);
@@ -95,7 +114,7 @@ const StorageProductPage = () => {
                   margin: 0,
                 }}
               >
-                S3 object storage built for the AI era
+                Store more. Pay less.<br />Own it completely.
               </h1>
 
               <p
@@ -110,7 +129,7 @@ const StorageProductPage = () => {
                   margin: 0,
                 }}
               >
-                Verifiable data integrity, no egress fees, and S3-compatible. Your data, your keys, your control, for when every byte matters.
+                Fully S3-compatible object storage with no egress fees, no API request charges, and verifiable data integrity on every byte.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
@@ -137,22 +156,43 @@ const StorageProductPage = () => {
           </div>
         </div>
 
-        {/* Use cases */}
+        {/* Stats */}
         <div ref={heroEndRef}>
-          <StorageUseCasesSection />
+          <section className="w-full px-5 md:px-8 pt-0 pb-0" style={{ backgroundColor: "#FFFFFF" }}>
+            <div className="w-full max-w-[1120px] mx-auto">
+              <div
+                ref={statsRef}
+                className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full reveal-group"
+              >
+                {STATS.map(({ value, label, note }) => (
+                  <div
+                    key={label}
+                    className={`flex flex-col gap-3 p-8 rounded-2xl border reveal${statsInView ? " in-view" : ""}`}
+                    style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF", boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)" }}
+                  >
+                    <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: "clamp(32px, 5vw, 44px)", lineHeight: 1, letterSpacing: "-0.03em", color: "#0090FF", margin: 0 }}>
+                      {value}
+                    </p>
+                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 15, color: "#09090B", margin: 0 }}>{label}</p>
+                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: "1.6", color: "#71717A", margin: 0 }}>{note}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
         </div>
 
         {/* Features */}
         <UseCasesSection />
 
-        {/* Comparison */}
-        <ComparisonSection />
+        {/* Use cases */}
+        <StorageUseCasesSection />
 
         {/* Calculator */}
         <StorageCalculatorSection />
 
-        {/* Pricing */}
-        <PricingSection />
+        {/* Comparison */}
+        <ComparisonSection />
 
         {/* FAQ */}
         <FaqSection include={[

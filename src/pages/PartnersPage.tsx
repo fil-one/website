@@ -11,47 +11,50 @@ import {
   ArrowsLeftRight,
   ChartLineUp,
   Chat,
-  CheckCircle,
+  Check,
 } from "@phosphor-icons/react";
 
 const PARTNER_ROLES = [
   {
     icon: Users,
-    title: "Channel",
-    subtitle: "Resellers · VARs · referral partners",
-    body: "Add modern, cost-predictable cloud storage to your portfolio and solve real customer storage problems — with margins that work.",
+    title: "Channel Partner",
+    subtitle: "Resellers · VARs · Referral Partners",
+    bestFor1: "You sell technology solutions and want to add cloud storage to your portfolio.",
+    bestFor2: "",
     bullets: [
-      "Reseller and referral models",
-      "Transparent $4.99/TB pricing, no egress fees",
-      "Deal support and co-marketing",
+      "Resell Fil One or refer customers",
+      "Earn revenue through reseller or referral programs",
+      "Get sales, deal, and co-marketing support",
     ],
-    cta: "Become a Channel partner",
+    cta: "Become a Channel Partner",
     href: "/partners/apply",
   },
   {
     icon: Code,
-    title: "Technology",
-    subtitle: "ISVs · platforms · integration partners",
-    body: "Build and market joint solutions on Fil One. If your product speaks S3, it already speaks Fil One — point it at our endpoint and ship.",
+    title: "Technology Partner",
+    subtitle: "ISVs · Platforms · Integration Partners",
+    bestFor1: "You build software and want to integrate storage directly into your product.",
+    bestFor2: "",
     bullets: [
-      "Drop-in S3-compatible API & SDKs",
-      "Verifiable data integrity (daily CID proofs)",
-      "Joint launch & integration listing",
+      "Integrate Fil One through our S3-compatible API",
+      "Embed storage into your product or platform",
+      "Jointly launch and market integrations",
     ],
-    cta: "Become a Technology partner",
+    cta: "Become a Technology Partner",
     href: "/partners/apply",
   },
   {
     icon: ShieldCheck,
-    title: "Managed Service Provider",
-    subtitle: "MSPs · backup & DR providers",
-    body: "Protect more data with predictable, cost-effective storage. No surprise egress or API bills — so your margins stay yours.",
+    title: "Managed Service Provider (MSP)",
+    subtitle: "Backup Providers · IT Services · Disaster Recovery",
+    bestFor1: "You manage infrastructure, backup, or data services on behalf of clients.",
+    bestFor2: "",
     bullets: [
-      "Predictable, all-in pricing",
-      "11 nines durability, multi-cloud by design",
-      "Works with the backup tools you already run",
+      "Manage customer storage and backups",
+      "Offer storage as part of a managed service",
+      "Reduce costs with predictable pricing and no egress fees",
     ],
-    cta: "Become an MSP partner",
+    cta: "Become an MSP Partner",
     href: "/partners/apply",
   },
 ];
@@ -60,7 +63,7 @@ const WHY_FEATURES = [
   {
     icon: CurrencyDollar,
     title: "No egress fees",
-    body: "$4.99/TB/month, no API request charges, no surprise bills. Easy to quote, easy to win.",
+    body: "No API request charges, no surprise bills. Easy to quote, easy to win.",
   },
   {
     icon: Cube,
@@ -85,7 +88,7 @@ const WHY_FEATURES = [
   {
     icon: Chat,
     title: "People, not portals",
-    body: "A responsive partner team that helps with deals, migrations and integrations — start with a single email.",
+    body: "A responsive partner team that helps with deals, migrations and integrations.",
   },
 ];
 
@@ -93,7 +96,7 @@ const STEPS = [
   {
     number: "01",
     title: "Reach out",
-    body: "Tell us about your business and the role that fits. One email — a real person on our team replies.",
+    body: "Tell us about your business and the role that fits. Our partner team will get back to you shortly.",
   },
   {
     number: "02",
@@ -203,10 +206,10 @@ const PartnersPage = () => {
 
               <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
                 <a href="/partners/apply" className="btn-primary">
-                  <span className="btn-primary-inner">Apply to partner</span>
+                  <span className="btn-primary-inner">Become a partner</span>
                 </a>
-                <a href="/contact-sales" className="btn-secondary">
-                  Talk to our team
+                <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                  Explore documentation
                 </a>
               </div>
             </div>
@@ -226,7 +229,7 @@ const PartnersPage = () => {
               "No egress fees — no surprise bills",
             ].map((item) => (
               <div key={item} className="flex items-center gap-2">
-                <CheckCircle size={14} weight="fill" style={{ color: "#0090FF", flexShrink: 0 }} />
+                <Check size={14} style={{ color: "#0090FF", flexShrink: 0 }} />
                 <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#52525B" }}>
                   {item}
                 </span>
@@ -236,97 +239,6 @@ const PartnersPage = () => {
         </div>
 
         {/* Partner role cards */}
-        <section className="px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#FFFFFF" }}>
-          <div className="max-w-[1120px] mx-auto">
-            <div ref={rolesRef} className={`reveal${rolesInView ? " in-view" : ""}`}>
-              <div className="flex flex-col items-center gap-4 mb-14 md:mb-16 text-center">
-                <span
-                  style={{
-                    fontFamily: "'DM Mono', monospace",
-                    fontWeight: 500,
-                    fontSize: 11,
-                    letterSpacing: "0.07em",
-                    color: "#71717A",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  One program. Multiple roles.
-                </span>
-                <h2
-                  className="text-[24px] md:text-[32px]"
-                  style={{
-                    fontFamily: "'Aspekta', sans-serif",
-                    fontWeight: 500,
-                    letterSpacing: "-0.02em",
-                    lineHeight: "1.2",
-                    color: "#09090B",
-                    maxWidth: 440,
-                    margin: 0,
-                  }}
-                >
-                  Find the role that fits
-                </h2>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {PARTNER_ROLES.map(({ icon: Icon, title, subtitle, body, bullets, cta, href }) => (
-                  <div
-                    key={title}
-                    className="flex flex-col gap-4 rounded-2xl p-6 border"
-                    style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF" }}
-                  >
-                    <div
-                      className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
-                      style={{ backgroundColor: "#EFF8FF" }}
-                    >
-                      <Icon size={18} color="#0090FF" />
-                    </div>
-
-                    <div>
-                      <h3
-                        style={{
-                          fontFamily: "'Aspekta', sans-serif",
-                          fontWeight: 500,
-                          fontSize: 16,
-                          color: "#09090B",
-                          margin: "0 0 3px",
-                        }}
-                      >
-                        {title}
-                      </h3>
-                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12, color: "#0070CC", margin: 0 }}>
-                        {subtitle}
-                      </p>
-                    </div>
-
-                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 14, lineHeight: "1.6", color: "#71717A", margin: 0, flex: 1 }}>
-                      {body}
-                    </p>
-
-                    <ul className="flex flex-col gap-2">
-                      {bullets.map((b) => (
-                        <li key={b} className="flex items-start gap-2">
-                          <CheckCircle size={14} weight="fill" style={{ color: "#0090FF", flexShrink: 0, marginTop: 2 }} />
-                          <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#52525B", lineHeight: "1.5" }}>
-                            {b}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <a
-                      href={href}
-                      className="btn-primary w-full mt-2"
-                    >
-                      <span className="btn-primary-inner w-full justify-center">{cta}</span>
-                    </a>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Why Fil One */}
         <section className="px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#FFFFFF" }}>
           <div className="max-w-[1120px] mx-auto">
@@ -358,7 +270,7 @@ const PartnersPage = () => {
                 >
                   Storage your customers will actually want
                 </h2>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 15, color: "#71717A", margin: 0, maxWidth: 400 }}>
+                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 15, color: "#71717A", margin: 0, maxWidth: 500 }}>
                   A product that's easy to sell, easy to integrate, and easy to trust.
                 </p>
               </div>
@@ -396,7 +308,7 @@ const PartnersPage = () => {
         </section>
 
         {/* How it works */}
-        <section className="px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#FFFFFF" }}>
+        <section className="px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#F4F4F5" }}>
           <div className="max-w-[1120px] mx-auto">
             <div ref={stepsRef} className={`reveal${stepsInView ? " in-view" : ""}`}>
               <div className="flex flex-col items-center gap-4 mb-14 text-center">
@@ -435,7 +347,7 @@ const PartnersPage = () => {
                         fontFamily: "'DM Mono', monospace",
                         fontWeight: 500,
                         fontSize: 28,
-                        color: "rgba(0,144,255,0.25)",
+                        color: "#0090FF",
                         lineHeight: 1,
                       }}
                     >
@@ -450,6 +362,101 @@ const PartnersPage = () => {
                   </div>
                 ))}
               </div>
+
+              <div className="flex justify-center mt-12">
+                <a href="/partners/apply" className="btn-primary">
+                  <span className="btn-primary-inner">Become a partner</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* One program. Multiple roles. */}
+        <section className="px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#FFFFFF" }}>
+          <div className="max-w-[1120px] mx-auto">
+            <div ref={rolesRef} className={`reveal${rolesInView ? " in-view" : ""}`}>
+              <div className="flex flex-col items-center gap-4 mb-14 md:mb-16 text-center">
+                <span
+                  style={{
+                    fontFamily: "'DM Mono', monospace",
+                    fontWeight: 500,
+                    fontSize: 11,
+                    letterSpacing: "0.07em",
+                    color: "#71717A",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  One program. Multiple roles.
+                </span>
+                <h2
+                  className="text-[24px] md:text-[32px]"
+                  style={{
+                    fontFamily: "'Aspekta', sans-serif",
+                    fontWeight: 500,
+                    letterSpacing: "-0.02em",
+                    lineHeight: "1.2",
+                    color: "#09090B",
+                    maxWidth: 440,
+                    margin: 0,
+                  }}
+                >
+                  Find the role that fits
+                </h2>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                {PARTNER_ROLES.map(({ icon: Icon, title, subtitle, bestFor1, bestFor2, bullets }) => (
+                  <div
+                    key={title}
+                    className="flex flex-col rounded-2xl border p-6 gap-5"
+                    style={{
+                      borderColor: "rgba(0,0,0,0.07)",
+                      backgroundColor: "#FFFFFF",
+                      boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
+                    }}
+                  >
+                    {/* Icon + title */}
+                    <div className="flex items-start gap-3">
+                      <div
+                        className="flex items-center justify-center w-8 h-8 rounded-lg shrink-0 mt-0.5"
+                        style={{ backgroundColor: "#F0F9FF", border: "1px solid rgba(0,144,255,0.12)" }}
+                      >
+                        <Icon size={15} color="#0090FF" />
+                      </div>
+                      <div>
+                        <h3 style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 15.5, color: "#09090B", margin: 0, lineHeight: 1.25 }}>
+                          {title}
+                        </h3>
+                        <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 11.5, color: "#71717A", margin: "3px 0 0", lineHeight: 1.3 }}>
+                          {subtitle}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13.5, color: "#52525B", margin: 0, lineHeight: "1.6" }}>
+                      {bestFor1} {bestFor2}
+                    </p>
+
+                    {/* Divider */}
+                    <div style={{ height: 1, backgroundColor: "rgba(0,0,0,0.06)" }} />
+
+                    {/* Bullets */}
+                    <ul className="flex flex-col gap-2.5">
+                      {bullets.map((b) => (
+                        <li key={b} className="flex items-start gap-2.5">
+                          <Check size={13} style={{ color: "#0090FF", flexShrink: 0, marginTop: 3 }} />
+                          <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#52525B", lineHeight: "1.55" }}>
+                            {b}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
             </div>
           </div>
         </section>
@@ -496,22 +503,9 @@ const PartnersPage = () => {
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>
                   Not sure which role fits? Tell us about your business and we'll point you to the best path.
                 </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <div className="flex items-center justify-center">
                   <a href="/partners/apply" className="btn-primary btn-primary-dark">
-                    <span className="btn-primary-inner">Email the partner team</span>
-                  </a>
-                  <a
-                    href="https://docs.fil.one"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      fontFamily: "'Funnel Sans', sans-serif",
-                      fontSize: 14,
-                      color: "rgba(255,255,255,0.6)",
-                      textDecoration: "none",
-                    }}
-                  >
-                    Read the docs →
+                    <span className="btn-primary-inner">Become a partner</span>
                   </a>
                 </div>
               </div>

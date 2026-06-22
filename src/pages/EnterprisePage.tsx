@@ -21,7 +21,7 @@ const FEATURES = [
     icon: Buildings,
     title: "Capacity assurance & SLAs",
     description:
-      "Reserve capacity with deployment guarantees. Contractual SLAs for uptime and performance, backed by a dedicated support line.",
+      "Guaranteed capacity with contractual SLAs covering uptime, performance, and dedicated enterprise support.",
   },
   {
     icon: Headset,
@@ -93,7 +93,7 @@ const FAQS = [
   },
   {
     q: "Where is my data stored?",
-    a: "We offer EU and US regions. Data is distributed across an independent network of Filecoin storage providers — not concentrated in a single facility or hyperscaler datacenter.",
+    a: "We currently offer two regions: EU (France) and US (Detroit). More regions are on the way.",
   },
   {
     q: "What compliance certifications do you have?",

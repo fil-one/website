@@ -201,7 +201,7 @@ const Support = () => {
                 color: "#71717A",
               }}
             >
-              Submit a request and our support team will get back to you shortly.
+              Browse common questions below or submit a request — our support team will get back to you shortly.
             </p>
           </div>
 
@@ -239,20 +239,24 @@ const Support = () => {
             </p>
             {[
               {
-                q: "How do I get my S3 credentials?",
-                a: "Go to the Fil One dashboard and select API Keys from the left menu. Click Create Key, give it a name, then copy your Access Key ID and Secret Access Key. The secret is shown only once — store it securely. If you lose it, you'll need to create a new key pair.",
+                q: "Does Fil One support IPFS or CIDs?",
+                a: "No. Fil One is S3-compatible object storage — it does not support IPFS retrieval or content addressing via CIDs. If you need IPFS pinning or CID-based access, take a look at Filecoin Open Cloud (FOC).",
               },
               {
-                q: "Why am I getting 403 errors?",
-                a: "Usually a permissions issue. Check that the API key you're using has the correct bucket policy attached, and that you're hitting the right endpoint (https://s3.fil.one). If using a custom domain or proxy, verify the Host header is being forwarded correctly.",
+                q: "Can I make a bucket public?",
+                a: "Public buckets are not currently supported. To share individual files, you can generate a presigned URL from the dashboard or via the S3 API — this gives time-limited access to a specific object without making the entire bucket public.",
               },
               {
-                q: "How does billing work?",
-                a: "You're billed monthly based on average stored GBs × $4.99/TB. There are no egress or API request fees. Invoices are available under Billing in the dashboard.",
+                q: "Are there any hidden fees on top of the storage price?",
+                a: "No. Fil One charges a flat rate per TB stored per month with no egress fees, no API request charges, and no retrieval penalties. What you see is what you pay.",
               },
               {
-                q: "Can I migrate from AWS S3?",
-                a: "Yes — Fil One is fully S3-compatible. Point rclone, the AWS CLI, or any S3 SDK at https://s3.fil.one with your Fil One credentials and it works with no code changes. See our migration guide in the documentation.",
+                q: "How do I migrate from Storacha or another S3-compatible provider?",
+                a: "Fil One is fully S3-compatible, so tools like rclone work out of the box. Point rclone at s3.fil.one with your Fil One credentials and sync your data across. If you need help with a larger migration, reach out and we'll guide you through it.",
+              },
+              {
+                q: "Can I pay with FIL tokens?",
+                a: "Not currently — billing is in USD. If paying in FIL is a hard requirement, get in touch and we can explore options depending on your storage volume.",
               },
             ].map(({ q, a }) => <FaqItem key={q} q={q} a={a} />)}
           </div>
@@ -277,7 +281,7 @@ const Support = () => {
             </div>
           ) : (
             /* ── Form ── */
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-5">
 
               {/* First / Last name row */}
               <div className="grid grid-cols-2 gap-4">

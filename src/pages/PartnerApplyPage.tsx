@@ -5,18 +5,18 @@ import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import {
   HS_PORTAL_ID,
-  HS_CONTACT_FORM_GUID as HS_FORM_GUID,
+  HS_PARTNER_FORM_GUID as HS_FORM_GUID,
   HS_MARKETING_SUBSCRIPTION_TYPE_ID,
   getHubSpotContext,
 } from "@/lib/hubspot";
 
 const PARTNER_TYPES = [
-  { value: "channel", label: "Channel", sub: "Reseller, VAR, or referral" },
-  { value: "technology", label: "Technology", sub: "ISV, platform, or integration" },
-  { value: "msp", label: "Managed Service Provider", sub: "MSP or backup & DR provider" },
+  { value: "Channel partner", label: "Channel Partner", sub: "You sell technology solutions to customers and want to add cloud storage to your portfolio." },
+  { value: "Technology Partner", label: "Technology Partner", sub: "You build software and want to integrate storage directly into your product." },
+  { value: "Managed Service Provider (MSP)", label: "Managed Service Provider (MSP)", sub: "You manage infrastructure, backup, or data services on behalf of clients." },
 ];
 
-const COMPANY_SIZES = ["1–10", "11–50", "51–200", "201–1,000", "1,000+"];
+const COMPANY_SIZES = ["1-10 employees", "11-50 employees", "51-200 employees", "201-1,000 employees", "1,000+ employees"];
 
 const inputStyle: React.CSSProperties = {
   width: "100%",
@@ -110,11 +110,13 @@ const PartnerApplyPage = () => {
             fields: [
               { objectTypeId: "0-1", name: "firstname", value: form.firstname },
               { objectTypeId: "0-1", name: "lastname", value: form.lastname },
-              { objectTypeId: "0-1", name: "company", value: form.company },
+              { objectTypeId: "0-2", name: "name", value: form.company },
               { objectTypeId: "0-1", name: "email", value: form.email },
               { objectTypeId: "0-1", name: "jobtitle", value: form.jobtitle },
-              { objectTypeId: "0-1", name: "website", value: form.website },
-              { objectTypeId: "0-1", name: "message", value: `Partner type: ${form.partnerType}\nCompany size: ${form.companySize}\n\n${form.message}` },
+              { objectTypeId: "0-2", name: "website", value: form.website },
+              { objectTypeId: "0-2", name: "partner_type", value: form.partnerType },
+              ...(form.companySize ? [{ objectTypeId: "0-2", name: "company_size", value: form.companySize }] : []),
+              ...(form.message ? [{ objectTypeId: "0-2", name: "tell_us_about_your_business", value: form.message }] : []),
             ],
             context: getHubSpotContext("Partner Application"),
             legalConsentOptions: {
@@ -194,7 +196,7 @@ const PartnerApplyPage = () => {
                 margin: 0,
               }}
             >
-              Tell us about your business and the role that fits. A real person on our partner team will get back to you shortly.
+              Tell us about your business and the role that fits. Our partner team will get back to you shortly.
             </p>
           </div>
 
@@ -229,7 +231,7 @@ const PartnerApplyPage = () => {
               </a>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
+            <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-6" noValidate>
 
               {/* Name row */}
               <div className="grid grid-cols-2 gap-4">
@@ -356,18 +358,26 @@ const PartnerApplyPage = () => {
 
               {/* Company size */}
               <Field label="Company size">
-                <select
-                  style={{ ...inputStyle, appearance: "none", cursor: "pointer" }}
-                  value={form.companySize}
-                  onChange={set("companySize")}
-                  onFocus={(e) => (e.target.style.borderColor = "rgba(0,144,255,0.5)")}
-                  onBlur={(e) => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                >
-                  <option value="">Select…</option>
-                  {COMPANY_SIZES.map((s) => (
-                    <option key={s} value={s}>{s} employees</option>
-                  ))}
-                </select>
+                <div style={{ position: "relative" }}>
+                  <select
+                    style={{ ...inputStyle, appearance: "none", cursor: "pointer", paddingRight: 36 }}
+                    value={form.companySize}
+                    onChange={set("companySize")}
+                    onFocus={(e) => (e.target.style.borderColor = "rgba(0,144,255,0.5)")}
+                    onBlur={(e) => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
+                  >
+                    <option value="">Select…</option>
+                    {COMPANY_SIZES.map((s) => (
+                      <option key={s} value={s}>{s} employees</option>
+                    ))}
+                  </select>
+                  <svg
+                    width="14" height="14" viewBox="0 0 14 14" fill="none"
+                    style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }}
+                  >
+                    <path d="M3 5L7 9L11 5" stroke="#71717A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
               </Field>
 
               {/* Message */}
@@ -382,25 +392,50 @@ const PartnerApplyPage = () => {
                 />
               </Field>
 
-              {/* Consent */}
-              <label className="flex items-start gap-3 cursor-pointer">
+              <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
+
+              {/* Consent text */}
+              <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, lineHeight: "1.7", color: "#71717A" }}>
+                Fil One is committed to protecting your privacy. We'll only use your personal information to administer your account and provide the products and services you requested. From time to time we'd like to contact you about our products and services.
+              </p>
+
+              {/* Consent checkbox */}
+              <label className="flex items-start gap-3 cursor-pointer" style={{ userSelect: "none" }}>
                 <input
                   type="checkbox"
                   checked={form.consent}
                   onChange={set("consent")}
-                  style={{ marginTop: 3, accentColor: "#0070CC", flexShrink: 0 }}
+                  style={{ display: "none" }}
                 />
                 <span
                   style={{
-                    fontFamily: "'Funnel Sans', sans-serif",
-                    fontSize: 13,
-                    color: "#71717A",
-                    lineHeight: "1.5",
+                    width: 16,
+                    height: 16,
+                    borderRadius: 4,
+                    border: form.consent ? "none" : "1.5px solid rgba(0,0,0,0.25)",
+                    backgroundColor: form.consent ? "#09090B" : "#FFFFFF",
+                    flexShrink: 0,
+                    marginTop: 2,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    transition: "background-color 150ms ease, border 150ms ease",
                   }}
                 >
-                  I agree to receive communications from Fil One about products, updates, and partner opportunities.
+                  {form.consent && (
+                    <Check size={10} color="#FFFFFF" />
+                  )}
+                </span>
+                <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, color: "#52525B", lineHeight: "1.6" }}>
+                  I agree to receive other communications from Fil One.
                 </span>
               </label>
+
+              <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: "1.7", color: "#71717A" }}>
+                You can unsubscribe at any time. For more information, review our{" "}
+                <a href="/privacy" style={{ color: "#71717A", textDecoration: "underline" }}>Privacy Policy</a>.
+                {" "}By clicking submit, you consent to allow Fil One to store and process the information submitted.
+              </p>
 
               {error && (
                 <p
@@ -428,11 +463,6 @@ const PartnerApplyPage = () => {
                   {loading ? "Submitting…" : "Submit application"}
                 </span>
               </button>
-
-              <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12.5, color: "#A1A1AA", textAlign: "center" }}>
-                By submitting, you agree to our{" "}
-                <a href="/privacy" style={{ color: "#71717A", textDecoration: "underline" }}>Privacy Policy</a>.
-              </p>
             </form>
           )}
         </div>

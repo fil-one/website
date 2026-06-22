@@ -49,7 +49,7 @@ const FEATURES = [
 const USECASES = [
   {
     title: "NFT collections",
-    body: "Host artwork, metadata JSON, and provenance records. Objects are content-addressed and immutable — what buyers see on mint is what they own forever.",
+    body: "Host artwork, metadata JSON, and provenance records. Objects are content-addressed and immutable.",
   },
   {
     title: "dApp backends",
@@ -191,7 +191,6 @@ const Web3DappsSolutionPage = () => {
             {[
               "On-chain verifiable proofs",
               "Immutable object locking",
-              "No egress fees",
               "S3-compatible API",
               "Filecoin-backed durability",
             ].map((item) => (
@@ -214,9 +213,9 @@ const Web3DappsSolutionPage = () => {
                   style={{
                     fontFamily: "'DM Mono', monospace",
                     fontWeight: 500,
-                    fontSize: 11,
-                    letterSpacing: "0.07em",
-                    color: "#0070CC",
+                    fontSize: 11.5,
+                    letterSpacing: "0.08em",
+                    color: "#52525B",
                     textTransform: "uppercase",
                   }}
                 >
@@ -230,7 +229,7 @@ const Web3DappsSolutionPage = () => {
                     letterSpacing: "-0.02em",
                     lineHeight: "1.2",
                     color: "#09090B",
-                    maxWidth: 500,
+                    maxWidth: 620,
                     margin: 0,
                   }}
                 >
@@ -238,25 +237,31 @@ const Web3DappsSolutionPage = () => {
                 </h2>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {FEATURES.map(({ icon: Icon, title, body }) => (
                   <div
                     key={title}
-                    className="flex flex-col gap-3 rounded-2xl p-6 border"
-                    style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FAFAFA" }}
+                    className="flex flex-col gap-5 p-8 rounded-2xl border"
+                    style={{
+                      borderColor: "rgba(0,0,0,0.07)",
+                      backgroundColor: "#FFFFFF",
+                      boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
+                    }}
                   >
                     <div
-                      className="flex items-center justify-center w-9 h-9 rounded-lg"
-                      style={{ backgroundColor: "#EFF8FF", color: "#0070CC" }}
+                      className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
+                      style={{ backgroundColor: "#EFF8FF" }}
                     >
-                      <Icon size={18} weight="duotone" />
+                      <Icon size={18} color="#0090FF" />
                     </div>
-                    <h3 style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 15, color: "#09090B", margin: 0 }}>
-                      {title}
-                    </h3>
-                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 14, lineHeight: "1.6", color: "#71717A", margin: 0 }}>
-                      {body}
-                    </p>
+                    <div className="flex flex-col gap-2">
+                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 15, lineHeight: "1.3", color: "#09090B" }}>
+                        {title}
+                      </p>
+                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13.5, lineHeight: "1.6", color: "#71717A" }}>
+                        {body}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -273,9 +278,9 @@ const Web3DappsSolutionPage = () => {
                   style={{
                     fontFamily: "'DM Mono', monospace",
                     fontWeight: 500,
-                    fontSize: 11,
-                    letterSpacing: "0.07em",
-                    color: "#0070CC",
+                    fontSize: 11.5,
+                    letterSpacing: "0.08em",
+                    color: "#52525B",
                     textTransform: "uppercase",
                   }}
                 >

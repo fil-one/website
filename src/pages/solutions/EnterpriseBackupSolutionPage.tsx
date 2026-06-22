@@ -21,13 +21,13 @@ const FEATURES = [
   },
   {
     icon: ShieldCheck,
-    title: "Cryptographic integrity",
-    body: "Every backup is cryptographically sealed. Detect corruption or tampering before you need to restore — not after.",
+    title: "Verifiable data integrity",
+    body: "Every backup is sealed and verifiable. Detect corruption or tampering before you need to restore — not after.",
   },
   {
     icon: Globe,
     title: "Geo-distributed redundancy",
-    body: "Data is distributed across independent Filecoin providers globally. No single datacenter failure can compromise your recovery.",
+    body: "Data is distributed across independent storage providers globally. No single datacenter failure can compromise your recovery.",
   },
   {
     icon: ClockCounterClockwise,
@@ -136,7 +136,7 @@ const EnterpriseBackupSolutionPage = () => {
                   letterSpacing: "-0.02em",
                   color: "#09090B",
                   textAlign: "center",
-                  maxWidth: 620,
+                  maxWidth: 500,
                   margin: 0,
                 }}
               >
@@ -155,7 +155,7 @@ const EnterpriseBackupSolutionPage = () => {
                   margin: 0,
                 }}
               >
-                Immutable, geo-distributed backup storage with cryptographic integrity proofs — and zero egress fees when disaster strikes and you need to restore.
+                Immutable, geo-distributed backup storage with verifiable data integrity — and zero egress fees when disaster strikes and you need to restore.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
@@ -190,8 +190,7 @@ const EnterpriseBackupSolutionPage = () => {
           <div className="max-w-[1120px] mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
             {[
               "Immutable object lock",
-              "Cryptographic integrity",
-              "No egress on restores",
+              "Verifiable data integrity",
               "Geo-distributed redundancy",
               "WORM compliance",
             ].map((item) => (
@@ -212,9 +211,9 @@ const EnterpriseBackupSolutionPage = () => {
                   style={{
                     fontFamily: "'DM Mono', monospace",
                     fontWeight: 500,
-                    fontSize: 11,
-                    letterSpacing: "0.07em",
-                    color: "#0070CC",
+                    fontSize: 11.5,
+                    letterSpacing: "0.08em",
+                    color: "#52525B",
                     textTransform: "uppercase",
                   }}
                 >
@@ -236,25 +235,31 @@ const EnterpriseBackupSolutionPage = () => {
                 </h2>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {FEATURES.map(({ icon: Icon, title, body }) => (
                   <div
                     key={title}
-                    className="flex flex-col gap-3 rounded-2xl p-6 border"
-                    style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FAFAFA" }}
+                    className="flex flex-col gap-5 p-8 rounded-2xl border"
+                    style={{
+                      borderColor: "rgba(0,0,0,0.07)",
+                      backgroundColor: "#FFFFFF",
+                      boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
+                    }}
                   >
                     <div
-                      className="flex items-center justify-center w-9 h-9 rounded-lg"
-                      style={{ backgroundColor: "#EFF8FF", color: "#0070CC" }}
+                      className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
+                      style={{ backgroundColor: "#EFF8FF" }}
                     >
-                      <Icon size={18} weight="duotone" />
+                      <Icon size={18} color="#0090FF" />
                     </div>
-                    <h3 style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 15, color: "#09090B", margin: 0 }}>
-                      {title}
-                    </h3>
-                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 14, lineHeight: "1.6", color: "#71717A", margin: 0 }}>
-                      {body}
-                    </p>
+                    <div className="flex flex-col gap-2">
+                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 15, lineHeight: "1.3", color: "#09090B" }}>
+                        {title}
+                      </p>
+                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13.5, lineHeight: "1.6", color: "#71717A" }}>
+                        {body}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -271,9 +276,9 @@ const EnterpriseBackupSolutionPage = () => {
                   style={{
                     fontFamily: "'DM Mono', monospace",
                     fontWeight: 500,
-                    fontSize: 11,
-                    letterSpacing: "0.07em",
-                    color: "#0070CC",
+                    fontSize: 11.5,
+                    letterSpacing: "0.08em",
+                    color: "#52525B",
                     textTransform: "uppercase",
                   }}
                 >
@@ -357,19 +362,19 @@ const EnterpriseBackupSolutionPage = () => {
                     lineHeight: "1.12",
                     color: "#FFFFFF",
                     marginBottom: 12,
+                    maxWidth: 560,
+                    marginLeft: "auto",
+                    marginRight: "auto",
                   }}
                 >
                   Your recovery plan deserves better storage
                 </h2>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>
+                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32, maxWidth: 480, marginLeft: "auto", marginRight: "auto" }}>
                   Talk to our enterprise team about custom retention policies, SLAs, and compliance requirements.
                 </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <div className="flex items-center justify-center">
                   <a href="/contact-sales" className="btn-primary btn-primary-dark">
                     <span className="btn-primary-inner">Talk to sales</span>
-                  </a>
-                  <a href="https://app.fil.one/login?screen_hint=signup" style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.6)", textDecoration: "none" }}>
-                    Or start free →
                   </a>
                 </div>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.60)", marginTop: 16 }}>

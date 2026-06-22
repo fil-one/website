@@ -18,7 +18,8 @@ import StorageProductPage from "./pages/StorageProductPage";
 import RagPipelineProductPage from "./pages/RagPipelineProductPage";
 import AgentToolkitProductPage from "./pages/AgentToolkitProductPage";
 import PricingPage from "./pages/PricingPage";
-import WaitlistPage from "./pages/WaitlistPage";
+import BucketIntelligenceWaitlistPage from "./pages/BucketIntelligenceWaitlistPage";
+import AgentToolkitWaitlistPage from "./pages/AgentToolkitWaitlistPage";
 import EnterprisePage from "./pages/EnterprisePage";
 import AiTrainingSolutionPage from "./pages/solutions/AiTrainingSolutionPage";
 import Web3DappsSolutionPage from "./pages/solutions/Web3DappsSolutionPage";
@@ -46,10 +47,11 @@ const App = () => (
           <Route path="/lp/barcelona" element={<BarcelonaLandingPage />} />
           <Route path="/v1" element={<VersionA />} />
           <Route path="/storage" element={<StorageProductPage />} />
-          <Route path="/rag-pipeline" element={<RagPipelineProductPage />} />
+          <Route path="/bucket-intelligence" element={<RagPipelineProductPage />} />
           <Route path="/ai-agent-toolkit" element={<AgentToolkitProductPage />} />
           <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/waitlist" element={<WaitlistPage />} />
+          <Route path="/waitlist/bucket-intelligence" element={<BucketIntelligenceWaitlistPage />} />
+          <Route path="/waitlist/ai-agent-toolkit" element={<AgentToolkitWaitlistPage />} />
           <Route path="/enterprise" element={<EnterprisePage />} />
           <Route path="/solutions/ai-training" element={<AiTrainingSolutionPage />} />
           <Route path="/solutions/web3-dapps" element={<Web3DappsSolutionPage />} />

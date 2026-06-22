@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
-import { Brain, Check, UploadSimple, MagnifyingGlass, ChatsCircle, CaretDown } from "@phosphor-icons/react";
+import { Check, CaretDown } from "@phosphor-icons/react";
 import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 
 const FEATURES = [
@@ -30,27 +30,39 @@ const FEATURES = [
   },
 ];
 
-const STEPS = [
+const STATS = [
   {
-    icon: UploadSimple,
-    step: "01",
+    value: "1-click",
+    label: "Enable on any bucket",
+    note: "No migration or data export. Works with your existing storage plan.",
+  },
+  {
+    value: "$0",
+    label: "LLM markup",
+    note: "Bring your own OpenAI, Anthropic, or Cohere keys. Provider costs go directly to you.",
+  },
+  {
+    value: "< 1 min",
+    label: "Indexing time",
+    note: "New uploads are chunked and indexed in near real-time as they arrive.",
+  },
+];
+
+const USE_CASES = [
+  {
+    number: "01",
     title: "Connect your bucket",
-    description:
-      "Enable RAG Pipeline on any existing bucket with one click. No migration or data export needed.",
+    description: "Enable Bucket Intelligence on any existing bucket with one click. No migration or data export needed.",
   },
   {
-    icon: Brain,
-    step: "02",
+    number: "02",
     title: "Files get indexed automatically",
-    description:
-      "New uploads are chunked and indexed in near real-time using your chosen embedding model and API key.",
+    description: "New uploads are chunked and indexed in near real-time using your chosen embedding model and API key.",
   },
   {
-    icon: ChatsCircle,
-    step: "03",
+    number: "03",
     title: "Ask questions, get answers",
-    description:
-      "Query via the dashboard, MCP endpoint, or REST API. Answers come with cited source file excerpts.",
+    description: "Query via the dashboard, MCP endpoint, or REST API. Answers come with cited source file excerpts.",
   },
 ];
 
@@ -82,18 +94,18 @@ const FAQS = [
 const RagPipelineProductPage = () => {
   const { heroEndRef } = useScrollTracking();
   const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.1 });
-  const { ref: stepsRef, inView: stepsInView } = useInView({ threshold: 0.05 });
+  const { ref: statsRef, inView: statsInView } = useInView({ threshold: 0.05 });
   const { ref: featuresRef, inView: featuresInView } = useInView({ threshold: 0.05 });
+  const { ref: ucRef, inView: ucInView } = useInView({ threshold: 0.05 });
   const { ref: pricingRef, inView: pricingInView } = useInView({ threshold: 0.1 });
   const { ref: faqRef, inView: faqInView } = useInView({ threshold: 0.05 });
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
-  const [activeStep, setActiveStep] = useState(0);
 
   useSeo({
     title: "RAG Pipeline — Fil One",
     description:
       "Turn any Fil One bucket into a queryable knowledge base. Auto-index files, semantic search, bring your own LLM keys. +$15/TB/month add-on.",
-    canonical: "https://filone.io/rag-pipeline",
+    canonical: "https://filone.io/bucket-intelligence",
     ogImage: "https://filone.io/og-image.png",
   });
 
@@ -143,7 +155,7 @@ const RagPipelineProductPage = () => {
                     padding: "3px 10px",
                   }}
                 >
-                  Coming soon · RAG Pipeline
+                  Coming soon · Bucket Intelligence
                 </span>
               </div>
 
@@ -180,7 +192,7 @@ const RagPipelineProductPage = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
-                <a href="/waitlist" className="btn-primary" onClick={() => trackCtaClick("Join the waitlist", "/waitlist", "primary")}>
+                <a href="/waitlist/bucket-intelligence" className="btn-primary" onClick={() => trackCtaClick("Join the waitlist", "/waitlist/bucket-intelligence", "primary")}>
                   <span className="btn-primary-inner">Join the waitlist</span>
                 </a>
                 <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary" onClick={() => { trackCtaClick("Explore docs", "https://docs.fil.one", "secondary"); trackDocsClick("https://docs.fil.one"); }}>
@@ -192,157 +204,31 @@ const RagPipelineProductPage = () => {
           </div>
         </div>
 
-        {/* How it works */}
+        {/* Stats */}
         <div ref={heroEndRef}>
-        <section className="w-full px-5 md:px-8 pt-6 md:pt-8 pb-16 md:pb-24" style={{ backgroundColor: "#FFFFFF" }}>
-          <div className="flex flex-col gap-4 w-full max-w-[1120px] mx-auto">
-
-            {/* Step cards — horizontal row */}
-            <div
-              ref={stepsRef}
-              className={`grid grid-cols-1 md:grid-cols-3 gap-3 reveal${stepsInView ? " in-view" : ""}`}
-            >
-              {STEPS.map(({ step, title, description }, i) => {
-                const isActive = activeStep === i;
-                return (
-                  <button
-                    key={title}
-                    onClick={() => setActiveStep(i)}
-                    className="text-left w-full flex flex-col justify-start"
-                    style={{
-                      padding: 20,
-                      borderRadius: 16,
-                      backgroundColor: isActive ? "#EFF8FF" : "#FAFAFA",
-                      border: isActive ? "1px solid rgba(0,144,255,0.28)" : "1px solid rgba(0,0,0,0.07)",
-                      boxShadow: isActive
-                        ? "0 0 0 1px rgba(0,144,255,0.1), 0 2px 16px rgba(0,144,255,0.08)"
-                        : "0 1px 3px rgba(0,0,0,0.04)",
-                      cursor: "pointer",
-                      transition: "background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease",
-                    }}
-                  >
-                    <div className="flex flex-col gap-3">
-                      <span
-                        style={{
-                          fontFamily: "'DM Mono', monospace",
-                          fontWeight: 500,
-                          fontSize: 11,
-                          color: isActive ? "#0090FF" : "#C4C4CC",
-                          letterSpacing: "0.06em",
-                          transition: "color 0.2s ease",
-                        }}
-                      >
-                        {step}
-                      </span>
-                      <div className="flex flex-col gap-1">
-                        <p
-                          style={{
-                            fontFamily: "'Funnel Sans', sans-serif",
-                            fontWeight: 500,
-                            fontSize: 14.5,
-                            color: "#09090B",
-                            margin: 0,
-                            lineHeight: "1.3",
-                          }}
-                        >
-                          {title}
-                        </p>
-                        <p
-                          style={{
-                            fontFamily: "'Funnel Sans', sans-serif",
-                            fontWeight: 400,
-                            fontSize: 13.5,
-                            color: "#71717A",
-                            margin: 0,
-                            lineHeight: "1.55",
-                          }}
-                        >
-                          {description}
-                        </p>
-                      </div>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Preview panel — full width below cards */}
-            <div className="w-full">
-              <div
-                style={{
-                  backgroundColor: "#FFFFFF",
-                  borderRadius: 14,
-                  border: "1px solid rgba(0,0,0,0.08)",
-                  boxShadow: "0 4px 32px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04)",
-                  overflow: "hidden",
-                }}
-              >
-                {/* Browser chrome */}
-                <div
-                  className="flex items-center gap-2 px-4"
-                  style={{
-                    height: 40,
-                    backgroundColor: "#F7F7F8",
-                    borderBottom: "1px solid rgba(0,0,0,0.07)",
-                  }}
-                >
-                  <div style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.14)" }} />
-                  <div style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.09)" }} />
-                  <div style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.06)" }} />
+          <section className="w-full px-5 md:px-8 pt-0 pb-0" style={{ backgroundColor: "#FFFFFF" }}>
+            <div className="w-full max-w-[1120px] mx-auto">
+              <div ref={statsRef} className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full reveal-group">
+                {STATS.map(({ value, label, note }) => (
                   <div
-                    className="flex items-center"
-                    style={{
-                      marginLeft: 10,
-                      backgroundColor: "rgba(0,0,0,0.06)",
-                      borderRadius: 5,
-                      padding: "3px 10px",
-                      fontFamily: "'DM Mono', monospace",
-                      fontSize: 11,
-                      color: "#A1A1AA",
-                      letterSpacing: "0.01em",
-                    }}
+                    key={label}
+                    className={`flex flex-col gap-3 p-8 rounded-2xl border reveal${statsInView ? " in-view" : ""}`}
+                    style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF", boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)" }}
                   >
-                    app.fil.one/rag-pipeline
+                    <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: "clamp(28px, 5vw, 40px)", lineHeight: 1, letterSpacing: "-0.03em", color: "#0090FF", margin: 0 }}>
+                      {value}
+                    </p>
+                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 15, color: "#09090B", margin: 0 }}>{label}</p>
+                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: "1.6", color: "#71717A", margin: 0 }}>{note}</p>
                   </div>
-                </div>
-
-                {/* Preview content — crossfade on activeStep */}
-                <div className="relative" style={{ aspectRatio: "16/7", backgroundColor: "#F9FAFB" }}>
-                  {STEPS.map(({ icon: Icon, title }, i) => (
-                    <div
-                      key={title}
-                      className="absolute inset-0 flex flex-col items-center justify-center gap-4"
-                      style={{
-                        opacity: activeStep === i ? 1 : 0,
-                        transition: "opacity 0.3s ease",
-                        pointerEvents: activeStep === i ? "auto" : "none",
-                      }}
-                    >
-                      <div
-                        className="flex items-center justify-center rounded-2xl"
-                        style={{ width: 56, height: 56, backgroundColor: "#EFF8FF" }}
-                      >
-                        <Icon size={26} color="#0090FF" />
-                      </div>
-                      <div className="flex flex-col items-center gap-1.5 text-center px-8">
-                        <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 15, color: "#09090B", margin: 0 }}>
-                          {title}
-                        </p>
-                        <p style={{ fontFamily: "'DM Mono', monospace", fontWeight: 400, fontSize: 11, color: "#A1A1AA", letterSpacing: "0.04em" }}>
-                          Screenshot coming soon
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                ))}
               </div>
             </div>
-
-          </div>
-        </section>
+          </section>
         </div>
 
         {/* Features */}
+        <div>
         <section className="w-full" style={{ backgroundColor: "#FFFFFF" }}>
           <div className="flex flex-col gap-12 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center text-center max-w-[480px]">
@@ -402,57 +288,33 @@ const RagPipelineProductPage = () => {
             </div>
           </div>
         </section>
+        </div>
 
-        {/* Pricing */}
-        <section className="w-full" style={{ backgroundColor: "#F4F4F5" }}>
-          <div className="flex flex-col gap-10 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-[1120px] mx-auto">
-            <div className="flex flex-col gap-3 items-center text-center max-w-[480px]">
+        {/* Use cases */}
+        <section className="w-full px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#F4F4F5" }}>
+          <div className="flex flex-col gap-12 w-full max-w-[1120px] mx-auto">
+            <div className="flex flex-col gap-3 items-center text-center">
               <span style={{ fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 11.5, letterSpacing: "0.08em", color: "#52525B", textTransform: "uppercase" }}>
-                Pricing
+                How it works
               </span>
-              <h2 style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: "clamp(22px, 4vw, 30px)", lineHeight: 1.2, letterSpacing: "-0.02em", color: "#09090B", margin: 0 }}>
-                Simple add-on pricing
+              <h2 style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: "clamp(24px, 4vw, 32px)", lineHeight: 1.2, letterSpacing: "-0.02em", color: "#09090B", margin: 0 }}>
+                Up and running in minutes
               </h2>
             </div>
-
-            <div
-              ref={pricingRef}
-              className={`flex flex-col gap-7 p-8 md:p-10 rounded-2xl border w-full max-w-[560px] reveal${pricingInView ? " in-view" : ""}`}
-              style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF", boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)" }}
-            >
-              <div className="flex flex-col gap-2">
-                <div className="flex items-end gap-2 flex-wrap">
-                  <span style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 32, lineHeight: "1", color: "#09090B", letterSpacing: "-0.02em" }}>
-                    +$15
+            <div ref={ucRef} className={`grid grid-cols-1 sm:grid-cols-3 gap-6 reveal${ucInView ? " in-view" : ""}`}>
+              {USE_CASES.map(({ number, title, description }) => (
+                <div key={number} className="flex flex-col gap-3">
+                  <span style={{ fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 28, color: "#0090FF", lineHeight: 1 }}>
+                    {number}
                   </span>
-                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 15, color: "#71717A", paddingBottom: 4 }}>
-                    / TB / month
-                  </span>
+                  <h3 style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 15, color: "#09090B", margin: 0 }}>
+                    {title}
+                  </h3>
+                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 14, lineHeight: "1.6", color: "#71717A", margin: 0 }}>
+                    {description}
+                  </p>
                 </div>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.55", color: "#71717A" }}>
-                  Add-on on top of your Object Storage plan. LLM and embedding costs are billed directly by your provider.
-                </p>
-              </div>
-
-              <div className="w-full h-px" style={{ backgroundColor: "rgba(0,0,0,0.06)" }} />
-
-              <div className="flex flex-col gap-3">
-                {[
-                  "No egress fees",
-                  "LLM costs go directly to your provider — no markup",
-                  "Billed on your existing Fil One invoice",
-                  "Enable or disable per bucket at any time",
-                ].map((f) => (
-                  <div key={f} className="flex gap-3 items-start">
-                    <Check size={15} color="#0090FF" className="shrink-0" style={{ marginTop: 2 }} />
-                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.5", color: "#52525B" }}>{f}</p>
-                  </div>
-                ))}
-              </div>
-
-              <a href="/waitlist" className="btn-primary w-full" onClick={() => trackCtaClick("Join the waitlist", "/waitlist", "primary")}>
-                <span className="btn-primary-inner w-full justify-center">Join the waitlist</span>
-              </a>
+              ))}
             </div>
           </div>
         </section>
@@ -569,7 +431,7 @@ const RagPipelineProductPage = () => {
                   Early access is open. Join the waitlist and be first in line.
                 </p>
                 <div className="flex items-center justify-center">
-                  <a href="/waitlist" className="btn-primary btn-primary-dark" onClick={() => trackCtaClick("Join the waitlist", "/waitlist", "primary")}>
+                  <a href="/waitlist/bucket-intelligence" className="btn-primary btn-primary-dark" onClick={() => trackCtaClick("Join the waitlist", "/waitlist/bucket-intelligence", "primary")}>
                     <span className="btn-primary-inner">Join the waitlist</span>
                   </a>
                 </div>

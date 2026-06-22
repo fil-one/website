@@ -1,5 +1,5 @@
 import imgDashboard from "../assets/dashboard-preview.png";
-import { ArrowRight, Play } from "@phosphor-icons/react";
+import { Play } from "@phosphor-icons/react";
 import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 
 const PlatformHeroSection = () => {
@@ -15,7 +15,7 @@ const PlatformHeroSection = () => {
               backgroundColor: "#EFF8FF",
               border: "1px solid rgba(0,144,255,0.2)",
               borderRadius: 9999,
-              padding: "5px 6px 5px 6px",
+              padding: "5px 14px 5px 6px",
             }}
           >
             <span
@@ -33,46 +33,25 @@ const PlatformHeroSection = () => {
                 lineHeight: 1.4,
               }}
             >
-              New
+              Coming soon
             </span>
-            <a
-              href="/waitlist"
-              className="flex items-center gap-2 transition-opacity hover:opacity-80"
-              style={{ textDecoration: "none" }}
+            <span
+              style={{
+                fontFamily: "'Funnel Sans', sans-serif",
+                fontWeight: 500,
+                fontSize: 13.5,
+                lineHeight: 1,
+                color: "#0070CC",
+                whiteSpace: "nowrap",
+              }}
             >
-              <span
-                style={{
-                  fontFamily: "'Funnel Sans', sans-serif",
-                  fontWeight: 500,
-                  fontSize: 13.5,
-                  lineHeight: 1,
-                  color: "#0070CC",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                RAG Pipeline &amp; AI Agent Toolkit — join the waitlist
-              </span>
-              <span
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: 22,
-                  height: 22,
-                  borderRadius: "50%",
-                  backgroundColor: "rgba(0,112,204,0.12)",
-                  flexShrink: 0,
-                  marginRight: 2,
-                }}
-              >
-                <ArrowRight size={11} weight="bold" color="#0070CC" />
-              </span>
-            </a>
+              Bucket Intelligence &amp; AI Agent Toolkit
+            </span>
           </div>
 
           {/* Headline */}
           <h1
-            className="text-[28px] sm:text-[34px] md:text-[44px]"
+            className="text-[32px] sm:text-[40px] md:text-[52px]"
             style={{
               fontFamily: "'Aspekta', sans-serif",
               fontWeight: 500,
@@ -84,7 +63,7 @@ const PlatformHeroSection = () => {
               margin: 0,
             }}
           >
-            Store your data. Query it. Connect it to AI.
+            S3 object storage built for the AI era
           </h1>
 
           {/* Subheadline */}
@@ -96,11 +75,11 @@ const PlatformHeroSection = () => {
               lineHeight: "1.65",
               color: "#71717A",
               textAlign: "center",
-              maxWidth: 460,
+              maxWidth: 600,
               margin: 0,
             }}
           >
-            Verifiable S3 storage at the core. Add queryable knowledge bases and AI agent integrations on top.
+            Your data, your keys, your control.<br />For when every byte matters.
           </p>
         </div>
 
@@ -139,6 +118,7 @@ const PlatformHeroSection = () => {
             border: "1px solid transparent",
             borderBottom: "none",
             boxShadow: "0 -4px 40px rgba(0,0,0,0.06)",
+            clipPath: "inset(-40px -40px 0 -40px)",
           }}
         >
           <img
@@ -146,29 +126,10 @@ const PlatformHeroSection = () => {
             alt="Fil One platform — object storage, RAG pipeline, and AI agent toolkit"
             className="w-full h-auto block"
           />
-          {/* Play button overlay */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div
-              style={{
-                width: 64,
-                height: 64,
-                borderRadius: "50%",
-                backgroundColor: "rgba(255,255,255,0.92)",
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.14), 0 1px 4px rgba(0,0,0,0.08)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Play size={22} weight="fill" color="#09090B" style={{ marginLeft: 3 }} />
-            </div>
-          </div>
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: "linear-gradient(to bottom, rgba(255,255,255,0) 60%, #FFFFFF 100%)",
+              background: "linear-gradient(to bottom, rgba(255,255,255,0) 40%, #FFFFFF 75%)",
             }}
           />
         </div>
@@ -181,6 +142,30 @@ const PlatformHeroSection = () => {
             background: "linear-gradient(to bottom, transparent, #FFFFFF 65%)",
           }}
         />
+      </div>
+
+      {/* Press highlight + featured in */}
+      <div className="flex flex-col items-center gap-12 px-5 pt-16 md:pt-20 pb-2">
+        {/* Fast Company callout */}
+        <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 24, color: "#71717A", letterSpacing: "-0.015em", textAlign: "center", lineHeight: 1.45, maxWidth: 620 }}>
+          Our technology was named one of<br />
+          <span style={{ color: "#0090FF" }}>Fast Company's 11 Next Big Things in AI &amp; Data Innovation</span>
+        </p>
+
+        {/* Featured in bar */}
+        <div className="flex flex-col items-center gap-4 w-full">
+          <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, color: "rgb(113, 113, 122)" }}>
+            And it has also been featured in
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+            {["CNBC", "Bloomberg", "Yahoo Finance", "VentureBeat"].map((pub, i, arr) => (
+              <span key={pub} className="flex items-center gap-6">
+                <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 16, color: "rgb(82, 82, 91)", textAlign: "center", lineHeight: 1.5 }}>{pub}</span>
+                {i < arr.length - 1 && <span style={{ color: "#D4D4D8", fontSize: 20 }}>·</span>}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

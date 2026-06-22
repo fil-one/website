@@ -27,7 +27,7 @@ const FEATURES = [
   {
     icon: ShieldCheck,
     title: "Verifiable data integrity",
-    body: "Every object is cryptographically sealed. Prove your training data hasn't drifted or been tampered with — critical for reproducible research.",
+    body: "Every object is cryptographically sealed. Prove your training data hasn't drifted or been tampered with.",
   },
   {
     icon: CurrencyDollar,
@@ -50,7 +50,7 @@ const STEPS = [
   {
     number: "01",
     title: "Create a bucket",
-    body: "Provision a bucket in seconds from the dashboard or via the S3 API. Pick your preferred region.",
+    body: "Provision a bucket in seconds from the dashboard. Pick your preferred region.",
   },
   {
     number: "02",
@@ -140,7 +140,7 @@ const AiTrainingSolutionPage = () => {
                   letterSpacing: "-0.02em",
                   color: "#09090B",
                   textAlign: "center",
-                  maxWidth: 600,
+                  maxWidth: 520,
                   margin: 0,
                 }}
               >
@@ -194,7 +194,6 @@ const AiTrainingSolutionPage = () => {
           <div className="max-w-[1120px] mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
             {[
               "S3-compatible — drop-in replacement",
-              "No egress fees",
               "$4.99 / TB / month",
               "Cryptographic data integrity",
               "Multi-region redundancy",
@@ -227,9 +226,9 @@ const AiTrainingSolutionPage = () => {
                   style={{
                     fontFamily: "'DM Mono', monospace",
                     fontWeight: 500,
-                    fontSize: 11,
-                    letterSpacing: "0.07em",
-                    color: "#0070CC",
+                    fontSize: 11.5,
+                    letterSpacing: "0.08em",
+                    color: "#52525B",
                     textTransform: "uppercase",
                   }}
                 >
@@ -243,7 +242,7 @@ const AiTrainingSolutionPage = () => {
                     letterSpacing: "-0.02em",
                     lineHeight: "1.2",
                     color: "#09090B",
-                    maxWidth: 500,
+                    maxWidth: 620,
                     margin: 0,
                   }}
                 >
@@ -251,41 +250,46 @@ const AiTrainingSolutionPage = () => {
                 </h2>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {FEATURES.map(({ icon: Icon, title, body }) => (
                   <div
                     key={title}
-                    className="flex flex-col gap-3 rounded-2xl p-6 border"
-                    style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FAFAFA" }}
+                    className="flex flex-col gap-5 p-8 rounded-2xl border"
+                    style={{
+                      borderColor: "rgba(0,0,0,0.07)",
+                      backgroundColor: "#FFFFFF",
+                      boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
+                    }}
                   >
                     <div
-                      className="flex items-center justify-center w-9 h-9 rounded-lg"
-                      style={{ backgroundColor: "#EFF8FF", color: "#0070CC" }}
+                      className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
+                      style={{ backgroundColor: "#EFF8FF" }}
                     >
-                      <Icon size={18} weight="duotone" />
+                      <Icon size={18} color="#0090FF" />
                     </div>
-                    <h3
-                      style={{
-                        fontFamily: "'Aspekta', sans-serif",
-                        fontWeight: 500,
-                        fontSize: 15,
-                        color: "#09090B",
-                        margin: 0,
-                      }}
-                    >
-                      {title}
-                    </h3>
-                    <p
-                      style={{
-                        fontFamily: "'Funnel Sans', sans-serif",
-                        fontSize: 14,
-                        lineHeight: "1.6",
-                        color: "#71717A",
-                        margin: 0,
-                      }}
-                    >
-                      {body}
-                    </p>
+                    <div className="flex flex-col gap-2">
+                      <p
+                        style={{
+                          fontFamily: "'Funnel Sans', sans-serif",
+                          fontWeight: 500,
+                          fontSize: 15,
+                          lineHeight: "1.3",
+                          color: "#09090B",
+                        }}
+                      >
+                        {title}
+                      </p>
+                      <p
+                        style={{
+                          fontFamily: "'Funnel Sans', sans-serif",
+                          fontSize: 13.5,
+                          lineHeight: "1.6",
+                          color: "#71717A",
+                        }}
+                      >
+                        {body}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -305,9 +309,9 @@ const AiTrainingSolutionPage = () => {
                   style={{
                     fontFamily: "'DM Mono', monospace",
                     fontWeight: 500,
-                    fontSize: 11,
-                    letterSpacing: "0.07em",
-                    color: "#0070CC",
+                    fontSize: 11.5,
+                    letterSpacing: "0.08em",
+                    color: "#52525B",
                     textTransform: "uppercase",
                   }}
                 >
@@ -336,7 +340,7 @@ const AiTrainingSolutionPage = () => {
                         fontFamily: "'DM Mono', monospace",
                         fontWeight: 500,
                         fontSize: 28,
-                        color: "rgba(0,144,255,0.25)",
+                        color: "#0090FF",
                         lineHeight: 1,
                       }}
                     >

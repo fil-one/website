@@ -22,7 +22,7 @@ const FEATURES = [
   {
     icon: CloudArrowDown,
     title: "No egress fees on downloads",
-    body: "Pull a 4K master to a new edit suite, share a rough cut with a client, or restore from archive — free ingress and egress, always.",
+    body: "Pull a 4K master to a new edit suite, share a rough cut with a client, or restore from archive. No egress fees.",
   },
   {
     icon: Archive,
@@ -46,18 +46,30 @@ const FEATURES = [
   },
 ];
 
-const COMPARISON = [
-  { label: "Storage cost / TB / mo", filOne: "$4.99", aws: "$23+", gcp: "$20+" },
-  { label: "Egress fees", filOne: "None", aws: "$0.09/GB", gcp: "$0.08/GB" },
-  { label: "Retrieval fees", filOne: "None", aws: "Up to $0.03/GB", gcp: "None (standard)" },
-  { label: "Minimum storage duration", filOne: "None", aws: "90 days (Glacier)", gcp: "None" },
-  { label: "Data integrity proof", filOne: "Cryptographic", aws: "Checksum only", gcp: "Checksum only" },
+
+const USECASES = [
+  {
+    title: "Broadcast & streaming archives",
+    body: "Store finished episodes, raw camera rolls, and ingest files in one place. Access any asset instantly without retrieval delays or fees.",
+  },
+  {
+    title: "Post-production studios",
+    body: "Keep proxies, color-graded masters, and project files alongside each other. Share deliverables with clients via presigned URLs — no FTP, no courier.",
+  },
+  {
+    title: "News & documentary teams",
+    body: "Archive years of footage with verifiable provenance. Prove a clip was never altered — essential for editorial credibility and licensing.",
+  },
+  {
+    title: "Sports rights & licensing",
+    body: "Store highlight reels, raw match footage, and licensed clips at scale. Pull content for re-licensing or distribution with zero egress cost.",
+  },
 ];
 
 const MediaArchiveSolutionPage = () => {
   const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.1 });
   const { ref: featRef, inView: featInView } = useInView({ threshold: 0.1 });
-  const { ref: cmpRef, inView: cmpInView } = useInView({ threshold: 0.1 });
+  const { ref: ucRef, inView: ucInView } = useInView({ threshold: 0.1 });
 
   useSeo({
     title: "Media & Archive Storage — Fil One",
@@ -144,7 +156,7 @@ const MediaArchiveSolutionPage = () => {
                   margin: 0,
                 }}
               >
-                Durable, low-cost storage for video masters, raw footage, and long-term archives — with no egress fees and no retrieval penalties.
+                Durable, low-cost storage for video masters, raw footage, and long-term archives. No egress fees and no retrieval penalties.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
@@ -179,7 +191,6 @@ const MediaArchiveSolutionPage = () => {
           <div className="max-w-[1120px] mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
             {[
               "$4.99 / TB / month",
-              "No egress fees",
               "No retrieval penalties",
               "S3-compatible",
               "Verifiable provenance",
@@ -201,9 +212,9 @@ const MediaArchiveSolutionPage = () => {
                   style={{
                     fontFamily: "'DM Mono', monospace",
                     fontWeight: 500,
-                    fontSize: 11,
-                    letterSpacing: "0.07em",
-                    color: "#0070CC",
+                    fontSize: 11.5,
+                    letterSpacing: "0.08em",
+                    color: "#52525B",
                     textTransform: "uppercase",
                   }}
                 >
@@ -217,7 +228,7 @@ const MediaArchiveSolutionPage = () => {
                     letterSpacing: "-0.02em",
                     lineHeight: "1.2",
                     color: "#09090B",
-                    maxWidth: 500,
+                    maxWidth: 620,
                     margin: 0,
                   }}
                 >
@@ -225,25 +236,31 @@ const MediaArchiveSolutionPage = () => {
                 </h2>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {FEATURES.map(({ icon: Icon, title, body }) => (
                   <div
                     key={title}
-                    className="flex flex-col gap-3 rounded-2xl p-6 border"
-                    style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FAFAFA" }}
+                    className="flex flex-col gap-5 p-8 rounded-2xl border"
+                    style={{
+                      borderColor: "rgba(0,0,0,0.07)",
+                      backgroundColor: "#FFFFFF",
+                      boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
+                    }}
                   >
                     <div
-                      className="flex items-center justify-center w-9 h-9 rounded-lg"
-                      style={{ backgroundColor: "#EFF8FF", color: "#0070CC" }}
+                      className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
+                      style={{ backgroundColor: "#EFF8FF" }}
                     >
-                      <Icon size={18} weight="duotone" />
+                      <Icon size={18} color="#0090FF" />
                     </div>
-                    <h3 style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 15, color: "#09090B", margin: 0 }}>
-                      {title}
-                    </h3>
-                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 14, lineHeight: "1.6", color: "#71717A", margin: 0 }}>
-                      {body}
-                    </p>
+                    <div className="flex flex-col gap-2">
+                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 15, lineHeight: "1.3", color: "#09090B" }}>
+                        {title}
+                      </p>
+                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13.5, lineHeight: "1.6", color: "#71717A" }}>
+                        {body}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -251,22 +268,23 @@ const MediaArchiveSolutionPage = () => {
           </div>
         </section>
 
-        {/* Comparison table */}
+
+        {/* Use cases */}
         <section className="px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#F4F4F5" }}>
           <div className="max-w-[1120px] mx-auto">
-            <div ref={cmpRef} className={`reveal${cmpInView ? " in-view" : ""}`}>
+            <div ref={ucRef} className={`reveal${ucInView ? " in-view" : ""}`}>
               <div className="flex flex-col items-center gap-4 mb-14 text-center">
                 <span
                   style={{
                     fontFamily: "'DM Mono', monospace",
                     fontWeight: 500,
-                    fontSize: 11,
-                    letterSpacing: "0.07em",
-                    color: "#0070CC",
+                    fontSize: 11.5,
+                    letterSpacing: "0.08em",
+                    color: "#52525B",
                     textTransform: "uppercase",
                   }}
                 >
-                  How we compare
+                  Use cases
                 </span>
                 <h2
                   className="text-[24px] md:text-[32px]"
@@ -279,54 +297,24 @@ const MediaArchiveSolutionPage = () => {
                     margin: 0,
                   }}
                 >
-                  Fil One vs. the big clouds
+                  What teams are archiving
                 </h2>
               </div>
-
-              <div className="overflow-x-auto rounded-2xl border" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
-                <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "#FFFFFF" }}>
-                  <thead>
-                    <tr style={{ borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
-                      {["", "Fil One", "AWS S3", "Google Cloud"].map((h, i) => (
-                        <th
-                          key={h + i}
-                          style={{
-                            fontFamily: "'Funnel Sans', sans-serif",
-                            fontWeight: i === 1 ? 600 : 500,
-                            fontSize: 13,
-                            color: i === 1 ? "#0070CC" : "#09090B",
-                            textAlign: i === 0 ? "left" : "center",
-                            padding: "14px 20px",
-                            backgroundColor: i === 1 ? "#EFF8FF" : "transparent",
-                          }}
-                        >
-                          {h}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {COMPARISON.map(({ label, filOne, aws, gcp }, ri) => (
-                      <tr
-                        key={label}
-                        style={{ borderBottom: ri < COMPARISON.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none" }}
-                      >
-                        <td style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#52525B", padding: "14px 20px" }}>
-                          {label}
-                        </td>
-                        <td style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, fontWeight: 600, color: "#0070CC", textAlign: "center", padding: "14px 20px", backgroundColor: "#EFF8FF" }}>
-                          {filOne}
-                        </td>
-                        <td style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#71717A", textAlign: "center", padding: "14px 20px" }}>
-                          {aws}
-                        </td>
-                        <td style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#71717A", textAlign: "center", padding: "14px 20px" }}>
-                          {gcp}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {USECASES.map(({ title, body }) => (
+                  <div
+                    key={title}
+                    className="rounded-2xl p-7 border"
+                    style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF" }}
+                  >
+                    <h3 style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 16, color: "#09090B", margin: "0 0 8px" }}>
+                      {title}
+                    </h3>
+                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 14, lineHeight: "1.6", color: "#71717A", margin: 0 }}>
+                      {body}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

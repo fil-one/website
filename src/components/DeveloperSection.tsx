@@ -179,7 +179,7 @@ const DeveloperSection = () => {
               margin: 0,
             }}
           >
-            Fil One is fully S3-compatible. Change the endpoint URL and you're done — every tool you already use keeps working.
+            Fil One is fully S3-compatible. Change the endpoint URL and you're done. Every tool you already use keeps working.
           </p>
         </div>
 

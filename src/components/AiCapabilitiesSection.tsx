@@ -192,7 +192,7 @@ const AiCapabilitiesSection = () => {
                 </p>
               </div>
               <a
-                href="/contact-sales"
+                href="/waitlist/bucket-intelligence"
                 className="flex items-center gap-1.5 shrink-0 transition-opacity hover:opacity-70"
                 style={{
                   fontFamily: "'Funnel Sans', sans-serif",
@@ -318,7 +318,7 @@ const AiCapabilitiesSection = () => {
                 </p>
               </div>
               <a
-                href="/contact-sales"
+                href="/waitlist/ai-agent-toolkit"
                 className="flex items-center gap-1.5 shrink-0 transition-opacity hover:opacity-70"
                 style={{
                   fontFamily: "'Funnel Sans', sans-serif",
