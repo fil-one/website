@@ -50,10 +50,10 @@ import AgentLoopsLandingPage from "./pages/AgentLoopsLandingPage";
 import AgentReadableLandingPage from "./pages/AgentReadableLandingPage";
 import ExitFirstLandingPage from "./pages/ExitFirstLandingPage";
 import CostTickerLandingPage from "./pages/CostTickerLandingPage";
+import GrantFundedLandingPage from "./pages/GrantFundedLandingPage";
+import CollectionsAccessLandingPage from "./pages/CollectionsAccessLandingPage";
 import DigitalPreservationLandingPage from "./pages/DigitalPreservationLandingPage";
 import FloatingSupportButton from "./components/FloatingSupportButton";
-import ConsentBanner from "./components/ConsentBanner";
-import ConsentManager from "./components/ConsentManager";
 
 const queryClient = new QueryClient();
 
@@ -77,9 +77,7 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => (
  */
 export const AppContent = () => (
   <>
-    <ConsentManager />
     <FloatingSupportButton />
-    <ConsentBanner />
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/terms" element={<TermsOfUse />} />
@@ -126,6 +124,8 @@ export const AppContent = () => (
       <Route path="/lp/agent-readable" element={<AgentReadableLandingPage />} />
       <Route path="/lp/exit-first" element={<ExitFirstLandingPage />} />
       <Route path="/lp/cost-ticker" element={<CostTickerLandingPage />} />
+      <Route path="/lp/grant-funded" element={<GrantFundedLandingPage />} />
+      <Route path="/lp/collections-access" element={<CollectionsAccessLandingPage />} />
       <Route path="/lp/digital-preservation" element={<DigitalPreservationLandingPage />} />
       <Route path="/:lang/:city" element={<AdsLandingPage />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
