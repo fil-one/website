@@ -51,8 +51,6 @@ import AgentReadableLandingPage from "./pages/AgentReadableLandingPage";
 import ExitFirstLandingPage from "./pages/ExitFirstLandingPage";
 import CostTickerLandingPage from "./pages/CostTickerLandingPage";
 import FloatingSupportButton from "./components/FloatingSupportButton";
-import ConsentBanner from "./components/ConsentBanner";
-import ConsentManager from "./components/ConsentManager";
 
 const queryClient = new QueryClient();
 
@@ -76,9 +74,7 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => (
  */
 export const AppContent = () => (
   <>
-    <ConsentManager />
     <FloatingSupportButton />
-    <ConsentBanner />
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/terms" element={<TermsOfUse />} />
