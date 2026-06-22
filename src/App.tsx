@@ -51,6 +51,7 @@ import AgentReadableLandingPage from "./pages/AgentReadableLandingPage";
 import ExitFirstLandingPage from "./pages/ExitFirstLandingPage";
 import CostTickerLandingPage from "./pages/CostTickerLandingPage";
 import GrantFundedLandingPage from "./pages/GrantFundedLandingPage";
+import CollectionsAccessLandingPage from "./pages/CollectionsAccessLandingPage";
 import FloatingSupportButton from "./components/FloatingSupportButton";
 
 const queryClient = new QueryClient();
@@ -123,6 +124,7 @@ export const AppContent = () => (
       <Route path="/lp/exit-first" element={<ExitFirstLandingPage />} />
       <Route path="/lp/cost-ticker" element={<CostTickerLandingPage />} />
       <Route path="/lp/grant-funded" element={<GrantFundedLandingPage />} />
+      <Route path="/lp/collections-access" element={<CollectionsAccessLandingPage />} />
       <Route path="/:lang/:city" element={<AdsLandingPage />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
