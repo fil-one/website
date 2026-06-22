@@ -2,14 +2,17 @@ import { useState } from "react";
 import { List, X } from "@phosphor-icons/react";
 import filOneLogo from "../assets/fil-one-logo.svg";
 
-const LandingNavbar = () => {
+const LandingNavbar = ({ lang = "en" }: { lang?: "en" | "es" }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const t = lang === "es"
+    ? { login: "Iniciar sesión", signup: "Registrarse" }
+    : { login: "Login", signup: "Sign up" };
 
   return (
     <>
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <nav
-        className="fixed top-0 left-0 right-0 z-50 border-b px-6 md:px-12"
+        className="fixed top-0 left-0 right-0 z-50 border-b"
         style={{
           backgroundColor: "rgba(255,255,255,0.85)",
           backdropFilter: "blur(20px)",
@@ -17,7 +20,7 @@ const LandingNavbar = () => {
           borderColor: "rgba(0,0,0,0.06)",
         }}
       >
-        <div className="flex items-center justify-between h-[58px] max-w-[1400px] mx-auto w-full">
+        <div className="flex items-center justify-between px-5 md:px-8 h-[58px] max-w-[1120px] mx-auto w-full">
           {/* Logo */}
           <a href="/" className="shrink-0" style={{ textDecoration: "none" }}>
             <img src={filOneLogo} alt="Fil One" style={{ height: 20, width: "auto", display: "block" }} />
@@ -26,10 +29,10 @@ const LandingNavbar = () => {
           {/* Desktop right */}
           <div className="hidden md:flex items-center gap-2.5 shrink-0">
             <a href="https://app.fil.one/login" className="btn-secondary">
-              Login
+              {t.login}
             </a>
             <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-sm">
-              <span className="btn-primary-inner">Sign up</span>
+              <span className="btn-primary-inner">{t.signup}</span>
             </a>
           </div>
 
@@ -59,14 +62,14 @@ const LandingNavbar = () => {
               className="btn-secondary w-full text-center"
               onClick={() => setMobileOpen(false)}
             >
-              Login
+              {t.login}
             </a>
             <a
               href="https://app.fil.one/login?screen_hint=signup"
               className="btn-primary w-full"
               onClick={() => setMobileOpen(false)}
             >
-              <span className="btn-primary-inner w-full justify-center">Sign up</span>
+              <span className="btn-primary-inner w-full justify-center">{t.signup}</span>
             </a>
           </div>
         )}

@@ -1,7 +1,6 @@
 import filOneLogo from "../assets/fil-one-logo.svg";
-import { trackDocsClick } from "@/lib/analytics";
 
-const LINKS: Record<string, { label: string; href: string }[]> = {
+const LINKS_EN: Record<string, { label: string; href: string }[]> = {
   Resources: [
     { label: "Documentation",  href: "https://docs.fil.one" },
     { label: "Contact sales",  href: "/contact-sales" },
@@ -15,7 +14,43 @@ const LINKS: Record<string, { label: string; href: string }[]> = {
   ],
 };
 
-const LandingFooter = () => (
+const LINKS_ES: Record<string, { label: string; href: string }[]> = {
+  Recursos: [
+    { label: "Documentación",     href: "https://docs.fil.one" },
+    { label: "Contactar ventas",  href: "/lp/es/contacto" },
+    { label: "Soporte",           href: "/lp/es/soporte" },
+    { label: "Estado",            href: "https://fil-one.instatus.com/" },
+  ],
+  Legal: [
+    { label: "Política de privacidad", href: "/privacy" },
+    { label: "Términos de uso",        href: "/terms" },
+    { label: "Uso aceptable",          href: "/aup" },
+  ],
+};
+
+const LINKS_BCN_EN: Record<string, { label: string; href: string }[]> = {
+  Resources: [
+    { label: "Documentation",  href: "https://docs.fil.one" },
+    { label: "Contact sales",  href: "/lp/barcelona/contact" },
+    { label: "Support",        href: "/lp/barcelona/support" },
+    { label: "Status",         href: "https://fil-one.instatus.com/" },
+  ],
+  Legal: [
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Use",   href: "/terms" },
+    { label: "Acceptable Use", href: "/aup" },
+  ],
+};
+
+const LandingFooter = ({ lang = "en", campaign }: { lang?: "en" | "es"; campaign?: "barcelona" }) => {
+  const LINKS = lang === "es" ? LINKS_ES : campaign === "barcelona" ? LINKS_BCN_EN : LINKS_EN;
+  const tagline = lang === "es"
+    ? "Almacenamiento de objetos S3 diseñado para la era de la IA."
+    : "S3 object storage built for the AI era.";
+  const copyright = lang === "es"
+    ? "© 2026 Fil One. Todos los derechos reservados."
+    : "© 2026 Fil One. All rights reserved.";
+  return (
   <footer
     className="flex flex-col px-5 md:px-8 pt-14 pb-10 w-full border-t"
     style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF" }}
@@ -24,7 +59,7 @@ const LandingFooter = () => (
       {/* Top row */}
       <div className="flex flex-col md:flex-row md:justify-between gap-10 md:gap-0">
         {/* Left: logo + tagline */}
-        <div className="flex flex-col gap-3 items-start max-w-[220px]">
+        <div className="flex flex-col gap-3 items-start max-w-[380px]">
           <a href="/" style={{ textDecoration: "none" }}>
             <img src={filOneLogo} alt="Fil One" style={{ height: 18, width: "auto", display: "block" }} />
           </a>
@@ -37,7 +72,7 @@ const LandingFooter = () => (
               color: "#71717A",
             }}
           >
-            S3 object storage built for the AI era.
+            {tagline}
           </p>
         </div>
 
@@ -61,7 +96,6 @@ const LandingFooter = () => (
                   key={label}
                   href={href}
                   {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  onClick={href.includes("docs.fil.one") ? () => trackDocsClick(href) : undefined}
                   style={{
                     fontFamily: "'Funnel Sans', sans-serif",
                     fontWeight: 400,
@@ -89,11 +123,12 @@ const LandingFooter = () => (
             color: "#71717A",
           }}
         >
-          © 2026 Fil One. All rights reserved.
+          {copyright}
         </p>
       </div>
     </div>
   </footer>
-);
+  );
+};
 
 export default LandingFooter;
