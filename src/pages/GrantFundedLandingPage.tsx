@@ -18,14 +18,14 @@ const GRANT_ROWS = [
   {
     provider: "AWS S3 Standard",
     storage: "$118",
-    egress: "$0.09/GB",
+    egress: "~$38/mo",
     allIn: "$156",
     isFilOne: false,
   },
   {
     provider: "AWS Glacier Deep Archive",
     storage: "$5",
-    egress: "$0.02 + $0.09/GB",
+    egress: "~$47/mo",
     allIn: "$52",
     isFilOne: false,
   },
@@ -49,17 +49,17 @@ const FEATURES = [
   {
     icon: CurrencyDollar,
     title: "Predictable flat rate",
-    desc: "$4.99/TB/month, flat. A number you can write into a data-management plan and a multi-year budget and trust to hold — no usage tier, no egress variable, no surprise true-up.",
+    desc: "$4.99/TB/month, flat. A number you can write into a data management plan and a multi-year budget and trust to hold up.",
   },
   {
     icon: Wallet,
     title: "No exit fees",
-    desc: "Leaving costs nothing. When the grant ends or the data moves to an institutional repository, you read everything back at $0 — no retrieval class, no egress invoice on the way out.",
+    desc: "Leaving costs nothing. When the grant ends or the data moves to an institutional repository, you read everything back at $0 — no invoice on the way out.",
   },
   {
     icon: ShieldCheck,
     title: "Integrity verification, ~24 h",
-    desc: "Every object is re-verified approximately every 24 hours, satisfying the integrity expectations of funder data-retention requirements without a manual fixity process.",
+    desc: "Every object is verified approximately every 24 hours, satisfying the integrity expectations of funder data retention requirements without a manual process.",
   },
   {
     icon: Database,
@@ -130,7 +130,7 @@ const GrantFundedLandingPage = () => {
                   color: "#0070CC",
                 }}
               >
-                For grant-funded research & data-management plans
+                For grant-funded research & data management plans
               </span>
             </div>
 
@@ -163,7 +163,7 @@ const GrantFundedLandingPage = () => {
                 margin: 0,
               }}
             >
-              Flat $4.99/TB. A cost you can write into a data-management plan and a budget — no exit fees, integrity verified approximately every 24 hours, S3-compatible.
+              Flat $4.99/TB. A cost you can write into a data management plan and trust to hold. No exit or retrieval fees.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -185,7 +185,7 @@ const GrantFundedLandingPage = () => {
                 textAlign: "center",
               }}
             >
-              No credit card required · No egress fees · Connects in minutes
+              No credit card required · No retrieval fees · Connects in minutes
             </p>
           </div>
         </section>
@@ -200,7 +200,7 @@ const GrantFundedLandingPage = () => {
               <SectionLabel>The funding mismatch</SectionLabel>
               <SectionHeading>The grant has an end date. The retention requirement does not.</SectionHeading>
               <SectionSub>
-                Funders want data kept and verifiable for years after the award closes. But the budget is fixed, the costs are variable, and the bill keeps arriving long after the money runs out.
+                Funders want data kept and verifiable for years after the award closes. But the budget is fixed, the costs are variable, and the bill keeps arriving long after the grant period ends.
               </SectionSub>
             </div>
 
@@ -219,7 +219,7 @@ const GrantFundedLandingPage = () => {
                 {
                   label: "The toll to leave",
                   catch: "Moving the data costs money.",
-                  body: "When the project ends and data migrates to an institutional or disciplinary repository, egress and retrieval fees turn the handover into an unbudgeted expense — charged precisely when there is no grant left to pay it.",
+                  body: "When the project ends, and data migrates to an institutional or disciplinary repository, retrieval fees turn the handover into an unbudgeted expense — charged precisely when every dollar has been spoken for.",
                 },
               ].map(({ label, body, catch: catchLine }) => (
                 <div
@@ -429,7 +429,7 @@ const GrantFundedLandingPage = () => {
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
               <a href="/contact-sales" className="btn-secondary">Talk to an expert</a>
             </div>
-            <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A" }}>No credit card required · No egress fees · Connects in minutes</p>
+            <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A" }}>No credit card required · No retrieval fees · Connects in minutes</p>
           </div>
         </section>
 
@@ -443,12 +443,12 @@ const GrantFundedLandingPage = () => {
               <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1"/></svg>')}")`, backgroundSize: "60px 60px", maskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", pointerEvents: "none" }} />
               <div style={{ position: "relative" }}>
                 <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>A number that outlives the award.</h2>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>Free 1 TB evaluation. Put a flat, predictable storage line in your next data-management plan — and read the data back, at any time, for $0.</p>
+                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>Free 1 TB evaluation. Put a flat, predictable storage line in your next data management plan.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark"><span className="btn-primary-inner">Start for free</span></a>
                   <a href="/contact-sales" className="btn-secondary btn-secondary-dark">Talk to an expert</a>
                 </div>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.60)", marginTop: 16 }}>No credit card required · No egress fees · Connects in minutes</p>
+                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.60)", marginTop: 16 }}>No credit card required · No retrieval fees · Connects in minutes</p>
               </div>
             </div>
           </div>
