@@ -50,6 +50,7 @@ import AgentLoopsLandingPage from "./pages/AgentLoopsLandingPage";
 import AgentReadableLandingPage from "./pages/AgentReadableLandingPage";
 import ExitFirstLandingPage from "./pages/ExitFirstLandingPage";
 import CostTickerLandingPage from "./pages/CostTickerLandingPage";
+import CollectionsAccessLandingPage from "./pages/CollectionsAccessLandingPage";
 import FloatingSupportButton from "./components/FloatingSupportButton";
 import ConsentBanner from "./components/ConsentBanner";
 import ConsentManager from "./components/ConsentManager";
@@ -125,6 +126,7 @@ export const AppContent = () => (
       <Route path="/lp/agent-readable" element={<AgentReadableLandingPage />} />
       <Route path="/lp/exit-first" element={<ExitFirstLandingPage />} />
       <Route path="/lp/cost-ticker" element={<CostTickerLandingPage />} />
+      <Route path="/lp/collections-access" element={<CollectionsAccessLandingPage />} />
       <Route path="/:lang/:city" element={<AdsLandingPage />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
