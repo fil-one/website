@@ -191,7 +191,7 @@ const RagPipelineProductPage = () => {
                 Auto-index your files as they arrive. Ask questions in plain language — powered by your own OpenAI, Anthropic, or Cohere keys.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
+              <div className="flex flex-row items-center gap-3 mt-2">
                 <a href="/waitlist/bucket-intelligence" className="btn-primary" onClick={() => trackCtaClick("Join the waitlist", "/waitlist/bucket-intelligence", "primary")}>
                   <span className="btn-primary-inner">Join the waitlist</span>
                 </a>

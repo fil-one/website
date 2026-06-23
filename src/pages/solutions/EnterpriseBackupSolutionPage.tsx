@@ -158,7 +158,7 @@ const EnterpriseBackupSolutionPage = () => {
                 Immutable, geo-distributed backup storage with verifiable data integrity — and zero egress fees when disaster strikes and you need to restore.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
+              <div className="flex flex-row items-center gap-3 mt-2">
                 <a href="/contact-sales" className="btn-primary">
                   <span className="btn-primary-inner">Talk to sales</span>
                 </a>

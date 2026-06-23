@@ -1,6 +1,6 @@
 import { Database, ChartLine, Plug, ShieldCheck } from "@phosphor-icons/react";
-import LandingNavbar from "@/components/LandingNavbar";
-import LandingFooter from "@/components/LandingFooter";
+import PlatformNavbar from "@/components/PlatformNavbar";
+import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
@@ -61,11 +61,11 @@ secret_access_key = "\${FIL_SECRET_KEY}"`;
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <LandingNavbar />
+      <PlatformNavbar />
 
       <main id="main-content">
         {/* Hero */}
-        <section className="relative isolate pt-[58px]" style={{ backgroundColor: "#FFFFFF" }}>
+        <section className="relative isolate pt-[58px] md:pt-[94px]" style={{ backgroundColor: "#FFFFFF" }}>
           <div
             aria-hidden="true"
             className="absolute inset-0 pointer-events-none -z-10"
@@ -572,7 +572,7 @@ secret_access_key = "\${FIL_SECRET_KEY}"`;
         </section>
       </main>
 
-      <LandingFooter />
+      <Footer />
     </div>
   );
 };

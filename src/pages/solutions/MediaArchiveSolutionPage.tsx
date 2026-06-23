@@ -159,7 +159,7 @@ const MediaArchiveSolutionPage = () => {
                 Durable, low-cost storage for video masters, raw footage, and long-term archives. No egress fees and no retrieval penalties.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
+              <div className="flex flex-row items-center gap-3 mt-2">
                 <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
                   <span className="btn-primary-inner">Start for free</span>
                 </a>

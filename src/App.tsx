@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 import NotFound from "./pages/NotFound";
 import TermsOfUse from "./pages/TermsOfUse";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Sla from "./pages/Sla";
 import ContactSales from "./pages/ContactSales";
 import Support from "./pages/Support";
 import AcceptableUsePolicy from "./pages/AcceptableUsePolicy";
@@ -29,9 +30,7 @@ import PartnerApplyPage from "./pages/PartnerApplyPage";
 // Landing pages
 import AgentsLandingPage from "./pages/AgentsLandingPage";
 import BarcelonaLandingPageES from "./pages/BarcelonaLandingPageES";
-import ContactSalesBcnEN from "./pages/ContactSalesBcnEN";
 import ContactSalesBcnES from "./pages/ContactSalesBcnES";
-import SupportBcnEN from "./pages/SupportBcnEN";
 import SupportBcnES from "./pages/SupportBcnES";
 import EgressLandingPage from "./pages/EgressLandingPage";
 import BackupDrLandingPage from "./pages/BackupDrLandingPage";
@@ -94,9 +93,8 @@ export const AppContent = () => (
           <Route path="/contact-sales" element={<ContactSales />} />
           <Route path="/support" element={<Support />} />
           <Route path="/aup" element={<AcceptableUsePolicy />} />
+          <Route path="/sla" element={<Sla />} />
           <Route path="/lp/barcelona" element={<BarcelonaLandingPage />} />
-          <Route path="/lp/barcelona/contact" element={<ContactSalesBcnEN />} />
-          <Route path="/lp/barcelona/support" element={<SupportBcnEN />} />
           <Route path="/lp/es/barcelona" element={<BarcelonaLandingPageES />} />
           <Route path="/lp/es/contacto" element={<ContactSalesBcnES />} />
           <Route path="/lp/es/soporte" element={<SupportBcnES />} />

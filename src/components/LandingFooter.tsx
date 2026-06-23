@@ -28,22 +28,8 @@ const LINKS_ES: Record<string, { label: string; href: string }[]> = {
   ],
 };
 
-const LINKS_BCN_EN: Record<string, { label: string; href: string }[]> = {
-  Resources: [
-    { label: "Documentation",  href: "https://docs.fil.one" },
-    { label: "Contact sales",  href: "/lp/barcelona/contact" },
-    { label: "Support",        href: "/lp/barcelona/support" },
-    { label: "Status",         href: "https://fil-one.instatus.com/" },
-  ],
-  Legal: [
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Use",   href: "/terms" },
-    { label: "Acceptable Use", href: "/aup" },
-  ],
-};
-
-const LandingFooter = ({ lang = "en", campaign }: { lang?: "en" | "es"; campaign?: "barcelona" }) => {
-  const LINKS = lang === "es" ? LINKS_ES : campaign === "barcelona" ? LINKS_BCN_EN : LINKS_EN;
+const LandingFooter = ({ lang = "en" }: { lang?: "en" | "es" }) => {
+  const LINKS = lang === "es" ? LINKS_ES : LINKS_EN;
   const tagline = lang === "es"
     ? "Almacenamiento de objetos S3 diseñado para la era de la IA."
     : "S3 object storage built for the AI era.";

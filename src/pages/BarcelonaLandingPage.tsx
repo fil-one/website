@@ -1,6 +1,6 @@
 import { Check, Plug, ArrowsOut, Globe, ShieldCheck, Lock, ChartLine } from "@phosphor-icons/react";
-import LandingNavbar from "@/components/LandingNavbar";
-import LandingFooter from "@/components/LandingFooter";
+import PlatformNavbar from "@/components/PlatformNavbar";
+import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
@@ -323,13 +323,13 @@ const BarcelonaLandingPage = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <LandingNavbar />
+      <PlatformNavbar />
 
       <main id="main-content">
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section
-          className="relative isolate pt-[58px]"
+          className="relative isolate pt-[58px] md:pt-[94px]"
           style={{ backgroundColor: "#FFFFFF" }}
         >
           {/* Blue radial glow */}
@@ -418,7 +418,7 @@ const BarcelonaLandingPage = () => {
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
                 <span className="btn-primary-inner">Try 30 days for free</span>
               </a>
-              <a href="/lp/barcelona/contact" className="btn-secondary">
+              <a href="/contact-sales" className="btn-secondary">
                 Talk to an expert
               </a>
             </div>
@@ -1064,7 +1064,7 @@ const BarcelonaLandingPage = () => {
                   <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark">
                     <span className="btn-primary-inner">Try 30 days for free</span>
                   </a>
-                  <a href="/lp/barcelona/contact" className="btn-secondary btn-secondary-dark">
+                  <a href="/contact-sales" className="btn-secondary btn-secondary-dark">
                     Talk to an expert
                   </a>
                 </div>
@@ -1085,7 +1085,7 @@ const BarcelonaLandingPage = () => {
         </section>
       </main>
 
-      <LandingFooter campaign="barcelona" />
+      <Footer />
     </div>
   );
 };

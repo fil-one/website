@@ -533,13 +533,9 @@ const ROUTE_META = {
     title: "Acceptable Use Policy — Fil One",
     description: "Read the Fil One Acceptable Use Policy for permitted and prohibited uses of our S3-compatible object storage service.",
   },
-  "/lp/barcelona/contact": {
-    title: "Contact Sales — Fil One Barcelona",
-    description: "Get in touch with the Fil One team at MWC Barcelona. Talk storage pricing, migration, and enterprise plans.",
-  },
-  "/lp/barcelona/support": {
-    title: "Support — Fil One Barcelona",
-    description: "Get technical support for Fil One object storage. Reach our team for help with setup, migration, and account questions.",
+  "/sla": {
+    title: "Service Level Agreement — Fil One",
+    description: "Read the Fil One Object Storage Service Level Agreement: uptime commitment, service credit tiers, and how to request credits.",
   },
   "/lp/es/contacto": {
     title: "Contacto — Fil One Barcelona",

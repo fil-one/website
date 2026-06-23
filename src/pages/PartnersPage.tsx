@@ -204,7 +204,7 @@ const PartnersPage = () => {
                 However you reach customers, there's a path to partner with Fil One. Pick a role to start the conversation.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
+              <div className="flex flex-row items-center gap-3 mt-2">
                 <a href="/partners/apply" className="btn-primary">
                   <span className="btn-primary-inner">Become a partner</span>
                 </a>

@@ -117,11 +117,7 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://fil.one/lp/barcelona/contact</loc>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://fil.one/lp/barcelona/support</loc>
+    <loc>https://fil.one/sla</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>

@@ -1,6 +1,6 @@
 import { Database, ArrowsOut, ChartLine, Plug } from "@phosphor-icons/react";
-import LandingNavbar from "@/components/LandingNavbar";
-import LandingFooter from "@/components/LandingFooter";
+import PlatformNavbar from "@/components/PlatformNavbar";
+import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
@@ -72,11 +72,11 @@ context = obj["Body"].read().decode()`;
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <LandingNavbar />
+      <PlatformNavbar />
 
       <main id="main-content">
         {/* Hero */}
-        <section className="relative isolate pt-[58px]" style={{ backgroundColor: "#FFFFFF" }}>
+        <section className="relative isolate pt-[58px] md:pt-[94px]" style={{ backgroundColor: "#FFFFFF" }}>
           <div
             aria-hidden="true"
             className="absolute inset-0 pointer-events-none -z-10"
@@ -155,7 +155,7 @@ context = obj["Body"].read().decode()`;
               S3-compatible storage at $4.99/TB flat. Store the whole document corpus without per-read or per-request fees eating into retrieval margin.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
+            <div className="flex flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
                 <span className="btn-primary-inner">Start for free</span>
               </a>
@@ -626,7 +626,7 @@ context = obj["Body"].read().decode()`;
         </section>
       </main>
 
-      <LandingFooter />
+      <Footer />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import LandingNavbar from "@/components/LandingNavbar";
-import LandingFooter from "@/components/LandingFooter";
+import PlatformNavbar from "@/components/PlatformNavbar";
+import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { ArrowUpRight, Copy, Check, CheckCircle, ShieldCheck, Plug, TrendUp, CaretRight, CurrencyDollar, LockOpen, HardDrives, Globe } from "@phosphor-icons/react";
@@ -362,12 +362,12 @@ const AgentsLandingPage = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <LandingNavbar />
+      <PlatformNavbar />
 
       <main id="main-content">
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
-        <section className="relative isolate pt-[58px]" style={{ backgroundColor: "#FFFFFF" }}>
+        <section className="relative isolate pt-[58px] md:pt-[94px]" style={{ backgroundColor: "#FFFFFF" }}>
           {/* Blue radial glow — very subtle */}
           <div
             aria-hidden="true"
@@ -482,7 +482,7 @@ const AgentsLandingPage = () => {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 hero-fade-3" style={{ marginTop: 4 }}>
+            <div className="flex flex-row items-center gap-3 hero-fade-3" style={{ marginTop: 4 }}>
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
                 <span className="btn-primary-inner">Start for free</span>
               </a>
@@ -1143,7 +1143,7 @@ const AgentsLandingPage = () => {
 
       </main>
 
-      <LandingFooter />
+      <Footer />
     </div>
   );
 };

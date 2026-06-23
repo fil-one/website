@@ -30,6 +30,7 @@ const Footer = () => {
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms of Use", href: "/terms" },
       { label: "Acceptable Use", href: "/aup" },
+      { label: "SLA", href: "/sla" },
     ],
   };
 

@@ -162,7 +162,7 @@ const AiTrainingSolutionPage = () => {
                 Store training datasets, model weights, and checkpoints with verifiable integrity — and move data freely with zero egress fees.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
+              <div className="flex flex-row items-center gap-3 mt-2">
                 <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
                   <span className="btn-primary-inner">Start for free</span>
                 </a>

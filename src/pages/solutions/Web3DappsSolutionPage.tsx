@@ -158,7 +158,7 @@ const Web3DappsSolutionPage = () => {
                 Cryptographic proof on every object. No centralized chokepoints, no IPFS pinning headaches — just verifiable, durable storage for NFTs and dApps.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
+              <div className="flex flex-row items-center gap-3 mt-2">
                 <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
                   <span className="btn-primary-inner">Start for free</span>
                 </a>
