@@ -175,10 +175,8 @@ const PlatformNavbar = () => {
 
       {/* Main navbar */}
       <nav
-        className="fixed left-0 right-0 z-50 border-b px-6 md:px-12"
+        className={`fixed left-0 right-0 z-50 border-b px-6 md:px-12 top-0 transition-[top] duration-200 ${utilityVisible ? "md:top-9" : "md:top-0"}`}
         style={{
-          top: utilityVisible ? UTILITY_BAR_HEIGHT : 0,
-          transition: "top 0.2s ease",
           backgroundColor: "rgba(255,255,255,0.85)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
