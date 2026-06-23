@@ -44,4 +44,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://filone.io/sitemap.xml
+Sitemap: https://fil.one/sitemap.xml

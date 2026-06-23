@@ -21,7 +21,7 @@ const VersionB = () => {
   }, []);
 
   useSeo({
-    title: "Fil One — The Data Platform for AI Builders (Version B)",
+    title: "Fil One | S3 object storage built for the AI era",
     description:
       "Store, search, and connect your data to AI. Object Storage, RAG Pipeline, and AI Agent Toolkit — on one verifiable, vendor-independent platform.",
     canonical: "https://filone.io/v2",
