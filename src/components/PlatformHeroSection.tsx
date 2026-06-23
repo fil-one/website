@@ -33,7 +33,7 @@ const PlatformHeroSection = () => {
                 lineHeight: 1.4,
               }}
             >
-              Coming soon
+              Soon
             </span>
             <span
               style={{
