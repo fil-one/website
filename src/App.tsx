@@ -4,7 +4,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import type { ReactNode } from "react";
-import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import TermsOfUse from "./pages/TermsOfUse";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -13,7 +12,6 @@ import Support from "./pages/Support";
 import AcceptableUsePolicy from "./pages/AcceptableUsePolicy";
 import AdsLandingPage from "./pages/AdsLandingPage";
 import BarcelonaLandingPage from "./pages/BarcelonaLandingPage";
-import VersionA from "./pages/VersionA";
 import VersionB from "./pages/VersionB";
 import StorageProductPage from "./pages/StorageProductPage";
 import RagPipelineProductPage from "./pages/RagPipelineProductPage";
@@ -91,7 +89,6 @@ export const AppShell = ({ children }: { children: ReactNode }) => (
 export const AppContent = () => (
   <Routes>
           <Route path="/" element={<VersionB />} />
-          <Route path="/legacy" element={<Index />} />
           <Route path="/terms" element={<TermsOfUse />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/contact-sales" element={<ContactSales />} />
@@ -137,7 +134,6 @@ export const AppContent = () => (
           <Route path="/lp/grant-funded" element={<GrantFundedLandingPage />} />
           <Route path="/lp/collections-access" element={<CollectionsAccessLandingPage />} />
           <Route path="/lp/digital-preservation" element={<DigitalPreservationLandingPage />} />
-          <Route path="/v1" element={<VersionA />} />
           <Route path="/storage" element={<StorageProductPage />} />
           <Route path="/bucket-intelligence" element={<RagPipelineProductPage />} />
           <Route path="/ai-agent-toolkit" element={<AgentToolkitProductPage />} />
