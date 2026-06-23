@@ -298,7 +298,7 @@ const AiTrainingSolutionPage = () => {
         </section>
 
         {/* How it works */}
-        <section className="px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#F4F4F5" }}>
+        <section className="px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#F4F4F5", borderTop: "1px solid #E4E4E7", borderBottom: "1px solid #E4E4E7" }}>
           <div className="max-w-[1120px] mx-auto">
             <div
               ref={stepsRef}

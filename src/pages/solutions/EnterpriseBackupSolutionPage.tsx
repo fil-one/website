@@ -268,7 +268,7 @@ const EnterpriseBackupSolutionPage = () => {
         </section>
 
         {/* Scenarios */}
-        <section className="px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#F4F4F5" }}>
+        <section className="px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#F4F4F5", borderTop: "1px solid #E4E4E7", borderBottom: "1px solid #E4E4E7" }}>
           <div className="max-w-[1120px] mx-auto">
             <div ref={scRef} className={`reveal${scInView ? " in-view" : ""}`}>
               <div className="flex flex-col items-center gap-4 mb-14 text-center">
