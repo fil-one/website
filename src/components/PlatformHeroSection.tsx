@@ -63,7 +63,7 @@ const PlatformHeroSection = () => {
               margin: 0,
             }}
           >
-            S3 object storage built for the AI era
+            S3 object storage built <br className="sm:hidden" />for the AI era
           </h1>
 
           {/* Subheadline */}
@@ -84,7 +84,7 @@ const PlatformHeroSection = () => {
         </div>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center gap-3 mt-10 hero-fade-2">
+        <div className="flex flex-row items-center justify-center gap-3 mt-10 hero-fade-2">
           <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary" onClick={() => trackCtaClick("Start for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
             <span className="btn-primary-inner">Start for free</span>
           </a>
