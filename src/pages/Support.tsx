@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Check } from "@phosphor-icons/react";
-import Navbar from "@/components/Navbar";
+import { Check, ArrowUpRight, Plus, Minus } from "@phosphor-icons/react";
+import { trackEvent } from "@/lib/analytics";
+import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import {
@@ -55,11 +56,36 @@ const Field = ({
   </div>
 );
 
+const FaqItem = ({ q, a }: { q: string; a: string }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center justify-between w-full gap-4 py-3.5 text-left"
+        style={{ background: "none", border: "none", cursor: "pointer" }}
+      >
+        <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#09090B" }}>
+          {q}
+        </span>
+        {open
+          ? <Minus size={14} style={{ color: "#A1A1AA", flexShrink: 0 }} />
+          : <Plus size={14} style={{ color: "#A1A1AA", flexShrink: 0 }} />}
+      </button>
+      {open && (
+        <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13.5, color: "#71717A", lineHeight: "1.65", margin: "0 0 14px" }}>
+          {a}
+        </p>
+      )}
+    </div>
+  );
+};
+
 const Support = () => {
   useSeo({
     title: "Support — Fil One S3 Object Storage",
     description: "Get help from the Fil One support team. Submit a request and we'll get back to you shortly.",
-    canonical: "https://filone.io/support",
+    canonical: "https://fil.one/support",
   });
 
   const [form, setForm] = useState({
@@ -125,6 +151,7 @@ const Support = () => {
         return;
       }
       setSubmitted(true);
+      trackEvent("Form Submit", { form: "support", page: window.location.pathname });
     } catch {
       setError("Network error — please check your connection and try again.");
     } finally {
@@ -134,9 +161,9 @@ const Support = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <Navbar />
+      <PlatformNavbar />
 
-      <main className="flex flex-col items-center px-5 md:px-8 pt-28 pb-24 w-full">
+      <main className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[560px]">
 
           {/* Header */}
@@ -174,8 +201,64 @@ const Support = () => {
                 color: "#71717A",
               }}
             >
-              Submit a request and our support team will get back to you shortly.
+              Browse common questions below or submit a request — our support team will get back to you shortly.
             </p>
+          </div>
+
+          {/* Quick links */}
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { label: "Documentation", sub: "Guides, API reference & SDKs", href: "https://docs.fil.one" },
+              { label: "Status", sub: "Live system & uptime status", href: "https://status.fil.one" },
+            ].map(({ label, sub, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col gap-1 rounded-xl border p-4 hover:bg-black/[0.02] transition-colors"
+                style={{ borderColor: "rgba(0,0,0,0.08)", textDecoration: "none" }}
+              >
+                <div className="flex items-center gap-1">
+                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#09090B" }}>
+                    {label}
+                  </span>
+                  <ArrowUpRight size={13} style={{ color: "#A1A1AA" }} />
+                </div>
+                <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12.5, color: "#71717A" }}>
+                  {sub}
+                </span>
+              </a>
+            ))}
+          </div>
+
+          {/* FAQ */}
+          <div className="flex flex-col gap-0">
+            <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 16, color: "#09090B", marginBottom: 12 }}>
+              Common questions
+            </p>
+            {[
+              {
+                q: "Does Fil One support IPFS or CIDs?",
+                a: "No. Fil One is S3-compatible object storage — it does not support IPFS retrieval or content addressing via CIDs. If you need IPFS pinning or CID-based access, take a look at Filecoin Open Cloud (FOC).",
+              },
+              {
+                q: "Can I make a bucket public?",
+                a: "Public buckets are not currently supported. To share individual files, you can generate a presigned URL from the dashboard or via the S3 API — this gives time-limited access to a specific object without making the entire bucket public.",
+              },
+              {
+                q: "Are there any hidden fees on top of the storage price?",
+                a: "No. Fil One charges a flat rate per TB stored per month with no egress fees, no API request charges, and no retrieval penalties. What you see is what you pay.",
+              },
+              {
+                q: "How do I migrate from Storacha or another S3-compatible provider?",
+                a: "Fil One is fully S3-compatible, so tools like rclone work out of the box. Point rclone at s3.fil.one with your Fil One credentials and sync your data across. If you need help with a larger migration, reach out and we'll guide you through it.",
+              },
+              {
+                q: "Can I pay with FIL tokens?",
+                a: "Not currently — billing is in USD. If paying in FIL is a hard requirement, get in touch and we can explore options depending on your storage volume.",
+              },
+            ].map(({ q, a }) => <FaqItem key={q} q={q} a={a} />)}
           </div>
 
           <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
@@ -198,7 +281,7 @@ const Support = () => {
             </div>
           ) : (
             /* ── Form ── */
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-5">
 
               {/* First / Last name row */}
               <div className="grid grid-cols-2 gap-4">
@@ -335,6 +418,17 @@ const Support = () => {
                 Fil One needs the contact information you provide to us to contact you about our products and services. You may unsubscribe from these communications at any time. For information on how to unsubscribe, as well as our privacy practices and commitment to protecting your privacy, please review our{" "}
                 <a href="/privacy" style={{ color: "#71717A", textDecoration: "underline" }}>Privacy Policy</a>.
               </p>
+
+              {/* Response time */}
+              <div
+                className="flex items-center gap-2.5 rounded-xl px-4 py-3"
+                style={{ backgroundColor: "#F4F4F5", border: "1px solid rgba(0,0,0,0.06)" }}
+              >
+                <div className="shrink-0 w-2 h-2 rounded-full" style={{ backgroundColor: "#22C55E" }} />
+                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13.5, color: "#52525B", margin: 0 }}>
+                  We typically respond within <span style={{ color: "#09090B", fontWeight: 500 }}>1 business day</span>.
+                </p>
+              </div>
 
               {/* Submit */}
               <div className="flex flex-col gap-2 pt-1">

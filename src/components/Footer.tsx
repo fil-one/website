@@ -1,39 +1,45 @@
-import { useLocation } from "react-router-dom";
 import filOneLogo from "../assets/fil-one-logo.svg";
+import { trackDocsClick } from "@/lib/analytics";
 
 const Footer = () => {
-  const { pathname } = useLocation();
-  const isHome = pathname === "/";
-  const anchor = (id: string) => isHome ? `#${id}` : `/#${id}`;
-
   const links: Record<string, { label: string; href: string }[]> = {
-    Navigation: [
-      { label: "Features", href: anchor("features") },
-      { label: "Compare", href: anchor("compare") },
-      { label: "Calculator", href: anchor("calculator") },
-      { label: "Pricing", href: anchor("pricing") },
-      { label: "FAQ", href: anchor("faq") },
+    Products: [
+      { label: "Object Storage", href: "/storage" },
+      { label: "Bucket Intelligence", href: "/bucket-intelligence" },
+      { label: "AI Agent Toolkit", href: "/ai-agent-toolkit" },
+    ],
+    Solutions: [
+      { label: "AI Training & Inference", href: "/solutions/ai-training" },
+      { label: "Web3 & dApps", href: "/solutions/web3-dapps" },
+      { label: "Media & Archive", href: "/solutions/media-archive" },
+      { label: "Enterprise Backup & DR", href: "/solutions/enterprise-backup" },
+    ],
+    Company: [
+      { label: "Pricing", href: "/pricing" },
+      { label: "Enterprise", href: "/enterprise" },
+      { label: "Partners", href: "/partners" },
+      { label: "Contact Sales", href: "/contact-sales" },
     ],
     Resources: [
       { label: "Documentation", href: "https://docs.fil.one" },
-      { label: "Contact sales", href: "/contact-sales" },
       { label: "Support", href: "/support" },
-      { label: "Status", href: "https://fil-one.instatus.com/" },
+      { label: "Status", href: "https://status.fil.one" },
       { label: "Filecoin", href: "https://filecoin.io" },
     ],
     Legal: [
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms of Use", href: "/terms" },
       { label: "Acceptable Use", href: "/aup" },
+      { label: "SLA", href: "/sla" },
     ],
   };
 
   return (
     <footer
-      className="flex flex-col px-5 md:px-8 pt-14 pb-10 w-full border-t"
+      className="flex flex-col px-6 md:px-12 pt-14 pb-10 w-full border-t"
       style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF" }}
     >
-      <div className="flex flex-col gap-12 w-full max-w-[1120px] mx-auto">
+      <div className="flex flex-col gap-12 w-full max-w-[1400px] mx-auto">
         {/* Top row */}
         <div className="flex flex-col md:flex-row md:justify-between gap-10 md:gap-0">
           {/* Left: logo + tagline */}
@@ -55,7 +61,7 @@ const Footer = () => {
           </div>
 
           {/* Right: link groups */}
-          <div className="grid grid-cols-3 gap-8 md:flex md:flex-row md:gap-16 items-start">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 md:flex md:flex-row md:gap-16 items-start">
             {Object.entries(links).map(([title, items]) => (
               <div key={title} className="flex flex-col gap-3 items-start">
                 <p
@@ -74,6 +80,7 @@ const Footer = () => {
                     key={label}
                     href={href}
                     {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    onClick={href.includes("docs.fil.one") ? () => trackDocsClick(href) : undefined}
                     style={{
                       fontFamily: "'Funnel Sans', sans-serif",
                       fontWeight: 400,

@@ -3,186 +3,241 @@
   <url>
     <loc>https://fil.one/</loc>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://fil.one/ai</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://fil.one/lp/agents</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://fil.one/lp/egress</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/rag-storage</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/ml-checkpoints</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/startups</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/backup-dr</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/log-retention</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/web-scraping</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/multi-cloud</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/data-sovereignty</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/migrate-from-s3</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/compliance</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/archival</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/versioning</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/regional-cloud</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/media</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/gaming</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/genomics</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/web3-fintech</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/web3-pivot</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/web3-native</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/barcelona</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/es/barcelona</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/contact-sales</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://fil.one/waitlist</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/support</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/terms</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/privacy</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/aup</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://fil.one/fr/marseille</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://fil.one/es/barcelona</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://fil.one/lp/barcelona/contact</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://fil.one/lp/barcelona/support</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://fil.one/sla</loc>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/es/contacto</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://fil.one/lp/es/soporte</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/fr/marseille</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/es/barcelona</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/lp/cost-ticker</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/lp/exit-first</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/lp/agent-loops</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/lp/agent-readable</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/lp/grant-funded</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/lp/collections-access</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/lp/digital-preservation</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/lp/affordable</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/lp/go-global</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/lp/metro</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/lp/data-control</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/lp/ml-training</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/lp/agent-knowledge-layer</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/storage</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/bucket-intelligence</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/ai-agent-toolkit</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/pricing</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/enterprise</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/partners</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/partners/apply</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/solutions/ai-training</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/solutions/web3-dapps</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/solutions/media-archive</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/solutions/enterprise-backup</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/waitlist/bucket-intelligence</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fil.one/waitlist/ai-agent-toolkit</loc>
+    <changefreq>weekly</changefreq>
   </url>
 </urlset>

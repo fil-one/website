@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Check } from "@phosphor-icons/react";
-import Navbar from "@/components/Navbar";
+import { trackEvent } from "@/lib/analytics";
+import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import {
@@ -62,7 +63,7 @@ const ContactSales = () => {
   useSeo({
     title: "Contact Sales — Fil One S3 Object Storage",
     description: "Talk to the Fil One team about enterprise S3-compatible object storage pricing, volume discounts, and custom SLAs.",
-    canonical: "https://filone.io/contact-sales",
+    canonical: "https://fil.one/contact-sales",
   });
 
   const [form, setForm] = useState({
@@ -131,6 +132,7 @@ const ContactSales = () => {
         return;
       }
       setSubmitted(true);
+      trackEvent("Form Submit", { form: "contact-sales", page: window.location.pathname });
     } catch (err) {
       setError("Network error — please check your connection and try again.");
     } finally {
@@ -140,9 +142,9 @@ const ContactSales = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <Navbar />
+      <PlatformNavbar />
 
-      <main className="flex flex-col items-center px-5 md:px-8 pt-28 pb-24 w-full">
+      <main className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[560px]">
 
           {/* Header */}

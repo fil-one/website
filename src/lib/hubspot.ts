@@ -11,11 +11,17 @@
  */
 export const HS_PORTAL_ID = "51191454";
 
-/** Waitlist "Join waitlist" form */
-export const HS_WAITLIST_FORM_GUID = "81067c08-e6eb-43ce-ad3c-2f5e2fca45bd";
+/** Bucket Intelligence waitlist form */
+export const HS_BUCKET_INTELLIGENCE_WAITLIST_FORM_GUID = "39527548-1773-4541-beed-eee6225ae3b2";
+
+/** AI Agent Toolkit waitlist form */
+export const HS_AGENT_TOOLKIT_WAITLIST_FORM_GUID = "4857a0c6-a4a5-459c-bf37-a56d452c7442";
 
 /** Contact Sales form */
 export const HS_CONTACT_FORM_GUID = "f7684332-cc69-4d56-bd8d-12a2b730bceb";
+
+/** Partner Apply form */
+export const HS_PARTNER_FORM_GUID = "b18ae776-5b6f-42fa-a6aa-10ce63a36cb5";
 
 /** Support form */
 export const HS_SUPPORT_FORM_GUID = "44da45a4-b99b-4886-988a-70e27308322d";

@@ -1,10 +1,11 @@
 import { Check } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
+import { trackCtaClick } from "@/lib/analytics";
 
 const PaygoFeatures = [
+  "1 TB free for 30 days",
   "Pay monthly",
-  "No egress fees",
-  "No API request fees",
+  "No egress or API request fees",
   "Data integrity guarantees",
 ];
 
@@ -91,18 +92,6 @@ const PricingSection = () => {
             <div className="flex items-end gap-2 flex-wrap">
               <span
                 style={{
-                  fontFamily: "'Funnel Sans', sans-serif",
-                  fontWeight: 400,
-                  fontSize: 20,
-                  lineHeight: "1",
-                  color: "#71717A",
-                  textDecoration: "line-through",
-                }}
-              >
-                $4.99
-              </span>
-              <span
-                style={{
                   fontFamily: "'Aspekta', sans-serif",
                   fontWeight: 500,
                   fontSize: 28,
@@ -111,7 +100,7 @@ const PricingSection = () => {
                   letterSpacing: "-0.02em",
                 }}
               >
-                $0
+                $4.99
               </span>
               <span
                 style={{
@@ -134,7 +123,7 @@ const PricingSection = () => {
                 color: "#71717A",
               }}
             >
-              Free for the first 30 days. No credit card required.
+              Free for the first 30 days, no credit card required.
             </p>
           </div>
 
@@ -159,7 +148,7 @@ const PricingSection = () => {
             ))}
           </div>
 
-          <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary mt-auto w-full">
+          <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary mt-auto w-full" onClick={() => trackCtaClick("Try for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
             <span className="btn-primary-inner w-full justify-center">
               Try for free
             </span>
@@ -245,7 +234,7 @@ const PricingSection = () => {
             ))}
           </div>
 
-          <a href="/contact-sales" className="btn-secondary mt-auto w-full justify-center">
+          <a href="/contact-sales" className="btn-secondary mt-auto w-full justify-center" onClick={() => trackCtaClick("Contact sales", "/contact-sales", "secondary")}>
             Contact sales
           </a>
         </div>

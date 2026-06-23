@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 
@@ -30,14 +30,14 @@ const AcceptableUsePolicy = () => {
   useSeo({
     title: "Acceptable Use Policy — Fil One",
     description: "Read the Fil One Acceptable Use Policy governing the use of our S3-compatible object storage services.",
-    canonical: "https://filone.io/aup",
+    canonical: "https://fil.one/aup",
   });
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <Navbar />
+      <PlatformNavbar />
 
-      <main className="flex flex-col items-center px-5 md:px-8 pt-28 pb-24 w-full">
+      <main className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[720px]">
 
           {/* Header */}

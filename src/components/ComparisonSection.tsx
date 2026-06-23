@@ -46,7 +46,7 @@ const colHeader = (label: string) => (
   </span>
 );
 
-const ComparisonSection = () => {
+const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
   const { ref: headingRef, inView: headingInView } = useInView();
   const { ref: tableRef, inView: tableInView } = useInView({ threshold: 0.04 });
 
@@ -62,7 +62,7 @@ const ComparisonSection = () => {
     <section
       id="compare"
       className="flex flex-col gap-12 items-center px-5 md:px-8 py-24 md:py-32 w-full"
-      style={{ backgroundColor: "#F4F4F5" }}
+      style={{ backgroundColor: "#F4F4F5", ...(bordered ? { borderTop: "1px solid #E4E4E7", borderBottom: "1px solid #E4E4E7" } : {}) }}
     >
       {/* Heading */}
       <div

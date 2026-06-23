@@ -2,6 +2,7 @@ import { useState, type ReactNode } from "react";
 import { CaretDown } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 import JsonLd from "@/components/JsonLd";
+import { trackEvent, trackDocsClick } from "@/lib/analytics";
 
 const faqs = [
   {
@@ -15,7 +16,7 @@ const faqs = [
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
         <p>Fil One provides an S3-compatible API: if your application works with AWS S3, it works with Fil One. Point your SDK or CLI at our endpoint and authenticate with your API keys.</p>
         <p>Fil One takes a security-first approach to S3-compatibility. The S3-compatible API enables simple setup and migration. Storage supports private buckets by default, with public access consistent with full S3 parity coming soon.</p>
-        <p>Read <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link">Fil One docs</a>, <a href="https://app.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link">access the app</a> to get started with no code required, or <a href="/contact-sales" className="faq-link">talk to someone on our team</a> to get started.</p>
+        <p>Read <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link" onClick={() => trackDocsClick("https://docs.fil.one")}>Fil One docs</a>, <a href="https://app.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link">access the app</a> to get started with no code required, or <a href="/contact-sales" className="faq-link">talk to someone on our team</a> to get started.</p>
       </div>
     ),
   },
@@ -42,6 +43,29 @@ const faqs = [
     ),
   },
   {
+    question: "What is Bucket Intelligence and how does it work?",
+    answer: (
+      <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
+        <p>Bucket Intelligence turns your Fil One buckets into queryable knowledge bases. Powered by a built-in RAG Pipeline, files are auto-indexed as they land in your bucket. You can ask questions in plain language and get answers grounded in your actual data.</p>
+        <p>You bring your own LLM API keys (OpenAI, Anthropic, or Cohere), so AI costs go directly to your provider. Bucket Intelligence is free for early testers.</p>
+      </div>
+    ),
+  },
+  {
+    question: "What is the AI Agent Toolkit?",
+    answer: (
+      <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
+        <p>The AI Agent Toolkit lets you connect your AI tools and automations to Fil One. Pick an integration, paste a config block, and your buckets are immediately available for your AI agents to use or to trigger automations from bucket events.</p>
+        <p>It works with your existing buckets, no new setup or credentials needed. Access can be revoked at any time. Free for early testers.</p>
+      </div>
+    ),
+  },
+  {
+    question: "Do I need to use all three products together?",
+    answer:
+      "No. Object Storage is the foundation every Fil One account starts with, and it works great on its own as a fully S3-compatible store. Bucket Intelligence and AI Agent Toolkit are coming soon and will connect directly to your existing buckets with no data migration needed.",
+  },
+  {
     question: "What is Filecoin?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
@@ -52,10 +76,10 @@ const faqs = [
   },
 ];
 
-const faqSchema = {
+const buildFaqSchema = (items: typeof faqs) => ({
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: faqs.map((faq) => ({
+  mainEntity: items.map((faq) => ({
     "@type": "Question",
     name: faq.question,
     acceptedAnswer: {
@@ -63,12 +87,19 @@ const faqSchema = {
       text: typeof faq.answer === "string" ? faq.answer : faq.question,
     },
   })),
-};
+});
 
-const FaqSection = () => {
+interface FaqSectionProps {
+  include?: string[]; // if provided, only show FAQs whose question is in this list
+}
+
+const FaqSection = ({ include }: FaqSectionProps = {}) => {
+  const visibleFaqs = include ? faqs.filter((f) => include.includes(f.question)) : faqs;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { ref: headingRef, inView: headingInView } = useInView();
   const { ref: listRef, inView: listInView } = useInView({ threshold: 0.04 });
+
+  const faqSchema = buildFaqSchema(visibleFaqs);
 
   return (
     <>
@@ -115,7 +146,7 @@ const FaqSection = () => {
         ref={listRef}
         className={`w-full max-w-[720px] reveal${listInView ? " in-view" : ""}`}
       >
-        {faqs.map((faq, i) => {
+        {visibleFaqs.map((faq, i) => {
           const isOpen = openIndex === i;
           const panelId = `faq-panel-${i}`;
           const buttonId = `faq-btn-${i}`;
@@ -128,7 +159,11 @@ const FaqSection = () => {
                 id={buttonId}
                 aria-expanded={isOpen}
                 aria-controls={panelId}
-                onClick={() => setOpenIndex(isOpen ? null : i)}
+                onClick={() => {
+                  const opening = !isOpen;
+                  setOpenIndex(opening ? i : null);
+                  if (opening) trackEvent("FAQ Expand", { question: faq.question.slice(0, 80), page: window.location.pathname });
+                }}
                 className="flex items-center justify-between w-full gap-4 py-5 text-left group transition-colors"
               >
                 <span

@@ -1,6 +1,6 @@
 import { Database, ArrowsOut, ChartLine, Plug, ArrowRight } from "@phosphor-icons/react";
-import LandingNavbar from "@/components/LandingNavbar";
-import LandingFooter from "@/components/LandingFooter";
+import PlatformNavbar from "@/components/PlatformNavbar";
+import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
@@ -11,25 +11,29 @@ const FEATURES = [
     icon: Database,
     title: "Agent memory & state",
     desc: "Persist conversation history, task queues, episodic memory, and checkpoint files across agent restarts. Standard PutObject/GetObject — the agent writes, the agent reads.",
-    devLabel: null,
+    comingSoon: false,
+    waitlistHref: null,
   },
   {
     icon: ChartLine,
     title: "Flat cost for loop traffic",
     desc: "Agents write frequently and read back their own outputs. Per-request billing makes loops expensive. $4.99/TB flat — no PUT fees, no GET fees, no egress.",
-    devLabel: null,
+    comingSoon: false,
+    waitlistHref: null,
   },
   {
     icon: ArrowsOut,
     title: "RAG corpus storage",
     desc: "Store raw documents, chunked text, and embeddings backing a retrieval pipeline. Reads are included in flat storage — no per-retrieval egress counter.",
-    devLabel: null,
+    comingSoon: true,
+    waitlistHref: "/waitlist/bucket-intelligence",
   },
   {
     icon: Plug,
     title: "AI toolkit integrations",
     desc: "LangChain, LlamaIndex, and Haystack connectors for direct corpus management, plus agent memory integrations.",
-    devLabel: "In development",
+    comingSoon: true,
+    waitlistHref: "/waitlist/ai-agent-toolkit",
   },
 ];
 
@@ -85,30 +89,29 @@ s3.put_object(
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <LandingNavbar />
+      <PlatformNavbar />
       <main id="main-content">
 
         {/* Hero */}
-        <section className="relative isolate pt-[58px]" style={{ backgroundColor: "#FFFFFF" }}>
+        <section className="relative isolate pt-[58px] md:pt-[94px]" style={{ backgroundColor: "#FFFFFF" }}>
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse 55% 40% at 50% 0%, rgba(0,144,255,0.13) 0%, transparent 70%)" }} />
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-10" style={{ backgroundImage: `url("data:image/svg+xml,${GRID_SVG}")`, backgroundSize: "60px 60px", backgroundPosition: "center top", maskImage: "radial-gradient(ellipse 80% 65% at 50% 0%, black 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 65%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 65% at 50% 0%, black 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 65%, transparent 80%)" }} />
           <div className="flex flex-col items-center gap-6 px-5 md:px-8 w-full max-w-[1120px] mx-auto pt-20 md:pt-[120px] pb-20 md:pb-28">
-            <a href="/waitlist" className="hero-fade-1 flex items-center gap-1.5 transition-opacity hover:opacity-80" style={{ backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.2)", borderRadius: 9999, padding: "4px 4px 4px 4px", maxWidth: "90vw", textDecoration: "none" }}>
+            <div className="hero-fade-1 flex items-center gap-2.5" style={{ backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.2)", borderRadius: 9999, padding: "5px 14px 5px 6px", maxWidth: "90vw" }}>
+              <span className="badge-pulse" style={{ fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 11, letterSpacing: "0.06em", color: "#FFFFFF", textTransform: "uppercase", backgroundColor: "#0090FF", borderRadius: 9999, padding: "3px 8px", lineHeight: 1.4 }}>
+                Coming soon
+              </span>
               <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 13.5, lineHeight: 1, color: "#0070CC", whiteSpace: "nowrap" }}>
-                <span style={{ fontWeight: 700, backgroundColor: "rgba(0,144,255,0.12)", borderRadius: 9999, padding: "3px 8px", marginRight: 6 }}>NEW</span>
-                RAG Pipeline & Agent Toolkit – join the waitlist
+                RAG Pipeline &amp; Agent Toolkit
               </span>
-              <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 21, height: 21, borderRadius: "50%", backgroundColor: "rgba(0,112,204,0.12)", flexShrink: 0 }}>
-                <ArrowRight size={11} weight="bold" color="#0070CC" />
-              </span>
-            </a>
+            </div>
             <h1 className="text-[30px] sm:text-[38px] md:text-[54px] hero-fade-2" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, lineHeight: "1.08", letterSpacing: "-0.025em", color: "#09090B", textAlign: "center", maxWidth: 820, margin: 0 }}>
               Turn object storage into<br /><span style={{ color: "#0090FF" }}>an agent knowledge layer.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 480, margin: 0 }}>
               S3 object storage with a built-in RAG pipeline. No stitching required, no per-query fees.
             </p>
-            <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
+            <div className="flex flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start storing for free</span></a>
               <a href="/contact-sales" className="btn-secondary">Talk to an expert</a>
             </div>
@@ -180,16 +183,22 @@ s3.put_object(
               <SectionSub maxWidth={560}>S3-compatible storage built for agents is live today. Be the first to try native RAG pipeline and AI agents integrations.</SectionSub>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-              {FEATURES.map(({ icon: Icon, title, desc, devLabel }) => (
-                <div key={title} className="flex flex-col gap-4 p-6 rounded-2xl border" style={{ borderColor: devLabel ? "rgba(0,0,0,0.08)" : "rgba(0,0,0,0.07)", backgroundColor: devLabel ? "#F4F4F5" : "#FFFFFF", boxShadow: "0px 1px 3px rgba(0,0,0,0.04)", textAlign: "left" }}>
+              {FEATURES.map(({ icon: Icon, title, desc, comingSoon, waitlistHref }) => (
+                <div key={title} className="flex flex-col gap-4 p-6 rounded-2xl border" style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF", boxShadow: "0px 1px 3px rgba(0,0,0,0.04)", textAlign: "left" }}>
                   <div className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0" style={{ backgroundColor: "#EFF8FF" }}><Icon size={18} color="#0090FF" /></div>
                   <div className="flex items-center gap-2 flex-wrap">
                     <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 15, lineHeight: "1.3", color: "#09090B", margin: 0 }}>{title}</p>
-                    {devLabel && <span style={{ fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase", color: "#52525B", backgroundColor: "#E4E4E7", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 9999, padding: "2px 8px" }}>{devLabel}</span>}
+                    {comingSoon && <span style={{ fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase", color: "#52525B", backgroundColor: "#E4E4E7", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 9999, padding: "2px 8px" }}>Coming soon</span>}
                   </div>
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: "1.6", color: devLabel ? "#52525B" : "#71717A" }}>
-                    {desc}{devLabel && <> <a href="/waitlist" style={{ color: "#0070CC", textDecoration: "underline" }}>Join the waitlist.</a></>}
+                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: "1.6", color: "#71717A" }}>
+                    {desc}
                   </p>
+                  {comingSoon && waitlistHref && (
+                    <a href={waitlistHref} className="flex items-center gap-1" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#0090FF", textDecoration: "none", alignSelf: "flex-start", marginTop: "auto" }}>
+                      Join the waitlist
+                      <ArrowRight size={14} weight="bold" />
+                    </a>
+                  )}
                 </div>
               ))}
             </div>
@@ -214,7 +223,7 @@ s3.put_object(
           </div>
         </section>
       </main>
-      <LandingFooter />
+      <Footer />
     </div>
   );
 };

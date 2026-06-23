@@ -1,54 +1,56 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Check, ArrowLeft } from "@phosphor-icons/react";
-import LandingNavbar from "@/components/LandingNavbar";
-import LandingFooter from "@/components/LandingFooter";
+import { Check } from "@phosphor-icons/react";
+import PlatformNavbar from "@/components/PlatformNavbar";
+import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import {
   HS_PORTAL_ID,
-  HS_WAITLIST_FORM_GUID,
+  HS_BUCKET_INTELLIGENCE_WAITLIST_FORM_GUID,
   HS_MARKETING_SUBSCRIPTION_TYPE_ID,
   getHubSpotContext,
 } from "@/lib/hubspot";
 
-type Product = "rag" | "agent" | "both";
-
-const PRODUCTS: { key: Product; label: string }[] = [
-  { key: "rag",   label: "RAG Pipeline" },
-  { key: "agent", label: "AI Agent Toolkit" },
-  { key: "both",  label: "Both" },
-];
-
 const USE_CASES = [
-  "AI / ML workloads",
-  "Data analytics",
-  "Document search & retrieval",
-  "Backup & archive",
-  "Content storage",
+  "Document Q&A",
+  "Internal knowledge base",
+  "Customer support",
+  "Research assistant",
   "Other",
 ];
 
-const PLATFORMS = [
-  "AWS S3",
-  "Azure Blob",
-  "Google Cloud Storage",
-  "On-premise",
-  "Not using cloud storage yet",
+const RAG_SOLUTIONS = [
+  "LangChain",
+  "LlamaIndex",
+  "OpenAI (native)",
+  "Pinecone",
+  "Building from scratch",
+  "Not using RAG yet",
   "Other",
 ];
 
 const TIMELINES = [
-  "Immediately",
-  "1–3 months",
-  "3–6 months",
-  "6+ months",
+  "Actively building now",
+  "Planning in next 3 months",
+  "Evaluating in next 6 months",
+  "Just exploring",
 ];
 
 const TEAM_SIZES = [
-  "1–10",
-  "11–50",
-  "51–200",
-  "200+",
+  "Just me",
+  "2-10 people",
+  "11-50 people",
+  "51+ people",
+];
+
+const STORAGE_AMOUNTS = [
+  "Less than 25 TB",
+  "25 - 50 TB",
+  "50 - 100 TB",
+  "100 - 150 TB",
+  "150 - 250 TB",
+  "250 - 500 TB",
+  "500 - 1 PB",
+  "More than 1 PB",
 ];
 
 const inputStyle: React.CSSProperties = {
@@ -83,15 +85,7 @@ const labelStyle: React.CSSProperties = {
   color: "#3F3F46",
 };
 
-const Field = ({
-  label,
-  required,
-  children,
-}: {
-  label: string;
-  required?: boolean;
-  children: React.ReactNode;
-}) => (
+const Field = ({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) => (
   <div className="flex flex-col gap-1.5">
     <label style={labelStyle}>
       {label}
@@ -101,21 +95,21 @@ const Field = ({
   </div>
 );
 
-const WaitlistPage = () => {
+const BucketIntelligenceWaitlistPage = () => {
   useSeo({
-    title: "Join the Waitlist — Fil One RAG Pipeline & AI Agent Toolkit",
-    description: "Get early access to Fil One's RAG Pipeline and AI Agent Toolkit. Join the waitlist and we'll reach out when your spot is ready.",
-    canonical: "https://filone.io/waitlist",
+    title: "Join the Bucket Intelligence Waitlist — Fil One",
+    description: "Get early access to Bucket Intelligence. Turn any bucket into a queryable knowledge base — join the waitlist and we'll reach out when your spot is ready.",
+    canonical: "https://fil.one/waitlist/bucket-intelligence",
   });
 
-  const navigate = useNavigate();
-  const [product, setProduct] = useState<Product | null>(null);
-  const [productError, setProductError] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [useCase, setUseCase] = useState("");
-  const [platform, setPlatform] = useState("");
+  const [ragSolution, setRagSolution] = useState("");
   const [timeline, setTimeline] = useState("");
   const [teamSize, setTeamSize] = useState("");
+  const [storageAmount, setStorageAmount] = useState("");
   const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -123,33 +117,28 @@ const WaitlistPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!product) {
-      setProductError(true);
-      return;
-    }
     setLoading(true);
     setError(null);
-    setProductError(false);
-
-    const productLabel = PRODUCTS.find(p => p.key === product)?.label ?? product;
 
     try {
       const res = await fetch(
-        `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_WAITLIST_FORM_GUID}`,
+        `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_BUCKET_INTELLIGENCE_WAITLIST_FORM_GUID}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             fields: [
               { objectTypeId: "0-1", name: "email", value: email },
-              { objectTypeId: "0-1", name: "product_interest", value: productLabel },
-              ...(useCase  ? [{ objectTypeId: "0-1", name: "primary_use_case",   value: useCase   }] : []),
-              ...(platform ? [{ objectTypeId: "0-1", name: "current_platform",   value: platform  }] : []),
-              ...(timeline ? [{ objectTypeId: "0-1", name: "migration_timeline", value: timeline  }] : []),
-              ...(teamSize ? [{ objectTypeId: "0-1", name: "team_size",          value: teamSize  }] : []),
-              ...(notes    ? [{ objectTypeId: "0-1", name: "message",            value: notes     }] : []),
+              { objectTypeId: "0-1", name: "firstname", value: firstName },
+              { objectTypeId: "0-1", name: "lastname", value: lastName },
+              ...(useCase       ? [{ objectTypeId: "0-1", name: "primary_use_case",   value: useCase       }] : []),
+              ...(ragSolution   ? [{ objectTypeId: "0-1", name: "how_are_you_handling_rag_today", value: ragSolution }] : []),
+              ...(timeline      ? [{ objectTypeId: "0-1", name: "timeline",           value: timeline      }] : []),
+              ...(teamSize      ? [{ objectTypeId: "0-1", name: "team_size",          value: teamSize      }] : []),
+              ...(storageAmount ? [{ objectTypeId: "0-1", name: "amount_of_storage_rag", value: storageAmount }] : []),
+              ...(notes         ? [{ objectTypeId: "0-1", name: "message",            value: notes         }] : []),
             ],
-            context: getHubSpotContext("Join Waitlist"),
+            context: getHubSpotContext("Bucket Intelligence Waitlist"),
             legalConsentOptions: {
               consent: {
                 consentToProcess: true,
@@ -181,82 +170,32 @@ const WaitlistPage = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <LandingNavbar />
+      <PlatformNavbar />
 
-      <main className="flex flex-col items-center px-5 md:px-8 pt-28 pb-24 w-full">
+      <main className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[560px]">
-
-          {/* Back button */}
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-1.5"
-            style={{
-              fontFamily: "'Funnel Sans', sans-serif",
-              fontWeight: 400,
-              fontSize: 14,
-              color: "#71717A",
-              background: "none",
-              border: "none",
-              padding: 0,
-              cursor: "pointer",
-              width: "fit-content",
-              transition: "color 150ms ease",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.color = "#09090B")}
-            onMouseLeave={e => (e.currentTarget.style.color = "#71717A")}
-          >
-            <ArrowLeft size={14} />
-            Back
-          </button>
 
           {/* Header */}
           <div className="flex flex-col gap-3">
-            <p
-              style={{
-                fontFamily: "'DM Mono', monospace",
-                fontWeight: 500,
-                fontSize: 11.5,
-                letterSpacing: "0.08em",
-                color: "#71717A",
-                textTransform: "uppercase",
-              }}
-            >
-              Early access
+            <p style={{ fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 11.5, letterSpacing: "0.08em", color: "#71717A", textTransform: "uppercase" }}>
+              Early access · Bucket Intelligence
             </p>
             <h1
               className="text-[28px] md:text-[36px]"
-              style={{
-                fontFamily: "'Aspekta', sans-serif",
-                fontWeight: 500,
-                lineHeight: "1.15",
-                letterSpacing: "-0.02em",
-                color: "#09090B",
-              }}
+              style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, lineHeight: "1.15", letterSpacing: "-0.02em", color: "#09090B" }}
             >
               Join the waitlist
             </h1>
-            <p
-              style={{
-                fontFamily: "'Funnel Sans', sans-serif",
-                fontWeight: 400,
-                fontSize: 15,
-                lineHeight: "1.6",
-                color: "#71717A",
-              }}
-            >
-              Get early access to the RAG Pipeline and AI Agent Toolkit. We'll reach out as soon as your spot is ready.
+            <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 15, lineHeight: "1.6", color: "#71717A" }}>
+              Get early access to Bucket Intelligence — turn any bucket into a queryable knowledge base. We'll reach out as soon as your spot is ready.
             </p>
           </div>
 
           <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
 
           {submitted ? (
-            /* ── Success state ── */
             <div className="flex flex-col gap-3 py-6">
-              <div
-                className="flex items-center justify-center w-10 h-10 rounded-full"
-                style={{ backgroundColor: "#EFF8FF" }}
-              >
+              <div className="flex items-center justify-center w-10 h-10 rounded-full" style={{ backgroundColor: "#EFF8FF" }}>
                 <Check size={18} color="#0090FF" />
               </div>
               <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 20, color: "#09090B", letterSpacing: "-0.01em" }}>
@@ -267,46 +206,35 @@ const WaitlistPage = () => {
               </p>
             </div>
           ) : (
-            /* ── Form ── */
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-5">
 
-              {/* Product interest */}
-              <div className="flex flex-col gap-1.5">
-                <label style={labelStyle}>
-                  I'm interested in
-                  <span style={{ color: "#DC2626", marginLeft: 2 }}>*</span>
-                </label>
-                {productError && (
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626" }}>
-                    Please select an option.
-                  </p>
-                )}
-                <div className="flex gap-2 flex-wrap">
-                  {PRODUCTS.map(({ key, label }) => (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => { setProduct(key); setProductError(false); }}
-                      style={{
-                        fontFamily: "'Funnel Sans', sans-serif",
-                        fontWeight: 400,
-                        fontSize: 14,
-                        padding: "8px 18px",
-                        borderRadius: 9999,
-                        border: product === key ? "1.5px solid #0090FF" : "1px solid rgba(0,0,0,0.12)",
-                        backgroundColor: product === key ? "#EFF8FF" : "#FFFFFF",
-                        color: product === key ? "#0070CC" : "#52525B",
-                        cursor: "pointer",
-                        transition: "all 0.12s ease",
-                      }}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
+              <div className="grid grid-cols-2 gap-4">
+                <Field label="First name" required>
+                  <input
+                    type="text"
+                    value={firstName}
+                    onChange={e => setFirstName(e.target.value)}
+                    placeholder="Jane"
+                    required
+                    style={inputStyle}
+                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
+                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
+                  />
+                </Field>
+                <Field label="Last name" required>
+                  <input
+                    type="text"
+                    value={lastName}
+                    onChange={e => setLastName(e.target.value)}
+                    placeholder="Smith"
+                    required
+                    style={inputStyle}
+                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
+                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
+                  />
+                </Field>
               </div>
 
-              {/* Work email */}
               <Field label="Work email" required>
                 <input
                   type="email"
@@ -320,59 +248,40 @@ const WaitlistPage = () => {
                 />
               </Field>
 
-              {/* 2-col dropdowns */}
               <div className="grid grid-cols-2 gap-4">
                 <Field label="Primary use case">
-                  <select
-                    value={useCase}
-                    onChange={e => setUseCase(e.target.value)}
-                    style={selectStyle}
-                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
-                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                  >
+                  <select value={useCase} onChange={e => setUseCase(e.target.value)} style={selectStyle} onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")} onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}>
                     <option value="">Select…</option>
                     {USE_CASES.map(o => <option key={o} value={o}>{o}</option>)}
                   </select>
                 </Field>
-                <Field label="Where do you run today?">
-                  <select
-                    value={platform}
-                    onChange={e => setPlatform(e.target.value)}
-                    style={selectStyle}
-                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
-                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                  >
+                <Field label="How are you handling RAG today?">
+                  <select value={ragSolution} onChange={e => setRagSolution(e.target.value)} style={selectStyle} onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")} onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}>
                     <option value="">Select…</option>
-                    {PLATFORMS.map(o => <option key={o} value={o}>{o}</option>)}
+                    {RAG_SOLUTIONS.map(o => <option key={o} value={o}>{o}</option>)}
                   </select>
                 </Field>
                 <Field label="Timeline">
-                  <select
-                    value={timeline}
-                    onChange={e => setTimeline(e.target.value)}
-                    style={selectStyle}
-                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
-                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                  >
+                  <select value={timeline} onChange={e => setTimeline(e.target.value)} style={selectStyle} onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")} onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}>
                     <option value="">Select…</option>
                     {TIMELINES.map(o => <option key={o} value={o}>{o}</option>)}
                   </select>
                 </Field>
                 <Field label="Team size">
-                  <select
-                    value={teamSize}
-                    onChange={e => setTeamSize(e.target.value)}
-                    style={selectStyle}
-                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
-                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                  >
+                  <select value={teamSize} onChange={e => setTeamSize(e.target.value)} style={selectStyle} onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")} onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}>
                     <option value="">Select…</option>
                     {TEAM_SIZES.map(o => <option key={o} value={o}>{o}</option>)}
                   </select>
                 </Field>
               </div>
 
-              {/* Notes */}
+              <Field label="Amount of storage">
+                <select value={storageAmount} onChange={e => setStorageAmount(e.target.value)} style={selectStyle} onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")} onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}>
+                  <option value="">Select…</option>
+                  {STORAGE_AMOUNTS.map(o => <option key={o} value={o}>{o}</option>)}
+                </select>
+              </Field>
+
               <Field label="Notes (optional)">
                 <textarea
                   value={notes}
@@ -387,13 +296,11 @@ const WaitlistPage = () => {
 
               <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
 
-              {/* Privacy */}
               <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: "1.7", color: "#71717A" }}>
                 By submitting this form you consent to allow Fil One to store and process your information and send you product updates. You can unsubscribe at any time. See our{" "}
                 <a href="/privacy" style={{ color: "#71717A", textDecoration: "underline" }}>Privacy Policy</a>.
               </p>
 
-              {/* Submit */}
               <div className="flex flex-col gap-2">
                 <button
                   type="submit"
@@ -418,9 +325,9 @@ const WaitlistPage = () => {
         </div>
       </main>
 
-      <LandingFooter />
+      <Footer />
     </div>
   );
 };
 
-export default WaitlistPage;
+export default BucketIntelligenceWaitlistPage;

@@ -22,8 +22,7 @@
       "/privacy",
       "/contact-sales",
       "/fr/marseille",
-      "/es/barcelona",
-      "/lp/agents"
+      "/es/barcelona"
     ],
     "puppeteerArgs": [
       "--no-sandbox",

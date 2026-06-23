@@ -3,7 +3,7 @@ import { useEffect } from "react";
 interface SeoProps {
   title: string;
   description: string;
-  /** Full canonical URL e.g. https://filone.io/ */
+  /** Full canonical URL e.g. https://fil.one/ */
   canonical: string;
   ogImage?: string;
 }

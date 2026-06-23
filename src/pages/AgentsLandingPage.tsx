@@ -1,6 +1,6 @@
 import { useState } from "react";
-import LandingNavbar from "@/components/LandingNavbar";
-import LandingFooter from "@/components/LandingFooter";
+import PlatformNavbar from "@/components/PlatformNavbar";
+import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { ArrowUpRight, Copy, Check, CheckCircle, ShieldCheck, Plug, TrendUp, CaretRight, CurrencyDollar, LockOpen, HardDrives, Globe } from "@phosphor-icons/react";
@@ -304,14 +304,14 @@ const USE_CASES = [
     title: "A storage tool your agent can call directly",
     description: "Give your agent read/write/list access to your buckets without hand-writing the S3 glue. The Agent Toolkit exposes storage as a native tool you drop into Claude Desktop, Cursor, or your framework via MCP, so the agent reaches storage through a clean interface, and the data stays in buckets you own, not a third-party SaaS.",
     badge: "Agent Toolkit coming soon",
-    waitlist: true,
+    waitlist: "/waitlist/ai-agent-toolkit",
   },
   {
     icon: TrendUp,
     title: "A queryable knowledge base over your buckets",
     description: "Point a retrieval agent at a bucket and query it in plain language. Files index as they land; semantic search runs on your own model keys. Store the whole corpus at volume — flat pricing makes a large document set a storage cost, not a per-query tax.",
     badge: "RAG Coming soon",
-    waitlist: true,
+    waitlist: "/waitlist/bucket-intelligence",
   },
 ];
 
@@ -345,7 +345,7 @@ const AgentsLandingPage = () => {
     title: "Fil One for AI Agents — Flat storage. No egress. No billing surprises.",
     description:
       "S3-compatible object storage at $4.99/TB flat. No egress fees, no per-request charges. Built for agentic workloads that read and write constantly. Start free — 1 TB included.",
-    canonical: "https://filone.io/lp/agents",
+    canonical: "https://fil.one/lp/agents",
   });
 
   const [activeTab, setActiveTab] = useState(0);
@@ -362,12 +362,12 @@ const AgentsLandingPage = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <LandingNavbar />
+      <PlatformNavbar />
 
       <main id="main-content">
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
-        <section className="relative isolate pt-[58px]" style={{ backgroundColor: "#FFFFFF" }}>
+        <section className="relative isolate pt-[58px] md:pt-[94px]" style={{ backgroundColor: "#FFFFFF" }}>
           {/* Blue radial glow — very subtle */}
           <div
             aria-hidden="true"
@@ -482,7 +482,7 @@ const AgentsLandingPage = () => {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 hero-fade-3" style={{ marginTop: 4 }}>
+            <div className="flex flex-row items-center gap-3 hero-fade-3" style={{ marginTop: 4 }}>
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
                 <span className="btn-primary-inner">Start for free</span>
               </a>
@@ -975,7 +975,7 @@ const AgentsLandingPage = () => {
                   )}
                   {waitlist && (
                     <a
-                      href="/waitlist"
+                      href={waitlist}
                       className="flex items-center gap-1"
                       style={{
                         fontFamily: "'Funnel Sans', sans-serif",
@@ -1143,7 +1143,7 @@ const AgentsLandingPage = () => {
 
       </main>
 
-      <LandingFooter />
+      <Footer />
     </div>
   );
 };
