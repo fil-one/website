@@ -192,7 +192,7 @@ const StorageProductPage = () => {
         <StorageCalculatorSection />
 
         {/* Comparison */}
-        <ComparisonSection />
+        <ComparisonSection bordered />
 
         {/* FAQ */}
         <FaqSection include={[

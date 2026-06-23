@@ -27,7 +27,7 @@ const StorageUseCasesSection = () => {
   const { ref: sectionRef, inView: sectionInView } = useInView({ threshold: 0.05 });
 
   return (
-    <section className="w-full px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#F4F4F5" }}>
+    <section className="w-full px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#F4F4F5", borderTop: "1px solid #E4E4E7", borderBottom: "1px solid #E4E4E7" }}>
       <div className="flex flex-col gap-12 w-full max-w-[1120px] mx-auto">
 
         <div className="flex flex-col gap-3 items-center text-center">
