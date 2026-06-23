@@ -345,7 +345,7 @@ const PlatformNavbar = () => {
         {/* Mobile menu */}
         {mobileOpen && (
           <div
-            className="md:hidden border-t px-5 py-3 flex flex-col gap-0.5"
+            className="md:hidden border-t px-5 py-3 flex flex-col gap-0.5 max-h-[calc(100dvh-58px)] overflow-y-auto overscroll-contain"
             style={{
               backgroundColor: "rgba(255,255,255,0.97)",
               borderColor: "rgba(0,0,0,0.06)",
