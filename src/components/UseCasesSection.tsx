@@ -40,7 +40,7 @@ const USE_CASES = [
   },
 ];
 
-const UseCasesSection = () => {
+const UseCasesSection = ({ heading = "Enterprise storage made simple" }: { heading?: string }) => {
   const { ref: cardsRef, inView: cardsInView } = useInView({ threshold: 0.06 });
 
   return (
@@ -75,7 +75,7 @@ const UseCasesSection = () => {
             margin: 0,
           }}
         >
-          Enterprise storage made simple
+          {heading}
         </h2>
         <p
           style={{

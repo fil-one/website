@@ -183,7 +183,7 @@ const StorageProductPage = () => {
         </div>
 
         {/* Features */}
-        <UseCasesSection />
+        <UseCasesSection heading="S3 storage made simple" />
 
         {/* Use cases */}
         <StorageUseCasesSection />
