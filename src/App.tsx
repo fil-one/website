@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import type { ReactNode } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import TermsOfUse from "./pages/TermsOfUse";
@@ -70,13 +71,25 @@ import DigitalPreservationLandingPage from "./pages/DigitalPreservationLandingPa
 
 const queryClient = new QueryClient();
 
-const App = () => (
+/**
+ * Providers wrapper — no router dependency.
+ * Used both by the client entry (App) and the SSR entry (entry-server.tsx).
+ */
+export const AppShell = ({ children }: { children: ReactNode }) => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-<Routes>
+      {children}
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+/**
+ * All routes — rendered inside BrowserRouter (client) or StaticRouter (SSR prerender).
+ */
+export const AppContent = () => (
+  <Routes>
           <Route path="/" element={<VersionB />} />
           <Route path="/legacy" element={<Index />} />
           <Route path="/terms" element={<TermsOfUse />} />
@@ -142,9 +155,15 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+);
+
+/** Full client-side app. */
+const App = () => (
+  <AppShell>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <AppContent />
+    </BrowserRouter>
+  </AppShell>
 );
 
 export default App;
