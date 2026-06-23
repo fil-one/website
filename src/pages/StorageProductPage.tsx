@@ -132,7 +132,7 @@ const StorageProductPage = () => {
                 Fully S3-compatible object storage with no egress fees, no API request charges, and verifiable data integrity on every byte.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
+              <div className="flex flex-row items-center justify-center gap-3 mt-2">
                 <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary" onClick={() => trackCtaClick("Start for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
                   <span className="btn-primary-inner">Start for free</span>
                 </a>
