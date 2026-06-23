@@ -59,7 +59,7 @@ const SupportBcnES = () => {
   useSeo({
     title: "Soporte — Fil One Almacenamiento S3",
     description: "Obtén ayuda del equipo de soporte de Fil One. Envía una solicitud y te responderemos en breve.",
-    canonical: "https://filone.io/lp/es/soporte",
+    canonical: "https://fil.one/lp/es/soporte",
   });
 
   const [form, setForm] = useState({

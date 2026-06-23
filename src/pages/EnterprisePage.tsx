@@ -122,8 +122,8 @@ const EnterprisePage = () => {
     title: "Enterprise — Fil One",
     description:
       "Fil One for enterprise: verifiable data integrity, S3-compatible, no egress fees, SLA-backed. Custom pricing for teams that need storage at scale.",
-    canonical: "https://filone.io/enterprise",
-    ogImage: "https://filone.io/og-image.png",
+    canonical: "https://fil.one/enterprise",
+    ogImage: "https://fil.one/og-image.png",
   });
 
   return (

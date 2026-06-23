@@ -30,7 +30,7 @@ const TermsOfUse = () => {
   useSeo({
     title: "Terms of Use — Fil One",
     description: "Read the Fil One terms of use governing access to our S3-compatible object storage platform.",
-    canonical: "https://filone.io/terms",
+    canonical: "https://fil.one/terms",
   });
 
   return (

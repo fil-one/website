@@ -30,7 +30,7 @@ const AcceptableUsePolicy = () => {
   useSeo({
     title: "Acceptable Use Policy — Fil One",
     description: "Read the Fil One Acceptable Use Policy governing the use of our S3-compatible object storage services.",
-    canonical: "https://filone.io/aup",
+    canonical: "https://fil.one/aup",
   });
 
   return (

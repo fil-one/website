@@ -15,13 +15,13 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Fil One",
-  url: "https://filone.io",
-  logo: "https://filone.io/favicon.png",
+  url: "https://fil.one",
+  logo: "https://fil.one/favicon.png",
   sameAs: ["https://twitter.com/FilOneStorage"],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "sales",
-    url: "https://filone.io/contact-sales",
+    url: "https://fil.one/contact-sales",
   },
 };
 
@@ -45,7 +45,7 @@ const softwareSchema = {
     "no egress fees",
     "verifiable data integrity",
   ],
-  url: "https://filone.io",
+  url: "https://fil.one",
   offers: {
     "@type": "Offer",
     priceCurrency: "USD",
@@ -65,8 +65,8 @@ const Index = () => {
     title: "Fil One — S3-Compatible Object Storage Built for the AI Era",
     description:
       "The storage layer for AI agents. S3-compatible object storage built on Filecoin — store RAG corpora, agent memory, model artifacts, and datasets. No egress fees, verifiable data integrity, $4.99/TB/month.",
-    canonical: "https://filone.io/",
-    ogImage: "https://filone.io/og-image.png",
+    canonical: "https://fil.one/",
+    ogImage: "https://fil.one/og-image.png",
   });
 
   return (

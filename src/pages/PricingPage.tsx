@@ -52,8 +52,8 @@ const PricingPage = () => {
     title: "Pricing — Fil One",
     description:
       "Simple, predictable pricing for Object Storage, RAG Pipeline, and AI Agent Toolkit. Start free, scale as you grow.",
-    canonical: "https://filone.io/pricing",
-    ogImage: "https://filone.io/og-image.png",
+    canonical: "https://fil.one/pricing",
+    ogImage: "https://fil.one/og-image.png",
   });
 
   return (

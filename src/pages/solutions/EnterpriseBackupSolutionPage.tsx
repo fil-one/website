@@ -74,8 +74,8 @@ const EnterpriseBackupSolutionPage = () => {
     title: "Enterprise Backup & Disaster Recovery — Fil One",
     description:
       "Immutable, geo-distributed backup storage with no egress fees. Ransomware resilience, cryptographic integrity, and compliance-ready for enterprise teams.",
-    canonical: "https://filone.io/solutions/enterprise-backup",
-    ogImage: "https://filone.io/og-image.png",
+    canonical: "https://fil.one/solutions/enterprise-backup",
+    ogImage: "https://fil.one/og-image.png",
   });
 
   return (

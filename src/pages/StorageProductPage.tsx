@@ -46,8 +46,8 @@ const StorageProductPage = () => {
     title: "Object Storage — Fil One",
     description:
       "S3-compatible object storage built for the AI era. Verifiable data integrity, no egress fees, $4.99/TB/month. The foundation every Fil One account starts with.",
-    canonical: "https://filone.io/storage",
-    ogImage: "https://filone.io/og-image.png",
+    canonical: "https://fil.one/storage",
+    ogImage: "https://fil.one/og-image.png",
   });
 
   return (

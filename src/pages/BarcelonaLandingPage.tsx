@@ -311,7 +311,7 @@ const BarcelonaLandingPage = () => {
     title: "Fil One for Barcelona — Hyperscaler speed. Budget-tier bills.",
     description:
       "S3-compatible object storage for creative, AI, and SaaS teams across Southern Europe. European-native latency, zero egress fees, €4.99/TB per month.",
-    canonical: "https://filone.io/lp/barcelona",
+    canonical: "https://fil.one/lp/barcelona",
   });
 
   const { ref: posRef,          inView: posInView          } = useInView({ threshold: 0.05 });

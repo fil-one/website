@@ -270,7 +270,7 @@ const BarcelonaLandingPageES = () => {
     title: "Fil One para Barcelona — Velocidad de hiperescalador. Facturas de gama económica.",
     description:
       "Almacenamiento de objetos compatible con S3 para equipos creativos, de IA y SaaS en el sur de Europa. Latencia nativa europea, sin tarifas de egreso, €4,99/TB al mes.",
-    canonical: "https://filone.io/lp/es/barcelona",
+    canonical: "https://fil.one/lp/es/barcelona",
   });
 
   const { ref: posRef,          inView: posInView          } = useInView({ threshold: 0.05 });

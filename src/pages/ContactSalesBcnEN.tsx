@@ -62,7 +62,7 @@ const ContactSalesBcnEN = () => {
   useSeo({
     title: "Contact Sales — Fil One S3 Object Storage",
     description: "Talk to the Fil One team about enterprise S3-compatible object storage pricing, volume discounts, and custom SLAs.",
-    canonical: "https://filone.io/lp/barcelona/contact",
+    canonical: "https://fil.one/lp/barcelona/contact",
   });
 
   const [form, setForm] = useState({

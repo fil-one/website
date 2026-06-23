@@ -23,8 +23,8 @@ const VersionA = () => {
     title: "Fil One — S3 Storage with AI Capabilities (Version A)",
     description:
       "S3-compatible object storage built for the AI era. Add RAG Pipeline and AI Agent Toolkit as capabilities on top of your storage.",
-    canonical: "https://filone.io/v1",
-    ogImage: "https://filone.io/og-image.png",
+    canonical: "https://fil.one/v1",
+    ogImage: "https://fil.one/og-image.png",
   });
 
   return (
