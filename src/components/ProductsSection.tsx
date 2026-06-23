@@ -32,7 +32,7 @@ const ProductsSection = () => {
       className="w-full"
       style={{ backgroundColor: "#FFFFFF" }}
     >
-      <div className="flex flex-col gap-10 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-[1120px] mx-auto">
+      <div className="flex flex-col gap-10 items-center px-5 md:px-8 pt-40 md:pt-52 pb-24 md:pb-32 w-full max-w-[1120px] mx-auto">
 
         {/* Heading */}
         <div
