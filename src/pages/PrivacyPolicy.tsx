@@ -55,7 +55,7 @@ const PrivacyPolicy = () => {
               Privacy Policy
             </h1>
             <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, color: "#71717A" }}>
-              Effective Date: Mar 3, 2026
+              Last updated: June 23, 2026
             </p>
           </div>
 
@@ -129,7 +129,8 @@ const PrivacyPolicy = () => {
           {/* IV */}
           <div className="flex flex-col gap-3">
             <h2 style={h2Style}>IV. Disclosure of Personal Information</h2>
-            <p style={pStyle}>We may disclose your personal information in the following circumstances:</p>
+
+            <p style={pStyle}><strong>A. In general:</strong> We may disclose your personal information in the following circumstances:</p>
             <ul className="flex flex-col gap-2 pl-5 list-disc">
               <li style={liStyle}><strong>Affiliates &amp; Related Entities:</strong> We may disclose your personal information between and among affiliates, subsidiaries, and related companies.</li>
               <li style={liStyle}><strong>Working Group Participants:</strong> We may disclose personal information, such as identifiers like real name and email, with members of working groups that we participate in.</li>
@@ -143,15 +144,52 @@ const PrivacyPolicy = () => {
               Please note that if you post any of your personal information via the Services, such personal information may be viewed, collected, and used by others over whom we have no control. We are not responsible for the use by third parties of personal information you post or otherwise make public.
             </p>
             <p style={pStyle}>
-              We do not sell personal information to third parties for monetary or other valuable consideration as defined by applicable law or share personal information for purposes of cross-contextual behavioral or targeted advertising.
+              We do not sell personal information to third parties for monetary or other valuable consideration as defined by applicable law.
+            </p>
+
+            <p style={pStyle}><strong>B. Google Analytics:</strong></p>
+            <p style={pStyle}>
+              We use Google Analytics to better understand how users interact with our website and to measure the effectiveness of our online advertising campaigns. Google Analytics uses cookies and similar technologies to collect information about your browsing behavior, including which pages you visit, how long you stay on the site, and the referring website or ad campaign that brought you to our site.
+            </p>
+            <p style={pStyle}>
+              We have enabled Google Analytics Advertising Features, such as conversion tracking, remarketing and Demographics &amp; Interest Reporting. This allows us to track when a user clicks on one of our ads on platforms like Google Ads, determine which ads drive traffic to our site, and improve our future marketing efforts. These features may involve third-party cookies or identifiers to track user activity across different sites.
+            </p>
+            <p style={pStyle}>
+              The information collected by Google Analytics is primarily aggregated and anonymized. It does not include personally identifiable information (PII) such as your name, email address, or phone number. We do not combine analytics data with personally identifiable information without your explicit consent.
+            </p>
+            <p style={pStyle}>
+              Google may use this data in accordance with its own privacy policy. You can opt out of Google Analytics by installing the Google Analytics opt-out browser add-on, or through our Consent Management Tool.
+            </p>
+
+            <p style={pStyle}><strong>C. Cookies</strong></p>
+            <p style={pStyle}>
+              &ldquo;Cookies&rdquo; are small text files that allow websites to store and retrieve information about you from your computer system. We may serve cookies to track individual site usage for later aggregation. If you do not want information collected through the use of cookies, there is a procedure in most browser settings that allows you to automatically decline cookies, or be given the choice of declining or accepting the transfer to your computer of a particular cookie (or cookies) from a particular site. You may wish to refer to allaboutcookies.org/manage-cookies. If you reject cookies through your browser settings, you may still use our Services, but you may experience some inconvenience.
             </p>
           </div>
 
           {/* V */}
           <div className="flex flex-col gap-3">
-            <h2 style={h2Style}>V. Cookies</h2>
+            <h2 style={h2Style}>V. Data Storage Privacy and Security</h2>
             <p style={pStyle}>
-              &ldquo;Cookies&rdquo; are small text files that allow websites to store and retrieve information about you from your computer system. We may serve cookies to track individual site usage for later aggregation. If you do not want information collected through the use of cookies, there is a procedure in most browser settings that allows you to automatically decline cookies, or be given the choice of declining or accepting the transfer to your computer of a particular cookie (or cookies) from a particular site. You may wish to refer to allaboutcookies.org/manage-cookies. If you reject cookies through your browser settings, you may still use our Services, but you may experience some inconvenience.
+              The section applies to the content of the data processed, stored, or hosted by our customers using the third-party storage providers in connection with a FIL One account.
+            </p>
+            <p style={pStyle}>
+              With FIL One, you own your data, and you control who has access. FIL One will implement and maintain commercially reasonable administrative, physical, and technical safeguards to protect the confidentiality, integrity, and availability of your content. You are responsible for securing access to its Account, including configuring appropriate access controls, including the principle of least privilege, multi-factor authentication, and regular key rotation; and promptly notifying FIL One at security@fil.org upon discovery of any unauthorized access or suspected compromise of account credentials. You should not make buckets publicly readable unless intentionally serving public content and should regularly audit bucket permissions using the FIL One security dashboard.
+            </p>
+            <p style={pStyle}>
+              To the extent you store personal data of its own customers or end users (as defined under GDPR, CCPA, or other applicable privacy laws) through the Services, it is your responsibility to comply with all applicable laws for any activity occurring under your account, including any actions taken by authorized or unauthorized users. Upon request, you and FIL One will enter into FIL One&rsquo;s standard Data Processing Agreement (&ldquo;DPA&rdquo;). The DPA governs the processing of personal data and takes precedence over this Agreement in the event of a conflict with respect to data protection matters.
+            </p>
+            <p style={pStyle}>
+              FIL One uses industry-standard encryption with per-object data encryption keys, ensuring your data is protected regardless of which provider it&rsquo;s stored with. Because FIL One accepts standard AWS CLI commands and SDK connections, developers can also natively run client-side encryption tools directly before upload for additional security and privacy.
+            </p>
+            <p style={pStyle}>
+              Filecoin is a distributed storage network launched in 2020, designed to make data portable, verifiable, and resilient by default. To help fulfil that promise, the Filecoin network uses Proof-of-Spacetime (&ldquo;PoSt&rdquo;) to validate that storage providers are continuously providing the storage they claim, requiring storage providers to be able to continuously prove the availability and integrity of the data they are storing, and the storage provider have a legitimate interest in fulfilling this obligation. Due to the technical architecture of our cryptographic and blockchain system, including PoST, this prevents physical deletion of stored content prior to the expiration of the storage deal term.
+            </p>
+            <p style={pStyle}>
+              To fulfill requests for deletion for data stored through Filecoin storage providers, we utilize cryptographic erasure (also known as crypto-shredding). When you request deletion, we permanently destroy the unique cryptographic keys used to encrypt and access your personally identifiable data. Once these keys are destroyed, the underlying data is rendered permanently unreadable and effectively erased.
+            </p>
+            <p style={pStyle}>
+              You have the right to access and to data portability for your stored content. You may download or export your content at any time using the FIL One API or management console, subject to applicable egress fees and the technical limitations of the Services.
             </p>
           </div>
 
@@ -165,7 +203,7 @@ const PrivacyPolicy = () => {
               <li style={liStyle}><strong>Right to Correction and Deletion:</strong> You may have the right to request that we correct or delete personal information that we collected from you and retain, subject to certain exceptions.</li>
             </ul>
             <p style={pStyle}>
-              To exercise your access, portability, correction, and deletion rights, you may submit a request by e-mail at Support Email. Once we receive your request, we may verify it by requesting information sufficient to confirm your identity. You may also be entitled, in accordance with applicable law, to appeal a refusal to take action on your request; to do so please respond to the email denying your request.
+              To exercise your access, portability, correction, and deletion rights, you may submit a request by e-mail at privacypolicy@fil.org. Once we receive your request, we may verify it by requesting information sufficient to confirm your identity. You may also be entitled, in accordance with applicable law, to appeal a refusal to take action on your request; to do so please respond to the email denying your request.
             </p>
             <p style={pStyle}>
               Only you, or a person authorized by you to act on your behalf, may make a verifiable consumer request related to your personal information. If you would like to use an authorized agent to exercise your rights, we may request evidence that you have provided such agent with power of attorney or that the agent otherwise has valid written authority to submit requests to exercise rights on your behalf. We reserve the right to deny requests in certain circumstances, such as where we have a reasonable belief that the request is fraudulent, where your identity cannot be confirmed, or where we must maintain your personal information consistent with applicable law.
@@ -246,7 +284,7 @@ const PrivacyPolicy = () => {
           <div className="flex flex-col gap-3">
             <h2 style={h2Style}>XV. More Questions?</h2>
             <p style={pStyle}>
-              If you have any questions about this Privacy Policy, email them to Support Email and be sure to indicate the specific site you&rsquo;re visiting and the nature of your question or concern.
+              If you have any questions about this Privacy Policy, email them to privacypolicy@fil.org and be sure to indicate the specific site you&rsquo;re visiting and the nature of your question or concern.
             </p>
           </div>
 
