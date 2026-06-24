@@ -45,7 +45,7 @@ const FEATURES = [
   {
     icon: CurrencyDollar,
     title: "Flat $4.99/TB",
-    desc: "One rate for storage, nothing for delivery. The bill is your stored footprint times $4.99 — predictable enough to put in a budget line that holds for years.",
+    desc: "One rate for storage, nothing for delivery. The bill is your stored TBs times $4.99 — predictable enough to put in a budget line that holds for years.",
   },
   {
     icon: Plug,
@@ -55,13 +55,13 @@ const FEATURES = [
   {
     icon: ChartLine,
     title: "11 nines durability",
-    desc: "Designed for 11 nines of durability. The master files behind every derivative and tile are held to an archival standard, not just a delivery cache.",
+    desc: "Distributed, redundant architecture designed for 11 nines of durability. The master files behind every derivative and tile are held to an archival standard, not just a delivery cache.",
   },
 ];
 
 const CollectionsAccessLandingPage = () => {
   useSeo({
-    title: "Fil One — Open the collection. Skip the egress bill.",
+    title: "Fil One — Open the collection. Close the tab.",
     description:
       "Serve digital collections and IIIF imagery with $0 egress. Flat $4.99/TB storage, S3-compatible for IIIF image servers, 11 nines durability.",
     canonical: "https://fil.one/lp/collections-access",
@@ -139,7 +139,7 @@ const CollectionsAccessLandingPage = () => {
               }}
             >
               Open the collection.<br />
-              <span style={{ color: "#0090FF" }}>Skip the egress bill.</span>
+              <span style={{ color: "#0090FF" }}>Close the tab.</span>
             </h1>
 
             <p
@@ -154,7 +154,7 @@ const CollectionsAccessLandingPage = () => {
                 margin: 0,
               }}
             >
-              Flat $4.99/TB. Serve IIIF imagery and downloads at $0 egress, no matter how many people open it. S3-compatible, 11 nines durability.
+              Flat $4.99/TB. Serve IIIF imagery and downloads at $0 egress, no matter how many people open it.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -189,9 +189,9 @@ const CollectionsAccessLandingPage = () => {
           >
             <div className="flex flex-col gap-4 items-center text-center max-w-[620px] mx-auto">
               <SectionLabel>The access penalty</SectionLabel>
-              <SectionHeading>You digitised it to be seen. Then access became the expensive part.</SectionHeading>
+              <SectionHeading>You digitized it to be seen. Then access became the expensive part.</SectionHeading>
               <SectionSub>
-                On metered storage, every view of a high-resolution image is an egress charge. The more your collection is used, the more it costs — so the success you wanted becomes the bill you fear.
+                On metered storage, every view of a high-resolution image is an egress charge. The more your collection is used, the more it costs — so open access starts to feel like a budget liability.
               </SectionSub>
             </div>
 
@@ -199,8 +199,8 @@ const CollectionsAccessLandingPage = () => {
               {[
                 {
                   label: "Popularity is a penalty",
-                  catch: "Egress scales with how much you are used.",
-                  body: "IIIF deep-zoom delivers many tiles per image. A single popular exhibition or a class assignment can move terabytes in a month. On per-GB egress, the most-loved part of the collection generates the biggest invoice.",
+                  catch: "Every view adds to your invoice.",
+                  body: "IIIF deep-zoom delivers 50–200 tiles per image. A single popular exhibition or a class assignment can move terabytes in a month. On per-GB egress, the most-loved part of the collection generates the biggest invoice.",
                 },
                 {
                   label: "The unpredictable invoice",
@@ -210,7 +210,7 @@ const CollectionsAccessLandingPage = () => {
                 {
                   label: "Access controls as cost control",
                   catch: "Rationing access to manage a bill.",
-                  body: "Teams throttle resolution, gate downloads, or cache aggressively — not for any preservation reason, but to keep egress down. The mission is open access; the pricing model quietly works against it.",
+                  body: "Teams throttle resolution, gate downloads, or cache aggressively — not to support preservation, but to keep egress down. The mission is open access; the pricing model quietly works against it.",
                 },
               ].map(({ label, body, catch: catchLine }) => (
                 <div
@@ -364,7 +364,7 @@ const CollectionsAccessLandingPage = () => {
               </table>
             </div>
             <p className="text-xs text-slate-500">
-              Scenario: 10 TB stored with 5 TB/month delivered to viewers (IIIF tiles, derivatives, downloads). AWS S3 Standard: ≈$236/mo storage ($0.023/GB) + 5 TB egress (5,120 GB × $0.09/GB) ≈ $461/mo ≈ $697/mo all-in. Wasabi: $6.99/TB = $70/mo, egress free within fair-use policy. Fil One: $4.99/TB = $50/mo, $0 egress. AWS and Wasabi rates from public US price cards, Q2 2026; figures indicative and rounded.
+              Scenario: 10 TB stored with 5 TB/month delivered to viewers (IIIF tiles, derivatives, downloads). AWS S3 Standard: ≈$236/mo storage ($0.023/GB) + 5 TB egress (5,120 GB × $0.09/GB) ≈ $461/mo ≈ $697/mo all-in. Wasabi: $6.99/TB = $70/mo, egress-free within fair-use limits; traffic-heavy collections may incur charges. Fil One: $4.99/TB = $50/mo, $0 egress. AWS and Wasabi rates from public US price cards, Q2 2026; figures indicative and rounded.
             </p>
           </div>
         </section>
@@ -378,7 +378,7 @@ const CollectionsAccessLandingPage = () => {
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Access without the meter</SectionLabel>
               <SectionHeading>
-                <span style={{ color: "#0090FF" }}>Serve as much as you like.</span> The bill does not move.
+                <span style={{ color: "#0090FF" }}>Open access far and wide.</span> The bill does not move.
               </SectionHeading>
             </div>
 
@@ -420,7 +420,7 @@ const CollectionsAccessLandingPage = () => {
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
               <a href="/contact-sales" className="btn-secondary">Talk to an expert</a>
             </div>
-            <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A" }}>No credit card required · No egress fees · Connects in minutes</p>
+            <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A" }}>No credit card required · 1 TB free · $0 egress</p>
           </div>
         </section>
 
@@ -434,7 +434,7 @@ const CollectionsAccessLandingPage = () => {
               <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1"/></svg>')}")`, backgroundSize: "60px 60px", maskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", pointerEvents: "none" }} />
               <div style={{ position: "relative" }}>
                 <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>Open access, flat bill.</h2>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>Free 1 TB evaluation. Point your IIIF server at Fil One and serve the collection — at zero egress cost.</p>
+                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>Start for free with 1 TB. Point your IIIF server at Fil One and serve the collection — at zero egress cost.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark"><span className="btn-primary-inner">Start for free</span></a>
                   <a href="/contact-sales" className="btn-secondary btn-secondary-dark">Talk to an expert</a>
