@@ -18,7 +18,7 @@ const PRESERVATION_ROWS = [
   {
     provider: "AWS S3 Standard",
     storage: "$236",
-    egress: "$0.09/GB",
+    egress: "~$75",
     allIn: "$311",
     integrity: "No",
     isFilOne: false,
@@ -26,7 +26,7 @@ const PRESERVATION_ROWS = [
   {
     provider: "AWS Glacier Deep Archive",
     storage: "$10",
-    egress: "$0.02 + $0.09/GB",
+    egress: "~$92",
     allIn: "$102",
     integrity: "No",
     isFilOne: false,
@@ -53,17 +53,17 @@ const FEATURES = [
   {
     icon: ShieldCheck,
     title: "Integrity verification, ~24 h",
-    desc: "Every preserved object is re-verified approximately every 24 hours. You do not wait a year for a fixity review to discover that a file changed — the check is continuous and built in.",
+    desc: "Every preserved object is re-verified approximately every 24 hours. You do not wait a year to authenticate that a file is unchanged. Checks are continuous and built in to storage.",
   },
   {
     icon: ChartLine,
     title: "11 nines durability",
-    desc: "Designed for 11 nines of durability. The storage architecture makes bit-loss a detectable, recoverable event rather than a silent one you find at restore time.",
+    desc: "Distributed, redundant architecture with no single point of failure. Designed to deliver 11 nines of durability, backed by continuous, audit-ready integrity records.",
   },
   {
     icon: ArrowsOut,
     title: "$0 retrieval, $0 egress",
-    desc: "Reading the collection back — for an audit, a migration, or a patron request — costs nothing. Verifying your archive is no longer a line item you ration.",
+    desc: "Reading the collection back — for an audit, a migration, or a patron request — costs nothing. Accessing your archive is no longer a line item you ration.",
   },
   {
     icon: Database,
@@ -74,7 +74,7 @@ const FEATURES = [
 
 const DigitalPreservationLandingPage = () => {
   useSeo({
-    title: "Fil One — Preservation you can verify, not just trust",
+    title: "Fil One — Preservation you can verify",
     description:
       "Flat $4.99/TB digital preservation storage with integrity verification every ~24 hours. No retrieval fees, no egress. 11 nines durability, S3-compatible.",
     canonical: "https://fil.one/lp/digital-preservation",
@@ -151,8 +151,8 @@ const DigitalPreservationLandingPage = () => {
                 margin: 0,
               }}
             >
-              Preservation you can verify,<br />
-              <span style={{ color: "#0090FF" }}>not just trust.</span>
+              Preservation you can<br />
+              <span style={{ color: "#0090FF" }}>verify.</span>
             </h1>
 
             <p
@@ -167,7 +167,7 @@ const DigitalPreservationLandingPage = () => {
                 margin: 0,
               }}
             >
-              Flat $4.99/TB. Integrity verified approximately every 24 hours, not once a year. No retrieval fees, no egress, 11 nines durability.
+              Integrity verified every 24 hours, not once a year. Built in at $4.99/TB flat.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -202,9 +202,9 @@ const DigitalPreservationLandingPage = () => {
           >
             <div className="flex flex-col gap-4 items-center text-center max-w-[620px] mx-auto">
               <SectionLabel>The preservation gap</SectionLabel>
-              <SectionHeading>A fixity report is a snapshot. Decay happens between snapshots.</SectionHeading>
+              <SectionHeading>A fixity report is a snapshot. Decay doesn’t wait for the next one.</SectionHeading>
               <SectionSub>
-                Preservation depends on knowing the bits are unchanged. Most storage only tells you once a year — and charges you to find out. Neither the gap nor the bill belongs in a serious preservation program.
+                Preservation depends on knowing the files are unchanged. Most storage only tells you once a year — and charges you to find out. Neither the gap nor the bill belongs in a serious archival program.
               </SectionSub>
             </div>
 
@@ -295,7 +295,7 @@ const DigitalPreservationLandingPage = () => {
             <div className="flex flex-col gap-3">
               <SectionLabel>The comparison</SectionLabel>
               <SectionHeading>
-                10 TB collection. <span style={{ color: "#0090FF" }}>One fixity review a year.</span>
+                10 TB collection. <span style={{ color: "#0090FF" }}>One fixity review a year — or one every day.</span>
               </SectionHeading>
               <SectionSub maxWidth={640}>
                 Same preservation workload, four providers. Monthly storage, the cost of reading the collection back to verify it, and whether integrity is actually checked.
