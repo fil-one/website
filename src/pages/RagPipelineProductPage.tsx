@@ -155,7 +155,7 @@ const RagPipelineProductPage = () => {
                     padding: "3px 10px",
                   }}
                 >
-                  Coming soon · Bucket Intelligence
+                  Early access · Bucket Intelligence
                 </span>
               </div>
 
