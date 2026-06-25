@@ -15,13 +15,13 @@ const PRODUCTS = [
   {
     label: "Bucket Intelligence",
     description: "Turn buckets into knowledge bases",
-    badge: "Coming soon",
+    badge: "Early access",
     href: "/bucket-intelligence",
   },
   {
     label: "AI Agent Toolkit",
     description: "MCP, OAuth & SDK integrations",
-    badge: "Coming soon",
+    badge: "Early access",
     href: "/ai-agent-toolkit",
   },
 ];
@@ -223,10 +223,10 @@ const PlatformNavbar = () => {
                                   fontWeight: 500,
                                   fontSize: 10,
                                   letterSpacing: "0.05em",
-                                  color: "#0070CC",
+                                  color: "#52525B",
                                   textTransform: "uppercase",
-                                  backgroundColor: "#EFF8FF",
-                                  border: "1px solid rgba(0,144,255,0.2)",
+                                  backgroundColor: "#F4F4F5",
+                                  border: "1px solid #E4E4E7",
                                   borderRadius: 9999,
                                   padding: "1px 6px",
                                 }}>
@@ -378,10 +378,10 @@ const PlatformNavbar = () => {
                       fontWeight: 500,
                       fontSize: 10,
                       letterSpacing: "0.05em",
-                      color: "#0070CC",
+                      color: "#52525B",
                       textTransform: "uppercase",
-                      backgroundColor: "#EFF8FF",
-                      border: "1px solid rgba(0,144,255,0.2)",
+                      backgroundColor: "#F4F4F5",
+                      border: "1px solid #E4E4E7",
                       borderRadius: 9999,
                       padding: "1px 6px",
                     }}
