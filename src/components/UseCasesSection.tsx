@@ -4,9 +4,9 @@ import { useInView } from "@/hooks/useInView";
 const USE_CASES = [
   {
     icon: ShieldCheck,
-    title: "Auditable data integrity",
+    title: "Immutable by design",
     description:
-      "Don't take our word for it. Fil One provides daily proof that your data is stored exactly as you uploaded it, uncorrupted.",
+      "Apply Object Lock and retention controls to make data impossible to delete, overwrite, or tamper with — not by ransomware, not by accident, not by anyone.",
   },
   {
     icon: Plug,
