@@ -220,7 +220,7 @@ const AgentToolkitProductPage = () => {
                     padding: "3px 10px",
                   }}
                 >
-                  Coming soon · AI Agent Toolkit
+                  Early access · AI Agent Toolkit
                 </span>
               </div>
 
