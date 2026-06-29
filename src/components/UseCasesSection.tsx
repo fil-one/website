@@ -16,7 +16,7 @@ const USE_CASES = [
   },
   {
     icon: Database,
-    title: "11 nines by design",
+    title: "Eleven nines of durability",
     description:
       "Distributed, redundant storage designed to deliver 11 nines of durability, backed by 24/7, audit-ready visibility into storage integrity.",
   },

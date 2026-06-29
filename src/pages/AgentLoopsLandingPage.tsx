@@ -122,9 +122,9 @@ s3.put_object(
           <div ref={problemRef} className={`flex flex-col gap-10 w-full max-w-[1120px] mx-auto reveal${problemInView ? " in-view" : ""}`}>
             <div className="flex flex-col gap-4 items-center text-center max-w-[600px] mx-auto">
               <SectionLabel>The billing problem</SectionLabel>
-              <SectionHeading>Agents are high-frequency by design. Per-call pricing taxes that frequency.</SectionHeading>
+              <SectionHeading>Agents are high-frequency workloads. Per-call pricing taxes that frequency.</SectionHeading>
               <SectionSub>
-                Every agent step writes state. Every context-aware turn reads memory. Every tool call produces output. Storage that charges per operation makes agents expensive to run — and the cost scales with capability, not with data volume.
+                Every agent step writes state. Every context-aware turn reads memory. Every tool call produces output. Storage that charges per operation makes agents expensive to run, and the cost scales with capability, not with data volume.
               </SectionSub>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
@@ -137,12 +137,12 @@ s3.put_object(
                 {
                   label: "The retrieval tax",
                   catch: "Reading context and memory charges egress.",
-                  body: "Agents that retrieve context, load memory, or read prior outputs pay $0.09/GB in egress on every read from AWS. The more context-aware the agent, the more it reads — and the more the bill grows.",
+                  body: "Agents that retrieve context, load memory, or read prior outputs pay $0.09/GB in egress on every read from AWS. The more context-aware the agent, the more it reads, and the more the bill grows.",
                 },
                 {
                   label: "The framework lock",
                   catch: "Purpose-built AI storage charges per query.",
-                  body: "Managed vector databases and agent memory platforms charge per API call. Teams building high-frequency agents find that per-query pricing makes the storage layer the dominant cost — not the LLM.",
+                  body: "Managed vector databases and agent memory platforms charge per API call. Teams building high-frequency agents find that per-query pricing makes the storage layer the dominant cost, not the LLM.",
                 },
               ].map(({ label, body, catch: c }) => (
                 <div key={label} className="flex flex-col rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF", boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)" }}>

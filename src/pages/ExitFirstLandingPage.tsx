@@ -15,9 +15,9 @@ const EXIT_ROWS = [
 ];
 
 const FEATURES = [
-  { icon: Plug, title: "Full S3 parity", desc: "Standard S3 API. The tools that read and write Fil One are the same ones that read and write everywhere else — so the migrate-off command is one you already know." },
-  { icon: ArrowsOut, title: "$0 egress on exit", desc: "Moving your data out costs nothing. The exit isn't a renegotiation or a budget request — it's a sync command you can run today, for free." },
-  { icon: ChartLine, title: "Flat, predictable cost", desc: "$4.99/TB/month while you stay. No egress, no per-request fees — the bill that would normally make leaving expensive doesn't exist." },
+  { icon: Plug, title: "Full S3 parity", desc: "Standard S3 API. The tools that read and write Fil One are the same ones that read and write everywhere else, so the migrate-off command is one you already know." },
+  { icon: ArrowsOut, title: "$0 egress on exit", desc: "Moving your data out costs nothing. The exit is a sync command you can run today, for free — not a contract renegotiation or a budget request." },
+  { icon: ChartLine, title: "Flat, predictable cost", desc: "$4.99/TB/month while you stay. With no egress and no per-request fees, the bill that would normally make leaving expensive doesn't exist." },
   { icon: ShieldCheck, title: "Integrity-verified data", desc: "Every object is verified approximately every 24 hours, so the data you eventually move out is provably the data you put in." },
 ];
 
@@ -25,7 +25,7 @@ const ExitFirstLandingPage = () => {
   useSeo({
     title: "Fil One — Here's how to leave. Read it before you start.",
     description:
-      "S3-compatible storage with $0 egress. The exit is a documented one-line sync command, not a renegotiation. Verify the way out before you commit. $4.99/TB flat.",
+      "S3-compatible storage with $0 egress. The exit is a documented one-line sync command you can run on day one. Verify the way out before you commit. $4.99/TB flat.",
     canonical: "https://fil.one/lp/exit-first",
   });
 
@@ -62,7 +62,7 @@ rclone sync filone:my-bucket aws:my-bucket --progress
               Here's how to leave.<br /><span style={{ color: "#0090FF" }}>Read it before you start.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 600, margin: 0 }}>
-              S3-compatible, $0 egress. The exit is a documented one-line command, not a renegotiation. You can verify the way out before you ever commit.
+              S3-compatible, $0 egress. The exit is a documented one-line command you can run on day one. You can verify the way out before you ever commit.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
@@ -78,7 +78,7 @@ rclone sync filone:my-bucket aws:my-bucket --progress
             <div className="flex flex-col gap-4 items-center text-center max-w-[620px] mx-auto">
               <SectionLabel>The lock-in you can't see</SectionLabel>
               <SectionHeading>Every vendor says "no lock-in." Few will show you the exit.</SectionHeading>
-              <SectionSub>If you've been burned before, the claim isn't enough — you want to see the way out before you put data in. With most providers, you only discover the real exit cost when you try to leave.</SectionSub>
+              <SectionSub>If you've been burned before, the claim isn't enough. You want to see the way out before you put data in, and with most providers you only discover the real exit cost when you try to leave.</SectionSub>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
               {[
