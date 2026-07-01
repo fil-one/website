@@ -18,12 +18,10 @@ const valueColor = (val: string) => {
 
 // ─── Pricing table data ────────────────────────────────────────────────────────
 const PRICING_ROWS = [
-  { provider: "AWS S3 Standard",      region: "eu-south-2 Madrid",          storage: "€197",    egress: "€790",   api: "€1.83", total: "€990",    isFilOne: false },
-  { provider: "Google Cloud Storage", region: "europe-southwest1 Madrid",   storage: "€171",    egress: "€1,052", api: "€1.83", total: "€1,226",  isFilOne: false },
-  { provider: "Azure Blob",           region: "Spain Central Madrid",        storage: "€178",    egress: "€763",   api: "€1.89", total: "€943",    isFilOne: false },
-  { provider: "Wasabi",               region: "eu-west-2 Paris",            storage: "€59.90",  egress: "€0",     api: "€0",    total: "€59.90",  isFilOne: false },
-  { provider: "Backblaze B2",         region: "eu-central-003 Amsterdam",   storage: "€59.60",  egress: "€0",     api: "€0",    total: "€59.60",  isFilOne: false },
   { provider: "Fil One",              region: "EU-West",                    storage: "€49.90",  egress: "€0",     api: "€0",    total: "€49.90",  isFilOne: true  },
+  { provider: "Backblaze B2",         region: "eu-central-003 Amsterdam",   storage: "€59.60",  egress: "€0",     api: "€0",    total: "€59.60",  isFilOne: false },
+  { provider: "Wasabi",               region: "eu-west-2 Paris",            storage: "€59.90",  egress: "€0",     api: "€0",    total: "€59.90",  isFilOne: false },
+  { provider: "AWS S3 Standard",      region: "eu-south-2 Madrid",          storage: "€197",    egress: "€790",   api: "€1.83", total: "€990",    isFilOne: false },
 ];
 
 // ─── Integrations ──────────────────────────────────────────────────────────────
@@ -85,7 +83,7 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
           <div className="flex flex-col items-center gap-6 px-5 md:px-8 w-full max-w-[1120px] mx-auto pt-20 md:pt-[120px] pb-10 md:pb-14">
             {/* Headline */}
             <h1
-              className="text-[30px] sm:text-[38px] md:text-[54px] hero-fade-2"
+              className="text-[34px] sm:text-[44px] md:text-[62px] hero-fade-2"
               style={{
                 fontFamily: "'Aspekta', sans-serif",
                 fontWeight: 500,
@@ -93,11 +91,11 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                 letterSpacing: "-0.025em",
                 color: "#09090B",
                 textAlign: "center",
-                maxWidth: 660,
+                maxWidth: 760,
                 margin: 0,
               }}
             >
-              European storage.<br /><span style={{ color: "#0090FF" }}>€4.99/TB, no egress fees.</span>
+              European storage<br /><span style={{ color: "#0090FF" }}>€4.99/TB, no egress fees</span>
             </h1>
 
             {/* Subheadline */}
@@ -118,11 +116,8 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-glow">
+              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-lg btn-primary-glow">
                 <span className="btn-primary-inner">Try 30 days for free</span>
-              </a>
-              <a href="/contact-sales" className="btn-secondary">
-                Talk to an expert
               </a>
             </div>
 
@@ -160,26 +155,25 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
         >
           <div
             ref={posRef}
-            className={`flex flex-col md:flex-row gap-8 md:gap-14 items-start w-full max-w-[1120px] mx-auto reveal${posInView ? " in-view" : ""}`}
+            className={`flex flex-col md:flex-row gap-8 md:gap-14 items-stretch md:items-start w-full max-w-[1120px] mx-auto reveal${posInView ? " in-view" : ""}`}
           >
-            <div className="flex flex-col gap-3 md:max-w-[320px]">
+            <div className="flex flex-col gap-3 items-center text-center md:items-start md:text-left md:max-w-[320px]">
               <SectionLabel>Why Fil One</SectionLabel>
-              <SectionHeading>Unbeatably low cost.</SectionHeading>
+              <SectionHeading>Unbeatably <span style={{ color: "#0090FF" }}>low cost</span></SectionHeading>
               <SectionSub maxWidth={320}>
                 S3-compatible, EU-sovereign, zero egress. No hidden fees, no pricing surprises.
               </SectionSub>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 flex-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full flex-1">
               {[
-                { stat: "€4.99/TB", label: "Flat monthly rate", desc: "Billed natively in EUR. No regional pricing tiers, no surprise line items." },
-                { stat: "€0", label: "Egress fees", desc: "Download your data as often as you need, at any scale, with no per-GB transfer charges." },
-                { stat: "23×", label: "Cheaper than AWS", desc: "Than AWS S3 eu-south-2 Madrid, for equivalent storage and egress volumes." },
-              ].map(({ stat, label, desc }) => (
-                <div key={stat} className="flex flex-col gap-3 p-6 rounded-2xl" style={{ backgroundColor: "#FFFFFF", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+                { stat: "€4.99/TB", label: "Flat monthly rate" },
+                { stat: "€0", label: "Egress fees" },
+                { stat: "20×", label: "Cheaper than AWS" },
+              ].map(({ stat, label }) => (
+                <div key={stat} className="flex flex-col items-center gap-1 px-6 py-9 rounded-2xl text-center" style={{ backgroundColor: "#FFFFFF", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
                   <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 36, color: "#0090FF", letterSpacing: "-0.02em", margin: 0 }}>{stat}</p>
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 14, color: "#09090B", margin: 0 }}>{label}</p>
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, color: "#71717A", lineHeight: 1.55, margin: 0 }}>{desc}</p>
+                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 16, color: "#09090B", margin: 0 }}>{label}</p>
                 </div>
               ))}
             </div>
@@ -198,13 +192,76 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
           >
             <div className="flex flex-col gap-3 items-center text-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>Your monthly bill, six ways.</SectionHeading>
+              <SectionHeading>Your monthly bill, <span style={{ color: "#0090FF" }}>four ways</span></SectionHeading>
               <SectionSub maxWidth={600}>
                 A 10 TB team in Barcelona, delivering 10 TB of egress each month, running 500,000 object operations.
               </SectionSub>
             </div>
 
-            <div style={{ overflowX: "auto" }}>
+            {/* Mobile: stacked cards (table below is md+ only) */}
+            <div className="flex flex-col gap-3 md:hidden">
+              {PRICING_ROWS.map((row) => (
+                <div
+                  key={row.provider}
+                  className="rounded-2xl p-4"
+                  style={{
+                    backgroundColor: row.isFilOne ? "#EFF8FF" : "#FFFFFF",
+                    border: row.isFilOne ? "1px solid rgba(0,144,255,0.25)" : "1px solid rgba(0,0,0,0.07)",
+                    fontFamily: "'Funnel Sans', sans-serif",
+                  }}
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <span style={{ fontSize: 16, fontWeight: 700, color: row.isFilOne ? "#0070CC" : "#09090B" }}>
+                      {row.provider}
+                    </span>
+                    {row.isFilOne && (
+                      <span
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          backgroundColor: "#EFF8FF",
+                          border: "1px solid rgba(0,144,255,0.2)",
+                          color: "#0070CC",
+                          fontSize: 11,
+                          fontWeight: 500,
+                          padding: "2px 8px",
+                          borderRadius: 9999,
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        You
+                      </span>
+                    )}
+                  </div>
+                  <div className="grid grid-cols-2 gap-y-2" style={{ fontSize: 14 }}>
+                    <span style={{ color: "#71717A" }}>Region</span>
+                    <span style={{ textAlign: "right", color: "#52525B" }}>{row.region}</span>
+                    <span style={{ color: "#71717A" }}>Storage</span>
+                    <span style={{ textAlign: "right", color: "#09090B" }}>{row.storage}</span>
+                    <span style={{ color: "#71717A" }}>Egress</span>
+                    <span style={{ textAlign: "right", color: row.isFilOne ? "#09090B" : valueColor(row.egress) }}>{row.egress}</span>
+                    <span style={{ color: "#71717A" }}>API / ops</span>
+                    <span style={{ textAlign: "right", color: row.isFilOne ? "#09090B" : valueColor(row.api) }}>{row.api}</span>
+                    <span style={{ color: "#71717A", fontWeight: 600, paddingTop: 8, borderTop: "1px solid rgba(0,0,0,0.06)", marginTop: 4 }}>Total / month</span>
+                    <span
+                      style={{
+                        textAlign: "right",
+                        fontWeight: 700,
+                        color: row.isFilOne ? "#0070CC" : "#09090B",
+                        paddingTop: 8,
+                        borderTop: "1px solid rgba(0,0,0,0.06)",
+                        marginTop: 4,
+                      }}
+                    >
+                      {row.total}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop / tablet: full table */}
+            <div className="hidden md:block" style={{ overflowX: "auto" }}>
               <table
                 style={{
                   width: "100%",
@@ -220,7 +277,7 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                         key={h}
                         style={{
                           textAlign: "left",
-                          padding: "11px 16px",
+                          padding: "14px 16px",
                           fontSize: 11,
                           fontWeight: 500,
                           letterSpacing: "0.06em",
@@ -244,9 +301,9 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                       {/* Provider */}
                       <td
                         style={{
-                          padding: "14px 16px",
+                          padding: "20px 16px",
                           borderBottom: "1px solid rgba(0,0,0,0.06)",
-                          fontSize: 14,
+                          fontSize: 16,
                           fontWeight: row.isFilOne ? 700 : 500,
                           color: row.isFilOne ? "#0070CC" : "#09090B",
                         }}
@@ -277,9 +334,9 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                       {/* Region */}
                       <td
                         style={{
-                          padding: "14px 16px",
+                          padding: "20px 16px",
                           borderBottom: "1px solid rgba(0,0,0,0.06)",
-                          fontSize: 13.5,
+                          fontSize: 15.5,
                           fontWeight: row.isFilOne ? 500 : 400,
                           color: row.isFilOne ? "#09090B" : "#52525B",
                         }}
@@ -289,9 +346,9 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                       {/* Storage */}
                       <td
                         style={{
-                          padding: "14px 16px",
+                          padding: "20px 16px",
                           borderBottom: "1px solid rgba(0,0,0,0.06)",
-                          fontSize: 13.5,
+                          fontSize: 15.5,
                           fontWeight: row.isFilOne ? 600 : 400,
                           color: row.isFilOne ? "#09090B" : "#52525B",
                         }}
@@ -301,9 +358,9 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                       {/* Egress */}
                       <td
                         style={{
-                          padding: "14px 16px",
+                          padding: "20px 16px",
                           borderBottom: "1px solid rgba(0,0,0,0.06)",
-                          fontSize: 13.5,
+                          fontSize: 15.5,
                           fontWeight: row.isFilOne ? 600 : 500,
                           color: row.isFilOne ? "#09090B" : valueColor(row.egress),
                         }}
@@ -313,9 +370,9 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                       {/* API */}
                       <td
                         style={{
-                          padding: "14px 16px",
+                          padding: "20px 16px",
                           borderBottom: "1px solid rgba(0,0,0,0.06)",
-                          fontSize: 13.5,
+                          fontSize: 15.5,
                           fontWeight: row.isFilOne ? 600 : 500,
                           color: row.isFilOne ? "#09090B" : valueColor(row.api),
                         }}
@@ -325,9 +382,9 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                       {/* Total */}
                       <td
                         style={{
-                          padding: "14px 16px",
+                          padding: "20px 16px",
                           borderBottom: "1px solid rgba(0,0,0,0.06)",
-                          fontSize: row.isFilOne ? 17 : 13.5,
+                          fontSize: row.isFilOne ? 19.5 : 15.5,
                           fontWeight: row.isFilOne ? 700 : 400,
                           color: row.isFilOne ? "#0070CC" : "#52525B",
                         }}
@@ -339,8 +396,8 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-slate-500 mt-4">
-              Competitor prices converted from USD at €1 = $1.17 (ECB rate, May 2026). FilOne is priced natively in EUR at €4.99/TB.
+            <p className="text-xs text-slate-500 mt-4 text-center">
+              Competitor prices converted from USD at €1 = $1.17 (ECB rate, May 2026). Fil One is priced natively in EUR at €4.99/TB.
             </p>
 
             {/* Mid-page CTA after pricing table */}
@@ -367,13 +424,13 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                 className="text-[24px] md:text-[34px]"
                 style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, lineHeight: "1.2", letterSpacing: "-0.02em", color: "#09090B", margin: 0 }}
               >
-                The <span style={{ color: "#0090FF" }}>S3 you expected.</span>
+                The <span style={{ color: "#0090FF" }}>S3 you expected</span>
               </h2>
               <p
                 className="text-[15px] md:text-[17px]"
                 style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", maxWidth: 560, margin: 0 }}
               >
-                Compatible with everything your team already uses. Priced for the workloads that move real data.
+                Compatible with everything your team already uses.
               </p>
             </div>
             <div
@@ -381,12 +438,12 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
               className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full reveal-group reveal${featuresInView ? " in-view" : ""}`}
             >
               {[
-                { icon: Plug,        title: "Drop-in S3 compatibility",    desc: "Same API, same SDKs, same tools. Point your existing workflow at our endpoint and keep shipping. No migration project." },
-                { icon: ArrowsOut,   title: "Zero egress fees",            desc: "Every read is free: client pulls, customer downloads, dashboard queries. Your bill stays flat no matter how busy the month." },
-                { icon: ShieldCheck, title: "Eleven nines of durability",  desc: "99.999999999% durability. Your data is replicated across multiple locations and monitored for integrity around the clock." },
-                { icon: Lock,        title: "Object Lock and versioning",  desc: "Compliance and governance modes for backup targets. Retention periods. Tamper-evident audit logs. Ready for regulated data." },
-                { icon: MapPin,      title: "Your data never leaves the EU", desc: "Storage infrastructure stays within European borders. Data residency you can point to when your legal or compliance team asks." },
-                { icon: Rocket,      title: "Up and running in minutes",   desc: "Generate your access keys, point your existing tools at our endpoint, and start uploading. No professional services, no migration project." },
+                { icon: Plug,        title: "Drop-in S3 compatibility",    desc: "Same API, same SDKs, same tools. Point your existing workflow at our endpoint." },
+                { icon: ArrowsOut,   title: "Zero egress fees",            desc: "Every read is free, so your bill stays flat no matter how busy the month." },
+                { icon: ShieldCheck, title: "Eleven nines of durability",  desc: "99.999999999% durability, replicated across locations and monitored around the clock." },
+                { icon: Lock,        title: "Object Lock and versioning",  desc: "Compliance modes, retention periods, and tamper-evident audit logs." },
+                { icon: MapPin,      title: "Your data never leaves the EU", desc: "Storage stays within European borders, ready for your compliance reviews." },
+                { icon: Rocket,      title: "Up and running in minutes",   desc: "Generate access keys, point your tools at our endpoint, and start uploading." },
               ].map(({ icon: Icon, title, desc }) => (
                 <div
                   key={title}
@@ -397,11 +454,11 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                     boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
                   }}
                 >
-                  <div className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0" style={{ backgroundColor: "#EFF8FF" }}>
-                    <Icon size={18} color="#0090FF" />
+                  <div className="flex items-center justify-center w-14 h-14 rounded-xl shrink-0" style={{ backgroundColor: "#EFF8FF" }}>
+                    <Icon size={26} color="#0090FF" />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 15, lineHeight: "1.3", color: "#09090B" }}>
+                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 18, lineHeight: "1.3", color: "#09090B" }}>
                       {title}
                     </p>
                     <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.6", color: "#71717A" }}>
@@ -426,16 +483,16 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
           >
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Integrations</SectionLabel>
-              <SectionHeading>Works with your existing stack.</SectionHeading>
+              <SectionHeading>Works with your <span style={{ color: "#0090FF" }}>existing stack</span></SectionHeading>
               <SectionSub maxWidth={440}>
                 S3 API compatible. If it talks to AWS, it talks to us.
               </SectionSub>
             </div>
 
             <div className="marquee-mask w-full overflow-hidden">
-              <div className="marquee-track flex items-center w-max" style={{ gap: 12 }}>
+              <div className="marquee-track marquee-track-slow flex items-center w-max" style={{ gap: 12 }}>
                 {[0, 1].map((copy) => (
-                  <div key={copy} style={{ display: "flex", gap: 12, paddingRight: 12 }} aria-hidden={copy === 1}>
+                  <div key={copy} style={{ display: "flex", gap: 12 }} aria-hidden={copy === 1}>
                     {INTEGRATIONS.map((name) => (
                       <div
                         key={name}
@@ -443,10 +500,10 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                           backgroundColor: "#FFFFFF",
                           border: "1px solid rgba(0,0,0,0.09)",
                           borderRadius: 10,
-                          padding: "12px 24px",
+                          padding: "14px 26px",
                           fontFamily: "'Funnel Sans', sans-serif",
                           fontWeight: 500,
-                          fontSize: 15.5,
+                          fontSize: 16.5,
                           color: "#374151",
                           whiteSpace: "nowrap",
                         }}
@@ -533,7 +590,7 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                     marginBottom: 12,
                   }}
                 >
-                  The cheapest object storage in Europe.
+                  The cheapest object storage in Europe
                 </h2>
                 <p
                   style={{

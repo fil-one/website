@@ -316,6 +316,14 @@
   animation: marquee-scroll 28s linear infinite;
 }
 
+.marquee-track-reverse {
+  animation-direction: reverse;
+}
+
+.marquee-track-slow {
+  animation-duration: 75s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-fade-1, .hero-fade-2, .hero-fade-3, .hero-fade-4 { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
