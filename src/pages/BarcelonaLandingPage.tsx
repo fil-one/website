@@ -95,7 +95,7 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                 margin: 0,
               }}
             >
-              European storage<br /><span style={{ color: "#0090FF" }}>€4.99/TB, no egress fees</span>
+              European storage.<br /><span style={{ color: "#0090FF" }}>€4.99/TB, no egress fees.</span>
             </h1>
 
             {/* Subheadline */}
