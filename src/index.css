@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Funnel+Sans:wght@400;500;600&display=swap');
-
 @font-face {
   font-family: 'Aspekta';
   src: url('/fonts/Aspekta-400.ttf') format('truetype');
@@ -150,6 +148,43 @@
   color: #FFFFFF;
 }
 
+/* Hero variant: a light-blue highlight flows evenly around the gradient border */
+.btn-primary-glow {
+  padding: 0;
+  border: 1.5px solid transparent;
+  background-image:
+    linear-gradient(#ffffff, #ffffff),
+    linear-gradient(
+      90deg,
+      #1ebfff 0%,
+      #0090ff 20%,
+      #0090ff 42%,
+      #83eaff 50%,
+      #0090ff 58%,
+      #0090ff 80%,
+      #1ebfff 100%
+    );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-size: 100% 100%, 260% 100%;
+  background-position: 0 0, 0% 0;
+  animation: btn-border-flow 3.2s linear infinite;
+}
+
+@keyframes btn-border-flow {
+  to { background-position: 0 0, -260% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary-glow { animation: none; }
+}
+
+/* ── Large primary (closing CTAs) ─────────────────────────────────────────── */
+.btn-primary-lg .btn-primary-inner {
+  padding: 14px 30px;
+  font-size: 17px;
+}
+
 /* Secondary button dark variant */
 .btn-secondary.btn-secondary-dark {
   background-color: #27272A;
@@ -238,10 +273,60 @@
   animation: badge-pulse 2.2s ease-out infinite;
 }
 
+/* CTA banner: grid texture drifts slowly, glow breathes behind the copy */
+@keyframes cta-grid-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 60px 60px; }
+}
+
+.cta-grid-drift {
+  animation: cta-grid-drift 30s linear infinite;
+}
+
+@keyframes cta-glow-pulse {
+  0%   { opacity: 0.5; transform: translate(0, 0) scale(1); }
+  25%  { opacity: 0.8; transform: translate(30px, -20px) scale(1.1); }
+  50%  { opacity: 1;   transform: translate(-10px, 25px) scale(1.15); }
+  75%  { opacity: 0.75; transform: translate(-30px, -15px) scale(1.05); }
+  100% { opacity: 0.5; transform: translate(0, 0) scale(1); }
+}
+
+.cta-glow-pulse {
+  animation: cta-glow-pulse 12s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-grid-drift, .cta-glow-pulse { animation: none; }
+}
+
+/* Logo marquee: infinite horizontal scroll, fading into background on both sides */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee-scroll 28s linear infinite;
+}
+
+.marquee-track-reverse {
+  animation-direction: reverse;
+}
+
+.marquee-track-slow {
+  animation-duration: 75s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-fade-1, .hero-fade-2, .hero-fade-3, .hero-fade-4 { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .badge-pulse { animation: none; }
+  .marquee-track { animation: none; }
 }
 
 /* Hide scrollbar on feature card strip */

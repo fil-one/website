@@ -49,34 +49,10 @@ const COMPETITORS = [
     isFilOne: false,
   },
   {
-    name: "Cloudflare R2",
-    region: null,
-    storagePricePerTB: 15.36,
-    egressPricePerTB: 0,
-    apiPer1M: 0,
-    isFilOne: false,
-  },
-  {
     name: "AWS S3",
     region: "eu-west-1",
     storagePricePerTB: 23.0,
     egressPricePerTB: 90.0,
-    apiPer1M: 5.0,
-    isFilOne: false,
-  },
-  {
-    name: "Google Cloud",
-    region: "EU multi-region",
-    storagePricePerTB: 20.0,
-    egressPricePerTB: 120.0,
-    apiPer1M: 5.0,
-    isFilOne: false,
-  },
-  {
-    name: "Azure Blob",
-    region: "West Europe",
-    storagePricePerTB: 18.4,
-    egressPricePerTB: 87.0,
     apiPer1M: 5.0,
     isFilOne: false,
   },
@@ -97,6 +73,7 @@ const PricingPage = () => {
 
   const { ref: benefitsRef, inView: benefitsInView } = useInView({ threshold: 0.05 });
   const { ref: calcRef, inView: calcInView } = useInView({ threshold: 0.05 });
+  const { ref: ctaRef, inView: ctaInView } = useInView({ threshold: 0.05 });
 
   const calcTotal = (c: typeof COMPETITORS[0]) =>
     c.storagePricePerTB * storedTB + c.egressPricePerTB * egressTB;
@@ -122,12 +99,11 @@ const PricingPage = () => {
                   lineHeight: "1.08",
                   letterSpacing: "-0.025em",
                   color: "#09090B",
-                  maxWidth: 640,
+                  maxWidth: 800,
                   margin: 0,
                 }}
               >
-                Simple, predictable pricing.<br />
-                <span style={{ color: "#0090FF" }}>No surprises.</span>
+                The <span style={{ color: "#0090FF" }}>cheapest S3-compatible</span> storage solution.
               </h1>
               <p
                 className="text-[15px] md:text-[17px]"
@@ -140,7 +116,7 @@ const PricingPage = () => {
                   margin: 0,
                 }}
               >
-                One flat rate per TB. No egress fees, no API charges, no minimum storage. Up to 80% less than hyperscalers.
+                One flat rate per TB. No egress fees and no API charges.
               </p>
             </div>
 
@@ -156,7 +132,7 @@ const PricingPage = () => {
                 }}
               >
                 <div className="flex flex-col gap-1">
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 15, color: "#09090B" }}>
+                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 18, color: "#09090B" }}>
                     Pay-as-you-go
                   </p>
                   <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, color: "#71717A" }}>
@@ -204,7 +180,7 @@ const PricingPage = () => {
                 }}
               >
                 <div className="flex flex-col gap-1">
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 15, color: "#09090B" }}>
+                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 18, color: "#09090B" }}>
                     Business
                   </p>
                   <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, color: "#71717A" }}>
@@ -248,22 +224,21 @@ const PricingPage = () => {
           >
             <div className="flex flex-col gap-3 md:max-w-[320px]">
               <SectionLabel>What's included</SectionLabel>
-              <SectionHeading>No hidden fees.</SectionHeading>
+              <SectionHeading>No hidden fees</SectionHeading>
               <SectionSub maxWidth={320}>
-                Storage capacity only. Everything else is included.
+                $4.99/TB/month for storage capacity. Everything else is included.
               </SectionSub>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 flex-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full flex-1">
               {[
-                { stat: "$0", label: "Egress fees", desc: "Download your data as often as you need. No per-GB transfer charges, ever." },
-                { stat: "$0", label: "API request fees", desc: "GET, PUT, LIST, DELETE. No metered API costs layered on top of your storage bill." },
-                { stat: "$0", label: "Minimum storage fee", desc: "Pay only for what you store. No floor, no commitment required to get started." },
-              ].map(({ stat, label, desc }) => (
-                <div key={label} className="flex flex-col gap-3 p-6 rounded-2xl" style={{ backgroundColor: "#FFFFFF", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+                { stat: "$0", label: "Egress fees" },
+                { stat: "$0", label: "API request fees" },
+                { stat: "$0", label: "Exit fees" },
+              ].map(({ stat, label }) => (
+                <div key={label} className="flex flex-col items-center gap-1 px-6 py-9 rounded-2xl text-center" style={{ backgroundColor: "#FFFFFF", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
                   <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 36, color: "#0090FF", letterSpacing: "-0.02em", margin: 0 }}>{stat}</p>
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 14, color: "#09090B", margin: 0 }}>{label}</p>
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, color: "#71717A", lineHeight: 1.55, margin: 0 }}>{desc}</p>
+                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 16, color: "#09090B", margin: 0 }}>{label}</p>
                 </div>
               ))}
             </div>
@@ -278,7 +253,7 @@ const PricingPage = () => {
           >
             <div className="flex flex-col gap-3 items-center text-center">
               <SectionLabel>Cost calculator</SectionLabel>
-              <SectionHeading>See your actual savings.</SectionHeading>
+              <SectionHeading>See your <span style={{ color: "#0090FF" }}>actual savings</span></SectionHeading>
               <SectionSub maxWidth={520}>
                 Enter your storage and egress volumes to compare your monthly bill across providers.
               </SectionSub>
@@ -288,10 +263,10 @@ const PricingPage = () => {
             <div className="flex flex-col sm:flex-row gap-6 w-full max-w-[640px] mx-auto">
               <div className="flex flex-col gap-3 flex-1">
                 <div className="flex justify-between items-center">
-                  <label style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#09090B" }}>
+                  <label style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 16, color: "#09090B" }}>
                     Storage
                   </label>
-                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 14, color: "#0070CC" }}>
+                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 16, color: "#0070CC" }}>
                     {storedTB} TB
                   </span>
                 </div>
@@ -311,10 +286,10 @@ const PricingPage = () => {
 
               <div className="flex flex-col gap-3 flex-1">
                 <div className="flex justify-between items-center">
-                  <label style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#09090B" }}>
+                  <label style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 16, color: "#09090B" }}>
                     Monthly egress
                   </label>
-                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 14, color: "#0070CC" }}>
+                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 16, color: "#0070CC" }}>
                     {egressTB} TB
                   </span>
                 </div>
@@ -333,13 +308,67 @@ const PricingPage = () => {
               </div>
             </div>
 
-            {/* Results table */}
-            <div style={{ overflowX: "auto", border: "1px solid rgba(0,0,0,0.07)", borderRadius: 16, backgroundColor: "#FFFFFF", boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)" }}>
+            {/* Results: stacked cards on mobile */}
+            <div className="flex flex-col gap-3 md:hidden">
+              {sortedCompetitors.map((c) => {
+                const storage = c.storagePricePerTB * storedTB;
+                const egress = c.egressPricePerTB * egressTB;
+                const total = storage + egress;
+                const savings = total - filOneTotal;
+                return (
+                  <div
+                    key={c.name}
+                    className="rounded-2xl p-4"
+                    style={{
+                      backgroundColor: c.isFilOne ? "#EFF8FF" : "#FFFFFF",
+                      border: c.isFilOne ? "1px solid rgba(0,144,255,0.25)" : "1px solid rgba(0,0,0,0.07)",
+                      fontFamily: "'Funnel Sans', sans-serif",
+                    }}
+                  >
+                    <div className="flex items-center gap-2 mb-3 flex-wrap">
+                      <span style={{ fontSize: 16, fontWeight: c.isFilOne ? 700 : 500, color: c.isFilOne ? "#0070CC" : "#09090B" }}>
+                        {c.name}
+                      </span>
+                      {c.isFilOne && (
+                        <span style={{ display: "inline-flex", alignItems: "center", backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.2)", color: "#0070CC", fontSize: 12, fontWeight: 500, padding: "2px 8px", borderRadius: 9999 }}>
+                          You
+                        </span>
+                      )}
+                      {c.region && (
+                        <span style={{ fontSize: 13, color: "#71717A" }}>
+                          {c.region}
+                        </span>
+                      )}
+                    </div>
+                    <div className="grid grid-cols-2 gap-y-2" style={{ fontSize: 14 }}>
+                      <span style={{ color: "#71717A" }}>Storage</span>
+                      <span style={{ textAlign: "right", color: c.isFilOne ? "#09090B" : "#52525B", fontWeight: c.isFilOne ? 600 : 400 }}>${storage.toFixed(2)}</span>
+                      <span style={{ color: "#71717A" }}>Egress</span>
+                      <span style={{ textAlign: "right", fontWeight: c.isFilOne ? 600 : 400, color: egress === 0 ? "#16a34a" : c.isFilOne ? "#09090B" : "#dc2626" }}>${egress.toFixed(2)}</span>
+                      <span style={{ color: "#71717A", fontWeight: 600, paddingTop: 8, borderTop: "1px solid rgba(0,0,0,0.06)", marginTop: 4 }}>Total / month</span>
+                      <span style={{ textAlign: "right", fontWeight: 700, color: c.isFilOne ? "#0070CC" : "#09090B", paddingTop: 8, borderTop: "1px solid rgba(0,0,0,0.06)", marginTop: 4 }}>
+                        ${total.toFixed(2)}
+                      </span>
+                    </div>
+                    {!c.isFilOne && savings > 0.5 && (
+                      <div className="mt-3">
+                        <span style={{ fontSize: 13, fontWeight: 500, color: "#15803d", backgroundColor: "#f0fdf4", border: "1px solid rgba(22,163,74,0.2)", borderRadius: 9999, padding: "2px 8px", whiteSpace: "nowrap" }}>
+                          {Math.round(savings / filOneTotal)}× more expensive
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Results table: desktop / tablet */}
+            <div className="hidden md:block" style={{ overflowX: "auto", border: "1px solid rgba(0,0,0,0.07)", borderRadius: 16, backgroundColor: "#FFFFFF", boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)" }}>
               <table style={{ width: "100%", minWidth: 520, borderCollapse: "collapse", fontFamily: "'Funnel Sans', sans-serif" }}>
                 <thead>
                   <tr>
                     {["Provider", "Storage", "Egress", "Total / month"].map((h) => (
-                      <th key={h} style={{ textAlign: "left", padding: "12px 20px", fontSize: 11, fontWeight: 500, letterSpacing: "0.06em", textTransform: "uppercase", color: "#71717A", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
+                      <th key={h} style={{ textAlign: "left", padding: "16px 20px", fontSize: 12, fontWeight: 500, letterSpacing: "0.06em", textTransform: "uppercase", color: "#71717A", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
                         {h}
                       </th>
                     ))}
@@ -353,38 +382,36 @@ const PricingPage = () => {
                     const savings = total - filOneTotal;
                     return (
                       <tr key={c.name} style={{ backgroundColor: c.isFilOne ? "#EFF8FF" : "transparent" }}>
-                        <td style={{ padding: "14px 20px", borderBottom: "1px solid rgba(0,0,0,0.05)" }}>
-                          <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                              <span style={{ fontSize: 14, fontWeight: c.isFilOne ? 700 : 500, color: c.isFilOne ? "#0070CC" : "#09090B" }}>
-                                {c.name}
+                        <td style={{ padding: "20px 20px", borderBottom: "1px solid rgba(0,0,0,0.05)" }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                            <span style={{ fontSize: 16, fontWeight: c.isFilOne ? 700 : 500, color: c.isFilOne ? "#0070CC" : "#09090B" }}>
+                              {c.name}
+                            </span>
+                            {c.isFilOne && (
+                              <span style={{ display: "inline-flex", alignItems: "center", backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.2)", color: "#0070CC", fontSize: 12, fontWeight: 500, padding: "2px 8px", borderRadius: 9999 }}>
+                                You
                               </span>
-                              {c.isFilOne && (
-                                <span style={{ display: "inline-flex", alignItems: "center", backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.2)", color: "#0070CC", fontSize: 11, fontWeight: 500, padding: "2px 8px", borderRadius: 9999 }}>
-                                  You
-                                </span>
-                              )}
-                            </div>
+                            )}
                             {c.region && (
-                              <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 11.5, color: "#71717A" }}>
+                              <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#71717A" }}>
                                 {c.region}
                               </span>
                             )}
                           </div>
                         </td>
-                        <td style={{ padding: "14px 20px", borderBottom: "1px solid rgba(0,0,0,0.05)", fontSize: 13.5, color: c.isFilOne ? "#09090B" : "#52525B", fontWeight: c.isFilOne ? 600 : 400 }}>
+                        <td style={{ padding: "20px 20px", borderBottom: "1px solid rgba(0,0,0,0.05)", fontSize: 15, color: c.isFilOne ? "#09090B" : "#52525B", fontWeight: c.isFilOne ? 600 : 400 }}>
                           ${storage.toFixed(2)}
                         </td>
-                        <td style={{ padding: "14px 20px", borderBottom: "1px solid rgba(0,0,0,0.05)", fontSize: 13.5, fontWeight: c.isFilOne ? 600 : 400, color: egress === 0 ? "#16a34a" : c.isFilOne ? "#09090B" : "#dc2626" }}>
+                        <td style={{ padding: "20px 20px", borderBottom: "1px solid rgba(0,0,0,0.05)", fontSize: 15, fontWeight: c.isFilOne ? 600 : 400, color: egress === 0 ? "#16a34a" : c.isFilOne ? "#09090B" : "#dc2626" }}>
                           ${egress.toFixed(2)}
                         </td>
-                        <td style={{ padding: "14px 20px", borderBottom: "1px solid rgba(0,0,0,0.05)" }}>
+                        <td style={{ padding: "20px 20px", borderBottom: "1px solid rgba(0,0,0,0.05)" }}>
                           <div className="flex items-center gap-3 flex-wrap">
-                            <span style={{ fontSize: c.isFilOne ? 17 : 14, fontWeight: c.isFilOne ? 700 : 400, color: c.isFilOne ? "#0070CC" : "#52525B" }}>
+                            <span style={{ fontSize: c.isFilOne ? 19 : 16, fontWeight: c.isFilOne ? 700 : 400, color: c.isFilOne ? "#0070CC" : "#52525B" }}>
                               ${total.toFixed(2)}
                             </span>
                             {!c.isFilOne && savings > 0.5 && (
-                              <span style={{ fontSize: 12, fontWeight: 500, color: "#15803d", backgroundColor: "#f0fdf4", border: "1px solid rgba(22,163,74,0.2)", borderRadius: 9999, padding: "2px 8px", whiteSpace: "nowrap" }}>
+                              <span style={{ fontSize: 13, fontWeight: 500, color: "#15803d", backgroundColor: "#f0fdf4", border: "1px solid rgba(22,163,74,0.2)", borderRadius: 9999, padding: "2px 8px", whiteSpace: "nowrap" }}>
                                 {Math.round(savings / filOneTotal)}× more expensive
                               </span>
                             )}
@@ -413,13 +440,19 @@ const PricingPage = () => {
             <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, color: "rgb(113,113,122)" }}>
               And it has also been featured in
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              {["CNBC", "Bloomberg", "Yahoo Finance", "VentureBeat"].map((pub, i, arr) => (
-                <span key={pub} className="flex items-center gap-6">
-                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 16, color: "rgb(82,82,91)" }}>{pub}</span>
-                  {i < arr.length - 1 && <span style={{ color: "#D4D4D8", fontSize: 20 }}>·</span>}
-                </span>
-              ))}
+            <div className="marquee-mask w-full max-w-2xl overflow-hidden">
+              <div className="marquee-track flex items-center w-max">
+                {[0, 1].map((copy) => (
+                  <span key={copy} className="flex items-center gap-8 pr-8" aria-hidden={copy === 1}>
+                    {["CNBC", "Bloomberg", "Yahoo Finance", "VentureBeat"].map((pub) => (
+                      <span key={pub} className="flex items-center gap-8">
+                        <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 16, color: "rgb(82,82,91)" }}>{pub}</span>
+                        <span style={{ color: "#D4D4D8", fontSize: 20 }}>·</span>
+                      </span>
+                    ))}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -427,16 +460,17 @@ const PricingPage = () => {
         {/* ── FAQ ──────────────────────────────────────────────────────────── */}
         <FaqSection include={[
           "What counts as egress?",
-          "Is there a minimum storage requirement?",
           "How is my bill calculated?",
           "Do you offer annual or reserved capacity plans?",
           "Where is my data stored?",
-          "Is there a free trial?",
         ]} />
 
         {/* ── CTA banner ───────────────────────────────────────────────────── */}
         <section className="px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full" style={{ backgroundColor: "#FFFFFF" }}>
-          <div className="w-full max-w-[1120px] mx-auto">
+          <div
+            ref={ctaRef}
+            className={`w-full max-w-[1120px] mx-auto reveal${ctaInView ? " in-view" : ""}`}
+          >
             <div
               style={{
                 position: "relative",
@@ -445,10 +479,12 @@ const PricingPage = () => {
                 borderRadius: 20,
                 textAlign: "center",
               }}
-              className="px-6 md:px-12 py-16 md:py-20"
+              className="px-6 md:px-12 py-16 md:py-[104px]"
             >
+              {/* White grid texture, drifting slowly */}
               <div
                 aria-hidden="true"
+                className="cta-grid-drift"
                 style={{
                   position: "absolute",
                   inset: 0,
@@ -459,18 +495,36 @@ const PricingPage = () => {
                   pointerEvents: "none",
                 }}
               />
+
+              {/* Soft breathing glow behind the copy */}
+              <div
+                aria-hidden="true"
+                className="cta-glow-pulse"
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  width: 480,
+                  height: 480,
+                  marginLeft: -240,
+                  marginTop: -240,
+                  background: "radial-gradient(circle, rgba(30,191,255,0.20) 0%, transparent 70%)",
+                  pointerEvents: "none",
+                }}
+              />
+
               <div style={{ position: "relative" }}>
                 <h2
                   className="text-[26px] md:text-[32px]"
                   style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12, maxWidth: 480, margin: "0 auto 12px" }}
                 >
-                  Up to 80% less than AWS, Google Cloud, and Azure.
+                  Up to 22× cheaper than AWS
                 </h2>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>
                   $4.99/TB, no egress fees, up and running in minutes.
                 </p>
                 <div className="flex items-center justify-center">
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark">
+                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark btn-primary-lg btn-primary-glow">
                     <span className="btn-primary-inner">Start for free</span>
                   </a>
                 </div>
