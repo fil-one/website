@@ -34,9 +34,9 @@ const INTEGRATIONS = [
 // ─── Page ──────────────────────────────────────────────────────────────────────
 const BarcelonaLandingPage = () => {
   useSeo({
-    title: "Fil One for Barcelona — European sovereignty. Budget-tier bills.",
+    title: "Fil One for Barcelona: European Storage, €4.99/TB, No Egress Fees",
     description:
-      "S3-compatible object storage for European teams. EU data sovereignty, zero egress fees, at €4.99/TB. Drop into your existing stack in minutes.",
+      "S3-compatible object storage for teams in Barcelona. EU data sovereignty, zero egress fees, at €4.99/TB. Drop into your existing stack in minutes.",
     canonical: "https://fil.one/lp/barcelona",
   });
 
