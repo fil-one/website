@@ -118,7 +118,7 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-glow">
                 <span className="btn-primary-inner">Try 30 days for free</span>
               </a>
               <a href="/contact-sales" className="btn-secondary">
@@ -135,13 +135,19 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
             <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, color: "rgb(113, 113, 122)" }}>
               Our technology has been featured in
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              {["Fast Company", "CNBC", "Bloomberg", "Yahoo Finance", "VentureBeat"].map((pub, i, arr) => (
-                <span key={pub} className="flex items-center gap-6">
-                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 16, color: "rgb(82, 82, 91)", textAlign: "center", lineHeight: 1.5 }}>{pub}</span>
-                  {i < arr.length - 1 && <span style={{ color: "#D4D4D8", fontSize: 20 }}>·</span>}
-                </span>
-              ))}
+            <div className="marquee-mask w-full max-w-2xl overflow-hidden">
+              <div className="marquee-track flex items-center w-max">
+                {[0, 1].map((copy) => (
+                  <span key={copy} className="flex items-center gap-8 pr-8" aria-hidden={copy === 1}>
+                    {["Fast Company", "CNBC", "Bloomberg", "Yahoo Finance", "VentureBeat"].map((pub) => (
+                      <span key={pub} className="flex items-center gap-8">
+                        <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 20, color: "rgb(113, 113, 122)", textAlign: "center", lineHeight: 1.5, whiteSpace: "nowrap" }}>{pub}</span>
+                        <span style={{ color: "#D4D4D8", fontSize: 20 }}>·</span>
+                      </span>
+                    ))}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -149,29 +155,31 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
         {/* ── Positioning ───────────────────────────────────────────────── */}
         <section
           id="positioning"
-          className="px-5 md:px-8 py-16 md:py-24 w-full"
-          style={{ backgroundColor: "#FFFFFF" }}
+          className="px-5 md:px-8 py-16 md:py-20 w-full"
+          style={{ backgroundColor: "#F9FAFB" }}
         >
           <div
             ref={posRef}
-            className={`flex flex-col gap-10 w-full max-w-[1120px] mx-auto reveal${posInView ? " in-view" : ""}`}
+            className={`flex flex-col md:flex-row gap-8 md:gap-14 items-start w-full max-w-[1120px] mx-auto reveal${posInView ? " in-view" : ""}`}
           >
-            <div className="flex flex-col gap-3 items-center text-center">
+            <div className="flex flex-col gap-3 md:max-w-[320px]">
               <SectionLabel>Why Fil One</SectionLabel>
-              <SectionHeading>The lowest cost. Full stop.</SectionHeading>
-              <SectionSub maxWidth={560}>
-                S3-compatible, EU-sovereign, zero egress. No hidden fees, no per-region pricing surprises, no egress meter running in the background.
+              <SectionHeading>Unbeatably low cost.</SectionHeading>
+              <SectionSub maxWidth={320}>
+                S3-compatible, EU-sovereign, zero egress. No hidden fees, no pricing surprises.
               </SectionSub>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 flex-1">
               {[
-                { stat: "€4.99/TB", label: "Flat monthly price, natively in EUR" },
-                { stat: "€0", label: "Egress fees — always, at any scale" },
-                { stat: "23×", label: "Cheaper than AWS S3 eu-south-2 Madrid" },
-              ].map(({ stat, label }) => (
-                <div key={stat} style={{ border: "1px solid rgba(0,0,0,0.07)", borderRadius: 16, backgroundColor: "#FFFFFF", padding: "32px 28px", boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)", textAlign: "center" }}>
-                  <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 40, color: "#0090FF", letterSpacing: "-0.02em", margin: "0 0 8px" }}>{stat}</p>
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, color: "#71717A", lineHeight: 1.5, margin: 0 }}>{label}</p>
+                { stat: "€4.99/TB", label: "Flat monthly rate", desc: "Billed natively in EUR. No regional pricing tiers, no surprise line items." },
+                { stat: "€0", label: "Egress fees", desc: "Download your data as often as you need, at any scale, with no per-GB transfer charges." },
+                { stat: "23×", label: "Cheaper than AWS", desc: "Than AWS S3 eu-south-2 Madrid, for equivalent storage and egress volumes." },
+              ].map(({ stat, label, desc }) => (
+                <div key={stat} className="flex flex-col gap-3 p-6 rounded-2xl" style={{ backgroundColor: "#FFFFFF", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
+                  <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 36, color: "#0090FF", letterSpacing: "-0.02em", margin: 0 }}>{stat}</p>
+                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 14, color: "#09090B", margin: 0 }}>{label}</p>
+                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, color: "#71717A", lineHeight: 1.55, margin: 0 }}>{desc}</p>
                 </div>
               ))}
             </div>
@@ -348,7 +356,7 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
         <section
           id="features"
           className="w-full"
-          style={{ backgroundColor: "#FFFFFF" }}
+          style={{ backgroundColor: "#F9FAFB" }}
         >
           <div className="flex flex-col gap-12 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-4 items-center text-center">
@@ -424,24 +432,31 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
               </SectionSub>
             </div>
 
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
-              {INTEGRATIONS.map((name) => (
-                <div
-                  key={name}
-                  style={{
-                    backgroundColor: "#FFFFFF",
-                    border: "1px solid rgba(0,0,0,0.09)",
-                    borderRadius: 10,
-                    padding: "12px 24px",
-                    fontFamily: "'Funnel Sans', sans-serif",
-                    fontWeight: 500,
-                    fontSize: 15.5,
-                    color: "#374151",
-                  }}
-                >
-                  {name}
-                </div>
-              ))}
+            <div className="marquee-mask w-full overflow-hidden">
+              <div className="marquee-track flex items-center w-max" style={{ gap: 12 }}>
+                {[0, 1].map((copy) => (
+                  <div key={copy} style={{ display: "flex", gap: 12, paddingRight: 12 }} aria-hidden={copy === 1}>
+                    {INTEGRATIONS.map((name) => (
+                      <div
+                        key={name}
+                        style={{
+                          backgroundColor: "#FFFFFF",
+                          border: "1px solid rgba(0,0,0,0.09)",
+                          borderRadius: 10,
+                          padding: "12px 24px",
+                          fontFamily: "'Funnel Sans', sans-serif",
+                          fontWeight: 500,
+                          fontSize: 15.5,
+                          color: "#374151",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {name}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
 
             <a
@@ -474,9 +489,10 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
               }}
               className="px-6 md:px-12 py-16 md:py-[104px]"
             >
-              {/* White grid texture */}
+              {/* White grid texture, drifting slowly */}
               <div
                 aria-hidden="true"
+                className="cta-grid-drift"
                 style={{
                   position: "absolute",
                   inset: 0,
@@ -484,6 +500,23 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                   backgroundSize: "60px 60px",
                   maskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)",
                   WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)",
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* Soft breathing glow behind the copy */}
+              <div
+                aria-hidden="true"
+                className="cta-glow-pulse"
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  width: 480,
+                  height: 480,
+                  marginLeft: -240,
+                  marginTop: -240,
+                  background: "radial-gradient(circle, rgba(30,191,255,0.20) 0%, transparent 70%)",
                   pointerEvents: "none",
                 }}
               />
@@ -515,7 +548,7 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
                 </p>
 
                 <div className="flex items-center justify-center">
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark">
+                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark btn-primary-lg btn-primary-glow">
                     <span className="btn-primary-inner">Try 30 days for free</span>
                   </a>
                 </div>
