@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
 import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
+import FaqSection from "@/components/FaqSection";
 
 // ─── Pricing tiers ─────────────────────────────────────────────────────────────
 const PAYGO_FEATURES = [
@@ -25,6 +26,7 @@ const BUSINESS_FEATURES = [
 const COMPETITORS = [
   {
     name: "Fil One",
+    region: null,
     storagePricePerTB: 4.99,
     egressPricePerTB: 0,
     apiPer1M: 0,
@@ -32,6 +34,7 @@ const COMPETITORS = [
   },
   {
     name: "Wasabi",
+    region: null,
     storagePricePerTB: 7.99,
     egressPricePerTB: 0,
     apiPer1M: 0,
@@ -39,13 +42,23 @@ const COMPETITORS = [
   },
   {
     name: "Backblaze B2",
-    storagePricePerTB: 7.0,
-    egressPricePerTB: 9.0,
+    region: null,
+    storagePricePerTB: 6.95,
+    egressPricePerTB: 10.0,
+    apiPer1M: 0,
+    isFilOne: false,
+  },
+  {
+    name: "Cloudflare R2",
+    region: null,
+    storagePricePerTB: 15.36,
+    egressPricePerTB: 0,
     apiPer1M: 0,
     isFilOne: false,
   },
   {
     name: "AWS S3",
+    region: "eu-west-1",
     storagePricePerTB: 23.0,
     egressPricePerTB: 90.0,
     apiPer1M: 5.0,
@@ -53,6 +66,7 @@ const COMPETITORS = [
   },
   {
     name: "Google Cloud",
+    region: "EU multi-region",
     storagePricePerTB: 20.0,
     egressPricePerTB: 120.0,
     apiPer1M: 5.0,
@@ -60,6 +74,7 @@ const COMPETITORS = [
   },
   {
     name: "Azure Blob",
+    region: "West Europe",
     storagePricePerTB: 18.4,
     egressPricePerTB: 87.0,
     apiPer1M: 5.0,
@@ -67,33 +82,6 @@ const COMPETITORS = [
   },
 ];
 
-// ─── FAQ ───────────────────────────────────────────────────────────────────────
-const FAQS = [
-  {
-    q: "What counts as egress?",
-    a: "Egress is any data transferred out of your bucket — to the internet, to another cloud, or to your own servers. With Fil One, all egress is free, always, at any scale.",
-  },
-  {
-    q: "Is there a minimum storage requirement?",
-    a: "No. You can store as little or as much as you need. You only pay for what you use, billed per TB per month.",
-  },
-  {
-    q: "How is my bill calculated?",
-    a: "You pay $4.99 per TB stored per month. There are no fees for egress or API operations. Your bill is the amount of data you store, multiplied by the rate.",
-  },
-  {
-    q: "Do you offer annual or reserved capacity plans?",
-    a: "Yes. For teams with predictable storage needs, we offer reserved capacity plans on 1, 3, or 5-year terms with volume discounts. Contact sales to get a quote.",
-  },
-  {
-    q: "Where is my data stored?",
-    a: "All data is stored within the European Union. We do not transfer your data outside EU borders.",
-  },
-  {
-    q: "Is there a free trial?",
-    a: "Yes. You get 1 TB free for 30 days. No credit card required to start.",
-  },
-];
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 const PricingPage = () => {
@@ -109,7 +97,6 @@ const PricingPage = () => {
 
   const { ref: benefitsRef, inView: benefitsInView } = useInView({ threshold: 0.05 });
   const { ref: calcRef, inView: calcInView } = useInView({ threshold: 0.05 });
-  const { ref: faqRef, inView: faqInView } = useInView({ threshold: 0.05 });
 
   const calcTotal = (c: typeof COMPETITORS[0]) =>
     c.storagePricePerTB * storedTB + c.egressPricePerTB * egressTB;
@@ -304,7 +291,7 @@ const PricingPage = () => {
                   <label style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#09090B" }}>
                     Storage
                   </label>
-                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 14, color: "#0090FF" }}>
+                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 14, color: "#0070CC" }}>
                     {storedTB} TB
                   </span>
                 </div>
@@ -317,8 +304,8 @@ const PricingPage = () => {
                   className="w-full calc-slider"
                 />
                 <div className="flex justify-between">
-                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12, color: "#A1A1AA" }}>1 TB</span>
-                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12, color: "#A1A1AA" }}>500 TB</span>
+                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12, color: "#71717A" }}>1 TB</span>
+                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12, color: "#71717A" }}>500 TB</span>
                 </div>
               </div>
 
@@ -327,7 +314,7 @@ const PricingPage = () => {
                   <label style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#09090B" }}>
                     Monthly egress
                   </label>
-                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 14, color: "#0090FF" }}>
+                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 14, color: "#0070CC" }}>
                     {egressTB} TB
                   </span>
                 </div>
@@ -340,8 +327,8 @@ const PricingPage = () => {
                   className="w-full calc-slider"
                 />
                 <div className="flex justify-between">
-                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12, color: "#A1A1AA" }}>0 TB</span>
-                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12, color: "#A1A1AA" }}>500 TB</span>
+                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12, color: "#71717A" }}>0 TB</span>
+                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12, color: "#71717A" }}>500 TB</span>
                 </div>
               </div>
             </div>
@@ -366,13 +353,24 @@ const PricingPage = () => {
                     const savings = total - filOneTotal;
                     return (
                       <tr key={c.name} style={{ backgroundColor: c.isFilOne ? "#EFF8FF" : "transparent" }}>
-                        <td style={{ padding: "14px 20px", borderBottom: "1px solid rgba(0,0,0,0.05)", fontSize: 14, fontWeight: c.isFilOne ? 700 : 500, color: c.isFilOne ? "#0070CC" : "#09090B" }}>
-                          {c.name}
-                          {c.isFilOne && (
-                            <span style={{ display: "inline-flex", alignItems: "center", marginLeft: 8, backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.2)", color: "#0070CC", fontSize: 11, fontWeight: 500, padding: "2px 8px", borderRadius: 9999, verticalAlign: "middle" }}>
-                              You
-                            </span>
-                          )}
+                        <td style={{ padding: "14px 20px", borderBottom: "1px solid rgba(0,0,0,0.05)" }}>
+                          <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                              <span style={{ fontSize: 14, fontWeight: c.isFilOne ? 700 : 500, color: c.isFilOne ? "#0070CC" : "#09090B" }}>
+                                {c.name}
+                              </span>
+                              {c.isFilOne && (
+                                <span style={{ display: "inline-flex", alignItems: "center", backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.2)", color: "#0070CC", fontSize: 11, fontWeight: 500, padding: "2px 8px", borderRadius: 9999 }}>
+                                  You
+                                </span>
+                              )}
+                            </div>
+                            {c.region && (
+                              <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 11.5, color: "#71717A" }}>
+                                {c.region}
+                              </span>
+                            )}
+                          </div>
                         </td>
                         <td style={{ padding: "14px 20px", borderBottom: "1px solid rgba(0,0,0,0.05)", fontSize: 13.5, color: c.isFilOne ? "#09090B" : "#52525B", fontWeight: c.isFilOne ? 600 : 400 }}>
                           ${storage.toFixed(2)}
@@ -386,7 +384,7 @@ const PricingPage = () => {
                               ${total.toFixed(2)}
                             </span>
                             {!c.isFilOne && savings > 0.5 && (
-                              <span style={{ fontSize: 12, fontWeight: 500, color: "#16a34a", backgroundColor: "#f0fdf4", border: "1px solid rgba(22,163,74,0.2)", borderRadius: 9999, padding: "2px 8px", whiteSpace: "nowrap" }}>
+                              <span style={{ fontSize: 12, fontWeight: 500, color: "#15803d", backgroundColor: "#f0fdf4", border: "1px solid rgba(22,163,74,0.2)", borderRadius: 9999, padding: "2px 8px", whiteSpace: "nowrap" }}>
                                 {Math.round(savings / filOneTotal)}× more expensive
                               </span>
                             )}
@@ -399,56 +397,42 @@ const PricingPage = () => {
               </table>
             </div>
 
-            <p className="text-xs text-center" style={{ color: "#A1A1AA" }}>
-              Competitor prices are estimates based on published list prices in USD. Actual bills may vary.
+            <p className="text-xs text-center" style={{ color: "#71717A" }}>
+              Prices are published list rates in USD as of July 2026. Backblaze B2 includes free egress up to 3× your monthly stored amount; the $10/TB rate applies beyond that threshold. Regional pricing may vary.
             </p>
           </div>
         </section>
 
         {/* ── Publications ─────────────────────────────────────────────────── */}
-        <section className="flex flex-col items-center gap-6 px-5 py-12 w-full" style={{ backgroundColor: "#F9FAFB" }}>
-          <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, color: "rgb(113,113,122)" }}>
-            Our technology has been featured in
+        <section className="flex flex-col items-center gap-12 px-5 py-16 md:py-20 w-full" style={{ backgroundColor: "#F9FAFB" }}>
+          <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 24, color: "#71717A", letterSpacing: "-0.015em", textAlign: "center", lineHeight: 1.45, maxWidth: 620 }}>
+            Our technology was named one of<br />
+            <span style={{ color: "#0090FF" }}>Fast Company's 11 Next Big Things in AI &amp; Data Innovation</span>
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-            {["Fast Company", "CNBC", "Bloomberg", "Yahoo Finance", "VentureBeat"].map((pub, i, arr) => (
-              <span key={pub} className="flex items-center gap-6">
-                <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 16, color: "rgb(82,82,91)" }}>{pub}</span>
-                {i < arr.length - 1 && <span style={{ color: "#D4D4D8", fontSize: 20 }}>·</span>}
-              </span>
-            ))}
-          </div>
-        </section>
-
-        {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full" style={{ backgroundColor: "#FFFFFF" }}>
-          <div
-            ref={faqRef}
-            className={`flex flex-col gap-10 w-full max-w-[720px] mx-auto reveal${faqInView ? " in-view" : ""}`}
-          >
-            <div className="flex flex-col gap-3 items-center text-center">
-              <SectionLabel>FAQ</SectionLabel>
-              <SectionHeading>Common questions.</SectionHeading>
-            </div>
-
-            <div className="flex flex-col gap-0">
-              {FAQS.map((item, i) => (
-                <div
-                  key={item.q}
-                  className="flex flex-col gap-2 py-6"
-                  style={{ borderBottom: i < FAQS.length - 1 ? "1px solid rgba(0,0,0,0.07)" : "none" }}
-                >
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 15, color: "#09090B" }}>
-                    {item.q}
-                  </p>
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, color: "#71717A", lineHeight: 1.65 }}>
-                    {item.a}
-                  </p>
-                </div>
+          <div className="flex flex-col items-center gap-4 w-full">
+            <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, color: "rgb(113,113,122)" }}>
+              And it has also been featured in
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+              {["CNBC", "Bloomberg", "Yahoo Finance", "VentureBeat"].map((pub, i, arr) => (
+                <span key={pub} className="flex items-center gap-6">
+                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 16, color: "rgb(82,82,91)" }}>{pub}</span>
+                  {i < arr.length - 1 && <span style={{ color: "#D4D4D8", fontSize: 20 }}>·</span>}
+                </span>
               ))}
             </div>
           </div>
         </section>
+
+        {/* ── FAQ ──────────────────────────────────────────────────────────── */}
+        <FaqSection include={[
+          "What counts as egress?",
+          "Is there a minimum storage requirement?",
+          "How is my bill calculated?",
+          "Do you offer annual or reserved capacity plans?",
+          "Where is my data stored?",
+          "Is there a free trial?",
+        ]} />
 
         {/* ── CTA banner ───────────────────────────────────────────────────── */}
         <section className="px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full" style={{ backgroundColor: "#FFFFFF" }}>
@@ -478,9 +462,9 @@ const PricingPage = () => {
               <div style={{ position: "relative" }}>
                 <h2
                   className="text-[26px] md:text-[32px]"
-                  style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}
+                  style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12, maxWidth: 480, margin: "0 auto 12px" }}
                 >
-                  The cheapest object storage in Europe.
+                  Up to 80% less than AWS, Google Cloud, and Azure.
                 </h2>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>
                   $4.99/TB, no egress fees, up and running in minutes.
