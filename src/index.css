@@ -342,6 +342,7 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 99px;
   outline: none;
   cursor: pointer;
+  background: #E4E4E7;
 }
 .calc-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -349,9 +350,9 @@ input[type="range"]::-moz-range-thumb {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #ffffff;
-  border: 2px solid #0090FF;
-  box-shadow: 0 1px 6px rgba(0, 144, 255, 0.25);
+  background: #0090FF;
+  border: none;
+  box-shadow: 0 1px 6px rgba(0, 144, 255, 0.35);
   cursor: pointer;
   transition: box-shadow 0.15s;
 }
@@ -359,9 +360,9 @@ input[type="range"]::-moz-range-thumb {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #ffffff;
-  border: 2px solid #0090FF;
-  box-shadow: 0 1px 6px rgba(0, 144, 255, 0.25);
+  background: #0090FF;
+  border: none;
+  box-shadow: 0 1px 6px rgba(0, 144, 255, 0.35);
   cursor: pointer;
 }
 .calc-slider:hover::-webkit-slider-thumb,
