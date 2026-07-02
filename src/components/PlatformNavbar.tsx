@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import filOneLogo from "../assets/fil-one-logo.svg";
 import { trackDocsClick } from "@/lib/analytics";
 
-const PRODUCTS = [
+const PRODUCTS_EN = [
   {
     label: "Object Storage",
     description: "S3-compatible, verifiably durable",
@@ -26,7 +26,28 @@ const PRODUCTS = [
   },
 ];
 
-const SOLUTIONS = [
+const PRODUCTS_ES = [
+  {
+    label: "Almacenamiento de objetos",
+    description: "Compatible con S3, con durabilidad verificable",
+    badge: null,
+    href: "/storage",
+  },
+  {
+    label: "Bucket Intelligence",
+    description: "Convierte tus buckets en bases de conocimiento",
+    badge: "Acceso anticipado",
+    href: "/bucket-intelligence",
+  },
+  {
+    label: "AI Agent Toolkit",
+    description: "Integraciones MCP, OAuth y SDK",
+    badge: "Acceso anticipado",
+    href: "/ai-agent-toolkit",
+  },
+];
+
+const SOLUTIONS_EN = [
   {
     icon: Brain,
     label: "AI Training & Inference",
@@ -53,15 +74,53 @@ const SOLUTIONS = [
   },
 ];
 
-const UTILITY_LINKS = [
+const SOLUTIONS_ES = [
+  {
+    icon: Brain,
+    label: "Entrenamiento e inferencia de IA",
+    description: "Almacenamiento que mantiene tus GPU alimentadas",
+    href: "/solutions/ai-training",
+  },
+  {
+    icon: LinkSimple,
+    label: "Web3 y dApps",
+    description: "Almacenamiento en el que tus smart contracts pueden confiar",
+    href: "/solutions/web3-dapps",
+  },
+  {
+    icon: FilmSlate,
+    label: "Medios y archivo",
+    description: "Archiva petabytes y no pagues nada por recuperarlos",
+    href: "/solutions/media-archive",
+  },
+  {
+    icon: ShieldCheck,
+    label: "Backup empresarial y DR",
+    description: "Copias de seguridad que el ransomware no puede tocar",
+    href: "/solutions/enterprise-backup",
+  },
+];
+
+const UTILITY_LINKS_EN = [
   { label: "Pricing", href: "/pricing" },
   { label: "Enterprise", href: "/enterprise" },
 ];
 
-const UTILITY_BAR_LINKS = [
+const UTILITY_LINKS_ES = [
+  { label: "Precios", href: "/pricing" },
+  { label: "Empresas", href: "/enterprise" },
+];
+
+const UTILITY_BAR_LINKS_EN = [
   { label: "Documentation", href: "https://docs.fil.one", external: true },
   { label: "Partners", href: "/partners" },
   { label: "Support", href: "/support" },
+];
+
+const UTILITY_BAR_LINKS_ES = [
+  { label: "Documentación", href: "https://docs.fil.one", external: true },
+  { label: "Partners", href: "/partners" },
+  { label: "Soporte", href: "/support" },
 ];
 
 const UTILITY_BAR_HEIGHT = 36;
@@ -76,11 +135,37 @@ const triggerStyle = {
   cursor: "pointer",
 } as const;
 
-const PlatformNavbar = () => {
+const PlatformNavbar = ({ lang = "en" }: { lang?: "en" | "es" }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [utilityVisible, setUtilityVisible] = useState(true);
   const lastScrollY = useRef(0);
   const { pathname } = useLocation();
+
+  const PRODUCTS = lang === "es" ? PRODUCTS_ES : PRODUCTS_EN;
+  const SOLUTIONS = lang === "es" ? SOLUTIONS_ES : SOLUTIONS_EN;
+  const UTILITY_LINKS = lang === "es" ? UTILITY_LINKS_ES : UTILITY_LINKS_EN;
+  const UTILITY_BAR_LINKS = lang === "es" ? UTILITY_BAR_LINKS_ES : UTILITY_BAR_LINKS_EN;
+  const t = lang === "es"
+    ? {
+        skipToContent: "Saltar al contenido principal",
+        signIn: "Iniciar sesión",
+        products: "Productos",
+        solutions: "Soluciones",
+        contactSales: "Contactar con ventas",
+        startForFree: "Empieza gratis",
+        closeMenu: "Cerrar menú",
+        openMenu: "Abrir menú",
+      }
+    : {
+        skipToContent: "Skip to main content",
+        signIn: "Sign in",
+        products: "Products",
+        solutions: "Solutions",
+        contactSales: "Contact Sales",
+        startForFree: "Start for free",
+        closeMenu: "Close menu",
+        openMenu: "Open menu",
+      };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -117,7 +202,7 @@ const PlatformNavbar = () => {
         }
       `}</style>
 
-      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <a href="#main-content" className="skip-link">{t.skipToContent}</a>
 
       {/* Utility bar */}
       <div
@@ -168,7 +253,7 @@ const PlatformNavbar = () => {
             }}
             className="hover:bg-black/[0.04] transition-colors"
           >
-            Sign in
+            {t.signIn}
           </a>
         </div>
       </div>
@@ -200,7 +285,7 @@ const PlatformNavbar = () => {
                     className="flex items-center gap-1 px-3.5 py-1.5 rounded-md transition-colors hover:bg-black/[0.04]"
                     style={triggerStyle}
                   >
-                    Products
+                    {t.products}
                     <CaretDown size={12} color="#A1A1AA" className="nav-caret" />
                   </NavigationMenuPrimitive.Trigger>
 
@@ -250,7 +335,7 @@ const PlatformNavbar = () => {
                     className="flex items-center gap-1 px-3.5 py-1.5 rounded-md transition-colors hover:bg-black/[0.04]"
                     style={triggerStyle}
                   >
-                    Solutions
+                    {t.solutions}
                     <CaretDown size={12} color="#A1A1AA" className="nav-caret" />
                   </NavigationMenuPrimitive.Trigger>
 
@@ -321,10 +406,10 @@ const PlatformNavbar = () => {
           {/* Desktop right CTAs */}
           <div className="hidden md:flex items-center gap-2.5 shrink-0">
             <a href="/contact-sales" className="btn-secondary">
-              Contact Sales
+              {t.contactSales}
             </a>
             <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-sm">
-              <span className="btn-primary-inner">Start for free</span>
+              <span className="btn-primary-inner">{t.startForFree}</span>
             </a>
           </div>
 
@@ -333,7 +418,7 @@ const PlatformNavbar = () => {
             className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg hover:bg-black/[0.04] transition-colors"
             onClick={() => setMobileOpen((o) => !o)}
             style={{ border: "none", backgroundColor: "transparent", cursor: "pointer" }}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-label={mobileOpen ? t.closeMenu : t.openMenu}
             aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X size={18} color="#09090B" /> : <List size={18} color="#09090B" />}
@@ -360,7 +445,7 @@ const PlatformNavbar = () => {
                 textTransform: "uppercase",
               }}
             >
-              Products
+              {t.products}
             </p>
             {PRODUCTS.map(({ label, badge, href }) => (
               <a
@@ -404,7 +489,7 @@ const PlatformNavbar = () => {
                 textTransform: "uppercase",
               }}
             >
-              Solutions
+              {t.solutions}
             </p>
             {SOLUTIONS.map(({ label, href }) => (
               <a
@@ -447,10 +532,10 @@ const PlatformNavbar = () => {
 
             <div className="pt-3 mt-1 border-t flex flex-col gap-2" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
               <a href="/contact-sales" className="btn-secondary w-full text-center" onClick={() => setMobileOpen(false)}>
-                Contact Sales
+                {t.contactSales}
               </a>
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary w-full" onClick={() => setMobileOpen(false)}>
-                <span className="btn-primary-inner w-full justify-center">Start for free</span>
+                <span className="btn-primary-inner w-full justify-center">{t.startForFree}</span>
               </a>
             </div>
           </div>
