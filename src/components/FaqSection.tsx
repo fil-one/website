@@ -66,6 +66,39 @@ const faqs = [
       "No. Object Storage is the foundation every Fil One account starts with, and it works great on its own as a fully S3-compatible store. Bucket Intelligence and AI Agent Toolkit are coming soon and will connect directly to your existing buckets with no data migration needed.",
   },
   {
+    question: "What counts as egress?",
+    answer:
+      "Egress is any data transferred out of your bucket: to the internet, to another cloud, or to your own servers. With Fil One, all egress is free, always, at any scale.",
+  },
+  {
+    question: "Is there a minimum storage requirement?",
+    answer:
+      "No. You can store as little or as much as you need. You only pay for what you use, billed per TB per month.",
+  },
+  {
+    question: "How is my bill calculated?",
+    answer:
+      "You pay $4.99 per TB stored per month. There are no fees for egress or API operations. Your bill is the amount of data you store, multiplied by the rate.",
+  },
+  {
+    question: "Do you offer annual or reserved capacity plans?",
+    answer: (
+      <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
+        <p>Yes. For teams with predictable storage needs, we offer reserved capacity plans on 1, 3, or 5-year terms with volume discounts. <a href="/contact-sales" className="faq-link">Contact sales</a> to get a quote.</p>
+      </div>
+    ),
+  },
+  {
+    question: "Where is my data stored?",
+    answer:
+      "It depends on the bucket region you choose. We currently offer an EU region (France) and a US region (Michigan) launching soon, with more regions on the way.",
+  },
+  {
+    question: "Is there a free trial?",
+    answer:
+      "Yes. You get 1 TB free for 30 days. No credit card required to start.",
+  },
+  {
     question: "What is Filecoin?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
