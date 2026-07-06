@@ -503,14 +503,14 @@ const ROUTE_META = {
       "Purpose-built for Web3-native apps. S3-compatible, CID-addressed, cryptographically verifiable storage on Filecoin at $4.99/TB.",
   },
   "/lp/barcelona": {
-    title: "Fil One at MWC Barcelona — S3 Object Storage on Filecoin",
+    title: "Fil One for Barcelona: European Storage, €4.99/TB, No Egress Fees",
     description:
-      "Meet Fil One at MWC Barcelona. Discover how decentralized, verifiable S3-compatible storage cuts costs and eliminates egress fees for enterprise teams.",
+      "S3-compatible object storage for teams in Barcelona. EU data sovereignty, zero egress fees, at €4.99/TB. Drop into your existing stack in minutes.",
   },
   "/lp/es/barcelona": {
-    title: "Fil One en MWC Barcelona — Almacenamiento S3 en Filecoin",
+    title: "Fil One para Barcelona: Almacenamiento Europeo, €4.99/TB, Sin Egress",
     description:
-      "Conozca Fil One en MWC Barcelona. Almacenamiento S3 compatible, descentralizado y verificable en Filecoin. Desde $4.99/TB, sin tarifas de egress.",
+      "Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a €4.99/TB. Intégralo en tu stack actual en minutos.",
   },
   "/contact-sales": {
     title: "Contact Sales — Fil One",
@@ -538,12 +538,12 @@ const ROUTE_META = {
     description: "Read the Fil One Object Storage Service Level Agreement: uptime commitment, service credit tiers, and how to request credits.",
   },
   "/lp/es/contacto": {
-    title: "Contacto — Fil One Barcelona",
-    description: "Póngase en contacto con el equipo de Fil One en MWC Barcelona. Hablemos de precios, migración y planes empresariales.",
+    title: "Fil One para Barcelona: Contacto",
+    description: "Ponte en contacto con el equipo de Fil One para hablar de precios, migración y planes empresariales.",
   },
   "/lp/es/soporte": {
-    title: "Soporte — Fil One Barcelona",
-    description: "Soporte técnico para el almacenamiento objeto de Fil One. Contáctenos para ayuda con configuración, migración y cuentas.",
+    title: "Fil One para Barcelona: Soporte",
+    description: "Soporte técnico para el almacenamiento de objetos de Fil One. Contáctanos para ayuda con configuración, migración y cuentas.",
   },
   "/fr/marseille": {
     title: "Stockage S3 rapide près de Marseille — Fil One",

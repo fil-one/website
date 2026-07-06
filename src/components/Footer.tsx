@@ -1,8 +1,8 @@
 import filOneLogo from "../assets/fil-one-logo.svg";
 import { trackDocsClick } from "@/lib/analytics";
 
-const Footer = () => {
-  const links: Record<string, { label: string; href: string }[]> = {
+const Footer = ({ lang = "en" }: { lang?: "en" | "es" }) => {
+  const linksEn: Record<string, { label: string; href: string }[]> = {
     Products: [
       { label: "Object Storage", href: "/storage" },
       { label: "Bucket Intelligence", href: "/bucket-intelligence" },
@@ -35,6 +35,46 @@ const Footer = () => {
     ],
   };
 
+  const linksEs: Record<string, { label: string; href: string }[]> = {
+    Productos: [
+      { label: "Almacenamiento de objetos", href: "/storage" },
+      { label: "Bucket Intelligence", href: "/bucket-intelligence" },
+      { label: "AI Agent Toolkit", href: "/ai-agent-toolkit" },
+    ],
+    Soluciones: [
+      { label: "Entrenamiento e inferencia de IA", href: "/solutions/ai-training" },
+      { label: "Web3 y dApps", href: "/solutions/web3-dapps" },
+      { label: "Medios y archivo", href: "/solutions/media-archive" },
+      { label: "Backup empresarial y DR", href: "/solutions/enterprise-backup" },
+    ],
+    Empresa: [
+      { label: "Precios", href: "/pricing" },
+      { label: "Empresas", href: "/enterprise" },
+      { label: "Partners", href: "/partners" },
+      { label: "Contactar con ventas", href: "/contact-sales" },
+    ],
+    Recursos: [
+      { label: "Documentación", href: "https://docs.fil.one" },
+      { label: "Soporte", href: "/support" },
+      { label: "Estado", href: "https://status.fil.one" },
+      { label: "Filecoin", href: "https://filecoin.io" },
+    ],
+    Legal: [
+      { label: "Política de privacidad", href: "/privacy" },
+      { label: "Términos de uso", href: "/terms" },
+      { label: "Uso aceptable", href: "/aup" },
+      { label: "SLA", href: "/sla" },
+    ],
+  };
+
+  const links = lang === "es" ? linksEs : linksEn;
+  const tagline = lang === "es"
+    ? "Almacenamiento de objetos S3 diseñado para la era de la IA."
+    : "S3 object storage built for the AI era.";
+  const copyright = lang === "es"
+    ? "© 2026 Fil One. Todos los derechos reservados."
+    : "© 2026 Fil One. All rights reserved.";
+
   return (
     <footer
       className="flex flex-col px-6 md:px-12 pt-14 pb-10 w-full border-t"
@@ -57,7 +97,7 @@ const Footer = () => {
                 color: "#71717A",
               }}
             >
-              S3 object storage built for the AI era.
+              {tagline}
             </p>
           </div>
 
@@ -109,7 +149,7 @@ const Footer = () => {
               color: "#71717A",
             }}
           >
-            © 2026 Fil One. All rights reserved.
+            {copyright}
           </p>
         </div>
       </div>
