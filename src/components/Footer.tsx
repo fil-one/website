@@ -48,6 +48,7 @@ const Footer = ({ lang = "en" }: { lang?: "en" | "es" }) => {
       { label: "Backup empresarial y DR", href: "/solutions/enterprise-backup" },
     ],
     Empresa: [
+      { label: "Nosotros", href: "/about" },
       { label: "Precios", href: "/pricing" },
       { label: "Empresas", href: "/enterprise" },
       { label: "Partners", href: "/partners" },
