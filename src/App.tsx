@@ -11,7 +11,6 @@ import Sla from "./pages/Sla";
 import ContactSales from "./pages/ContactSales";
 import Support from "./pages/Support";
 import AcceptableUsePolicy from "./pages/AcceptableUsePolicy";
-import AdsLandingPage from "./pages/AdsLandingPage";
 import BarcelonaLandingPage from "./pages/BarcelonaLandingPage";
 import VersionB from "./pages/VersionB";
 import StorageProductPage from "./pages/StorageProductPage";
@@ -145,7 +144,6 @@ export const AppContent = () => (
           <Route path="/solutions/enterprise-backup" element={<EnterpriseBackupSolutionPage />} />
           <Route path="/partners" element={<PartnersPage />} />
           <Route path="/partners/apply" element={<PartnerApplyPage />} />
-          <Route path="/:lang/:city" element={<AdsLandingPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
