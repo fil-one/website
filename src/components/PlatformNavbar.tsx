@@ -111,16 +111,16 @@ const UTILITY_LINKS_ES = [
   { label: "Empresas", href: "/enterprise" },
 ];
 
-const UTILITY_BAR_LINKS_EN = [
+const utilityBarLinksEn = (supportHref: string) => [
   { label: "Documentation", href: "https://docs.fil.one", external: true },
   { label: "Partners", href: "/partners" },
-  { label: "Support", href: "/support" },
+  { label: "Support", href: supportHref },
 ];
 
-const UTILITY_BAR_LINKS_ES = [
+const utilityBarLinksEs = (supportHref: string) => [
   { label: "Documentación", href: "https://docs.fil.one", external: true },
   { label: "Partners", href: "/partners" },
-  { label: "Soporte", href: "/support" },
+  { label: "Soporte", href: supportHref },
 ];
 
 const UTILITY_BAR_HEIGHT = 36;
@@ -135,7 +135,15 @@ const triggerStyle = {
   cursor: "pointer",
 } as const;
 
-const PlatformNavbar = ({ lang = "en" }: { lang?: "en" | "es" }) => {
+interface PlatformNavbarProps {
+  lang?: "en" | "es";
+  /** Override the utility bar's Support link — defaults to the general /support page. */
+  supportHref?: string;
+  /** Override the "Contact Sales" CTA — defaults to the general /contact-sales page. */
+  contactSalesHref?: string;
+}
+
+const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHref = "/contact-sales" }: PlatformNavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [utilityVisible, setUtilityVisible] = useState(true);
   const lastScrollY = useRef(0);
@@ -144,7 +152,7 @@ const PlatformNavbar = ({ lang = "en" }: { lang?: "en" | "es" }) => {
   const PRODUCTS = lang === "es" ? PRODUCTS_ES : PRODUCTS_EN;
   const SOLUTIONS = lang === "es" ? SOLUTIONS_ES : SOLUTIONS_EN;
   const UTILITY_LINKS = lang === "es" ? UTILITY_LINKS_ES : UTILITY_LINKS_EN;
-  const UTILITY_BAR_LINKS = lang === "es" ? UTILITY_BAR_LINKS_ES : UTILITY_BAR_LINKS_EN;
+  const UTILITY_BAR_LINKS = (lang === "es" ? utilityBarLinksEs : utilityBarLinksEn)(supportHref);
   const t = lang === "es"
     ? {
         skipToContent: "Saltar al contenido principal",
@@ -405,7 +413,7 @@ const PlatformNavbar = ({ lang = "en" }: { lang?: "en" | "es" }) => {
 
           {/* Desktop right CTAs */}
           <div className="hidden md:flex items-center gap-2.5 shrink-0">
-            <a href="/contact-sales" className="btn-secondary">
+            <a href={contactSalesHref} className="btn-secondary">
               {t.contactSales}
             </a>
             <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-sm">
@@ -531,7 +539,7 @@ const PlatformNavbar = ({ lang = "en" }: { lang?: "en" | "es" }) => {
             ))}
 
             <div className="pt-3 mt-1 border-t flex flex-col gap-2" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
-              <a href="/contact-sales" className="btn-secondary w-full text-center" onClick={() => setMobileOpen(false)}>
+              <a href={contactSalesHref} className="btn-secondary w-full text-center" onClick={() => setMobileOpen(false)}>
                 {t.contactSales}
               </a>
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary w-full" onClick={() => setMobileOpen(false)}>
