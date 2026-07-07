@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Check } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
+import { BackButton } from "@/components/LandingPrimitives";
 import { useSeo } from "@/hooks/useSeo";
 import {
   HS_PORTAL_ID,
@@ -174,6 +175,8 @@ const BucketIntelligenceWaitlistPage = () => {
 
       <main className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[560px]">
+
+          <BackButton />
 
           {/* Header */}
           <div className="flex flex-col gap-3">
