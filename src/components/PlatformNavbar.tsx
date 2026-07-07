@@ -4,6 +4,7 @@ import { List, X, ArrowUpRight, CaretDown, Brain, LinkSimple, FilmSlate, ShieldC
 import { useLocation } from "react-router-dom";
 import filOneLogo from "../assets/fil-one-logo.svg";
 import { trackDocsClick } from "@/lib/analytics";
+import { Button } from "@/components/Button";
 
 const PRODUCTS_EN = [
   {
@@ -405,12 +406,12 @@ const PlatformNavbar = ({ lang = "en" }: { lang?: "en" | "es" }) => {
 
           {/* Desktop right CTAs */}
           <div className="hidden md:flex items-center gap-2.5 shrink-0">
-            <a href="/contact-sales" className="btn-secondary">
+            <Button href="/contact-sales" variant="secondary">
               {t.contactSales}
-            </a>
-            <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-sm">
-              <span className="btn-primary-inner">{t.startForFree}</span>
-            </a>
+            </Button>
+            <Button href="https://app.fil.one/login?screen_hint=signup" variant="primary" size="sm">
+              {t.startForFree}
+            </Button>
           </div>
 
           {/* Mobile hamburger */}
@@ -531,12 +532,17 @@ const PlatformNavbar = ({ lang = "en" }: { lang?: "en" | "es" }) => {
             ))}
 
             <div className="pt-3 mt-1 border-t flex flex-col gap-2" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
-              <a href="/contact-sales" className="btn-secondary w-full text-center" onClick={() => setMobileOpen(false)}>
+              <Button href="/contact-sales" variant="secondary" fullWidth onClick={() => setMobileOpen(false)}>
                 {t.contactSales}
-              </a>
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary w-full" onClick={() => setMobileOpen(false)}>
-                <span className="btn-primary-inner w-full justify-center">{t.startForFree}</span>
-              </a>
+              </Button>
+              <Button
+                href="https://app.fil.one/login?screen_hint=signup"
+                variant="primary"
+                fullWidth
+                onClick={() => setMobileOpen(false)}
+              >
+                {t.startForFree}
+              </Button>
             </div>
           </div>
         )}
