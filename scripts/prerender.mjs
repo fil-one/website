@@ -738,19 +738,34 @@ async function prerender() {
       const canonical = `${BASE_URL}${route === "/" ? "/" : route}`;
 
       // Inject per-page title, description, and canonical into the template.
-      // The placeholders (<!--META_*--> … <!--/META_*-->) wrap the defaults in
-      // index.html so in-browser SPA loads still get sensible fallback values.
+      // index.html ships with sensible defaults so non-prerendered loads (dev
+      // server, or dynamic routes like /:lang/:city that can't be enumerated
+      // here) still get real text — these regexes target the actual tags
+      // directly rather than comment markers, which HTML doesn't hide inside
+      // <title> or attribute values (they'd render as literal text).
+      const title = meta.title ?? "Fil One | S3 object storage built for the AI era";
+      const description =
+        meta.description ??
+        "S3-compatible object storage built on Filecoin. Enterprise-grade durability, no egress fees, and verifiable data integrity.";
+
       let html = template
+        .replace(/<title>[\s\S]*?<\/title>/, `<title>${title}</title>`)
         .replace(
-          /<!--META_TITLE-->.*?<!--\/META_TITLE-->/gs,
-          meta.title ?? "Fil One | S3 object storage built for the AI era"
+          /<meta name="description" content="[^"]*"/,
+          `<meta name="description" content="${description}"`
         )
+        .replace(/<link rel="canonical" href="[^"]*"/, `<link rel="canonical" href="${canonical}"`)
+        .replace(/<meta property="og:title" content="[^"]*"/, `<meta property="og:title" content="${title}"`)
         .replace(
-          /<!--META_DESCRIPTION-->.*?<!--\/META_DESCRIPTION-->/gs,
-          meta.description ??
-            "S3-compatible object storage built on Filecoin. Enterprise-grade durability, no egress fees, and verifiable data integrity."
+          /<meta property="og:description" content="[^"]*"/,
+          `<meta property="og:description" content="${description}"`
         )
-        .replace(/<!--META_CANONICAL-->.*?<!--\/META_CANONICAL-->/gs, canonical)
+        .replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${canonical}"`)
+        .replace(/<meta name="twitter:title" content="[^"]*"/, `<meta name="twitter:title" content="${title}"`)
+        .replace(
+          /<meta name="twitter:description" content="[^"]*"/,
+          `<meta name="twitter:description" content="${description}"`
+        )
         .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
 
       // Inject JSON-LD structured data when defined for this route.
