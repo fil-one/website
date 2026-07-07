@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Check, ArrowLeft } from "@phosphor-icons/react";
+import { Check } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
+import { BackButton } from "@/components/LandingPrimitives";
 import { useSeo } from "@/hooks/useSeo";
 import {
   HS_PORTAL_ID,
@@ -115,7 +115,6 @@ const BucketIntelligenceWaitlistPage = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -177,28 +176,7 @@ const BucketIntelligenceWaitlistPage = () => {
       <main className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[560px]">
 
-          {/* Back button */}
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-1.5"
-            style={{
-              fontFamily: "'Funnel Sans', sans-serif",
-              fontWeight: 400,
-              fontSize: 14,
-              color: "#71717A",
-              background: "none",
-              border: "none",
-              padding: 0,
-              cursor: "pointer",
-              width: "fit-content",
-              transition: "color 150ms ease",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.color = "#09090B")}
-            onMouseLeave={e => (e.currentTarget.style.color = "#71717A")}
-          >
-            <ArrowLeft size={14} />
-            Back
-          </button>
+          <BackButton />
 
           {/* Header */}
           <div className="flex flex-col gap-3">

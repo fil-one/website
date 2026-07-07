@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "@phosphor-icons/react";
+
 export const GRID_SVG = encodeURIComponent(
   '<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#000" stroke-opacity="0.16" stroke-width="1"/></svg>'
 );
@@ -49,3 +52,31 @@ export const SectionSub = ({ children, maxWidth = 560 }: { children: React.React
     {children}
   </p>
 );
+
+export const BackButton = () => {
+  const navigate = useNavigate();
+
+  return (
+    <button
+      onClick={() => navigate(-1)}
+      className="flex items-center gap-1.5"
+      style={{
+        fontFamily: "'Funnel Sans', sans-serif",
+        fontWeight: 400,
+        fontSize: 14,
+        color: "#71717A",
+        background: "none",
+        border: "none",
+        padding: 0,
+        cursor: "pointer",
+        width: "fit-content",
+        transition: "color 150ms ease",
+      }}
+      onMouseEnter={e => (e.currentTarget.style.color = "#09090B")}
+      onMouseLeave={e => (e.currentTarget.style.color = "#71717A")}
+    >
+      <ArrowLeft size={14} />
+      Back
+    </button>
+  );
+};
