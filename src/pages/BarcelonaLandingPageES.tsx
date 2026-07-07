@@ -627,7 +627,7 @@ const BarcelonaLandingPageES = () => {
         </section>
       </main>
 
-      <Footer lang="es" />
+      <Footer lang="es" supportHref="/lp/es/soporte" contactSalesHref="/lp/es/contacto" />
     </div>
   );
 };

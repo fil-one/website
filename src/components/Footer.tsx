@@ -1,7 +1,15 @@
 import filOneLogo from "../assets/fil-one-logo.svg";
 import { trackDocsClick } from "@/lib/analytics";
 
-const Footer = ({ lang = "en" }: { lang?: "en" | "es" }) => {
+interface FooterProps {
+  lang?: "en" | "es";
+  /** Override the Support link — defaults to the general /support page. */
+  supportHref?: string;
+  /** Override the Contact Sales link — defaults to the general /contact-sales page. */
+  contactSalesHref?: string;
+}
+
+const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/contact-sales" }: FooterProps) => {
   const linksEn: Record<string, { label: string; href: string }[]> = {
     Products: [
       { label: "Object Storage", href: "/storage" },
@@ -18,11 +26,11 @@ const Footer = ({ lang = "en" }: { lang?: "en" | "es" }) => {
       { label: "Pricing", href: "/pricing" },
       { label: "Enterprise", href: "/enterprise" },
       { label: "Partners", href: "/partners" },
-      { label: "Contact Sales", href: "/contact-sales" },
+      { label: "Contact Sales", href: contactSalesHref },
     ],
     Resources: [
       { label: "Documentation", href: "https://docs.fil.one" },
-      { label: "Support", href: "/support" },
+      { label: "Support", href: supportHref },
       { label: "Status", href: "https://status.fil.one" },
       { label: "Filecoin", href: "https://filecoin.io" },
     ],
@@ -50,11 +58,11 @@ const Footer = ({ lang = "en" }: { lang?: "en" | "es" }) => {
       { label: "Precios", href: "/pricing" },
       { label: "Empresas", href: "/enterprise" },
       { label: "Partners", href: "/partners" },
-      { label: "Contactar con ventas", href: "/contact-sales" },
+      { label: "Contactar con ventas", href: contactSalesHref },
     ],
     Recursos: [
       { label: "Documentación", href: "https://docs.fil.one" },
-      { label: "Soporte", href: "/support" },
+      { label: "Soporte", href: supportHref },
       { label: "Estado", href: "https://status.fil.one" },
       { label: "Filecoin", href: "https://filecoin.io" },
     ],
