@@ -23,7 +23,7 @@ const PRINCIPLES = [
   },
   {
     icon: SealCheck,
-    title: "Trust should be proven, not promised",
+    title: "Trust is proven, not promised",
     description:
       "Every object carries a fingerprint, verified independently: proof, not promises.",
   },
@@ -306,7 +306,7 @@ const About = () => {
             <div className="flex flex-col gap-6 w-full">
               <div
                 ref={instRef}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full reveal-group"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full reveal-group"
               >
                 {INSTITUTIONS.map(({ name, description, logo }) => (
                   <div
@@ -330,7 +330,6 @@ const About = () => {
 
               {/* Also on the network */}
               <div className="flex flex-col items-center gap-8 w-full pt-2">
-                <div className="w-full max-w-[860px] h-px" style={{ backgroundColor: "rgba(0,0,0,0.07)" }} />
                 <div className="flex flex-col items-center gap-6 w-full">
                   <p style={{ ...labelStyle, fontSize: 10.5 }}>Also on the network</p>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-0 w-full max-w-[860px]">
