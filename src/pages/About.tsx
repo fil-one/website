@@ -22,19 +22,19 @@ const PRINCIPLES = [
     icon: Key,
     title: "Your data belongs to you",
     description:
-      "Sovereignty isn't a feature — it's the reason Fil One exists. You hold your keys, you set the rules, and ownership never quietly transfers to your storage vendor. We see ourselves as custodians of your data, never gatekeepers to it.",
+      "Sovereignty is the reason Fil One exists. You hold your keys and set the rules; ownership never quietly transfers to your storage vendor. We're custodians of your data, never gatekeepers.",
   },
   {
     icon: SealCheck,
     title: "Trust should be proven, not promised",
     description:
-      "Every provider claims durability. We think you deserve proof. Every object you store carries a cryptographic fingerprint that's independently verified — so you never have to take anyone's word for it, including ours.",
+      "Every provider claims durability. We think you deserve proof: every object carries a cryptographic fingerprint, independently verified, so you never have to take anyone's word for it, including ours.",
   },
   {
     icon: DoorOpen,
     title: "Leaving should always be free",
     description:
-      "A storage provider should earn your business every month, not hold your data hostage. That's why the exit door stays open — no egress fees, no proprietary formats — and why we work to be worth staying for.",
+      "A storage provider should earn your business every month, not hold your data hostage. That's why the exit door stays open: no egress fees, no proprietary formats, and why we work to be worth staying for.",
   },
 ];
 
