@@ -58,6 +58,12 @@ const INSTITUTIONS = [
   },
 ];
 
+const ALSO_ON_NETWORK = [
+  { name: "Smithsonian Institution", detail: "Alexander Graham Bell sound recordings (1881–1889)" },
+  { name: "Lockheed Martin", detail: "First IPFS deployment in space: LM LINUSS CubeSat, Jan 2024" },
+  { name: "MIT Open Learning", detail: "OpenCourseWare content on the Filecoin network (Jan 2025)" },
+];
+
 const LEADERSHIP = [
   {
     name: "Marta Belcher",
@@ -340,6 +346,24 @@ const About = () => {
                     </p>
                   </div>
                 </a>
+              </div>
+
+              {/* Also on the network */}
+              <div className="flex flex-col items-center gap-6 w-full pt-2">
+                <div className="w-full max-w-[640px] h-px" style={{ backgroundColor: "rgba(0,0,0,0.07)" }} />
+                <p style={{ ...labelStyle, fontSize: 10.5 }}>Also on the network</p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-center">
+                  {ALSO_ON_NETWORK.map(({ name, detail }) => (
+                    <div key={name} className="flex flex-col gap-0.5 max-w-[220px]">
+                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 13.5, color: "#3F3F46" }}>
+                        {name}
+                      </p>
+                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: 1.5, color: "#A1A1AA" }}>
+                        {detail}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
