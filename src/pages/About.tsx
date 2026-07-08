@@ -338,7 +338,7 @@ const About = () => {
                       <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 13.5, color: "#3F3F46" }}>
                         {name}
                       </p>
-                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: 1.5, color: "#A1A1AA" }}>
+                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: 1.5, color: "#71717A" }}>
                         {detail}
                       </p>
                     </div>
