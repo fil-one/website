@@ -296,7 +296,7 @@ const About = () => {
           <div className="flex flex-col gap-12 items-center px-5 md:px-8 py-16 md:py-24 w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center text-center max-w-[520px]">
               <span style={labelStyle}>Recognition</span>
-              <SectionHeading>Trusted by leading institutions</SectionHeading>
+              <SectionHeading>Trusted by <span style={{ color: "#0090FF" }}>leading institutions</span></SectionHeading>
               <p style={bodyStyle}>
                 The Filecoin network that Fil One runs on stores data for some of the world’s most respected institutions.
               </p>
@@ -306,7 +306,7 @@ const About = () => {
             <div className="flex flex-col gap-6 w-full">
               <div
                 ref={instRef}
-                className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full reveal-group"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full reveal-group"
               >
                 {INSTITUTIONS.map(({ name, description, logo }) => (
                   <div
