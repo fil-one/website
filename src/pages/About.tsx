@@ -59,9 +59,9 @@ const INSTITUTIONS = [
 ];
 
 const ALSO_ON_NETWORK = [
-  { name: "Smithsonian Institution", detail: "Alexander Graham Bell sound recordings (1881–1889)" },
-  { name: "Lockheed Martin", detail: "First IPFS deployment in space: LM LINUSS CubeSat, Jan 2024" },
-  { name: "MIT Open Learning", detail: "OpenCourseWare content on the Filecoin network (Jan 2025)" },
+  { name: "Smithsonian Institution", detail: "Preserving Alexander Graham Bell sound recordings (1881–1889) from the National Museum of American History." },
+  { name: "Lockheed Martin", detail: "First-ever deployment of a decentralized file system (IPFS) in space, completed January 2024 on an LM LINUSS CubeSat." },
+  { name: "MIT Open Learning", detail: "MIT OpenCourseWare content uploaded to the Filecoin network (Jan 2025)." },
 ];
 
 const LEADERSHIP = [
