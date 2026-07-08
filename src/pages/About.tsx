@@ -2,7 +2,7 @@ import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
-import { SealCheck, ArrowsLeftRight, ShieldCheck, UserCircleDashed, Buildings, ArrowUpRight } from "@phosphor-icons/react";
+import { SealCheck, Key, DoorOpen, UserCircleDashed, Buildings, ArrowUpRight } from "@phosphor-icons/react";
 import { trackCtaClick } from "@/lib/analytics";
 import { SectionHeading } from "@/components/LandingPrimitives";
 import martaPhoto from "@/assets/team-marta-belcher.jpg";
@@ -17,27 +17,24 @@ import setiLogo from "@/assets/inst-seti.png";
 import lockheedLogo from "@/assets/inst-lockheed.jpg";
 import mitOpenLearningLogo from "@/assets/inst-mit-openlearning.svg";
 
-const STATS = [
-  { value: "$4.99", label: "Per TB, per month" },
-  { value: "$0", label: "Egress fees" },
-  { value: "100%", label: "S3 API compatible" },
-];
-
-const PILLARS = [
+const PRINCIPLES = [
+  {
+    icon: Key,
+    title: "Your data belongs to you",
+    description:
+      "Sovereignty isn't a feature — it's the reason Fil One exists. You hold your keys, you set the rules, and ownership never quietly transfers to your storage vendor. We see ourselves as custodians of your data, never gatekeepers to it.",
+  },
   {
     icon: SealCheck,
-    title: "Verifiable",
-    description: "A unique fingerprint, checked every 24 hours. Durability you can verify yourself.",
+    title: "Trust should be proven, not promised",
+    description:
+      "Every provider claims durability. We think you deserve proof. Every object you store carries a cryptographic fingerprint that's independently verified — so you never have to take anyone's word for it, including ours.",
   },
   {
-    icon: ArrowsLeftRight,
-    title: "Portable",
-    description: "S3-compatible, no egress fees. Your data moves freely, with no lock-in.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Resilient",
-    description: "Distributed across independent infrastructure. No single point of failure.",
+    icon: DoorOpen,
+    title: "Leaving should always be free",
+    description:
+      "A storage provider should earn your business every month, not hold your data hostage. That's why the exit door stays open — no egress fees, no proprietary formats — and why we work to be worth staying for.",
   },
 ];
 
@@ -132,7 +129,6 @@ const cardStyle = {
 
 const About = () => {
   const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.1 });
-  const { ref: statsRef, inView: statsInView } = useInView({ threshold: 0.2 });
   const { ref: whoRef, inView: whoInView } = useInView({ threshold: 0.1 });
   const { ref: pillarsRef, inView: pillarsInView } = useInView({ threshold: 0.05 });
   const { ref: instRef, inView: instInView } = useInView({ threshold: 0.05 });
@@ -141,7 +137,7 @@ const About = () => {
   useSeo({
     title: "About — Fil One",
     description:
-      "Fil One builds verifiable, portable, and resilient S3-compatible object storage for the world's most data-intensive workloads. Built on the Filecoin network.",
+      "Fil One exists to put you back in control of your data. Learn who we are, why we built verifiable S3-compatible storage, and the principles behind it.",
     canonical: "https://fil.one/about",
     ogImage: "https://fil.one/og-image.png",
   });
@@ -205,7 +201,7 @@ const About = () => {
                 margin: 0,
               }}
             >
-              Built for teams where <span style={{ color: "#0090FF" }}>every byte matters</span>
+              We believe your data belongs to <span style={{ color: "#0090FF" }}>you</span>
             </h1>
 
             <p
@@ -220,36 +216,8 @@ const About = () => {
                 margin: 0,
               }}
             >
-              S3-compatible object storage for AI training, large-scale archives, and production inference. Verifiable by default. Portable without penalty. Resilient without heroics.
+              Fil One was built by the team behind Filecoin, the world's largest decentralized storage network, to fix a broken bargain in cloud storage — one where you take a vendor's word on durability, pay a toll to use your own files, and stay because leaving costs too much.
             </p>
-          </div>
-
-          {/* Stats strip */}
-          <div
-            ref={statsRef}
-            className={`w-full border-t reveal${statsInView ? " in-view" : ""}`}
-            style={{ borderColor: "rgba(0,0,0,0.07)" }}
-          >
-            <div className="grid grid-cols-3 max-w-[700px] mx-auto w-full">
-              {STATS.map(({ value, label }, i) => (
-                <div
-                  key={label}
-                  className="flex flex-col items-center gap-1.5 px-4 py-8 md:py-10"
-                  style={{
-                    borderColor: "rgba(0,0,0,0.07)",
-                    borderLeftWidth: i === 0 ? 0 : 1,
-                    borderLeftStyle: "solid",
-                  }}
-                >
-                  <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: "clamp(24px, 3vw, 32px)", letterSpacing: "-0.02em", color: "#09090B", margin: 0 }}>
-                    {value}
-                  </p>
-                  <p style={{ fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 11, letterSpacing: "0.04em", color: "#71717A", textAlign: "center", margin: 0 }}>
-                    {label}
-                  </p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 
@@ -287,18 +255,18 @@ const About = () => {
             className={`grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 md:gap-16 px-5 md:px-8 py-16 md:py-24 w-full max-w-[1120px] mx-auto reveal${whoInView ? " in-view" : ""}`}
           >
             <div className="flex flex-col gap-3">
-              <span style={labelStyle}>Who we are</span>
-              <SectionHeading>Built on serious infrastructure</SectionHeading>
+              <span style={labelStyle}>Our story</span>
+              <SectionHeading>Why we built Fil One</SectionHeading>
             </div>
             <div className="flex flex-col gap-4">
               <p style={bodyStyle}>
-                Fil One is a technology company incorporated in Delaware in 2026, built by a distributed team with deep expertise in storage infrastructure and distributed systems.
+                If you store serious data in the cloud, you know the bargain. Your provider promises eleven nines of durability — and asks you to take their word for it. Your files sit behind egress fees that make using your own data feel like a penalty. And the longer you stay, the more expensive it becomes to ever leave.
               </p>
               <p style={bodyStyle}>
-                Most enterprise storage asks you to trust a single vendor’s word on durability. Fil One runs on the Filecoin network instead, a global marketplace of thousands of independent operators with 5.8 exabytes of capacity proven in production since 2020. Because no single operator controls your data, durability is verified independently, not just reported quarterly, and because the network is open, there’s no lock-in and no egress fees to escape it.
+                We built Fil One because we believe that bargain is backwards. Storage should prove itself: every file you store gets a cryptographic fingerprint that’s verified independently, so durability is something you can check — not a claim you have to trust. Pricing is one flat rate with zero egress fees, so using your data never runs a meter. And because everything is S3-compatible, moving to Fil One — or away from it — is an endpoint change, not a migration project.
               </p>
               <p style={bodyStyle}>
-                Fil One is built with support from key teams behind Filecoin, the world’s largest decentralized storage network, live since 2020 and designed to keep data secure, verifiable, and free from centralized control.
+                Behind the product is the team behind Filecoin, the world’s largest decentralized storage network — live since 2020, with thousands of independent operators and exabytes of proven capacity. It’s the same infrastructure trusted by the Internet Archive and the Smithsonian, and it means your data never depends on any single company staying honest. Not even us.
               </p>
             </div>
           </div>
@@ -309,14 +277,14 @@ const About = () => {
           <div className="flex flex-col gap-12 items-center px-5 md:px-8 py-16 md:py-24 w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center text-center max-w-[480px]">
               <span style={labelStyle}>What we believe</span>
-              <SectionHeading><span style={{ color: "#0090FF" }}>Three principles</span> run through everything we build</SectionHeading>
+              <SectionHeading>The principles behind <span style={{ color: "#0090FF" }}>everything we build</span></SectionHeading>
             </div>
 
             <div
               ref={pillarsRef}
               className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full reveal-group"
             >
-              {PILLARS.map(({ icon: Icon, title, description }) => (
+              {PRINCIPLES.map(({ icon: Icon, title, description }) => (
                 <div
                   key={title}
                   className={`flex flex-col gap-5 p-8 rounded-2xl border transition-colors hover:border-black/[0.12] reveal${pillarsInView ? " in-view" : ""}`}
