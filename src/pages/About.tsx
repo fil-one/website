@@ -10,12 +10,9 @@ import claraPhoto from "@/assets/team-clara-tsao.jpg";
 import hannahPhoto from "@/assets/team-hannah-howard.jpg";
 import jamesPhoto from "@/assets/team-james-kurz.jpg";
 import internetArchiveLogo from "@/assets/inst-internet-archive.png";
-import smithsonianLogo from "@/assets/inst-smithsonian.png";
 import stanfordLogo from "@/assets/inst-stanford.webp";
 import flickrLogo from "@/assets/inst-flickr.jpg";
 import setiLogo from "@/assets/inst-seti.png";
-import lockheedLogo from "@/assets/inst-lockheed.jpg";
-import mitOpenLearningLogo from "@/assets/inst-mit-openlearning.svg";
 
 const PRINCIPLES = [
   {
@@ -45,12 +42,7 @@ const INSTITUTIONS = [
     logo: internetArchiveLogo,
   },
   {
-    name: "Smithsonian Institution",
-    description: "Preserving Alexander Graham Bell sound recordings (1881–1889) from the National Museum of American History.",
-    logo: smithsonianLogo,
-  },
-  {
-    name: "Stanford (Starling Lab)",
+    name: "Starling Lab",
     description: "Preserved 56,000 genocide-survivor testimonies (~4 PB); filed cryptographic evidence to the ICC.",
     logo: stanfordLogo,
   },
@@ -63,16 +55,6 @@ const INSTITUTIONS = [
     name: "SETI Institute",
     description: "Safeguarding search-for-extraterrestrial-intelligence data, including the decoded “A Sign in Space” transmission.",
     logo: setiLogo,
-  },
-  {
-    name: "Lockheed Martin",
-    description: "First-ever deployment of a decentralized file system (IPFS) in space, completed January 2024 on an LM LINUSS CubeSat.",
-    logo: lockheedLogo,
-  },
-  {
-    name: "MIT Open Learning",
-    description: "MIT OpenCourseWare content uploaded to the Filecoin network (Jan 2025).",
-    logo: mitOpenLearningLogo,
   },
 ];
 
@@ -318,7 +300,7 @@ const About = () => {
             <div className="flex flex-col gap-6 w-full">
               <div
                 ref={instRef}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full reveal-group"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 w-full reveal-group"
               >
                 {INSTITUTIONS.map(({ name, description, logo }) => (
                   <div
