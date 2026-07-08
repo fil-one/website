@@ -2,7 +2,7 @@ import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
-import { SealCheck, Key, DoorOpen, UserCircleDashed, Buildings, ArrowUpRight } from "@phosphor-icons/react";
+import { SealCheck, Key, DoorOpen, UserCircleDashed } from "@phosphor-icons/react";
 import { trackCtaClick } from "@/lib/analytics";
 import { SectionHeading } from "@/components/LandingPrimitives";
 import martaPhoto from "@/assets/team-marta-belcher.jpg";
@@ -306,7 +306,7 @@ const About = () => {
             <div className="flex flex-col gap-6 w-full">
               <div
                 ref={instRef}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 w-full reveal-group"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full reveal-group"
               >
                 {INSTITUTIONS.map(({ name, description, logo }) => (
                   <div
@@ -326,26 +326,6 @@ const About = () => {
                     </div>
                   </div>
                 ))}
-
-                <a
-                  href="/contact-sales"
-                  onClick={() => trackCtaClick("Become the next institution", "/contact-sales", "secondary")}
-                  className={`flex flex-col gap-4 p-6 rounded-2xl border transition-colors group reveal${instInView ? " in-view" : ""}`}
-                  style={{ borderColor: "rgba(0,144,255,0.25)", backgroundColor: "#EFF8FF", textDecoration: "none" }}
-                >
-                  <div className="flex items-center justify-center w-14 h-14 rounded-xl shrink-0 p-2.5" style={{ backgroundColor: "#FFFFFF" }}>
-                    <Buildings size={26} color="#0090FF" weight="regular" />
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <p className="flex items-center gap-1" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 15, lineHeight: "1.3", color: "#0070CC" }}>
-                      Become the next institution
-                      <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </p>
-                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: "1.6", color: "#3B82C4" }}>
-                      Talk to our team about storing your data on Fil One.
-                    </p>
-                  </div>
-                </a>
               </div>
 
               {/* Also on the network */}
