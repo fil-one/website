@@ -242,9 +242,9 @@ const About = () => {
             ref={whoRef}
             className={`grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6 md:gap-16 px-5 md:px-8 py-16 md:py-24 w-full max-w-[1120px] mx-auto reveal${whoInView ? " in-view" : ""}`}
           >
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 items-center text-center md:items-start md:text-left">
               <span style={labelStyle}>Our story</span>
-              <SectionHeading>Why we built<br />Fil One</SectionHeading>
+              <SectionHeading>Why we built<br className="hidden md:block" /> Fil One</SectionHeading>
             </div>
             <div className="flex flex-col gap-4">
               <p style={bodyStyle}>
