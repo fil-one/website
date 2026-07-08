@@ -329,20 +329,26 @@ const About = () => {
               </div>
 
               {/* Also on the network */}
-              <div className="flex flex-col items-center gap-6 w-full pt-2">
-                <div className="w-full max-w-[640px] h-px" style={{ backgroundColor: "rgba(0,0,0,0.07)" }} />
-                <p style={{ ...labelStyle, fontSize: 10.5 }}>Also on the network</p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-center">
-                  {ALSO_ON_NETWORK.map(({ name, detail }) => (
-                    <div key={name} className="flex flex-col gap-0.5 max-w-[220px]">
-                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 13.5, color: "#3F3F46" }}>
-                        {name}
-                      </p>
-                      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: 1.5, color: "#71717A" }}>
-                        {detail}
-                      </p>
-                    </div>
-                  ))}
+              <div className="flex flex-col items-center gap-8 w-full pt-2">
+                <div className="w-full max-w-[860px] h-px" style={{ backgroundColor: "rgba(0,0,0,0.07)" }} />
+                <div className="flex flex-col items-center gap-6 w-full">
+                  <p style={{ ...labelStyle, fontSize: 10.5 }}>Also on the network</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-0 w-full max-w-[860px]">
+                    {ALSO_ON_NETWORK.map(({ name, detail }, i) => (
+                      <div
+                        key={name}
+                        className={`flex flex-col gap-1.5 text-center sm:text-left px-0 sm:px-7${i === 0 ? "" : " sm:border-l"}`}
+                        style={{ borderColor: "rgba(0,0,0,0.08)" }}
+                      >
+                        <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 13.5, color: "#3F3F46" }}>
+                          {name}
+                        </p>
+                        <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: 1.55, color: "#71717A" }}>
+                          {detail}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
