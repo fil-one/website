@@ -216,7 +216,7 @@ const About = () => {
                 margin: 0,
               }}
             >
-              Fil One was built by the team behind Filecoin, the world's largest decentralized storage network, to fix a broken bargain in cloud storage — one where you take a vendor's word on durability, pay a toll to use your own files, and stay because leaving costs too much.
+              Fil One was built by the team behind Filecoin, the world's largest decentralized storage network, to fix cloud storage's broken bargain: trust a vendor's word on durability, pay to access your own files, and stay because leaving costs too much.
             </p>
           </div>
         </div>
@@ -256,17 +256,17 @@ const About = () => {
           >
             <div className="flex flex-col gap-3">
               <span style={labelStyle}>Our story</span>
-              <SectionHeading>Why we built Fil One</SectionHeading>
+              <SectionHeading>Why we built<br />Fil One</SectionHeading>
             </div>
             <div className="flex flex-col gap-4">
               <p style={bodyStyle}>
-                If you store serious data in the cloud, you know the bargain. Your provider promises eleven nines of durability — and asks you to take their word for it. Your files sit behind egress fees that make using your own data feel like a penalty. And the longer you stay, the more expensive it becomes to ever leave.
+                If you store serious data in the cloud, you know the bargain: your provider promises eleven nines of durability and asks you to trust it, egress fees punish you for using your own data, and staying longer only makes leaving more expensive.
               </p>
               <p style={bodyStyle}>
-                We built Fil One because we believe that bargain is backwards. Storage should prove itself: every file you store gets a cryptographic fingerprint that’s verified independently, so durability is something you can check — not a claim you have to trust. Pricing is one flat rate with zero egress fees, so using your data never runs a meter. And because everything is S3-compatible, moving to Fil One — or away from it — is an endpoint change, not a migration project.
+                We built Fil One because that bargain is backwards. Every file gets a cryptographic fingerprint, verified independently, so durability is something you can check, not a claim you have to trust. Pricing is one flat rate with zero egress fees, and because everything is S3-compatible, moving to or from Fil One is an endpoint change, not a migration project.
               </p>
               <p style={bodyStyle}>
-                Behind the product is the team behind Filecoin, the world’s largest decentralized storage network — live since 2020, with thousands of independent operators and exabytes of proven capacity. It’s the same infrastructure trusted by the Internet Archive and the Smithsonian, and it means your data never depends on any single company staying honest. Not even us.
+                Behind the product is the team behind Filecoin, the world’s largest decentralized storage network, live since 2020 with thousands of independent operators and exabytes of proven capacity. It’s the same infrastructure trusted by the Internet Archive and the Smithsonian, so your data never depends on any single company staying honest. Not even us.
               </p>
             </div>
           </div>
