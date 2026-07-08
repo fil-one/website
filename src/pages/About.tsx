@@ -201,7 +201,7 @@ const About = () => {
                 margin: 0,
               }}
             >
-              We believe your data belongs to <span style={{ color: "#0090FF" }}>you</span>
+              We believe your data <span style={{ color: "#0090FF" }}>belongs to you</span>
             </h1>
 
             <p
