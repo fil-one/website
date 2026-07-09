@@ -331,8 +331,8 @@ const HeroLens: React.FC<HeroLensProps> = ({ h1Ref, bg = "#ffffff" }) => {
 
     // ── State ────────────────────────────────────────────────────────────────
     let tex: WebGLTexture | null = null;
-    let lensUV   = { x: 0.5, y: 0.5 };
-    let targetUV = { x: 0.5, y: 0.5 };
+    const lensUV   = { x: 0.5, y: 0.5 };
+    const targetUV = { x: 0.5, y: 0.5 };
     let isHovered = false;
     let raf = 0;
     let startTime = 0;

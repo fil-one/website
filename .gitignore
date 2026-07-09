@@ -11,6 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+*.tsbuildinfo
+
+# Claude Code ephemeral worktrees
+.claude/worktrees
 
 # Editor directories and files
 .vscode/*

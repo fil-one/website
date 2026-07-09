@@ -10,7 +10,6 @@ describe("analytics", () => {
   });
 
   afterEach(() => {
-    // @ts-expect-error — cleaning up test mock
     delete window.plausible;
   });
 
@@ -31,7 +30,6 @@ describe("analytics", () => {
     });
 
     it("is a no-op when window.plausible is undefined", () => {
-      // @ts-expect-error — simulating missing plausible
       delete window.plausible;
 
       expect(() => trackEvent("Should Not Crash")).not.toThrow();
