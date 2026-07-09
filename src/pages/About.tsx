@@ -268,6 +268,9 @@ const About = () => {
               <p style={bodyStyle}>
                 Behind the product is the team behind Filecoin, the world’s largest decentralized storage network — live since 2020, with thousands of independent operators and exabytes of proven capacity. It’s the same infrastructure trusted by the Internet Archive and the Smithsonian, and it means your data never depends on any single company staying honest. Not even us.
               </p>
+              <p style={bodyStyle}>
+                this is a test for meredith
+              </p>
             </div>
           </div>
         </section>
