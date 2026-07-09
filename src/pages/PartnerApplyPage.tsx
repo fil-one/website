@@ -48,13 +48,13 @@ const Field = ({
   required?: boolean;
   children: React.ReactNode;
 }) => (
-  <div className="flex flex-col gap-1.5">
-    <label style={labelStyle}>
+  <label className="flex flex-col gap-1.5">
+    <span style={labelStyle}>
       {label}
-      {required && <span style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
-    </label>
+      {required && <span aria-hidden="true" style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
+    </span>
     {children}
-  </div>
+  </label>
 );
 
 const PartnerApplyPage = () => {
@@ -313,10 +313,10 @@ const PartnerApplyPage = () => {
               </Field>
 
               {/* Partner type */}
-              <div className="flex flex-col gap-2">
-                <label style={labelStyle}>
-                  Partner type <span style={{ color: "#DC2626", marginLeft: 2 }}>*</span>
-                </label>
+              <fieldset className="flex flex-col gap-2" style={{ border: "none", padding: 0, margin: 0 }}>
+                <legend style={{ ...labelStyle, padding: 0 }}>
+                  Partner type <span aria-hidden="true" style={{ color: "#DC2626", marginLeft: 2 }}>*</span>
+                </legend>
                 <div className="flex flex-col gap-2">
                   {PARTNER_TYPES.map(({ value, label, sub }) => {
                     const selected = form.partnerType === value;
@@ -350,11 +350,11 @@ const PartnerApplyPage = () => {
                   })}
                 </div>
                 {partnerTypeError && (
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626" }}>
+                  <p role="alert" style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626" }}>
                     Please select a partner type.
                   </p>
                 )}
-              </div>
+              </fieldset>
 
               {/* Company size */}
               <Field label="Company size">
@@ -405,9 +405,10 @@ const PartnerApplyPage = () => {
                   type="checkbox"
                   checked={form.consent}
                   onChange={set("consent")}
-                  style={{ display: "none" }}
+                  className="peer sr-only"
                 />
                 <span
+                  className="peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
                   style={{
                     width: 16,
                     height: 16,
@@ -420,6 +421,7 @@ const PartnerApplyPage = () => {
                     alignItems: "center",
                     justifyContent: "center",
                     transition: "background-color 150ms ease, border 150ms ease",
+                    outlineColor: "#0090FF",
                   }}
                 >
                   {form.consent && (

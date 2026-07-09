@@ -50,13 +50,13 @@ const Field = ({
   required?: boolean;
   children: React.ReactNode;
 }) => (
-  <div className="flex flex-col gap-1.5">
-    <label style={labelStyle}>
+  <label className="flex flex-col gap-1.5">
+    <span style={labelStyle}>
       {label}
-      {required && <span style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
-    </label>
+      {required && <span aria-hidden="true" style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
+    </span>
     {children}
-  </div>
+  </label>
 );
 
 const ContactSales = () => {
@@ -263,13 +263,13 @@ const ContactSales = () => {
               </Field>
 
               {/* Data storage radio group */}
-              <div className="flex flex-col gap-3">
-                <label style={labelStyle}>
+              <fieldset className="flex flex-col gap-3" style={{ border: "none", padding: 0, margin: 0 }}>
+                <legend style={{ ...labelStyle, padding: 0 }}>
                   How much data are you looking to store?
-                  <span style={{ color: "#DC2626", marginLeft: 2 }}>*</span>
-                </label>
+                  <span aria-hidden="true" style={{ color: "#DC2626", marginLeft: 2 }}>*</span>
+                </legend>
                 {radioError && (
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626" }}>
+                  <p role="alert" style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626" }}>
                     Please select an option.
                   </p>
                 )}
@@ -288,10 +288,12 @@ const ContactSales = () => {
                           value={option}
                           checked={checked}
                           onChange={() => { setForm((f) => ({ ...f, dataStorage: option })); setRadioError(false); }}
-                          style={{ display: "none" }}
+                          required
+                          className="peer sr-only"
                         />
                         {/* Custom radio */}
                         <span
+                          className="peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
                           style={{
                             width: 17,
                             height: 17,
@@ -301,6 +303,7 @@ const ContactSales = () => {
                             flexShrink: 0,
                             transition: "border 150ms ease",
                             display: "inline-block",
+                            outlineColor: "#0090FF",
                           }}
                         />
                         <span
@@ -318,7 +321,7 @@ const ContactSales = () => {
                     );
                   })}
                 </div>
-              </div>
+              </fieldset>
 
               <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
 
@@ -333,9 +336,10 @@ const ContactSales = () => {
                   type="checkbox"
                   checked={form.consent}
                   onChange={set("consent")}
-                  style={{ display: "none" }}
+                  className="peer sr-only"
                 />
                 <span
+                  className="peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
                   style={{
                     width: 16,
                     height: 16,
@@ -348,6 +352,7 @@ const ContactSales = () => {
                     alignItems: "center",
                     justifyContent: "center",
                     transition: "background-color 150ms ease, border 150ms ease",
+                    outlineColor: "#0090FF",
                   }}
                 >
                   {form.consent && (
