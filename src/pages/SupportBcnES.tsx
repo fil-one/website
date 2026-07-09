@@ -3,6 +3,7 @@ import { Check } from "@phosphor-icons/react";
 import LandingNavbar from "@/components/LandingNavbar";
 import LandingFooter from "@/components/LandingFooter";
 import { useSeo } from "@/hooks/useSeo";
+import { useLang } from "@/hooks/useLang";
 import {
   HS_PORTAL_ID,
   HS_SUPPORT_FORM_GUID,
@@ -56,6 +57,7 @@ const Field = ({
 );
 
 const SupportBcnES = () => {
+  useLang("es");
   useSeo({
     title: "Soporte — Fil One Almacenamiento S3",
     description: "Obtén ayuda del equipo de soporte de Fil One. Envía una solicitud y te responderemos en breve.",

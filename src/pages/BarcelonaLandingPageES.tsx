@@ -3,6 +3,7 @@ import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
+import { useLang } from "@/hooks/useLang";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
 
 // ─── Grid texture (matches Index.tsx hero) ─────────────────────────────────────
@@ -33,6 +34,7 @@ const INTEGRATIONS = [
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 const BarcelonaLandingPageES = () => {
+  useLang("es");
   useSeo({
     title: "Fil One para Barcelona: Almacenamiento Europeo, €4.99/TB, Sin Egress",
     description:

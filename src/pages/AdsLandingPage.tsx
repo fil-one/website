@@ -1,8 +1,8 @@
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Check } from "@phosphor-icons/react";
 import { CITY_MAP } from "@/data/adsCities";
 import { useSeo } from "@/hooks/useSeo";
+import { useLang } from "@/hooks/useLang";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
 import filOneLogo from "../assets/fil-one-logo.svg";
 import NotFound from "./NotFound";
@@ -84,10 +84,7 @@ const AdsLandingPage = () => {
   const { lang, city } = useParams<{ lang: string; city: string }>();
   const config = CITY_MAP[lang ?? ""]?.[city ?? ""];
 
-  useEffect(() => {
-    if (config?.lang) document.documentElement.lang = config.lang;
-    return () => { document.documentElement.lang = "en"; };
-  }, [config?.lang]);
+  useLang(config?.lang);
 
   useSeo(
     config

@@ -508,6 +508,7 @@ const ROUTE_META = {
       "S3-compatible object storage for teams in Barcelona. EU data sovereignty, zero egress fees, at €4.99/TB. Drop into your existing stack in minutes.",
   },
   "/lp/es/barcelona": {
+    lang: "es",
     title: "Fil One para Barcelona: Almacenamiento Europeo, €4.99/TB, Sin Egress",
     description:
       "Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a €4.99/TB. Intégralo en tu stack actual en minutos.",
@@ -538,19 +539,23 @@ const ROUTE_META = {
     description: "Read the Fil One Object Storage Service Level Agreement: uptime commitment, service credit tiers, and how to request credits.",
   },
   "/lp/es/contacto": {
+    lang: "es",
     title: "Fil One para Barcelona: Contacto",
     description: "Ponte en contacto con el equipo de Fil One para hablar de precios, migración y planes empresariales.",
   },
   "/lp/es/soporte": {
+    lang: "es",
     title: "Fil One para Barcelona: Soporte",
     description: "Soporte técnico para el almacenamiento de objetos de Fil One. Contáctanos para ayuda con configuración, migración y cuentas.",
   },
   "/fr/marseille": {
+    lang: "fr",
     title: "Stockage S3 rapide près de Marseille — Fil One",
     description:
       "Datacenter dans le Sud de la France. Stockage objet S3 à 5 ms de Marseille, moins cher que Scaleway, Backblaze et Wasabi. Essayez 30 jours gratuitement.",
   },
   "/es/barcelona": {
+    lang: "es",
     title: "Almacenamiento S3 rápido cerca de Barcelona — Fil One",
     description:
       "Centro de datos en el sur de Francia. Almacenamiento objeto S3 a 6 ms de Barcelona, más barato que Scaleway, Backblaze y Wasabi. Prueba 30 días gratis.",
@@ -691,6 +696,34 @@ const ROUTE_META = {
   },
 };
 
+/**
+ * hreflang clusters — each entry lists the reciprocal translations of one page.
+ * Every URL in a cluster gets a <link rel="alternate" hreflang="xx"> for all
+ * members (including itself), plus an x-default pointing at the English version,
+ * so search engines serve the right language variant. Pages not listed here
+ * have no translation and get no alternates (which is valid).
+ */
+const HREFLANG_GROUPS = [
+  { en: "/lp/barcelona", es: "/lp/es/barcelona" },
+  { en: "/contact-sales", es: "/lp/es/contacto" },
+  { en: "/support", es: "/lp/es/soporte" },
+];
+
+/** route path → array of { hreflang, href }, built once from HREFLANG_GROUPS. */
+const HREFLANG_BY_ROUTE = {};
+for (const group of HREFLANG_GROUPS) {
+  const members = Object.entries(group); // [["en", "/…"], ["es", "/…"]]
+  const alternates = members.map(([lang, path]) => ({
+    hreflang: lang,
+    href: `${BASE_URL}${path}`,
+  }));
+  // x-default → the English variant when present, else the first member.
+  alternates.push({ hreflang: "x-default", href: `${BASE_URL}${group.en ?? members[0][1]}` });
+  for (const [, path] of members) {
+    HREFLANG_BY_ROUTE[path] = alternates;
+  }
+}
+
 /** All routes to prerender. */
 const ROUTES = Object.keys(ROUTE_META);
 
@@ -747,8 +780,17 @@ async function prerender() {
       const description =
         meta.description ??
         "S3-compatible object storage built on Filecoin. Enterprise-grade durability, no egress fees, and verifiable data integrity.";
+      const lang = meta.lang ?? "en";
+
+      // Reciprocal hreflang alternates for translated page clusters (no-op for
+      // pages without a translation).
+      const hreflangTags = (HREFLANG_BY_ROUTE[route] ?? [])
+        .map((a) => `<link rel="alternate" hreflang="${a.hreflang}" href="${a.href}" />`)
+        .join("\n    ");
 
       let html = template
+        .replace(/<html lang="[^"]*">/, `<html lang="${lang}">`)
+        .replace("<!--META_HREFLANG-->", hreflangTags)
         .replace(/<title>[\s\S]*?<\/title>/, `<title>${title}</title>`)
         .replace(
           /<meta name="description" content="[^"]*"/,
