@@ -15,6 +15,7 @@ const Footer = ({ lang = "en" }: { lang?: "en" | "es" }) => {
       { label: "Enterprise Backup & DR", href: "/solutions/enterprise-backup" },
     ],
     Company: [
+      { label: "About", href: "/about" },
       { label: "Pricing", href: "/pricing" },
       { label: "Enterprise", href: "/enterprise" },
       { label: "Partners", href: "/partners" },
@@ -47,6 +48,7 @@ const Footer = ({ lang = "en" }: { lang?: "en" | "es" }) => {
       { label: "Backup empresarial y DR", href: "/solutions/enterprise-backup" },
     ],
     Empresa: [
+      { label: "Nosotros", href: "/about" },
       { label: "Precios", href: "/pricing" },
       { label: "Empresas", href: "/enterprise" },
       { label: "Partners", href: "/partners" },

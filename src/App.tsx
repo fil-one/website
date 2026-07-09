@@ -21,6 +21,7 @@ import PricingPage from "./pages/PricingPage";
 import BucketIntelligenceWaitlistPage from "./pages/BucketIntelligenceWaitlistPage";
 import AgentToolkitWaitlistPage from "./pages/AgentToolkitWaitlistPage";
 import EnterprisePage from "./pages/EnterprisePage";
+import About from "./pages/About";
 import AiTrainingSolutionPage from "./pages/solutions/AiTrainingSolutionPage";
 import Web3DappsSolutionPage from "./pages/solutions/Web3DappsSolutionPage";
 import MediaArchiveSolutionPage from "./pages/solutions/MediaArchiveSolutionPage";
@@ -139,6 +140,7 @@ export const AppContent = () => (
           <Route path="/waitlist/bucket-intelligence" element={<BucketIntelligenceWaitlistPage />} />
           <Route path="/waitlist/ai-agent-toolkit" element={<AgentToolkitWaitlistPage />} />
           <Route path="/enterprise" element={<EnterprisePage />} />
+          <Route path="/about" element={<About />} />
           <Route path="/solutions/ai-training" element={<AiTrainingSolutionPage />} />
           <Route path="/solutions/web3-dapps" element={<Web3DappsSolutionPage />} />
           <Route path="/solutions/media-archive" element={<MediaArchiveSolutionPage />} />
