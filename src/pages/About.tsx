@@ -177,7 +177,7 @@ const About = () => {
             </span>
 
             <h1
-              className="text-[32px] sm:text-[40px] md:text-[52px]"
+              className="text-[34px] sm:text-[42px] md:text-[56px]"
               style={{
                 fontFamily: "'Aspekta', sans-serif",
                 fontWeight: 500,
@@ -200,11 +200,11 @@ const About = () => {
                 lineHeight: "1.65",
                 color: "#71717A",
                 textAlign: "center",
-                maxWidth: 560,
+                maxWidth: 600,
                 margin: 0,
               }}
             >
-              Fil One was built by the team behind Filecoin, the world's largest decentralized storage network, to fix cloud storage's broken bargain: trust a vendor's word on durability, pay to access your own files, and stay because leaving costs too much.
+              Fil One was built by the team behind Filecoin, the world's largest decentralized storage network. We make cloud storage you can verify, access without egress fees, and leave anytime, because your data should belong to you.
             </p>
           </div>
         </div>
@@ -244,7 +244,7 @@ const About = () => {
           >
             <div className="flex flex-col gap-3 items-center text-center md:items-start md:text-left">
               <span style={labelStyle}>Our story</span>
-              <SectionHeading>Why we built<br className="hidden md:block" /> Fil One</SectionHeading>
+              <SectionHeading>Why we built<br className="hidden md:block" /> <span style={{ color: "#0090FF" }}>Fil One</span></SectionHeading>
             </div>
             <div className="flex flex-col gap-4">
               <p style={bodyStyle}>
