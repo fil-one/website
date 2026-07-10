@@ -2,6 +2,7 @@ import { useState, type ReactNode } from "react";
 import { CaretDown } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 import JsonLd from "@/components/JsonLd";
+import SectionHeader from "@/components/SectionHeader";
 import { trackEvent, trackDocsClick } from "@/lib/analytics";
 
 const faqs = [
@@ -143,36 +144,12 @@ const FaqSection = ({ include }: FaqSectionProps = {}) => {
       style={{ backgroundColor: "#FFFFFF" }}
     >
       {/* Heading */}
-      <div
+      <SectionHeader
         ref={headingRef}
-        className={`flex flex-col gap-3 items-center text-center w-full max-w-[560px] reveal${headingInView ? " in-view" : ""}`}
-      >
-        <span
-          aria-hidden="true"
-          style={{
-            fontFamily: "'DM Mono', monospace",
-            fontWeight: 500,
-            fontSize: 11.5,
-            letterSpacing: "0.08em",
-            color: "#71717A",
-            textTransform: "uppercase",
-          }}
-        >
-          FAQ
-        </span>
-        <h2
-          className="text-[26px] md:text-[32px]"
-          style={{
-            fontFamily: "'Aspekta', sans-serif",
-            fontWeight: 500,
-            lineHeight: "1.2",
-            letterSpacing: "-0.02em",
-            color: "#09090B",
-          }}
-        >
-          Frequently asked questions
-        </h2>
-      </div>
+        className={`w-full max-w-[560px] reveal${headingInView ? " in-view" : ""}`}
+        label="FAQ"
+        title="Frequently asked questions"
+      />
 
       {/* FAQ list */}
       <div

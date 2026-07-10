@@ -1,6 +1,7 @@
 import { HardDrive, ChatDots, Robot, Check, ArrowRight } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
+import SectionHeader from "@/components/SectionHeader";
 
 const STORAGE_FEATURES = [
   "11 nines durability, verified daily",
@@ -35,47 +36,13 @@ const ProductsSection = () => {
       <div className="flex flex-col gap-10 items-center px-5 md:px-8 pt-40 md:pt-52 pb-24 md:pb-32 w-full max-w-[1120px] mx-auto">
 
         {/* Heading */}
-        <div
+        <SectionHeader
           ref={headingRef}
-          className={`flex flex-col gap-3 items-center text-center max-w-[560px] reveal${headingInView ? " in-view" : ""}`}
-        >
-          <span
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontWeight: 500,
-              fontSize: 11.5,
-              letterSpacing: "0.08em",
-              color: "#52525B",
-              textTransform: "uppercase",
-            }}
-          >
-            Products
-          </span>
-          <h2
-            style={{
-              fontFamily: "'Aspekta', sans-serif",
-              fontWeight: 500,
-              fontSize: "clamp(24px, 4vw, 32px)",
-              lineHeight: 1.2,
-              letterSpacing: "-0.02em",
-              color: "#09090B",
-              margin: 0,
-            }}
-          >
-            Start with storage. Build AI on top.
-          </h2>
-          <p
-            style={{
-              fontFamily: "'Funnel Sans', sans-serif",
-              fontWeight: 400,
-              fontSize: 16,
-              lineHeight: 1.6,
-              color: "#52525B",
-            }}
-          >
-            Storage is the foundation. Bucket Intelligence and AI Agent Toolkit will soon connect directly to your buckets, no extra infrastructure needed.
-          </p>
-        </div>
+          className={`max-w-[560px] reveal${headingInView ? " in-view" : ""}`}
+          label="Products"
+          title="Start with storage. Build AI on top."
+          subtitle="Storage is the foundation. Bucket Intelligence and AI Agent Toolkit will soon connect directly to your buckets, no extra infrastructure needed."
+        />
 
         {/* Foundation card — Object Storage */}
         <div

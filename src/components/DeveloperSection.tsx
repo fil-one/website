@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Check, Copy } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
+import SectionHeader from "@/components/SectionHeader";
 
 type LangKey = "python" | "typescript" | "go";
 
@@ -141,47 +142,12 @@ const DeveloperSection = () => {
         className="flex flex-col gap-12 px-5 md:px-8 py-24 md:py-32 w-full max-w-[1120px] mx-auto"
       >
         {/* Heading */}
-        <div className={`flex flex-col gap-4 items-center text-center reveal${inView ? " in-view" : ""}`}>
-          <span
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontWeight: 500,
-              fontSize: 11,
-              letterSpacing: "0.1em",
-              color: "#71717A",
-              textTransform: "uppercase",
-            }}
-          >
-            Developer first
-          </span>
-          <h2
-            className="text-[26px] md:text-[34px]"
-            style={{
-              fontFamily: "'Aspekta', sans-serif",
-              fontWeight: 500,
-              lineHeight: 1.15,
-              letterSpacing: "-0.02em",
-              color: "#09090B",
-              margin: 0,
-              maxWidth: 480,
-            }}
-          >
-            Your existing S3 code runs here.
-          </h2>
-          <p
-            style={{
-              fontFamily: "'Funnel Sans', sans-serif",
-              fontWeight: 400,
-              fontSize: 15,
-              lineHeight: 1.65,
-              color: "#71717A",
-              maxWidth: 420,
-              margin: 0,
-            }}
-          >
-            Fil One is fully S3-compatible. Change the endpoint URL and you're done. Every tool you already use keeps working.
-          </p>
-        </div>
+        <SectionHeader
+          className={`max-w-[480px] reveal${inView ? " in-view" : ""}`}
+          label="Developer first"
+          title="Your existing S3 code runs here."
+          subtitle="Fil One is fully S3-compatible. Change the endpoint URL and you're done. Every tool you already use keeps working."
+        />
 
         {/* Step pills */}
         <div className={`flex flex-wrap items-center justify-center gap-2 reveal${inView ? " in-view" : ""}`}>

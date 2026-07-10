@@ -19,6 +19,8 @@ export default {
         sans: ["Funnel Sans", "sans-serif"],
         // Display / headings — the @font-face family loaded in index.css (~200 inline uses)
         display: ["Aspekta", "sans-serif"],
+        // Monospace — labels / code, loaded via Google Fonts in index.html
+        mono: ["DM Mono", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
