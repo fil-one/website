@@ -23,7 +23,6 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.restoreAllMocks();
-  // @ts-expect-error — cleaning up test mock
   delete window.plausible;
 });
 
@@ -40,13 +39,11 @@ describe("useScrollTracking", () => {
 
       // Simulate attaching the ref to a DOM element
       const el = document.createElement("div");
-      // @ts-expect-error — manually setting ref.current for test
       result.current.heroEndRef.current = el;
 
       // Re-render to trigger the effect with the element present
       const { result: result2 } = renderHook(() => useScrollTracking());
       const el2 = document.createElement("div");
-      // @ts-expect-error — manually setting ref.current for test
       result2.current.heroEndRef.current = el2;
 
       // The observer won't fire without a real DOM, so let's test via the callback directly

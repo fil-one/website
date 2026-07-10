@@ -15,11 +15,21 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Linting */
+    /* Type-checking strictness.
+       Enabled incrementally — these flags the codebase already satisfies are
+       on now to lock in the wins and prevent regressions. `strictNullChecks`
+       (~51 existing errors) is the remaining step; enable it once those are
+       burned down, at which point `strict: true` can replace this block. */
     "strict": false,
+    "noImplicitAny": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "useUnknownInCatchVariables": true,
+    "strictNullChecks": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noImplicitAny": false,
     "noFallthroughCasesInSwitch": false,
 
     "baseUrl": ".",

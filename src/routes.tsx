@@ -67,6 +67,7 @@ export const routeDefs: RouteDef[] = [
   { path: "/waitlist/bucket-intelligence", load: () => import("./pages/BucketIntelligenceWaitlistPage") },
   { path: "/waitlist/ai-agent-toolkit", load: () => import("./pages/AgentToolkitWaitlistPage") },
   { path: "/enterprise", load: () => import("./pages/EnterprisePage") },
+  { path: "/about", load: () => import("./pages/About") },
   { path: "/solutions/ai-training", load: () => import("./pages/solutions/AiTrainingSolutionPage") },
   { path: "/solutions/web3-dapps", load: () => import("./pages/solutions/Web3DappsSolutionPage") },
   { path: "/solutions/media-archive", load: () => import("./pages/solutions/MediaArchiveSolutionPage") },
