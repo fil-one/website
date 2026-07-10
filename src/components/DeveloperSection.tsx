@@ -139,7 +139,7 @@ const DeveloperSection = () => {
     <section style={{ backgroundColor: "#F4F4F5", borderTop: "1px solid #E4E4E7", borderBottom: "1px solid #E4E4E7" }}>
       <div
         ref={ref}
-        className="flex flex-col gap-12 px-5 md:px-8 py-24 md:py-32 w-full max-w-[1120px] mx-auto"
+        className="flex flex-col gap-12 px-5 md:px-8 py-24 md:py-32 w-full max-w-container mx-auto"
       >
         {/* Heading */}
         <SectionHeader

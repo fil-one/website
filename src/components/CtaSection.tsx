@@ -14,7 +14,7 @@ const CtaSection = () => {
       {/* Dark card */}
       <div
         ref={ref}
-        className={`flex flex-col gap-8 items-center justify-center text-center w-full max-w-[1120px] px-8 py-20 md:py-32 reveal${inView ? " in-view" : ""}`}
+        className={`flex flex-col gap-8 items-center justify-center text-center w-full max-w-container px-8 py-20 md:py-32 reveal${inView ? " in-view" : ""}`}
         style={{
           backgroundImage: `url(${ctaBg})`,
           backgroundSize: "cover",

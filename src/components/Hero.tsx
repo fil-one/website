@@ -5,7 +5,7 @@ import { Button } from "@/components/Button";
 const Hero = () => {
   return (
     <section className="relative w-full pt-[58px] md:pt-[94px]">
-      <div className="relative flex flex-col items-center pt-20 md:pt-[120px] pb-0 px-5 md:px-8 max-w-[1120px] mx-auto w-full">
+      <div className="relative flex flex-col items-center pt-20 md:pt-[120px] pb-0 px-5 md:px-8 max-w-container mx-auto w-full">
         <div className="flex flex-col items-center gap-6 w-full hero-fade-1">
 
           {/* Platform badge */}
