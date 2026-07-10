@@ -722,7 +722,7 @@ async function prerender() {
 
   for (const route of ROUTES) {
     try {
-      const appHtml = render(route);
+      const appHtml = await render(route);
       const meta = ROUTE_META[route] ?? {};
       const canonical = `${BASE_URL}${route === "/" ? "/" : route}`;
 
