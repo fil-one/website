@@ -7,7 +7,7 @@ import imgDashboard from "../assets/dashboard-preview.png";
  */
 const DashboardPreview = () => (
   <div className="relative w-full overflow-hidden">
-    <div className="relative px-5 sm:px-10 md:px-16 lg:px-[120px] pb-0 pt-12 md:pt-16 max-w-[1120px] mx-auto w-full hero-fade-4">
+    <div className="relative px-5 sm:px-10 md:px-16 lg:px-[120px] pb-0 pt-12 md:pt-16 max-w-container mx-auto w-full hero-fade-4">
       <div
         className="relative w-full rounded-t-[12px] md:rounded-t-[16px] overflow-hidden"
         style={{
