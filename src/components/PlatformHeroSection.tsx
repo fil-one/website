@@ -3,6 +3,7 @@ import { Play } from "@phosphor-icons/react";
 import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 import { PressBar } from "@/components/PressBar";
 import AnnouncementBadge from "@/components/AnnouncementBadge";
+import { Button } from "@/components/Button";
 
 const PlatformHeroSection = () => {
   return (
@@ -51,12 +52,12 @@ const PlatformHeroSection = () => {
 
         {/* CTAs */}
         <div className="flex flex-row items-center justify-center gap-3 mt-10 hero-fade-2">
-          <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary" onClick={() => trackCtaClick("Start for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
-            <span className="btn-primary-inner">Start for free</span>
-          </a>
-          <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary" onClick={() => { trackCtaClick("Explore docs", "https://docs.fil.one", "secondary"); trackDocsClick("https://docs.fil.one"); }}>
+          <Button variant="primary" href="https://app.fil.one/login?screen_hint=signup" onClick={() => trackCtaClick("Start for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
+            Start for free
+          </Button>
+          <Button variant="secondary" href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" onClick={() => { trackCtaClick("Explore docs", "https://docs.fil.one", "secondary"); trackDocsClick("https://docs.fil.one"); }}>
             Explore docs
-          </a>
+          </Button>
         </div>
 
         {/* Tagline */}

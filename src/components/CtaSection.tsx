@@ -1,6 +1,7 @@
 import ctaBg from "../assets/enter-hyperspace-cta-background.png";
 import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
+import { Button } from "@/components/Button";
 
 const CtaSection = () => {
   const { ref, inView } = useInView({ threshold: 0.15 });
@@ -50,12 +51,12 @@ const CtaSection = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-2.5 justify-center">
-          <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark" onClick={() => trackCtaClick("Start at no cost to you", "https://app.fil.one/login?screen_hint=signup", "primary")}>
-            <span className="btn-primary-inner">Start at no cost to you</span>
-          </a>
-          <a href="/contact-sales" className="btn-secondary btn-secondary-dark w-full sm:w-auto justify-center" onClick={() => trackCtaClick("Talk to our team", "/contact-sales", "secondary")}>
+          <Button variant="primary" tone="dark" href="https://app.fil.one/login?screen_hint=signup" onClick={() => trackCtaClick("Start at no cost to you", "https://app.fil.one/login?screen_hint=signup", "primary")}>
+            Start at no cost to you
+          </Button>
+          <Button variant="secondary" tone="dark" href="/contact-sales" className="w-full sm:w-auto justify-center" onClick={() => trackCtaClick("Talk to our team", "/contact-sales", "secondary")}>
             Talk to our team
-          </a>
+          </Button>
         </div>
       </div>
     </section>

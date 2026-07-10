@@ -3,6 +3,7 @@ import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
 import SectionHeader from "@/components/SectionHeader";
 import Pill from "@/components/Pill";
+import { Button } from "@/components/Button";
 
 const STORAGE_FEATURES = [
   "11 nines durability, verified daily",
@@ -142,9 +143,9 @@ const ProductsSection = () => {
                   >
                     Learn more
                   </a>
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary" onClick={() => trackCtaClick("Start free trial", "https://app.fil.one/login?screen_hint=signup", "primary")}>
-                    <span className="btn-primary-inner">Start free trial</span>
-                  </a>
+                  <Button variant="primary" href="https://app.fil.one/login?screen_hint=signup" onClick={() => trackCtaClick("Start free trial", "https://app.fil.one/login?screen_hint=signup", "primary")}>
+                    Start free trial
+                  </Button>
                 </div>
               </div>
             </div>
