@@ -10,25 +10,14 @@ interface PressBarProps {
  */
 export const PressBar = ({ backgroundColor = "#FFFFFF" }: PressBarProps) => (
   <section className="flex flex-col items-center gap-12 px-5 py-16 md:py-20 w-full" style={{ backgroundColor }}>
-    <p
-      style={{
-        fontFamily: "'Aspekta', sans-serif",
-        fontWeight: 500,
-        fontSize: 24,
-        color: "#71717A",
-        letterSpacing: "-0.015em",
-        textAlign: "center",
-        lineHeight: 1.45,
-        maxWidth: 620,
-      }}
-    >
+    <p className="max-w-[620px] text-center font-display text-[24px] font-medium leading-[1.45] tracking-[-0.015em] text-zinc-500">
       Our technology was named one of
       <br />
-      <span style={{ color: "#0090FF" }}>Fast Company's 11 Next Big Things in AI &amp; Data Innovation</span>
+      <span className="text-brand-500">Fast Company's 11 Next Big Things in AI &amp; Data Innovation</span>
     </p>
 
     <div className="flex flex-col items-center gap-4 w-full">
-      <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, color: "rgb(113,113,122)" }}>
+      <p className="font-sans text-[12.5px] font-normal text-zinc-500">
         And it has also been featured in
       </p>
       <div className="marquee-mask w-full max-w-2xl overflow-hidden">
@@ -37,10 +26,10 @@ export const PressBar = ({ backgroundColor = "#FFFFFF" }: PressBarProps) => (
             <span key={copy} className="flex items-center gap-8 pr-8" aria-hidden={copy === 1}>
               {PUBLICATIONS.map((pub) => (
                 <span key={pub} className="flex items-center gap-8">
-                  <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 16, color: "rgb(82,82,91)" }}>
+                  <span className="font-sans text-[16px] font-medium text-zinc-600">
                     {pub}
                   </span>
-                  <span style={{ color: "#D4D4D8", fontSize: 20 }}>·</span>
+                  <span className="text-[20px] text-zinc-300">·</span>
                 </span>
               ))}
             </span>
