@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import PlatformNavbar from "@/components/PlatformNavbar";
-import PlatformHeroSection from "@/components/PlatformHeroSection";
+import Hero from "@/components/Hero";
+import DashboardPreview from "@/components/DashboardPreview";
+import { PressBar } from "@/components/PressBar";
 import HeroGridDots from "@/components/HeroGridDots";
 import ProductsSection from "@/components/ProductsSection";
 import DeveloperSection from "@/components/DeveloperSection";
@@ -45,7 +47,9 @@ const Home = () => {
             }}
           />
           <HeroGridDots />
-          <PlatformHeroSection />
+          <Hero />
+          <DashboardPreview />
+          <PressBar />
           {/* Products section replaces the features section — this is the platform's core nav anchor */}
           <div ref={heroEndRef}>
             <ProductsSection />
