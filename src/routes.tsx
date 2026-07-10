@@ -15,7 +15,7 @@ export interface RouteDef {
  *    renderToString always has the real component, never a Suspense fallback.
  */
 export const routeDefs: RouteDef[] = [
-  { path: "/", load: () => import("./pages/VersionB") },
+  { path: "/", load: () => import("./pages/Home") },
   { path: "/terms", load: () => import("./pages/TermsOfUse") },
   { path: "/privacy", load: () => import("./pages/PrivacyPolicy") },
   { path: "/contact-sales", load: () => import("./pages/ContactSales") },

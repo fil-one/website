@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
 
-const VersionB = () => {
+const Home = () => {
   const { heroEndRef } = useScrollTracking();
 
   useEffect(() => {
@@ -60,4 +60,4 @@ const VersionB = () => {
   );
 };
 
-export default VersionB;
+export default Home;
