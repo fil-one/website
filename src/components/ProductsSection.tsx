@@ -4,6 +4,7 @@ import { trackCtaClick } from "@/lib/analytics";
 import SectionHeader from "@/components/SectionHeader";
 import Pill from "@/components/Pill";
 import { Button } from "@/components/Button";
+import IconTile from "@/components/IconTile";
 
 const STORAGE_FEATURES = [
   "11 nines durability, verified daily",
@@ -62,12 +63,7 @@ const ProductsSection = () => {
             <div className="flex flex-col gap-6">
               {/* Header: icon + title */}
               <div className="flex items-center gap-3">
-                <div
-                  className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
-                  style={{ backgroundColor: "#EFF8FF" }}
-                >
-                  <HardDrive size={18} color="#0090FF" />
-                </div>
+                <IconTile icon={HardDrive} />
                 <h3
                   style={{
                     fontFamily: "'Aspekta', sans-serif",
@@ -187,9 +183,7 @@ const ProductsSection = () => {
             {/* Header: icon + title + badge */}
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">
-                <div className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0" style={{ backgroundColor: "#EFF8FF" }}>
-                  <ChatDots size={18} color="#0090FF" />
-                </div>
+                <IconTile icon={ChatDots} />
                 <h3
                   style={{
                     fontFamily: "'Aspekta', sans-serif",
@@ -271,9 +265,7 @@ const ProductsSection = () => {
             {/* Header: icon + title + badge */}
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">
-                <div className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0" style={{ backgroundColor: "#EFF8FF" }}>
-                  <Robot size={18} color="#0090FF" />
-                </div>
+                <IconTile icon={Robot} />
                 <h3
                   style={{
                     fontFamily: "'Aspekta', sans-serif",
