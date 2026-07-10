@@ -3,6 +3,7 @@ import { Check } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import LandingFooter from "@/components/LandingFooter";
 import { useSeo } from "@/hooks/useSeo";
+import { useLang } from "@/hooks/useLang";
 import {
   HS_PORTAL_ID,
   HS_CONTACT_FORM_GUID as HS_FORM_GUID,
@@ -59,6 +60,7 @@ const Field = ({
 );
 
 const ContactSalesBcnES = () => {
+  useLang("es");
   useSeo({
     title: "Contactar con ventas — Fil One Almacenamiento S3",
     description: "Habla con el equipo de Fil One sobre almacenamiento de objetos S3 compatible, precios para empresas y acuerdos de nivel de servicio.",
