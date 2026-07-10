@@ -74,8 +74,6 @@ export const routeDefs: RouteDef[] = [
   { path: "/solutions/enterprise-backup", load: () => import("./pages/solutions/EnterpriseBackupSolutionPage") },
   { path: "/partners", load: () => import("./pages/PartnersPage") },
   { path: "/partners/apply", load: () => import("./pages/PartnerApplyPage") },
-  // ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "/:lang/:city" ROUTE
-  { path: "/:lang/:city", load: () => import("./pages/AdsLandingPage") },
 ];
 
 export const notFoundLoad: PageLoader = () => import("./pages/NotFound");
