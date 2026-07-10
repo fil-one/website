@@ -2,7 +2,7 @@ import { HardDrive, ChatDots, Robot, Check, ArrowRight } from "@phosphor-icons/r
 import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
 import SectionHeader from "@/components/SectionHeader";
-import Badge from "@/components/Badge";
+import Pill from "@/components/Pill";
 
 const STORAGE_FEATURES = [
   "11 nines durability, verified daily",
@@ -203,7 +203,7 @@ const ProductsSection = () => {
                   Bucket Intelligence
                 </h3>
               </div>
-              <Badge className="shrink-0">Coming soon</Badge>
+              <Pill className="shrink-0">Coming soon</Pill>
             </div>
 
             {/* Subtitle + description */}
@@ -287,7 +287,7 @@ const ProductsSection = () => {
                   AI Agent Toolkit
                 </h3>
               </div>
-              <Badge className="shrink-0">Coming soon</Badge>
+              <Pill className="shrink-0">Coming soon</Pill>
             </div>
 
             {/* Subtitle + description */}

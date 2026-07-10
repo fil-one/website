@@ -2,7 +2,7 @@ import imgDashboard from "../assets/dashboard-preview.png";
 import { Play } from "@phosphor-icons/react";
 import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 import { PressBar } from "@/components/PressBar";
-import Badge from "@/components/Badge";
+import AnnouncementBadge from "@/components/AnnouncementBadge";
 
 const PlatformHeroSection = () => {
   return (
@@ -11,12 +11,9 @@ const PlatformHeroSection = () => {
         <div className="flex flex-col items-center gap-6 w-full hero-fade-1">
 
           {/* Platform badge */}
-          <div className="flex items-center gap-2.5 rounded-full border border-brand/20 bg-brand-50 py-[5px] pl-[6px] pr-[14px]">
-            <Badge variant="solid" pulse>Soon</Badge>
-            <span className="whitespace-nowrap font-sans text-[13.5px] font-medium leading-none text-brand-600">
-              Bucket Intelligence &amp; AI Agent Toolkit
-            </span>
-          </div>
+          <AnnouncementBadge pill="Soon">
+            Bucket Intelligence &amp; AI Agent Toolkit
+          </AnnouncementBadge>
 
           {/* Headline */}
           <h1
