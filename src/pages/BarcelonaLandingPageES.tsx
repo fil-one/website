@@ -50,7 +50,7 @@ const BarcelonaLandingPageES = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <PlatformNavbar lang="es" />
+      <PlatformNavbar lang="es" supportHref="/lp/es/soporte" contactSalesHref="/lp/es/contacto" />
 
       <main id="main-content">
 
@@ -629,7 +629,7 @@ const BarcelonaLandingPageES = () => {
         </section>
       </main>
 
-      <Footer lang="es" />
+      <Footer lang="es" supportHref="/lp/es/soporte" contactSalesHref="/lp/es/contacto" />
     </div>
   );
 };

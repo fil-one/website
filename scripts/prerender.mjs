@@ -548,19 +548,6 @@ const ROUTE_META = {
     title: "Fil One para Barcelona: Soporte",
     description: "Soporte técnico para el almacenamiento de objetos de Fil One. Contáctanos para ayuda con configuración, migración y cuentas.",
   },
-  "/fr/marseille": {
-    lang: "fr",
-    title: "Stockage S3 rapide près de Marseille — Fil One",
-    description:
-      "Datacenter dans le Sud de la France. Stockage objet S3 à 5 ms de Marseille, moins cher que Scaleway, Backblaze et Wasabi. Essayez 30 jours gratuitement.",
-  },
-  "/es/barcelona": {
-    lang: "es",
-    title: "Almacenamiento S3 rápido cerca de Barcelona — Fil One",
-    description:
-      "Centro de datos en el sur de Francia. Almacenamiento objeto S3 a 6 ms de Barcelona, más barato que Scaleway, Backblaze y Wasabi. Prueba 30 días gratis.",
-  },
-
   // ── Newest /lp pages ──────────────────────────────────────────────────────
   "/lp/cost-ticker": {
     title: "Fil One — Watch the meter you're not paying",
@@ -766,7 +753,7 @@ async function prerender() {
 
   for (const route of ROUTES) {
     try {
-      const appHtml = render(route);
+      const appHtml = await render(route);
       const meta = ROUTE_META[route] ?? {};
       const canonical = `${BASE_URL}${route === "/" ? "/" : route}`;
 

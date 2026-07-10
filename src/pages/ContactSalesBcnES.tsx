@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Check } from "@phosphor-icons/react";
-import LandingNavbar from "@/components/LandingNavbar";
+import PlatformNavbar from "@/components/PlatformNavbar";
 import LandingFooter from "@/components/LandingFooter";
 import { useSeo } from "@/hooks/useSeo";
 import { useLang } from "@/hooks/useLang";
@@ -50,13 +50,13 @@ const Field = ({
   required?: boolean;
   children: React.ReactNode;
 }) => (
-  <div className="flex flex-col gap-1.5">
-    <label style={labelStyle}>
+  <label className="flex flex-col gap-1.5">
+    <span style={labelStyle}>
       {label}
-      {required && <span style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
-    </label>
+      {required && <span aria-hidden="true" style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
+    </span>
     {children}
-  </div>
+  </label>
 );
 
 const ContactSalesBcnES = () => {
@@ -141,9 +141,9 @@ const ContactSalesBcnES = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-      <LandingNavbar lang="es" />
+      <PlatformNavbar lang="es" supportHref="/lp/es/soporte" contactSalesHref="/lp/es/contacto" />
 
-      <main className="flex flex-col items-center px-5 md:px-8 pt-28 pb-24 w-full">
+      <main className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[560px]">
 
           <div className="flex flex-col gap-3">
@@ -257,13 +257,13 @@ const ContactSalesBcnES = () => {
                 />
               </Field>
 
-              <div className="flex flex-col gap-3">
-                <label style={labelStyle}>
+              <fieldset className="flex flex-col gap-3" style={{ border: "none", padding: 0, margin: 0 }}>
+                <legend style={{ ...labelStyle, padding: 0 }}>
                   ¿Cuántos datos quieres almacenar?
-                  <span style={{ color: "#DC2626", marginLeft: 2 }}>*</span>
-                </label>
+                  <span aria-hidden="true" style={{ color: "#DC2626", marginLeft: 2 }}>*</span>
+                </legend>
                 {radioError && (
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626" }}>
+                  <p role="alert" style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626" }}>
                     Por favor, selecciona una opción.
                   </p>
                 )}
@@ -282,9 +282,11 @@ const ContactSalesBcnES = () => {
                           value={option}
                           checked={checked}
                           onChange={() => { setForm((f) => ({ ...f, dataStorage: option })); setRadioError(false); }}
-                          style={{ display: "none" }}
+                          required
+                          className="peer sr-only"
                         />
                         <span
+                          className="peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
                           style={{
                             width: 17,
                             height: 17,
@@ -294,6 +296,7 @@ const ContactSalesBcnES = () => {
                             flexShrink: 0,
                             transition: "border 150ms ease",
                             display: "inline-block",
+                            outlineColor: "#0090FF",
                           }}
                         />
                         <span
@@ -311,7 +314,7 @@ const ContactSalesBcnES = () => {
                     );
                   })}
                 </div>
-              </div>
+              </fieldset>
 
               <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
 
@@ -324,9 +327,10 @@ const ContactSalesBcnES = () => {
                   type="checkbox"
                   checked={form.consent}
                   onChange={set("consent")}
-                  style={{ display: "none" }}
+                  className="peer sr-only"
                 />
                 <span
+                  className="peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
                   style={{
                     width: 16,
                     height: 16,
@@ -339,6 +343,7 @@ const ContactSalesBcnES = () => {
                     alignItems: "center",
                     justifyContent: "center",
                     transition: "background-color 150ms ease, border 150ms ease",
+                    outlineColor: "#0090FF",
                   }}
                 >
                   {form.consent && <Check size={10} color="#FFFFFF" />}

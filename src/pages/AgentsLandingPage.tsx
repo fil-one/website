@@ -325,7 +325,7 @@ function renderCode(code: string, filename: string): React.ReactNode {
     go: "package|import|func|var|const|type|struct|for|if|else|return|range|nil|true|false|string|int|bool|main",
   }[lang];
   const commentPat = lang === "py" ? "#[^\n]*" : "//[^\n]*";
-  const regex = new RegExp(`(${commentPat})|(\"[^\"\\n]*\"|'[^'\\n]*')|(\\b(?:${kw})\\b)`, "g");
+  const regex = new RegExp(`(${commentPat})|("[^"\\n]*"|'[^'\\n]*')|(\\b(?:${kw})\\b)`, "g");
   const parts: React.ReactNode[] = [];
   let last = 0, key = 0, m: RegExpExecArray | null;
   while ((m = regex.exec(code)) !== null) {

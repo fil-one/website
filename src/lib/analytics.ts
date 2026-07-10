@@ -8,7 +8,9 @@
 
 declare global {
   interface Window {
-    plausible: (
+    // Optional: the Plausible script may not have loaded (and tests delete it),
+    // so every call site guards with `if (window.plausible)`.
+    plausible?: (
       event: string,
       options?: { props?: Record<string, string | number | boolean> },
     ) => void;
