@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Check } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
-import LandingFooter from "@/components/LandingFooter";
+import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useLang } from "@/hooks/useLang";
 import {
@@ -383,7 +383,7 @@ const ContactSalesBcnES = () => {
         </div>
       </main>
 
-      <LandingFooter lang="es" />
+      <Footer lang="es" supportHref="/lp/es/soporte" contactSalesHref="/lp/es/contacto" />
     </div>
   );
 };
