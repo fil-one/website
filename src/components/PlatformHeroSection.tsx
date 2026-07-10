@@ -2,6 +2,7 @@ import imgDashboard from "../assets/dashboard-preview.png";
 import { Play } from "@phosphor-icons/react";
 import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 import { PressBar } from "@/components/PressBar";
+import Badge from "@/components/Badge";
 
 const PlatformHeroSection = () => {
   return (
@@ -10,42 +11,9 @@ const PlatformHeroSection = () => {
         <div className="flex flex-col items-center gap-6 w-full hero-fade-1">
 
           {/* Platform badge */}
-          <div
-            className="flex items-center gap-2.5"
-            style={{
-              backgroundColor: "#EFF8FF",
-              border: "1px solid rgba(0,144,255,0.2)",
-              borderRadius: 9999,
-              padding: "5px 14px 5px 6px",
-            }}
-          >
-            <span
-              className="badge-pulse"
-              style={{
-                fontFamily: "'DM Mono', monospace",
-                fontWeight: 500,
-                fontSize: 11,
-                letterSpacing: "0.06em",
-                color: "#FFFFFF",
-                textTransform: "uppercase",
-                backgroundColor: "#0090FF",
-                borderRadius: 9999,
-                padding: "3px 8px",
-                lineHeight: 1.4,
-              }}
-            >
-              Soon
-            </span>
-            <span
-              style={{
-                fontFamily: "'Funnel Sans', sans-serif",
-                fontWeight: 500,
-                fontSize: 13.5,
-                lineHeight: 1,
-                color: "#0070CC",
-                whiteSpace: "nowrap",
-              }}
-            >
+          <div className="flex items-center gap-2.5 rounded-full border border-brand/20 bg-brand-50 py-[5px] pl-[6px] pr-[14px]">
+            <Badge variant="solid" pulse>Soon</Badge>
+            <span className="whitespace-nowrap font-sans text-[13.5px] font-medium leading-none text-brand-600">
               Bucket Intelligence &amp; AI Agent Toolkit
             </span>
           </div>

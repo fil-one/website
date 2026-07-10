@@ -2,6 +2,7 @@ import { HardDrive, ChatDots, Robot, Check, ArrowRight } from "@phosphor-icons/r
 import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
 import SectionHeader from "@/components/SectionHeader";
+import Badge from "@/components/Badge";
 
 const STORAGE_FEATURES = [
   "11 nines durability, verified daily",
@@ -202,24 +203,7 @@ const ProductsSection = () => {
                   Bucket Intelligence
                 </h3>
               </div>
-              <span
-                style={{
-                  fontFamily: "'DM Mono', monospace",
-                  fontWeight: 500,
-                  fontSize: 10.5,
-                  letterSpacing: "0.06em",
-                  color: "#0070CC",
-                  textTransform: "uppercase",
-                  backgroundColor: "#EFF8FF",
-                  border: "1px solid rgba(0,144,255,0.2)",
-                  borderRadius: 9999,
-                  padding: "3px 8px",
-                  whiteSpace: "nowrap",
-                  flexShrink: 0,
-                }}
-              >
-                Coming soon
-              </span>
+              <Badge className="shrink-0">Coming soon</Badge>
             </div>
 
             {/* Subtitle + description */}
@@ -303,24 +287,7 @@ const ProductsSection = () => {
                   AI Agent Toolkit
                 </h3>
               </div>
-              <span
-                style={{
-                  fontFamily: "'DM Mono', monospace",
-                  fontWeight: 500,
-                  fontSize: 10.5,
-                  letterSpacing: "0.06em",
-                  color: "#0070CC",
-                  textTransform: "uppercase",
-                  backgroundColor: "#EFF8FF",
-                  border: "1px solid rgba(0,144,255,0.2)",
-                  borderRadius: 9999,
-                  padding: "3px 8px",
-                  whiteSpace: "nowrap",
-                  flexShrink: 0,
-                }}
-              >
-                Coming soon
-              </span>
+              <Badge className="shrink-0">Coming soon</Badge>
             </div>
 
             {/* Subtitle + description */}
