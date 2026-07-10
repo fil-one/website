@@ -11,7 +11,6 @@ import Sla from "./pages/Sla";
 import ContactSales from "./pages/ContactSales";
 import Support from "./pages/Support";
 import AcceptableUsePolicy from "./pages/AcceptableUsePolicy";
-import AdsLandingPage from "./pages/AdsLandingPage";
 import BarcelonaLandingPage from "./pages/BarcelonaLandingPage";
 import VersionB from "./pages/VersionB";
 import StorageProductPage from "./pages/StorageProductPage";
@@ -21,6 +20,7 @@ import PricingPage from "./pages/PricingPage";
 import BucketIntelligenceWaitlistPage from "./pages/BucketIntelligenceWaitlistPage";
 import AgentToolkitWaitlistPage from "./pages/AgentToolkitWaitlistPage";
 import EnterprisePage from "./pages/EnterprisePage";
+import About from "./pages/About";
 import AiTrainingSolutionPage from "./pages/solutions/AiTrainingSolutionPage";
 import Web3DappsSolutionPage from "./pages/solutions/Web3DappsSolutionPage";
 import MediaArchiveSolutionPage from "./pages/solutions/MediaArchiveSolutionPage";
@@ -139,13 +139,13 @@ export const AppContent = () => (
           <Route path="/waitlist/bucket-intelligence" element={<BucketIntelligenceWaitlistPage />} />
           <Route path="/waitlist/ai-agent-toolkit" element={<AgentToolkitWaitlistPage />} />
           <Route path="/enterprise" element={<EnterprisePage />} />
+          <Route path="/about" element={<About />} />
           <Route path="/solutions/ai-training" element={<AiTrainingSolutionPage />} />
           <Route path="/solutions/web3-dapps" element={<Web3DappsSolutionPage />} />
           <Route path="/solutions/media-archive" element={<MediaArchiveSolutionPage />} />
           <Route path="/solutions/enterprise-backup" element={<EnterpriseBackupSolutionPage />} />
           <Route path="/partners" element={<PartnersPage />} />
           <Route path="/partners/apply" element={<PartnerApplyPage />} />
-          <Route path="/:lang/:city" element={<AdsLandingPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

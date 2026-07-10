@@ -70,13 +70,13 @@ const labelStyle: React.CSSProperties = {
 };
 
 const Field = ({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) => (
-  <div className="flex flex-col gap-1.5">
-    <label style={labelStyle}>
+  <label className="flex flex-col gap-1.5">
+    <span style={labelStyle}>
       {label}
-      {required && <span style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
-    </label>
+      {required && <span aria-hidden="true" style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
+    </span>
     {children}
-  </div>
+  </label>
 );
 
 const AgentToolkitWaitlistPage = () => {
@@ -253,7 +253,10 @@ const AgentToolkitWaitlistPage = () => {
                 </Field>
               </div>
 
-              <Field label="Which tools are you connecting?">
+              <fieldset style={{ border: "none", padding: 0, margin: 0 }}>
+                <legend style={{ ...labelStyle, padding: 0, marginBottom: 6 }}>
+                  Which tools are you connecting?
+                </legend>
                 <div className="grid grid-cols-2 gap-x-6 gap-y-3 pt-1">
                   {TOOLS.map(tool => (
                     <label
@@ -261,9 +264,14 @@ const AgentToolkitWaitlistPage = () => {
                       className="flex items-center gap-2.5 cursor-pointer"
                       style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, color: "#3F3F46" }}
                     >
-                      <div
-                        onClick={() => toggleTool(tool)}
-                        className="flex items-center justify-center shrink-0"
+                      <input
+                        type="checkbox"
+                        checked={selectedTools.includes(tool)}
+                        onChange={() => toggleTool(tool)}
+                        className="peer sr-only"
+                      />
+                      <span
+                        className="flex items-center justify-center shrink-0 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
                         style={{
                           width: 18,
                           height: 18,
@@ -271,12 +279,12 @@ const AgentToolkitWaitlistPage = () => {
                           border: selectedTools.includes(tool) ? "1.5px solid #0090FF" : "1.5px solid rgba(0,0,0,0.18)",
                           backgroundColor: selectedTools.includes(tool) ? "#0090FF" : "#FFFFFF",
                           transition: "all 120ms ease",
-                          cursor: "pointer",
+                          outlineColor: "#0090FF",
                         }}
                       >
                         {selectedTools.includes(tool) && <Check size={11} color="#FFFFFF" weight="bold" />}
-                      </div>
-                      <span onClick={() => toggleTool(tool)}>{tool}</span>
+                      </span>
+                      <span>{tool}</span>
                     </label>
                   ))}
                 </div>
@@ -286,12 +294,13 @@ const AgentToolkitWaitlistPage = () => {
                     value={otherTool}
                     onChange={e => setOtherTool(e.target.value)}
                     placeholder="Which tool?"
+                    aria-label="Which tool?"
                     style={{ ...inputStyle, marginTop: 8 }}
                     onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
                     onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
                   />
                 )}
-              </Field>
+              </fieldset>
 
               <Field label="Notes (optional)">
                 <textarea

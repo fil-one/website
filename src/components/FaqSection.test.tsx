@@ -4,7 +4,7 @@ import FaqSection from "./FaqSection";
 
 // Mock useInView so we don't need IntersectionObserver
 vi.mock("@/hooks/useInView", () => ({
-  useInView: () => ({ ref: { current: null }, inView: true }),
+  useInView: () => ({ ref: { current: null as HTMLDivElement | null }, inView: true }),
 }));
 
 describe("FaqSection — analytics", () => {
@@ -16,21 +16,21 @@ describe("FaqSection — analytics", () => {
   });
 
   afterEach(() => {
-    // @ts-expect-error — cleaning up test mock
     delete window.plausible;
   });
+
+  const Q1 = "How does data integrity verification work with Fil One?";
+  const Q2 = "Is Fil One compatible with my existing tools?";
 
   it('fires "FAQ Expand" when a question is clicked', () => {
     render(<FaqSection />);
 
-    const firstQuestion = screen.getByText(
-      "Is Fil One hot, warm, or cold storage? Is it like Glacier?",
-    );
+    const firstQuestion = screen.getByText(Q1);
     fireEvent.click(firstQuestion);
 
     expect(plausibleSpy).toHaveBeenCalledWith("FAQ Expand", {
       props: expect.objectContaining({
-        question: expect.stringContaining("Is Fil One hot"),
+        question: expect.stringContaining("data integrity"),
         page: window.location.pathname,
       }),
     });
@@ -39,9 +39,7 @@ describe("FaqSection — analytics", () => {
   it("does not fire again when collapsing the same question", () => {
     render(<FaqSection />);
 
-    const firstQuestion = screen.getByText(
-      "Is Fil One hot, warm, or cold storage? Is it like Glacier?",
-    );
+    const firstQuestion = screen.getByText(Q1);
 
     // Expand
     fireEvent.click(firstQuestion);
@@ -61,12 +59,8 @@ describe("FaqSection — analytics", () => {
   it("fires for different questions independently", () => {
     render(<FaqSection />);
 
-    const q1 = screen.getByText(
-      "Is Fil One hot, warm, or cold storage? Is it like Glacier?",
-    );
-    const q2 = screen.getByText(
-      "How does data integrity verification work with Fil One?",
-    );
+    const q1 = screen.getByText(Q1);
+    const q2 = screen.getByText(Q2);
 
     fireEvent.click(q1);
     fireEvent.click(q2);
@@ -75,7 +69,7 @@ describe("FaqSection — analytics", () => {
       (c: unknown[]) => c[0] === "FAQ Expand",
     );
     expect(faqCalls).toHaveLength(2);
-    expect(faqCalls[0][1].props.question).toContain("hot");
-    expect(faqCalls[1][1].props.question).toContain("integrity");
+    expect(faqCalls[0][1].props.question).toContain("data integrity");
+    expect(faqCalls[1][1].props.question).toContain("compatible");
   });
 });

@@ -4,7 +4,7 @@ import CtaSection from "./CtaSection";
 
 // Mock useInView so we don't need IntersectionObserver
 vi.mock("@/hooks/useInView", () => ({
-  useInView: () => ({ ref: { current: null }, inView: true }),
+  useInView: () => ({ ref: { current: null as HTMLDivElement | null }, inView: true }),
 }));
 
 describe("CtaSection — analytics", () => {
@@ -16,7 +16,6 @@ describe("CtaSection — analytics", () => {
   });
 
   afterEach(() => {
-    // @ts-expect-error — cleaning up test mock
     delete window.plausible;
   });
 

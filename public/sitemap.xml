@@ -129,14 +129,6 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://fil.one/fr/marseille</loc>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://fil.one/es/barcelona</loc>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
     <loc>https://fil.one/lp/cost-ticker</loc>
     <changefreq>weekly</changefreq>
   </url>

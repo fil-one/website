@@ -46,13 +46,13 @@ const Field = ({
   required?: boolean;
   children: React.ReactNode;
 }) => (
-  <div className="flex flex-col gap-1.5">
-    <label style={labelStyle}>
+  <label className="flex flex-col gap-1.5">
+    <span style={labelStyle}>
       {label}
-      {required && <span style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
-    </label>
+      {required && <span aria-hidden="true" style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
+    </span>
     {children}
-  </div>
+  </label>
 );
 
 const SupportBcnES = () => {
@@ -266,13 +266,13 @@ const SupportBcnES = () => {
                 />
               </Field>
 
-              <div className="flex flex-col gap-3">
-                <label style={labelStyle}>
+              <fieldset className="flex flex-col gap-3" style={{ border: "none", padding: 0, margin: 0 }}>
+                <legend style={{ ...labelStyle, padding: 0 }}>
                   Categoría
-                  <span style={{ color: "#DC2626", marginLeft: 2 }}>*</span>
-                </label>
+                  <span aria-hidden="true" style={{ color: "#DC2626", marginLeft: 2 }}>*</span>
+                </legend>
                 {categoryError && (
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626" }}>
+                  <p role="alert" style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626" }}>
                     Por favor, selecciona al menos una categoría.
                   </p>
                 )}
@@ -285,8 +285,14 @@ const SupportBcnES = () => {
                         className="flex items-center gap-3 cursor-pointer"
                         style={{ userSelect: "none" }}
                       >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => toggleCategory(value)}
+                          className="peer sr-only"
+                        />
                         <span
-                          onClick={() => toggleCategory(value)}
+                          className="peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
                           style={{
                             width: 16,
                             height: 16,
@@ -298,13 +304,12 @@ const SupportBcnES = () => {
                             alignItems: "center",
                             justifyContent: "center",
                             transition: "background-color 150ms ease, border 150ms ease",
-                            cursor: "pointer",
+                            outlineColor: "#0090FF",
                           }}
                         >
                           {checked && <Check size={10} color="#FFFFFF" />}
                         </span>
                         <span
-                          onClick={() => toggleCategory(value)}
                           style={{
                             fontFamily: "'Funnel Sans', sans-serif",
                             fontWeight: 400,
@@ -319,7 +324,7 @@ const SupportBcnES = () => {
                     );
                   })}
                 </div>
-              </div>
+              </fieldset>
 
               <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
 

@@ -87,13 +87,13 @@ const labelStyle: React.CSSProperties = {
 };
 
 const Field = ({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) => (
-  <div className="flex flex-col gap-1.5">
-    <label style={labelStyle}>
+  <label className="flex flex-col gap-1.5">
+    <span style={labelStyle}>
       {label}
-      {required && <span style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
-    </label>
+      {required && <span aria-hidden="true" style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
+    </span>
     {children}
-  </div>
+  </label>
 );
 
 const BucketIntelligenceWaitlistPage = () => {
