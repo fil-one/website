@@ -25,7 +25,7 @@ const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
     <div
       ref={ref}
       id={id}
-      className={`flex flex-col items-center gap-3 text-center${className ? ` ${className}` : ""}`}
+      className={`mx-auto flex flex-col items-center gap-3 text-center${className ? ` ${className}` : ""}`}
     >
       {label && (
         <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.08em] text-zinc-500">
