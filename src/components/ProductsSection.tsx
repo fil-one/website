@@ -1,4 +1,4 @@
-import { HardDrive, ChatDots, Robot, ArrowRight } from "@phosphor-icons/react";
+import { HardDrive, ChatDots, Robot } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
 import SectionHeader from "@/components/SectionHeader";
@@ -6,6 +6,7 @@ import Pill from "@/components/Pill";
 import { Button } from "@/components/Button";
 import IconTile from "@/components/IconTile";
 import FeatureList from "@/components/FeatureList";
+import TextLink from "@/components/TextLink";
 
 const STORAGE_FEATURES = [
   "11 nines durability, verified daily",
@@ -124,13 +125,7 @@ const ProductsSection = () => {
                   </p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <a
-                    href="/storage"
-                    className="flex items-center gap-1 transition-opacity hover:opacity-70"
-                    style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, color: "#71717A", textDecoration: "none", whiteSpace: "nowrap" }}
-                  >
-                    Learn more
-                  </a>
+                  <TextLink href="/storage">Learn more</TextLink>
                   <Button variant="primary" href="https://app.fil.one/login?screen_hint=signup" onClick={() => trackCtaClick("Start free trial", "https://app.fil.one/login?screen_hint=signup", "primary")}>
                     Start free trial
                   </Button>
@@ -206,13 +201,7 @@ const ProductsSection = () => {
             {/* Features */}
             <FeatureList items={RAG_FEATURES} />
 
-            <a
-              href="/bucket-intelligence"
-              className="flex items-center gap-0.5 transition-opacity hover:opacity-70 self-start"
-              style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A", textDecoration: "none" }}
-            >
-              Learn more
-            </a>
+            <TextLink href="/bucket-intelligence" className="self-start">Learn more</TextLink>
 
             <div className="flex-1" />
             <div className="w-full h-px" style={{ backgroundColor: "rgba(0,0,0,0.06)" }} />
@@ -227,14 +216,15 @@ const ProductsSection = () => {
                   LLM costs billed by your provider
                 </p>
               </div>
-              <a
+              <TextLink
                 href="/waitlist/bucket-intelligence"
-                className="flex items-center gap-1.5 shrink-0 transition-opacity hover:opacity-70"
-                style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#0090FF", textDecoration: "none" }}
+                tone="brand"
+                arrow
+                className="shrink-0"
                 onClick={() => trackCtaClick("Join waitlist", "/waitlist/bucket-intelligence", "secondary")}
               >
-                Join waitlist <ArrowRight size={14} />
-              </a>
+                Join waitlist
+              </TextLink>
             </div>
           </div>
 
@@ -281,13 +271,7 @@ const ProductsSection = () => {
             {/* Features */}
             <FeatureList items={AGENT_FEATURES} />
 
-            <a
-              href="/ai-agent-toolkit"
-              className="flex items-center gap-0.5 transition-opacity hover:opacity-70 self-start"
-              style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A", textDecoration: "none" }}
-            >
-              Learn more
-            </a>
+            <TextLink href="/ai-agent-toolkit" className="self-start">Learn more</TextLink>
 
             <div className="flex-1" />
             <div className="w-full h-px" style={{ backgroundColor: "rgba(0,0,0,0.06)" }} />
@@ -299,14 +283,15 @@ const ProductsSection = () => {
                   Free for early testers
                 </p>
               </div>
-              <a
+              <TextLink
                 href="/waitlist/ai-agent-toolkit"
-                className="flex items-center gap-1.5 shrink-0 transition-opacity hover:opacity-70"
-                style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#0090FF", textDecoration: "none" }}
+                tone="brand"
+                arrow
+                className="shrink-0"
                 onClick={() => trackCtaClick("Join waitlist", "/waitlist/ai-agent-toolkit", "secondary")}
               >
-                Join waitlist <ArrowRight size={14} />
-              </a>
+                Join waitlist
+              </TextLink>
             </div>
           </div>
         </div>
