@@ -7,44 +7,27 @@ const CtaSection = () => {
   const { ref, inView } = useInView({ threshold: 0.15 });
 
   return (
-    <section
-      className="flex flex-col items-center px-5 md:px-8 py-16 md:py-20 w-full"
-      style={{ backgroundColor: "#FFFFFF" }}
-    >
+    <section className="flex flex-col items-center px-5 md:px-8 py-16 md:py-20 w-full bg-white">
       {/* Dark card */}
       <div
         ref={ref}
-        className={`flex flex-col gap-8 items-center justify-center text-center w-full max-w-container px-8 py-20 md:py-32 reveal${inView ? " in-view" : ""}`}
+        className={`flex flex-col gap-8 items-center justify-center text-center w-full max-w-container px-8 py-20 md:py-32 rounded-[28px] min-h-[320px] reveal${inView ? " in-view" : ""}`}
         style={{
           backgroundImage: `url(${ctaBg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          borderRadius: 28,
-          minHeight: 320,
         }}
       >
         <div className="flex flex-col gap-4 items-center max-w-[260px] md:max-w-[420px]">
           <h2
-            className="text-[26px] md:text-[32px]"
-            style={{
-              fontFamily: "'Aspekta', sans-serif",
-              fontWeight: 500,
-              lineHeight: "1.2",
-              letterSpacing: "-0.02em",
-              color: "#FFFFFF",
-            }}
+            className="font-display font-medium text-white text-[26px] md:text-[32px]"
+            style={{ lineHeight: "1.2", letterSpacing: "-0.02em" }}
           >
             One network. One record. One less thing to worry about.
           </h2>
           <p
-            className="text-[14.5px]"
-            style={{
-              fontFamily: "'Funnel Sans', sans-serif",
-              fontWeight: 400,
-              lineHeight: "1.6",
-              color: "rgba(255,255,255,0.60)",
-              maxWidth: 380,
-            }}
+            className="font-sans text-white/60 text-[14.5px] max-w-[380px]"
+            style={{ lineHeight: "1.6" }}
           >
             Try Fil One for 30 days. 1 TB included, no credit card required. Or talk to our team about enterprise pricing or migrating your existing storage today.
           </p>
