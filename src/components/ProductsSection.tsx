@@ -2,11 +2,11 @@ import { HardDrive, ChatDots, Robot } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
 import SectionHeader from "@/components/SectionHeader";
-import Pill from "@/components/Pill";
 import { Button } from "@/components/Button";
 import IconTile from "@/components/IconTile";
 import FeatureList from "@/components/FeatureList";
 import TextLink from "@/components/TextLink";
+import ProductCard from "@/components/ProductCard";
 
 const STORAGE_FEATURES = [
   "11 nines durability, verified daily",
@@ -158,142 +158,34 @@ const ProductsSection = () => {
           ref={addonsRef}
           className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full reveal-group"
         >
-          {/* Bucket Intelligence */}
-          <div
-            className={`flex flex-col gap-5 p-7 rounded-2xl border reveal${addonsInView ? " in-view" : ""}`}
-            style={{
-              borderColor: "rgba(0,0,0,0.07)",
-              backgroundColor: "#FFFFFF",
-              boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
-            }}
-          >
-            {/* Header: icon + title + badge */}
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <IconTile icon={ChatDots} />
-                <h3
-                  style={{
-                    fontFamily: "'Aspekta', sans-serif",
-                    fontWeight: 500,
-                    fontSize: 19,
-                    lineHeight: "1.2",
-                    letterSpacing: "-0.015em",
-                    color: "#09090B",
-                    margin: 0,
-                  }}
-                >
-                  Bucket Intelligence
-                </h3>
-              </div>
-              <Pill className="shrink-0">Coming soon</Pill>
-            </div>
+          <ProductCard
+            className={`reveal${addonsInView ? " in-view" : ""}`}
+            icon={ChatDots}
+            title="Bucket Intelligence"
+            badge="Coming soon"
+            subtitle="Turn any bucket into a queryable knowledge base"
+            description="Powered by a built-in RAG Pipeline. Files are auto-indexed as they land in your bucket. Ask questions in plain language using your own OpenAI, Anthropic, or Cohere keys."
+            features={RAG_FEATURES}
+            learnMoreHref="/bucket-intelligence"
+            footerTitle="Free for early testers"
+            footerNote="LLM costs billed by your provider"
+            waitlistHref="/waitlist/bucket-intelligence"
+            onWaitlistClick={() => trackCtaClick("Join waitlist", "/waitlist/bucket-intelligence", "secondary")}
+          />
 
-            {/* Subtitle + description */}
-            <div className="flex flex-col gap-1">
-              <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 13.5, lineHeight: "1.4", color: "#52525B" }}>
-                Turn any bucket into a queryable knowledge base
-              </p>
-              <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: "1.6", color: "#71717A" }}>
-                Powered by a built-in RAG Pipeline. Files are auto-indexed as they land in your bucket. Ask questions in plain language using your own OpenAI, Anthropic, or Cohere keys.
-              </p>
-            </div>
-
-            {/* Features */}
-            <FeatureList items={RAG_FEATURES} />
-
-            <TextLink href="/bucket-intelligence" className="self-start">Learn more</TextLink>
-
-            <div className="flex-1" />
-            <div className="w-full h-px" style={{ backgroundColor: "rgba(0,0,0,0.06)" }} />
-
-            {/* Footer */}
-            <div className="flex items-center justify-between gap-4 flex-wrap">
-              <div>
-                <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 15, color: "#09090B", letterSpacing: "-0.015em", lineHeight: 1 }}>
-                  Free for early testers
-                </p>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12, color: "#71717A", marginTop: 3 }}>
-                  LLM costs billed by your provider
-                </p>
-              </div>
-              <TextLink
-                href="/waitlist/bucket-intelligence"
-                tone="brand"
-                arrow
-                className="shrink-0"
-                onClick={() => trackCtaClick("Join waitlist", "/waitlist/bucket-intelligence", "secondary")}
-              >
-                Join waitlist
-              </TextLink>
-            </div>
-          </div>
-
-          {/* AI Agent Toolkit */}
-          <div
-            className={`flex flex-col gap-5 p-7 rounded-2xl border reveal${addonsInView ? " in-view" : ""}`}
-            style={{
-              borderColor: "rgba(0,0,0,0.07)",
-              backgroundColor: "#FFFFFF",
-              boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
-            }}
-          >
-            {/* Header: icon + title + badge */}
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <IconTile icon={Robot} />
-                <h3
-                  style={{
-                    fontFamily: "'Aspekta', sans-serif",
-                    fontWeight: 500,
-                    fontSize: 19,
-                    lineHeight: "1.2",
-                    letterSpacing: "-0.015em",
-                    color: "#09090B",
-                    margin: 0,
-                  }}
-                >
-                  AI Agent Toolkit
-                </h3>
-              </div>
-              <Pill className="shrink-0">Coming soon</Pill>
-            </div>
-
-            {/* Subtitle + description */}
-            <div className="flex flex-col gap-1">
-              <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 13.5, lineHeight: "1.4", color: "#52525B" }}>
-                Connect your AI tools and automations to Fil One
-              </p>
-              <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: "1.6", color: "#71717A" }}>
-                Pick an integration, paste a config block, and your buckets are immediately available for your AI agents to use or to trigger automations from bucket events.
-              </p>
-            </div>
-
-            {/* Features */}
-            <FeatureList items={AGENT_FEATURES} />
-
-            <TextLink href="/ai-agent-toolkit" className="self-start">Learn more</TextLink>
-
-            <div className="flex-1" />
-            <div className="w-full h-px" style={{ backgroundColor: "rgba(0,0,0,0.06)" }} />
-
-            {/* Footer */}
-            <div className="flex items-center justify-between gap-4 flex-wrap">
-              <div>
-                <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 15, color: "#09090B", letterSpacing: "-0.015em", lineHeight: 1 }}>
-                  Free for early testers
-                </p>
-              </div>
-              <TextLink
-                href="/waitlist/ai-agent-toolkit"
-                tone="brand"
-                arrow
-                className="shrink-0"
-                onClick={() => trackCtaClick("Join waitlist", "/waitlist/ai-agent-toolkit", "secondary")}
-              >
-                Join waitlist
-              </TextLink>
-            </div>
-          </div>
+          <ProductCard
+            className={`reveal${addonsInView ? " in-view" : ""}`}
+            icon={Robot}
+            title="AI Agent Toolkit"
+            badge="Coming soon"
+            subtitle="Connect your AI tools and automations to Fil One"
+            description="Pick an integration, paste a config block, and your buckets are immediately available for your AI agents to use or to trigger automations from bucket events."
+            features={AGENT_FEATURES}
+            learnMoreHref="/ai-agent-toolkit"
+            footerTitle="Free for early testers"
+            waitlistHref="/waitlist/ai-agent-toolkit"
+            onWaitlistClick={() => trackCtaClick("Join waitlist", "/waitlist/ai-agent-toolkit", "secondary")}
+          />
         </div>
       </div>
     </section>

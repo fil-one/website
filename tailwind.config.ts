@@ -162,10 +162,12 @@ export default {
         section: "104px",
       },
 
-      // Card elevation — the two shadows behind nearly every card (~53 + ~33 uses)
+      // Card elevation — the two shadows behind nearly every card (~53 + ~33 uses).
+      // Named "elevated" (not "card") to avoid colliding with the `card` color,
+      // which would make Tailwind emit a shadow-COLOR utility of the same name.
       boxShadow: {
-        card: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
-        "card-sm": "0px 1px 3px rgba(0,0,0,0.04)",
+        elevated: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
+        "elevated-sm": "0px 1px 3px rgba(0,0,0,0.04)",
       },
 
       // Repeated background gradients (usable as bg-hero-grid-mask, bg-dark-section…)
