@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Check, Copy } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 import SectionHeader from "@/components/SectionHeader";
+import Icon from "@/components/Icon";
 
 type LangKey = "python" | "typescript" | "go";
 
@@ -136,7 +137,7 @@ const DeveloperSection = () => {
   const lines = CODE[lang].split("\n");
 
   return (
-    <section style={{ backgroundColor: "#F4F4F5", borderTop: "1px solid #E4E4E7", borderBottom: "1px solid #E4E4E7" }}>
+    <section className="border-y border-zinc-200 bg-zinc-100">
       <div
         ref={ref}
         className="flex flex-col gap-12 px-5 md:px-8 py-24 md:py-32 w-full max-w-container mx-auto"
@@ -153,15 +154,8 @@ const DeveloperSection = () => {
         <div className={`flex flex-wrap items-center justify-center gap-2 reveal${inView ? " in-view" : ""}`}>
           {STEPS.map((step, i) => (
             <div key={step} className="flex items-center gap-2">
-              <div
-                className="flex items-center px-4 py-2 rounded-full"
-                style={{
-                  backgroundColor: "#FFFFFF",
-                  border: "1px solid rgba(0,0,0,0.08)",
-                  boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
-                }}
-              >
-                <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, color: "#3F3F46", whiteSpace: "nowrap" }}>
+              <div className="flex items-center rounded-full border border-black/[0.08] bg-white px-4 py-2 shadow-elevated-sm">
+                <span className="whitespace-nowrap font-sans text-[13.5px] font-normal text-zinc-700">
                   {step}
                 </span>
               </div>
@@ -176,36 +170,23 @@ const DeveloperSection = () => {
 
         {/* Code block */}
         <div
-          className={`w-full rounded-2xl overflow-hidden reveal${inView ? " in-view" : ""}`}
+          className={`w-full overflow-hidden rounded-2xl border border-black/[0.07] bg-white reveal${inView ? " in-view" : ""}`}
           style={{
-            backgroundColor: "#FFFFFF",
-            border: "1px solid rgba(0,0,0,0.07)",
+            // Bespoke code-block shadow — no matching token.
             boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(0,0,0,0.05)",
           }}
         >
             {/* Header */}
-            <div
-              className="flex items-center justify-between px-5 py-3 border-b"
-              style={{ borderColor: "rgba(0,0,0,0.06)" }}
-            >
+            <div className="flex items-center justify-between border-b border-black/[0.06] px-5 py-3">
               {/* Language tabs */}
               <div className="flex items-center gap-0.5">
                 {LANGS.map(({ key, label }) => (
                   <button
                     key={key}
                     onClick={() => setLang(key)}
-                    style={{
-                      fontFamily: "'DM Mono', monospace",
-                      fontWeight: 400,
-                      fontSize: 12,
-                      color: lang === key ? "#09090B" : "#A1A1AA",
-                      backgroundColor: lang === key ? "#F4F4F5" : "transparent",
-                      border: "none",
-                      borderRadius: 6,
-                      padding: "4px 10px",
-                      cursor: "pointer",
-                      transition: "all 0.12s ease",
-                    }}
+                    className={`cursor-pointer rounded-md px-2.5 py-1 font-mono text-[12px] transition-all ${
+                      lang === key ? "bg-zinc-100 text-zinc-950" : "text-zinc-500"
+                    }`}
                   >
                     {label}
                   </button>
@@ -215,48 +196,20 @@ const DeveloperSection = () => {
               {/* Copy button */}
               <button
                 onClick={handleCopy}
-                className="flex items-center gap-1.5 transition-opacity hover:opacity-70"
-                style={{
-                  fontFamily: "'Funnel Sans', sans-serif",
-                  fontWeight: 400,
-                  fontSize: 12.5,
-                  color: copied ? "#0090FF" : "#A1A1AA",
-                  backgroundColor: "transparent",
-                  border: "none",
-                  cursor: "pointer",
-                  padding: "4px 6px",
-                  borderRadius: 6,
-                }}
+                className={`flex cursor-pointer items-center gap-1.5 rounded-md px-1.5 py-1 font-sans text-[12.5px] transition-opacity hover:opacity-70 ${
+                  copied ? "text-brand-500" : "text-zinc-500"
+                }`}
               >
-                {copied ? <Check size={13} /> : <Copy size={13} />}
+                <Icon icon={copied ? Check : Copy} size={13} />
                 {copied ? "Copied" : "Copy"}
               </button>
             </div>
 
             {/* Code with line numbers */}
-            <pre
-              style={{
-                margin: 0,
-                padding: "20px 0",
-                overflowX: "auto",
-                fontFamily: "'DM Mono', monospace",
-                fontSize: 13,
-                lineHeight: 1.75,
-              }}
-            >
+            <pre className="m-0 overflow-x-auto py-5 font-mono text-[13px] leading-[1.75]">
               {lines.map((line, i) => (
                 <div key={i} className="flex px-5 hover:bg-black/[0.02] transition-colors">
-                  <span
-                    style={{
-                      minWidth: 36,
-                      textAlign: "right",
-                      paddingRight: 20,
-                      color: "#D4D4D8",
-                      userSelect: "none",
-                      flexShrink: 0,
-                      fontSize: 12,
-                    }}
-                  >
+                  <span className="min-w-9 shrink-0 select-none pr-5 text-right text-[12px] text-zinc-300">
                     {i + 1}
                   </span>
                   <span
