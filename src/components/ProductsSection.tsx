@@ -55,10 +55,9 @@ const ProductsSection = () => {
           className={`w-full reveal${storageInView ? " in-view" : ""}`}
         >
           <div
-            className="w-full p-8 pb-6 md:p-10 md:pb-6 rounded-2xl border"
+            className="w-full rounded-2xl border border-brand/20 bg-[#FAFEFF] p-8 pb-6 md:p-10 md:pb-6"
             style={{
-              borderColor: "rgba(0,144,255,0.2)",
-              backgroundColor: "#FAFEFF",
+              // Bespoke blue-tinted card shadow — no matching token (differs from shadow-elevated).
               boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 24px rgba(0,144,255,0.06)",
             }}
           >
@@ -66,33 +65,13 @@ const ProductsSection = () => {
               {/* Header: icon + title */}
               <div className="flex items-center gap-3">
                 <IconTile icon={HardDrive} />
-                <h3
-                  style={{
-                    fontFamily: "'Aspekta', sans-serif",
-                    fontWeight: 500,
-                    fontSize: 22,
-                    lineHeight: "1.2",
-                    letterSpacing: "-0.015em",
-                    color: "#09090B",
-                    margin: 0,
-                  }}
-                >
+                <h3 className="m-0 font-display text-[22px] font-medium leading-[1.2] tracking-[-0.015em] text-zinc-950">
                   Object Storage
                 </h3>
               </div>
 
               {/* Description */}
-              <p
-                style={{
-                  fontFamily: "'Funnel Sans', sans-serif",
-                  fontWeight: 400,
-                  fontSize: 15,
-                  lineHeight: "1.6",
-                  color: "#52525B",
-                  maxWidth: 600,
-                  marginTop: -8,
-                }}
-              >
+              <p className="-mt-2 max-w-[600px] font-sans text-[15px] font-normal leading-[1.6] text-zinc-600">
                 S3-compatible, verifiably durable object storage. Drop-in compatible with every S3 SDK and workflow, and the substrate every other capability runs on.
               </p>
 
@@ -100,27 +79,18 @@ const ProductsSection = () => {
               <FeatureList items={STORAGE_FEATURES} />
 
               {/* Divider */}
-              <div className="w-full h-px" style={{ backgroundColor: "rgba(0,0,0,0.06)" }} />
+              <div className="h-px w-full bg-black/[0.06]" />
 
               {/* Footer: price + links + CTA */}
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div>
-                  <p
-                    style={{
-                      fontFamily: "'Aspekta', sans-serif",
-                      fontWeight: 500,
-                      fontSize: 20,
-                      color: "#09090B",
-                      letterSpacing: "-0.02em",
-                      lineHeight: 1,
-                    }}
-                  >
+                  <p className="font-display text-[20px] font-medium leading-none tracking-[-0.02em] text-zinc-950">
                     $4.99
-                    <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, color: "#71717A", letterSpacing: 0 }}>
+                    <span className="font-sans text-[14px] font-normal tracking-normal text-zinc-500">
                       {" "}/ TB / month
                     </span>
                   </p>
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, color: "#71717A", marginTop: 4 }}>
+                  <p className="mt-1 font-sans text-[12.5px] font-normal text-zinc-500">
                     30-day free trial · no credit card
                   </p>
                 </div>
