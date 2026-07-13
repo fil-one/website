@@ -1,10 +1,11 @@
-import { HardDrive, ChatDots, Robot, Check, ArrowRight } from "@phosphor-icons/react";
+import { HardDrive, ChatDots, Robot, ArrowRight } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
 import SectionHeader from "@/components/SectionHeader";
 import Pill from "@/components/Pill";
 import { Button } from "@/components/Button";
 import IconTile from "@/components/IconTile";
+import FeatureList from "@/components/FeatureList";
 
 const STORAGE_FEATURES = [
   "11 nines durability, verified daily",
@@ -95,16 +96,7 @@ const ProductsSection = () => {
               </p>
 
               {/* Features */}
-              <div className="flex flex-col gap-2.5">
-                {STORAGE_FEATURES.map((f) => (
-                  <div key={f} className="flex gap-3 items-start">
-                    <Check size={14} color="#0090FF" className="shrink-0" style={{ marginTop: 2 }} />
-                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.5", color: "#52525B" }}>
-                      {f}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <FeatureList items={STORAGE_FEATURES} />
 
               {/* Divider */}
               <div className="w-full h-px" style={{ backgroundColor: "rgba(0,0,0,0.06)" }} />
@@ -212,14 +204,7 @@ const ProductsSection = () => {
             </div>
 
             {/* Features */}
-            <div className="flex flex-col gap-2">
-              {RAG_FEATURES.map((f) => (
-                <div key={f} className="flex gap-2.5 items-start">
-                  <Check size={14} color="#0090FF" className="shrink-0" style={{ marginTop: 2 }} />
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: "1.5", color: "#52525B" }}>{f}</p>
-                </div>
-              ))}
-            </div>
+            <FeatureList items={RAG_FEATURES} />
 
             <a
               href="/bucket-intelligence"
@@ -294,14 +279,7 @@ const ProductsSection = () => {
             </div>
 
             {/* Features */}
-            <div className="flex flex-col gap-2">
-              {AGENT_FEATURES.map((f) => (
-                <div key={f} className="flex gap-2.5 items-start">
-                  <Check size={14} color="#0090FF" className="shrink-0" style={{ marginTop: 2 }} />
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: "1.5", color: "#52525B" }}>{f}</p>
-                </div>
-              ))}
-            </div>
+            <FeatureList items={AGENT_FEATURES} />
 
             <a
               href="/ai-agent-toolkit"
