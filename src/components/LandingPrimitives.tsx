@@ -53,6 +53,44 @@ export const SectionSub = ({ children, maxWidth = 560 }: { children: React.React
   </p>
 );
 
+/**
+ * Page-level hero heading: the large display h1 plus an optional supporting
+ * paragraph, centered. Shared by the homepage Hero and standalone page heroes
+ * (e.g. Pricing). Type scale is fixed for consistency; max-widths vary by
+ * content so they're props. `title`/`description` accept ReactNode so callers
+ * can embed highlighted spans or line breaks.
+ */
+export const HeroHeading = ({
+  title,
+  description,
+  titleMaxWidth,
+  descriptionMaxWidth,
+  className,
+}: {
+  title: React.ReactNode;
+  description?: React.ReactNode;
+  titleMaxWidth?: number;
+  descriptionMaxWidth?: number;
+  className?: string;
+}) => (
+  <div className={`flex flex-col items-center gap-4 text-center${className ? ` ${className}` : ""}`}>
+    <h1
+      className="m-0 font-display font-medium text-[32px] sm:text-[40px] md:text-[52px] leading-[1.1] tracking-[-0.025em] text-zinc-950"
+      style={titleMaxWidth ? { maxWidth: titleMaxWidth } : undefined}
+    >
+      {title}
+    </h1>
+    {description && (
+      <p
+        className="m-0 font-sans text-[15px] md:text-[17px] leading-[1.65] text-zinc-500"
+        style={descriptionMaxWidth ? { maxWidth: descriptionMaxWidth } : undefined}
+      >
+        {description}
+      </p>
+    )}
+  </div>
+);
+
 export const BackButton = () => {
   const navigate = useNavigate();
 

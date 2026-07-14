@@ -9,7 +9,6 @@ import StorageUseCasesSection from "@/components/StorageUseCasesSection";
 import UseCasesSection from "@/components/UseCasesSection";
 import ComparisonSection from "@/components/ComparisonSection";
 import StorageCalculatorSection from "@/components/StorageCalculatorSection";
-import PricingSection from "@/components/PricingSection";
 import FaqSection from "@/components/FaqSection";
 
 const STATS = [
