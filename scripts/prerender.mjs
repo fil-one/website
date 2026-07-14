@@ -115,7 +115,7 @@ const ROUTE_META = {
   "/": {
     title: "Fil One | S3 object storage built for the AI era",
     description:
-      "S3-compatible object storage on Filecoin. $4.99/TB/month, no egress fees, 11 nines durability, and verifiable CID integrity proofs.",
+      "S3-compatible object storage on Filecoin. $4.99/TB/month, no egress fees, 11 nines durability, proven daily.",
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -131,7 +131,7 @@ const ROUTE_META = {
         "@type": "Product",
         name: "Fil One Object Storage",
         description:
-          "S3-compatible object storage on Filecoin with no egress fees and verifiable data integrity via CID proofs.",
+          "S3-compatible object storage on Filecoin with no egress fees and verifiable data integrity, proven daily.",
         brand: { "@type": "Brand", name: "Fil One" },
         offers: {
           "@type": "Offer",
@@ -200,7 +200,7 @@ const ROUTE_META = {
   "/lp/agents": {
     title: "Fil One for AI Agents — S3 Storage for RAG, Agent Memory & Datasets",
     description:
-      "Give your AI agents durable, verifiable storage. S3-compatible, $4.99/TB, no egress fees, CID integrity proofs every ~24h. Drop-in replacement for AWS S3.",
+      "Give your AI agents durable, verifiable storage. S3-compatible, $4.99/TB, no egress fees, integrity proven daily. Drop-in replacement for AWS S3.",
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -385,7 +385,7 @@ const ROUTE_META = {
   "/lp/backup-dr": {
     title: "Backup & Disaster Recovery Storage — Fil One",
     description:
-      "Durable, verifiable backup storage at $4.99/TB. 11 nines durability, CID integrity proofs, zero egress for restores. S3-compatible drop-in for DR workflows.",
+      "Durable, verifiable backup storage at $4.99/TB. 11 nines durability, proven daily, zero egress for restores. S3-compatible drop-in for DR workflows.",
   },
   "/lp/log-retention": {
     title: "Cheap Log Retention Storage — $4.99/TB | Fil One",
@@ -455,12 +455,12 @@ const ROUTE_META = {
   "/lp/compliance": {
     title: "Compliant Object Storage with Verifiable Integrity — Fil One",
     description:
-      "Meet compliance requirements with cryptographically verifiable storage. CID proofs every ~24h, 11 nines durability, S3-compatible at $4.99/TB.",
+      "Meet compliance requirements with cryptographically verifiable storage. Integrity proven daily, 11 nines durability, S3-compatible at $4.99/TB.",
   },
   "/lp/archival": {
     title: "Archival Object Storage — Cheap, Durable & Verifiable | Fil One",
     description:
-      "Archive cold data at $4.99/TB with 11 nines durability and verifiable CID proofs. No egress fees when you need to restore. S3-compatible.",
+      "Archive cold data at $4.99/TB with 11 nines durability and integrity proven daily. No egress fees when you need to restore. S3-compatible.",
   },
   "/lp/versioning": {
     title: "Object Storage with Versioning — Fil One",
@@ -485,12 +485,12 @@ const ROUTE_META = {
   "/lp/genomics": {
     title: "Genomics & Life Sciences Data Storage — Fil One",
     description:
-      "Store genomics datasets, sequencing data, and research archives at $4.99/TB with 11 nines durability, verifiable CID proofs, and zero egress fees.",
+      "Store genomics datasets, sequencing data, and research archives at $4.99/TB with 11 nines durability, integrity proven daily, and zero egress fees.",
   },
   "/lp/web3-fintech": {
     title: "Web3 & Fintech Data Storage — Verifiable, S3-Compatible | Fil One",
     description:
-      "Verifiable, decentralized storage for Web3 and fintech workloads. Cryptographic CID proofs, $4.99/TB, no egress — built on Filecoin.",
+      "Verifiable, decentralized storage for Web3 and fintech workloads. Integrity proven daily, $4.99/TB, no egress, built on Filecoin.",
   },
   "/lp/web3-pivot": {
     title: "Decentralized Storage for Web3 Projects — Fil One",
@@ -500,7 +500,7 @@ const ROUTE_META = {
   "/lp/web3-native": {
     title: "Native Web3 Object Storage — Filecoin-Backed | Fil One",
     description:
-      "Purpose-built for Web3-native apps. S3-compatible, CID-addressed, cryptographically verifiable storage on Filecoin at $4.99/TB.",
+      "Purpose-built for Web3-native apps. S3-compatible, cryptographically verifiable storage on Filecoin at $4.99/TB, integrity proven daily.",
   },
   "/lp/barcelona": {
     title: "Fil One for Barcelona: European Storage, €4.99/TB, No Egress Fees",
