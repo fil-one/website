@@ -97,7 +97,7 @@ const DeveloperSection = () => {
   const { ref, inView } = useInView({ threshold: 0.05 });
 
   return (
-    <section className="border-y border-zinc-200 bg-zinc-100">
+    <section className="border-y border-zinc-100 bg-zinc-50">
       <div
         ref={ref}
         className="flex flex-col gap-12 px-5 md:px-8 py-24 md:py-32 w-full max-w-container mx-auto"

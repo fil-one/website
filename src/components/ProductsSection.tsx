@@ -7,6 +7,7 @@ import IconTile from "@/components/IconTile";
 import FeatureList from "@/components/FeatureList";
 import TextLink from "@/components/TextLink";
 import ProductCard from "@/components/ProductCard";
+import { PRICE_DISPLAY } from "@/lib/pricing";
 
 const STORAGE_FEATURES = [
   "11 nines durability, verified daily",
@@ -85,7 +86,7 @@ const ProductsSection = () => {
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div>
                   <p className="font-display text-[20px] font-medium leading-none tracking-[-0.02em] text-zinc-950">
-                    $4.99
+                    {PRICE_DISPLAY}
                     <span className="font-sans text-[14px] font-normal tracking-normal text-zinc-500">
                       {" "}/ TB / month
                     </span>

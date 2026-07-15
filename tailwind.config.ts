@@ -168,6 +168,9 @@ export default {
       boxShadow: {
         elevated: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
         "elevated-sm": "0px 1px 3px rgba(0,0,0,0.04)",
+        // Elevated + a brand-500 @ 6% focus ring — the highlighted pricing card
+        "elevated-ring":
+          "0 0 0 4px rgba(0,144,255,0.06), 0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
       },
 
       // Repeated background gradients (usable as bg-hero-grid-mask, bg-dark-section…)
