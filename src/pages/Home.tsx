@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Hero from "@/components/Hero";
+import AnnouncementBadge from "@/components/AnnouncementBadge";
+import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 import DashboardPreview from "@/components/DashboardPreview";
 import { PressBar } from "@/components/PressBar";
 import HeroGridDots from "@/components/HeroGridDots";
@@ -47,7 +49,33 @@ const Home = () => {
             }}
           />
           <HeroGridDots />
-          <Hero />
+          <Hero
+            badge={<AnnouncementBadge pill="Soon">Bucket Intelligence &amp; AI Agent Toolkit</AnnouncementBadge>}
+            title={<>S3 object storage built <br className="sm:hidden" />for the AI era</>}
+            description={<>Your data, your keys, your control.<br />For when every byte matters.</>}
+            titleMaxWidth={520}
+            descriptionMaxWidth={600}
+            ctas={[
+              {
+                label: "Start for free",
+                href: "https://app.fil.one/login?screen_hint=signup",
+                variant: "primary",
+                onClick: () => trackCtaClick("Start for free", "https://app.fil.one/login?screen_hint=signup", "primary"),
+              },
+              {
+                label: "Explore docs",
+                href: "https://docs.fil.one",
+                variant: "secondary",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                onClick: () => {
+                  trackCtaClick("Explore docs", "https://docs.fil.one", "secondary");
+                  trackDocsClick("https://docs.fil.one");
+                },
+              },
+            ]}
+            tagline="1TB free for 30 days · No credit card required · No egress fees"
+          />
           <DashboardPreview />
           <PressBar />
           {/* Products section replaces the features section — this is the platform's core nav anchor */}

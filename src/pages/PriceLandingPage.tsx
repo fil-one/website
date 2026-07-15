@@ -3,7 +3,8 @@ import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
-import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import Hero from "@/components/Hero";
 
 
 // 10 TB stored per month, flat-rate vendors only (no egress/API line items —
@@ -43,26 +44,25 @@ const PriceLandingPage = () => {
       <main id="main-content">
 
         {/* Hero */}
-        <section className="relative isolate pt-[58px] md:pt-[94px] bg-white">
-          <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-10 bg-blue-halo" />
-          <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-10" style={{ backgroundImage: `url("data:image/svg+xml,${GRID_SVG}")`, backgroundSize: "60px 60px", backgroundPosition: "center top", maskImage: "radial-gradient(ellipse 80% 65% at 50% 0%, black 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 65%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 65% at 50% 0%, black 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 65%, transparent 80%)" }} />
-          <div className="flex flex-col items-center gap-6 px-5 md:px-8 w-full max-w-container mx-auto pt-20 md:pt-[120px] pb-16 md:pb-20">
-            <div className="hero-fade-1 flex items-center gap-1.5 text-center bg-brand-50 border border-brand-500/20" style={{ borderRadius: 14, padding: "10px 14px", maxWidth: "90vw" }}>
-              <span className="font-sans font-medium text-brand-600 text-sm" style={{ lineHeight: 1 }}>For teams comparing S3-compatible storage vendors</span>
+        <Hero
+          glow
+          grid
+          contentClassName="pb-16 md:pb-20"
+          badge={
+            <div className="inline-flex items-center rounded-full border border-brand/20 bg-brand-50 px-[14px] py-[8px]">
+              <span className="whitespace-nowrap font-sans text-[13.5px] font-medium leading-none text-brand-600">For teams comparing S3-compatible storage vendors</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl hero-fade-2 font-display text-zinc-950 text-center" style={{ fontWeight: 500, lineHeight: "1.08", letterSpacing: "-0.025em", maxWidth: 800, margin: 0 }}>
-              $4.99.<br /><span className="text-brand-500">Theirs isn't.</span>
-            </h1>
-            <p className="text-base md:text-lg hero-fade-2 font-sans text-zinc-500 text-center" style={{ fontWeight: 400, lineHeight: "1.65", maxWidth: 580, margin: 0 }}>
-              Wasabi and Backblaze also call their pricing flat-rate. Run the same 10 TB and the invoices don't land in the same place.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
-              <a href="/contact-sales" className="btn-secondary">Talk to an expert</a>
-            </div>
-            <p className="hero-fade-4 font-sans text-zinc-500 text-center text-sm" style={{ fontWeight: 400 }}>No credit card required · No egress fees · Connects in minutes</p>
-          </div>
-        </section>
+          }
+          title={<>$4.99.<br /><span className="text-brand-500">Theirs isn't.</span></>}
+          description="Wasabi and Backblaze also call their pricing flat-rate. Run the same 10 TB and the invoices don't land in the same place."
+          titleMaxWidth={800}
+          descriptionMaxWidth={580}
+          ctas={[
+            { label: "Start for free", href: "https://app.fil.one/login?screen_hint=signup", variant: "primary" },
+            { label: "Talk to an expert", href: "/contact-sales", variant: "secondary" },
+          ]}
+          tagline="No credit card required · No egress fees · Connects in minutes"
+        />
 
         {/* Comparison — the hero of the page */}
         <section className="px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full bg-white">

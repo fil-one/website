@@ -1,44 +1,109 @@
-import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
-import AnnouncementBadge from "@/components/AnnouncementBadge";
+import type { ReactNode } from "react";
 import { Button } from "@/components/Button";
-import { HeroHeading } from "@/components/LandingPrimitives";
+import { GRID_SVG, HeroHeading } from "@/components/LandingPrimitives";
 
-const Hero = () => {
-  return (
-    <section className="relative w-full pt-[58px] md:pt-[94px]">
-      <div className="relative flex flex-col items-center pt-20 md:pt-[120px] pb-0 px-5 md:px-8 max-w-container mx-auto w-full">
-        <div className="flex flex-col items-center gap-6 w-full hero-fade-1">
+export interface HeroCta {
+  label: string;
+  href: string;
+  variant: "primary" | "secondary";
+  target?: string;
+  rel?: string;
+  onClick?: () => void;
+}
 
-          {/* Platform badge */}
-          <AnnouncementBadge pill="Soon">
-            Bucket Intelligence &amp; AI Agent Toolkit
-          </AnnouncementBadge>
+interface HeroProps {
+  /** Self-contained badge node above the heading (e.g. AnnouncementBadge or a soft pill). */
+  badge?: ReactNode;
+  /** Display heading; accepts highlighted spans and <br/>. */
+  title: ReactNode;
+  /** Supporting paragraph under the heading. */
+  description?: ReactNode;
+  /** Call-to-action buttons, rendered left-to-right. */
+  ctas?: HeroCta[];
+  /** Trust line under the CTAs (middle-dot separated). */
+  tagline?: ReactNode;
+  titleMaxWidth?: number;
+  descriptionMaxWidth?: number;
+  /** Blue radial halo background layer. */
+  glow?: boolean;
+  /** Grid texture background layer. */
+  grid?: boolean;
+  /** Extra classes for the inner content container (e.g. bottom padding). */
+  contentClassName?: string;
+}
 
-          <HeroHeading
-            title={<>S3 object storage built <br className="sm:hidden" />for the AI era</>}
-            description={<>Your data, your keys, your control.<br />For when every byte matters.</>}
-            titleMaxWidth={520}
-            descriptionMaxWidth={600}
-          />
-        </div>
+const GRID_MASK =
+  "radial-gradient(ellipse 80% 65% at 50% 0%, black 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 65%, transparent 80%)";
 
-        {/* CTAs */}
-        <div className="flex flex-row items-center justify-center gap-3 mt-10 hero-fade-2">
-          <Button variant="primary" href="https://app.fil.one/login?screen_hint=signup" onClick={() => trackCtaClick("Start for free", "https://app.fil.one/login?screen_hint=signup", "primary")}>
-            Start for free
-          </Button>
-          <Button variant="secondary" href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" onClick={() => { trackCtaClick("Explore docs", "https://docs.fil.one", "secondary"); trackDocsClick("https://docs.fil.one"); }}>
-            Explore docs
-          </Button>
-        </div>
-
-        {/* Tagline */}
-        <p className="mt-4 hero-fade-3 text-center font-sans text-[13px] font-normal leading-[1.5] text-zinc-500">
-          1TB free for 30 days · No credit card required · No egress fees
-        </p>
+/**
+ * Page hero: badge + display heading + optional description, CTAs, and trust
+ * line, in the shared `hero-fade` entrance sequence. Background layers (glow /
+ * grid) are opt-in so pages that supply their own backdrop (e.g. the homepage)
+ * render the hero transparent. Content is composed from the HeroHeading and
+ * Button primitives so every page's hero stays consistent.
+ */
+const Hero = ({
+  badge,
+  title,
+  description,
+  ctas,
+  tagline,
+  titleMaxWidth,
+  descriptionMaxWidth,
+  glow = false,
+  grid = false,
+  contentClassName = "",
+}: HeroProps) => (
+  <section className={`relative w-full pt-[58px] md:pt-[94px]${glow || grid ? " isolate" : ""}`}>
+    {glow && <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-10 bg-blue-halo" />}
+    {grid && (
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none -z-10"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,${GRID_SVG}")`,
+          backgroundSize: "60px 60px",
+          backgroundPosition: "center top",
+          maskImage: GRID_MASK,
+          WebkitMaskImage: GRID_MASK,
+        }}
+      />
+    )}
+    <div className={`relative flex flex-col items-center pt-20 md:pt-[120px] px-5 md:px-8 max-w-container mx-auto w-full${contentClassName ? ` ${contentClassName}` : ""}`}>
+      <div className="flex flex-col items-center gap-6 w-full hero-fade-1">
+        {badge}
+        <HeroHeading
+          title={title}
+          description={description}
+          titleMaxWidth={titleMaxWidth}
+          descriptionMaxWidth={descriptionMaxWidth}
+        />
       </div>
-    </section>
-  );
-};
+
+      {ctas && ctas.length > 0 && (
+        <div className="flex flex-row items-center justify-center gap-3 mt-10 hero-fade-2">
+          {ctas.map((cta) => (
+            <Button
+              key={cta.label}
+              variant={cta.variant}
+              href={cta.href}
+              target={cta.target}
+              rel={cta.rel}
+              onClick={cta.onClick}
+            >
+              {cta.label}
+            </Button>
+          ))}
+        </div>
+      )}
+
+      {tagline && (
+        <p className="mt-4 hero-fade-3 text-center font-sans text-[13px] font-normal leading-[1.5] text-zinc-500">
+          {tagline}
+        </p>
+      )}
+    </div>
+  </section>
+);
 
 export default Hero;
