@@ -151,10 +151,12 @@ export default {
        * migrated incrementally (e.g. max-w-[1120px] → max-w-container).
        * ─────────────────────────────────────────────────────────────────── */
 
-      // Content width — the dominant `max-w-[1120px]` (~276 uses); wide = container padding cap
+      // Content width — the dominant `max-w-[1120px]` (~276 uses); wide = container
+      // padding cap; narrow = form/input columns (e.g. the cost calculator inputs)
       maxWidth: {
         container: "1120px",
         "container-wide": "1400px",
+        "container-narrow": "640px",
       },
 
       // Vertical rhythm for dark hero/CTA sections — the repeated `py-[104px]`

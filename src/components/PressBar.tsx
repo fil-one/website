@@ -1,3 +1,5 @@
+import PressMarquee from "@/components/PressMarquee";
+
 const PUBLICATIONS = ["CNBC", "Bloomberg", "Yahoo Finance", "VentureBeat"];
 
 interface PressBarProps {
@@ -6,8 +8,9 @@ interface PressBarProps {
 }
 
 /**
- * "Fast Company" callout + infinite-scroll marquee of press logos.
+ * "Fast Company" award callout + infinite-scroll marquee of press logos.
  * Used on the homepage and pricing page — only the background differs.
+ * The logo strip on its own (no callout) is FeaturedInBar.
  */
 export const PressBar = ({ tone = "white" }: PressBarProps) => (
   <section
@@ -25,22 +28,7 @@ export const PressBar = ({ tone = "white" }: PressBarProps) => (
       <p className="font-sans text-[12.5px] font-normal text-zinc-500">
         And it has also been featured in
       </p>
-      <div className="marquee-mask w-full max-w-2xl overflow-hidden">
-        <div className="marquee-track flex items-center w-max">
-          {[0, 1].map((copy) => (
-            <span key={copy} className="flex items-center gap-8 pr-8" aria-hidden={copy === 1}>
-              {PUBLICATIONS.map((pub) => (
-                <span key={pub} className="flex items-center gap-8">
-                  <span className="font-sans text-[16px] font-medium text-zinc-600">
-                    {pub}
-                  </span>
-                  <span className="text-[20px] text-zinc-300">·</span>
-                </span>
-              ))}
-            </span>
-          ))}
-        </div>
-      </div>
+      <PressMarquee items={PUBLICATIONS} />
     </div>
   </section>
 );

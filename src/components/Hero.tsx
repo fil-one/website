@@ -6,6 +6,10 @@ export interface HeroCta {
   label: string;
   href: string;
   variant: "primary" | "secondary";
+  /** Primary only — maps to .btn-primary-lg / .btn-primary-sm. */
+  size?: "sm" | "lg";
+  /** Primary only — animated gradient border for prominent hero CTAs. */
+  glow?: boolean;
   target?: string;
   rel?: string;
   onClick?: () => void;
@@ -24,6 +28,8 @@ interface HeroProps {
   tagline?: ReactNode;
   titleMaxWidth?: number;
   descriptionMaxWidth?: number;
+  /** Responsive font-size classes for the heading; defaults to the standard hero scale. */
+  titleSize?: string;
   /** Blue radial halo background layer. */
   glow?: boolean;
   /** Grid texture background layer. */
@@ -50,6 +56,7 @@ const Hero = ({
   tagline,
   titleMaxWidth,
   descriptionMaxWidth,
+  titleSize,
   glow = false,
   grid = false,
   contentClassName = "",
@@ -77,6 +84,7 @@ const Hero = ({
           description={description}
           titleMaxWidth={titleMaxWidth}
           descriptionMaxWidth={descriptionMaxWidth}
+          titleSize={titleSize}
         />
       </div>
 
@@ -86,6 +94,8 @@ const Hero = ({
             <Button
               key={cta.label}
               variant={cta.variant}
+              size={cta.size}
+              glow={cta.glow}
               href={cta.href}
               target={cta.target}
               rel={cta.rel}

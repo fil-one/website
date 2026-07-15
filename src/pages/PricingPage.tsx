@@ -1,16 +1,14 @@
-import { useState } from "react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
-import { useInView } from "@/hooks/useInView";
-import { SectionLabel, SectionHeading, SectionSub, HeroHeading } from "@/components/LandingPrimitives";
+import { HeroHeading } from "@/components/LandingPrimitives";
 import FaqSection from "@/components/FaqSection";
 import { PressBar } from "@/components/PressBar";
 import PricingCard from "@/components/PricingCard";
 import StatGridSection from "@/components/StatGridSection";
-import PricingComparison, { type Competitor } from "@/components/PricingComparison";
+import CostCalculatorSection from "@/components/CostCalculatorSection";
 import CtaBanner from "@/components/CtaBanner";
-import { PRICE_PER_TB, PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { COMPETITORS, PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 // ─── Pricing tiers ─────────────────────────────────────────────────────────────
 const PAYGO_FEATURES = [
@@ -27,42 +25,6 @@ const BUSINESS_FEATURES = [
   "Capacity assurance and deployment SLAs",
 ];
 
-// ─── Calculator competitors ────────────────────────────────────────────────────
-const COMPETITORS: Competitor[] = [
-  {
-    name: "Fil One",
-    region: null,
-    storagePricePerTB: PRICE_PER_TB,
-    egressPricePerTB: 0,
-    apiPer1M: 0,
-    isFilOne: true,
-  },
-  {
-    name: "Wasabi",
-    region: null,
-    storagePricePerTB: 7.99,
-    egressPricePerTB: 0,
-    apiPer1M: 0,
-    isFilOne: false,
-  },
-  {
-    name: "Backblaze B2",
-    region: null,
-    storagePricePerTB: 6.95,
-    egressPricePerTB: 10.0,
-    apiPer1M: 0,
-    isFilOne: false,
-  },
-  {
-    name: "AWS S3",
-    region: "eu-west-1",
-    storagePricePerTB: 23.0,
-    egressPricePerTB: 90.0,
-    apiPer1M: 5.0,
-    isFilOne: false,
-  },
-];
-
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 const PricingPage = () => {
@@ -72,11 +34,6 @@ const PricingPage = () => {
       `S3-compatible object storage at ${PRICE_DISPLAY}/TB with no egress fees. See how much you could save compared to AWS, Google Cloud, and Azure.`,
     canonical: "https://fil.one/pricing",
   });
-
-  const [storedTB, setStoredTB] = useState(10);
-  const [egressTB, setEgressTB] = useState(10);
-
-  const { ref: calcRef, inView: calcInView } = useInView({ threshold: 0.05 });
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-white">
@@ -132,76 +89,7 @@ const PricingPage = () => {
         />
 
         {/* ── Cost calculator ───────────────────────────────────────────────── */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-white">
-          <div
-            ref={calcRef}
-            className={`flex flex-col gap-10 w-full max-w-container mx-auto reveal${calcInView ? " in-view" : ""}`}
-          >
-            <div className="flex flex-col gap-3 items-center text-center">
-              <SectionLabel>Cost calculator</SectionLabel>
-              <SectionHeading>See your <span className="text-brand-500">actual savings</span></SectionHeading>
-              <SectionSub maxWidth={520}>
-                Enter your storage and egress volumes to compare your monthly bill across providers.
-              </SectionSub>
-            </div>
-
-            {/* Inputs */}
-            <div className="flex flex-col sm:flex-row gap-6 w-full max-w-[640px] mx-auto">
-              <div className="flex flex-col gap-3 flex-1">
-                <div className="flex justify-between items-center">
-                  <label className="font-sans font-medium text-[16px] text-zinc-950">
-                    Storage
-                  </label>
-                  <span className="font-sans font-semibold text-[16px] text-brand-600">
-                    {storedTB} TB
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min={1}
-                  max={500}
-                  value={storedTB}
-                  onChange={(e) => setStoredTB(Number(e.target.value))}
-                  className="w-full calc-slider"
-                />
-                <div className="flex justify-between">
-                  <span className="font-sans text-[12px] text-zinc-500">1 TB</span>
-                  <span className="font-sans text-[12px] text-zinc-500">500 TB</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-3 flex-1">
-                <div className="flex justify-between items-center">
-                  <label className="font-sans font-medium text-[16px] text-zinc-950">
-                    Monthly egress
-                  </label>
-                  <span className="font-sans font-semibold text-[16px] text-brand-600">
-                    {egressTB} TB
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min={0}
-                  max={500}
-                  value={egressTB}
-                  onChange={(e) => setEgressTB(Number(e.target.value))}
-                  className="w-full calc-slider"
-                />
-                <div className="flex justify-between">
-                  <span className="font-sans text-[12px] text-zinc-500">0 TB</span>
-                  <span className="font-sans text-[12px] text-zinc-500">500 TB</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Results: stacked cards on mobile, table on tablet / desktop */}
-            <PricingComparison competitors={COMPETITORS} storedTB={storedTB} egressTB={egressTB} />
-
-            <p className="text-xs text-center text-zinc-500">
-              Prices are published list rates in USD as of July 2026. Backblaze B2 includes free egress up to 3× your monthly stored amount; the $10/TB rate applies beyond that threshold. Regional pricing may vary.
-            </p>
-          </div>
-        </section>
+        <CostCalculatorSection competitors={COMPETITORS} />
 
         {/* ── Publications ─────────────────────────────────────────────────── */}
         <PressBar tone="grey" />

@@ -65,17 +65,20 @@ export const HeroHeading = ({
   description,
   titleMaxWidth,
   descriptionMaxWidth,
+  titleSize = "text-[32px] sm:text-[40px] md:text-[52px]",
   className,
 }: {
   title: React.ReactNode;
   description?: React.ReactNode;
   titleMaxWidth?: number;
   descriptionMaxWidth?: number;
+  /** Responsive font-size classes for the h1; defaults to the standard hero scale. */
+  titleSize?: string;
   className?: string;
 }) => (
   <div className={`flex flex-col items-center gap-4 text-center${className ? ` ${className}` : ""}`}>
     <h1
-      className="m-0 font-display font-medium text-[32px] sm:text-[40px] md:text-[52px] leading-[1.1] tracking-[-0.025em] text-zinc-950"
+      className={`m-0 font-display font-medium ${titleSize} leading-[1.1] tracking-[-0.025em] text-zinc-950`}
       style={titleMaxWidth ? { maxWidth: titleMaxWidth } : undefined}
     >
       {title}
