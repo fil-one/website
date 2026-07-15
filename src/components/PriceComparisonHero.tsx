@@ -57,13 +57,13 @@ const PriceComparisonHero = ({ ctaHref }: { ctaHref: string }) => (
             }
           >
             {/* Logo row — fixed height so all three logos share a baseline.
-                Competitor marks are desaturated so the full-colour Fil One
-                logo and highlighted card hold the focus. */}
+                Competitor marks keep brand colour but are dimmed so Fil One
+                stays the visual focus. */}
             <div className="flex h-6 items-center justify-center">
               <img
                 src={logo}
                 alt={alt}
-                className={highlighted ? "max-h-6 w-auto" : "max-h-6 w-auto grayscale opacity-60"}
+                className={highlighted ? "max-h-6 w-auto" : "max-h-6 w-auto opacity-70"}
               />
             </div>
 
