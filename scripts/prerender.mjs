@@ -614,6 +614,11 @@ const ROUTE_META = {
     description:
       "S3 object storage with a built-in RAG pipeline. No stitching required, no per-query fees. Agent memory, RAG corpus, and retrieval on one platform.",
   },
+  "/lp/price": {
+    title: "Fil One — $4.99. Theirs isn't.",
+    description:
+      "Compare flat-rate S3-compatible storage side by side. Fil One: $4.99/TB, $0 egress, no per-request fees — versus Wasabi $7.99/TB and Backblaze B2 $6.95/TB.",
+  },
 
   // ── Product / solutions / marketing pages ─────────────────────────────────
   "/storage": {

@@ -24,12 +24,12 @@ const FEATURES = [
   { icon: ShieldCheck,title: "Recurring integrity checks", desc: "Every stored object is verified approximately every 24 hours. Low-cost storage that also proves your data is intact." },
 ];
 
-const Price499LandingPage = () => {
+const PriceLandingPage = () => {
   useSeo({
     title: "Fil One — $4.99. Theirs isn't.",
     description:
       "Compare flat-rate S3-compatible storage side by side. Fil One: $4.99/TB, $0 egress, no per-request fees — versus Wasabi $7.99/TB and Backblaze B2 $6.95/TB.",
-    canonical: "https://fil.one/lp/499",
+    canonical: "https://fil.one/lp/price",
   });
 
   const { ref: tableRef,    inView: tableInView    } = useInView({ threshold: 0.05 });
@@ -38,73 +38,73 @@ const Price499LandingPage = () => {
   const { ref: ctaRef,      inView: ctaInView      } = useInView({ threshold: 0.05 });
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
+    <div className="min-h-screen overflow-x-hidden bg-white">
       <PlatformNavbar />
       <main id="main-content">
 
         {/* Hero */}
-        <section className="relative isolate pt-[58px] md:pt-[94px]" style={{ backgroundColor: "#FFFFFF" }}>
-          <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse 55% 40% at 50% 0%, rgba(0,144,255,0.13) 0%, transparent 70%)" }} />
+        <section className="relative isolate pt-[58px] md:pt-[94px] bg-white">
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-10 bg-blue-halo" />
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-10" style={{ backgroundImage: `url("data:image/svg+xml,${GRID_SVG}")`, backgroundSize: "60px 60px", backgroundPosition: "center top", maskImage: "radial-gradient(ellipse 80% 65% at 50% 0%, black 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 65%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 65% at 50% 0%, black 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 65%, transparent 80%)" }} />
-          <div className="flex flex-col items-center gap-6 px-5 md:px-8 w-full max-w-[1120px] mx-auto pt-20 md:pt-[120px] pb-16 md:pb-20">
-            <div className="hero-fade-1 flex items-center gap-1.5 text-center" style={{ backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.2)", borderRadius: 14, padding: "10px 14px", maxWidth: "90vw" }}>
-              <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 13.5, lineHeight: 1, color: "#0070CC" }}>For teams comparing S3-compatible storage vendors</span>
+          <div className="flex flex-col items-center gap-6 px-5 md:px-8 w-full max-w-container mx-auto pt-20 md:pt-[120px] pb-16 md:pb-20">
+            <div className="hero-fade-1 flex items-center gap-1.5 text-center bg-brand-50 border border-brand-500/20" style={{ borderRadius: 14, padding: "10px 14px", maxWidth: "90vw" }}>
+              <span className="font-sans font-medium text-brand-600 text-sm" style={{ lineHeight: 1 }}>For teams comparing S3-compatible storage vendors</span>
             </div>
-            <h1 className="text-[30px] sm:text-[38px] md:text-[54px] hero-fade-2" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, lineHeight: "1.08", letterSpacing: "-0.025em", color: "#09090B", textAlign: "center", maxWidth: 800, margin: 0 }}>
-              $4.99.<br /><span style={{ color: "#0090FF" }}>Theirs isn't.</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl hero-fade-2 font-display text-zinc-950 text-center" style={{ fontWeight: 500, lineHeight: "1.08", letterSpacing: "-0.025em", maxWidth: 800, margin: 0 }}>
+              $4.99.<br /><span className="text-brand-500">Theirs isn't.</span>
             </h1>
-            <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 580, margin: 0 }}>
+            <p className="text-base md:text-lg hero-fade-2 font-sans text-zinc-500 text-center" style={{ fontWeight: 400, lineHeight: "1.65", maxWidth: 580, margin: 0 }}>
               Wasabi and Backblaze also call their pricing flat-rate. Run the same 10 TB and the invoices don't land in the same place.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
               <a href="/contact-sales" className="btn-secondary">Talk to an expert</a>
             </div>
-            <p className="hero-fade-4" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A", textAlign: "center" }}>No credit card required · No egress fees · Connects in minutes</p>
+            <p className="hero-fade-4 font-sans text-zinc-500 text-center text-sm" style={{ fontWeight: 400 }}>No credit card required · No egress fees · Connects in minutes</p>
           </div>
         </section>
 
         {/* Comparison — the hero of the page */}
-        <section className="px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full" style={{ backgroundColor: "#FFFFFF" }}>
+        <section className="px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full bg-white">
           <div ref={tableRef} className={`flex flex-col gap-8 w-full max-w-[880px] mx-auto reveal${tableInView ? " in-view" : ""}`}>
             <div className="flex flex-col gap-3 items-center text-center">
               <SectionLabel>Side by side</SectionLabel>
-              <SectionHeading>10 TB/month, <span style={{ color: "#0090FF" }}>three flat-rate vendors.</span></SectionHeading>
+              <SectionHeading>10 TB/month, <span className="text-brand-500">three flat-rate vendors.</span></SectionHeading>
               <SectionSub maxWidth={560}>They all call it flat. The per-TB rate is where "flat" stops meaning the same thing.</SectionSub>
             </div>
             <div style={{ overflowX: "auto" }}>
-              <table style={{ width: "100%", minWidth: 420, borderCollapse: "collapse", fontFamily: "'Funnel Sans', sans-serif" }}>
+              <table className="font-sans" style={{ width: "100%", minWidth: 420, borderCollapse: "collapse" }}>
                 <thead>
                   <tr>
                     {["Provider", "Rate / TB", "10 TB / month"].map(h => (
-                      <th key={h} style={{ textAlign: "left", padding: "11px 16px", fontSize: 11, fontWeight: 500, letterSpacing: "0.06em", textTransform: "uppercase", color: "#71717A", borderBottom: "1px solid rgba(0,0,0,0.07)", whiteSpace: "nowrap" }}>{h}</th>
+                      <th key={h} className="text-left text-xs font-medium uppercase text-zinc-500 border-b border-black/[0.07] whitespace-nowrap" style={{ padding: "11px 16px", letterSpacing: "0.06em" }}>{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {COMPARE_ROWS.map(r => (
-                    <tr key={r.provider} style={{ backgroundColor: r.isFilOne ? "#EFF8FF" : "transparent" }}>
-                      <td style={{ padding: "14px 16px", borderBottom: "1px solid rgba(0,0,0,0.06)", fontSize: 14, fontWeight: r.isFilOne ? 700 : 500, color: r.isFilOne ? "#0070CC" : "#09090B" }}>
-                        {r.provider}{r.isFilOne && <span style={{ marginLeft: 8, fontSize: 11, fontWeight: 500, color: "#0070CC", backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.2)", borderRadius: 9999, padding: "2px 7px", verticalAlign: "middle" }}>You</span>}
+                    <tr key={r.provider} className={r.isFilOne ? "bg-brand-50" : undefined}>
+                      <td className={`border-b border-black/[0.06] text-sm ${r.isFilOne ? "font-bold text-brand-600" : "font-medium text-zinc-950"}`} style={{ padding: "14px 16px" }}>
+                        {r.provider}{r.isFilOne && <span className="text-xs font-medium text-brand-600 bg-brand-50 border border-brand-500/20 align-middle" style={{ marginLeft: 8, borderRadius: 9999, padding: "2px 7px" }}>You</span>}
                       </td>
-                      <td style={{ padding: "14px 16px", borderBottom: "1px solid rgba(0,0,0,0.06)", fontSize: 13.5, color: r.isFilOne ? "#09090B" : "#52525B", fontWeight: r.isFilOne ? 600 : 400 }}>{r.rate}</td>
-                      <td style={{ padding: "14px 16px", borderBottom: "1px solid rgba(0,0,0,0.06)", fontSize: r.isFilOne ? 17 : 13.5, fontWeight: r.isFilOne ? 700 : 400, color: r.isFilOne ? "#0070CC" : "#52525B" }}>{r.total}</td>
+                      <td className={`border-b border-black/[0.06] text-sm ${r.isFilOne ? "font-semibold text-zinc-950" : "text-zinc-600"}`} style={{ padding: "14px 16px" }}>{r.rate}</td>
+                      <td className={`border-b border-black/[0.06] ${r.isFilOne ? "font-bold text-brand-600 text-lg" : "text-zinc-600 text-sm"}`} style={{ padding: "14px 16px" }}>{r.total}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 13, color: "#0070CC", backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.2)", borderRadius: 9999, padding: "7px 14px", textAlign: "center" }}>$19.60/mo less than Backblaze B2</span>
-              <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 13, color: "#0070CC", backgroundColor: "#EFF8FF", border: "1px solid rgba(0,144,255,0.2)", borderRadius: 9999, padding: "7px 14px", textAlign: "center" }}>$30.00/mo less than Wasabi</span>
+              <span className="font-sans font-medium text-brand-600 bg-brand-50 border border-brand-500/20 text-center text-sm" style={{ borderRadius: 9999, padding: "7px 14px" }}>$19.60/mo less than Backblaze B2</span>
+              <span className="font-sans font-medium text-brand-600 bg-brand-50 border border-brand-500/20 text-center text-sm" style={{ borderRadius: 9999, padding: "7px 14px" }}>$30.00/mo less than Wasabi</span>
             </div>
-            <p className="text-xs text-slate-500 text-center">Fil One: $4.99/TB/month flat, $0 egress, no per-request fees. Backblaze B2 and Wasabi published flat storage rates, Q3 2026 — $6.95/TB and $7.99/TB respectively; Wasabi's flat rate carries a 90-day minimum retention charge. All three positioned as egress-free / request-free flat storage; figures shown are storage cost for 10 TB stored for one month.</p>
+            <p className="text-xs text-zinc-500 text-center font-sans">Fil One: $4.99/TB/month flat, $0 egress, no per-request fees. Backblaze B2 and Wasabi published flat storage rates, Q3 2026 — $6.95/TB and $7.99/TB respectively; Wasabi's flat rate carries a 90-day minimum retention charge. All three positioned as egress-free / request-free flat storage; figures shown are storage cost for 10 TB stored for one month.</p>
           </div>
         </section>
 
         {/* Problem */}
-        <section className="px-5 md:px-8 py-16 md:py-24 w-full" style={{ backgroundColor: "#F9FAFB" }}>
-          <div ref={problemRef} className={`flex flex-col gap-10 w-full max-w-[1120px] mx-auto reveal${problemInView ? " in-view" : ""}`}>
+        <section className="px-5 md:px-8 py-16 md:py-24 w-full bg-gray-50">
+          <div ref={problemRef} className={`flex flex-col gap-10 w-full max-w-container mx-auto reveal${problemInView ? " in-view" : ""}`}>
             <div className="flex flex-col gap-4 items-center text-center max-w-[600px] mx-auto">
               <SectionLabel>The comparison problem</SectionLabel>
               <SectionHeading>"They're all about the same price," until you do the math.</SectionHeading>
@@ -116,11 +116,11 @@ const Price499LandingPage = () => {
                 { label: "Fine print",  catch: "The list price isn't always the invoice.",     body: "Wasabi's flat rate carries a 90-day minimum retention charge — capacity is billed for 90 days even if the data is deleted sooner. Fil One bills only for what's stored, no minimum term." },
                 { label: "One line of math","catch": "The comparison takes a single multiplication.", body: "Storage volume times the per-TB rate. That's the whole comparison for flat-rate vendors — check the table above against your own workload." },
               ].map(({ label, body, catch: c }) => (
-                <div key={label} className="flex flex-col rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF", boxShadow: "0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)" }}>
+                <div key={label} className="flex flex-col rounded-2xl overflow-hidden bg-white border border-black/[0.07] shadow-elevated">
                   <div className="flex flex-col p-7" style={{ gap: 10, flex: 1 }}>
-                    <span style={{ display: "inline-block", fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.08em", textTransform: "uppercase", color: "#52525B", backgroundColor: "#F4F4F5", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 9999, padding: "3px 10px", marginBottom: 2, alignSelf: "flex-start" }}>{label}</span>
-                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 18, lineHeight: "1.3", letterSpacing: "-0.01em", color: "#09090B" }}>{c}</p>
-                    <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: 1.65, color: "#71717A", marginTop: 4 }}>{body}</p>
+                    <span className="inline-block text-xs font-mono font-medium uppercase text-zinc-600 bg-zinc-100 border border-black/[0.08] self-start" style={{ letterSpacing: "0.08em", borderRadius: 9999, padding: "3px 10px", marginBottom: 2 }}>{label}</span>
+                    <p className="font-sans font-semibold text-zinc-950 text-lg" style={{ lineHeight: "1.3", letterSpacing: "-0.01em" }}>{c}</p>
+                    <p className="font-sans text-zinc-500 text-sm" style={{ lineHeight: 1.65, marginTop: 4 }}>{body}</p>
                   </div>
                 </div>
               ))}
@@ -129,18 +129,18 @@ const Price499LandingPage = () => {
         </section>
 
         {/* Features */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full" style={{ backgroundColor: "#FFFFFF" }}>
-          <div ref={featuresRef} className={`flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto reveal${featuresInView ? " in-view" : ""}`}>
+        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-white">
+          <div ref={featuresRef} className={`flex flex-col gap-10 items-center text-center w-full max-w-container mx-auto reveal${featuresInView ? " in-view" : ""}`}>
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Why it stays $4.99</SectionLabel>
-              <SectionHeading>Storage that works like <span style={{ color: "#0090FF" }}>it says on the tin.</span></SectionHeading>
+              <SectionHeading>Storage that works like <span className="text-brand-500">it says on the tin.</span></SectionHeading>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
               {FEATURES.map(({ icon: Icon, title, desc }) => (
-                <div key={title} className="flex flex-col gap-4 p-6 rounded-2xl border" style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF", boxShadow: "0px 1px 3px rgba(0,0,0,0.04)", textAlign: "left" }}>
-                  <div className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0" style={{ backgroundColor: "#EFF8FF" }}><Icon size={18} color="#0090FF" /></div>
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 15, lineHeight: "1.3", color: "#09090B" }}>{title}</p>
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, lineHeight: "1.6", color: "#71717A" }}>{desc}</p>
+                <div key={title} className="flex flex-col gap-4 p-6 rounded-2xl border border-black/[0.07] bg-white shadow-elevated-sm text-left">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0 bg-brand-50"><Icon size={18} color="#0090FF" /></div>
+                  <p className="font-sans font-medium text-zinc-950 text-base" style={{ lineHeight: "1.3" }}>{title}</p>
+                  <p className="font-sans text-zinc-500 text-sm" style={{ lineHeight: "1.6" }}>{desc}</p>
                 </div>
               ))}
             </div>
@@ -148,34 +148,34 @@ const Price499LandingPage = () => {
         </section>
 
         {/* Pricing */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full" style={{ backgroundColor: "#F9FAFB" }}>
-          <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
+        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-gray-50">
+          <div className="flex flex-col gap-10 items-center text-center w-full max-w-container mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span className="text-brand-500">$4.99/TB/month.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. No egress, no requests, no minimum term. Multiply your TB by $4.99 and that is the invoice.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
               <a href="/contact-sales" className="btn-secondary">Talk to an expert</a>
             </div>
-            <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A" }}>No credit card required · No egress fees · Connects in minutes</p>
+            <p className="font-sans text-zinc-500 text-sm" style={{ fontWeight: 400 }}>No credit card required · No egress fees · Connects in minutes</p>
           </div>
         </section>
 
         {/* Dark CTA */}
-        <section className="px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full" style={{ backgroundColor: "#FFFFFF" }}>
-          <div ref={ctaRef} className={`w-full max-w-[1120px] mx-auto reveal${ctaInView ? " in-view" : ""}`}>
-            <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(135deg, #020D1A 0%, #0D2847 55%, #041525 100%)", borderRadius: 20, textAlign: "center" }} className="px-6 md:px-12 py-16 md:py-[104px]">
+        <section className="px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full bg-white">
+          <div ref={ctaRef} className={`w-full max-w-container mx-auto reveal${ctaInView ? " in-view" : ""}`}>
+            <div className="relative overflow-hidden bg-dark-section rounded-[20px] text-center px-6 md:px-12 py-16 md:py-section">
               <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1"/></svg>')}")`, backgroundSize: "60px 60px", maskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", pointerEvents: "none" }} />
-              <div style={{ position: "relative" }}>
-                <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>Run your own numbers.</h2>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>Free 1 TB evaluation. Compare the invoice against whatever you're paying today.</p>
+              <div className="relative">
+                <h2 className="text-2xl md:text-3xl font-display text-white" style={{ fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", marginBottom: 12 }}>Run your own numbers.</h2>
+                <p className="font-sans text-white/60 text-lg" style={{ fontWeight: 400, marginBottom: 32 }}>Free 1 TB evaluation. Compare the invoice against whatever you're paying today.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark"><span className="btn-primary-inner">Start for free</span></a>
                   <a href="/contact-sales" className="btn-secondary btn-secondary-dark">Talk to an expert</a>
                 </div>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.60)", marginTop: 16 }}>No credit card required · No egress fees · Connects in minutes</p>
+                <p className="font-sans text-white/60 text-sm" style={{ marginTop: 16 }}>No credit card required · No egress fees · Connects in minutes</p>
               </div>
             </div>
           </div>
@@ -186,4 +186,4 @@ const Price499LandingPage = () => {
   );
 };
 
-export default Price499LandingPage;
+export default PriceLandingPage;
