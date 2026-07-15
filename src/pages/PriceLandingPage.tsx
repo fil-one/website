@@ -63,7 +63,7 @@ const PriceLandingPage = () => {
 
         {/* Closing CTA */}
         <CtaBanner
-          heading="The cheapest S3 object storage"
+          heading="The lowest-cost S3 object storage"
           subhead={`${PRICE_DISPLAY}/TB, no egress fees, up and running in minutes.`}
           cta={{ label: "Try 30 days for free", href: "https://app.fil.one/login?screen_hint=signup" }}
           note="No credit card required"
