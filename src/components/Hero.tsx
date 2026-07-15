@@ -1,6 +1,7 @@
 import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 import AnnouncementBadge from "@/components/AnnouncementBadge";
 import { Button } from "@/components/Button";
+import { HeroHeading } from "@/components/LandingPrimitives";
 
 const Hero = () => {
   return (
@@ -13,15 +14,12 @@ const Hero = () => {
             Bucket Intelligence &amp; AI Agent Toolkit
           </AnnouncementBadge>
 
-          {/* Headline */}
-          <h1 className="m-0 max-w-[520px] text-center font-display text-[32px] font-medium leading-[1.12] tracking-[-0.02em] text-zinc-950 sm:text-[40px] md:text-[52px]">
-            S3 object storage built <br className="sm:hidden" />for the AI era
-          </h1>
-
-          {/* Subheadline */}
-          <p className="m-0 max-w-[600px] text-center font-sans text-[15px] font-normal leading-[1.65] text-zinc-500 md:text-[16.5px]">
-            Your data, your keys, your control.<br />For when every byte matters.
-          </p>
+          <HeroHeading
+            title={<>S3 object storage built <br className="sm:hidden" />for the AI era</>}
+            description={<>Your data, your keys, your control.<br />For when every byte matters.</>}
+            titleMaxWidth={520}
+            descriptionMaxWidth={600}
+          />
         </div>
 
         {/* CTAs */}

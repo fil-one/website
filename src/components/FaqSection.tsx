@@ -4,6 +4,7 @@ import { useInView } from "@/hooks/useInView";
 import JsonLd from "@/components/JsonLd";
 import SectionHeader from "@/components/SectionHeader";
 import { trackEvent, trackDocsClick } from "@/lib/analytics";
+import { PRICE_DISPLAY } from "@/lib/pricing";
 
 const faqs = [
   {
@@ -79,7 +80,7 @@ const faqs = [
   {
     question: "How is my bill calculated?",
     answer:
-      "You pay $4.99 per TB stored per month. There are no fees for egress or API operations. Your bill is the amount of data you store, multiplied by the rate.",
+      `You pay ${PRICE_DISPLAY} per TB stored per month. There are no fees for egress or API operations. Your bill is the amount of data you store, multiplied by the rate.`,
   },
   {
     question: "Do you offer annual or reserved capacity plans?",
