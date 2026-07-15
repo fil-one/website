@@ -1,7 +1,7 @@
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
-import Hero from "@/components/Hero";
+import PriceComparisonHero from "@/components/PriceComparisonHero";
 import FeaturedInBar from "@/components/FeaturedInBar";
 import StatGridSection from "@/components/StatGridSection";
 import FeaturesSection from "@/components/FeaturesSection";
@@ -24,19 +24,7 @@ const PriceLandingPage = () => {
       <main id="main-content">
 
         {/* Hero */}
-        <Hero
-          glow
-          grid
-          contentClassName="pb-10 md:pb-14"
-          title={<>$4.99/TB/month.<br /><span className="text-brand-500">Switch and save.</span></>}
-          titleSize="text-[34px] sm:text-[44px] md:text-[62px]"
-          description="Move from Wasabi or Backblaze and start paying less today, with the same S3-compatible workflow."
-          titleMaxWidth={760}
-          descriptionMaxWidth={520}
-          ctas={[
-            { label: "Try 30 days for free", href: "https://app.fil.one/login?screen_hint=signup", variant: "primary", size: "lg", glow: true },
-          ]}
-        />
+        <PriceComparisonHero ctaHref="https://app.fil.one/login?screen_hint=signup" />
 
         <FeaturedInBar />
 

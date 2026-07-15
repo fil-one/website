@@ -173,6 +173,8 @@ export default {
         // Elevated + a brand-500 @ 6% focus ring — the highlighted pricing card
         "elevated-ring":
           "0 0 0 4px rgba(0,144,255,0.06), 0px 1px 3px rgba(0,0,0,0.04), 0px 4px 16px rgba(0,0,0,0.04)",
+        // Soft brand-blue glow for a lifted, highlighted accent card
+        "brand-glow": "0px 12px 32px -8px rgba(0,144,255,0.28), 0px 2px 6px rgba(0,0,0,0.05)",
       },
 
       // Repeated background gradients (usable as bg-hero-grid-mask, bg-dark-section…)
