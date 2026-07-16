@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import IntegrationsSection from "@/components/IntegrationsSection";
 
 // ─── Grid texture (matches Index.tsx hero) ─────────────────────────────────────
 
@@ -24,13 +25,6 @@ const PRICING_ROWS = [
   { provider: "AWS S3 Standard",      region: "eu-south-2 Madrid",          storage: "€197",    egress: "€790",   api: "€1.83", total: "€990",    isFilOne: false },
 ];
 
-// ─── Integrations ──────────────────────────────────────────────────────────────
-const INTEGRATIONS = [
-  "Iconik", "LucidLink", "Veeam", "Rclone", "Restic",
-  "MSP360", "Premiere", "DaVinci Resolve", "Hugging Face",
-  "PyTorch", "Arq", "Duplicati",
-];
-
 // ─── Page ──────────────────────────────────────────────────────────────────────
 const BarcelonaLandingPage = () => {
   useSeo({
@@ -43,7 +37,6 @@ const BarcelonaLandingPage = () => {
   const { ref: posRef,          inView: posInView          } = useInView({ threshold: 0.05 });
   const { ref: pricingRef,      inView: pricingInView      } = useInView({ threshold: 0.05 });
   const { ref: featuresRef,     inView: featuresInView     } = useInView({ threshold: 0.05 });
-const { ref: integrationsRef, inView: integrationsInView } = useInView({ threshold: 0.05 });
   const { ref: ctaRef,          inView: ctaInView          } = useInView({ threshold: 0.05 });
 
   return (
@@ -472,60 +465,7 @@ const { ref: integrationsRef, inView: integrationsInView } = useInView({ thresho
         </section>
 
         {/* ── Integrations ──────────────────────────────────────────────────── */}
-        <section
-          id="integrations"
-          className="px-5 md:px-8 py-24 md:py-32 w-full"
-          style={{ backgroundColor: "#FFFFFF" }}
-        >
-          <div
-            ref={integrationsRef}
-            className={`flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto reveal${integrationsInView ? " in-view" : ""}`}
-          >
-            <div className="flex flex-col gap-3 items-center">
-              <SectionLabel>Integrations</SectionLabel>
-              <SectionHeading>Works with your <span style={{ color: "#0090FF" }}>existing stack</span></SectionHeading>
-              <SectionSub maxWidth={440}>
-                S3 API compatible. If it talks to AWS, it talks to us.
-              </SectionSub>
-            </div>
-
-            <div className="marquee-mask w-full overflow-hidden">
-              <div className="marquee-track marquee-track-slow flex items-center w-max" style={{ gap: 12 }}>
-                {[0, 1].map((copy) => (
-                  <div key={copy} style={{ display: "flex", gap: 12 }} aria-hidden={copy === 1}>
-                    {INTEGRATIONS.map((name) => (
-                      <div
-                        key={name}
-                        style={{
-                          backgroundColor: "#FFFFFF",
-                          border: "1px solid rgba(0,0,0,0.09)",
-                          borderRadius: 10,
-                          padding: "14px 26px",
-                          fontFamily: "'Funnel Sans', sans-serif",
-                          fontWeight: 500,
-                          fontSize: 16.5,
-                          color: "#374151",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        {name}
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <a
-              href="https://docs.fil.one"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-            >
-              View documentation →
-            </a>
-          </div>
-        </section>
+        <IntegrationsSection />
 
         {/* ── CTA Banner ────────────────────────────────────────────────────── */}
         <section

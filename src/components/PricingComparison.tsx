@@ -1,13 +1,7 @@
 import Table from "@/components/Table";
+import type { Competitor } from "@/lib/pricing";
 
-export interface Competitor {
-  name: string;
-  region: string | null;
-  storagePricePerTB: number;
-  egressPricePerTB: number;
-  apiPer1M: number;
-  isFilOne: boolean;
-}
+export type { Competitor };
 
 interface PricingComparisonProps {
   competitors: Competitor[];
@@ -53,7 +47,9 @@ const PricingComparison = ({ competitors, storedTB, egressTB }: PricingCompariso
   const rows: ComparisonRow[] = competitors
     .map((c) => {
       const storage = c.storagePricePerTB * storedTB;
-      const egress = c.egressPricePerTB * egressTB;
+      const freeEgressTB = (c.freeEgressMultiplier ?? 0) * storedTB;
+      const billableEgressTB = Math.max(0, egressTB - freeEgressTB);
+      const egress = c.egressPricePerTB * billableEgressTB;
       return { ...c, storage, egress, total: storage + egress };
     })
     .sort((a, b) => a.total - b.total);
