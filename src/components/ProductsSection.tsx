@@ -138,8 +138,8 @@ const ProductsSection = () => {
             description="Powered by a built-in RAG Pipeline. Files are auto-indexed as they land in your bucket. Ask questions in plain language using your own OpenAI, Anthropic, or Cohere keys."
             features={RAG_FEATURES}
             learnMoreHref="/bucket-intelligence"
-            footerTitle="Free for early testers"
-            footerNote="LLM costs billed by your provider"
+            footerTitle="Included at no charge during early testing"
+            footerNote="LLM usage is billed by your provider"
             waitlistHref="/waitlist/bucket-intelligence"
             onWaitlistClick={() => trackCtaClick("Join waitlist", "/waitlist/bucket-intelligence", "secondary")}
           />
@@ -153,7 +153,7 @@ const ProductsSection = () => {
             description="Pick an integration, paste a config block, and your buckets are immediately available for your AI agents to use or to trigger automations from bucket events."
             features={AGENT_FEATURES}
             learnMoreHref="/ai-agent-toolkit"
-            footerTitle="Free for early testers"
+            footerTitle="Available to early testers at no charge"
             waitlistHref="/waitlist/ai-agent-toolkit"
             onWaitlistClick={() => trackCtaClick("Join waitlist", "/waitlist/ai-agent-toolkit", "secondary")}
           />

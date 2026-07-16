@@ -16,8 +16,8 @@ const faqs = [
     question: "Is Fil One compatible with my existing tools?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Fil One provides an S3-compatible API: if your application works with AWS S3, it works with Fil One. Point your SDK or CLI at our endpoint and authenticate with your API keys.</p>
-        <p>Fil One takes a security-first approach to S3-compatibility. The S3-compatible API enables simple setup and migration. Storage supports private buckets by default, with public access consistent with full S3 parity coming soon.</p>
+        <p>The S3-compatible API means anything built for AWS S3 works here too. Point your SDK or CLI at our endpoint and authenticate with your API keys.</p>
+        <p>Security comes first in the S3-compatible design: setup and migration stay simple, and buckets are private by default. Public access with full S3 parity is coming soon.</p>
         <p>Read <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link" onClick={() => trackDocsClick("https://docs.fil.one")}>Fil One docs</a>, <a href="https://app.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link">access the app</a> to get started with no code required, or <a href="/contact-sales" className="faq-link">talk to someone on our team</a> to get started.</p>
       </div>
     ),
@@ -25,13 +25,13 @@ const faqs = [
   {
     question: "What kinds of organizations use Fil One?",
     answer:
-      "Fil One is optimized for large-scale storage needs, including AI and data-intensive workloads, multi-cloud strategies, audit-sensitive data, and long-term retention.",
+      "Built for large-scale storage needs, including AI and data-intensive workloads, multi-cloud strategies, audit-sensitive data, and long-term retention.",
   },
   {
     question: "How does Fil One approach security and compliance?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Fil One uses industry-standard encryption with per-object data encryption keys, ensuring your data is protected regardless of which provider it's stored with. We are actively pursuing SOC 2 Type II and ISO 27001 certifications — if you'd like to be notified when those are finalized or have other questions about security, reach out to our team directly at <a href="mailto:security@fil.one" className="faq-link">security@fil.one</a>.</p>
+        <p>Encryption is industry-standard, with per-object data encryption keys that protect your data regardless of which provider it's stored with. SOC 2 Type II and ISO 27001 certifications are actively in progress. Reach out to <a href="mailto:security@fil.one" className="faq-link">security@fil.one</a> if you'd like to be notified when those finalize, or have other questions about security.</p>
       </div>
     ),
   },
@@ -39,8 +39,8 @@ const faqs = [
     question: "How do I migrate from AWS / Azure / Google Cloud?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>After you create an account and provision your first bucket, migrating to Fil One is straightforward with our S3-compatible interface. You can integrate directly into your codebase using any S3-compatible SDK, or use the AWS CLI to migrate your data with a single command.</p>
-        <p>For enterprise teams who want more hands-on support during migration, our team is available to walk you through every step. Reach out at <a href="mailto:sales@fil.one" className="faq-link">sales@fil.one</a>, and we'll make sure the transition is seamless.</p>
+        <p>After you create an account and provision your first bucket, migrating to Fil One is straightforward with our S3-compatible interface. Integrate directly into your codebase with any S3-compatible SDK, or migrate your data with a single AWS CLI command.</p>
+        <p>Enterprise teams who want more hands-on support can work directly with our team through every step of migration. Reach out at <a href="mailto:sales@fil.one" className="faq-link">sales@fil.one</a> to get started.</p>
       </div>
     ),
   },
@@ -48,8 +48,8 @@ const faqs = [
     question: "What is Bucket Intelligence and how does it work?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Bucket Intelligence turns your Fil One buckets into queryable knowledge bases. Powered by a built-in RAG Pipeline, files are auto-indexed as they land in your bucket. You can ask questions in plain language and get answers grounded in your actual data.</p>
-        <p>You bring your own LLM API keys (OpenAI, Anthropic, or Cohere), so AI costs go directly to your provider. Bucket Intelligence is free for early testers.</p>
+        <p>Every bucket becomes a queryable knowledge base once Bucket Intelligence is connected. Files are auto-indexed as they land, powered by a built-in RAG pipeline. Ask questions in plain language and get answers grounded in your actual data.</p>
+        <p>Bring your own LLM API keys (OpenAI, Anthropic, or Cohere), so AI costs go directly to your provider. Early testers get access at no charge.</p>
       </div>
     ),
   },
@@ -58,14 +58,14 @@ const faqs = [
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
         <p>The AI Agent Toolkit lets you connect your AI tools and automations to Fil One. Pick an integration, paste a config block, and your buckets are immediately available for your AI agents to use or to trigger automations from bucket events.</p>
-        <p>It works with your existing buckets, no new setup or credentials needed. Access can be revoked at any time. Free for early testers.</p>
+        <p>It works with your existing buckets, no new setup or credentials needed. Access can be revoked at any time, and there's no cost for early testers.</p>
       </div>
     ),
   },
   {
     question: "Do I need to use all three products together?",
     answer:
-      "No. Object Storage is the foundation every Fil One account starts with, and it works great on its own as a fully S3-compatible store. Bucket Intelligence and AI Agent Toolkit are coming soon and will connect directly to your existing buckets with no data migration needed.",
+      "Not required. Object Storage is the foundation every Fil One account starts with, and it works great on its own as a fully S3-compatible store. Both additional products connect directly to your existing buckets when they launch, with no data migration needed.",
   },
   {
     question: "What counts as egress?",
@@ -75,18 +75,18 @@ const faqs = [
   {
     question: "Is there a minimum storage requirement?",
     answer:
-      "No. You can store as little or as much as you need. You only pay for what you use, billed per TB per month.",
+      "No minimum. Store as little or as much as you need, and pay only for what you use, billed per TB per month.",
   },
   {
     question: "How is my bill calculated?",
     answer:
-      `You pay ${PRICE_DISPLAY} per TB stored per month. There are no fees for egress or API operations. Your bill is the amount of data you store, multiplied by the rate.`,
+      `Billing is ${PRICE_DISPLAY} per TB stored per month, with no fees for egress or API operations. Your bill is the amount of data you store, multiplied by the rate.`,
   },
   {
     question: "Do you offer annual or reserved capacity plans?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Yes. For teams with predictable storage needs, we offer reserved capacity plans on 1, 3, or 5-year terms with volume discounts. <a href="/contact-sales" className="faq-link">Contact sales</a> to get a quote.</p>
+        <p>Yes. Teams with predictable storage needs can choose reserved capacity plans on 1, 3, or 5-year terms with volume discounts. <a href="/contact-sales" className="faq-link">Contact sales</a> to get a quote.</p>
       </div>
     ),
   },
@@ -98,7 +98,7 @@ const faqs = [
   {
     question: "Is there a free trial?",
     answer:
-      "Yes. You get 1 TB free for 30 days. No credit card required to start.",
+      "Yes. The trial includes 1 TB free for 30 days, with no credit card required to start.",
   },
   {
     question: "What is Filecoin?",
