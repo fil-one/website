@@ -7,6 +7,8 @@ import type { Competitor } from "@/lib/pricing";
 interface CostCalculatorSectionProps {
   /** Providers to compare; each page decides which competitors to include. */
   competitors: Competitor[];
+  /** Optional anchor id so pages can deep-link/scroll to the calculator. */
+  id?: string;
 }
 
 /**
@@ -14,13 +16,13 @@ interface CostCalculatorSectionProps {
  * provider comparison. Shared by the pricing page and the /lp/price landing
  * page, which differ only in which competitors they pass in.
  */
-const CostCalculatorSection = ({ competitors }: CostCalculatorSectionProps) => {
+const CostCalculatorSection = ({ competitors, id }: CostCalculatorSectionProps) => {
   const [storedTB, setStoredTB] = useState(10);
   const [egressTB, setEgressTB] = useState(10);
   const { ref, inView } = useInView({ threshold: 0.05 });
 
   return (
-    <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-white">
+    <section id={id} className="scroll-mt-24 px-5 md:px-8 py-24 md:py-32 w-full bg-white">
       <div ref={ref} className={`flex flex-col gap-10 w-full max-w-container mx-auto reveal${inView ? " in-view" : ""}`}>
         <div className="flex flex-col gap-3 items-center text-center">
           <SectionLabel>Cost calculator</SectionLabel>

@@ -1,7 +1,7 @@
 import { Plug, ArrowsOut, ShieldCheck, Lock, SignOut, Rocket } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
-import IconTile from "@/components/IconTile";
+import FeatureCard from "@/components/FeatureCard";
 
 const FEATURES = [
   { icon: Plug,        title: "Drop-in S3 compatibility",     desc: "Same API, same SDKs, same tools. Point your existing workflow at our endpoint." },
@@ -34,16 +34,13 @@ const FeaturesSection = () => {
           className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full reveal-group reveal${inView ? " in-view" : ""}`}
         >
           {FEATURES.map(({ icon, title, desc }) => (
-            <div
+            <FeatureCard
               key={title}
-              className={`flex flex-col gap-5 p-8 rounded-2xl border border-black/[0.07] bg-white shadow-elevated reveal${inView ? " in-view" : ""}`}
-            >
-              <IconTile icon={icon} size={26} className="h-14 w-14" />
-              <div className="flex flex-col gap-2">
-                <h3 className="font-sans font-medium text-[18px] leading-[1.3] text-zinc-950 m-0">{title}</h3>
-                <p className="font-sans font-normal text-[14px] leading-[1.6] text-zinc-500 m-0">{desc}</p>
-              </div>
-            </div>
+              icon={icon}
+              title={title}
+              description={desc}
+              className={`reveal${inView ? " in-view" : ""}`}
+            />
           ))}
         </div>
       </div>
