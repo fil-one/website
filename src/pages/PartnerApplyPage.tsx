@@ -59,7 +59,7 @@ const Field = ({
 
 const PartnerApplyPage = () => {
   useSeo({
-    title: "Partner Application — Fil One",
+    title: "Partner Application · Fil One",
     description: "Apply to join the Fil One partner program as a Channel, Technology, or MSP partner.",
     canonical: "https://fil.one/partners/apply",
   });

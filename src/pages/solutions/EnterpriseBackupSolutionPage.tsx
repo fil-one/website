@@ -71,7 +71,7 @@ const EnterpriseBackupSolutionPage = () => {
   const { ref: scRef, inView: scInView } = useInView({ threshold: 0.1 });
 
   useSeo({
-    title: "Enterprise Backup & Disaster Recovery — Fil One",
+    title: "Enterprise Backup & Disaster Recovery · Fil One",
     description:
       "Immutable, geo-distributed backup storage with no egress fees. Ransomware resilience, cryptographic integrity, and compliance-ready for enterprise teams.",
     canonical: "https://fil.one/solutions/enterprise-backup",

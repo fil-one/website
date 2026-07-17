@@ -26,7 +26,7 @@ const LLMS_TXT = `$ curl -s https://fil.one/llms.txt
 
 const AgentReadableLandingPage = () => {
   useSeo({
-    title: "Fil One — Priced so plainly your agent can read it",
+    title: "Fil One · Priced so plainly your agent can read it",
     description:
       "Flat $4.99/TB pricing published in machine-readable llms.txt, with full S3 parity. No gated quotes — an AI coding agent can evaluate Fil One in one pass.",
     canonical: "https://fil.one/lp/agent-readable",

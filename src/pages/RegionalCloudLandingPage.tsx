@@ -15,7 +15,7 @@ const FEATURES = [
 
 const RegionalCloudLandingPage = () => {
   useSeo({
-    title: "Fil One — Offer global storage without building it",
+    title: "Fil One · Offer global storage without building it",
     description:
       "S3-compatible object storage infrastructure you can embed in your regional cloud offering. SLA-backed, partner-ready. Contact for commercial terms.",
     canonical: "https://fil.one/lp/regional-cloud",

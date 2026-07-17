@@ -198,7 +198,7 @@ const ROUTE_META = {
     ],
   },
   "/lp/agents": {
-    title: "Fil One for AI Agents — S3 Storage for RAG, Agent Memory & Datasets",
+    title: "Fil One for AI Agents · S3 Storage for RAG, Agent Memory & Datasets",
     description:
       "Give your AI agents durable, verifiable storage. S3-compatible, $4.99/TB, no egress fees, integrity proven daily. Drop-in replacement for AWS S3.",
     jsonLd: [
@@ -243,7 +243,7 @@ const ROUTE_META = {
     ],
   },
   "/lp/egress": {
-    title: "Zero Egress Fee Object Storage — Fil One vs AWS S3, Backblaze, Wasabi",
+    title: "Zero Egress Fee Object Storage · Fil One vs AWS S3, Backblaze, Wasabi",
     description:
       "Stop paying egress fees. Fil One charges $0 for data transfer out — save thousands vs AWS S3 ($90+/TB) and Wasabi ($0.007/GB) with no API fees either.",
     jsonLd: [
@@ -288,7 +288,7 @@ const ROUTE_META = {
     ],
   },
   "/lp/rag-storage": {
-    title: "Object Storage for RAG Pipelines — Fil One",
+    title: "Object Storage for RAG Pipelines · Fil One",
     description:
       "Store and retrieve RAG corpora, embeddings, and vector indexes at $4.99/TB. S3-compatible, no egress fees, verifiable integrity — built for LLM pipelines.",
     jsonLd: [
@@ -333,7 +333,7 @@ const ROUTE_META = {
     ],
   },
   "/lp/ml-checkpoints": {
-    title: "ML Checkpoint Storage — Save Model Weights Cheaply | Fil One",
+    title: "ML Checkpoint Storage · Save Model Weights Cheaply | Fil One",
     description:
       "Store ML checkpoints and model artifacts at $4.99/TB with no egress fees. S3-compatible, durable, and verifiable — ideal for training runs on any cloud.",
     jsonLd: [
@@ -378,37 +378,37 @@ const ROUTE_META = {
     ],
   },
   "/lp/startups": {
-    title: "Object Storage for Startups — $4.99/TB, No Egress | Fil One",
+    title: "Object Storage for Startups · $4.99/TB, No Egress | Fil One",
     description:
       "Predictable, affordable cloud storage for startups. $4.99/TB, zero egress fees, S3-compatible. No surprise bills — just storage that scales with you.",
   },
   "/lp/backup-dr": {
-    title: "Backup & Disaster Recovery Storage — Fil One",
+    title: "Backup & Disaster Recovery Storage · Fil One",
     description:
       "Durable, verifiable backup storage at $4.99/TB. 11 nines durability, proven daily, zero egress for restores. S3-compatible drop-in for DR workflows.",
   },
   "/lp/log-retention": {
-    title: "Cheap Log Retention Storage — $4.99/TB | Fil One",
+    title: "Cheap Log Retention Storage · $4.99/TB | Fil One",
     description:
       "Store logs long-term at $4.99/TB with no egress fees. S3-compatible, verifiable, and far cheaper than CloudWatch or Datadog for long-term retention.",
   },
   "/lp/web-scraping": {
-    title: "Storage for Web Scraping & Data Collection — Fil One",
+    title: "Storage for Web Scraping & Data Collection · Fil One",
     description:
       "Store scraped datasets, crawl archives, and raw HTML at $4.99/TB. No egress fees when feeding data into pipelines. S3-compatible and verifiable.",
   },
   "/lp/multi-cloud": {
-    title: "Multi-Cloud Object Storage — S3-Compatible | Fil One",
+    title: "Multi-Cloud Object Storage · S3-Compatible | Fil One",
     description:
       "Add a cost-effective, verifiable storage tier to your multi-cloud stack. $4.99/TB, no egress, S3-compatible — works alongside AWS, GCP, and Azure.",
   },
   "/lp/data-sovereignty": {
-    title: "Data Sovereignty Storage — Verifiable, Decentralized | Fil One",
+    title: "Data Sovereignty Storage · Verifiable, Decentralized | Fil One",
     description:
       "Own your data with cryptographic proof. Fil One's Filecoin-backed storage gives you verifiable custody, no vendor lock-in, and S3-compatible access at $4.99/TB.",
   },
   "/lp/migrate-from-s3": {
-    title: "Migrate from AWS S3 to Fil One — Drop-In S3 Replacement",
+    title: "Migrate from AWS S3 to Fil One · Drop-In S3 Replacement",
     description:
       "Switch from AWS S3 to Fil One in minutes. Fully S3-compatible API, $4.99/TB vs AWS $23+/TB, and $0 egress vs AWS $90+/TB. No code changes required.",
     jsonLd: [
@@ -453,52 +453,52 @@ const ROUTE_META = {
     ],
   },
   "/lp/compliance": {
-    title: "Compliant Object Storage with Verifiable Integrity — Fil One",
+    title: "Compliant Object Storage with Verifiable Integrity · Fil One",
     description:
       "Meet compliance requirements with cryptographically verifiable storage. Integrity proven daily, 11 nines durability, S3-compatible at $4.99/TB.",
   },
   "/lp/archival": {
-    title: "Archival Object Storage — Cheap, Durable & Verifiable | Fil One",
+    title: "Archival Object Storage · Cheap, Durable & Verifiable | Fil One",
     description:
       "Archive cold data at $4.99/TB with 11 nines durability and integrity proven daily. No egress fees when you need to restore. S3-compatible.",
   },
   "/lp/versioning": {
-    title: "Object Storage with Versioning — Fil One",
+    title: "Object Storage with Versioning · Fil One",
     description:
       "S3-compatible versioning on Filecoin. Keep every version of every object at $4.99/TB with no egress fees and cryptographic integrity guarantees.",
   },
   "/lp/regional-cloud": {
-    title: "Regional Cloud Storage Alternative — Fil One",
+    title: "Regional Cloud Storage Alternative · Fil One",
     description:
       "A globally distributed, cost-effective alternative to regional cloud storage. $4.99/TB, no egress, S3-compatible, and verifiably durable.",
   },
   "/lp/media": {
-    title: "Media & Asset Storage — S3-Compatible, No Egress | Fil One",
+    title: "Media & Asset Storage · S3-Compatible, No Egress | Fil One",
     description:
       "Store and serve media assets, video, and images at $4.99/TB with zero egress fees. S3-compatible, high-durability storage for media workflows.",
   },
   "/lp/gaming": {
-    title: "Game Asset & Save-Data Storage — Fil One",
+    title: "Game Asset & Save-Data Storage · Fil One",
     description:
       "Durable, verifiable storage for game assets, saves, and telemetry at $4.99/TB. Zero egress fees and S3-compatible — built for game backends.",
   },
   "/lp/genomics": {
-    title: "Genomics & Life Sciences Data Storage — Fil One",
+    title: "Genomics & Life Sciences Data Storage · Fil One",
     description:
       "Store genomics datasets, sequencing data, and research archives at $4.99/TB with 11 nines durability, integrity proven daily, and zero egress fees.",
   },
   "/lp/web3-fintech": {
-    title: "Web3 & Fintech Data Storage — Verifiable, S3-Compatible | Fil One",
+    title: "Web3 & Fintech Data Storage · Verifiable, S3-Compatible | Fil One",
     description:
       "Verifiable, decentralized storage for Web3 and fintech workloads. Integrity proven daily, $4.99/TB, no egress, built on Filecoin.",
   },
   "/lp/web3-pivot": {
-    title: "Decentralized Storage for Web3 Projects — Fil One",
+    title: "Decentralized Storage for Web3 Projects · Fil One",
     description:
       "Transition to decentralized storage without rebuilding your stack. Fil One is S3-compatible, Filecoin-backed, and $4.99/TB with no egress fees.",
   },
   "/lp/web3-native": {
-    title: "Native Web3 Object Storage — Filecoin-Backed | Fil One",
+    title: "Native Web3 Object Storage · Filecoin-Backed | Fil One",
     description:
       "Purpose-built for Web3-native apps. S3-compatible, cryptographically verifiable storage on Filecoin at $4.99/TB, integrity proven daily.",
   },
@@ -514,28 +514,28 @@ const ROUTE_META = {
       "Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a €4.99/TB. Intégralo en tu stack actual en minutos.",
   },
   "/contact-sales": {
-    title: "Contact Sales — Fil One",
+    title: "Contact Sales · Fil One",
     description:
       "Talk to the Fil One team about enterprise storage, pricing, and migration from AWS S3. We'll help you cut storage costs without changing your stack.",
   },
   "/support": {
-    title: "Support — Fil One",
+    title: "Support · Fil One",
     description: "Get help with Fil One object storage. Contact our support team for technical questions, account issues, and migration assistance.",
   },
   "/terms": {
-    title: "Terms of Use — Fil One",
+    title: "Terms of Use · Fil One",
     description: "Read the Fil One Terms of Use governing access to and use of the Fil One S3-compatible object storage service.",
   },
   "/privacy": {
-    title: "Privacy Policy — Fil One",
+    title: "Privacy Policy · Fil One",
     description: "Read the Fil One Privacy Policy to understand how we collect, use, and protect your data.",
   },
   "/aup": {
-    title: "Acceptable Use Policy — Fil One",
+    title: "Acceptable Use Policy · Fil One",
     description: "Read the Fil One Acceptable Use Policy for permitted and prohibited uses of our S3-compatible object storage service.",
   },
   "/sla": {
-    title: "Service Level Agreement — Fil One",
+    title: "Service Level Agreement · Fil One",
     description: "Read the Fil One Object Storage Service Level Agreement: uptime commitment, service credit tiers, and how to request credits.",
   },
   "/lp/es/contacto": {
@@ -550,139 +550,139 @@ const ROUTE_META = {
   },
   // ── Newest /lp pages ──────────────────────────────────────────────────────
   "/lp/cost-ticker": {
-    title: "Fil One — Watch the meter you're not paying",
+    title: "Fil One · Watch the meter you're not paying",
     description:
       "Hyperscalers meter every read, request, and byte out. Fil One is flat $4.99/TB with no egress and no per-request fees. See the side-by-side.",
   },
   "/lp/exit-first": {
-    title: "Fil One — Here's how to leave. Read it before you start.",
+    title: "Fil One · Here's how to leave. Read it before you start.",
     description:
       "S3-compatible storage with $0 egress. The exit is a documented one-line sync command, not a renegotiation. Verify the way out before you commit. $4.99/TB flat.",
   },
   "/lp/agent-loops": {
-    title: "Fil One — Let agents run. Not your bill.",
+    title: "Fil One · Let agents run. Not your bill.",
     description:
       "S3-compatible storage at $4.99/TB flat. No per-PUT fees, no per-GET fees, no egress. Agent loops run at full speed without a per-call counter.",
   },
   "/lp/agent-readable": {
-    title: "Fil One — Priced so plainly your agent can read it",
+    title: "Fil One · Priced so plainly your agent can read it",
     description:
       "Flat $4.99/TB pricing published in machine-readable llms.txt, with full S3 parity. No gated quotes — an AI coding agent can evaluate Fil One in one pass.",
   },
   "/lp/grant-funded": {
-    title: "Fil One — Storage that outlives the grant cycle",
+    title: "Fil One · Storage that outlives the grant cycle",
     description:
       "Flat $4.99/TB research data storage with no exit fees and integrity verification every ~24 hours. Predictable for multi-year grants, S3-compatible.",
   },
   "/lp/collections-access": {
-    title: "Fil One — Open the collection. Skip the egress bill.",
+    title: "Fil One · Open the collection. Skip the egress bill.",
     description:
       "Serve digital collections and IIIF imagery with $0 egress. Flat $4.99/TB storage, S3-compatible for IIIF image servers, 11 nines durability.",
   },
   "/lp/digital-preservation": {
-    title: "Fil One — Preservation you can verify, not just trust",
+    title: "Fil One · Preservation you can verify, not just trust",
     description:
       "Flat $4.99/TB digital preservation storage with integrity verification every ~24 hours. No retrieval fees, no egress. 11 nines durability, S3-compatible.",
   },
   "/lp/affordable": {
-    title: "Fil One — Make storage your lowest line item",
+    title: "Fil One · Make storage your lowest line item",
     description:
       "S3-compatible object storage at $4.99/TB flat. No egress fees, no per-request charges, no confusing billing. One number. Start in minutes.",
   },
   "/lp/go-global": {
-    title: "Fil One — Go global. Skip the multi-year build.",
+    title: "Fil One · Go global. Skip the multi-year build.",
     description:
       "Embed S3-compatible object storage into your product. Global network, SLA-backed, $4.99/TB flat. No capex, no infrastructure build — contact for enterprise and embedding terms.",
   },
   "/lp/metro": {
-    title: "Fil One — Hyperscaler speed. Budget-tier bills.",
+    title: "Fil One · Hyperscaler speed. Budget-tier bills.",
     description:
       "S3-compatible object storage at $4.99/TB flat. A global network of storage providers — fast reads without the hyperscaler price tag. No egress fees.",
   },
   "/lp/data-control": {
-    title: "Fil One — Your data, under your control",
+    title: "Fil One · Your data, under your control",
     description:
       "S3-compatible storage with EU region endpoint, recurring integrity verification, $0 exit egress, and no vendor lock-in. Flat $4.99/TB.",
   },
   "/lp/ml-training": {
-    title: "Fil One — Build around the clock",
+    title: "Fil One · Build around the clock",
     description:
       "S3-compatible training-data storage at $4.99/TB flat. No egress on dataset reads. 62× cheaper than AWS EFS. fsspec, PyArrow, and HuggingFace datasets work natively.",
   },
   "/lp/agent-knowledge-layer": {
-    title: "Fil One — Turn Object Storage Into an Agent Knowledge Layer",
+    title: "Fil One · Turn Object Storage Into an Agent Knowledge Layer",
     description:
       "S3 object storage with a built-in RAG pipeline. No stitching required, no per-query fees. Agent memory, RAG corpus, and retrieval on one platform.",
   },
   "/lp/price": {
-    title: "Fil One — $4.99/TB/month. Switch and save.",
+    title: "Fil One · $4.99/TB/month. Switch and save.",
     description:
       "Compare flat-rate S3-compatible storage side by side. Fil One is $4.99/TB with $0 egress and no per-request fees. Wasabi is $7.99/TB and Backblaze B2 $6.95/TB.",
   },
 
   // ── Product / solutions / marketing pages ─────────────────────────────────
   "/storage": {
-    title: "Object Storage — Fil One",
+    title: "Object Storage · Fil One",
     description:
       "S3-compatible object storage built for the AI era. Verifiable data integrity, no egress fees, $4.99/TB/month. The foundation every Fil One account starts with.",
   },
   "/bucket-intelligence": {
-    title: "RAG Pipeline — Fil One",
+    title: "RAG Pipeline · Fil One",
     description:
       "Turn any Fil One bucket into a queryable knowledge base. Auto-index files, semantic search, bring your own LLM keys. +$15/TB/month add-on.",
   },
   "/ai-agent-toolkit": {
-    title: "AI Agent Toolkit — Fil One",
+    title: "AI Agent Toolkit · Fil One",
     description:
       "Plug Fil One into Claude, Cursor, Zapier, and 10+ more integrations via MCP and OAuth. Free with your storage plan.",
   },
   "/pricing": {
-    title: "Pricing — Fil One",
+    title: "Pricing · Fil One",
     description:
       "Simple, predictable pricing for Object Storage, RAG Pipeline, and AI Agent Toolkit. Start free, scale as you grow.",
   },
   "/enterprise": {
-    title: "Enterprise — Fil One",
+    title: "Enterprise · Fil One",
     description:
       "Fil One for enterprise: verifiable data integrity, S3-compatible, no egress fees, SLA-backed. Custom pricing for teams that need storage at scale.",
   },
   "/partners": {
-    title: "Partners — Fil One",
+    title: "Partners · Fil One",
     description:
       "Channel, Technology, and MSP partner programs for Fil One. Resell, integrate, or bundle verifiable cloud storage with your business.",
   },
   "/partners/apply": {
-    title: "Partner Application — Fil One",
+    title: "Partner Application · Fil One",
     description:
       "Apply to the Fil One partner program. Resell, integrate, or bundle verifiable S3-compatible cloud storage with your business.",
   },
   "/solutions/ai-training": {
-    title: "AI Training & Inference Storage — Fil One",
+    title: "AI Training & Inference Storage · Fil One",
     description:
       "S3-compatible object storage built for AI workloads. Store training datasets, model weights, and checkpoints with verifiable integrity and no egress fees.",
   },
   "/solutions/web3-dapps": {
-    title: "Web3 & dApp Storage — Fil One",
+    title: "Web3 & dApp Storage · Fil One",
     description:
       "Verifiable, decentralized object storage for NFTs, dApps, and on-chain assets. S3-compatible, no egress fees, cryptographic proof on every object.",
   },
   "/solutions/media-archive": {
-    title: "Media & Archive Storage — Fil One",
+    title: "Media & Archive Storage · Fil One",
     description:
       "Low-cost, high-durability object storage for video, audio, and long-term archives. No egress fees, no retrieval penalties. $4.99/TB/month.",
   },
   "/solutions/enterprise-backup": {
-    title: "Enterprise Backup & Disaster Recovery — Fil One",
+    title: "Enterprise Backup & Disaster Recovery · Fil One",
     description:
       "Immutable, geo-distributed backup storage with no egress fees. Ransomware resilience, cryptographic integrity, and compliance-ready for enterprise teams.",
   },
   "/waitlist/bucket-intelligence": {
-    title: "Join the Bucket Intelligence Waitlist — Fil One",
+    title: "Join the Bucket Intelligence Waitlist · Fil One",
     description:
       "Get early access to Fil One RAG Pipeline — turn any bucket into a queryable knowledge base with semantic search and your own LLM keys.",
   },
   "/waitlist/ai-agent-toolkit": {
-    title: "Join the AI Agent Toolkit Waitlist — Fil One",
+    title: "Join the AI Agent Toolkit Waitlist · Fil One",
     description:
       "Get early access to the Fil One AI Agent Toolkit — connect storage to Claude, Cursor, and your agent stack via MCP and OAuth.",
   },

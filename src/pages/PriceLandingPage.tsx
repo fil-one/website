@@ -12,7 +12,7 @@ import { COMPETITORS, PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 const PriceLandingPage = () => {
   useSeo({
-    title: "Fil One — $4.99/TB/month. Switch and save.",
+    title: "Fil One · $4.99/TB/month. Switch and save.",
     description:
       "Compare flat-rate S3-compatible storage side by side. Fil One is $4.99/TB with $0 egress and no per-request fees. Wasabi is $7.99/TB and Backblaze B2 $6.95/TB.",
     canonical: "https://fil.one/lp/price",

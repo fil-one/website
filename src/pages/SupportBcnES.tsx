@@ -59,7 +59,7 @@ const Field = ({
 const SupportBcnES = () => {
   useLang("es");
   useSeo({
-    title: "Soporte — Fil One Almacenamiento S3",
+    title: "Soporte · Fil One Almacenamiento S3",
     description: "Obtén ayuda del equipo de soporte de Fil One. Envía una solicitud y te responderemos en breve.",
     canonical: "https://fil.one/lp/es/soporte",
   });

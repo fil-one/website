@@ -31,7 +31,7 @@ const FEATURES = [
 
 const GamingLandingPage = () => {
   useSeo({
-    title: "Fil One — Player data that scales without bill shock",
+    title: "Fil One · Player data that scales without bill shock",
     description:
       "$4.99/TB flat storage for game studios. Store player data, UGC, and game assets without egress fees or per-request billing. No bill shock on growth.",
     canonical: "https://fil.one/lp/gaming",

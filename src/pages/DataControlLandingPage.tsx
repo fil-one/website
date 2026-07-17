@@ -15,7 +15,7 @@ const FEATURES = [
 
 const DataControlLandingPage = () => {
   useSeo({
-    title: "Fil One — Your data, under your control",
+    title: "Fil One · Your data, under your control",
     description:
       "S3-compatible storage with EU region endpoint, recurring integrity verification, $0 exit egress, and no vendor lock-in. Flat $4.99/TB.",
     canonical: "https://fil.one/lp/data-control",

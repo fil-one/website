@@ -342,7 +342,7 @@ function renderCode(code: string, filename: string): React.ReactNode {
 // ─── Page ──────────────────────────────────────────────────────────────────────
 const AgentsLandingPage = () => {
   useSeo({
-    title: "Fil One for AI Agents — Flat storage. No egress. No billing surprises.",
+    title: "Fil One for AI Agents · Flat storage. No egress. No billing surprises.",
     description:
       "S3-compatible object storage at $4.99/TB flat. No egress fees, no per-request charges. Built for agentic workloads that read and write constantly. Start free — 1 TB included.",
     canonical: "https://fil.one/lp/agents",

@@ -23,7 +23,7 @@ const FEATURES = [
 
 const ExitFirstLandingPage = () => {
   useSeo({
-    title: "Fil One — Here's how to leave. Read it before you start.",
+    title: "Fil One · Here's how to leave. Read it before you start.",
     description:
       "S3-compatible storage with $0 egress. The exit is a documented one-line sync command you can run on day one. Verify the way out before you commit. $4.99/TB flat.",
     canonical: "https://fil.one/lp/exit-first",

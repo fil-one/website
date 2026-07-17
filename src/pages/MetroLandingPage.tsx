@@ -45,7 +45,7 @@ const FEATURES = [
 
 const MetroLandingPage = () => {
   useSeo({
-    title: "Fil One — Hyperscaler speed. Budget-tier bills.",
+    title: "Fil One · Hyperscaler speed. Budget-tier bills.",
     description:
       "S3-compatible object storage at $4.99/TB flat. A global network of storage providers — fast reads without the hyperscaler price tag. No egress fees.",
     canonical: "https://fil.one/lp/metro",

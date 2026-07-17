@@ -35,7 +35,7 @@ const FEATURES = [
 
 const DataSovereigntyLandingPage = () => {
   useSeo({
-    title: "Fil One — EU data residency with S3-compatible tools",
+    title: "Fil One · EU data residency with S3-compatible tools",
     description:
       "S3-compatible object storage with EU region endpoint. Store data in EU infrastructure at $4.99/TB flat. No egress fees.",
     canonical: "https://fil.one/lp/data-sovereignty",

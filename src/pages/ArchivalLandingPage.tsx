@@ -86,7 +86,7 @@ const FEATURES = [
 
 const ArchivalLandingPage = () => {
   useSeo({
-    title: "Fil One — Know your archive is intact before you need it",
+    title: "Fil One · Know your archive is intact before you need it",
     description:
       "Flat $4.99/TB archival storage with recurring integrity verification every ~24 hours. No retrieval fees, no egress. 11 nines durability.",
     canonical: "https://fil.one/lp/archival",

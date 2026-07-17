@@ -72,7 +72,7 @@ const About = () => {
   const { ref: teamRef, inView: teamInView } = useInView({ threshold: 0.05 });
 
   useSeo({
-    title: "About — Fil One",
+    title: "About · Fil One",
     description:
       "Fil One exists to put you back in control of your data. Learn who we are, why we built verifiable S3-compatible storage, and the principles behind it.",
     canonical: "https://fil.one/about",

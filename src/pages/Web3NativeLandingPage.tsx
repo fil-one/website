@@ -9,7 +9,7 @@ import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components
 const FEATURES = [
   {
     icon: Plug,
-    title: "S3-compatible — existing tools work",
+    title: "S3-compatible · existing tools work",
     desc: "boto3, aws-sdk, rclone, DuckDB, PyArrow fsspec — any tool that reads or writes S3 connects with an endpoint change. No new SDK, no wrapper library.",
   },
   {
@@ -31,7 +31,7 @@ const FEATURES = [
 
 const Web3NativeLandingPage = () => {
   useSeo({
-    title: "Fil One — You didn't build in Web3 to end up fully dependent on Amazon",
+    title: "Fil One · You didn't build in Web3 to end up fully dependent on Amazon",
     description:
       "S3-compatible object storage backed by Filecoin. CID per object, Proof of Spacetime verification, $4.99/TB flat. For Web3-native analytics, research, and dev infra teams.",
     canonical: "https://fil.one/lp/web3-native",

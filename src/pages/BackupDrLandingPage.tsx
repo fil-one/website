@@ -142,7 +142,7 @@ const WORKLOADS = [
 
 const BackupDrLandingPage = () => {
   useSeo({
-    title: "Fil One — Restore without the retrieval bill",
+    title: "Fil One · Restore without the retrieval bill",
     description:
       "S3-compatible backup target at $4.99/TB flat. No retrieval fees. No egress. Object Lock and versioning included. Restore with the S3 tools your backup software already uses.",
     canonical: "https://fil.one/lp/backup-dr",

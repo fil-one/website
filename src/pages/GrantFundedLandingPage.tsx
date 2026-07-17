@@ -70,7 +70,7 @@ const FEATURES = [
 
 const GrantFundedLandingPage = () => {
   useSeo({
-    title: "Fil One — Storage that outlives the grant cycle",
+    title: "Fil One · Storage that outlives the grant cycle",
     description:
       "Flat $4.99/TB research data storage with no exit fees and integrity verification every ~24 hours. Predictable for multi-year grants, S3-compatible.",
     canonical: "https://fil.one/lp/grant-funded",

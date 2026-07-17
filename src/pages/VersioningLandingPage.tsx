@@ -31,7 +31,7 @@ const FEATURES = [
 
 const VersioningLandingPage = () => {
   useSeo({
-    title: "Fil One — Recreate any dataset from any point",
+    title: "Fil One · Recreate any dataset from any point",
     description:
       "S3-compatible storage with built-in version history. Retrieve any prior state by version ID. $4.99/TB flat. No egress on version reads.",
     canonical: "https://fil.one/lp/versioning",
