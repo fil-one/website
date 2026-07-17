@@ -1,10 +1,11 @@
 import { useInView } from "@/hooks/useInView";
+import { PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 const USE_CASES = [
   {
     title: "Host your ML training data",
     description:
-      "Upload datasets once. Run training jobs from anywhere — no egress fees every time your compute cluster reads a batch.",
+      "Upload datasets once. Run training jobs from anywhere. No egress fees every time your compute cluster reads a batch.",
   },
   {
     title: "Store and serve user-generated content",
@@ -14,12 +15,12 @@ const USE_CASES = [
   {
     title: "Back up databases with proof of integrity",
     description:
-      "Ship snapshots to Fil One. Every backup is verified daily — so you know it's intact before you ever need to restore.",
+      "Ship snapshots to Fil One. Every backup is verified daily, so you know it's intact before you ever need to restore.",
   },
   {
     title: "Archive at scale, access without penalty",
     description:
-      "Long-term storage without cold-tier restrictions. No minimum duration, no retrieval fees — just flat $4.99/TB/month.",
+      `Long-term storage without cold-tier restrictions. No minimum duration, no retrieval fees, just flat ${PRICE_PER_TB_MONTH}.`,
   },
 ];
 
@@ -27,7 +28,7 @@ const StorageUseCasesSection = () => {
   const { ref: sectionRef, inView: sectionInView } = useInView({ threshold: 0.05 });
 
   return (
-    <section className="w-full px-5 md:px-8 py-24 md:py-32" style={{ backgroundColor: "#F4F4F5", borderTop: "1px solid #E4E4E7", borderBottom: "1px solid #E4E4E7" }}>
+    <section className="w-full px-5 md:px-8 py-24 md:py-32 bg-white">
       <div className="flex flex-col gap-12 w-full max-w-[1120px] mx-auto">
 
         <div className="flex flex-col gap-3 items-center text-center">

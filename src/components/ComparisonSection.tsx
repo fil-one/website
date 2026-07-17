@@ -61,8 +61,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
   return (
     <section
       id="compare"
-      className="flex flex-col gap-12 items-center px-5 md:px-8 py-24 md:py-32 w-full"
-      style={{ backgroundColor: "#F4F4F5", ...(bordered ? { borderTop: "1px solid #E4E4E7", borderBottom: "1px solid #E4E4E7" } : {}) }}
+      className={`flex flex-col gap-12 items-center px-5 md:px-8 py-24 md:py-32 w-full bg-zinc-50${bordered ? " border-y border-zinc-100" : ""}`}
     >
       {/* Heading */}
       <div
