@@ -29,7 +29,7 @@ const BUSINESS_FEATURES = [
 // ─── Page ──────────────────────────────────────────────────────────────────────
 const PricingPage = () => {
   useSeo({
-    title: "Pricing — Fil One",
+    title: "Pricing · Fil One",
     description:
       `S3-compatible object storage at ${PRICE_DISPLAY}/TB with no egress fees. See how much you could save compared to AWS, Google Cloud, and Azure.`,
     canonical: "https://fil.one/pricing",

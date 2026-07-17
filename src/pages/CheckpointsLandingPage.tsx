@@ -31,7 +31,7 @@ const FEATURES = [
 
 const CheckpointsLandingPage = () => {
   useSeo({
-    title: "Fil One — Stop deleting checkpoints you'll want back",
+    title: "Fil One · Stop deleting checkpoints you'll want back",
     description:
       "S3-compatible storage at $4.99/TB flat. Keep every checkpoint, eval set, and training artifact without per-GB guilt. No egress fees on eval runs.",
     canonical: "https://fil.one/lp/ml-checkpoints",

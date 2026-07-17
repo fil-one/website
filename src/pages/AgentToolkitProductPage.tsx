@@ -167,7 +167,7 @@ const AgentToolkitProductPage = () => {
   const [codeCopied, setCodeCopied] = useState(false);
 
   useSeo({
-    title: "AI Agent Toolkit — Fil One",
+    title: "AI Agent Toolkit · Fil One",
     description:
       "Plug Fil One into Claude, Cursor, Zapier, and 10+ more integrations via MCP and OAuth. Free with your storage plan.",
     canonical: "https://fil.one/ai-agent-toolkit",

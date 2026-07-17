@@ -46,7 +46,7 @@ const FEATURES = [
 
 const MediaLandingPage = () => {
   useSeo({
-    title: "Fil One — Your media library shouldn't bleed money on delivery",
+    title: "Fil One · Your media library shouldn't bleed money on delivery",
     description:
       "S3-compatible object storage, $4.99/TB flat, $0 egress. Store media libraries and deliver at scale without egress fees eating your margin.",
     canonical: "https://fil.one/lp/media",

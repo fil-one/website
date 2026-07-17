@@ -36,7 +36,7 @@ const FEATURES = [
   },
   {
     icon: ArrowsClockwise,
-    title: "S3-compatible — works with your tools",
+    title: "S3-compatible · works with your tools",
     body: "Integrates with DaVinci Resolve, Final Cut Pro via S3 plugins, LucidLink, Iconik, and any media asset management system with S3 support.",
   },
   {
@@ -72,7 +72,7 @@ const MediaArchiveSolutionPage = () => {
   const { ref: ucRef, inView: ucInView } = useInView({ threshold: 0.1 });
 
   useSeo({
-    title: "Media & Archive Storage — Fil One",
+    title: "Media & Archive Storage · Fil One",
     description:
       "Low-cost, high-durability object storage for video, audio, and long-term archives. No egress fees, no retrieval penalties. $4.99/TB/month.",
     canonical: "https://fil.one/solutions/media-archive",

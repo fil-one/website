@@ -83,7 +83,7 @@ const FaqItem = ({ q, a }: { q: string; a: string }) => {
 
 const Support = () => {
   useSeo({
-    title: "Support — Fil One S3 Object Storage",
+    title: "Support · Fil One S3 Object Storage",
     description: "Get help from the Fil One support team. Submit a request and we'll get back to you shortly.",
     canonical: "https://fil.one/support",
   });

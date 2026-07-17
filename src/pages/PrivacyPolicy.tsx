@@ -28,7 +28,7 @@ const h2Style = {
 
 const PrivacyPolicy = () => {
   useSeo({
-    title: "Privacy Policy — Fil One",
+    title: "Privacy Policy · Fil One",
     description: "Learn how Fil One collects, uses, and protects your data on our S3-compatible object storage platform.",
     canonical: "https://fil.one/privacy",
   });

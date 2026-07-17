@@ -9,7 +9,7 @@ import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components
 const FEATURES = [
   {
     icon: Plug,
-    title: "Endpoint swap — nothing else changes",
+    title: "Endpoint swap · nothing else changes",
     desc: "Fil One implements the S3 API. Swap the endpoint in your config. Your existing upload code, SDKs, and tooling connect immediately — no migration project, no new library.",
   },
   {
@@ -31,7 +31,7 @@ const FEATURES = [
 
 const Web3PivotLandingPage = () => {
   useSeo({
-    title: "Fil One — Don't be a Web2 company just playing with crypto",
+    title: "Fil One · Don't be a Web2 company just playing with crypto",
     description:
       "Back your Web3 product with storage that's actually decentralized. S3-compatible, Filecoin-backed, $4.99/TB flat. Endpoint swap — nothing else changes.",
     canonical: "https://fil.one/lp/web3-pivot",
@@ -48,7 +48,7 @@ s3 = boto3.client("s3", region_name="us-east-1")
 # Your smart contracts are decentralized.
 # This part isn't.`;
 
-  const AFTER_CODE = `# After — Fil One (Filecoin-backed)
+  const AFTER_CODE = `# After · Fil One (Filecoin-backed)
 import boto3, os
 s3 = boto3.client(
     "s3",

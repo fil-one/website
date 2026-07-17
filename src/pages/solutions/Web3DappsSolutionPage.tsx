@@ -36,7 +36,7 @@ const FEATURES = [
   },
   {
     icon: Code,
-    title: "S3 API — works with your stack",
+    title: "S3 API · works with your stack",
     body: "Use any S3-compatible SDK, including ethers.js workflows that write metadata post-mint. No proprietary API to learn.",
   },
   {
@@ -71,7 +71,7 @@ const Web3DappsSolutionPage = () => {
   const { ref: ucRef, inView: ucInView } = useInView({ threshold: 0.1 });
 
   useSeo({
-    title: "Web3 & dApp Storage — Fil One",
+    title: "Web3 & dApp Storage · Fil One",
     description:
       "Verifiable, decentralized object storage for NFTs, dApps, and on-chain assets. S3-compatible, no egress fees, cryptographic proof on every object.",
     canonical: "https://fil.one/solutions/web3-dapps",

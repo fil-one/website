@@ -35,7 +35,7 @@ const FEATURES = [
   },
   {
     icon: Plug,
-    title: "S3-compatible — existing tools work",
+    title: "S3-compatible · existing tools work",
     desc: "boto3, @aws-sdk/client-s3, LangChain S3 loaders, LlamaIndex — any tool that reads or writes S3 connects with an endpoint change. No new SDK.",
   },
   {
@@ -47,7 +47,7 @@ const FEATURES = [
 
 const AgentLoopsLandingPage = () => {
   useSeo({
-    title: "Fil One — Let agents run. Not your bill.",
+    title: "Fil One · Let agents run. Not your bill.",
     description:
       "S3-compatible storage at $4.99/TB flat. No per-PUT fees, no per-GET fees, no egress. Agent loops run at full speed without a per-call counter.",
     canonical: "https://fil.one/lp/agent-loops",

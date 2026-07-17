@@ -75,7 +75,7 @@ const AiTrainingSolutionPage = () => {
   const { ref: stepsRef, inView: stepsInView } = useInView({ threshold: 0.1 });
 
   useSeo({
-    title: "AI Training & Inference Storage — Fil One",
+    title: "AI Training & Inference Storage · Fil One",
     description:
       "S3-compatible object storage built for AI workloads. Store training datasets, model weights, and checkpoints with verifiable integrity and no egress fees.",
     canonical: "https://fil.one/solutions/ai-training",

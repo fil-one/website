@@ -58,7 +58,7 @@ const FEATURES = [
 
 const MigrateFromS3LandingPage = () => {
   useSeo({
-    title: "Fil One — Leaving S3 is a config change, not a rewrite",
+    title: "Fil One · Leaving S3 is a config change, not a rewrite",
     description:
       "Same SDK. New endpoint. Lower bill. Point your existing S3 tools at Fil One and cut storage costs to $4.99/TB flat with $0 egress.",
     canonical: "https://fil.one/lp/migrate-from-s3",
@@ -75,7 +75,7 @@ s3 = boto3.client(
     region_name="us-east-1",
 )`;
 
-  const BOTO3_AFTER = `# After — Fil One (no other changes)
+  const BOTO3_AFTER = `# After · Fil One (no other changes)
 s3 = boto3.client(
     "s3",
     endpoint_url="https://eu-west-1.s3.fil.one",
@@ -87,7 +87,7 @@ s3 = boto3.client(
   const NODE_BEFORE = `// Before — AWS S3
 const s3 = new S3Client({ region: "us-east-1" });`;
 
-  const NODE_AFTER = `// After — Fil One
+  const NODE_AFTER = `// After · Fil One
 const s3 = new S3Client({
   endpoint: "https://eu-west-1.s3.fil.one",
   region: "eu-west-1",

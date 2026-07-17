@@ -26,7 +26,7 @@ const FEATURES = [
 
 const CostTickerLandingPage = () => {
   useSeo({
-    title: "Fil One — Watch the meter you're not paying",
+    title: "Fil One · Watch the meter you're not paying",
     description:
       "Hyperscalers meter every read, request, and byte out. Fil One is flat $4.99/TB with no egress and no per-request fees. See the side-by-side.",
     canonical: "https://fil.one/lp/cost-ticker",

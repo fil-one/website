@@ -98,7 +98,7 @@ const Field = ({ label, required, children }: { label: string; required?: boolea
 
 const BucketIntelligenceWaitlistPage = () => {
   useSeo({
-    title: "Join the Bucket Intelligence Waitlist — Fil One",
+    title: "Join the Bucket Intelligence Waitlist · Fil One",
     description: "Get early access to Bucket Intelligence. Turn any bucket into a queryable knowledge base — join the waitlist and we'll reach out when your spot is ready.",
     canonical: "https://fil.one/waitlist/bucket-intelligence",
   });

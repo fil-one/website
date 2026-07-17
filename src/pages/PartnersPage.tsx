@@ -117,7 +117,7 @@ const PartnersPage = () => {
   const { ref: stepsRef, inView: stepsInView } = useInView({ threshold: 0.1 });
 
   useSeo({
-    title: "Partners — Fil One",
+    title: "Partners · Fil One",
     description:
       "Channel, Technology, and MSP partner programs for Fil One. Resell, integrate, or bundle verifiable cloud storage with your business.",
     canonical: "https://fil.one/partners",

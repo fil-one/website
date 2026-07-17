@@ -61,7 +61,7 @@ const FEATURES = [
 
 const CollectionsAccessLandingPage = () => {
   useSeo({
-    title: "Fil One — Open the collection. Close the tab.",
+    title: "Fil One · Open the collection. Close the tab.",
     description:
       "Serve digital collections and IIIF imagery with $0 egress. Flat $4.99/TB storage, S3-compatible for IIIF image servers, 11 nines durability.",
     canonical: "https://fil.one/lp/collections-access",

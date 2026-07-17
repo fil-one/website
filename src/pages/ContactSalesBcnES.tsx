@@ -62,7 +62,7 @@ const Field = ({
 const ContactSalesBcnES = () => {
   useLang("es");
   useSeo({
-    title: "Contactar con ventas — Fil One Almacenamiento S3",
+    title: "Contactar con ventas · Fil One Almacenamiento S3",
     description: "Habla con el equipo de Fil One sobre almacenamiento de objetos S3 compatible, precios para empresas y acuerdos de nivel de servicio.",
     canonical: "https://fil.one/lp/es/contacto",
   });

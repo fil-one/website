@@ -19,7 +19,7 @@ const FEATURES = [
   },
   {
     icon: Plug,
-    title: "S3-compatible — no SDK changes",
+    title: "S3-compatible · no SDK changes",
     desc: "Your existing boto3, aws-sdk, or S3-compatible tooling connects with an endpoint change. Exchange backends, wallet data pipelines, and DeFi indexers work without modification.",
   },
   {
@@ -31,7 +31,7 @@ const FEATURES = [
 
 const Web3FintechLandingPage = () => {
   useSeo({
-    title: "Fil One — Decentralized storage for Web3 fintech",
+    title: "Fil One · Decentralized storage for Web3 fintech",
     description:
       "S3-compatible object storage built on Filecoin. Cryptographic integrity verification per object. For exchanges, DeFi protocols, custody providers, and crypto wallets.",
     canonical: "https://fil.one/lp/web3-fintech",

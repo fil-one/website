@@ -92,7 +92,7 @@ const CREDIT_TIERS = [
 
 const Sla = () => {
   useSeo({
-    title: "Service Level Agreement — Fil One",
+    title: "Service Level Agreement · Fil One",
     description:
       "The Fil One Object Storage Service Level Agreement: uptime commitment, service credit tiers, and how to request credits.",
     canonical: "https://fil.one/sla",
