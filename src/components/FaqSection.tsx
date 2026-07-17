@@ -105,7 +105,7 @@ const faqs = [
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
         <p>Filecoin is a distributed storage network launched in 2020, designed to make data portable, verifiable, and resilient by default.</p>
-        <p>Instead of relying on a single proprietary vendor, Filecoin uses open protocols and an open market to store data with a global network of independent providers — helping reduce single points of failure and deliver true multi-cloud durability.</p>
+        <p>Instead of relying on a single proprietary vendor, Filecoin uses open protocols and an open market to store data with a global network of independent providers, helping reduce single points of failure and deliver true multi-cloud durability.</p>
       </div>
     ),
   },

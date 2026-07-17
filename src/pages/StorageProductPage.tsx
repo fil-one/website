@@ -2,17 +2,17 @@ import { useEffect } from "react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
-import { useInView } from "@/hooks/useInView";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
 import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 import Hero from "@/components/Hero";
 import Pill from "@/components/Pill";
-import StatCard from "@/components/StatCard";
+import StatGridSection from "@/components/StatGridSection";
 import CtaBanner from "@/components/CtaBanner";
 import StorageUseCasesSection from "@/components/StorageUseCasesSection";
 import UseCasesSection from "@/components/UseCasesSection";
 import ComparisonSection from "@/components/ComparisonSection";
-import StorageCalculatorSection from "@/components/StorageCalculatorSection";
+import PricingTeaserSection from "@/components/PricingTeaserSection";
+import IntegrationsSection from "@/components/IntegrationsSection";
 import FaqSection from "@/components/FaqSection";
 import { PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
@@ -20,14 +20,13 @@ const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const DOCS_URL = "https://docs.fil.one";
 
 const STATS = [
-  { value: PRICE_DISPLAY, label: "Per TB / month" },
-  { value: "$0", label: "Egress fees" },
-  { value: "11 9s", label: "Durability" },
+  { stat: PRICE_DISPLAY, label: "Per TB / month" },
+  { stat: "$0", label: "Egress fees" },
+  { stat: "11 9s", label: "Durability" },
 ];
 
 const StorageProductPage = () => {
   const { heroEndRef } = useScrollTracking();
-  const { ref: statsRef, inView: statsInView } = useInView({ threshold: 0.05 });
 
   useEffect(() => {
     const id = window.location.hash.slice(1);
@@ -39,7 +38,7 @@ const StorageProductPage = () => {
   useSeo({
     title: "Object Storage · Fil One",
     description:
-      "S3-compatible object storage built for the AI era. Verifiable data integrity, no egress fees, $4.99/TB/month. The foundation every Fil One account starts with.",
+      `S3-compatible object storage built for the AI era. Verifiable data integrity, no egress fees, ${PRICE_PER_TB_MONTH}. The foundation every Fil One account starts with.`,
     canonical: "https://fil.one/storage",
     ogImage: "https://fil.one/og-image.png",
   });
@@ -56,9 +55,9 @@ const StorageProductPage = () => {
           badge={<Pill>Object Storage · S3-compatible</Pill>}
           titleSize="text-[28px] sm:text-[34px] md:text-[44px]"
           title={<>Store more. Pay less.<br />Own it completely.</>}
-          description="Fully S3-compatible object storage with no egress fees, no API request charges, and verifiable data integrity on every byte."
+          description={"Fully S3-compatible object storage with no egress fees, no API request charges, and verifiable data integrity on every byte."}
           titleMaxWidth={560}
-          descriptionMaxWidth={460}
+          descriptionMaxWidth={500}
           contentClassName="pb-24 md:pb-32"
           tagline="1 TB free for 30 days · No credit card required · No egress fees"
           ctas={[
@@ -84,38 +83,30 @@ const StorageProductPage = () => {
 
         {/* Stats */}
         <div ref={heroEndRef}>
-          <section className="w-full px-5 md:px-8 bg-white">
-            <div className="w-full max-w-container mx-auto">
-              <div
-                ref={statsRef}
-                className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full reveal-group"
-              >
-                {STATS.map(({ value, label }) => (
-                  <StatCard
-                    key={label}
-                    stat={value}
-                    label={label}
-                    className={`reveal${statsInView ? " in-view" : ""}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </section>
+          <StatGridSection
+            label="By the numbers"
+            heading="No surprises"
+            description={`Flat ${PRICE_PER_TB_MONTH} for storage. No egress fees, no API charges, and verifiable durability on every byte.`}
+            stats={STATS}
+          />
         </div>
 
-        {/* Features */}
+        {/* Features — what it does */}
         <UseCasesSection heading="S3 storage made simple" />
 
-        {/* Use cases */}
+        {/* Integrations — works with your existing stack */}
+        <IntegrationsSection tone="grey" />
+
+        {/* Use cases — what you build with it */}
         <StorageUseCasesSection />
 
-        {/* Calculator */}
-        <StorageCalculatorSection />
-
-        {/* Comparison */}
+        {/* Comparison — how it stacks up */}
         <ComparisonSection bordered />
 
-        {/* FAQ */}
+        {/* Pricing teaser — the savings payoff */}
+        <PricingTeaserSection />
+
+        {/* FAQ — objection handling, right before the CTA */}
         <FaqSection include={[
           "Is Fil One hot, warm, or cold storage? Is it like Glacier?",
           "How does data integrity verification work with Fil One?",

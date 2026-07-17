@@ -7,15 +7,25 @@ const INTEGRATIONS = [
   "PyTorch", "Arq", "Duplicati",
 ];
 
+interface IntegrationsSectionProps {
+  /** white (default) or the standard grey section treatment (zinc-50 + zinc-100 borders) */
+  tone?: "white" | "grey";
+}
+
 /**
  * Auto-scrolling marquee of supported integrations — S3-compatibility
  * reassurance shared by the /lp/price and Barcelona landing pages.
  */
-const IntegrationsSection = () => {
+const IntegrationsSection = ({ tone = "white" }: IntegrationsSectionProps) => {
   const { ref, inView } = useInView({ threshold: 0.05 });
 
   return (
-    <section id="integrations" className="px-5 md:px-8 py-24 md:py-32 w-full bg-white">
+    <section
+      id="integrations"
+      className={`px-5 md:px-8 py-24 md:py-32 w-full ${
+        tone === "grey" ? "bg-zinc-50 border-y border-zinc-100" : "bg-white"
+      }`}
+    >
       <div
         ref={ref}
         className={`flex flex-col gap-10 items-center text-center w-full max-w-container mx-auto reveal${inView ? " in-view" : ""}`}
