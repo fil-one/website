@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
@@ -34,6 +35,17 @@ const PricingPage = () => {
       `S3-compatible object storage at ${PRICE_DISPLAY}/TB with no egress fees. See how much you could save compared to AWS, Google Cloud, and Azure.`,
     canonical: "https://fil.one/pricing",
   });
+
+  // Deep links like /pricing#calculator arrive as a full page load; the target
+  // section only exists after render, so scroll to it once on mount.
+  useEffect(() => {
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    // Defer a frame so the section is in the DOM before we scroll.
+    requestAnimationFrame(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    });
+  }, []);
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-white">
@@ -89,7 +101,7 @@ const PricingPage = () => {
         />
 
         {/* ── Cost calculator ───────────────────────────────────────────────── */}
-        <CostCalculatorSection competitors={COMPETITORS} />
+        <CostCalculatorSection id="calculator" competitors={COMPETITORS} />
 
         {/* ── Publications ─────────────────────────────────────────────────── */}
         <PressBar tone="grey" />

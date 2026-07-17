@@ -8,46 +8,22 @@ export const GRID_SVG = encodeURIComponent(
 export const SectionLabel = ({ children }: { children: React.ReactNode }) => (
   <span
     aria-hidden="true"
-    style={{
-      fontFamily: "'DM Mono', monospace",
-      fontWeight: 500,
-      fontSize: 11.5,
-      letterSpacing: "0.08em",
-      color: "#71717A",
-      textTransform: "uppercase" as const,
-    }}
+    className="font-mono font-medium text-[11.5px] tracking-[0.08em] uppercase text-zinc-500"
   >
     {children}
   </span>
 );
 
 export const SectionHeading = ({ children }: { children: React.ReactNode }) => (
-  <h2
-    className="text-[24px] md:text-[34px]"
-    style={{
-      fontFamily: "'Aspekta', sans-serif",
-      fontWeight: 500,
-      lineHeight: "1.2",
-      letterSpacing: "-0.02em",
-      color: "#09090B",
-      margin: 0,
-    }}
-  >
+  <h2 className="font-display font-medium text-[24px] md:text-[34px] leading-[1.2] tracking-[-0.02em] text-zinc-950 m-0">
     {children}
   </h2>
 );
 
 export const SectionSub = ({ children, maxWidth = 560 }: { children: React.ReactNode; maxWidth?: number }) => (
   <p
-    className="text-[15px] md:text-[17px]"
-    style={{
-      fontFamily: "'Funnel Sans', sans-serif",
-      fontWeight: 400,
-      lineHeight: "1.65",
-      color: "#71717A",
-      maxWidth,
-      margin: 0,
-    }}
+    className="font-sans font-normal text-[15px] md:text-[17px] leading-[1.65] text-zinc-500 m-0"
+    style={{ maxWidth }}
   >
     {children}
   </p>
