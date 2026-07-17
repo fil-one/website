@@ -6,6 +6,12 @@ interface CtaBannerProps {
   heading: ReactNode;
   subhead: ReactNode;
   cta: { label: string; href: string; onClick?: () => void };
+  /**
+   * Optional second button. When present, both CTAs render at default size and
+   * the primary drops its glow (balanced two-button treatment); with only the
+   * primary CTA it stays the large glowing single button.
+   */
+  secondaryCta?: { label: string; href: string; onClick?: () => void };
   note?: ReactNode;
 }
 
@@ -14,13 +20,13 @@ interface CtaBannerProps {
  * and a breathing glow, a headline, and a glowing primary button. Tuned for
  * the closing section of a page (sits on white, above the footer).
  */
-const CtaBanner = ({ heading, subhead, cta, note }: CtaBannerProps) => {
+const CtaBanner = ({ heading, subhead, cta, secondaryCta, note }: CtaBannerProps) => {
   const { ref, inView } = useInView({ threshold: 0.05 });
 
   return (
     <section className="px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full bg-white">
       <div ref={ref} className={`w-full max-w-container mx-auto reveal${inView ? " in-view" : ""}`}>
-        <div className="relative overflow-hidden rounded-[20px] text-center bg-dark-section px-6 md:px-12 py-16 md:py-[104px]">
+        <div className="relative overflow-hidden rounded-[20px] text-center bg-dark-section px-6 md:px-12 py-16 md:py-section">
           {/* White grid texture, drifting slowly */}
           <div
             aria-hidden="true"
@@ -51,11 +57,23 @@ const CtaBanner = ({ heading, subhead, cta, note }: CtaBannerProps) => {
             >
               {heading}
             </h2>
-            <p className="font-sans text-[17px] text-white/60 mb-8">{subhead}</p>
-            <div className="flex items-center justify-center">
-              <Button variant="primary" tone="dark" size="lg" glow href={cta.href} onClick={cta.onClick}>
+            <p className="font-sans text-[17px] text-white/60 mb-8 mx-auto max-w-[460px]">{subhead}</p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Button
+                variant="primary"
+                tone="dark"
+                size={secondaryCta ? undefined : "lg"}
+                glow={!secondaryCta}
+                href={cta.href}
+                onClick={cta.onClick}
+              >
                 {cta.label}
               </Button>
+              {secondaryCta && (
+                <Button variant="secondary" tone="dark" href={secondaryCta.href} onClick={secondaryCta.onClick}>
+                  {secondaryCta.label}
+                </Button>
+              )}
             </div>
             {note && <p className="font-sans text-[13px] text-white/60 mt-4">{note}</p>}
           </div>
