@@ -303,12 +303,12 @@ const AgentToolkitProductPage = () => {
                         className="flex items-center justify-center rounded-lg shrink-0"
                         style={{ width: 30, height: 30, backgroundColor: isActive ? "rgba(0,144,255,0.1)" : "rgba(0,0,0,0.05)", transition: "background-color 0.2s ease" }}
                       >
-                        <Icon size={14} color={isActive ? "#0090FF" : "#A1A1AA"} />
+                        <Icon size={14} color={isActive ? "#0090FF" : "#52525B"} />
                       </div>
                       <div className="flex flex-col gap-1">
                         <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14.5, color: "#09090B", margin: 0, lineHeight: "1.3" }}>{label}</p>
                         <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A", margin: 0, lineHeight: "1.5" }}>{description}</p>
-                        <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12, color: "#A1A1AA", margin: "4px 0 0", lineHeight: "1.4" }}>{integrations.join(" · ")}</p>
+                        <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12, color: "#52525B", margin: "4px 0 0", lineHeight: "1.4" }}>{integrations.join(" · ")}</p>
                       </div>
                     </div>
                   </button>
@@ -331,7 +331,7 @@ const AgentToolkitProductPage = () => {
                       setTimeout(() => setCodeCopied(false), 1800);
                     }}
                     className="flex items-center gap-1.5 transition-opacity hover:opacity-70"
-                    style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, color: codeCopied ? "#0090FF" : "#A1A1AA", background: "none", border: "none", cursor: "pointer", padding: "4px 6px", borderRadius: 6 }}
+                    style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, color: codeCopied ? "#0090FF" : "#52525B", background: "none", border: "none", cursor: "pointer", padding: "4px 6px", borderRadius: 6 }}
                   >
                     {codeCopied ? <Check size={13} /> : <Copy size={13} />}
                     {codeCopied ? "Copied" : "Copy"}

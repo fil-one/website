@@ -247,7 +247,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
               }}
             >
               {label}
-              {external && <ArrowUpRight size={11} style={{ color: "#A1A1AA", marginTop: 1 }} aria-hidden="true" />}
+              {external && <ArrowUpRight size={11} style={{ color: "#52525B", marginTop: 1 }} aria-hidden="true" />}
             </a>
           ))}
           <div style={{ width: 1, height: 14, backgroundColor: "rgba(0,0,0,0.1)", margin: "0 4px" }} />
@@ -297,7 +297,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                     style={triggerStyle}
                   >
                     {t.products}
-                    <CaretDown size={12} color="#A1A1AA" className="nav-caret" />
+                    <CaretDown size={12} color="#52525B" className="nav-caret" />
                   </NavigationMenuPrimitive.Trigger>
 
                   <NavigationMenuPrimitive.Content>
@@ -347,7 +347,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                     style={triggerStyle}
                   >
                     {t.solutions}
-                    <CaretDown size={12} color="#A1A1AA" className="nav-caret" />
+                    <CaretDown size={12} color="#52525B" className="nav-caret" />
                   </NavigationMenuPrimitive.Trigger>
 
                   <NavigationMenuPrimitive.Content>
@@ -452,7 +452,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                 fontWeight: 500,
                 fontSize: 10.5,
                 letterSpacing: "0.08em",
-                color: "#A1A1AA",
+                color: "#52525B",
                 textTransform: "uppercase",
               }}
             >
@@ -496,7 +496,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                 fontWeight: 500,
                 fontSize: 10.5,
                 letterSpacing: "0.08em",
-                color: "#A1A1AA",
+                color: "#52525B",
                 textTransform: "uppercase",
               }}
             >

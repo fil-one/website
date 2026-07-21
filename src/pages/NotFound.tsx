@@ -154,7 +154,7 @@ const NotFound = () => {
                 </div>
                 <ArrowRight
                   size={14}
-                  color="#A1A1AA"
+                  color="#52525B"
                   className="shrink-0 transition-transform group-hover:translate-x-0.5"
                 />
               </a>
