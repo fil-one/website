@@ -204,6 +204,11 @@ const FaqSection = ({ include }: FaqSectionProps = {}) => {
                 aria-labelledby={buttonId}
                 className="overflow-hidden transition-all duration-200"
                 style={{ maxHeight: isOpen ? 1200 : 0 }}
+                // Keep the answer in the DOM (for crawlers) but, while collapsed,
+                // remove it from the tab order and a11y tree via `inert` so
+                // keyboard/AT users can't land on hidden links. (`inert` isn't in
+                // the React 18 prop types, hence the cast.)
+                {...(isOpen ? {} : ({ inert: "" } as Record<string, string>))}
               >
                 {typeof faq.answer === "string" ? (
                   <p

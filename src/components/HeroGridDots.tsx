@@ -131,7 +131,14 @@ const HeroGridDots = () => {
     const ro = new ResizeObserver(resize);
     if (canvas.parentElement) ro.observe(canvas.parentElement);
     resize();
-    raf = requestAnimationFrame(draw);
+
+    // Respect prefers-reduced-motion: the dots are purely decorative, so when
+    // the user asks for reduced motion we size the canvas but never start the
+    // animation loop (leaving it blank rather than animating).
+    const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (!prefersReduced) {
+      raf = requestAnimationFrame(draw);
+    }
 
     return () => {
       cancelAnimationFrame(raf);
