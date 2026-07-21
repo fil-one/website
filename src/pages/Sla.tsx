@@ -102,7 +102,7 @@ const Sla = () => {
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
       <PlatformNavbar />
 
-      <main className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
+      <main id="main-content" className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[720px]">
 
           {/* Header */}
