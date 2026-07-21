@@ -50,7 +50,7 @@ const AgentLoopsLandingPage = () => {
     title: "Fil One · Let agents run. Not your bill.",
     description:
       "S3-compatible storage at $4.99/TB flat. No per-PUT fees, no per-GET fees, no egress. Agent loops run at full speed without a per-call counter.",
-    canonical: "https://fil.one/lp/agent-loops",
+    canonical: "https://www.fil.one/lp/agent-loops",
   });
 
   const { ref: problemRef,  inView: problemInView  } = useInView({ threshold: 0.05 });

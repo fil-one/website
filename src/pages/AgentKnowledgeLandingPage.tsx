@@ -42,7 +42,7 @@ const AgentKnowledgeLandingPage = () => {
     title: "Fil One · Turn Object Storage Into an Agent Knowledge Layer",
     description:
       "S3-compatible storage purpose-built for AI agents: agent memory, RAG corpus, model artifacts, and inference I/O. $4.99/TB flat, no per-request fees.",
-    canonical: "https://fil.one/lp/agent-knowledge-layer",
+    canonical: "https://www.fil.one/lp/agent-knowledge-layer",
   });
 
   const { ref: problemRef,  inView: problemInView  } = useInView({ threshold: 0.05 });

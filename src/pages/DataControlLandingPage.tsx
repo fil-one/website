@@ -18,7 +18,7 @@ const DataControlLandingPage = () => {
     title: "Fil One · Your data, under your control",
     description:
       "S3-compatible storage with EU region endpoint, recurring integrity verification, $0 exit egress, and no vendor lock-in. Flat $4.99/TB.",
-    canonical: "https://fil.one/lp/data-control",
+    canonical: "https://www.fil.one/lp/data-control",
   });
 
   const { ref: problemRef,  inView: problemInView  } = useInView({ threshold: 0.05 });

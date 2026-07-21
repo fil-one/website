@@ -105,8 +105,8 @@ const RagPipelineProductPage = () => {
     title: "RAG Pipeline · Fil One",
     description:
       "Turn any Fil One bucket into a queryable knowledge base. Auto-index files, semantic search, bring your own LLM keys. +$15/TB/month add-on.",
-    canonical: "https://fil.one/bucket-intelligence",
-    ogImage: "https://fil.one/og-image.png",
+    canonical: "https://www.fil.one/bucket-intelligence",
+    ogImage: "https://www.fil.one/og-image.png",
   });
 
   return (

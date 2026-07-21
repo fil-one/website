@@ -174,7 +174,7 @@ const EgressLandingPage = () => {
     title: "Fil One · Read your own data without the bill",
     description:
       "S3-compatible object storage at $4.99/TB flat. No egress fees. No per-request charges. Built for analytics, ML, and feature-store teams whose bill is driven by reading.",
-    canonical: "https://fil.one/lp/egress",
+    canonical: "https://www.fil.one/lp/egress",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

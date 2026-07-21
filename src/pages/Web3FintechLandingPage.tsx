@@ -34,7 +34,7 @@ const Web3FintechLandingPage = () => {
     title: "Fil One · Decentralized storage for Web3 fintech",
     description:
       "S3-compatible object storage built on Filecoin. Cryptographic integrity verification per object. For exchanges, DeFi protocols, custody providers, and crypto wallets.",
-    canonical: "https://fil.one/lp/web3-fintech",
+    canonical: "https://www.fil.one/lp/web3-fintech",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

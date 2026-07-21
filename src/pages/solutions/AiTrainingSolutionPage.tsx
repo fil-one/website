@@ -78,8 +78,8 @@ const AiTrainingSolutionPage = () => {
     title: "AI Training & Inference Storage · Fil One",
     description:
       "S3-compatible object storage built for AI workloads. Store training datasets, model weights, and checkpoints with verifiable integrity and no egress fees.",
-    canonical: "https://fil.one/solutions/ai-training",
-    ogImage: "https://fil.one/og-image.png",
+    canonical: "https://www.fil.one/solutions/ai-training",
+    ogImage: "https://www.fil.one/og-image.png",
   });
 
   return (

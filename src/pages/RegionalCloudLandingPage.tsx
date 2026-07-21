@@ -18,7 +18,7 @@ const RegionalCloudLandingPage = () => {
     title: "Fil One · Offer global storage without building it",
     description:
       "S3-compatible object storage infrastructure you can embed in your regional cloud offering. SLA-backed, partner-ready. Contact for commercial terms.",
-    canonical: "https://fil.one/lp/regional-cloud",
+    canonical: "https://www.fil.one/lp/regional-cloud",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

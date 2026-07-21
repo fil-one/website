@@ -77,7 +77,7 @@ const DigitalPreservationLandingPage = () => {
     title: "Fil One · Preservation you can verify",
     description:
       "Flat $4.99/TB digital preservation storage with integrity verification every ~24 hours. No retrieval fees, no egress. 11 nines durability, S3-compatible.",
-    canonical: "https://fil.one/lp/digital-preservation",
+    canonical: "https://www.fil.one/lp/digital-preservation",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

@@ -38,7 +38,7 @@ const RagStorageLandingPage = () => {
     title: "Fil One · RAG corpus storage at flat cost",
     description:
       "S3-compatible object storage at $4.99/TB flat. Store retrieval-augmented generation document corpora without per-query or per-read charges.",
-    canonical: "https://fil.one/lp/rag-storage",
+    canonical: "https://www.fil.one/lp/rag-storage",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

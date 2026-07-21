@@ -32,7 +32,7 @@ const GenomicsLandingPage = () => {
     title: "Fil One · Petabyte retention without the petabyte bill",
     description:
       "S3-compatible storage at $4.99/TB flat for genomics and research data. Recurring integrity verification, 11 nines durability, $0 egress. Keep the whole dataset for years.",
-    canonical: "https://fil.one/lp/genomics",
+    canonical: "https://www.fil.one/lp/genomics",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

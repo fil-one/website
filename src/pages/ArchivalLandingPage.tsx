@@ -89,7 +89,7 @@ const ArchivalLandingPage = () => {
     title: "Fil One · Know your archive is intact before you need it",
     description:
       "Flat $4.99/TB archival storage with recurring integrity verification every ~24 hours. No retrieval fees, no egress. 11 nines durability.",
-    canonical: "https://fil.one/lp/archival",
+    canonical: "https://www.fil.one/lp/archival",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

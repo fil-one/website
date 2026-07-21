@@ -34,7 +34,7 @@ const Web3PivotLandingPage = () => {
     title: "Fil One · Don't be a Web2 company just playing with crypto",
     description:
       "Back your Web3 product with storage that's actually decentralized. S3-compatible, Filecoin-backed, $4.99/TB flat. Endpoint swap — nothing else changes.",
-    canonical: "https://fil.one/lp/web3-pivot",
+    canonical: "https://www.fil.one/lp/web3-pivot",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

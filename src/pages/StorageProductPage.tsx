@@ -39,8 +39,8 @@ const StorageProductPage = () => {
     title: "Object Storage · Fil One",
     description:
       `S3-compatible object storage built for the AI era. Verifiable data integrity, no egress fees, ${PRICE_PER_TB_MONTH}. The foundation every Fil One account starts with.`,
-    canonical: "https://fil.one/storage",
-    ogImage: "https://fil.one/og-image.png",
+    canonical: "https://www.fil.one/storage",
+    ogImage: "https://www.fil.one/og-image.png",
   });
 
   return (

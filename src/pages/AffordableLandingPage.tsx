@@ -33,7 +33,7 @@ const AffordableLandingPage = () => {
     title: "Fil One · Make storage your lowest line item",
     description:
       "S3-compatible object storage at $4.99/TB flat. No egress fees, no per-request charges, no confusing billing. One number. Start in minutes.",
-    canonical: "https://fil.one/lp/affordable",
+    canonical: "https://www.fil.one/lp/affordable",
   });
 
   const { ref: problemRef,  inView: problemInView  } = useInView({ threshold: 0.05 });

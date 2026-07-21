@@ -69,7 +69,7 @@ const StartupsLandingPage = () => {
     title: "Fil One · Storage that doesn't outgrow your revenue",
     description:
       "Flat $4.99/TB object storage for early-stage startups. No egress, no per-request fees, no surprise invoice. S3-compatible from day one.",
-    canonical: "https://fil.one/lp/startups",
+    canonical: "https://www.fil.one/lp/startups",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

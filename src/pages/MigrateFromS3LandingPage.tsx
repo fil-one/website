@@ -61,7 +61,7 @@ const MigrateFromS3LandingPage = () => {
     title: "Fil One · Leaving S3 is a config change, not a rewrite",
     description:
       "Same SDK. New endpoint. Lower bill. Point your existing S3 tools at Fil One and cut storage costs to $4.99/TB flat with $0 egress.",
-    canonical: "https://fil.one/lp/migrate-from-s3",
+    canonical: "https://www.fil.one/lp/migrate-from-s3",
   });
 
   const { ref: codeRef, inView: codeInView } = useInView({ threshold: 0.05 });
