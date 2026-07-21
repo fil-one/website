@@ -24,13 +24,13 @@ const comparisonRows: {
 
 const renderCell = (value: CellValue, isFilOne = false) => {
   if (value === "check") {
-    return <span role="img" aria-label="Yes"><Check size={16} weight="bold" color={isFilOne ? "#0090FF" : "#A1A1AA"} aria-hidden="true" /></span>;
+    return <span role="img" aria-label="Yes"><Check size={16} weight="bold" color={isFilOne ? "#0090FF" : "#52525B"} aria-hidden="true" /></span>;
   }
   if (value === "x") {
-    return <span role="img" aria-label="No"><X size={15} weight="bold" color="#A1A1AA" aria-hidden="true" /></span>;
+    return <span role="img" aria-label="No"><X size={15} weight="bold" color="#52525B" aria-hidden="true" /></span>;
   }
   // warn
-  return <span role="img" aria-label="Partial"><Minus size={15} weight="bold" color="#A1A1AA" aria-hidden="true" /></span>;
+  return <span role="img" aria-label="Partial"><Minus size={15} weight="bold" color="#52525B" aria-hidden="true" /></span>;
 };
 
 const colHeader = (label: string) => (

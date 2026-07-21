@@ -493,7 +493,7 @@ const AgentsLandingPage = () => {
                 className="btn-secondary flex items-center gap-1"
               >
                 Read the docs
-                <ArrowUpRight size={13} style={{ color: "#A1A1AA", marginTop: 1 }} aria-hidden="true" />
+                <ArrowUpRight size={13} style={{ color: "#52525B", marginTop: 1 }} aria-hidden="true" />
               </a>
             </div>
 
@@ -504,7 +504,7 @@ const AgentsLandingPage = () => {
                 fontFamily: "'Funnel Sans', sans-serif",
                 fontWeight: 400,
                 fontSize: 13,
-                color: "#A1A1AA",
+                color: "#52525B",
                 textAlign: "center",
               }}
             >
@@ -747,7 +747,7 @@ const AgentsLandingPage = () => {
                         fontFamily: "'DM Mono', monospace",
                         fontWeight: 400,
                         fontSize: 12,
-                        color: activeTab === i ? "#09090B" : "#A1A1AA",
+                        color: activeTab === i ? "#09090B" : "#52525B",
                         backgroundColor: activeTab === i ? "#FFFFFF" : "transparent",
                         border: activeTab === i ? "1px solid rgba(0,0,0,0.10)" : "1px solid transparent",
                         borderRadius: 6,
@@ -769,7 +769,7 @@ const AgentsLandingPage = () => {
                     fontFamily: "'Funnel Sans', sans-serif",
                     fontSize: 12.5,
                     fontWeight: 400,
-                    color: copied ? "#0090FF" : "#A1A1AA",
+                    color: copied ? "#0090FF" : "#52525B",
                     backgroundColor: "transparent",
                     border: "none",
                     cursor: "pointer",
@@ -1124,7 +1124,7 @@ const AgentsLandingPage = () => {
                         <span style={{ fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.08em", textTransform: "uppercase", color: "#71717A" }}>
                           {label}
                         </span>
-                        <ArrowUpRight size={14} color="#A1A1AA" />
+                        <ArrowUpRight size={14} color="#52525B" />
                       </div>
                       <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 16, color: "#09090B", margin: 0, lineHeight: "1.3" }}>
                         {title}

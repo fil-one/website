@@ -69,8 +69,8 @@ const FaqItem = ({ q, a }: { q: string; a: string }) => {
           {q}
         </span>
         {open
-          ? <Minus size={14} style={{ color: "#A1A1AA", flexShrink: 0 }} />
-          : <Plus size={14} style={{ color: "#A1A1AA", flexShrink: 0 }} />}
+          ? <Minus size={14} style={{ color: "#52525B", flexShrink: 0 }} />
+          : <Plus size={14} style={{ color: "#52525B", flexShrink: 0 }} />}
       </button>
       {open && (
         <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13.5, color: "#71717A", lineHeight: "1.65", margin: "0 0 14px" }}>
@@ -223,7 +223,7 @@ const Support = () => {
                   <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#09090B" }}>
                     {label}
                   </span>
-                  <ArrowUpRight size={13} style={{ color: "#A1A1AA" }} />
+                  <ArrowUpRight size={13} style={{ color: "#52525B" }} />
                 </div>
                 <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12.5, color: "#71717A" }}>
                   {sub}

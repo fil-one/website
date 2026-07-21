@@ -263,7 +263,7 @@ const RagPipelineProductPage = () => {
 
             {/* Supported file types */}
             <div className="flex flex-col gap-4 items-center">
-              <p style={{ fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 11, letterSpacing: "0.07em", color: "#A1A1AA", textTransform: "uppercase" }}>
+              <p style={{ fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 11, letterSpacing: "0.07em", color: "#52525B", textTransform: "uppercase" }}>
                 Supported file types
               </p>
               <div className="flex flex-wrap gap-2 justify-center">
