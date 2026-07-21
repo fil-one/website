@@ -81,6 +81,9 @@ const PriceComparisonHero = ({ ctaHref }: { ctaHref: string }) => (
               <span className="font-sans text-[13px] leading-none pb-1 text-zinc-500">
                 /TB/month
               </span>
+              <span className="sr-only">
+                {highlighted ? "(our price)" : "(competitor price, shown for comparison)"}
+              </span>
             </div>
           </div>
         ))}

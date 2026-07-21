@@ -34,10 +34,10 @@ const CostCalculatorSection = ({ competitors, id }: CostCalculatorSectionProps) 
         <div className="flex flex-col sm:flex-row gap-6 w-full max-w-container-narrow mx-auto">
           <div className="flex flex-col gap-3 flex-1">
             <div className="flex justify-between items-center">
-              <label className="font-sans font-medium text-base text-zinc-950">Storage</label>
+              <label htmlFor="calc-storage" className="font-sans font-medium text-base text-zinc-950">Storage</label>
               <span className="font-sans font-semibold text-base text-brand-600">{storedTB} TB</span>
             </div>
-            <input type="range" min={1} max={500} value={storedTB} onChange={(e) => setStoredTB(Number(e.target.value))} className="w-full calc-slider" />
+            <input id="calc-storage" type="range" min={1} max={500} value={storedTB} aria-valuetext={`${storedTB} TB`} onChange={(e) => setStoredTB(Number(e.target.value))} className="w-full calc-slider" />
             <div className="flex justify-between">
               <span className="font-sans text-xs text-zinc-500">1 TB</span>
               <span className="font-sans text-xs text-zinc-500">500 TB</span>
@@ -46,10 +46,10 @@ const CostCalculatorSection = ({ competitors, id }: CostCalculatorSectionProps) 
 
           <div className="flex flex-col gap-3 flex-1">
             <div className="flex justify-between items-center">
-              <label className="font-sans font-medium text-base text-zinc-950">Monthly egress</label>
+              <label htmlFor="calc-egress" className="font-sans font-medium text-base text-zinc-950">Monthly egress</label>
               <span className="font-sans font-semibold text-base text-brand-600">{egressTB} TB</span>
             </div>
-            <input type="range" min={0} max={500} value={egressTB} onChange={(e) => setEgressTB(Number(e.target.value))} className="w-full calc-slider" />
+            <input id="calc-egress" type="range" min={0} max={500} value={egressTB} aria-valuetext={`${egressTB} TB`} onChange={(e) => setEgressTB(Number(e.target.value))} className="w-full calc-slider" />
             <div className="flex justify-between">
               <span className="font-sans text-xs text-zinc-500">0 TB</span>
               <span className="font-sans text-xs text-zinc-500">500 TB</span>

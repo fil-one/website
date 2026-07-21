@@ -39,6 +39,7 @@ const Row = ({ children, className = "" }: { children: ReactNode; className?: st
 
 const HeadCell = ({ children, className = "" }: { children: ReactNode; className?: string }) => (
   <th
+    scope="col"
     className={`text-left px-5 py-4 text-[12px] font-medium uppercase tracking-[0.06em] text-zinc-500 border-b border-black/[0.07]${
       className ? ` ${className}` : ""
     }`}
