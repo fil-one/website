@@ -138,7 +138,7 @@ const SupportBcnES = () => {
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
       <PlatformNavbar lang="es" supportHref="/lp/es/soporte" contactSalesHref="/lp/es/contacto" />
 
-      <main className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
+      <main id="main-content" className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
         <div className="flex flex-col gap-10 w-full max-w-[560px]">
 
           <div className="flex flex-col gap-3">
