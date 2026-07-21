@@ -34,7 +34,7 @@ const Web3NativeLandingPage = () => {
     title: "Fil One · You didn't build in Web3 to end up fully dependent on Amazon",
     description:
       "S3-compatible object storage backed by Filecoin. CID per object, Proof of Spacetime verification, $4.99/TB flat. For Web3-native analytics, research, and dev infra teams.",
-    canonical: "https://fil.one/lp/web3-native",
+    canonical: "https://www.fil.one/lp/web3-native",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

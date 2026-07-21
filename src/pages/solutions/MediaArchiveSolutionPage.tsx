@@ -75,8 +75,8 @@ const MediaArchiveSolutionPage = () => {
     title: "Media & Archive Storage · Fil One",
     description:
       "Low-cost, high-durability object storage for video, audio, and long-term archives. No egress fees, no retrieval penalties. $4.99/TB/month.",
-    canonical: "https://fil.one/solutions/media-archive",
-    ogImage: "https://fil.one/og-image.png",
+    canonical: "https://www.fil.one/solutions/media-archive",
+    ogImage: "https://www.fil.one/og-image.png",
   });
 
   return (

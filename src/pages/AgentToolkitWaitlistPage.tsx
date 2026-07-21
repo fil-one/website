@@ -83,7 +83,7 @@ const AgentToolkitWaitlistPage = () => {
   useSeo({
     title: "Join the AI Agent Toolkit Waitlist · Fil One",
     description: "Get early access to the AI Agent Toolkit. Connect your AI tools and automations to Fil One — join the waitlist and we'll reach out when your spot is ready.",
-    canonical: "https://fil.one/waitlist/ai-agent-toolkit",
+    canonical: "https://www.fil.one/waitlist/ai-agent-toolkit",
   });
 
   const [firstName, setFirstName] = useState("");

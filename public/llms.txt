@@ -102,11 +102,11 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
 
 ## Pages
 
-- [Homepage](https://fil.one): Product overview, feature comparison, pricing, and FAQ
-- [Fil One for AI Agents](https://fil.one/lp/agents): Landing page for AI agent
+- [Homepage](https://www.fil.one): Product overview, feature comparison, pricing, and FAQ
+- [Fil One for AI Agents](https://www.fil.one/lp/agents): Landing page for AI agent
   developers — S3-compatible storage at $4.99/TB flat, no egress fees, free 30-day
   trial. Covers agent use cases, code examples, and pricing.
-- [Contact Sales](https://fil.one/contact-sales): Enterprise and high-volume inquiries;
+- [Contact Sales](https://www.fil.one/contact-sales): Enterprise and high-volume inquiries;
   also reachable at sales@fil.one
 
 ## Docs
@@ -116,8 +116,8 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
 
 ## Optional
 
-- [Full reference for AI agents and developers](https://fil.one/llms-full.txt): SDK
+- [Full reference for AI agents and developers](https://www.fil.one/llms-full.txt): SDK
   examples, architecture patterns, multipart upload, presigned URLs, PyArrow/fsspec
   integration, and full S3 API compatibility list
-- [Privacy Policy](https://fil.one/privacy): Data handling and privacy practices
-- [Terms of Service](https://fil.one/terms): Terms governing use of the platform
+- [Privacy Policy](https://www.fil.one/privacy): Data handling and privacy practices
+- [Terms of Service](https://www.fil.one/terms): Terms governing use of the platform

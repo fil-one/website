@@ -101,7 +101,7 @@ globalThis.IntersectionObserver ??= class {
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const rootDir = resolve(__dirname, "..");
 
-const BASE_URL = "https://fil.one";
+const BASE_URL = "https://www.fil.one";
 
 /**
  * Per-route metadata injected at prerender time so every page has a unique
@@ -121,8 +121,8 @@ const ROUTE_META = {
         "@context": "https://schema.org",
         "@type": "Organization",
         name: "Fil One",
-        url: "https://fil.one",
-        logo: "https://fil.one/fil-one-logo.svg",
+        url: "https://www.fil.one",
+        logo: "https://www.fil.one/fil-one-logo.svg",
         description:
           "S3-compatible object storage built on Filecoin. Enterprise-grade durability, no egress fees, and verifiable data integrity.",
       },

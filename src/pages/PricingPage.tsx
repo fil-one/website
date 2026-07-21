@@ -33,7 +33,7 @@ const PricingPage = () => {
     title: "Pricing · Fil One",
     description:
       `S3-compatible object storage at ${PRICE_DISPLAY}/TB with no egress fees. See how much you could save compared to AWS, Google Cloud, and Azure.`,
-    canonical: "https://fil.one/pricing",
+    canonical: "https://www.fil.one/pricing",
   });
 
   // Deep links like /pricing#calculator arrive as a full page load; the target

@@ -64,7 +64,7 @@ const CollectionsAccessLandingPage = () => {
     title: "Fil One · Open the collection. Close the tab.",
     description:
       "Serve digital collections and IIIF imagery with $0 egress. Flat $4.99/TB storage, S3-compatible for IIIF image servers, 11 nines durability.",
-    canonical: "https://fil.one/lp/collections-access",
+    canonical: "https://www.fil.one/lp/collections-access",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

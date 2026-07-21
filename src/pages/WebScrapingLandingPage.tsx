@@ -46,7 +46,7 @@ const WebScrapingLandingPage = () => {
     title: "Fil One · Scrape at scale without the per-PUT bill",
     description:
       "$4.99/TB flat storage. No per-PUT charges, no egress fees. Run large-scale web scraping and data collection pipelines without per-write billing.",
-    canonical: "https://fil.one/lp/web-scraping",
+    canonical: "https://www.fil.one/lp/web-scraping",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

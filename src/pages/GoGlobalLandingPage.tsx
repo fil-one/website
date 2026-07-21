@@ -28,7 +28,7 @@ const GoGlobalLandingPage = () => {
     title: "Fil One · Go global. Skip the multi-year build.",
     description:
       "Embed S3-compatible object storage into your product. Global network, SLA-backed, $4.99/TB flat. No capex, no infrastructure build — contact for enterprise and embedding terms.",
-    canonical: "https://fil.one/lp/go-global",
+    canonical: "https://www.fil.one/lp/go-global",
   });
 
   const { ref: problemRef,  inView: problemInView  } = useInView({ threshold: 0.05 });

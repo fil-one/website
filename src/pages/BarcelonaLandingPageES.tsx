@@ -39,7 +39,7 @@ const BarcelonaLandingPageES = () => {
     title: "Fil One para Barcelona: Almacenamiento Europeo, €4.99/TB, Sin Egress",
     description:
       "Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a €4.99/TB. Intégralo en tu stack actual en minutos.",
-    canonical: "https://fil.one/lp/es/barcelona",
+    canonical: "https://www.fil.one/lp/es/barcelona",
   });
 
   const { ref: posRef,          inView: posInView          } = useInView({ threshold: 0.05 });

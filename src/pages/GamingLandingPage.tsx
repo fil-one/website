@@ -34,7 +34,7 @@ const GamingLandingPage = () => {
     title: "Fil One · Player data that scales without bill shock",
     description:
       "$4.99/TB flat storage for game studios. Store player data, UGC, and game assets without egress fees or per-request billing. No bill shock on growth.",
-    canonical: "https://fil.one/lp/gaming",
+    canonical: "https://www.fil.one/lp/gaming",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

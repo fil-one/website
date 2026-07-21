@@ -63,7 +63,7 @@ const ContactSales = () => {
   useSeo({
     title: "Contact Sales · Fil One S3 Object Storage",
     description: "Talk to the Fil One team about enterprise S3-compatible object storage pricing, volume discounts, and custom SLAs.",
-    canonical: "https://fil.one/contact-sales",
+    canonical: "https://www.fil.one/contact-sales",
   });
 
   const [form, setForm] = useState({

@@ -33,7 +33,7 @@ const MlTrainingLandingPage = () => {
     title: "Fil One · Build around the clock",
     description:
       "S3-compatible training-data storage at $4.99/TB flat. No egress on dataset reads. 62× cheaper than AWS EFS. fsspec, PyArrow, and HuggingFace datasets work natively.",
-    canonical: "https://fil.one/lp/ml-training",
+    canonical: "https://www.fil.one/lp/ml-training",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

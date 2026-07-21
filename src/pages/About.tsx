@@ -75,8 +75,8 @@ const About = () => {
     title: "About · Fil One",
     description:
       "Fil One exists to put you back in control of your data. Learn who we are, why we built verifiable S3-compatible storage, and the principles behind it.",
-    canonical: "https://fil.one/about",
-    ogImage: "https://fil.one/og-image.png",
+    canonical: "https://www.fil.one/about",
+    ogImage: "https://www.fil.one/og-image.png",
   });
 
   return (

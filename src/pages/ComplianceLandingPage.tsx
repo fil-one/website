@@ -34,7 +34,7 @@ const ComplianceLandingPage = () => {
     title: "Fil One · Audit-ready storage with recurring integrity verification",
     description:
       "S3-compatible storage with recurring integrity verification every ~24 hours and full version history. $4.99/TB flat. No egress fees.",
-    canonical: "https://fil.one/lp/compliance",
+    canonical: "https://www.fil.one/lp/compliance",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

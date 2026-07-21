@@ -61,7 +61,7 @@ const PartnerApplyPage = () => {
   useSeo({
     title: "Partner Application · Fil One",
     description: "Apply to join the Fil One partner program as a Channel, Technology, or MSP partner.",
-    canonical: "https://fil.one/partners/apply",
+    canonical: "https://www.fil.one/partners/apply",
   });
 
   const [form, setForm] = useState({

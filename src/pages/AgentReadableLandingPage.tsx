@@ -12,7 +12,7 @@ const FEATURES = [
   { icon: MagnifyingGlass, title: "No gated pricing", desc: "The price is on the page and in llms.txt — not behind a 'contact sales' form. An agent evaluating vendors never hits a wall where the number should be." },
 ];
 
-const LLMS_TXT = `$ curl -s https://fil.one/llms.txt
+const LLMS_TXT = `$ curl -s https://www.fil.one/llms.txt
 
 ## Pricing
 - Pay-as-you-go: $4.99/TB/month
@@ -29,7 +29,7 @@ const AgentReadableLandingPage = () => {
     title: "Fil One · Priced so plainly your agent can read it",
     description:
       "Flat $4.99/TB pricing published in machine-readable llms.txt, with full S3 parity. No gated quotes — an AI coding agent can evaluate Fil One in one pass.",
-    canonical: "https://fil.one/lp/agent-readable",
+    canonical: "https://www.fil.one/lp/agent-readable",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

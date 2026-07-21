@@ -170,8 +170,8 @@ const AgentToolkitProductPage = () => {
     title: "AI Agent Toolkit · Fil One",
     description:
       "Plug Fil One into Claude, Cursor, Zapier, and 10+ more integrations via MCP and OAuth. Free with your storage plan.",
-    canonical: "https://fil.one/ai-agent-toolkit",
-    ogImage: "https://fil.one/og-image.png",
+    canonical: "https://www.fil.one/ai-agent-toolkit",
+    ogImage: "https://www.fil.one/og-image.png",
   });
 
   return (

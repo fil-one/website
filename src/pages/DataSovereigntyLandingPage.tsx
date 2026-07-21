@@ -38,7 +38,7 @@ const DataSovereigntyLandingPage = () => {
     title: "Fil One · EU data residency with S3-compatible tools",
     description:
       "S3-compatible object storage with EU region endpoint. Store data in EU infrastructure at $4.99/TB flat. No egress fees.",
-    canonical: "https://fil.one/lp/data-sovereignty",
+    canonical: "https://www.fil.one/lp/data-sovereignty",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

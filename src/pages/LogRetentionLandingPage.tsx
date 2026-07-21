@@ -34,7 +34,7 @@ const LogRetentionLandingPage = () => {
     title: "Fil One · Stop sampling your logs to save money",
     description:
       "S3-compatible log storage at $4.99/TB flat. No per-request fees. Drop in as a Vector, Fluent Bit, or OTel sink and keep every event.",
-    canonical: "https://fil.one/lp/log-retention",
+    canonical: "https://www.fil.one/lp/log-retention",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

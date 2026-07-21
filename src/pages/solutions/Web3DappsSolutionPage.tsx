@@ -74,8 +74,8 @@ const Web3DappsSolutionPage = () => {
     title: "Web3 & dApp Storage · Fil One",
     description:
       "Verifiable, decentralized object storage for NFTs, dApps, and on-chain assets. S3-compatible, no egress fees, cryptographic proof on every object.",
-    canonical: "https://fil.one/solutions/web3-dapps",
-    ogImage: "https://fil.one/og-image.png",
+    canonical: "https://www.fil.one/solutions/web3-dapps",
+    ogImage: "https://www.fil.one/og-image.png",
   });
 
   return (

@@ -28,8 +28,8 @@ const Home = () => {
     title: "Fil One | S3 object storage built for the AI era",
     description:
       "Store, search, and connect your data to AI. Object Storage, RAG Pipeline, and AI Agent Toolkit — on one verifiable, vendor-independent platform.",
-    canonical: "https://fil.one/",
-    ogImage: "https://fil.one/og-image.png",
+    canonical: "https://www.fil.one/",
+    ogImage: "https://www.fil.one/og-image.png",
   });
 
   return (

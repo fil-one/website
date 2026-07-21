@@ -31,7 +31,7 @@ const BarcelonaLandingPage = () => {
     title: "Fil One for Barcelona: European Storage, €4.99/TB, No Egress Fees",
     description:
       "S3-compatible object storage for teams in Barcelona. EU data sovereignty, zero egress fees, at €4.99/TB. Drop into your existing stack in minutes.",
-    canonical: "https://fil.one/lp/barcelona",
+    canonical: "https://www.fil.one/lp/barcelona",
   });
 
   const { ref: posRef,          inView: posInView          } = useInView({ threshold: 0.05 });

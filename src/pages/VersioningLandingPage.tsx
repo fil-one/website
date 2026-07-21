@@ -34,7 +34,7 @@ const VersioningLandingPage = () => {
     title: "Fil One · Recreate any dataset from any point",
     description:
       "S3-compatible storage with built-in version history. Retrieve any prior state by version ID. $4.99/TB flat. No egress on version reads.",
-    canonical: "https://fil.one/lp/versioning",
+    canonical: "https://www.fil.one/lp/versioning",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });

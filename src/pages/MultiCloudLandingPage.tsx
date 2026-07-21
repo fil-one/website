@@ -84,7 +84,7 @@ const MultiCloudLandingPage = () => {
     title: "Fil One · Design your exit before you need it",
     description:
       "S3-compatible object storage with $0 egress. No exit penalty. Move in and out with the same S3 tools and no egress bill. Flat $4.99/TB/month.",
-    canonical: "https://fil.one/lp/multi-cloud",
+    canonical: "https://www.fil.one/lp/multi-cloud",
   });
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });
