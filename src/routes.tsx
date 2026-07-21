@@ -78,3 +78,9 @@ export const routeDefs: RouteDef[] = [
 ];
 
 export const notFoundLoad: PageLoader = () => import("./pages/NotFound");
+
+/**
+ * Flat list of every route path. Single source of truth for the prerender
+ * script (which routes to render + the sitemap) and the route-parity test.
+ */
+export const routePaths: string[] = routeDefs.map((r) => r.path);

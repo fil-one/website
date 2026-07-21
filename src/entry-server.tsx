@@ -15,6 +15,10 @@ import { Routes, Route } from "react-router-dom";
 import { AppShell } from "./App";
 import { routeDefs, notFoundLoad } from "./routes";
 
+// Re-exported so scripts/prerender.mjs can read the route list from the built
+// SSR bundle (single source of truth for which routes to prerender).
+export { routePaths } from "./routes";
+
 let resolvedRoutes: { path: string; Component: ComponentType }[] | null = null;
 let ResolvedNotFound: ComponentType | null = null;
 
