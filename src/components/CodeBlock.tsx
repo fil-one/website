@@ -81,6 +81,8 @@ const CodeBlock = ({ snippets, className = "" }: CodeBlockProps) => {
             <button
               key={lang}
               onClick={() => setActive(lang)}
+              aria-pressed={active === lang}
+              aria-label={`Show ${label} example`}
               className={`cursor-pointer rounded-md px-2.5 py-1 font-mono text-[12px] transition-all ${
                 active === lang ? "bg-zinc-100 text-zinc-950" : "text-zinc-500"
               }`}
@@ -106,7 +108,7 @@ const CodeBlock = ({ snippets, className = "" }: CodeBlockProps) => {
       <pre className="m-0 overflow-x-auto py-5 font-mono text-[13px] leading-[1.75]">
         {lines.map((line, i) => (
           <div key={i} className="flex px-5 hover:bg-black/[0.02] transition-colors">
-            <span className="min-w-9 shrink-0 select-none pr-5 text-right text-[12px] text-zinc-300">
+            <span aria-hidden="true" className="min-w-9 shrink-0 select-none pr-5 text-right text-[12px] text-zinc-300">
               {i + 1}
             </span>
             <span
