@@ -203,7 +203,7 @@ const PartnerApplyPage = () => {
           <div style={{ width: "100%", height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
 
           {submitted ? (
-            <div className="flex flex-col items-center gap-5 py-10 text-center">
+            <div role="status" className="flex flex-col items-center gap-5 py-10 text-center">
               <div
                 className="flex items-center justify-center w-12 h-12 rounded-full"
                 style={{ backgroundColor: "#ECFDF5" }}
@@ -441,6 +441,7 @@ const PartnerApplyPage = () => {
 
               {error && (
                 <p
+                  role="alert"
                   style={{
                     fontFamily: "'Funnel Sans', sans-serif",
                     fontSize: 13.5,

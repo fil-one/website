@@ -184,7 +184,7 @@ const AgentToolkitWaitlistPage = () => {
           <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
 
           {submitted ? (
-            <div className="flex flex-col gap-3 py-6">
+            <div role="status" className="flex flex-col gap-3 py-6">
               <div className="flex items-center justify-center w-10 h-10 rounded-full" style={{ backgroundColor: "#EFF8FF" }}>
                 <Check size={18} color="#0090FF" />
               </div>
@@ -333,7 +333,7 @@ const AgentToolkitWaitlistPage = () => {
                   </span>
                 </button>
                 {error && (
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626", textAlign: "center" }}>
+                  <p role="alert" style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626", textAlign: "center" }}>
                     {error}
                   </p>
                 )}
