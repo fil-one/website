@@ -14,15 +14,34 @@ export const SectionLabel = ({ children }: { children: React.ReactNode }) => (
   </span>
 );
 
-export const SectionHeading = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="font-display font-medium text-[24px] md:text-[34px] leading-[1.2] tracking-[-0.02em] text-zinc-950 m-0">
+export const SectionHeading = ({
+  children,
+  maxWidth,
+}: {
+  children: React.ReactNode;
+  /** Optional cap on the heading's width (px) to control where it wraps. */
+  maxWidth?: number;
+}) => (
+  <h2
+    className="font-display font-medium text-[24px] md:text-[34px] leading-[1.2] tracking-[-0.02em] text-zinc-950 m-0"
+    style={maxWidth ? { maxWidth } : undefined}
+  >
     {children}
   </h2>
 );
 
-export const SectionSub = ({ children, maxWidth = 560 }: { children: React.ReactNode; maxWidth?: number }) => (
+export const SectionSub = ({
+  children,
+  maxWidth = 560,
+  size = "text-[15px] md:text-[17px]",
+}: {
+  children: React.ReactNode;
+  maxWidth?: number;
+  /** Responsive font-size classes; defaults to the standard sub scale. */
+  size?: string;
+}) => (
   <p
-    className="font-sans font-normal text-[15px] md:text-[17px] leading-[1.65] text-zinc-500 m-0"
+    className={`font-sans font-normal ${size} leading-[1.65] text-zinc-500 m-0`}
     style={{ maxWidth }}
   >
     {children}

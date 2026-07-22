@@ -528,7 +528,7 @@ export const ROUTE_META = {
   "/bucket-intelligence": {
     title: "Bucket Intelligence · Fil One",
     description:
-      "Turn any Fil One bucket into a queryable knowledge base. Auto-index files, semantic search, bring your own LLM keys. +$15/TB/month add-on.",
+      "Turn any Fil One bucket into a queryable knowledge base. Auto-index files, semantic search, and a managed model. Free during early access.",
   },
   "/ai-agent-toolkit": {
     title: "AI Agent Toolkit · Fil One",
