@@ -48,52 +48,6 @@ export const ROUTE_META = {
           },
         },
       },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: "Does Fil One charge egress fees?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "No. Fil One charges $0 for egress and $0 for API requests. You only pay $4.99/TB/month for storage.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Is Fil One S3-compatible?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Yes. Fil One is fully S3-compatible — any tool that works with AWS S3 (boto3, the AWS CLI, S3-compatible SDKs) works with Fil One without code changes.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "How does Fil One verify data integrity?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Every object stored on Fil One receives a CID (Content Identifier). Cryptographic integrity proofs run approximately every 24 hours, giving you verifiable proof that your data is intact and stored correctly on the Filecoin network.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "What durability does Fil One offer?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Fil One provides 11 nines (99.999999999%) of durability through Filecoin's distributed storage network.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Can I use Fil One for AI workloads like RAG and agent memory?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Yes. Fil One is designed for AI workloads including RAG corpora, agent memory, model artifacts, and datasets. It exposes an S3-compatible API and an llms.txt endpoint for direct LLM ingestion.",
-            },
-          },
-        ],
-      },
     ],
   },
   "/lp/agents": {
