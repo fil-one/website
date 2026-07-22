@@ -106,7 +106,7 @@ const RagPipelineProductPage = () => {
   const { ref: ucRef, inView: ucInView } = useInView({ threshold: 0.05 });
 
   useSeo({
-    title: "RAG Pipeline · Fil One",
+    title: "Bucket Intelligence · Fil One",
     description:
       "Turn any Fil One bucket into a queryable knowledge base. Auto-index files, semantic search, bring your own LLM keys. +$15/TB/month add-on.",
     canonical: "https://www.fil.one/bucket-intelligence",

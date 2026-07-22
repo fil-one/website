@@ -526,7 +526,7 @@ export const ROUTE_META = {
       "S3-compatible object storage built for the AI era. Verifiable data integrity, no egress fees, $4.99/TB/month. The foundation every Fil One account starts with.",
   },
   "/bucket-intelligence": {
-    title: "RAG Pipeline · Fil One",
+    title: "Bucket Intelligence · Fil One",
     description:
       "Turn any Fil One bucket into a queryable knowledge base. Auto-index files, semantic search, bring your own LLM keys. +$15/TB/month add-on.",
   },
