@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, isValidElement, type ReactNode } from "react";
 import { CaretDown } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 import JsonLd from "@/components/JsonLd";
@@ -111,6 +111,19 @@ const faqs = [
   },
 ];
 
+/**
+ * Flatten a string | ReactNode answer to plain text for the JSON-LD
+ * acceptedAnswer. Previously ReactNode answers fell back to the *question*,
+ * so those FAQPage entries emitted the question as its own answer.
+ */
+function answerToText(node: ReactNode): string {
+  if (node == null || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(answerToText).join(" ");
+  if (isValidElement(node)) return answerToText((node.props as { children?: ReactNode }).children);
+  return "";
+}
+
 const buildFaqSchema = (items: typeof faqs) => ({
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -119,7 +132,9 @@ const buildFaqSchema = (items: typeof faqs) => ({
     name: faq.question,
     acceptedAnswer: {
       "@type": "Answer",
-      text: typeof faq.answer === "string" ? faq.answer : faq.question,
+      text: (typeof faq.answer === "string" ? faq.answer : answerToText(faq.answer))
+        .replace(/\s+/g, " ")
+        .trim(),
     },
   })),
 });
