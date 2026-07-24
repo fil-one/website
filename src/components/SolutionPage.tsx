@@ -1,11 +1,14 @@
+import type { ReactNode } from "react";
 import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
 import Hero, { type HeroCta } from "@/components/Hero";
+import FeaturedInBar from "@/components/FeaturedInBar";
 import ProofBar from "@/components/ProofBar";
 import FeatureCard from "@/components/FeatureCard";
+import Step from "@/components/Step";
 import FaqSection from "@/components/FaqSection";
 import CtaBanner from "@/components/CtaBanner";
 import Pill from "@/components/Pill";
@@ -44,8 +47,8 @@ export type SolutionDetail =
 export interface SolutionPageConfig {
   seo: { title: string; description: string; canonical: string; ogImage?: string };
   hero: {
-    badge: string;
-    title: string;
+    badge?: string;
+    title: ReactNode;
     titleMaxWidth?: number;
     /** Responsive font-size classes for the h1; defaults to the solutions scale. */
     titleSize?: string;
@@ -54,6 +57,8 @@ export interface SolutionPageConfig {
     ctas: HeroCta[];
     tagline: string;
   };
+  /** Show the "featured in" publications bar directly below the hero. */
+  featuredIn?: boolean;
   proof: string[];
   features: {
     label: string;
@@ -64,7 +69,7 @@ export interface SolutionPageConfig {
   detail: SolutionDetail;
   faq: string[];
   cta: {
-    heading: string;
+    heading: ReactNode;
     subhead: string;
     note?: string;
     cta: { label: string; href: string };
@@ -97,7 +102,7 @@ const SectionHead = ({
  * components (Hero, ProofBar, FeatureCard, FaqSection, CtaBanner, Pill).
  */
 const SolutionPage = ({ config }: { config: SolutionPageConfig }) => {
-  const { seo, hero, proof, features, detail, faq, cta } = config;
+  const { seo, hero, featuredIn, proof, features, detail, faq, cta } = config;
   const { ref: featRef, inView: featInView } = useInView({ threshold: 0.05 });
   const { ref: detailRef, inView: detailInView } = useInView({ threshold: 0.05 });
 
@@ -111,7 +116,7 @@ const SolutionPage = ({ config }: { config: SolutionPageConfig }) => {
         <Hero
           glow
           grid
-          badge={<Pill>{hero.badge}</Pill>}
+          badge={hero.badge ? <Pill>{hero.badge}</Pill> : undefined}
           titleSize={hero.titleSize ?? "text-[34px] sm:text-[44px] md:text-[56px]"}
           title={hero.title}
           titleMaxWidth={hero.titleMaxWidth}
@@ -121,6 +126,9 @@ const SolutionPage = ({ config }: { config: SolutionPageConfig }) => {
           ctas={hero.ctas}
           tagline={hero.tagline}
         />
+
+        {/* Publications / social proof */}
+        {featuredIn && <FeaturedInBar />}
 
         {/* Proof bar */}
         <ProofBar items={proof} />
@@ -157,16 +165,16 @@ const SolutionPage = ({ config }: { config: SolutionPageConfig }) => {
             {detail.variant === "steps" ? (
               <div
                 ref={detailRef}
-                className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full reveal${detailInView ? " in-view" : ""}`}
+                className={`grid grid-cols-1 divide-y divide-zinc-200 lg:grid-cols-4 lg:divide-x lg:divide-y-0 w-full reveal${detailInView ? " in-view" : ""}`}
               >
                 {detail.items.map(({ number, title, body }) => (
-                  <div key={number} className="flex flex-col gap-3">
-                    <span className="font-mono font-medium text-[28px] leading-none text-brand-500">
-                      {number}
-                    </span>
-                    <h3 className="font-display font-medium text-[15px] text-zinc-950 m-0">{title}</h3>
-                    <p className="font-sans text-[14px] leading-[1.6] text-zinc-500 m-0">{body}</p>
-                  </div>
+                  <Step
+                    key={number}
+                    number={number}
+                    title={title}
+                    description={body}
+                    className="py-8 first:pt-0 last:pb-0 lg:py-0 lg:px-8 lg:first:pl-0 lg:last:pr-0"
+                  />
                 ))}
               </div>
             ) : (

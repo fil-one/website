@@ -1,10 +1,10 @@
 import {
   Database,
   Lightning,
-  ShieldCheck,
+  Lock,
   CurrencyDollar,
   ArrowsClockwise,
-  Code,
+  LinkSimple,
 } from "@phosphor-icons/react";
 import SolutionPage, { type SolutionPageConfig } from "@/components/SolutionPage";
 
@@ -16,12 +16,16 @@ const config: SolutionPageConfig = {
     canonical: "https://www.fil.one/solutions/ai-training",
   },
   hero: {
-    badge: "AI Training & Inference",
-    title: "Storage that keeps your GPUs fed",
-    titleMaxWidth: 520,
+    title: (
+      <>
+        Object storage built for{" "}
+        <span className="text-brand-500">AI training and inference</span>
+      </>
+    ),
+    titleMaxWidth: 620,
     description:
-      "Store training datasets, model weights, and checkpoints with verifiable integrity. Move data freely with zero egress fees.",
-    descriptionMaxWidth: 480,
+      "Keep training datasets, model weights, and checkpoints on S3-compatible storage. High-throughput reads keep your GPUs busy, with verifiable integrity and zero egress fees.",
+    descriptionMaxWidth: 540,
     ctas: [
       {
         label: "Start for free",
@@ -31,7 +35,7 @@ const config: SolutionPageConfig = {
         glow: true,
       },
     ],
-    tagline: "1 TB free for 30 days · No credit card required · No egress fees",
+    tagline: "1 TB free for 30 days · No credit card required",
   },
   proof: [
     "S3-compatible drop-in replacement",
@@ -55,9 +59,9 @@ const config: SolutionPageConfig = {
         body: "Sustained multi-Gbps reads so your GPU cluster never waits for the next batch.",
       },
       {
-        icon: ShieldCheck,
-        title: "Verifiable data integrity",
-        body: "Every object is cryptographically sealed, so you can prove your data was never altered.",
+        icon: Lock,
+        title: "Immutable object lock",
+        body: "Lock objects so your training data can't be altered or deleted, even with your keys.",
       },
       {
         icon: CurrencyDollar,
@@ -70,9 +74,9 @@ const config: SolutionPageConfig = {
         body: "Works with PyTorch, HuggingFace, Ray Data, and any S3-compatible SDK.",
       },
       {
-        icon: Code,
-        title: "Checkpoint versioning",
-        body: "Tag checkpoints, roll back to any training step, and share via presigned URLs.",
+        icon: LinkSimple,
+        title: "Presigned URL sharing",
+        body: "Share checkpoints with time-limited presigned URLs, no credentials to hand out.",
       },
     ],
   },
@@ -84,36 +88,38 @@ const config: SolutionPageConfig = {
       {
         number: "01",
         title: "Create a bucket",
-        body: "Provision a bucket in seconds from the dashboard. Pick your preferred region.",
+        body: "Pick a region and create a bucket in seconds from the dashboard.",
       },
       {
         number: "02",
         title: "Swap your endpoint",
-        body: "Replace your existing S3 endpoint URL with Fil One's. No SDK changes, no re-architecture.",
+        body: "Point your S3 endpoint at Fil One. No SDK changes needed.",
       },
       {
         number: "03",
         title: "Upload your data",
-        body: "Use rclone, the AWS CLI, or any S3 library to migrate datasets and checkpoints.",
+        body: "Migrate data with rclone, the AWS CLI, or any S3 library.",
       },
       {
         number: "04",
         title: "Train with confidence",
-        body: "Your data is verifiably intact, your reads are fast, and your egress bill is zero.",
+        body: "Your data stays intact, GPUs stay busy, and egress bill is zero.",
       },
     ],
   },
   faq: [
     "Is Fil One hot, warm, or cold storage? Is it like Glacier?",
-    "How does data integrity verification work with Fil One?",
     "Is Fil One compatible with my existing tools?",
     "How do I migrate from AWS / Azure / Google Cloud?",
     "How does Fil One approach security and compliance?",
   ],
   cta: {
-    heading: "Stop paying egress fees on every training run",
-    subhead: "Start with 1 TB free. No credit card, no egress fees, no surprises.",
-    note: "S3-compatible · Verifiable integrity · $4.99/TB/month after trial",
+    heading: (
+      <>
+        Stop paying egress fees<br />on every training run
+      </>
+    ),
+    subhead: "1 TB free for 30 days. No credit card and no egress fees.",
     cta: { label: "Start for free", href: "https://app.fil.one/login?screen_hint=signup" },
   },
 };
