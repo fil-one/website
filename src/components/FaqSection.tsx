@@ -155,7 +155,7 @@ const FaqSection = ({ include }: FaqSectionProps = {}) => {
       {/* FAQ list */}
       <div
         ref={listRef}
-        className={`w-full max-w-[720px] reveal${listInView ? " in-view" : ""}`}
+        className={`w-full max-w-container-prose reveal${listInView ? " in-view" : ""}`}
       >
         {visibleFaqs.map((faq, i) => {
           const isOpen = openIndex === i;
