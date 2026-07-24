@@ -47,6 +47,8 @@ export interface SolutionPageConfig {
     badge: string;
     title: string;
     titleMaxWidth?: number;
+    /** Responsive font-size classes for the h1; defaults to the solutions scale. */
+    titleSize?: string;
     description: string;
     descriptionMaxWidth?: number;
     ctas: HeroCta[];
@@ -110,7 +112,7 @@ const SolutionPage = ({ config }: { config: SolutionPageConfig }) => {
           glow
           grid
           badge={<Pill>{hero.badge}</Pill>}
-          titleSize="text-[28px] sm:text-[34px] md:text-[44px]"
+          titleSize={hero.titleSize ?? "text-[34px] sm:text-[44px] md:text-[56px]"}
           title={hero.title}
           titleMaxWidth={hero.titleMaxWidth}
           description={hero.description}
