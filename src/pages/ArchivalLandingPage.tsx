@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // Archive comparison scenario: 100 TB stored, one 10 TB restore per year (≈ 853 GB/month).
@@ -88,7 +89,7 @@ const ArchivalLandingPage = () => {
   useSeo({
     title: "Fil One · Know your archive is intact before you need it",
     description:
-      "Flat $4.99/TB archival storage with recurring integrity verification every ~24 hours. No retrieval fees, no egress. 11 nines durability.",
+      `Flat ${PRICE_PER_TB_SHORT} archival storage with recurring integrity verification every ~24 hours. No retrieval fees, no egress. 11 nines durability.`,
     canonical: "https://www.fil.one/lp/archival",
   });
 
@@ -179,7 +180,7 @@ const ArchivalLandingPage = () => {
                 margin: 0,
               }}
             >
-              Flat $4.99/TB. Recurring integrity verification, no egress, no retrieval tax. 11 nines durability.
+              Flat {PRICE_PER_TB_SHORT}. Recurring integrity verification, no egress, no retrieval tax. 11 nines durability.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -439,7 +440,7 @@ const ArchivalLandingPage = () => {
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. Integrity verification, 11 nines durability, and free restores are included.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 // 10 TB stored, 10 TB read/month — same scenario as egress page for comparability.
 // AWS S3 Standard us-east-1: $0.023/GB storage + $0.09/GB egress.
@@ -39,7 +40,7 @@ const FEATURES = [
   {
     icon: ChartLine,
     title: "Flat, predictable cost",
-    desc: "$4.99/TB regardless of where your team is, how often they read, or how fast your data grows. One rate. One line on the invoice.",
+    desc: `${PRICE_PER_TB_SHORT} regardless of where your team is, how often they read, or how fast your data grows. One rate. One line on the invoice.`,
   },
 ];
 
@@ -47,7 +48,7 @@ const MetroLandingPage = () => {
   useSeo({
     title: "Fil One · Hyperscaler speed. Budget-tier bills.",
     description:
-      "S3-compatible object storage at $4.99/TB flat. A global network of storage providers — fast reads without the hyperscaler price tag. No egress fees.",
+      `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. A global network of storage providers — fast reads without the hyperscaler price tag. No egress fees.`,
     canonical: "https://www.fil.one/lp/metro",
   });
 
@@ -80,7 +81,7 @@ const MetroLandingPage = () => {
               Hyperscaler speed.<br /><span style={{ color: "#0090FF" }}>Budget-tier bills.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 580, margin: 0 }}>
-              S3-compatible object storage at $4.99/TB flat. A global network of storage providers — fast access without the hyperscaler price tag. No egress fees.
+              S3-compatible object storage at {PRICE_PER_TB_SHORT} flat. A global network of storage providers — fast access without the hyperscaler price tag. No egress fees.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
@@ -190,7 +191,7 @@ const MetroLandingPage = () => {
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. No egress, no per-request charges, no regional pricing tiers. Fast access doesn't cost extra here.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

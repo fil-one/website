@@ -2,19 +2,26 @@
  * Single source of truth for Fil One's pricing data — the headline storage
  * price and the competitor rates used by the pricing calculator.
  *
- * Centralised so a price change is a one-line edit here rather than a
- * find-and-replace across the site. Shared by the pricing page and the
- * /lp/price landing page.
+ * The raw price constants live in ./pricing.constants.mjs (plain ESM) so the
+ * build-time SEO meta (scripts/routeMeta.mjs) can share the exact same values;
+ * they are re-exported here so app code keeps importing from "@/lib/pricing".
+ * A price change is a one-line edit in pricing.constants.mjs.
  */
 
-/** Fil One storage price, in USD per TB per month. */
-export const PRICE_PER_TB = 4.99;
+export {
+  /** Fil One storage price, in USD per TB per month. */
+  PRICE_PER_TB,
+  /** The numeric amount as a string, e.g. "4.99" (for JSON-LD price fields). */
+  PRICE_AMOUNT,
+  /** The bare price with currency symbol, e.g. "$4.99". */
+  PRICE_DISPLAY,
+  /** The short per-TB rate, e.g. "$4.99/TB". */
+  PRICE_PER_TB_SHORT,
+  /** The full per-TB rate for inline copy, e.g. "$4.99/TB/month". */
+  PRICE_PER_TB_MONTH,
+} from "./pricing.constants.mjs";
 
-/** The bare price with currency symbol, e.g. "$4.99". */
-export const PRICE_DISPLAY = `$${PRICE_PER_TB.toFixed(2)}`;
-
-/** The full per-TB rate for inline copy, e.g. "$4.99/TB/month". */
-export const PRICE_PER_TB_MONTH = `${PRICE_DISPLAY}/TB/month`;
+import { PRICE_PER_TB } from "./pricing.constants.mjs";
 
 /** A storage provider row for the pricing comparison / cost calculator. */
 export interface Competitor {

@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // Access comparison scenario: 10 TB stored, 5 TB/month delivered to viewers (IIIF image tiles, downloads).
@@ -44,8 +45,8 @@ const FEATURES = [
   },
   {
     icon: CurrencyDollar,
-    title: "Flat $4.99/TB",
-    desc: "One rate for storage, nothing for delivery. The bill is your stored TBs times $4.99 — predictable enough to put in a budget line that holds for years.",
+    title: `Flat ${PRICE_PER_TB_SHORT}`,
+    desc: `One rate for storage, nothing for delivery. The bill is your stored TBs times ${PRICE_DISPLAY} — predictable enough to put in a budget line that holds for years.`,
   },
   {
     icon: Plug,
@@ -63,7 +64,7 @@ const CollectionsAccessLandingPage = () => {
   useSeo({
     title: "Fil One · Open the collection. Close the tab.",
     description:
-      "Serve digital collections and IIIF imagery with $0 egress. Flat $4.99/TB storage, S3-compatible for IIIF image servers, 11 nines durability.",
+      `Serve digital collections and IIIF imagery with $0 egress. Flat ${PRICE_PER_TB_SHORT} storage, S3-compatible for IIIF image servers, 11 nines durability.`,
     canonical: "https://www.fil.one/lp/collections-access",
   });
 
@@ -154,7 +155,7 @@ const CollectionsAccessLandingPage = () => {
                 margin: 0,
               }}
             >
-              Flat $4.99/TB. Serve IIIF imagery and downloads at $0 egress, no matter how many people open it.
+              Flat {PRICE_PER_TB_SHORT}. Serve IIIF imagery and downloads at $0 egress, no matter how many people open it.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -413,7 +414,7 @@ const CollectionsAccessLandingPage = () => {
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. Egress is free, so a busy month and a quiet one cost exactly the same.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

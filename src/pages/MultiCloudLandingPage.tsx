@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // Exit cost scenario: 100 TB moved out.
@@ -70,7 +71,7 @@ const FEATURES = [
   {
     icon: ChartLine,
     title: "Flat, predictable cost",
-    desc: "One rate at $4.99/TB regardless of read volume, request count, or where the data goes. Multi-cloud cost modelling has one fewer variable.",
+    desc: `One rate at ${PRICE_PER_TB_SHORT} regardless of read volume, request count, or where the data goes. Multi-cloud cost modelling has one fewer variable.`,
   },
   {
     icon: ShieldCheck,
@@ -83,7 +84,7 @@ const MultiCloudLandingPage = () => {
   useSeo({
     title: "Fil One · Design your exit before you need it",
     description:
-      "S3-compatible object storage with $0 egress. No exit penalty. Move in and out with the same S3 tools and no egress bill. Flat $4.99/TB/month.",
+      `S3-compatible object storage with $0 egress. No exit penalty. Move in and out with the same S3 tools and no egress bill. Flat ${PRICE_PER_TB_MONTH}.`,
     canonical: "https://www.fil.one/lp/multi-cloud",
   });
 
@@ -493,7 +494,7 @@ const MultiCloudLandingPage = () => {
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
               <SectionHeading>
-                One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span>
+                One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span>
               </SectionHeading>
               <SectionSub maxWidth={520}>
                 Storage. That is the whole bill. No egress fees in or out. Portability is built into the pricing, not negotiated.

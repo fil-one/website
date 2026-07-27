@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
 import FaqSection from "@/components/FaqSection";
+import { PRICE_PER_TB_MONTH } from "@/lib/pricing";
 import {
   ShieldCheck,
   Lock,
@@ -378,7 +379,7 @@ const EnterpriseBackupSolutionPage = () => {
                   </a>
                 </div>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.60)", marginTop: 16 }}>
-                  S3-compatible · Immutable object lock · $4.99/TB/month
+                  S3-compatible · Immutable object lock · {PRICE_PER_TB_MONTH}
                 </p>
               </div>
             </div>

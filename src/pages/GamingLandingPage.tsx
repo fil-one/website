@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // Cost-at-scale table. Scenario: 50% egress ratio (reads = 50% of stored volume per month).
@@ -33,7 +34,7 @@ const GamingLandingPage = () => {
   useSeo({
     title: "Fil One · Player data that scales without bill shock",
     description:
-      "$4.99/TB flat storage for game studios. Store player data, UGC, and game assets without egress fees or per-request billing. No bill shock on growth.",
+      `${PRICE_PER_TB_SHORT} flat storage for game studios. Store player data, UGC, and game assets without egress fees or per-request billing. No bill shock on growth.`,
     canonical: "https://www.fil.one/lp/gaming",
   });
 
@@ -59,7 +60,7 @@ const GamingLandingPage = () => {
               Player data that scales<br /><span style={{ color: "#0090FF" }}>without bill shock.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 580, margin: 0 }}>
-              $4.99/TB flat. No egress, no per-request fees, S3-compatible. Storage cost grows linearly with your player base — not ahead of it.
+              {PRICE_PER_TB_SHORT} flat. No egress, no per-request fees, S3-compatible. Storage cost grows linearly with your player base — not ahead of it.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
@@ -155,7 +156,7 @@ const GamingLandingPage = () => {
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. No egress, no per-request fees. The invoice is predictable before the season starts.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

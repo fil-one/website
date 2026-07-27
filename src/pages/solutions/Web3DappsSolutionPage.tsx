@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
 import FaqSection from "@/components/FaqSection";
+import { PRICE_PER_TB_MONTH } from "@/lib/pricing";
 import {
   LinkSimple,
   ShieldCheck,
@@ -32,7 +33,7 @@ const FEATURES = [
   {
     icon: CurrencyDollar,
     title: "Predictable, low-cost pricing",
-    body: "Flat $4.99/TB/month. No per-request fees that explode with NFT traffic spikes. No egress charges when your dApp serves data to users.",
+    body: `Flat ${PRICE_PER_TB_MONTH}. No per-request fees that explode with NFT traffic spikes. No egress charges when your dApp serves data to users.`,
   },
   {
     icon: Code,
@@ -376,7 +377,7 @@ const Web3DappsSolutionPage = () => {
                   </a>
                 </div>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.60)", marginTop: 16 }}>
-                  S3-compatible · Verifiable integrity · $4.99/TB/month after trial
+                  S3-compatible · Verifiable integrity · {PRICE_PER_TB_MONTH} after trial
                 </p>
               </div>
             </div>

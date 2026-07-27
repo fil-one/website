@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 const FEATURES = [
@@ -25,7 +26,7 @@ const FEATURES = [
   {
     icon: ChartLine,
     title: "Flat, predictable cost",
-    desc: "$4.99/TB flat. No egress fees on reads, no per-request charges. High-volume on-chain event indexing and custody audit logs don't generate surprise invoices.",
+    desc: `${PRICE_PER_TB_SHORT} flat. No egress fees on reads, no per-request charges. High-volume on-chain event indexing and custody audit logs don't generate surprise invoices.`,
   },
 ];
 
@@ -213,7 +214,7 @@ obj = s3.get_object(
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. No egress on compliance reads, no per-request fees on audit queries. Predictable cost for unpredictable on-chain activity.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

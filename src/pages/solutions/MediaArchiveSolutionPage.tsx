@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
 import FaqSection from "@/components/FaqSection";
+import { PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 import {
   FilmSlate,
   CloudArrowDown,
@@ -27,7 +28,7 @@ const FEATURES = [
   {
     icon: Archive,
     title: "Long-term archive at low cost",
-    body: "$4.99/TB/month, no retrieval fees, no minimum storage duration. Cheaper than cold tiers that penalize you for accessing your own data.",
+    body: `${PRICE_PER_TB_MONTH}, no retrieval fees, no minimum storage duration. Cheaper than cold tiers that penalize you for accessing your own data.`,
   },
   {
     icon: CurrencyDollar,
@@ -74,7 +75,7 @@ const MediaArchiveSolutionPage = () => {
   useSeo({
     title: "Media & Archive Storage · Fil One",
     description:
-      "Low-cost, high-durability object storage for video, audio, and long-term archives. No egress fees, no retrieval penalties. $4.99/TB/month.",
+      `Low-cost, high-durability object storage for video, audio, and long-term archives. No egress fees, no retrieval penalties. ${PRICE_PER_TB_MONTH}.`,
     canonical: "https://www.fil.one/solutions/media-archive",
     ogImage: "https://www.fil.one/og-image.png",
   });
@@ -190,7 +191,7 @@ const MediaArchiveSolutionPage = () => {
         >
           <div className="max-w-[1120px] mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
             {[
-              "$4.99 / TB / month",
+              `${PRICE_DISPLAY} / TB / month`,
               "No retrieval penalties",
               "S3-compatible",
               "Verifiable provenance",
@@ -376,7 +377,7 @@ const MediaArchiveSolutionPage = () => {
                   </a>
                 </div>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.60)", marginTop: 16 }}>
-                  S3-compatible · Verifiable integrity · $4.99/TB/month after trial
+                  S3-compatible · Verifiable integrity · {PRICE_PER_TB_MONTH} after trial
                 </p>
               </div>
             </div>

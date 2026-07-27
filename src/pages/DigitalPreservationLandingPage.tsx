@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // Preservation comparison scenario: 10 TB collection, one full fixity review per year, amortized monthly.
@@ -76,7 +77,7 @@ const DigitalPreservationLandingPage = () => {
   useSeo({
     title: "Fil One · Preservation you can verify",
     description:
-      "Flat $4.99/TB digital preservation storage with integrity verification every ~24 hours. No retrieval fees, no egress. 11 nines durability, S3-compatible.",
+      `Flat ${PRICE_PER_TB_SHORT} digital preservation storage with integrity verification every ~24 hours. No retrieval fees, no egress. 11 nines durability, S3-compatible.`,
     canonical: "https://www.fil.one/lp/digital-preservation",
   });
 
@@ -167,7 +168,7 @@ const DigitalPreservationLandingPage = () => {
                 margin: 0,
               }}
             >
-              Integrity verified every 24 hours, not once a year. Built in at $4.99/TB flat.
+              Integrity verified every 24 hours, not once a year. Built in at {PRICE_PER_TB_SHORT} flat.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -427,7 +428,7 @@ const DigitalPreservationLandingPage = () => {
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. Integrity verification, 11 nines durability, and free reads are included — verifying the collection never adds a cent.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 const FEATURES = [
@@ -37,7 +38,7 @@ const DataSovereigntyLandingPage = () => {
   useSeo({
     title: "Fil One · EU data residency with S3-compatible tools",
     description:
-      "S3-compatible object storage with EU region endpoint. Store data in EU infrastructure at $4.99/TB flat. No egress fees.",
+      `S3-compatible object storage with EU region endpoint. Store data in EU infrastructure at ${PRICE_PER_TB_SHORT} flat. No egress fees.`,
     canonical: "https://www.fil.one/lp/data-sovereignty",
   });
 
@@ -128,7 +129,7 @@ const DataSovereigntyLandingPage = () => {
                 margin: 0,
               }}
             >
-              S3-compatible storage with EU region endpoint. Flat $4.99/TB. No egress, no re-architecture.
+              S3-compatible storage with EU region endpoint. Flat {PRICE_PER_TB_SHORT}. No egress, no re-architecture.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -377,7 +378,7 @@ s3.upload_file("dataset.parquet", "eu-data", "uploads/dataset.parquet")`}</pre>
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
               <SectionHeading>
-                One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span>
+                One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span>
               </SectionHeading>
               <SectionSub maxWidth={520}>
                 Storage. That is the whole bill. No egress fees, no per-request charges. EU residency does not carry a premium.

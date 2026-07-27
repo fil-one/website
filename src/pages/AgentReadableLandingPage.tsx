@@ -4,10 +4,11 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 const FEATURES = [
   { icon: FileText, title: "Machine-readable llms.txt", desc: "Pricing, endpoint, and S3 compatibility are published in a structured llms.txt at a stable URL. An agent fetches one file and has the full picture." },
-  { icon: ChartLine, title: "One rate, no tiers", desc: "$4.99/TB/month. No per-GB-vs-per-TB ambiguity, no tiered egress table, no request classes to reconcile. A single number an agent can compute against." },
+  { icon: ChartLine, title: "One rate, no tiers", desc: `${PRICE_PER_TB_MONTH}. No per-GB-vs-per-TB ambiguity, no tiered egress table, no request classes to reconcile. A single number an agent can compute against.` },
   { icon: Plug, title: "Full S3 parity", desc: "The same API surface an agent already knows. Compatibility is stated plainly, not scattered across PDFs — drop-in against the documented endpoint." },
   { icon: MagnifyingGlass, title: "No gated pricing", desc: "The price is on the page and in llms.txt — not behind a 'contact sales' form. An agent evaluating vendors never hits a wall where the number should be." },
 ];
@@ -15,7 +16,7 @@ const FEATURES = [
 const LLMS_TXT = `$ curl -s https://www.fil.one/llms.txt
 
 ## Pricing
-- Pay-as-you-go: $4.99/TB/month
+- Pay-as-you-go: ${PRICE_PER_TB_MONTH}
   — no egress fees, no API request fees
 - Free trial: 30 days, 1 TB included, no credit card
 
@@ -28,7 +29,7 @@ const AgentReadableLandingPage = () => {
   useSeo({
     title: "Fil One · Priced so plainly your agent can read it",
     description:
-      "Flat $4.99/TB pricing published in machine-readable llms.txt, with full S3 parity. No gated quotes — an AI coding agent can evaluate Fil One in one pass.",
+      `Flat ${PRICE_PER_TB_SHORT} pricing published in machine-readable llms.txt, with full S3 parity. No gated quotes — an AI coding agent can evaluate Fil One in one pass.`,
     canonical: "https://www.fil.one/lp/agent-readable",
   });
 
@@ -54,7 +55,7 @@ const AgentReadableLandingPage = () => {
               Priced so plainly<br /><span style={{ color: "#0090FF" }}>your agent can read it.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 600, margin: 0 }}>
-              Flat $4.99/TB, published in machine-readable llms.txt with full S3 parity. No gated quotes, no "contact sales" for a number — an agent parses the price and the API in one pass.
+              Flat {PRICE_PER_TB_SHORT}, published in machine-readable llms.txt with full S3 parity. No gated quotes, no "contact sales" for a number — an agent parses the price and the API in one pass.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
@@ -130,7 +131,7 @@ const AgentReadableLandingPage = () => {
             <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(135deg, #020D1A 0%, #0D2847 55%, #041525 100%)", borderRadius: 20, textAlign: "center" }} className="px-6 md:px-12 py-16 md:py-[104px]">
               <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1"/></svg>')}")`, backgroundSize: "60px 60px", maskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", pointerEvents: "none" }} />
               <div style={{ position: "relative" }}>
-                <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>One rate. $4.99/TB/month.</h2>
+                <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>One rate. {PRICE_PER_TB_MONTH}.</h2>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", maxWidth: 560, marginLeft: "auto", marginRight: "auto", marginBottom: 32 }}>Storage. No egress, no per-request fees, no tiers. Free 1 TB evaluation — point your agent at llms.txt, confirm the parity, and connect against the documented endpoint.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark"><span className="btn-primary-inner">Start for free</span></a>

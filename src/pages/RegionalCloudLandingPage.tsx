@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 const FEATURES = [
@@ -92,7 +93,7 @@ const RegionalCloudLandingPage = () => {
               {[
                 { heading: "Deployment SLAs", sub: "Capacity assurance and deployment SLAs available on 1, 3, and 5-year terms via the Business plan. Contact for terms." },
                 { heading: "S3 API compatibility", sub: "Full S3 API — same SDKs, same tooling, same integration patterns as AWS S3. No re-architecture for your customers." },
-                { heading: "Flat, predictable pricing", sub: "$4.99/TB/month, no egress, no per-request fees. Simple cost modelling for your own pricing layer." },
+                { heading: "Flat, predictable pricing", sub: `${PRICE_PER_TB_MONTH}, no egress, no per-request fees. Simple cost modelling for your own pricing layer.` },
               ].map(({ heading, sub }) => (
                 <div key={heading} style={{ border: "1px solid rgba(0,0,0,0.07)", borderRadius: 16, backgroundColor: "#F9FAFB", padding: "24px 24px", textAlign: "left" }}>
                   <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 600, fontSize: 17, color: "#09090B", marginBottom: 8, lineHeight: "1.3" }}>{heading}</p>

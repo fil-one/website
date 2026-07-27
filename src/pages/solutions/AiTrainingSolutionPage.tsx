@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
 import FaqSection from "@/components/FaqSection";
+import { PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 import {
   Database,
   Lightning,
@@ -194,7 +195,7 @@ const AiTrainingSolutionPage = () => {
           <div className="max-w-[1120px] mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
             {[
               "S3-compatible — drop-in replacement",
-              "$4.99 / TB / month",
+              `${PRICE_DISPLAY} / TB / month`,
               "Cryptographic data integrity",
               "Multi-region redundancy",
             ].map((item) => (
@@ -447,7 +448,7 @@ const AiTrainingSolutionPage = () => {
                     marginTop: 16,
                   }}
                 >
-                  S3-compatible · Verifiable integrity · $4.99/TB/month after trial
+                  S3-compatible · Verifiable integrity · {PRICE_PER_TB_MONTH} after trial
                 </p>
               </div>
             </div>

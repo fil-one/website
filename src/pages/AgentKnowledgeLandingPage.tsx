@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 const FEATURES = [
@@ -17,7 +18,7 @@ const FEATURES = [
   {
     icon: ChartLine,
     title: "Flat cost for loop traffic",
-    desc: "Agents write frequently and read back their own outputs. Per-request billing makes loops expensive. $4.99/TB flat — no PUT fees, no GET fees, no egress.",
+    desc: `Agents write frequently and read back their own outputs. Per-request billing makes loops expensive. ${PRICE_PER_TB_SHORT} flat — no PUT fees, no GET fees, no egress.`,
     comingSoon: false,
     waitlistHref: null,
   },
@@ -41,7 +42,7 @@ const AgentKnowledgeLandingPage = () => {
   useSeo({
     title: "Fil One · Turn Object Storage Into an Agent Knowledge Layer",
     description:
-      "S3-compatible storage purpose-built for AI agents: agent memory, RAG corpus, model artifacts, and inference I/O. $4.99/TB flat, no per-request fees.",
+      `S3-compatible storage purpose-built for AI agents: agent memory, RAG corpus, model artifacts, and inference I/O. ${PRICE_PER_TB_SHORT} flat, no per-request fees.`,
     canonical: "https://www.fil.one/lp/agent-knowledge-layer",
   });
 
@@ -211,7 +212,7 @@ s3.put_object(
             <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(135deg, #020D1A 0%, #0D2847 55%, #041525 100%)", borderRadius: 20, textAlign: "center" }} className="px-6 md:px-12 py-16 md:py-[104px]">
               <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1"/></svg>')}")`, backgroundSize: "60px 60px", maskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", pointerEvents: "none" }} />
               <div style={{ position: "relative" }}>
-                <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>One rate. $4.99/TB/month.</h2>
+                <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>One rate. {PRICE_PER_TB_MONTH}.</h2>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", maxWidth: 560, marginLeft: "auto", marginRight: "auto", marginBottom: 32 }}>Storage only — no PUT fees, no GET fees, no egress. Try it free with 1 TB: one place to store your data, retrieve it, and put it to work.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark"><span className="btn-primary-inner">Start for free</span></a>

@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 const FEATURES = [
@@ -20,7 +21,7 @@ const FEATURES = [
   {
     icon: ChartLine,
     title: "Predictable cost",
-    desc: "One flat rate per TB. No request fees, no retrieval tiers. The storage line is storage volume times $4.99.",
+    desc: `One flat rate per TB. No request fees, no retrieval tiers. The storage line is storage volume times ${PRICE_DISPLAY}.`,
   },
   {
     icon: Plug,
@@ -33,7 +34,7 @@ const CheckpointsLandingPage = () => {
   useSeo({
     title: "Fil One · Stop deleting checkpoints you'll want back",
     description:
-      "S3-compatible storage at $4.99/TB flat. Keep every checkpoint, eval set, and training artifact without per-GB guilt. No egress fees on eval runs.",
+      `S3-compatible storage at ${PRICE_PER_TB_SHORT} flat. Keep every checkpoint, eval set, and training artifact without per-GB guilt. No egress fees on eval runs.`,
     canonical: "https://www.fil.one/lp/ml-checkpoints",
   });
 
@@ -148,7 +149,7 @@ state = torch.load(obj["Body"])`;
                 margin: 0,
               }}
             >
-              S3-compatible storage at $4.99/TB flat. Keep every checkpoint, eval set, and training artifact without rationing by cost.
+              S3-compatible storage at {PRICE_PER_TB_SHORT} flat. Keep every checkpoint, eval set, and training artifact without rationing by cost.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -483,7 +484,7 @@ state = torch.load(obj["Body"])`;
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
               <SectionHeading>
-                One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span>
+                One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span>
               </SectionHeading>
               <SectionSub maxWidth={520}>
                 Storage. That is the whole bill. No egress fees, no request charges, no retrieval tier. Keep every checkpoint, load it as often as you need to.

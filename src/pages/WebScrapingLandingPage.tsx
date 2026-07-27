@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // Per-PUT comparison: 1 billion PUTs/month.
@@ -32,7 +33,7 @@ const FEATURES = [
   {
     icon: ChartLine,
     title: "Predictable collection cost",
-    desc: "Storage at $4.99/TB. The write rate determines the dataset size; the dataset size determines the cost. No request-rate multiplier.",
+    desc: `Storage at ${PRICE_PER_TB_SHORT}. The write rate determines the dataset size; the dataset size determines the cost. No request-rate multiplier.`,
   },
   {
     icon: Plug,
@@ -45,7 +46,7 @@ const WebScrapingLandingPage = () => {
   useSeo({
     title: "Fil One · Scrape at scale without the per-PUT bill",
     description:
-      "$4.99/TB flat storage. No per-PUT charges, no egress fees. Run large-scale web scraping and data collection pipelines without per-write billing.",
+      `${PRICE_PER_TB_SHORT} flat storage. No per-PUT charges, no egress fees. Run large-scale web scraping and data collection pipelines without per-write billing.`,
     canonical: "https://www.fil.one/lp/web-scraping",
   });
 
@@ -160,7 +161,7 @@ with ThreadPoolExecutor(max_workers=64) as pool:
                 margin: 0,
               }}
             >
-              $4.99/TB flat. No per-PUT charges, no egress, S3-compatible. Collection pipelines that bill per write shrink the dataset the budget allows.
+              {PRICE_PER_TB_SHORT} flat. No per-PUT charges, no egress, S3-compatible. Collection pipelines that bill per write shrink the dataset the budget allows.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -478,7 +479,7 @@ with ThreadPoolExecutor(max_workers=64) as pool:
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
               <SectionHeading>
-                One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span>
+                One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span>
               </SectionHeading>
               <SectionSub maxWidth={520}>
                 Storage. That is the whole bill. No per-PUT fees, no egress. Collection pipelines cost what they produce, not what they write.
