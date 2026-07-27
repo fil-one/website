@@ -134,7 +134,7 @@ s3.put_object(
               {[
                 { label: "The architecture cost", catch: null,  highlight: false, body: "A typical RAG-enabled agent requires several services duct-taped together. A vector database, a retrieval layer, a compute service, and an object store, each with its own integration, its own failure point, and its own bill. You're paying for complexity before your agents run a single query." },
                 { label: "The usage cost",        catch: null,  highlight: false, body: "A single agent task triggers dozens of retrieval calls: context lookups, memory reads, state writes. Multiply that across thousands of tasks per hour and the meter runs constantly. Every action your agents take is a billable event." },
-                { label: "A different model",     catch: "Fil One collapses the stack and the bill", highlight: true, body: "One platform for agent memory, RAG corpus, and retrieval. No glue code required. You pay for what you store, not what your agents do with it." },
+                { label: "A different model",     catch: "Fil One collapses the stack and the bill", highlight: true, body: "One platform for agent memory, RAG corpus, and retrieval. No glue code required. You pay for storage, not for what your agents do with it." },
               ].map(({ label, body, catch: c, highlight }) => (
                 <div key={label} className="flex flex-col rounded-2xl overflow-hidden" style={{
                   border: highlight ? "1px solid rgba(0,144,255,0.25)" : "1px solid rgba(0,0,0,0.07)",

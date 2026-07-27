@@ -123,7 +123,7 @@ const WHY = [
     icon: CurrencyDollar,
     title: "No extra cost",
     description:
-      "The toolkit is free with your storage plan. You pay only for the storage you actually use.",
+      "The toolkit is free with your storage plan. You pay for the storage you use, never for the toolkit itself.",
   },
   {
     icon: Wrench,

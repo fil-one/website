@@ -131,7 +131,7 @@ const CostTickerLandingPage = () => {
           <div ref={featuresRef} className={`flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto reveal${featuresInView ? " in-view" : ""}`}>
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Meters you don't pay</SectionLabel>
-              <SectionHeading>The bill is the rate <span style={{ color: "#0090FF" }}>times what you store. Full stop.</span></SectionHeading>
+              <SectionHeading>The bill is the rate <span style={{ color: "#0090FF" }}>times what you store. No meters.</span></SectionHeading>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
               {FEATURES.map(({ icon: Icon, title, desc }) => (

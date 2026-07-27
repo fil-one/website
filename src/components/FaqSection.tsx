@@ -73,14 +73,14 @@ const faqs = [
       "Egress is any data transferred out of your bucket: to the internet, to another cloud, or to your own servers. With Fil One, all egress is free, always, at any scale.",
   },
   {
-    question: "Is there a minimum storage requirement?",
+    question: "Is there a minimum charge?",
     answer:
-      "No minimum. Store as little or as much as you need, and pay only for what you use, billed per TB per month.",
+      `Storage is billed at ${PRICE_DISPLAY} per TB per month, with a ${PRICE_DISPLAY} monthly minimum. Store under 1 TB and you pay the ${PRICE_DISPLAY} minimum; store more and you pay per TB for what you use, with no egress or API fees.`,
   },
   {
     question: "How is my bill calculated?",
     answer:
-      `Billing is ${PRICE_DISPLAY} per TB stored per month, with no fees for egress or API operations. Your bill is the amount of data you store, multiplied by the rate.`,
+      `Billing is ${PRICE_DISPLAY} per TB stored per month, with no fees for egress or API operations. Your bill is what you store multiplied by the rate, subject to a ${PRICE_DISPLAY} monthly minimum.`,
   },
   {
     question: "Do you offer annual or reserved capacity plans?",
