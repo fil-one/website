@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 const FEATURES = [
@@ -25,7 +26,7 @@ const FEATURES = [
   {
     icon: ChartLine,
     title: "Flat cost across versions",
-    desc: "Versions cost $4.99/TB like any stored object. The version history grows with the data; the rate per TB does not change.",
+    desc: `Versions cost ${PRICE_PER_TB_SHORT} like any stored object. The version history grows with the data; the rate per TB does not change.`,
   },
 ];
 
@@ -33,7 +34,7 @@ const VersioningLandingPage = () => {
   useSeo({
     title: "Fil One · Recreate any dataset from any point",
     description:
-      "S3-compatible storage with built-in version history. Retrieve any prior state by version ID. $4.99/TB flat. No egress on version reads.",
+      `S3-compatible storage with built-in version history. Retrieve any prior state by version ID. ${PRICE_PER_TB_SHORT} flat. No egress on version reads.`,
     canonical: "https://www.fil.one/lp/versioning",
   });
 
@@ -94,7 +95,7 @@ prior_state = obj["Body"].read()`;
               <span style={{ color: "#0090FF" }}>from any point.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 580, margin: 0 }}>
-              S3-compatible storage with built-in version history. Restore any prior state by version ID. $4.99/TB flat, no egress on reads.
+              S3-compatible storage with built-in version history. Restore any prior state by version ID. {PRICE_PER_TB_SHORT} flat, no egress on reads.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
@@ -157,7 +158,7 @@ prior_state = obj["Body"].read()`;
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Why it works</SectionLabel>
               <SectionHeading>Version history that <span style={{ color: "#0090FF" }}>costs what it stores.</span></SectionHeading>
-              <SectionSub maxWidth={560}>Standard S3 versioning API. Versions billed at $4.99/TB like any stored object — no retrieval fee on any read.</SectionSub>
+              <SectionSub maxWidth={560}>Standard S3 versioning API. Versions billed at {PRICE_PER_TB_SHORT} like any stored object — no retrieval fee on any read.</SectionSub>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
               {FEATURES.map(({ icon: Icon, title, desc }) => (
@@ -176,7 +177,7 @@ prior_state = obj["Body"].read()`;
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage — versions included. No retrieval fee, no egress per read. The whole version history costs what it takes to store it.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

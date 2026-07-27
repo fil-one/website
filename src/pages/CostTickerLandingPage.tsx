@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
+import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 // Same 10 TB workload, 10 TB read/month — the "meter" each provider runs.
 // AWS: 10,240×$0.023 = $235.52 storage + 10,240×$0.09 = $921.60 egress ≈ $1,157
@@ -21,14 +22,14 @@ const FEATURES = [
   { icon: ArrowsOut, title: "No egress meter", desc: "Every byte you read on a hyperscaler ticks the egress meter at $0.09/GB. On Fil One that meter doesn't exist — reads are included." },
   { icon: ChartLine, title: "No request meter", desc: "PUT, GET, LIST, HEAD all run a per-operation counter elsewhere. Here they're free, so a busy month doesn't become an expensive one." },
   { icon: Plug, title: "S3-compatible", desc: "Point your existing tools at the endpoint. The workload doesn't change — only the meter that was quietly running underneath it." },
-  { icon: ShieldCheck, title: "The invoice you can predict", desc: "Stored TB times $4.99. You know December's bill in January, because nothing in between is metered." },
+  { icon: ShieldCheck, title: "The invoice you can predict", desc: `Stored TB times ${PRICE_DISPLAY}. You know December's bill in January, because nothing in between is metered.` },
 ];
 
 const CostTickerLandingPage = () => {
   useSeo({
     title: "Fil One · Watch the meter you're not paying",
     description:
-      "Hyperscalers meter every read, request, and byte out. Fil One is flat $4.99/TB with no egress and no per-request fees. See the side-by-side.",
+      `Hyperscalers meter every read, request, and byte out. Fil One is flat ${PRICE_PER_TB_SHORT} with no egress and no per-request fees. See the side-by-side.`,
     canonical: "https://www.fil.one/lp/cost-ticker",
   });
 
@@ -54,7 +55,7 @@ const CostTickerLandingPage = () => {
               Watch the meter<br /><span style={{ color: "#0090FF" }}>you're not paying.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 600, margin: 0 }}>
-              Hyperscalers meter every read, every request, every byte out. Fil One is flat $4.99/TB — no egress, no per-request fees. Same workload, side by side.
+              Hyperscalers meter every read, every request, every byte out. Fil One is flat {PRICE_PER_TB_SHORT} — no egress, no per-request fees. Same workload, side by side.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
@@ -150,7 +151,7 @@ const CostTickerLandingPage = () => {
             <div style={{ position: "relative", overflow: "hidden", background: "linear-gradient(135deg, #020D1A 0%, #0D2847 55%, #041525 100%)", borderRadius: 20, textAlign: "center" }} className="px-6 md:px-12 py-16 md:py-[104px]">
               <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1"/></svg>')}")`, backgroundSize: "60px 60px", maskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", pointerEvents: "none" }} />
               <div style={{ position: "relative" }}>
-                <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>Turn off the meter. $4.99/TB/month.</h2>
+                <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>Turn off the meter. {PRICE_PER_TB_MONTH}.</h2>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", maxWidth: 560, marginLeft: "auto", marginRight: "auto", marginBottom: 32 }}>Storage only — no egress meter, no request meter, no tiers. Free 1 TB evaluation: run your real workload and compare the invoice. The egress line will read zero.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark"><span className="btn-primary-inner">Start for free</span></a>

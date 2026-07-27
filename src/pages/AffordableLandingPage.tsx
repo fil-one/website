@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // What you actually pay on each provider for a simple 10 TB workload, light reads.
@@ -22,7 +23,7 @@ const COMPARE_ROWS = [
 ];
 
 const FEATURES = [
-  { icon: ChartLine, title: "One number on the invoice",    desc: "Storage volume times $4.99. No egress column, no request column, no retrieval tier. The invoice has one line." },
+  { icon: ChartLine, title: "One number on the invoice",    desc: `Storage volume times ${PRICE_DISPLAY}. No egress column, no request column, no retrieval tier. The invoice has one line.` },
   { icon: ArrowsOut, title: "No egress fees",               desc: "Reads are included in flat storage. Download your own data as many times as you need — $0 in egress." },
   { icon: Plug,      title: "S3-compatible, zero migration cost", desc: "Existing SDKs, tools, and scripts connect with an endpoint change. No rewrite, no new library, no operational overhead." },
   { icon: ShieldCheck,title: "Recurring integrity checks", desc: "Every stored object is verified approximately every 24 hours. Low-cost storage that also proves your data is intact." },
@@ -32,7 +33,7 @@ const AffordableLandingPage = () => {
   useSeo({
     title: "Fil One · Make storage your lowest line item",
     description:
-      "S3-compatible object storage at $4.99/TB flat. No egress fees, no per-request charges, no confusing billing. One number. Start in minutes.",
+      `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. No egress fees, no per-request charges, no confusing billing. One number. Start in minutes.`,
     canonical: "https://www.fil.one/lp/affordable",
   });
 
@@ -58,7 +59,7 @@ const AffordableLandingPage = () => {
               Make storage your lowest line item<br /><span style={{ color: "#0090FF" }}>and the last thing you worry about.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 580, margin: 0 }}>
-              $4.99/TB flat. No egress fees, no per-request charges, no confusing billing tiers. Buckets and retrieval work exactly as you expect.
+              {PRICE_PER_TB_SHORT} flat. No egress fees, no per-request charges, no confusing billing tiers. Buckets and retrieval work exactly as you expect.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
@@ -154,8 +155,8 @@ const AffordableLandingPage = () => {
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
-              <SectionSub maxWidth={520}>Storage. That is the whole bill. No egress, no requests, no tiers. Multiply your TB by $4.99 and that is the invoice.</SectionSub>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
+              <SectionSub maxWidth={520}>Storage. That is the whole bill. No egress, no requests, no tiers. Multiply your TB by {PRICE_DISPLAY} and that is the invoice.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>

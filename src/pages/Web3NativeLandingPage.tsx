@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 const FEATURES = [
@@ -25,7 +26,7 @@ const FEATURES = [
   {
     icon: ChartLine,
     title: "Flat cost at any scale",
-    desc: "$4.99/TB regardless of volume. Petabyte-scale research datasets, blockchain analytics archives, and developer infra pay the same rate per TB.",
+    desc: `${PRICE_PER_TB_SHORT} regardless of volume. Petabyte-scale research datasets, blockchain analytics archives, and developer infra pay the same rate per TB.`,
   },
 ];
 
@@ -33,7 +34,7 @@ const Web3NativeLandingPage = () => {
   useSeo({
     title: "Fil One · You didn't build in Web3 to end up fully dependent on Amazon",
     description:
-      "S3-compatible object storage backed by Filecoin. CID per object, Proof of Spacetime verification, $4.99/TB flat. For Web3-native analytics, research, and dev infra teams.",
+      `S3-compatible object storage backed by Filecoin. CID per object, Proof of Spacetime verification, ${PRICE_PER_TB_SHORT} flat. For Web3-native analytics, research, and dev infra teams.`,
     canonical: "https://www.fil.one/lp/web3-native",
   });
 
@@ -89,7 +90,7 @@ dataset = ds.dataset(
             </h1>
 
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 600, margin: 0 }}>
-              Decentralized object storage backed by Filecoin. S3-compatible — your existing tools connect today. $4.99/TB flat.
+              Decentralized object storage backed by Filecoin. S3-compatible — your existing tools connect today. {PRICE_PER_TB_SHORT} flat.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -211,7 +212,7 @@ dataset = ds.dataset(
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. Filecoin-backed integrity verification, $0 egress, and 11 nines durability are included.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

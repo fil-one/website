@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // Grant comparison scenario: 5 TB of research data, one annual integrity review, amortized monthly.
@@ -49,7 +50,7 @@ const FEATURES = [
   {
     icon: CurrencyDollar,
     title: "Predictable flat rate",
-    desc: "$4.99/TB/month, flat. A number you can write into a data management plan and a multi-year budget and trust to hold up.",
+    desc: `${PRICE_PER_TB_MONTH}, flat. A number you can write into a data management plan and a multi-year budget and trust to hold up.`,
   },
   {
     icon: Wallet,
@@ -72,7 +73,7 @@ const GrantFundedLandingPage = () => {
   useSeo({
     title: "Fil One · Storage that outlives the grant cycle",
     description:
-      "Flat $4.99/TB research data storage with no exit fees and integrity verification every ~24 hours. Predictable for multi-year grants, S3-compatible.",
+      `Flat ${PRICE_PER_TB_SHORT} research data storage with no exit fees and integrity verification every ~24 hours. Predictable for multi-year grants, S3-compatible.`,
     canonical: "https://www.fil.one/lp/grant-funded",
   });
 
@@ -163,7 +164,7 @@ const GrantFundedLandingPage = () => {
                 margin: 0,
               }}
             >
-              Flat $4.99/TB. A cost you can write into a data management plan and trust to hold. No exit or retrieval fees.
+              Flat {PRICE_PER_TB_SHORT}. A cost you can write into a data management plan and trust to hold. No exit or retrieval fees.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -422,7 +423,7 @@ const GrantFundedLandingPage = () => {
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. Integrity verification, 11 nines durability, free reads, and no exit fees are all included — the number you budget is the number you pay.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

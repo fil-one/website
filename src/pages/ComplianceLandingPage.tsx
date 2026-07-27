@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 const FEATURES = [
@@ -33,7 +34,7 @@ const ComplianceLandingPage = () => {
   useSeo({
     title: "Fil One · Audit-ready storage with recurring integrity verification",
     description:
-      "S3-compatible storage with recurring integrity verification every ~24 hours and full version history. $4.99/TB flat. No egress fees.",
+      `S3-compatible storage with recurring integrity verification every ~24 hours and full version history. ${PRICE_PER_TB_SHORT} flat. No egress fees.`,
     canonical: "https://www.fil.one/lp/compliance",
   });
 
@@ -124,7 +125,7 @@ const ComplianceLandingPage = () => {
                 margin: 0,
               }}
             >
-              S3-compatible storage with recurring integrity verification and full version history. $4.99/TB flat.
+              S3-compatible storage with recurring integrity verification and full version history. {PRICE_PER_TB_SHORT} flat.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -379,7 +380,7 @@ const ComplianceLandingPage = () => {
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
               <SectionHeading>
-                One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span>
+                One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span>
               </SectionHeading>
               <SectionSub maxWidth={520}>
                 Storage. That is the whole bill. Integrity verification, version history, and 11 nines durability are included — not add-ons.
