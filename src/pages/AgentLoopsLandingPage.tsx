@@ -31,7 +31,7 @@ const FEATURES = [
   {
     icon: ArrowsOut,
     title: "No egress on context reads",
-    desc: "Retrieving memory, loading corpus chunks, and reading prior outputs cost $0 in egress. Agent loops that read frequently pay only for what they store.",
+    desc: "Retrieving memory, loading corpus chunks, and reading prior outputs cost $0 in egress. Agent loops that read frequently pay for storage, not for reads.",
   },
   {
     icon: Plug,

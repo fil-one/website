@@ -20,7 +20,7 @@ const FEATURES = [
   {
     icon: ArrowsOut,
     title: "No egress on reads",
-    desc: "Reading back transaction history, user data, or audit logs costs $0 in egress. Crypto products that read frequently — wallets, explorers, dashboards — pay only for what they store.",
+    desc: "Reading back transaction history, user data, or audit logs costs $0 in egress. Crypto products that read frequently — wallets, explorers, dashboards — pay for storage, not for reads.",
   },
   {
     icon: ChartLine,

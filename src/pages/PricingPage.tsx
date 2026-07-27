@@ -15,6 +15,7 @@ import { COMPETITORS, PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 const PAYGO_FEATURES = [
   "1 TB free for 30 days",
   "Pay monthly",
+  `${PRICE_DISPLAY}/month minimum`,
   "No egress or API request fees",
   "Data integrity guarantees",
 ];
