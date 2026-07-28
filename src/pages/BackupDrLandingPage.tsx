@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // Scenario: 50 TB retained for DR, plus one full restore of a 5 TB workload to
@@ -144,7 +145,7 @@ const BackupDrLandingPage = () => {
   useSeo({
     title: "Fil One · Restore without the retrieval bill",
     description:
-      "S3-compatible backup target at $4.99/TB flat. No retrieval fees. No egress. Object Lock and versioning included. Restore with the S3 tools your backup software already uses.",
+      `S3-compatible backup target at ${PRICE_PER_TB_SHORT} flat. No retrieval fees. No egress. Object Lock and versioning included. Restore with the S3 tools your backup software already uses.`,
     canonical: "https://www.fil.one/lp/backup-dr",
   });
 
@@ -236,7 +237,7 @@ const BackupDrLandingPage = () => {
                 margin: 0,
               }}
             >
-              Flat $4.99/TB. No retrieval fees, no egress, no archive-tier wait. A hot, S3-compatible backup target you can actually afford to restore from.
+              Flat {PRICE_PER_TB_SHORT}. No retrieval fees, no egress, no archive-tier wait. A hot, S3-compatible backup target you can actually afford to restore from.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -810,7 +811,7 @@ const BackupDrLandingPage = () => {
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
               <SectionHeading>
-                One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span>
+                One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span>
               </SectionHeading>
               <SectionSub maxWidth={520}>
                 That is the whole bill. No retrieval. No egress. No archive-tier sleight of hand. The number on the invoice is the rate times the TB you keep.

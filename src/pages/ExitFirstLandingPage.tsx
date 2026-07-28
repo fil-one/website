@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 // Exit cost on 100 TB. Hyperscaler internet egress vs Fil One.
 // AWS S3 us-east-1: 102,400 GB × $0.09 = $9,216. Fil One: $0.
@@ -17,7 +18,7 @@ const EXIT_ROWS = [
 const FEATURES = [
   { icon: Plug, title: "Full S3 parity", desc: "Standard S3 API. The tools that read and write Fil One are the same ones that read and write everywhere else, so the migrate-off command is one you already know." },
   { icon: ArrowsOut, title: "$0 egress on exit", desc: "Moving your data out costs nothing. The exit is a sync command you can run today, for free — not a contract renegotiation or a budget request." },
-  { icon: ChartLine, title: "Flat, predictable cost", desc: "$4.99/TB/month while you stay. With no egress and no per-request fees, the bill that would normally make leaving expensive doesn't exist." },
+  { icon: ChartLine, title: "Flat, predictable cost", desc: `${PRICE_PER_TB_MONTH} while you stay. With no egress and no per-request fees, the bill that would normally make leaving expensive doesn't exist.` },
   { icon: ShieldCheck, title: "Integrity-verified data", desc: "Every object is verified approximately every 24 hours, so the data you eventually move out is provably the data you put in." },
 ];
 
@@ -25,7 +26,7 @@ const ExitFirstLandingPage = () => {
   useSeo({
     title: "Fil One · Here's how to leave. Read it before you start.",
     description:
-      "S3-compatible storage with $0 egress. The exit is a documented one-line sync command you can run on day one. Verify the way out before you commit. $4.99/TB flat.",
+      `S3-compatible storage with $0 egress. The exit is a documented one-line sync command you can run on day one. Verify the way out before you commit. ${PRICE_PER_TB_SHORT} flat.`,
     canonical: "https://www.fil.one/lp/exit-first",
   });
 
@@ -154,7 +155,7 @@ rclone sync filone:my-bucket aws:my-bucket --progress
               <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1"/></svg>')}")`, backgroundSize: "60px 60px", maskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)", pointerEvents: "none" }} />
               <div style={{ position: "relative" }}>
                 <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>Know the exit before you commit.</h2>
-                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", maxWidth: 560, marginLeft: "auto", marginRight: "auto", marginBottom: 32 }}>$4.99/TB/month — storage only, no egress in or out. Free 1 TB evaluation: put data in, run the migrate-off command, and watch it cost nothing. Then decide.</p>
+                <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", maxWidth: 560, marginLeft: "auto", marginRight: "auto", marginBottom: 32 }}>{PRICE_PER_TB_MONTH} — storage only, no egress in or out. Free 1 TB evaluation: put data in, run the migrate-off command, and watch it cost nothing. Then decide.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark"><span className="btn-primary-inner">Start for free</span></a>
                   <a href="/contact-sales" className="btn-secondary btn-secondary-dark">Talk to an expert</a>

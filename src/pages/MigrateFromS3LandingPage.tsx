@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // Price delta scenario: 10 TB stored + 10 TB reads + 1M GET operations
@@ -47,7 +48,7 @@ const FEATURES = [
   {
     icon: ChartLine,
     title: "Predictable flat cost",
-    desc: "Storage at $4.99/TB. No egress, no per-request fees, no storage tier waterfall. The line item you plan for is the line item that ships.",
+    desc: `Storage at ${PRICE_PER_TB_SHORT}. No egress, no per-request fees, no storage tier waterfall. The line item you plan for is the line item that ships.`,
   },
   {
     icon: ShieldCheck,
@@ -60,7 +61,7 @@ const MigrateFromS3LandingPage = () => {
   useSeo({
     title: "Fil One · Leaving S3 is a config change, not a rewrite",
     description:
-      "Same SDK. New endpoint. Lower bill. Point your existing S3 tools at Fil One and cut storage costs to $4.99/TB flat with $0 egress.",
+      `Same SDK. New endpoint. Lower bill. Point your existing S3 tools at Fil One and cut storage costs to ${PRICE_PER_TB_SHORT} flat with $0 egress.`,
     canonical: "https://www.fil.one/lp/migrate-from-s3",
   });
 
@@ -179,7 +180,7 @@ const s3 = new S3Client({
                 margin: 0,
               }}
             >
-              Point your existing S3 tools at Fil One. $4.99/TB flat, no egress. Same SDK, same API, lower bill.
+              Point your existing S3 tools at Fil One. {PRICE_PER_TB_SHORT} flat, no egress. Same SDK, same API, lower bill.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -517,7 +518,7 @@ const s3 = new S3Client({
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
               <SectionHeading>
-                One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span>
+                One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span>
               </SectionHeading>
               <SectionSub maxWidth={520}>
                 Storage. That is the whole bill. No egress fees, no per-request charges. The S3 code carries over; the invoice does not.

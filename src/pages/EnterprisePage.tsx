@@ -10,7 +10,6 @@ import {
   ArrowsLeftRight,
   LockKey,
   Certificate,
-  Check,
 } from "@phosphor-icons/react";
 import { trackCtaClick } from "@/lib/analytics";
 import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
@@ -18,6 +17,7 @@ import Hero from "@/components/Hero";
 import FeaturedInBar from "@/components/FeaturedInBar";
 import { Button } from "@/components/Button";
 import CtaBanner from "@/components/CtaBanner";
+import CheckChip from "@/components/CheckChip";
 import StatCard from "@/components/StatCard";
 import TextLink from "@/components/TextLink";
 import FeatureCard from "@/components/FeatureCard";
@@ -218,15 +218,7 @@ const EnterprisePage = () => {
 
               <div className="flex flex-wrap justify-center gap-2">
                 {PRICING_TAGS.map((tag) => (
-                  <div
-                    key={tag}
-                    className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-brand/5 border border-brand/20"
-                  >
-                    <Check size={12} weight="bold" className="text-aqua-400 shrink-0" />
-                    <span className="font-sans font-normal text-[13.5px] text-brand-700 whitespace-nowrap">
-                      {tag}
-                    </span>
-                  </div>
+                  <CheckChip key={tag}>{tag}</CheckChip>
                 ))}
               </div>
 
@@ -239,7 +231,7 @@ const EnterprisePage = () => {
 
         {/* FAQ */}
         <section className="w-full bg-white">
-          <div className="flex flex-col gap-10 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-[720px] mx-auto">
+          <div className="flex flex-col gap-10 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-container-prose mx-auto">
             <div className="flex flex-col gap-3 items-center text-center">
               <SectionLabel>FAQ</SectionLabel>
               <SectionHeading>Common questions</SectionHeading>

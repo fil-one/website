@@ -7,6 +7,7 @@ import {
   LinkSimple,
 } from "@phosphor-icons/react";
 import SolutionPage, { type SolutionPageConfig } from "@/components/SolutionPage";
+import { PRICE_DISPLAY } from "@/lib/pricing";
 
 const config: SolutionPageConfig = {
   seo: {
@@ -39,7 +40,7 @@ const config: SolutionPageConfig = {
   },
   proof: [
     "S3-compatible drop-in replacement",
-    "$4.99 / TB / month",
+    `${PRICE_DISPLAY} / TB / month`,
     "Cryptographic data integrity",
     "Multi-region redundancy",
   ],

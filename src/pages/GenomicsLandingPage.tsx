@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // PB-scale cost comparison. 1 PB = 1,000 TB = 1,024,000 GB.
@@ -24,14 +25,14 @@ const FEATURES = [
   { icon: ShieldCheck, title: "Recurring integrity verification", desc: "Every stored object is verified approximately every 24 hours. Genomics datasets cannot silently corrupt between write and analysis without detection." },
   { icon: Database, title: "11 nines durability", desc: "Designed for 11 nines of durability. Long-retention datasets — sequenced once, analysed for years — require a storage layer that treats loss as an event to detect and recover." },
   { icon: ArrowsOut, title: "No egress on analysis", desc: "Re-analysing the dataset from a new pipeline, re-running variant calling, or sharing data with collaborators costs $0 in egress. The cost is the bytes you keep." },
-  { icon: ChartLine, title: "Flat petabyte pricing", desc: "$4.99/TB regardless of scale. 1 TB and 1 PB pay the same rate per TB. Retention decisions are not driven by storage-tier economics." },
+  { icon: ChartLine, title: "Flat petabyte pricing", desc: `${PRICE_PER_TB_SHORT} regardless of scale. 1 TB and 1 PB pay the same rate per TB. Retention decisions are not driven by storage-tier economics.` },
 ];
 
 const GenomicsLandingPage = () => {
   useSeo({
     title: "Fil One · Petabyte retention without the petabyte bill",
     description:
-      "S3-compatible storage at $4.99/TB flat for genomics and research data. Recurring integrity verification, 11 nines durability, $0 egress. Keep the whole dataset for years.",
+      `S3-compatible storage at ${PRICE_PER_TB_SHORT} flat for genomics and research data. Recurring integrity verification, 11 nines durability, $0 egress. Keep the whole dataset for years.`,
     canonical: "https://www.fil.one/lp/genomics",
   });
 
@@ -58,7 +59,7 @@ const GenomicsLandingPage = () => {
               Petabyte retention<br /><span style={{ color: "#0090FF" }}>without the petabyte bill.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 580, margin: 0 }}>
-              S3-compatible storage at $4.99/TB flat, with recurring integrity verification and 11 nines durability. Keep the whole dataset, for years.
+              S3-compatible storage at {PRICE_PER_TB_SHORT} flat, with recurring integrity verification and 11 nines durability. Keep the whole dataset, for years.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
@@ -179,7 +180,7 @@ const GenomicsLandingPage = () => {
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. Integrity verification, 11 nines durability, and free egress are included at every scale.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

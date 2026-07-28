@@ -3,6 +3,7 @@ import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
+import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 import { ArrowUpRight, Copy, Check, CheckCircle, ShieldCheck, Plug, TrendUp, CaretRight, CurrencyDollar, LockOpen, HardDrives, Globe } from "@phosphor-icons/react";
 
 // ─── Grid texture ──────────────────────────────────────────────────────────────
@@ -84,7 +85,7 @@ const PricingCtaBlock = ({ bg = "#FFFFFF" }: { bg?: string }) => (
             color: "#09090B",
           }}
         >
-          $4.99
+          {PRICE_DISPLAY}
         </span>
         <span
           style={{
@@ -140,7 +141,7 @@ const PricingCtaBlock = ({ bg = "#FFFFFF" }: { bg?: string }) => (
 
 // ─── Comparison table data ─────────────────────────────────────────────────────
 const COMPARISON_ROWS = [
-  { item: "Storage",           aws: "$0.023/GB/month (~$23/TB)",      filone: "~$0.005/GB/month ($4.99/TB)" },
+  { item: "Storage",           aws: "$0.023/GB/month (~$23/TB)",      filone: `~$0.005/GB/month (${PRICE_PER_TB_SHORT})` },
   { item: "PUT requests",      aws: "$0.005 per 1,000",     filone: "Included" },
   { item: "GET requests",      aws: "$0.0004 per 1,000",    filone: "Included" },
   { item: "Egress",            aws: "$0.09/GB",             filone: "$0" },
@@ -152,7 +153,7 @@ const DEV_FEATURES = [
   {
     number: "01",
     title: "Flat pricing.",
-    body: "$4.99/TB/month. No per-call charges. No egress. When your agent loops a thousand times overnight, the bill reflects storage — nothing else. You can read the pricing page once and stop thinking about it.",
+    body: `${PRICE_PER_TB_MONTH}. No per-call charges. No egress. When your agent loops a thousand times overnight, the bill reflects storage — nothing else. You can read the pricing page once and stop thinking about it.`,
     code: null,
   },
   {
@@ -344,7 +345,7 @@ const AgentsLandingPage = () => {
   useSeo({
     title: "Fil One for AI Agents · Flat storage. No egress. No billing surprises.",
     description:
-      "S3-compatible object storage at $4.99/TB flat. No egress fees, no per-request charges. Built for agentic workloads that read and write constantly. Start free — 1 TB included.",
+      `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. No egress fees, no per-request charges. Built for agentic workloads that read and write constantly. Start free — 1 TB included.`,
     canonical: "https://www.fil.one/lp/agents",
   });
 
@@ -466,7 +467,7 @@ const AgentsLandingPage = () => {
                   color: "#09090B",
                 }}
               >
-                $4.99
+                {PRICE_DISPLAY}
               </span>
               <span
                 style={{
@@ -607,7 +608,7 @@ const AgentsLandingPage = () => {
                       Fil One
                     </span>
                     <span style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 36, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#0070CC" }}>
-                      $4.99
+                      {PRICE_DISPLAY}
                     </span>
                     <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12.5, color: "#52525B", lineHeight: 1.5, marginTop: 2 }}>
                       storage only — requests and egress included
@@ -1029,7 +1030,7 @@ const AgentsLandingPage = () => {
                       color: "#0070CC",
                     }}
                   >
-                    $4.99
+                    {PRICE_DISPLAY}
                   </span>
                   <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 16, color: "#71717A" }}>
                     / TB / month

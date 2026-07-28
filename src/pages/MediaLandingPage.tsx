@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // Media delivery scenario: 10 TB library stored, 50 TB delivered to viewers per month.
@@ -39,16 +40,16 @@ const EGRESS_ROWS = [
 
 const FEATURES = [
   { icon: ArrowsOut, title: "Zero egress fees", desc: "Every viewer fetch is a read from origin storage. On Fil One those reads cost nothing. The delivery margin is not eaten by the storage provider." },
-  { icon: Database, title: "Store the full library", desc: "At $4.99/TB flat, a 10 TB media library costs $50/month. A 100 TB library costs $499. The rate per TB does not increase with library size." },
+  { icon: Database, title: "Store the full library", desc: `At ${PRICE_PER_TB_SHORT} flat, a 10 TB media library costs $50/month. A 100 TB library costs $499. The rate per TB does not increase with library size.` },
   { icon: Plug, title: "S3-compatible origin", desc: "Media players, CDNs, and delivery pipelines that read from S3 origins connect without modification. Swap the endpoint; the delivery stack does not change." },
-  { icon: ChartLine, title: "Predictable delivery cost", desc: "Storage × $4.99. The number of views, downloads, or streams in a month does not change the storage bill. Viral moments are not billing events." },
+  { icon: ChartLine, title: "Predictable delivery cost", desc: `Storage × ${PRICE_DISPLAY}. The number of views, downloads, or streams in a month does not change the storage bill. Viral moments are not billing events.` },
 ];
 
 const MediaLandingPage = () => {
   useSeo({
     title: "Fil One · Your media library shouldn't bleed money on delivery",
     description:
-      "S3-compatible object storage, $4.99/TB flat, $0 egress. Store media libraries and deliver at scale without egress fees eating your margin.",
+      `S3-compatible object storage, ${PRICE_PER_TB_SHORT} flat, $0 egress. Store media libraries and deliver at scale without egress fees eating your margin.`,
     canonical: "https://www.fil.one/lp/media",
   });
 
@@ -82,7 +83,7 @@ const MediaLandingPage = () => {
               <span style={{ color: "#0090FF" }}>bleed money on delivery.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 580, margin: 0 }}>
-              S3-compatible object storage, $4.99/TB flat, $0 egress. Store the library and deliver at scale without egress fees eating margin.
+              S3-compatible object storage, {PRICE_PER_TB_SHORT} flat, $0 egress. Store the library and deliver at scale without egress fees eating margin.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
@@ -180,7 +181,7 @@ const MediaLandingPage = () => {
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. Delivery volume does not change the invoice. Viral moments are not billing events.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // Scale-up comparison. AWS S3 Standard tiered rates: $0.023/GB for first 50 TB,
@@ -45,7 +46,7 @@ const FEATURES = [
   {
     icon: Wallet,
     title: "Predictable invoice",
-    desc: "Multiply $4.99 by the TB you keep. That number is the bill. Show it to the board without a caveat slide.",
+    desc: `Multiply ${PRICE_DISPLAY} by the TB you keep. That number is the bill. Show it to the board without a caveat slide.`,
   },
   {
     icon: ChartLine,
@@ -68,7 +69,7 @@ const StartupsLandingPage = () => {
   useSeo({
     title: "Fil One · Storage that doesn't outgrow your revenue",
     description:
-      "Flat $4.99/TB object storage for early-stage startups. No egress, no per-request fees, no surprise invoice. S3-compatible from day one.",
+      `Flat ${PRICE_PER_TB_SHORT} object storage for early-stage startups. No egress, no per-request fees, no surprise invoice. S3-compatible from day one.`,
     canonical: "https://www.fil.one/lp/startups",
   });
 
@@ -159,7 +160,7 @@ const StartupsLandingPage = () => {
                 margin: 0,
               }}
             >
-              $4.99/TB flat. No egress, no per-request fees, no surprise invoice. The line item you can defend in the next runway conversation.
+              {PRICE_PER_TB_SHORT} flat. No egress, no per-request fees, no surprise invoice. The line item you can defend in the next runway conversation.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -462,7 +463,7 @@ const StartupsLandingPage = () => {
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
               <SectionHeading>
-                One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span>
+                One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span>
               </SectionHeading>
               <SectionSub maxWidth={520}>
                 That is the bill. Multiplied by TB. The number you put in the model.

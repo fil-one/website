@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
 
 
 // Scale cost comparison: 1 PB stored
@@ -20,14 +21,14 @@ const FEATURES = [
   { icon: Plug,        title: "S3-compatible from day one", desc: "Your customers use the same SDKs, CLIs, and integrations they already run. No custom adapter, no lock-in to a proprietary API surface." },
   { icon: ArrowsOut,   title: "No egress for your customers", desc: "Customers who read their own data at scale pay $0 in egress. A storage product that doesn't penalise usage is easier to sell." },
   { icon: ShieldCheck, title: "SLA-backed, enterprise terms", desc: "Capacity assurance and deployment SLAs available on 1, 3, and 5-year terms via the Business plan. Predictable infrastructure for a predictable product." },
-  { icon: ChartLine,   title: "Flat pricing that scales linearly", desc: "$4.99/TB regardless of volume. At 1 PB, that is $4,990/month — a number you can build a product margin on. No tier waterfall to model." },
+  { icon: ChartLine,   title: "Flat pricing that scales linearly", desc: `${PRICE_PER_TB_SHORT} regardless of volume. At 1 PB, that is $4,990/month — a number you can build a product margin on. No tier waterfall to model.` },
 ];
 
 const GoGlobalLandingPage = () => {
   useSeo({
     title: "Fil One · Go global. Skip the multi-year build.",
     description:
-      "Embed S3-compatible object storage into your product. Global network, SLA-backed, $4.99/TB flat. No capex, no infrastructure build — contact for enterprise and embedding terms.",
+      `Embed S3-compatible object storage into your product. Global network, SLA-backed, ${PRICE_PER_TB_SHORT} flat. No capex, no infrastructure build — contact for enterprise and embedding terms.`,
     canonical: "https://www.fil.one/lp/go-global",
   });
 
@@ -53,7 +54,7 @@ const GoGlobalLandingPage = () => {
               Go global.<br /><span style={{ color: "#0090FF" }}>Skip the multi-year build.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 600, margin: 0 }}>
-              Embed S3-compatible object storage into your product. Global network, SLA-backed, $4.99/TB flat. Your customers get global storage — you skip the infrastructure capex.
+              Embed S3-compatible object storage into your product. Global network, SLA-backed, {PRICE_PER_TB_SHORT} flat. Your customers get global storage — you skip the infrastructure capex.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="/contact-sales" className="btn-primary"><span className="btn-primary-inner">Talk to our team</span></a>

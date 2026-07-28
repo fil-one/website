@@ -190,7 +190,7 @@ const ContactSales = () => {
 
           {submitted ? (
             /* ── Success state ── */
-            <div className="flex flex-col gap-3 py-6">
+            <div role="status" className="flex flex-col gap-3 py-6">
               <div
                 className="flex items-center justify-center w-10 h-10 rounded-full"
                 style={{ backgroundColor: "#F0FDF4" }}
@@ -383,7 +383,7 @@ const ContactSales = () => {
                   </span>
                 </button>
                 {error && (
-                  <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626", textAlign: "center" }}>
+                  <p role="alert" style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626", textAlign: "center" }}>
                     {error}
                   </p>
                 )}
