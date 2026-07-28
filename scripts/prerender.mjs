@@ -181,6 +181,7 @@ async function prerender() {
   // ── 4. Render each route ─────────────────────────────────────────────────
   console.log("Prerendering routes…");
 
+  const failures = [];
   for (const route of ROUTES) {
     try {
       const appHtml = await render(route);
@@ -251,8 +252,12 @@ async function prerender() {
       writeFileSync(resolve(outDir, "index.html"), html);
       console.log(`  ✓ ${route}`);
     } catch (err) {
-      // A failed route falls back to the SPA shell — not ideal but not fatal.
-      console.warn(`  ✗ ${route} (skipped — ${err.message})`);
+      // Record the failure and fail the build below. A skipped route silently
+      // falls back to the SPA shell (no prerendered HTML → generic title +
+      // homepage canonical), which is exactly how the original broken-LP
+      // incident shipped. Better to break the build than deploy a broken page.
+      console.error(`  ✗ ${route} — ${err.message}`);
+      failures.push({ route, error: err.message });
     }
   }
 
@@ -263,6 +268,14 @@ async function prerender() {
 
   // ── 6. Clean up SSR bundle ───────────────────────────────────────────────
   rmSync(SSR_OUT_DIR, { recursive: true, force: true });
+
+  // ── 7. Fail the build if any route was skipped ───────────────────────────
+  if (failures.length) {
+    throw new Error(
+      `Prerendering failed for ${failures.length} route(s):\n` +
+        failures.map((f) => `  - ${f.route}: ${f.error}`).join("\n")
+    );
+  }
 
   console.log("Prerendering complete.");
 }
