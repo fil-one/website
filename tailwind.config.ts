@@ -152,11 +152,13 @@ export default {
        * ─────────────────────────────────────────────────────────────────── */
 
       // Content width — the dominant `max-w-[1120px]` (~276 uses); wide = container
-      // padding cap; narrow = form/input columns (e.g. the cost calculator inputs)
+      // padding cap; narrow = form/input columns (e.g. the cost calculator inputs);
+      // prose = the reading column for long-form copy (FAQ lists, legal pages)
       maxWidth: {
         container: "1120px",
         "container-wide": "1400px",
         "container-narrow": "640px",
+        "container-prose": "720px",
       },
 
       // Vertical rhythm for dark hero/CTA sections — the repeated `py-[104px]`
