@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 // Storage cost comparison for ML training data.
@@ -18,21 +19,21 @@ import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components
 const COST_ROWS = [
   { storage: "AWS EFS (gp)",         perTb: "$307/TB",   egress: "N/A",        monthly10tb: "$3,072",  isFilOne: false },
   { storage: "AWS S3 + 20 runs",     perTb: "$23.55/TB", egress: "$0.09/GB",   monthly10tb: "$18,668", isFilOne: false },
-  { storage: "Fil One",              perTb: "$4.99/TB",  egress: "$0",         monthly10tb: "$50",     isFilOne: true  },
+  { storage: "Fil One",              perTb: PRICE_PER_TB_SHORT,  egress: "$0",         monthly10tb: "$50",     isFilOne: true  },
 ];
 
 const FEATURES = [
-  { icon: ChartLine, title: "62× cheaper than EFS", desc: "AWS EFS costs $0.30/GB ($307/TB). Fil One costs $4.99/TB. At 10 TB of training data, that is $3,072/month vs $50 — before a single training run reads a byte." },
+  { icon: ChartLine, title: "62× cheaper than EFS", desc: `AWS EFS costs $0.30/GB ($307/TB). Fil One costs ${PRICE_PER_TB_SHORT}. At 10 TB of training data, that is $3,072/month vs $50 — before a single training run reads a byte.` },
   { icon: ArrowsOut, title: "No egress on training reads", desc: "Each training run reads the full dataset. On AWS S3, 20 runs a month over 10 TB costs $18,432 in egress alone. On Fil One, every read is included in flat storage." },
   { icon: Plug,      title: "fsspec / PyArrow / HuggingFace native", desc: "PyTorch DataLoader, JAX, HuggingFace datasets, and PyArrow all support S3-compatible storage via fsspec. Change the endpoint — nothing else changes." },
-  { icon: Database,  title: "Flat cost at any run frequency", desc: "Run training 5 times or 500 times. The storage bill is the TB you keep times $4.99. Run frequency is an engineering decision, not a cost one." },
+  { icon: Database,  title: "Flat cost at any run frequency", desc: `Run training 5 times or 500 times. The storage bill is the TB you keep times ${PRICE_DISPLAY}. Run frequency is an engineering decision, not a cost one.` },
 ];
 
 const MlTrainingLandingPage = () => {
   useSeo({
     title: "Fil One · Build around the clock",
     description:
-      "S3-compatible training-data storage at $4.99/TB flat. No egress on dataset reads. 62× cheaper than AWS EFS. fsspec, PyArrow, and HuggingFace datasets work natively.",
+      `S3-compatible training-data storage at ${PRICE_PER_TB_SHORT} flat. No egress on dataset reads. 62× cheaper than AWS EFS. fsspec, PyArrow, and HuggingFace datasets work natively.`,
     canonical: "https://www.fil.one/lp/ml-training",
   });
 
@@ -45,7 +46,7 @@ const MlTrainingLandingPage = () => {
 import pyarrow.dataset as ds
 from torch.utils.data import DataLoader
 
-# Training data on Fil One — $4.99/TB, $0 egress per run
+# Training data on Fil One — ${PRICE_PER_TB_SHORT}, $0 egress per run
 fs = fsspec.filesystem(
     "s3",
     endpoint_url="https://eu-west-1.s3.fil.one",
@@ -89,7 +90,7 @@ ds_hf = load_dataset(
               Build around<br /><span style={{ color: "#0090FF" }}>the clock.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 580, margin: 0 }}>
-              Training-data storage at $4.99/TB flat. No egress on dataset reads. fsspec, PyArrow, and HuggingFace datasets work natively — change the endpoint, keep the code.
+              Training-data storage at {PRICE_PER_TB_SHORT} flat. No egress on dataset reads. fsspec, PyArrow, and HuggingFace datasets work natively — change the endpoint, keep the code.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
@@ -199,7 +200,7 @@ ds_hf = load_dataset(
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. Run training 5 times or 500 times — the storage invoice does not change.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

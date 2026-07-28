@@ -4,13 +4,14 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 const FEATURES = [
   {
     icon: Database,
     title: "Store the whole corpus",
-    desc: "At $4.99/TB flat, a 1 TB document store is $4.99/month. A 10 TB corpus is $49.90. The storage price does not penalise breadth.",
+    desc: `At ${PRICE_PER_TB_SHORT} flat, a 1 TB document store is ${PRICE_DISPLAY}/month. A 10 TB corpus is $49.90. The storage price does not penalise breadth.`,
     devLabel: null,
   },
   {
@@ -22,7 +23,7 @@ const FEATURES = [
   {
     icon: ChartLine,
     title: "Predictable corpus cost",
-    desc: "Storage volume times $4.99. No per-request fees on reads or writes. The corpus bill grows with what you keep, not how often you query it.",
+    desc: `Storage volume times ${PRICE_DISPLAY}. No per-request fees on reads or writes. The corpus bill grows with what you keep, not how often you query it.`,
     devLabel: null,
   },
   {
@@ -37,7 +38,7 @@ const RagStorageLandingPage = () => {
   useSeo({
     title: "Fil One · RAG corpus storage at flat cost",
     description:
-      "S3-compatible object storage at $4.99/TB flat. Store retrieval-augmented generation document corpora without per-query or per-read charges.",
+      `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. Store retrieval-augmented generation document corpora without per-query or per-read charges.`,
     canonical: "https://www.fil.one/lp/rag-storage",
   });
 
@@ -152,7 +153,7 @@ context = obj["Body"].read().decode()`;
                 margin: 0,
               }}
             >
-              S3-compatible storage at $4.99/TB flat. Store the whole document corpus without per-read or per-request fees eating into retrieval margin.
+              S3-compatible storage at {PRICE_PER_TB_SHORT} flat. Store the whole document corpus without per-read or per-request fees eating into retrieval margin.
             </p>
 
             <div className="flex flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -520,7 +521,7 @@ context = obj["Body"].read().decode()`;
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
               <SectionHeading>
-                One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span>
+                One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span>
               </SectionHeading>
               <SectionSub maxWidth={520}>
                 Storage. That is the whole bill. No egress fees on retrieval reads, no per-request fees. The corpus cost is the TB you keep, multiplied by one number.

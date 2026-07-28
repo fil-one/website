@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 const FEATURES = [
@@ -20,12 +21,12 @@ const FEATURES = [
   {
     icon: ArrowsOut,
     title: "No egress on reads",
-    desc: "Reading back transaction history, user data, or audit logs costs $0 in egress. Crypto products that read frequently — wallets, explorers, dashboards — pay only for what they store.",
+    desc: "Reading back transaction history, user data, or audit logs costs $0 in egress. Crypto products that read frequently — wallets, explorers, dashboards — pay for storage, not for reads.",
   },
   {
     icon: ChartLine,
     title: "Flat, predictable cost",
-    desc: "$4.99/TB flat. No surprise invoices when your crypto product hits viral growth. Storage cost is proportional to what you keep, not what your users do.",
+    desc: `${PRICE_PER_TB_SHORT} flat. No surprise invoices when your crypto product hits viral growth. Storage cost is proportional to what you keep, not what your users do.`,
   },
 ];
 
@@ -33,7 +34,7 @@ const Web3PivotLandingPage = () => {
   useSeo({
     title: "Fil One · Don't be a Web2 company just playing with crypto",
     description:
-      "Back your Web3 product with storage that's actually decentralized. S3-compatible, Filecoin-backed, $4.99/TB flat. Endpoint swap — nothing else changes.",
+      `Back your Web3 product with storage that's actually decentralized. S3-compatible, Filecoin-backed, ${PRICE_PER_TB_SHORT} flat. Endpoint swap — nothing else changes.`,
     canonical: "https://www.fil.one/lp/web3-pivot",
   });
 
@@ -81,7 +82,7 @@ s3 = boto3.client(
             </h1>
 
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 600, margin: 0 }}>
-              Back your Web3 product with storage that's actually decentralized. Filecoin-backed, S3-compatible, $4.99/TB flat. One endpoint change.
+              Back your Web3 product with storage that's actually decentralized. Filecoin-backed, S3-compatible, {PRICE_PER_TB_SHORT} flat. One endpoint change.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -193,7 +194,7 @@ s3 = boto3.client(
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. The decentralized infrastructure does not add a premium to the price.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

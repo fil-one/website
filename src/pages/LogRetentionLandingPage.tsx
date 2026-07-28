@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 
 const FEATURES = [
@@ -33,7 +34,7 @@ const LogRetentionLandingPage = () => {
   useSeo({
     title: "Fil One · Stop sampling your logs to save money",
     description:
-      "S3-compatible log storage at $4.99/TB flat. No per-request fees. Drop in as a Vector, Fluent Bit, or OTel sink and keep every event.",
+      `S3-compatible log storage at ${PRICE_PER_TB_SHORT} flat. No per-request fees. Drop in as a Vector, Fluent Bit, or OTel sink and keep every event.`,
     canonical: "https://www.fil.one/lp/log-retention",
   });
 
@@ -141,7 +142,7 @@ secret_access_key = "\${FIL_SECRET_KEY}"`;
                 margin: 0,
               }}
             >
-              S3-compatible storage at $4.99/TB flat. No per-request fees, no egress. Keep every event, every span, every audit trail — without watching the PUT counter.
+              S3-compatible storage at {PRICE_PER_TB_SHORT} flat. No per-request fees, no egress. Keep every event, every span, every audit trail — without watching the PUT counter.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
@@ -466,7 +467,7 @@ secret_access_key = "\${FIL_SECRET_KEY}"`;
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
               <SectionHeading>
-                One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span>
+                One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span>
               </SectionHeading>
               <SectionSub maxWidth={520}>
                 Storage. That is the whole bill. No PUT charges. No egress. Logs cost what they should — the bytes you decide to keep.

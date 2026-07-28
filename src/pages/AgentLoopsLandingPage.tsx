@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
+import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 // Per-call cost comparison for agent workload:
 // 1 billion operations/month (mix of PUT state writes + GET context reads).
@@ -31,7 +32,7 @@ const FEATURES = [
   {
     icon: ArrowsOut,
     title: "No egress on context reads",
-    desc: "Retrieving memory, loading corpus chunks, and reading prior outputs cost $0 in egress. Agent loops that read frequently pay only for what they store.",
+    desc: "Retrieving memory, loading corpus chunks, and reading prior outputs cost $0 in egress. Agent loops that read frequently pay for storage, not for reads.",
   },
   {
     icon: Plug,
@@ -41,7 +42,7 @@ const FEATURES = [
   {
     icon: ChartLine,
     title: "Cost that scales with data, not calls",
-    desc: "$4.99/TB flat. An agent that makes 10 million calls a day but stores 1 TB pays $4.99/month. Call frequency is not a billing input.",
+    desc: `${PRICE_PER_TB_SHORT} flat. An agent that makes 10 million calls a day but stores 1 TB pays ${PRICE_DISPLAY}/month. Call frequency is not a billing input.`,
   },
 ];
 
@@ -49,7 +50,7 @@ const AgentLoopsLandingPage = () => {
   useSeo({
     title: "Fil One · Let agents run. Not your bill.",
     description:
-      "S3-compatible storage at $4.99/TB flat. No per-PUT fees, no per-GET fees, no egress. Agent loops run at full speed without a per-call counter.",
+      `S3-compatible storage at ${PRICE_PER_TB_SHORT} flat. No per-PUT fees, no per-GET fees, no egress. Agent loops run at full speed without a per-call counter.`,
     canonical: "https://www.fil.one/lp/agent-loops",
   });
 
@@ -107,7 +108,7 @@ s3.put_object(
               Let agents run.<br /><span style={{ color: "#0090FF" }}>Not your bill.</span>
             </h1>
             <p className="text-[15px] md:text-[17px] hero-fade-2" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, lineHeight: "1.65", color: "#71717A", textAlign: "center", maxWidth: 580, margin: 0 }}>
-              S3-compatible storage at $4.99/TB flat. No per-PUT fees, no per-GET fees, no egress. Agent loops run at full speed without a per-call counter.
+              S3-compatible storage at {PRICE_PER_TB_SHORT} flat. No per-PUT fees, no per-GET fees, no egress. Agent loops run at full speed without a per-call counter.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
@@ -227,7 +228,7 @@ s3.put_object(
           <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
             <div className="flex flex-col gap-3 items-center">
               <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>$4.99/TB/month.</span></SectionHeading>
+              <SectionHeading>One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span></SectionHeading>
               <SectionSub maxWidth={520}>Storage. That is the whole bill. Run agents at any frequency — the invoice is determined by bytes stored, not calls made.</SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">

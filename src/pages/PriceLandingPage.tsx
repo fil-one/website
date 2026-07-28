@@ -8,7 +8,7 @@ import FeaturesSection from "@/components/FeaturesSection";
 import CostCalculatorSection from "@/components/CostCalculatorSection";
 import IntegrationsSection from "@/components/IntegrationsSection";
 import CtaBanner from "@/components/CtaBanner";
-import { COMPETITORS, PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { COMPETITORS, PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 import filOneLogo from "@/assets/fil-one-logo.svg";
 import wasabiLogo from "@/assets/wasabi.svg";
 import backblazeLogo from "@/assets/backblaze.svg";
@@ -25,9 +25,9 @@ const CARDS = [
 
 const PriceLandingPage = () => {
   useSeo({
-    title: "Fil One · $4.99/TB/month. Switch and save.",
+    title: `Fil One · ${PRICE_PER_TB_MONTH}. Switch and save.`,
     description:
-      "Compare flat-rate S3-compatible storage side by side. Fil One is $4.99/TB with $0 egress and no per-request fees. Wasabi is $7.99/TB and Backblaze B2 $6.95/TB.",
+      `Compare flat-rate S3-compatible storage side by side. Fil One is ${PRICE_PER_TB_SHORT} with $0 egress and no per-request fees. Wasabi is $7.99/TB and Backblaze B2 $6.95/TB.`,
     canonical: "https://www.fil.one/lp/price",
   });
 
