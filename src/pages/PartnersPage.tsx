@@ -101,7 +101,7 @@ const STEPS = [
   {
     number: "02",
     title: "Plan together",
-    body: "We align on commercials, technical fit and go-to-market, then set you up with the access you need.",
+    body: "We align on commercials, technical fit, and go-to-market, then get you set up.",
   },
   {
     number: "03",
