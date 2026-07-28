@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
 import Hero, { type HeroCta } from "@/components/Hero";
+import { Button } from "@/components/Button";
 import FeaturedInBar from "@/components/FeaturedInBar";
 import ProofBar from "@/components/ProofBar";
 import FeatureCard from "@/components/FeatureCard";
@@ -65,6 +66,8 @@ export interface SolutionPageConfig {
     heading: string;
     headingMaxWidth?: number;
     items: SolutionFeature[];
+    /** Optional CTA button group rendered below the features grid. */
+    ctas?: HeroCta[];
   };
   detail: SolutionDetail;
   faq: string[];
@@ -155,6 +158,23 @@ const SolutionPage = ({ config }: { config: SolutionPageConfig }) => {
                 />
               ))}
             </div>
+            {features.ctas && features.ctas.length > 0 && (
+              <div className="flex flex-row items-center justify-center gap-3">
+                {features.ctas.map((c) => (
+                  <Button
+                    key={c.label}
+                    variant={c.variant}
+                    size={c.size}
+                    glow={c.glow}
+                    href={c.href}
+                    target={c.target}
+                    rel={c.rel}
+                  >
+                    {c.label}
+                  </Button>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 
