@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Check } from "@phosphor-icons/react";
+import { Check, CaretDown } from "@phosphor-icons/react";
 
 /**
  * Shared form primitives for the marketing forms (contact, support, partner
@@ -47,13 +47,18 @@ export const FormField = ({
 export const TextField = ({
   label,
   required,
+  className,
   ...inputProps
 }: {
   label: string;
   required?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>) => (
   <FormField label={label} required={required}>
-    <input required={required} className={FIELD_INPUT_CLASS} {...inputProps} />
+    <input
+      required={required}
+      className={`${FIELD_INPUT_CLASS}${className ? ` ${className}` : ""}`}
+      {...inputProps}
+    />
   </FormField>
 );
 
@@ -61,6 +66,7 @@ export const TextField = ({
 export const TextAreaField = ({
   label,
   required,
+  className,
   ...textareaProps
 }: {
   label: string;
@@ -69,9 +75,37 @@ export const TextAreaField = ({
   <FormField label={label} required={required}>
     <textarea
       required={required}
-      className={`${FIELD_INPUT_CLASS} resize-y leading-[1.6]`}
+      className={`${FIELD_INPUT_CLASS} resize-y leading-[1.6]${className ? ` ${className}` : ""}`}
       {...textareaProps}
     />
+  </FormField>
+);
+
+/** A labelled native select with the shared chevron affordance. Pass `<option>`s as children. */
+export const SelectField = ({
+  label,
+  required,
+  children,
+  className,
+  ...selectProps
+}: {
+  label: string;
+  required?: boolean;
+} & React.SelectHTMLAttributes<HTMLSelectElement>) => (
+  <FormField label={label} required={required}>
+    <div className="relative">
+      <select
+        required={required}
+        className={`${FIELD_INPUT_CLASS} cursor-pointer appearance-none pr-9${className ? ` ${className}` : ""}`}
+        {...selectProps}
+      >
+        {children}
+      </select>
+      <CaretDown
+        size={14}
+        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500"
+      />
+    </div>
   </FormField>
 );
 
@@ -156,6 +190,70 @@ const checkboxBoxClass = (checked: boolean, tone: "dark" | "brand" = "dark") =>
         : "border-none bg-zinc-950"
       : "border-[1.5px] border-black/25 bg-white"
   }`;
+
+/**
+ * Single-select radio group rendered as bordered cards, each with an optional
+ * description. Selected card gets a brand tint. Uses a native radio (keyboard
+ * accessible) accented to the brand colour.
+ */
+export const RadioCardField = ({
+  legend,
+  name,
+  options,
+  value,
+  onChange,
+  required,
+  error,
+}: {
+  legend: string;
+  name: string;
+  options: { value: string; label: string; sub?: string }[];
+  value: string;
+  onChange: (value: string) => void;
+  required?: boolean;
+  /** Validation message announced via role="alert" when set. */
+  error?: string;
+}) => (
+  <fieldset className="m-0 flex flex-col gap-2 border-none p-0">
+    {/* A <legend> is not a flex item, so the heading→options gap lives here. */}
+    <legend className={`mb-3 p-0 ${LABEL_CLASS}`}>
+      {legend}
+      {required && REQUIRED_MARK}
+    </legend>
+    <div className="flex flex-col gap-2">
+      {options.map(({ value: optionValue, label, sub }) => {
+        const selected = value === optionValue;
+        return (
+          <label
+            key={optionValue}
+            className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 transition-colors ${
+              selected ? "border-brand-500/50 bg-brand-50" : "border-black/[0.09] bg-white"
+            }`}
+          >
+            <input
+              type="radio"
+              name={name}
+              value={optionValue}
+              checked={selected}
+              onChange={() => onChange(optionValue)}
+              required={required}
+              className="accent-brand-600"
+            />
+            <div>
+              <p className="m-0 font-sans font-medium text-[14px] text-zinc-950">{label}</p>
+              {sub && <p className="m-0 font-sans text-[12.5px] text-zinc-500">{sub}</p>}
+            </div>
+          </label>
+        );
+      })}
+    </div>
+    {error && (
+      <p role="alert" className="font-sans text-[13px] text-danger-600">
+        {error}
+      </p>
+    )}
+  </fieldset>
+);
 
 /**
  * Controlled custom checkbox with its label content. `tone="dark"` (default)
@@ -267,23 +365,48 @@ export const SubmitButton = ({
   </button>
 );
 
-/** Post-submit success panel, announced to assistive tech via role="status". */
+/**
+ * Post-submit success panel, announced to assistive tech via role="status".
+ * `align="center"` centers it and adds more vertical padding; `action` renders
+ * an optional CTA (e.g. a link back) below the message.
+ */
 export const FormSuccess = ({
   title,
   children,
+  align = "start",
+  action,
 }: {
   title: string;
   children: ReactNode;
-}) => (
-  <div role="status" className="flex flex-col gap-3 py-6">
-    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-success-50">
-      <Check size={18} className="text-success-500" />
+  align?: "start" | "center";
+  action?: ReactNode;
+}) => {
+  const centered = align === "center";
+  return (
+    <div
+      role="status"
+      className={`flex flex-col gap-3 ${centered ? "items-center py-10 text-center" : "py-6"}`}
+    >
+      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-success-50">
+        <Check size={18} className="text-success-500" />
+      </div>
+      <p className="font-display font-medium text-[20px] tracking-[-0.01em] text-zinc-950">
+        {title}
+      </p>
+      <p className="font-sans font-normal text-[14.5px] leading-[1.6] text-zinc-500">
+        {children}
+      </p>
+      {action && <div className="mt-2">{action}</div>}
     </div>
-    <p className="font-display font-medium text-[20px] tracking-[-0.01em] text-zinc-950">
-      {title}
-    </p>
-    <p className="font-sans font-normal text-[14.5px] leading-[1.6] text-zinc-500">
-      {children}
-    </p>
-  </div>
+  );
+};
+
+/** Form-level error message, announced to assistive tech via role="alert". */
+export const FormError = ({ children }: { children: ReactNode }) => (
+  <p
+    role="alert"
+    className="rounded-[8px] border border-danger-600/20 bg-danger-50 px-3.5 py-2.5 font-sans text-[13.5px] text-danger-600"
+  >
+    {children}
+  </p>
 );
