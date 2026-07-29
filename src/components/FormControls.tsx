@@ -57,6 +57,24 @@ export const TextField = ({
   </FormField>
 );
 
+/** A labelled multi-line textarea. */
+export const TextAreaField = ({
+  label,
+  required,
+  ...textareaProps
+}: {
+  label: string;
+  required?: boolean;
+} & React.TextareaHTMLAttributes<HTMLTextAreaElement>) => (
+  <FormField label={label} required={required}>
+    <textarea
+      required={required}
+      className={`${FIELD_INPUT_CLASS} resize-y leading-[1.6]`}
+      {...textareaProps}
+    />
+  </FormField>
+);
+
 /** Single-select custom radio group inside a labelled fieldset. */
 export const RadioField = ({
   legend,
@@ -126,10 +144,23 @@ export const RadioField = ({
   </fieldset>
 );
 
+const CHECKBOX_BOX_BASE =
+  "inline-flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-[4px] transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand-500";
+
+/** Classes for the custom checkbox box, given its checked state and tone. */
+const checkboxBoxClass = (checked: boolean, tone: "dark" | "brand" = "dark") =>
+  `${CHECKBOX_BOX_BASE} ${
+    checked
+      ? tone === "brand"
+        ? "border-none bg-brand-500"
+        : "border-none bg-zinc-950"
+      : "border-[1.5px] border-black/25 bg-white"
+  }`;
+
 /**
  * Controlled custom checkbox with its label content. `tone="dark"` (default)
- * is the consent/agreement style; `tone="brand"` is the blue multi-select
- * style (waitlist tool pickers).
+ * is the consent/agreement style; `tone="brand"` is the blue style. Aligned
+ * to the top of the label so multi-line consent copy stays tidy.
  */
 export const Checkbox = ({
   checked,
@@ -141,32 +172,81 @@ export const Checkbox = ({
   onChange: (checked: boolean) => void;
   tone?: "dark" | "brand";
   children: ReactNode;
-}) => {
-  const boxOn =
-    tone === "brand"
-      ? "border-none bg-brand-500"
-      : "border-none bg-zinc-950";
-  return (
-    <label className="flex cursor-pointer select-none items-start gap-3">
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-        className="peer sr-only"
-      />
-      <span
-        className={`mt-0.5 inline-flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-[4px] transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand-500 ${
-          checked ? boxOn : "border-[1.5px] border-black/25 bg-white"
-        }`}
-      >
-        {checked && <Check size={10} weight="bold" className="text-white" />}
-      </span>
-      <span className="font-sans font-normal text-[13.5px] leading-[1.6] text-zinc-600">
-        {children}
-      </span>
-    </label>
-  );
-};
+}) => (
+  <label className="flex cursor-pointer select-none items-start gap-3">
+    <input
+      type="checkbox"
+      checked={checked}
+      onChange={(e) => onChange(e.target.checked)}
+      className="peer sr-only"
+    />
+    <span className={`${checkboxBoxClass(checked, tone)} mt-0.5`}>
+      {checked && <Check size={10} weight="bold" className="text-white" />}
+    </span>
+    <span className="font-sans font-normal text-[13.5px] leading-[1.6] text-zinc-600">
+      {children}
+    </span>
+  </label>
+);
+
+/** Multi-select custom checkbox group inside a labelled fieldset. */
+export const CheckboxField = ({
+  legend,
+  options,
+  values,
+  onToggle,
+  required,
+  error,
+}: {
+  legend: string;
+  options: { label: string; value: string }[];
+  values: string[];
+  onToggle: (value: string) => void;
+  required?: boolean;
+  /** Validation message announced via role="alert" when set. */
+  error?: string;
+}) => (
+  <fieldset className="m-0 flex flex-col gap-3 border-none p-0">
+    {/* A <legend> is not a flex item, so the heading→options gap lives here. */}
+    <legend className={`mb-3 p-0 ${LABEL_CLASS}`}>
+      {legend}
+      {required && REQUIRED_MARK}
+    </legend>
+    {error && (
+      <p role="alert" className="font-sans text-[13px] text-danger-600">
+        {error}
+      </p>
+    )}
+    <div className="flex flex-col gap-2">
+      {options.map(({ label, value }) => {
+        const checked = values.includes(value);
+        return (
+          <label
+            key={value}
+            className="flex cursor-pointer select-none items-center gap-3"
+          >
+            <input
+              type="checkbox"
+              checked={checked}
+              onChange={() => onToggle(value)}
+              className="peer sr-only"
+            />
+            <span className={checkboxBoxClass(checked)}>
+              {checked && <Check size={10} weight="bold" className="text-white" />}
+            </span>
+            <span
+              className={`font-sans text-[14.5px] transition-colors ${
+                checked ? "text-zinc-950" : "text-zinc-600"
+              }`}
+            >
+              {label}
+            </span>
+          </label>
+        );
+      })}
+    </div>
+  </fieldset>
+);
 
 /** Full-width primary submit button with a loading state. */
 export const SubmitButton = ({
