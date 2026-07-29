@@ -534,7 +534,7 @@ export const ROUTE_META = {
   "/waitlist/bucket-intelligence": {
     title: "Join the Bucket Intelligence Waitlist · Fil One",
     description:
-      "Get early access to Fil One RAG Pipeline — turn any bucket into a queryable knowledge base with semantic search and your own LLM keys.",
+      "Get early access to Fil One RAG Pipeline. Turn any bucket into a queryable knowledge base with semantic search and your own LLM keys.",
   },
   "/waitlist/ai-agent-toolkit": {
     title: "Join the AI Agent Toolkit Waitlist · Fil One",
