@@ -91,6 +91,8 @@ export async function submitHubSpotForm(opts: {
   pageName: string;
   /** Optional HubSpot `legalConsentOptions` payload (consent checkboxes). */
   legalConsentOptions?: unknown;
+  /** Message shown on network failure; override for localized (non-English) pages. */
+  networkErrorMessage?: string;
 }): Promise<HubSpotSubmitResult> {
   try {
     const res = await fetch(
@@ -120,7 +122,9 @@ export async function submitHubSpotForm(opts: {
   } catch {
     return {
       ok: false,
-      error: "Network error — please check your connection and try again.",
+      error:
+        opts.networkErrorMessage ??
+        "Network error — please check your connection and try again.",
     };
   }
 }
