@@ -539,7 +539,7 @@ export const ROUTE_META = {
   "/waitlist/ai-agent-toolkit": {
     title: "Join the AI Agent Toolkit Waitlist · Fil One",
     description:
-      "Get early access to the Fil One AI Agent Toolkit — connect storage to Claude, Cursor, and your agent stack via MCP and OAuth.",
+      "Get early access to the Fil One AI Agent Toolkit. Connect storage to Claude, Cursor, and your agent stack via MCP and OAuth.",
   },
   "/about": {
     title: "About · Fil One",
