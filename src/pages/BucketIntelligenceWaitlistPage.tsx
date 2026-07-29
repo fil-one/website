@@ -1,14 +1,20 @@
 import { useState } from "react";
-import { Check } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
-import { BackButton } from "@/components/LandingPrimitives";
+import { BackButton, SectionLabel } from "@/components/LandingPrimitives";
 import { useSeo } from "@/hooks/useSeo";
 import {
-  HS_PORTAL_ID,
+  TextField,
+  TextAreaField,
+  SelectField,
+  SubmitButton,
+  FormSuccess,
+  FormError,
+} from "@/components/FormControls";
+import {
   HS_BUCKET_INTELLIGENCE_WAITLIST_FORM_GUID,
   HS_MARKETING_SUBSCRIPTION_TYPE_ID,
-  getHubSpotContext,
+  submitHubSpotForm,
 } from "@/lib/hubspot";
 
 const USE_CASES = [
@@ -54,52 +60,10 @@ const STORAGE_AMOUNTS = [
   "More than 1 PB",
 ];
 
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  border: "1px solid rgba(0,0,0,0.10)",
-  borderRadius: 10,
-  padding: "10px 14px",
-  fontFamily: "'Funnel Sans', sans-serif",
-  fontWeight: 400,
-  fontSize: 14.5,
-  color: "#09090B",
-  backgroundColor: "#FFFFFF",
-  outline: "none",
-  transition: "border-color 150ms ease",
-};
-
-const selectStyle: React.CSSProperties = {
-  ...inputStyle,
-  appearance: "none",
-  WebkitAppearance: "none",
-  backgroundImage: `url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2352525B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "right 14px center",
-  paddingRight: 36,
-  cursor: "pointer",
-};
-
-const labelStyle: React.CSSProperties = {
-  fontFamily: "'Funnel Sans', sans-serif",
-  fontWeight: 500,
-  fontSize: 13.5,
-  color: "#3F3F46",
-};
-
-const Field = ({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) => (
-  <label className="flex flex-col gap-1.5">
-    <span style={labelStyle}>
-      {label}
-      {required && <span aria-hidden="true" style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
-    </span>
-    {children}
-  </label>
-);
-
 const BucketIntelligenceWaitlistPage = () => {
   useSeo({
     title: "Join the Bucket Intelligence Waitlist · Fil One",
-    description: "Get early access to Bucket Intelligence. Turn any bucket into a queryable knowledge base — join the waitlist and we'll reach out when your spot is ready.",
+    description: "Get early access to Bucket Intelligence. Turn any bucket into a queryable knowledge base. Join the waitlist and we'll reach out when your spot is ready.",
     canonical: "https://www.fil.one/waitlist/bucket-intelligence",
   });
 
@@ -121,56 +85,43 @@ const BucketIntelligenceWaitlistPage = () => {
     setLoading(true);
     setError(null);
 
-    try {
-      const res = await fetch(
-        `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_BUCKET_INTELLIGENCE_WAITLIST_FORM_GUID}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            fields: [
-              { objectTypeId: "0-1", name: "email", value: email },
-              { objectTypeId: "0-1", name: "firstname", value: firstName },
-              { objectTypeId: "0-1", name: "lastname", value: lastName },
-              ...(useCase       ? [{ objectTypeId: "0-1", name: "primary_use_case",   value: useCase       }] : []),
-              ...(ragSolution   ? [{ objectTypeId: "0-1", name: "how_are_you_handling_rag_today", value: ragSolution }] : []),
-              ...(timeline      ? [{ objectTypeId: "0-1", name: "timeline",           value: timeline      }] : []),
-              ...(teamSize      ? [{ objectTypeId: "0-1", name: "team_size",          value: teamSize      }] : []),
-              ...(storageAmount ? [{ objectTypeId: "0-1", name: "amount_of_storage_rag", value: storageAmount }] : []),
-              ...(notes         ? [{ objectTypeId: "0-1", name: "message",            value: notes         }] : []),
-            ],
-            context: getHubSpotContext("Bucket Intelligence Waitlist"),
-            legalConsentOptions: {
-              consent: {
-                consentToProcess: true,
-                text: "By joining the waitlist, you consent to allow Fil One to store and process your information and send you product updates.",
-                communications: [{
-                  value: true,
-                  subscriptionTypeId: HS_MARKETING_SUBSCRIPTION_TYPE_ID,
-                  text: "I agree to receive product updates from Fil One.",
-                }],
-              },
-            },
-          }),
-        }
-      );
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        const msg = body?.errors?.map((e: { message: string }) => e.message).join(" | ") || body?.message || JSON.stringify(body);
-        console.error("HubSpot submission error:", body);
-        setError(msg);
-        return;
-      }
-      setSubmitted(true);
-    } catch {
-      setError("Network error — please check your connection and try again.");
-    } finally {
-      setLoading(false);
+    const result = await submitHubSpotForm({
+      formGuid: HS_BUCKET_INTELLIGENCE_WAITLIST_FORM_GUID,
+      pageName: "Bucket Intelligence Waitlist",
+      fields: [
+        { objectTypeId: "0-1", name: "email", value: email },
+        { objectTypeId: "0-1", name: "firstname", value: firstName },
+        { objectTypeId: "0-1", name: "lastname", value: lastName },
+        ...(useCase       ? [{ objectTypeId: "0-1", name: "primary_use_case",   value: useCase       }] : []),
+        ...(ragSolution   ? [{ objectTypeId: "0-1", name: "how_are_you_handling_rag_today", value: ragSolution }] : []),
+        ...(timeline      ? [{ objectTypeId: "0-1", name: "timeline",           value: timeline      }] : []),
+        ...(teamSize      ? [{ objectTypeId: "0-1", name: "team_size",          value: teamSize      }] : []),
+        ...(storageAmount ? [{ objectTypeId: "0-1", name: "amount_of_storage_rag", value: storageAmount }] : []),
+        ...(notes         ? [{ objectTypeId: "0-1", name: "message",            value: notes         }] : []),
+      ],
+      legalConsentOptions: {
+        consent: {
+          consentToProcess: true,
+          text: "By joining the waitlist, you consent to allow Fil One to store and process your information and send you product updates.",
+          communications: [{
+            value: true,
+            subscriptionTypeId: HS_MARKETING_SUBSCRIPTION_TYPE_ID,
+            text: "I agree to receive product updates from Fil One.",
+          }],
+        },
+      },
+    });
+
+    setLoading(false);
+    if (!result.ok) {
+      setError(result.error);
+      return;
     }
+    setSubmitted(true);
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
+    <div className="min-h-screen overflow-x-hidden bg-white">
       <PlatformNavbar />
 
       <main id="main-content" className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
@@ -180,146 +131,75 @@ const BucketIntelligenceWaitlistPage = () => {
 
           {/* Header */}
           <div className="flex flex-col gap-3">
-            <p style={{ fontFamily: "'DM Mono', monospace", fontWeight: 500, fontSize: 11.5, letterSpacing: "0.08em", color: "#71717A", textTransform: "uppercase" }}>
-              Early access · Bucket Intelligence
-            </p>
-            <h1
-              className="text-[28px] md:text-[36px]"
-              style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, lineHeight: "1.15", letterSpacing: "-0.02em", color: "#09090B" }}
-            >
+            <SectionLabel>Early access · Bucket Intelligence</SectionLabel>
+            <h1 className="m-0 font-display font-medium text-[28px] md:text-[36px] leading-[1.15] tracking-[-0.02em] text-zinc-950">
               Join the waitlist
             </h1>
-            <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 15, lineHeight: "1.6", color: "#71717A" }}>
-              Get early access to Bucket Intelligence — turn any bucket into a queryable knowledge base. We'll reach out as soon as your spot is ready.
+            <p className="m-0 font-sans font-normal text-[15px] leading-[1.6] text-zinc-500">
+              Get early access to Bucket Intelligence. Turn any bucket into a queryable knowledge base, and we'll reach out as soon as your spot is ready.
             </p>
           </div>
 
-          <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
+          <div className="h-px w-full bg-black/[0.07]" />
 
           {submitted ? (
-            <div role="status" className="flex flex-col gap-3 py-6">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full" style={{ backgroundColor: "#EFF8FF" }}>
-                <Check size={18} color="#0090FF" />
-              </div>
-              <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 20, color: "#09090B", letterSpacing: "-0.01em" }}>
-                You're on the list!
-              </p>
-              <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14.5, color: "#71717A", lineHeight: "1.6" }}>
-                We'll reach out as soon as your spot is ready. Keep an eye on your inbox.
-              </p>
-            </div>
+            <FormSuccess title="You're on the list!">
+              We'll reach out as soon as your spot is ready. Keep an eye on your inbox.
+            </FormSuccess>
           ) : (
             <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-5">
 
               <div className="grid grid-cols-2 gap-4">
-                <Field label="First name" required>
-                  <input
-                    type="text"
-                    value={firstName}
-                    onChange={e => setFirstName(e.target.value)}
-                    placeholder="Jane"
-                    required
-                    style={inputStyle}
-                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
-                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                  />
-                </Field>
-                <Field label="Last name" required>
-                  <input
-                    type="text"
-                    value={lastName}
-                    onChange={e => setLastName(e.target.value)}
-                    placeholder="Smith"
-                    required
-                    style={inputStyle}
-                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
-                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                  />
-                </Field>
+                <TextField label="First name" required type="text" value={firstName} onChange={e => setFirstName(e.target.value)} placeholder="Jane" />
+                <TextField label="Last name" required type="text" value={lastName} onChange={e => setLastName(e.target.value)} placeholder="Smith" />
               </div>
 
-              <Field label="Work email" required>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  placeholder="you@company.com"
-                  required
-                  style={inputStyle}
-                  onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
-                  onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                />
-              </Field>
+              <TextField label="Work email" required type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@company.com" />
 
               <div className="grid grid-cols-2 gap-4">
-                <Field label="Primary use case">
-                  <select value={useCase} onChange={e => setUseCase(e.target.value)} style={selectStyle} onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")} onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}>
-                    <option value="">Select…</option>
-                    {USE_CASES.map(o => <option key={o} value={o}>{o}</option>)}
-                  </select>
-                </Field>
-                <Field label="How are you handling RAG today?">
-                  <select value={ragSolution} onChange={e => setRagSolution(e.target.value)} style={selectStyle} onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")} onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}>
-                    <option value="">Select…</option>
-                    {RAG_SOLUTIONS.map(o => <option key={o} value={o}>{o}</option>)}
-                  </select>
-                </Field>
-                <Field label="Timeline">
-                  <select value={timeline} onChange={e => setTimeline(e.target.value)} style={selectStyle} onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")} onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}>
-                    <option value="">Select…</option>
-                    {TIMELINES.map(o => <option key={o} value={o}>{o}</option>)}
-                  </select>
-                </Field>
-                <Field label="Team size">
-                  <select value={teamSize} onChange={e => setTeamSize(e.target.value)} style={selectStyle} onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")} onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}>
-                    <option value="">Select…</option>
-                    {TEAM_SIZES.map(o => <option key={o} value={o}>{o}</option>)}
-                  </select>
-                </Field>
+                <SelectField label="Primary use case" value={useCase} onChange={e => setUseCase(e.target.value)}>
+                  <option value="">Select…</option>
+                  {USE_CASES.map(o => <option key={o} value={o}>{o}</option>)}
+                </SelectField>
+                <SelectField label="How are you handling RAG today?" value={ragSolution} onChange={e => setRagSolution(e.target.value)}>
+                  <option value="">Select…</option>
+                  {RAG_SOLUTIONS.map(o => <option key={o} value={o}>{o}</option>)}
+                </SelectField>
+                <SelectField label="Timeline" value={timeline} onChange={e => setTimeline(e.target.value)}>
+                  <option value="">Select…</option>
+                  {TIMELINES.map(o => <option key={o} value={o}>{o}</option>)}
+                </SelectField>
+                <SelectField label="Team size" value={teamSize} onChange={e => setTeamSize(e.target.value)}>
+                  <option value="">Select…</option>
+                  {TEAM_SIZES.map(o => <option key={o} value={o}>{o}</option>)}
+                </SelectField>
               </div>
 
-              <Field label="Amount of storage">
-                <select value={storageAmount} onChange={e => setStorageAmount(e.target.value)} style={selectStyle} onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")} onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}>
-                  <option value="">Select…</option>
-                  {STORAGE_AMOUNTS.map(o => <option key={o} value={o}>{o}</option>)}
-                </select>
-              </Field>
+              <SelectField label="Amount of storage" value={storageAmount} onChange={e => setStorageAmount(e.target.value)}>
+                <option value="">Select…</option>
+                {STORAGE_AMOUNTS.map(o => <option key={o} value={o}>{o}</option>)}
+              </SelectField>
 
-              <Field label="Notes (optional)">
-                <textarea
-                  value={notes}
-                  onChange={e => setNotes(e.target.value)}
-                  rows={3}
-                  placeholder="What file types do you work with? How large is your document corpus?"
-                  style={{ ...inputStyle, resize: "vertical", lineHeight: 1.55 }}
-                  onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
-                  onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                />
-              </Field>
+              <TextAreaField
+                label="Notes (optional)"
+                value={notes}
+                onChange={e => setNotes(e.target.value)}
+                rows={3}
+                placeholder="What file types do you work with? How large is your document corpus?"
+              />
 
-              <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
+              <div className="h-px w-full bg-black/[0.07]" />
 
-              <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: "1.7", color: "#71717A" }}>
+              <p className="font-sans font-normal text-[12.5px] leading-[1.7] text-zinc-500">
                 By submitting this form you consent to allow Fil One to store and process your information and send you product updates. You can unsubscribe at any time. See our{" "}
-                <a href="/privacy" style={{ color: "#71717A", textDecoration: "underline" }}>Privacy Policy</a>.
+                <a href="/privacy" className="text-zinc-500 underline">Privacy Policy</a>.
               </p>
 
               <div className="flex flex-col gap-2">
-                <button
-                  type="submit"
-                  disabled={!email || loading}
-                  className="btn-primary"
-                  style={{ border: "none", cursor: (!email || loading) ? "default" : "pointer", opacity: (!email || loading) ? 0.7 : 1, width: "100%" }}
-                >
-                  <span className="btn-primary-inner" style={{ padding: "11px 24px", fontSize: 15 }}>
-                    {loading ? "Joining…" : "Join waitlist"}
-                  </span>
-                </button>
-                {error && (
-                  <p role="alert" style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626", textAlign: "center" }}>
-                    {error}
-                  </p>
-                )}
+                <SubmitButton loading={loading} disabled={!email}>
+                  {loading ? "Joining…" : "Join waitlist"}
+                </SubmitButton>
+                {error && <FormError>{error}</FormError>}
               </div>
 
             </form>
