@@ -12,6 +12,7 @@ import {
   CheckboxField,
   SubmitButton,
   FormSuccess,
+  FormError,
 } from "@/components/FormControls";
 import { HS_SUPPORT_FORM_GUID, submitHubSpotForm } from "@/lib/hubspot";
 
@@ -249,11 +250,7 @@ const Support = () => {
                 <SubmitButton loading={loading}>
                   {loading ? "Submitting…" : "Submit"}
                 </SubmitButton>
-                {error && (
-                  <p role="alert" className="font-sans text-[13px] text-danger-600 text-center">
-                    {error}
-                  </p>
-                )}
+                {error && <FormError>{error}</FormError>}
               </div>
 
             </form>

@@ -12,6 +12,7 @@ import {
   Checkbox,
   SubmitButton,
   FormSuccess,
+  FormError,
 } from "@/components/FormControls";
 import {
   HS_CONTACT_FORM_GUID,
@@ -197,11 +198,7 @@ const ContactSales = () => {
                 <SubmitButton loading={loading}>
                   {loading ? "Submitting…" : "Submit"}
                 </SubmitButton>
-                {error && (
-                  <p role="alert" className="font-sans text-[13px] text-danger-600 text-center">
-                    {error}
-                  </p>
-                )}
+                {error && <FormError>{error}</FormError>}
               </div>
 
             </form>
