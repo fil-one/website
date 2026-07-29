@@ -60,3 +60,67 @@ export function getHubSpotContext(pageName: string) {
     ...(hutk ? { hutk } : {}),
   };
 }
+
+/** A single field in a HubSpot Forms-API submission. */
+export interface HubSpotField {
+  /** HubSpot object type (e.g. "0-1" contact, "0-5" ticket). */
+  objectTypeId?: string;
+  name: string;
+  value: string;
+}
+
+export interface HubSpotSubmitResult {
+  ok: boolean;
+  /** Human-readable error message; present only when `ok` is false. */
+  error?: string;
+}
+
+/**
+ * Submit a form to the HubSpot Forms API and normalise the result.
+ *
+ * Wraps the fetch + response parsing shared by every marketing form so pages
+ * only build their `fields` array. Resolves to `{ ok: true }` on success or
+ * `{ ok: false, error }` with a human-readable message on failure — never
+ * throws. Callers own the `data-hs-do-not-collect` attribute on their `<form>`
+ * and the `role="status"`/`role="alert"` announcements.
+ */
+export async function submitHubSpotForm(opts: {
+  formGuid: string;
+  fields: HubSpotField[];
+  /** Human-readable page name recorded in the submission context. */
+  pageName: string;
+  /** Optional HubSpot `legalConsentOptions` payload (consent checkboxes). */
+  legalConsentOptions?: unknown;
+}): Promise<HubSpotSubmitResult> {
+  try {
+    const res = await fetch(
+      `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${opts.formGuid}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fields: opts.fields,
+          context: getHubSpotContext(opts.pageName),
+          ...(opts.legalConsentOptions
+            ? { legalConsentOptions: opts.legalConsentOptions }
+            : {}),
+        }),
+      }
+    );
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      const msg =
+        body?.errors?.map((e: { message: string }) => e.message).join(" | ") ||
+        body?.message ||
+        JSON.stringify(body);
+      console.error("HubSpot submission error:", body);
+      return { ok: false, error: msg };
+    }
+    return { ok: true };
+  } catch {
+    return {
+      ok: false,
+      error: "Network error — please check your connection and try again.",
+    };
+  }
+}

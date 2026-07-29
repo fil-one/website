@@ -1,14 +1,22 @@
 import { useState } from "react";
-import { Check } from "@phosphor-icons/react";
 import { trackEvent } from "@/lib/analytics";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
+import { SectionLabel } from "@/components/LandingPrimitives";
 import {
-  HS_PORTAL_ID,
-  HS_CONTACT_FORM_GUID as HS_FORM_GUID,
+  FIELD_INPUT_CLASS,
+  FormField,
+  TextField,
+  RadioField,
+  Checkbox,
+  SubmitButton,
+  FormSuccess,
+} from "@/components/FormControls";
+import {
+  HS_CONTACT_FORM_GUID,
   HS_MARKETING_SUBSCRIPTION_TYPE_ID,
-  getHubSpotContext,
+  submitHubSpotForm,
 } from "@/lib/hubspot";
 
 const DATA_OPTIONS = [
@@ -19,45 +27,6 @@ const DATA_OPTIONS = [
   "500-1,000 TB",
   "1+ PB",
 ];
-
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  border: "1px solid rgba(0,0,0,0.10)",
-  borderRadius: 10,
-  padding: "10px 14px",
-  fontFamily: "'Funnel Sans', sans-serif",
-  fontWeight: 400,
-  fontSize: 14.5,
-  color: "#09090B",
-  backgroundColor: "#FFFFFF",
-  outline: "none",
-  transition: "border-color 150ms ease",
-};
-
-const labelStyle: React.CSSProperties = {
-  fontFamily: "'Funnel Sans', sans-serif",
-  fontWeight: 500,
-  fontSize: 13.5,
-  color: "#3F3F46",
-};
-
-const Field = ({
-  label,
-  required,
-  children,
-}: {
-  label: string;
-  required?: boolean;
-  children: React.ReactNode;
-}) => (
-  <label className="flex flex-col gap-1.5">
-    <span style={labelStyle}>
-      {label}
-      {required && <span aria-hidden="true" style={{ color: "#DC2626", marginLeft: 2 }}>*</span>}
-    </span>
-    {children}
-  </label>
-);
 
 const ContactSales = () => {
   useSeo({
@@ -81,11 +50,11 @@ const ContactSales = () => {
 
   const set = (key: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement>
-  ) => setForm((f) => ({ ...f, [key]: e.target.type === "checkbox" ? e.target.checked : e.target.value }));
+  ) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Manual validation for hidden radio group
+    // Manual validation for the custom radio group
     if (!form.dataStorage) {
       setRadioError(true);
       return;
@@ -93,55 +62,43 @@ const ContactSales = () => {
     setLoading(true);
     setError(null);
     setRadioError(false);
-    try {
-      const res = await fetch(
-        `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_FORM_GUID}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            fields: [
-              { objectTypeId: "0-1", name: "firstname", value: form.firstname },
-              { objectTypeId: "0-1", name: "lastname", value: form.lastname },
-              { objectTypeId: "0-1", name: "company", value: form.company },
-              { objectTypeId: "0-1", name: "email", value: form.email },
-              { objectTypeId: "0-1", name: "how_much_data_are_you_looking_to_store", value: form.dataStorage },
-            ],
-            context: getHubSpotContext("Contact Sales"),
-            legalConsentOptions: {
-              consent: {
-                consentToProcess: true,
-                text: "By clicking submit, you consent to allow Fil One to store and process the information submitted.",
-                communications: [
-                  {
-                    value: form.consent,
-                    subscriptionTypeId: HS_MARKETING_SUBSCRIPTION_TYPE_ID,
-                    text: "I agree to receive other communications from Fil One.",
-                  },
-                ],
-              },
+
+    const result = await submitHubSpotForm({
+      formGuid: HS_CONTACT_FORM_GUID,
+      pageName: "Contact Sales",
+      fields: [
+        { objectTypeId: "0-1", name: "firstname", value: form.firstname },
+        { objectTypeId: "0-1", name: "lastname", value: form.lastname },
+        { objectTypeId: "0-1", name: "company", value: form.company },
+        { objectTypeId: "0-1", name: "email", value: form.email },
+        { objectTypeId: "0-1", name: "how_much_data_are_you_looking_to_store", value: form.dataStorage },
+      ],
+      legalConsentOptions: {
+        consent: {
+          consentToProcess: true,
+          text: "By clicking submit, you consent to allow Fil One to store and process the information submitted.",
+          communications: [
+            {
+              value: form.consent,
+              subscriptionTypeId: HS_MARKETING_SUBSCRIPTION_TYPE_ID,
+              text: "I agree to receive other communications from Fil One.",
             },
-          }),
-        }
-      );
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        const msg = body?.errors?.map((e: { message: string }) => e.message).join(" | ") || body?.message || JSON.stringify(body);
-        console.error("HubSpot submission error:", body);
-        setError(msg);
-        return;
-      }
-      setSubmitted(true);
-      trackEvent("Form Submit", { form: "contact-sales", page: window.location.pathname });
-    } catch (err) {
-      setError("Network error — please check your connection and try again.");
-    } finally {
-      setLoading(false);
+          ],
+        },
+      },
+    });
+
+    setLoading(false);
+    if (!result.ok) {
+      setError(result.error);
+      return;
     }
+    setSubmitted(true);
+    trackEvent("Form Submit", { form: "contact-sales", page: window.location.pathname });
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
+    <div className="min-h-screen overflow-x-hidden bg-white">
       <PlatformNavbar />
 
       <main id="main-content" className="flex flex-col items-center px-5 md:px-8 pt-36 pb-24 w-full">
@@ -149,241 +106,99 @@ const ContactSales = () => {
 
           {/* Header */}
           <div className="flex flex-col gap-3">
-            <p
-              style={{
-                fontFamily: "'DM Mono', monospace",
-                fontWeight: 500,
-                fontSize: 11.5,
-                letterSpacing: "0.08em",
-                color: "#71717A",
-                textTransform: "uppercase",
-              }}
-            >
-              Contact Sales
-            </p>
-            <h1
-              className="text-[28px] md:text-[36px]"
-              style={{
-                fontFamily: "'Aspekta', sans-serif",
-                fontWeight: 500,
-                lineHeight: "1.15",
-                letterSpacing: "-0.02em",
-                color: "#09090B",
-              }}
-            >
+            <SectionLabel>Contact Sales</SectionLabel>
+            <h1 className="m-0 font-display font-medium text-[28px] md:text-[36px] leading-[1.15] tracking-[-0.02em] text-zinc-950">
               Talk to our team
             </h1>
-            <p
-              style={{
-                fontFamily: "'Funnel Sans', sans-serif",
-                fontWeight: 400,
-                fontSize: 15,
-                lineHeight: "1.6",
-                color: "#71717A",
-              }}
-            >
+            <p className="m-0 font-sans font-normal text-[15px] leading-[1.6] text-zinc-500">
               Tell us about your use case and we'll get back to you shortly.
             </p>
           </div>
 
-          <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
+          <div className="h-px w-full bg-black/[0.07]" />
 
           {submitted ? (
-            /* ── Success state ── */
-            <div role="status" className="flex flex-col gap-3 py-6">
-              <div
-                className="flex items-center justify-center w-10 h-10 rounded-full"
-                style={{ backgroundColor: "#F0FDF4" }}
-              >
-                <Check size={18} color="#22C55E" />
-              </div>
-              <p style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, fontSize: 20, color: "#09090B", letterSpacing: "-0.01em" }}>
-                We'll be in touch soon.
-              </p>
-              <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14.5, color: "#71717A", lineHeight: "1.6" }}>
-                Thanks for reaching out. Our team will review your message and get back to you shortly.
-              </p>
-            </div>
+            <FormSuccess title="We'll be in touch soon.">
+              Thanks for reaching out. Our team will review your message and get back to you shortly.
+            </FormSuccess>
           ) : (
-            /* ── Form ── */
             <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-5">
 
               {/* First / Last name row */}
               <div className="grid grid-cols-2 gap-4">
-                <Field label="First name" required>
-                  <input
-                    type="text"
-                    value={form.firstname}
-                    onChange={set("firstname")}
-                    placeholder="Jane"
-                    required
-                    style={inputStyle}
-                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
-                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                  />
-                </Field>
-                <Field label="Last name" required>
-                  <input
-                    type="text"
-                    value={form.lastname}
-                    onChange={set("lastname")}
-                    placeholder="Smith"
-                    required
-                    style={inputStyle}
-                    onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
-                    onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                  />
-                </Field>
+                <TextField
+                  label="First name"
+                  required
+                  type="text"
+                  value={form.firstname}
+                  onChange={set("firstname")}
+                  placeholder="Jane"
+                />
+                <TextField
+                  label="Last name"
+                  required
+                  type="text"
+                  value={form.lastname}
+                  onChange={set("lastname")}
+                  placeholder="Smith"
+                />
               </div>
 
-              <Field label="Company name" required>
-                <input
-                  type="text"
-                  value={form.company}
-                  onChange={set("company")}
-                  placeholder="Acme Inc."
-                  required
-                  style={inputStyle}
-                  onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
-                  onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                />
-              </Field>
+              <TextField
+                label="Company name"
+                required
+                type="text"
+                value={form.company}
+                onChange={set("company")}
+                placeholder="Acme Inc."
+              />
 
-              <Field label="Work email" required>
-                <input
-                  type="email"
-                  value={form.email}
-                  onChange={set("email")}
-                  placeholder="jane@acme.com"
-                  required
-                  style={inputStyle}
-                  onFocus={e => (e.target.style.borderColor = "rgba(0,0,0,0.30)")}
-                  onBlur={e => (e.target.style.borderColor = "rgba(0,0,0,0.10)")}
-                />
-              </Field>
+              <TextField
+                label="Work email"
+                required
+                type="email"
+                value={form.email}
+                onChange={set("email")}
+                placeholder="jane@acme.com"
+              />
 
-              {/* Data storage radio group */}
-              <fieldset className="flex flex-col gap-3" style={{ border: "none", padding: 0, margin: 0 }}>
-                <legend style={{ ...labelStyle, padding: 0 }}>
-                  How much data are you looking to store?
-                  <span aria-hidden="true" style={{ color: "#DC2626", marginLeft: 2 }}>*</span>
-                </legend>
-                {radioError && (
-                  <p role="alert" style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626" }}>
-                    Please select an option.
-                  </p>
-                )}
-                <div className="flex flex-col gap-2">
-                  {DATA_OPTIONS.map((option) => {
-                    const checked = form.dataStorage === option;
-                    return (
-                      <label
-                        key={option}
-                        className="flex items-center gap-3 cursor-pointer"
-                        style={{ userSelect: "none" }}
-                      >
-                        <input
-                          type="radio"
-                          name="dataStorage"
-                          value={option}
-                          checked={checked}
-                          onChange={() => { setForm((f) => ({ ...f, dataStorage: option })); setRadioError(false); }}
-                          required
-                          className="peer sr-only"
-                        />
-                        {/* Custom radio */}
-                        <span
-                          className="peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
-                          style={{
-                            width: 17,
-                            height: 17,
-                            borderRadius: "50%",
-                            border: checked ? "5px solid #09090B" : "1.5px solid rgba(0,0,0,0.25)",
-                            backgroundColor: "#FFFFFF",
-                            flexShrink: 0,
-                            transition: "border 150ms ease",
-                            display: "inline-block",
-                            outlineColor: "#0090FF",
-                          }}
-                        />
-                        <span
-                          style={{
-                            fontFamily: "'Funnel Sans', sans-serif",
-                            fontWeight: 400,
-                            fontSize: 14.5,
-                            color: checked ? "#09090B" : "#52525B",
-                            transition: "color 150ms ease",
-                          }}
-                        >
-                          {option}
-                        </span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </fieldset>
+              <RadioField
+                legend="How much data are you looking to store?"
+                name="dataStorage"
+                required
+                options={DATA_OPTIONS}
+                value={form.dataStorage}
+                onChange={(value) => { setForm((f) => ({ ...f, dataStorage: value })); setRadioError(false); }}
+                error={radioError ? "Please select an option." : undefined}
+              />
 
-              <div className="w-full" style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
+              <div className="h-px w-full bg-black/[0.07]" />
 
               {/* Consent text */}
-              <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, lineHeight: "1.7", color: "#71717A" }}>
+              <p className="font-sans font-normal text-[13px] leading-[1.7] text-zinc-500">
                 Fil One is committed to protecting your privacy. We'll only use your personal information to administer your account and provide the products and services you requested. From time to time we'd like to contact you about our products and services.
               </p>
 
-              {/* Consent checkbox */}
-              <label className="flex items-start gap-3 cursor-pointer" style={{ userSelect: "none" }}>
-                <input
-                  type="checkbox"
-                  checked={form.consent}
-                  onChange={set("consent")}
-                  className="peer sr-only"
-                />
-                <span
-                  className="peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2"
-                  style={{
-                    width: 16,
-                    height: 16,
-                    borderRadius: 4,
-                    border: form.consent ? "none" : "1.5px solid rgba(0,0,0,0.25)",
-                    backgroundColor: form.consent ? "#09090B" : "#FFFFFF",
-                    flexShrink: 0,
-                    marginTop: 2,
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    transition: "background-color 150ms ease, border 150ms ease",
-                    outlineColor: "#0090FF",
-                  }}
-                >
-                  {form.consent && (
-                    <Check size={10} color="#FFFFFF" />
-                  )}
-                </span>
-                <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13.5, color: "#52525B", lineHeight: "1.6" }}>
-                  I agree to receive other communications from Fil One.
-                </span>
-              </label>
+              <Checkbox
+                checked={form.consent}
+                onChange={(checked) => setForm((f) => ({ ...f, consent: checked }))}
+              >
+                I agree to receive other communications from Fil One.
+              </Checkbox>
 
-              <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, lineHeight: "1.7", color: "#71717A" }}>
+              <p className="font-sans font-normal text-[12.5px] leading-[1.7] text-zinc-500">
                 You can unsubscribe at any time. For more information, review our{" "}
-                <a href="/privacy" style={{ color: "#71717A", textDecoration: "underline" }}>Privacy Policy</a>.
+                <a href="/privacy" className="text-zinc-500 underline">Privacy Policy</a>.
                 By clicking submit, you consent to allow Fil One to store and process the information submitted.
               </p>
 
               {/* Submit */}
               <div className="flex flex-col gap-2 pt-1">
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="btn-primary"
-                  style={{ border: "none", cursor: loading ? "default" : "pointer", opacity: loading ? 0.7 : 1, width: "100%" }}
-                >
-                  <span className="btn-primary-inner" style={{ padding: "11px 24px", fontSize: 15 }}>
-                    {loading ? "Submitting…" : "Submit"}
-                  </span>
-                </button>
+                <SubmitButton loading={loading}>
+                  {loading ? "Submitting…" : "Submit"}
+                </SubmitButton>
                 {error && (
-                  <p role="alert" style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "#DC2626", textAlign: "center" }}>
+                  <p role="alert" className="font-sans text-[13px] text-danger-600 text-center">
                     {error}
                   </p>
                 )}

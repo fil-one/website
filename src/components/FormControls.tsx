@@ -1,0 +1,209 @@
+import type { ReactNode } from "react";
+import { Check } from "@phosphor-icons/react";
+
+/**
+ * Shared form primitives for the marketing forms (contact, support, partner
+ * apply, waitlists). Tokenized visuals + baked-in a11y so every form stays
+ * consistent and accessible. Compose these — there is no monolithic "form"
+ * component, because the pages differ (single object of state vs per-field
+ * state, radio vs multi-select checkbox groups).
+ *
+ * Pair with `submitHubSpotForm` in `lib/hubspot`. Callers keep
+ * `data-hs-do-not-collect="true"` on the `<form>` element itself.
+ */
+
+/** Tokenized styling shared by text inputs, textareas and selects. */
+export const FIELD_INPUT_CLASS =
+  "w-full rounded-[10px] border border-black/10 bg-white px-3.5 py-2.5 font-sans text-[14.5px] font-normal text-zinc-950 transition-colors placeholder:text-zinc-400 focus:border-black/30";
+
+const REQUIRED_MARK = (
+  <span aria-hidden="true" className="ml-0.5 text-danger-600">
+    *
+  </span>
+);
+
+const LABEL_CLASS = "font-sans font-medium text-[13.5px] text-zinc-700";
+
+/** Labelled field wrapper: label text (+ optional required asterisk) over its control. */
+export const FormField = ({
+  label,
+  required,
+  children,
+}: {
+  label: string;
+  required?: boolean;
+  children: ReactNode;
+}) => (
+  <label className="flex flex-col gap-1.5">
+    <span className={LABEL_CLASS}>
+      {label}
+      {required && REQUIRED_MARK}
+    </span>
+    {children}
+  </label>
+);
+
+/** The common case: a labelled single-line text/email input. */
+export const TextField = ({
+  label,
+  required,
+  ...inputProps
+}: {
+  label: string;
+  required?: boolean;
+} & React.InputHTMLAttributes<HTMLInputElement>) => (
+  <FormField label={label} required={required}>
+    <input required={required} className={FIELD_INPUT_CLASS} {...inputProps} />
+  </FormField>
+);
+
+/** Single-select custom radio group inside a labelled fieldset. */
+export const RadioField = ({
+  legend,
+  name,
+  options,
+  value,
+  onChange,
+  required,
+  error,
+}: {
+  legend: string;
+  name: string;
+  options: string[];
+  value: string;
+  onChange: (value: string) => void;
+  required?: boolean;
+  /** Validation message announced via role="alert" when set. */
+  error?: string;
+}) => (
+  <fieldset className="m-0 flex flex-col gap-3 border-none p-0">
+    {/* A <legend> is not a flex item, so the fieldset's gap never spaces it
+        from the options — the heading→options gap must live on the legend. */}
+    <legend className={`mb-3 p-0 ${LABEL_CLASS}`}>
+      {legend}
+      {required && REQUIRED_MARK}
+    </legend>
+    {error && (
+      <p role="alert" className="font-sans text-[13px] text-danger-600">
+        {error}
+      </p>
+    )}
+    <div className="flex flex-col gap-2">
+      {options.map((option) => {
+        const checked = value === option;
+        return (
+          <label
+            key={option}
+            className="flex cursor-pointer select-none items-center gap-3"
+          >
+            <input
+              type="radio"
+              name={name}
+              value={option}
+              checked={checked}
+              onChange={() => onChange(option)}
+              required={required}
+              className="peer sr-only"
+            />
+            <span
+              className={`inline-block h-[17px] w-[17px] flex-shrink-0 rounded-full bg-white transition-[border] peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand-500 ${
+                checked
+                  ? "border-[5px] border-zinc-950"
+                  : "border-[1.5px] border-black/25"
+              }`}
+            />
+            <span
+              className={`font-sans text-[14.5px] transition-colors ${
+                checked ? "text-zinc-950" : "text-zinc-600"
+              }`}
+            >
+              {option}
+            </span>
+          </label>
+        );
+      })}
+    </div>
+  </fieldset>
+);
+
+/**
+ * Controlled custom checkbox with its label content. `tone="dark"` (default)
+ * is the consent/agreement style; `tone="brand"` is the blue multi-select
+ * style (waitlist tool pickers).
+ */
+export const Checkbox = ({
+  checked,
+  onChange,
+  tone = "dark",
+  children,
+}: {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  tone?: "dark" | "brand";
+  children: ReactNode;
+}) => {
+  const boxOn =
+    tone === "brand"
+      ? "border-none bg-brand-500"
+      : "border-none bg-zinc-950";
+  return (
+    <label className="flex cursor-pointer select-none items-start gap-3">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="peer sr-only"
+      />
+      <span
+        className={`mt-0.5 inline-flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-[4px] transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand-500 ${
+          checked ? boxOn : "border-[1.5px] border-black/25 bg-white"
+        }`}
+      >
+        {checked && <Check size={10} weight="bold" className="text-white" />}
+      </span>
+      <span className="font-sans font-normal text-[13.5px] leading-[1.6] text-zinc-600">
+        {children}
+      </span>
+    </label>
+  );
+};
+
+/** Full-width primary submit button with a loading state. */
+export const SubmitButton = ({
+  loading,
+  children,
+}: {
+  loading?: boolean;
+  children: ReactNode;
+}) => (
+  <button
+    type="submit"
+    disabled={loading}
+    className="btn-primary w-full cursor-pointer border-none disabled:cursor-default disabled:opacity-70"
+  >
+    <span className="btn-primary-inner px-6 py-[11px] text-[15px]">
+      {children}
+    </span>
+  </button>
+);
+
+/** Post-submit success panel, announced to assistive tech via role="status". */
+export const FormSuccess = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) => (
+  <div role="status" className="flex flex-col gap-3 py-6">
+    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-success-50">
+      <Check size={18} className="text-success-500" />
+    </div>
+    <p className="font-display font-medium text-[20px] tracking-[-0.01em] text-zinc-950">
+      {title}
+    </p>
+    <p className="font-sans font-normal text-[14.5px] leading-[1.6] text-zinc-500">
+      {children}
+    </p>
+  </div>
+);
