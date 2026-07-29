@@ -529,7 +529,7 @@ export const ROUTE_META = {
   "/solutions/enterprise-backup": {
     title: "Enterprise Backup & Disaster Recovery · Fil One",
     description:
-      "Immutable, geo-distributed backup storage with no egress fees. Ransomware resilience, cryptographic integrity, and compliance-ready for enterprise teams.",
+      "Immutable, S3-compatible backup storage with object lock and no egress fees. Ransomware-resilient, WORM-compliant, and built for enterprise recovery.",
   },
   "/waitlist/bucket-intelligence": {
     title: "Join the Bucket Intelligence Waitlist · Fil One",
