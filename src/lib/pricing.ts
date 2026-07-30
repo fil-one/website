@@ -19,6 +19,20 @@ export {
   PRICE_PER_TB_SHORT,
   /** The full per-TB rate for inline copy, e.g. "$4.99/TB/month". */
   PRICE_PER_TB_MONTH,
+  /** Fil One storage price, in EUR per TB per month. */
+  PRICE_PER_TB_EUR,
+  /** The numeric EUR amount as a string, e.g. "4.99". */
+  PRICE_AMOUNT_EUR,
+  /** The bare EUR price with currency symbol, e.g. "€4.99". */
+  PRICE_DISPLAY_EUR,
+  /** The short per-TB EUR rate, e.g. "€4.99/TB". */
+  PRICE_PER_TB_SHORT_EUR,
+  /** The full per-TB EUR rate for inline copy, e.g. "€4.99/TB/month". */
+  PRICE_PER_TB_MONTH_EUR,
+  /** USD per 1 EUR, for converting competitors' USD rate cards. */
+  EUR_USD_RATE,
+  /** Where and when EUR_USD_RATE was taken. */
+  EUR_USD_RATE_SOURCE,
 } from "./pricing.constants.mjs";
 
 import { PRICE_PER_TB } from "./pricing.constants.mjs";
