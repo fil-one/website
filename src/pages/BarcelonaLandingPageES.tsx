@@ -140,7 +140,7 @@ const BarcelonaLandingPageES = () => {
             </>
           }
           description="Almacenamiento de objetos compatible con S3 que mantiene tus datos en Europa. Funciona con las herramientas que ya utilizas, sin necesidad de migraciones."
-          ctas={[{ label: "Prueba gratis por 30 días", href: SIGNUP_URL, variant: "primary", size: "lg", glow: true }]}
+          ctas={[{ label: "Empieza con 30 días gratis", href: SIGNUP_URL, variant: "primary", size: "lg", glow: true }]}
         />
 
         {/* ── Publications / Social proof ──────────────────────────────────── */}
@@ -207,7 +207,7 @@ const BarcelonaLandingPageES = () => {
             {/* Mid-page CTA after pricing table */}
             <div className="flex items-center justify-center mt-4">
               <Button variant="primary" href={SIGNUP_URL}>
-                Prueba gratis por 30 días
+                Empieza con 30 días gratis
               </Button>
             </div>
           </div>
@@ -257,7 +257,7 @@ const BarcelonaLandingPageES = () => {
           heading="El almacenamiento de objetos más económico de Europa"
           headingMaxWidth={620}
           subhead={`${PRICE_PER_TB_SHORT_EUR_ES}, sin costes de egress y listo para usar en minutos.`}
-          cta={{ label: "Prueba gratis por 30 días", href: SIGNUP_URL }}
+          cta={{ label: "Empieza con 30 días gratis", href: SIGNUP_URL }}
           note="No se requiere tarjeta de crédito."
         />
       </main>
