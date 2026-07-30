@@ -13,6 +13,8 @@ interface CtaBannerProps {
    */
   secondaryCta?: { label: string; href: string; onClick?: () => void };
   note?: ReactNode;
+  /** Cap on the heading width (px). Longer translations need more room. */
+  headingMaxWidth?: number;
 }
 
 /**
@@ -20,7 +22,7 @@ interface CtaBannerProps {
  * and a breathing glow, a headline, and a glowing primary button. Tuned for
  * the closing section of a page (sits on white, above the footer).
  */
-const CtaBanner = ({ heading, subhead, cta, secondaryCta, note }: CtaBannerProps) => {
+const CtaBanner = ({ heading, subhead, cta, secondaryCta, note, headingMaxWidth = 480 }: CtaBannerProps) => {
   const { ref, inView } = useInView({ threshold: 0.05 });
 
   return (
@@ -53,7 +55,7 @@ const CtaBanner = ({ heading, subhead, cta, secondaryCta, note }: CtaBannerProps
           <div className="relative">
             <h2
               className="text-[26px] md:text-[32px] font-display font-medium text-white mx-auto mb-3"
-              style={{ letterSpacing: "-0.025em", lineHeight: "1.12", maxWidth: 480 }}
+              style={{ letterSpacing: "-0.025em", lineHeight: "1.12", maxWidth: headingMaxWidth }}
             >
               {heading}
             </h2>

@@ -39,9 +39,25 @@ interface PriceComparisonTableProps {
   centerFootnote?: boolean;
 }
 
+/**
+ * Parse a formatted currency string to a number, tolerating both the English
+ * ("€1,234.56") and Spanish ("1.234,56 €") conventions. Whichever of "." or ","
+ * comes last is the decimal separator when 1 to 2 digits follow it; otherwise
+ * every separator is thousands grouping. Returns NaN for non-numeric values,
+ * which falls through to the neutral tone.
+ */
+const parseAmount = (value: string) => {
+  const digits = value.replace(/[^0-9.,-]/g, "");
+  const lastSep = Math.max(digits.lastIndexOf("."), digits.lastIndexOf(","));
+  if (lastSep === -1) return parseFloat(digits);
+  const trailing = digits.length - lastSep - 1;
+  if (trailing < 1 || trailing > 2) return parseFloat(digits.replace(/[.,]/g, ""));
+  return parseFloat(`${digits.slice(0, lastSep).replace(/[.,]/g, "")}.${digits.slice(lastSep + 1)}`);
+};
+
 /** Zero reads as success, a large charge as danger, anything else neutral. */
 const valueTone = (value: string) => {
-  const n = parseFloat(value.replace(/[^0-9.-]/g, ""));
+  const n = parseAmount(value);
   if (n === 0) return "text-success-700";
   if (n > 50) return "text-danger-600";
   return "text-zinc-600";
