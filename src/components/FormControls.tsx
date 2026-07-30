@@ -349,14 +349,17 @@ export const CheckboxField = ({
 /** Full-width primary submit button with a loading state. */
 export const SubmitButton = ({
   loading,
+  disabled,
   children,
 }: {
   loading?: boolean;
+  /** Extra disabled condition beyond `loading` (e.g. an unfilled required field). */
+  disabled?: boolean;
   children: ReactNode;
 }) => (
   <button
     type="submit"
-    disabled={loading}
+    disabled={loading || disabled}
     className="btn-primary w-full cursor-pointer border-none disabled:cursor-default disabled:opacity-70"
   >
     <span className="btn-primary-inner px-6 py-[11px] text-[15px]">
