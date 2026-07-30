@@ -86,13 +86,13 @@ const PRICING_ROWS: PriceComparisonRow[] = [
 
 const STATS = [
   { stat: PRICE_PER_TB_SHORT_EUR_ES, label: "Precio fijo mensual" },
-  { stat: eurEs(0, 0), label: "Costes de egress" },
+  { stat: eurEs(0, 0), label: "Costes por egress" },
   // El 20× es sobre la factura total, que depende del egress, así que
   // solo se cumple con un uso intensivo de lectura. La nota indica el escenario.
   {
     stat: "20×",
     label: "Más barato que AWS",
-    note: `Con ${WORKLOAD_TB} TB almacenados y ${WORKLOAD_TB} TB de egress`,
+    note: `Con ${WORKLOAD_TB} TB de almacenamiento y ${WORKLOAD_TB} TB de egress`,
   },
 ];
 
@@ -256,7 +256,7 @@ const BarcelonaLandingPageES = () => {
         <CtaBanner
           heading="El almacenamiento de objetos más económico de Europa"
           headingMaxWidth={620}
-          subhead={`${PRICE_PER_TB_SHORT_EUR_ES}, sin costes de egress y listo para usar en minutos.`}
+          subhead={`${PRICE_PER_TB_SHORT_EUR_ES}, sin costes por egress y listo para usar en minutos.`}
           cta={{ label: "Empieza con 30 días gratis", href: SIGNUP_URL }}
           note="No se requiere tarjeta de crédito."
         />
