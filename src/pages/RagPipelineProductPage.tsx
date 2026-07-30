@@ -81,7 +81,7 @@ const USE_CASES = [
   },
 ];
 
-const FILE_TYPES = ["Markdown", "Plain text", "HTML", "DOCX", "PPTX"];
+const FILE_TYPES = ["Markdown", "Plain text", "HTML", "DOCX", "PPTX", "PDF"];
 
 const TRUST = [
   {
@@ -143,7 +143,7 @@ console.log(data.answer, data.sources);`,
 const FAQS = [
   {
     q: "What file types are supported?",
-    a: "Markdown, plain text (.txt), HTML, DOCX, and PPTX at launch. More formats on the roadmap.",
+    a: "Markdown, plain text (.txt), HTML, DOCX, PDF (text-based), and PPTX at launch. More formats on the roadmap.",
   },
   {
     q: "Can I query my buckets from my own app?",
