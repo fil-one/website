@@ -85,19 +85,19 @@ const PRICING_ROWS: PriceComparisonRow[] = [
 
 const STATS = [
   { stat: PRICE_PER_TB_SHORT_EUR_ES, label: "Precio fijo mensual" },
-  { stat: eurEs(0, 0), label: "Costes de salida" },
-  // El 20× es sobre la factura total, que depende del tráfico de salida, así que
+  { stat: eurEs(0, 0), label: "Costes de egress" },
+  // El 20× es sobre la factura total, que depende del egress, así que
   // solo se cumple con un uso intensivo de lectura. La nota indica el escenario.
   {
     stat: "20×",
     label: "Más barato que AWS",
-    note: `Con ${WORKLOAD_TB} TB almacenados y ${WORKLOAD_TB} TB de salida`,
+    note: `Con ${WORKLOAD_TB} TB almacenados y ${WORKLOAD_TB} TB de egress`,
   },
 ];
 
 const FEATURES = [
   { icon: Plug, title: "Compatibilidad inmediata con S3", desc: "La misma API, los mismos SDKs y herramientas. Conecta tu flujo a nuestro endpoint y sigue trabajando." },
-  { icon: ArrowsOut, title: "Sin cargos por tráfico de salida", desc: "Cada lectura es gratis, así que tu factura se mantiene plana sin importar cuánto uses el servicio." },
+  { icon: ArrowsOut, title: "Sin cargos por egress", desc: "Cada lectura es gratis, así que tu factura se mantiene plana sin importar cuánto uses el servicio." },
   { icon: ShieldCheck, title: "Once nueves de durabilidad", desc: "99,999999999% de durabilidad, replicada en varias ubicaciones y monitorizada permanentemente." },
   { icon: Lock, title: "Object Lock y versionado", desc: "Modos de cumplimiento, periodos de retención y registros de auditoría a prueba de manipulación." },
   { icon: MapPin, title: "Tus datos nunca salen de la UE", desc: "La infraestructura de almacenamiento permanece dentro de las fronteras europeas." },
@@ -135,7 +135,7 @@ const BarcelonaLandingPageES = () => {
             <>
               Almacenamiento europeo.
               <br />
-              <span className="text-brand-500">{PRICE_PER_TB_SHORT_EUR_ES}, sin cargos por tráfico de salida.</span>
+              <span className="text-brand-500">{PRICE_PER_TB_SHORT_EUR_ES}, sin cargos por egress.</span>
             </>
           }
           description="Almacenamiento de objetos compatible con S3 que mantiene tus datos en Europa. Funciona con las herramientas que ya utilizas, sin necesidad de migraciones."
@@ -157,7 +157,7 @@ const BarcelonaLandingPageES = () => {
                 Un coste <span className="text-brand-500">imbatible</span>
               </SectionHeading>
               <SectionSub maxWidth={320}>
-                Compatible con S3, soberanía de datos en la UE y sin cargos por tráfico de salida. Sin costes ocultos ni
+                Compatible con S3, soberanía de datos en la UE y sin cargos por egress. Sin costes ocultos ni
                 sorpresas.
               </SectionSub>
             </div>
@@ -182,7 +182,7 @@ const BarcelonaLandingPageES = () => {
                 Tu factura mensual, <span className="text-brand-500">de cuatro formas</span>
               </SectionHeading>
               <SectionSub maxWidth={600}>
-                Un equipo de {WORKLOAD_TB} TB en Barcelona, con {WORKLOAD_TB} TB de tráfico de salida al mes y con
+                Un equipo de {WORKLOAD_TB} TB en Barcelona, con {WORKLOAD_TB} TB de egress al mes y con
                 500.000 operaciones de objetos.
               </SectionSub>
             </div>
@@ -255,7 +255,7 @@ const BarcelonaLandingPageES = () => {
         <CtaBanner
           heading="El almacenamiento de objetos más económico de Europa"
           headingMaxWidth={620}
-          subhead={`${PRICE_PER_TB_SHORT_EUR_ES}, sin costes de salida y listo para usar en minutos.`}
+          subhead={`${PRICE_PER_TB_SHORT_EUR_ES}, sin costes de egress y listo para usar en minutos.`}
           cta={{ label: "Prueba gratis por 30 días", href: SIGNUP_URL }}
           note="No se requiere tarjeta de crédito."
         />
