@@ -8,7 +8,12 @@
  * Every route in src/routes.tsx (routeDefs) MUST have an entry here — the
  * route-parity test (src/test/route-seo-parity.test.ts) asserts this.
  */
-import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH, PRICE_AMOUNT } from "../src/lib/pricing.constants.mjs";
+import {
+  PRICE_PER_TB_SHORT,
+  PRICE_PER_TB_MONTH,
+  PRICE_AMOUNT,
+  PRICE_PER_TB_SHORT_EUR,
+} from "../src/lib/pricing.constants.mjs";
 
 export const BASE_URL = "https://www.fil.one";
 
@@ -358,15 +363,15 @@ export const ROUTE_META = {
       `Purpose-built for Web3-native apps. S3-compatible, cryptographically verifiable storage on Filecoin at ${PRICE_PER_TB_SHORT}, integrity proven daily.`,
   },
   "/lp/barcelona": {
-    title: "Fil One for Barcelona: European Storage, €4.99/TB, No Egress Fees",
+    title: `Fil One for Barcelona: European Storage, ${PRICE_PER_TB_SHORT_EUR}, No Egress Fees`,
     description:
-      "S3-compatible object storage for teams in Barcelona. EU data sovereignty, zero egress fees, at €4.99/TB. Drop into your existing stack in minutes.",
+      `S3-compatible object storage for teams in Barcelona. EU data sovereignty, zero egress fees, at ${PRICE_PER_TB_SHORT_EUR}. Drop into your existing stack in minutes.`,
   },
   "/lp/es/barcelona": {
     lang: "es",
-    title: "Fil One para Barcelona: Almacenamiento Europeo, €4.99/TB, Sin Egress",
+    title: `Fil One para Barcelona: Almacenamiento Europeo, ${PRICE_PER_TB_SHORT_EUR}, Sin Egress`,
     description:
-      "Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a €4.99/TB. Intégralo en tu stack actual en minutos.",
+      `Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a ${PRICE_PER_TB_SHORT_EUR}. Intégralo en tu stack actual en minutos.`,
   },
   "/contact-sales": {
     title: "Contact Sales · Fil One",

@@ -23,3 +23,35 @@ export const PRICE_PER_TB_SHORT = `${PRICE_DISPLAY}/TB`;
 
 /** The full per-TB rate for inline copy, e.g. "$4.99/TB/month". */
 export const PRICE_PER_TB_MONTH = `${PRICE_DISPLAY}/TB/month`;
+
+/* ── EUR ────────────────────────────────────────────────────────────────────
+ * The European pages (e.g. /lp/barcelona) quote a price denominated natively
+ * in EUR rather than a conversion of the USD rate, so it is its own constant.
+ * The two happen to share the same figure today; they are deliberately not
+ * derived from one another so either can move independently.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/** Fil One storage price, in EUR per TB per month. */
+export const PRICE_PER_TB_EUR = 4.99;
+
+/** The numeric EUR amount as a string, for structured data. */
+export const PRICE_AMOUNT_EUR = PRICE_PER_TB_EUR.toFixed(2);
+
+/** The bare EUR price with currency symbol, e.g. "€4.99". */
+export const PRICE_DISPLAY_EUR = `€${PRICE_AMOUNT_EUR}`;
+
+/** The short per-TB EUR rate, e.g. "€4.99/TB". */
+export const PRICE_PER_TB_SHORT_EUR = `${PRICE_DISPLAY_EUR}/TB`;
+
+/** The full per-TB EUR rate for inline copy, e.g. "€4.99/TB/month". */
+export const PRICE_PER_TB_MONTH_EUR = `${PRICE_DISPLAY_EUR}/TB/month`;
+
+/**
+ * USD per 1 EUR, used to convert competitors' USD rate cards for the EUR
+ * comparison tables. Kept here (rather than inline in a page footnote) so the
+ * rate and its provenance move together across every page that cites them.
+ */
+export const EUR_USD_RATE = 1.17;
+
+/** Where and when EUR_USD_RATE was taken, for the comparison-table footnote. */
+export const EUR_USD_RATE_SOURCE = "ECB rate, May 2026";

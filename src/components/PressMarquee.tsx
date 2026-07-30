@@ -24,7 +24,9 @@ const PressMarquee = ({ items, size = "md", className = "" }: PressMarqueeProps)
           {items.map((item) => (
             <span key={item} className="flex items-center gap-8">
               <span className={`font-sans ${SIZE_CLASSES[size]} font-medium text-zinc-600`}>{item}</span>
-              <span className="text-[20px] text-zinc-300">·</span>
+              {/* Purely visual separator: hidden from assistive tech so the
+                  list reads as names, not "Bloomberg middle dot CNBC". */}
+              <span aria-hidden="true" className="text-[20px] text-zinc-300">·</span>
             </span>
           ))}
         </span>
