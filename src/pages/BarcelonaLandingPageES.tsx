@@ -183,8 +183,8 @@ const BarcelonaLandingPageES = () => {
                 Tu factura mensual, <span className="text-brand-500">de cuatro formas</span>
               </SectionHeading>
               <SectionSub maxWidth={600}>
-                Un equipo de {WORKLOAD_TB} TB en Barcelona, con {WORKLOAD_TB} TB de egress al mes y con
-                500.000 operaciones de objetos.
+                Un equipo en Barcelona con {WORKLOAD_TB} TB de almacenamiento, {WORKLOAD_TB} TB de egress al mes y
+                500.000 operaciones sobre objetos.
               </SectionSub>
             </div>
 
