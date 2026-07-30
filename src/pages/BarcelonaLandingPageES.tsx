@@ -197,8 +197,8 @@ const BarcelonaLandingPageES = () => {
               centerFootnote
               footnote={
                 <>
-                  Los precios de los demás proveedores se han convertido de USD a un tipo de cambio de 1 €&nbsp;={" "}
-                  {EUR_USD_RATE_ES} ({EUR_USD_RATE_SOURCE_ES}). Fil One tiene un precio nativo en euros de{" "}
+                  Los precios de los demás proveedores se han convertido de USD a EUR utilizando un tipo de cambio de
+                  1 €&nbsp;= {EUR_USD_RATE_ES} ({EUR_USD_RATE_SOURCE_ES}). Fil One tiene un precio nativo en euros de{" "}
                   {PRICE_PER_TB_SHORT_EUR_ES}.
                 </>
               }
