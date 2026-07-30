@@ -75,3 +75,9 @@ export const PRICE_PER_TB_SHORT_EUR_ES = `${PRICE_DISPLAY_EUR_ES}/TB`;
 
 /** The full per-TB EUR rate for inline Spanish copy, e.g. "4,99 €/TB al mes". */
 export const PRICE_PER_TB_MONTH_EUR_ES = `${PRICE_PER_TB_SHORT_EUR_ES} al mes`;
+
+/** EUR_USD_RATE in Spanish format with the symbol after the number, "1,17 $". */
+export const EUR_USD_RATE_ES = `${EUR_USD_RATE.toFixed(2).replace(".", ",")} $`;
+
+/** Spanish rendering of EUR_USD_RATE_SOURCE, for the ES comparison footnote. */
+export const EUR_USD_RATE_SOURCE_ES = "BCE, mayo de 2026";

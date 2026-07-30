@@ -19,7 +19,8 @@ import PriceComparisonTable, {
 import {
   PRICE_PER_TB_EUR,
   PRICE_PER_TB_SHORT_EUR_ES,
-  EUR_USD_RATE,
+  EUR_USD_RATE_ES,
+  EUR_USD_RATE_SOURCE_ES,
   eurEs,
 } from "@/lib/pricing";
 
@@ -54,7 +55,7 @@ const PRICING_ROWS: PriceComparisonRow[] = [
   {
     provider: "Backblaze B2",
     values: {
-      region: "eu-central-003 Ámsterdam",
+      region: "eu-central-003 Amsterdam",
       storage: eurEs(59.6),
       egress: eurEs(0, 0),
       api: eurEs(0, 0),
@@ -64,7 +65,7 @@ const PRICING_ROWS: PriceComparisonRow[] = [
   {
     provider: "Wasabi",
     values: {
-      region: "eu-west-2 París",
+      region: "eu-west-2 Paris",
       storage: eurEs(59.9),
       egress: eurEs(0, 0),
       api: eurEs(0, 0),
@@ -196,8 +197,8 @@ const BarcelonaLandingPageES = () => {
               centerFootnote
               footnote={
                 <>
-                  Los precios de la competencia se han convertido de USD utilizando el tipo de cambio de 1 € = $
-                  {EUR_USD_RATE} (tipo de cambio del BCE, mayo de 2026). Fil One tiene un precio nativo en euros de{" "}
+                  Los precios de los demás proveedores se han convertido de USD a un tipo de cambio de 1 €&nbsp;={" "}
+                  {EUR_USD_RATE_ES} ({EUR_USD_RATE_SOURCE_ES}). Fil One tiene un precio nativo en euros de{" "}
                   {PRICE_PER_TB_SHORT_EUR_ES}.
                 </>
               }

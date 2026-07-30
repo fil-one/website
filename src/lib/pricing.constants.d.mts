@@ -15,3 +15,5 @@ export function eurEs(amount: number, decimals?: number): string;
 export const PRICE_DISPLAY_EUR_ES: string;
 export const PRICE_PER_TB_SHORT_EUR_ES: string;
 export const PRICE_PER_TB_MONTH_EUR_ES: string;
+export const EUR_USD_RATE_ES: string;
+export const EUR_USD_RATE_SOURCE_ES: string;

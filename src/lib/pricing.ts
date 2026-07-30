@@ -41,6 +41,10 @@ export {
   PRICE_PER_TB_SHORT_EUR_ES,
   /** The full per-TB EUR rate for Spanish copy, e.g. "4,99 €/TB al mes". */
   PRICE_PER_TB_MONTH_EUR_ES,
+  /** EUR_USD_RATE in Spanish format, e.g. "1,17 $". */
+  EUR_USD_RATE_ES,
+  /** Spanish rendering of EUR_USD_RATE_SOURCE. */
+  EUR_USD_RATE_SOURCE_ES,
 } from "./pricing.constants.mjs";
 
 import { PRICE_PER_TB } from "./pricing.constants.mjs";
