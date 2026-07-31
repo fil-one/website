@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
 import { useInView } from "@/hooks/useInView";
 
@@ -10,13 +11,34 @@ const INTEGRATIONS = [
 interface IntegrationsSectionProps {
   /** white (default) or the standard grey section treatment (zinc-50 + zinc-100 borders) */
   tone?: "white" | "grey";
+  /** Section eyebrow; defaults to English. */
+  label?: ReactNode;
+  /** Section heading; defaults to English. */
+  heading?: ReactNode;
+  /** Supporting line under the heading; defaults to English. */
+  description?: ReactNode;
+  /** Docs link label; defaults to English. */
+  ctaLabel?: ReactNode;
 }
 
 /**
  * Auto-scrolling marquee of supported integrations — S3-compatibility
  * reassurance shared by the /lp/price and Barcelona landing pages.
+ *
+ * Copy is overridable so the Spanish pages can share the section rather than
+ * inlining a translated copy of it; the defaults are the English strings.
  */
-const IntegrationsSection = ({ tone = "white" }: IntegrationsSectionProps) => {
+const IntegrationsSection = ({
+  tone = "white",
+  label = "Integrations",
+  heading = (
+    <>
+      Works with your <span className="text-brand-500">existing stack</span>
+    </>
+  ),
+  description = "S3 API compatible. If it talks to AWS, it talks to us.",
+  ctaLabel = "View documentation →",
+}: IntegrationsSectionProps) => {
   const { ref, inView } = useInView({ threshold: 0.05 });
 
   return (
@@ -31,9 +53,9 @@ const IntegrationsSection = ({ tone = "white" }: IntegrationsSectionProps) => {
         className={`flex flex-col gap-10 items-center text-center w-full max-w-container mx-auto reveal${inView ? " in-view" : ""}`}
       >
         <div className="flex flex-col gap-3 items-center">
-          <SectionLabel>Integrations</SectionLabel>
-          <SectionHeading>Works with your <span className="text-brand-500">existing stack</span></SectionHeading>
-          <SectionSub maxWidth={440}>S3 API compatible. If it talks to AWS, it talks to us.</SectionSub>
+          <SectionLabel>{label}</SectionLabel>
+          <SectionHeading>{heading}</SectionHeading>
+          <SectionSub maxWidth={440}>{description}</SectionSub>
         </div>
 
         <div className="marquee-mask w-full overflow-hidden">
@@ -54,7 +76,7 @@ const IntegrationsSection = ({ tone = "white" }: IntegrationsSectionProps) => {
         </div>
 
         <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary">
-          View documentation →
+          {ctaLabel}
         </a>
       </div>
     </section>

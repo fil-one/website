@@ -55,3 +55,29 @@ export const EUR_USD_RATE = 1.17;
 
 /** Where and when EUR_USD_RATE was taken, for the comparison-table footnote. */
 export const EUR_USD_RATE_SOURCE = "ECB rate, May 2026";
+
+/* ── Spanish-locale EUR formatting ──────────────────────────────────────────
+ * Spanish writes a decimal comma with the symbol after the number and a
+ * non-breaking space ("4,99 €"), not "€4.99". The Spanish pages format every
+ * figure this way, so the helper is shared rather than hand-written per page.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/** Format a EUR amount the Spanish way, e.g. 49.9 -> "49,90 €". Pass
+ *  `decimals: 0` for whole-euro figures like "197 €". */
+export const eurEs = (amount, decimals = 2) =>
+  `${amount.toFixed(decimals).replace(".", ",")} €`;
+
+/** The bare EUR price, Spanish format, e.g. "4,99 €". */
+export const PRICE_DISPLAY_EUR_ES = eurEs(PRICE_PER_TB_EUR);
+
+/** The short per-TB EUR rate, Spanish format, e.g. "4,99 €/TB". */
+export const PRICE_PER_TB_SHORT_EUR_ES = `${PRICE_DISPLAY_EUR_ES}/TB`;
+
+/** The full per-TB EUR rate for inline Spanish copy, e.g. "4,99 €/TB al mes". */
+export const PRICE_PER_TB_MONTH_EUR_ES = `${PRICE_PER_TB_SHORT_EUR_ES} al mes`;
+
+/** EUR_USD_RATE in Spanish format with the symbol after the number, "1,17 $". */
+export const EUR_USD_RATE_ES = `${EUR_USD_RATE.toFixed(2).replace(".", ",")} $`;
+
+/** Spanish rendering of EUR_USD_RATE_SOURCE, for the ES comparison footnote. */
+export const EUR_USD_RATE_SOURCE_ES = "BCE, mayo de 2026";
