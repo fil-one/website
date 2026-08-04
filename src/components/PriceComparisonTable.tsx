@@ -41,7 +41,7 @@ interface PriceComparisonTableProps {
 
 /**
  * Parse a formatted currency string to a number, tolerating both the English
- * ("€1,234.56") and Spanish ("1.234,56 €") conventions. Whichever of "." or ","
+ * ("$1,234.56") and Spanish ("1.234,56 $") conventions. Whichever of "." or ","
  * comes last is the decimal separator when 1 to 2 digits follow it; otherwise
  * every separator is thousands grouping. Returns NaN for non-numeric values,
  * which falls through to the neutral tone.
