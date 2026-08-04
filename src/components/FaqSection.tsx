@@ -93,7 +93,7 @@ const faqs = [
   {
     question: "Where is my data stored?",
     answer:
-      "It depends on the bucket region you choose. We currently offer an EU region (France) and a US region (Michigan) launching soon, with more regions on the way.",
+      "It depends on the bucket region you choose. We currently offer an EU region (France) and a US region (Michigan), with more regions on the way.",
   },
   {
     question: "Is there a free trial?",
