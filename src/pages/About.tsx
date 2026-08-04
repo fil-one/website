@@ -59,6 +59,11 @@ const LEADERSHIP = [
     bio: "James leads Fil One’s commercial strategy and investor narrative. Throughout his career, James has specialized in scaling innovative SaaS platforms and guiding companies through critical growth stages. Prior to joining Filecoin Foundation, James served as CFO for Sweet, where he led fundraising and strategic finance initiatives. Previously, he served as Chief Financial Officer and Chief Operating Officer at doctor.com which was acquired by PE-backed Press Ganey.",
     photo: jamesPhoto,
   },
+  {
+    name: "R.W. Holleman",
+    title: "Head of Revenue, Fil One",
+    bio: "R.W. leads Fil One’s revenue and go-to-market strategy. Throughout his career, R.W. has specialized in scaling enterprise sales organizations and building the channel partnerships that turn emerging technology into durable, repeatable revenue. Prior to joining Filecoin Foundation, R.W. served as Chief Commercial Officer at Storj, where he led enterprise storage sales and built relationships across the industry’s major distributors and master agents. Previously, he served as Chief Revenue Officer at Inveniam, where he helped scale go-to-market strategy across the company’s data infrastructure business.",
+  },
 ];
 
 // Shared type/layout recipes, expressed with design tokens.
