@@ -5,6 +5,7 @@ import JsonLd from "@/components/JsonLd";
 import SectionHeader from "@/components/SectionHeader";
 import { trackEvent, trackDocsClick } from "@/lib/analytics";
 import { PRICE_DISPLAY } from "@/lib/pricing";
+import { consoleOrigin } from "@/lib/console-url";
 
 const faqs = [
   {
@@ -18,7 +19,7 @@ const faqs = [
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
         <p>The S3-compatible API means anything built for AWS S3 works here too. Point your SDK or CLI at our endpoint and authenticate with your API keys.</p>
         <p>Security comes first in the S3-compatible design: setup and migration stay simple, and buckets are private by default. Public access with full S3 parity is coming soon.</p>
-        <p>Read <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link" onClick={() => trackDocsClick("https://docs.fil.one")}>Fil One docs</a>, <a href="https://app.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link">access the app</a> to get started with no code required, or <a href="/contact-sales" className="faq-link">talk to someone on our team</a> to get started.</p>
+        <p>Read <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link" onClick={() => trackDocsClick("https://docs.fil.one")}>Fil One docs</a>, <a href={consoleOrigin()} target="_blank" rel="noopener noreferrer" className="faq-link">access the app</a> to get started with no code required, or <a href="/contact-sales" className="faq-link">talk to someone on our team</a> to get started.</p>
       </div>
     ),
   },

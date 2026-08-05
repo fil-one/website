@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
 import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
 
 // Exit cost scenario: 100 TB moved out.
@@ -185,7 +186,7 @@ const MultiCloudLandingPage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+              <a href={signupUrl()} className="btn-primary">
                 <span className="btn-primary-inner">Start for free</span>
               </a>
               <a href="/contact-sales" className="btn-secondary">
@@ -501,7 +502,7 @@ const MultiCloudLandingPage = () => {
               </SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+              <a href={signupUrl()} className="btn-primary">
                 <span className="btn-primary-inner">Start for free</span>
               </a>
               <a href="/contact-sales" className="btn-secondary">
@@ -577,7 +578,7 @@ const MultiCloudLandingPage = () => {
                   Free 1 TB evaluation. Point your S3 tools at the endpoint. The exit is $0 from day one.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark">
+                  <a href={signupUrl()} className="btn-primary btn-primary-dark">
                     <span className="btn-primary-inner">Start for free</span>
                   </a>
                   <a href="/contact-sales" className="btn-secondary btn-secondary-dark">

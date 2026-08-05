@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
 import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
 // Same 10 TB workload, 10 TB read/month — the "meter" each provider runs.
 // AWS: 10,240×$0.023 = $235.52 storage + 10,240×$0.09 = $921.60 egress ≈ $1,157
@@ -58,7 +59,7 @@ const CostTickerLandingPage = () => {
               Hyperscalers meter every read, every request, every byte out. Fil One is flat {PRICE_PER_TB_SHORT} — no egress, no per-request fees. Same workload, side by side.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
+              <a href={signupUrl()} className="btn-primary"><span className="btn-primary-inner">Start for free</span></a>
               <a href="/contact-sales" className="btn-secondary">Talk to an expert</a>
             </div>
             <p className="hero-fade-4" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A", textAlign: "center" }}>No credit card required · No egress fees · Connects in minutes</p>
@@ -154,7 +155,7 @@ const CostTickerLandingPage = () => {
                 <h2 className="text-[26px] md:text-[32px]" style={{ fontFamily: "'Aspekta', sans-serif", fontWeight: 500, letterSpacing: "-0.025em", lineHeight: "1.12", color: "#FFFFFF", marginBottom: 12 }}>Turn off the meter. {PRICE_PER_TB_MONTH}.</h2>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", maxWidth: 560, marginLeft: "auto", marginRight: "auto", marginBottom: 32 }}>Storage only — no egress meter, no request meter, no tiers. Free 1 TB evaluation: run your real workload and compare the invoice. The egress line will read zero.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark"><span className="btn-primary-inner">Start for free</span></a>
+                  <a href={signupUrl()} className="btn-primary btn-primary-dark"><span className="btn-primary-inner">Start for free</span></a>
                   <a href="/contact-sales" className="btn-secondary btn-secondary-dark">Talk to an expert</a>
                 </div>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.60)", marginTop: 16 }}>No credit card required · No egress fees · Connects in minutes</p>

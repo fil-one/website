@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 import { ArrowUpRight, Copy, Check, CheckCircle, ShieldCheck, Plug, TrendUp, CaretRight, CurrencyDollar, LockOpen, HardDrives, Globe } from "@phosphor-icons/react";
+import { signupUrl } from "@/lib/console-url";
 
 // ─── Grid texture ──────────────────────────────────────────────────────────────
 const GRID_SVG = encodeURIComponent(
@@ -132,7 +133,7 @@ const PricingCtaBlock = ({ bg = "#FFFFFF" }: { bg?: string }) => (
         Free tier: 1 TB storage + 2 TB bandwidth, 30 days. No credit card required.
       </p>
 
-      <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+      <a href={signupUrl()} className="btn-primary">
         <span className="btn-primary-inner">Start free</span>
       </a>
     </div>
@@ -298,7 +299,7 @@ const USE_CASES = [
     icon: ShieldCheck,
     title: "Persistent agent memory and artifacts",
     description: "Your agents write session state, conversation history, checkpoints, and generated outputs straight to S3 buckets, and read them back on the next run. Flat pricing means the loop doesn't cost you: thousands of small reads and writes price the same as a handful. Keep everything your agents produce instead of deleting it to stay in budget. Plain S3: works today with boto3, the AWS CLI, or any SDK.",
-    cta: { label: "Start now", href: "https://app.fil.one/login?screen_hint=signup" },
+    cta: { label: "Start now", href: signupUrl() },
   },
   {
     icon: Plug,
@@ -484,7 +485,7 @@ const AgentsLandingPage = () => {
 
             {/* CTAs */}
             <div className="flex flex-row items-center gap-3 hero-fade-3" style={{ marginTop: 4 }}>
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+              <a href={signupUrl()} className="btn-primary">
                 <span className="btn-primary-inner">Start for free</span>
               </a>
               <a
@@ -626,7 +627,7 @@ const AgentsLandingPage = () => {
                 >
                   <div style={{ borderRight: "1px solid rgba(0,144,255,0.1)" }} />
                   <div style={{ padding: "16px 24px" }}>
-                    <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+                    <a href={signupUrl()} className="btn-primary">
                       <span className="btn-primary-inner">Start for free</span>
                     </a>
                   </div>
@@ -1052,7 +1053,7 @@ const AgentsLandingPage = () => {
                   Free trial: 1 TB storage + 2 TB bandwidth, 30 days.<br />No credit card required.
                 </p>
 
-                <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+                <a href={signupUrl()} className="btn-primary">
                   <span className="btn-primary-inner">Start for free</span>
                 </a>
               </div>

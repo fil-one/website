@@ -120,6 +120,8 @@ Deployed on **Vercel**. Pushing to `main` triggers a production deployment autom
 
 **The alias must stay out of search results.** `vercel.json` sends `X-Robots-Tag: noindex, nofollow` for `(www.)?filone.ai` via a host-conditional `has` rule, placed first so it applies regardless of whether Vercel evaluates `headers` cumulatively or first-match. Canonicals need no special handling: `index.html` and `useSeo` already emit absolute `https://www.fil.one/…` URLs on every host, so the alias points search engines at the canonical domain by itself. **Do not** add a `Disallow` for the alias in `robots.txt` — that would stop crawlers fetching the page at all, so they would never see the `noindex` header, and the two mechanisms would cancel out. The `has.value` pattern is unanchored, so it also matches a host merely containing the alias; that only ever over-applies `noindex`, which is the safe direction.
 
+**Console links must follow the host.** Use `signupUrl()` for sign-up CTAs, or `consoleUrl(path)` / `consoleOrigin()` for any other console destination, all from `src/lib/console-url.ts`. Never hardcode `https://app.fil.one`, or a visitor on the alias is sent to the domain the alias exists to avoid.
+
 Keep the alias unadvertised: no public links, no marketing references, and do not add it to Search Console.
 
 Two things about `filone.ai` worth knowing before you change anything here:

@@ -12,6 +12,7 @@ import { COMPETITORS, PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } fr
 import filOneLogo from "@/assets/fil-one-logo.svg";
 import wasabiLogo from "@/assets/wasabi.svg";
 import backblazeLogo from "@/assets/backblaze.svg";
+import { signupUrl } from "@/lib/console-url";
 
 const fmt = (n: number) => `$${n.toFixed(2)}`;
 const rate = (name: string) => fmt(COMPETITORS.find((c) => c.name === name)!.storagePricePerTB);
@@ -46,7 +47,7 @@ const PriceLandingPage = () => {
           ctas={[
             {
               label: "Try 30 days for free",
-              href: "https://app.fil.one/login?screen_hint=signup",
+              href: signupUrl(),
               variant: "primary",
               size: "lg",
               glow: true,
@@ -126,7 +127,7 @@ const PriceLandingPage = () => {
         <CtaBanner
           heading="The lowest-cost S3 object storage"
           subhead={`${PRICE_DISPLAY}/TB, no egress fees, up and running in minutes.`}
-          cta={{ label: "Try 30 days for free", href: "https://app.fil.one/login?screen_hint=signup" }}
+          cta={{ label: "Try 30 days for free", href: signupUrl() }}
           note="No credit card required"
         />
       </main>
