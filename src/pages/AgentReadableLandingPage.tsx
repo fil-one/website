@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
 import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
 const FEATURES = [
   { icon: FileText, title: "Machine-readable llms.txt", desc: "Pricing, endpoint, and S3 compatibility are published in a structured llms.txt at a stable URL. An agent fetches one file and has the full picture." },
@@ -21,7 +22,7 @@ const LLMS_TXT = `$ curl -s https://www.fil.one/llms.txt
 - Free trial: 30 days, 1 TB included, no credit card
 
 ## How to connect
-- Endpoint: https://eu-west-1.s3.fil.one
+- Endpoint: ${S3_ENDPOINT}
 - Auth: standard AWS Access Key ID + Secret
 - Drop-in S3 replacement — no SDK changes required`;
 

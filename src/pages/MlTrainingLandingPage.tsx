@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
 import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
 
 // Storage cost comparison for ML training data.
@@ -49,7 +50,7 @@ from torch.utils.data import DataLoader
 # Training data on Fil One — ${PRICE_PER_TB_SHORT}, $0 egress per run
 fs = fsspec.filesystem(
     "s3",
-    endpoint_url="https://eu-west-1.s3.fil.one",
+    endpoint_url="${S3_ENDPOINT}",
     key=os.environ["FIL_ACCESS_KEY"],
     secret=os.environ["FIL_SECRET_KEY"],
 )
@@ -67,7 +68,7 @@ ds_hf = load_dataset(
     "parquet",
     data_files="s3://training-data/instruct/train.parquet",
     storage_options={
-        "endpoint_url": "https://eu-west-1.s3.fil.one",
+        "endpoint_url": "${S3_ENDPOINT}",
         "key": os.environ["FIL_ACCESS_KEY"],
         "secret": os.environ["FIL_SECRET_KEY"],
     },

@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
 import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
 
 // Price delta scenario: 10 TB stored + 10 TB reads + 1M GET operations
@@ -79,7 +80,7 @@ s3 = boto3.client(
   const BOTO3_AFTER = `# After · Fil One (no other changes)
 s3 = boto3.client(
     "s3",
-    endpoint_url="https://eu-west-1.s3.fil.one",
+    endpoint_url="${S3_ENDPOINT}",
     aws_access_key_id=os.environ["FIL_ACCESS_KEY"],
     aws_secret_access_key=os.environ["FIL_SECRET_KEY"],
     region_name="eu-west-1",
@@ -90,7 +91,7 @@ const s3 = new S3Client({ region: "us-east-1" });`;
 
   const NODE_AFTER = `// After · Fil One
 const s3 = new S3Client({
-  endpoint: "https://eu-west-1.s3.fil.one",
+  endpoint: "${S3_ENDPOINT}",
   region: "eu-west-1",
   credentials: {
     accessKeyId: process.env.FIL_ONE_ACCESS_KEY,

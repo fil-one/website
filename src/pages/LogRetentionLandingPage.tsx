@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
 import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
 
 const FEATURES = [
@@ -48,7 +49,7 @@ const LogRetentionLandingPage = () => {
 type      = "aws_s3"
 inputs    = ["all_services"]
 bucket    = "prod-logs"
-endpoint  = "https://eu-west-1.s3.fil.one"
+endpoint  = "${S3_ENDPOINT}"
 region    = "eu-west-1"
 compression = "gzip"
 

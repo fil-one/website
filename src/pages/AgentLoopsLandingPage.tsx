@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
 import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
 // Per-call cost comparison for agent workload:
 // 1 billion operations/month (mix of PUT state writes + GET context reads).
@@ -64,7 +65,7 @@ const AgentLoopsLandingPage = () => {
 # Flat-rate storage — no per-call counter
 s3 = boto3.client(
     "s3",
-    endpoint_url="https://eu-west-1.s3.fil.one",
+    endpoint_url="${S3_ENDPOINT}",
     aws_access_key_id=os.environ["FIL_ACCESS_KEY"],
     aws_secret_access_key=os.environ["FIL_SECRET_KEY"],
     region_name="eu-west-1",

@@ -33,7 +33,7 @@ import boto3
 
 s3 = boto3.client(
     "s3",
-    endpoint_url="https://eu-west-1.s3.fil.one",
+    endpoint_url="https://eu-west-1.s3.filonecontent.com",
     aws_access_key_id=os.environ["FIL_ONE_ACCESS_KEY"],
     aws_secret_access_key=os.environ["FIL_ONE_SECRET_KEY"],
     region_name="eu-west-1",
@@ -65,7 +65,7 @@ class AgentMemory:
     def __init__(self, bucket: str, agent_id: str):
         self.s3 = boto3.client(
             "s3",
-            endpoint_url="https://eu-west-1.s3.fil.one",
+            endpoint_url="https://eu-west-1.s3.filonecontent.com",
             aws_access_key_id=os.environ["FIL_ONE_ACCESS_KEY"],
             aws_secret_access_key=os.environ["FIL_ONE_SECRET_KEY"],
             region_name="eu-west-1",
@@ -152,7 +152,7 @@ import pyarrow.fs as pafs
 
 # PyArrow native S3 access (pass custom endpoint via S3FileSystem)
 fs = pafs.S3FileSystem(
-    endpoint_override="eu-west-1.s3.fil.one",
+    endpoint_override="eu-west-1.s3.filonecontent.com",
     access_key=os.environ["FIL_ONE_ACCESS_KEY"],
     secret_key=os.environ["FIL_ONE_SECRET_KEY"],
     scheme="https",
@@ -167,7 +167,7 @@ table = pq.read_table("my-datasets/train/sft-v3.parquet", filesystem=fs)
 
 | Parameter | Value |
 |-----------|-------|
-| Endpoint URL | `https://eu-west-1.s3.fil.one` |
+| Endpoint URL | `https://eu-west-1.s3.filonecontent.com` |
 | Region | `eu-west-1` |
 | Auth | AWS Signature V4 (Access Key ID + Secret Access Key) |
 | Protocol | HTTPS |
@@ -185,7 +185,7 @@ Fil One is compatible with any S3-compatible client or SDK:
 ### Environment variable pattern (recommended)
 
 ```bash
-export FIL_ONE_ENDPOINT=https://eu-west-1.s3.fil.one
+export FIL_ONE_ENDPOINT=https://eu-west-1.s3.filonecontent.com
 export FIL_ONE_REGION=eu-west-1
 export FIL_ONE_ACCESS_KEY=your_access_key_id
 export FIL_ONE_SECRET_KEY=your_secret_access_key

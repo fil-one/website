@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
 import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
 
 const FEATURES = [
@@ -95,7 +96,7 @@ const DataControlLandingPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
                 { heading: "~24-hour integrity verification", sub: "Every stored object is verified on a recurring basis — approximately every 24 hours. Data cannot silently corrupt or change without detection. This is built into the storage layer, not a monitoring add-on." },
-                { heading: "EU endpoint at eu-west-1", sub: "Data written to https://eu-west-1.s3.fil.one stays in EU-hosted infrastructure. Standard S3 tools connect with the endpoint change — no re-architecture." },
+                { heading: "EU endpoint at eu-west-1", sub: `Data written to ${S3_ENDPOINT} stays in EU-hosted infrastructure. Standard S3 tools connect with the endpoint change — no re-architecture.` },
                 { heading: "$0 exit egress", sub: "Moving your data to another provider costs nothing in egress. Portability is structural, not contractual. The exit is $0 from day one." },
               ].map(({ heading, sub }) => (
                 <div key={heading} style={{ border: "1px solid rgba(0,0,0,0.07)", borderRadius: 16, backgroundColor: "#F9FAFB", padding: "24px 24px" }}>

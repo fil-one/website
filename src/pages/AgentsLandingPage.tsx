@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { PRICE_DISPLAY, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 import { ArrowUpRight, Copy, Check, CheckCircle, ShieldCheck, Plug, TrendUp, CaretRight, CurrencyDollar, LockOpen, HardDrives, Globe } from "@phosphor-icons/react";
+import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
 // ─── Grid texture ──────────────────────────────────────────────────────────────
 const GRID_SVG = encodeURIComponent(
@@ -164,7 +165,7 @@ const DEV_FEATURES = [
 
 s3 = boto3.client(
     "s3",
-    endpoint_url="https://eu-west-1.s3.fil.one",
+    endpoint_url="${S3_ENDPOINT}",
     aws_access_key_id="YOUR_ACCESS_KEY",
     aws_secret_access_key="YOUR_SECRET_KEY",
 )
@@ -195,7 +196,7 @@ const AGENT_TABS = [
 
 s3 = boto3.client(
     "s3",
-    endpoint_url="https://eu-west-1.s3.fil.one",
+    endpoint_url="${S3_ENDPOINT}",
     aws_access_key_id="YOUR_ACCESS_KEY",
     aws_secret_access_key="YOUR_SECRET_KEY",
 )
@@ -215,7 +216,7 @@ for obj in response.get("Contents", []):
 import { readFileSync } from "fs";
 
 const client = new S3Client({
-  endpoint: "https://eu-west-1.s3.fil.one",
+  endpoint: "${S3_ENDPOINT}",
   region: "eu-west-1",
   forcePathStyle: true,
   credentials: {
@@ -254,7 +255,7 @@ import (
 
 func main() {
     client := s3.New(s3.Options{
-        BaseEndpoint: aws.String("https://eu-west-1.s3.fil.one"),
+        BaseEndpoint: aws.String("${S3_ENDPOINT}"),
         Region:       "eu-west-1",
         UsePathStyle: true,
         Credentials: credentials.NewStaticCredentialsProvider(

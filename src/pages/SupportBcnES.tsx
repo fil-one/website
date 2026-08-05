@@ -16,6 +16,7 @@ import {
   FormError,
 } from "@/components/FormControls";
 import { HS_SUPPORT_FORM_GUID, submitHubSpotForm } from "@/lib/hubspot";
+import { S3_ENDPOINT_HOST } from "@/lib/s3-endpoint";
 
 const CATEGORY_OPTIONS = [
   { label: "Problema con el producto", value: "PRODUCT_ISSUE" },
@@ -44,7 +45,7 @@ const FAQS = [
   },
   {
     q: "¿Cómo migro desde Storacha u otro proveedor compatible con S3?",
-    a: "Fil One es totalmente compatible con S3, así que herramientas como rclone funcionan sin configuración adicional. Apunta rclone a s3.fil.one con tus credenciales de Fil One y sincroniza tus datos. Si necesitas ayuda con una migración más grande, escríbenos y te guiaremos.",
+    a: `Fil One es totalmente compatible con S3, así que herramientas como rclone funcionan sin configuración adicional. Apunta rclone a ${S3_ENDPOINT_HOST} con tus credenciales de Fil One y sincroniza tus datos. Si necesitas ayuda con una migración más grande, escríbenos y te guiaremos.`,
   },
   {
     q: "¿Puedo pagar con tokens FIL?",
