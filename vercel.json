@@ -1,50 +1,153 @@
 {
   "headers": [
     {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?filone\\.ai"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/fonts/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000"
+        }
       ]
     },
     {
       "source": "/",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     },
     {
       "source": "/:path((?!assets/|fonts/|api/|blog/).*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     }
   ],
   "redirects": [
-    { "source": "/decentralizedstorage", "destination": "/", "permanent": true },
-    { "source": "/company", "destination": "/", "permanent": true },
-    { "source": "/destor-directory-akave", "destination": "/", "permanent": true },
-    { "source": "/products", "destination": "/", "permanent": true },
-    { "source": "/products/datadrop-free-trial", "destination": "/", "permanent": true },
-    { "source": "/products/s3-cloud", "destination": "/", "permanent": true },
-    { "source": "/resources/blog/destor-solves-archiving-issues", "destination": "/", "permanent": true },
-    { "source": "/solutions/ransomware", "destination": "/", "permanent": true },
-    { "source": "/victor-chang-cardiac-research-institute-case-study", "destination": "/", "permanent": true },
-    { "source": "/contact/talk-with-sales", "destination": "/contact-sales", "permanent": true },
-    { "source": "/destor-network/overview", "destination": "/", "permanent": true },
-    { "source": "/en-us/filecoin-network-client-explorer", "destination": "/", "permanent": true },
-    { "source": "/products/archival", "destination": "/", "permanent": true },
-    { "source": "/resources/blog/cloud-storage-past-present-and-future", "destination": "/", "permanent": true },
-    { "source": "/resources/news/destor-partners-with-kabat-to-deliver-energy-efficient-cloud-storage-solutions", "destination": "/", "permanent": true },
-    { "source": "/resources/news/qamcom-dds-destor-partnership", "destination": "/", "permanent": true },
-    { "source": "/resources/news/solana-integrates-filecoin", "destination": "/", "permanent": true },
-    { "source": "/solutions/archival", "destination": "/", "permanent": true },
-    { "source": "/solutions/backup", "destination": "/", "permanent": true }
+    {
+      "source": "/decentralizedstorage",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/company",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/destor-directory-akave",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/datadrop-free-trial",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/s3-cloud",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/resources/blog/destor-solves-archiving-issues",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/ransomware",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/victor-chang-cardiac-research-institute-case-study",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/contact/talk-with-sales",
+      "destination": "/contact-sales",
+      "permanent": true
+    },
+    {
+      "source": "/destor-network/overview",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en-us/filecoin-network-client-explorer",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/products/archival",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/resources/blog/cloud-storage-past-present-and-future",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/resources/news/destor-partners-with-kabat-to-deliver-energy-efficient-cloud-storage-solutions",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/resources/news/qamcom-dds-destor-partnership",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/resources/news/solana-integrates-filecoin",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/archival",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/backup",
+      "destination": "/",
+      "permanent": true
+    }
   ],
   "rewrites": [
     { "source": "/blog/rss.xml", "destination": "/api/rss" },
