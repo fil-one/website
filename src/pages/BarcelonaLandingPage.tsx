@@ -15,18 +15,13 @@ import PriceComparisonTable, {
   type PriceComparisonColumn,
   type PriceComparisonRow,
 } from "@/components/PriceComparisonTable";
-import {
-  PRICE_PER_TB_EUR,
-  PRICE_PER_TB_SHORT_EUR,
-  EUR_USD_RATE,
-  EUR_USD_RATE_SOURCE,
-} from "@/lib/pricing";
+import { PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
 
 const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 
 /** The modelled workload: 10 TB stored, 10 TB egress, 500K operations a month. */
 const WORKLOAD_TB = 10;
-const FIL_ONE_TOTAL = `€${(PRICE_PER_TB_EUR * WORKLOAD_TB).toFixed(2)}`;
+const FIL_ONE_TOTAL = `$${(PRICE_PER_TB * WORKLOAD_TB).toFixed(2)}`;
 
 const PRICING_COLUMNS: PriceComparisonColumn[] = [
   { key: "region", header: "Region" },
@@ -40,25 +35,25 @@ const PRICING_ROWS: PriceComparisonRow[] = [
   {
     provider: "Fil One",
     isFilOne: true,
-    values: { region: "EU-West", storage: FIL_ONE_TOTAL, egress: "€0", api: "€0", total: FIL_ONE_TOTAL },
+    values: { region: "EU-West", storage: FIL_ONE_TOTAL, egress: "$0", api: "$0", total: FIL_ONE_TOTAL },
   },
   {
     provider: "Backblaze B2",
-    values: { region: "eu-central-003 Amsterdam", storage: "€59.60", egress: "€0", api: "€0", total: "€59.60" },
+    values: { region: "eu-central-003 Amsterdam", storage: "$69.50", egress: "$0", api: "$0", total: "$69.50" },
   },
   {
     provider: "Wasabi",
-    values: { region: "eu-west-2 Paris", storage: "€59.90", egress: "€0", api: "€0", total: "€59.90" },
+    values: { region: "eu-west-2 Paris", storage: "$79.90", egress: "$0", api: "$0", total: "$79.90" },
   },
   {
     provider: "AWS S3 Standard",
-    values: { region: "eu-south-2 Madrid", storage: "€197", egress: "€790", api: "€1.83", total: "€990" },
+    values: { region: "eu-south-2 Madrid", storage: "$230", egress: "$900", api: "$2.50", total: "$1,132.50" },
   },
 ];
 
 const STATS = [
-  { stat: PRICE_PER_TB_SHORT_EUR, label: "Flat monthly rate" },
-  { stat: "€0", label: "Egress fees" },
+  { stat: PRICE_PER_TB_SHORT, label: "Flat monthly rate" },
+  { stat: "$0", label: "Egress fees" },
   // The 20× is the total bill, which is egress-driven, so it only holds for a
   // read-heavy workload. The note names the one the pricing table models.
   {
@@ -79,9 +74,9 @@ const FEATURES = [
 
 const BarcelonaLandingPage = () => {
   useSeo({
-    title: `Fil One for Barcelona: European Storage, ${PRICE_PER_TB_SHORT_EUR}, No Egress Fees`,
+    title: `Fil One for Barcelona: European Storage, ${PRICE_PER_TB_SHORT}, No Egress Fees`,
     description:
-      `S3-compatible object storage for teams in Barcelona. EU data sovereignty, zero egress fees, at ${PRICE_PER_TB_SHORT_EUR}. Drop into your existing stack in minutes.`,
+      `S3-compatible object storage for teams in Barcelona. EU data sovereignty, zero egress fees, at ${PRICE_PER_TB_SHORT}. Drop into your existing stack in minutes.`,
     canonical: "https://www.fil.one/lp/barcelona",
   });
 
@@ -107,7 +102,7 @@ const BarcelonaLandingPage = () => {
             <>
               European storage.
               <br />
-              <span className="text-brand-500">{PRICE_PER_TB_SHORT_EUR}, no egress fees.</span>
+              <span className="text-brand-500">{PRICE_PER_TB_SHORT}, no egress fees.</span>
             </>
           }
           description={
@@ -169,12 +164,7 @@ const BarcelonaLandingPage = () => {
               rows={PRICING_ROWS}
               caption={`Monthly cost for a ${WORKLOAD_TB} TB workload in Europe, by provider`}
               centerFootnote
-              footnote={
-                <>
-                  Competitor prices converted from USD at €1 = ${EUR_USD_RATE} ({EUR_USD_RATE_SOURCE}). Fil One is
-                  priced natively in EUR at {PRICE_PER_TB_SHORT_EUR}.
-                </>
-              }
+              footnote="Competitor prices are their published EU-region list rates. All prices in USD."
             />
 
             {/* Mid-page CTA after pricing table */}
@@ -219,7 +209,7 @@ const BarcelonaLandingPage = () => {
         {/* ── CTA Banner ────────────────────────────────────────────────────── */}
         <CtaBanner
           heading="The cheapest object storage in Europe"
-          subhead={`${PRICE_PER_TB_SHORT_EUR}, no egress fees, up and running in minutes.`}
+          subhead={`${PRICE_PER_TB_SHORT}, no egress fees, up and running in minutes.`}
           cta={{ label: "Try 30 days for free", href: SIGNUP_URL }}
           note="No credit card required"
         />

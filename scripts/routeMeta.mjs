@@ -12,8 +12,6 @@ import {
   PRICE_PER_TB_SHORT,
   PRICE_PER_TB_MONTH,
   PRICE_AMOUNT,
-  PRICE_PER_TB_SHORT_EUR,
-  PRICE_PER_TB_SHORT_EUR_ES,
 } from "../src/lib/pricing.constants.mjs";
 
 export const BASE_URL = "https://www.fil.one";
@@ -364,15 +362,15 @@ export const ROUTE_META = {
       `Purpose-built for Web3-native apps. S3-compatible, cryptographically verifiable storage on Filecoin at ${PRICE_PER_TB_SHORT}, integrity proven daily.`,
   },
   "/lp/barcelona": {
-    title: `Fil One for Barcelona: European Storage, ${PRICE_PER_TB_SHORT_EUR}, No Egress Fees`,
+    title: `Fil One for Barcelona: European Storage, ${PRICE_PER_TB_SHORT}, No Egress Fees`,
     description:
-      `S3-compatible object storage for teams in Barcelona. EU data sovereignty, zero egress fees, at ${PRICE_PER_TB_SHORT_EUR}. Drop into your existing stack in minutes.`,
+      `S3-compatible object storage for teams in Barcelona. EU data sovereignty, zero egress fees, at ${PRICE_PER_TB_SHORT}. Drop into your existing stack in minutes.`,
   },
   "/lp/es/barcelona": {
     lang: "es",
-    title: `Fil One para Barcelona: Almacenamiento Europeo, ${PRICE_PER_TB_SHORT_EUR_ES}, Sin Egress`,
+    title: `Fil One para Barcelona: Almacenamiento Europeo, ${PRICE_PER_TB_SHORT}, Sin Egress`,
     description:
-      `Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a ${PRICE_PER_TB_SHORT_EUR_ES}. Intégralo en tu stack actual en minutos.`,
+      `Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a ${PRICE_PER_TB_SHORT}. Intégralo en tu stack actual en minutos.`,
   },
   "/contact-sales": {
     title: "Contact Sales · Fil One",
