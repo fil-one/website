@@ -355,6 +355,53 @@
   .marquee-track { animation: none; }
 }
 
+/* ── HubSpot blog article content ───────────────────────────────────────── */
+.blog-content {
+  color: #3f3f46;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.blog-content > * + * {
+  margin-top: 1.5rem;
+}
+
+.blog-content h2,
+.blog-content h3 {
+  margin-top: 3rem;
+  color: #09090b;
+  font-family: 'Aspekta', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.blog-content h2 { font-size: 30px; }
+.blog-content h3 { font-size: 23px; }
+.blog-content strong { color: #18181b; font-weight: 600; }
+.blog-content ul,
+.blog-content ol { padding-left: 1.4rem; }
+.blog-content ul { list-style: disc; }
+.blog-content ol { list-style: decimal; }
+.blog-content li + li { margin-top: 0.6rem; }
+.blog-content a { color: #087fc0; text-decoration: underline; text-underline-offset: 3px; }
+.blog-content img { width: 100%; height: auto; border-radius: 12px; }
+.blog-content blockquote {
+  margin: 2.5rem 0;
+  border-left: 3px solid #47afff;
+  padding: 0.35rem 0 0.35rem 1.5rem;
+  color: #18181b;
+  font-size: 20px;
+  line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .blog-content { font-size: 16px; line-height: 1.75; }
+  .blog-content h2 { font-size: 26px; }
+  .blog-content h3 { font-size: 21px; }
+  .blog-content blockquote { font-size: 18px; padding-left: 1rem; }
+}
+
 /* Hide scrollbar on feature card strip */
 .features-scroll::-webkit-scrollbar {
   display: none;

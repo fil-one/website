@@ -17,6 +17,11 @@ import {
 export const BASE_URL = "https://www.fil.one";
 
 export const ROUTE_META = {
+  "/blog": {
+    title: "Blog · Fil One",
+    description:
+      "Ideas and practical guidance on object storage, AI infrastructure, and verifiable data.",
+  },
   "/": {
     title: "Fil One | S3 object storage built for the AI era",
     description:

@@ -30,6 +30,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
       { label: "Contact Sales", href: contactSalesHref },
     ],
     Resources: [
+      { label: "Blog", href: "/blog" },
       { label: "Documentation", href: "https://docs.fil.one" },
       { label: "Support", href: supportHref },
       { label: "Status", href: "https://status.fil.one" },
@@ -63,6 +64,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
       { label: "Contactar con ventas", href: contactSalesHref },
     ],
     Recursos: [
+      { label: "Blog", href: "/blog" },
       { label: "Documentación", href: "https://docs.fil.one" },
       { label: "Soporte", href: supportHref },
       { label: "Estado", href: "https://status.fil.one" },

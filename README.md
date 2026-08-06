@@ -78,12 +78,21 @@ Two forms submit to HubSpot via the [Forms API v3](https://developers.hubspot.co
 
 Portal ID and form GUIDs are centralised in `src/lib/hubspot.ts`.
 
+Blog content is read through server-side Vercel functions so the private app token is never exposed to the browser:
+
+- `GET /api/blogs` — published post list
+- `GET /api/blogs/:id` — published post detail
+
+Copy `.env.example` to `.env` and set `HUBSPOT_PRIVATE_APP_ACCESS_TOKEN` to a HubSpot service key or private app token with the `content` scope. Set `HUBSPOT_BLOG_CONTENT_GROUP_ID` to the target Blog ID.
+
 ## Pages & routes
 
 | Route | Description |
 |---|---|
 | `/` | Main landing page |
 | `/contact-sales` | Contact sales form |
+| `/blog` | HubSpot-powered blog index |
+| `/blog/:slug` | Blog article |
 | `/privacy` | Privacy Policy |
 | `/terms` | Terms of Use |
 
