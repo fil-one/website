@@ -2,6 +2,11 @@ import type { BlogPost, HubSpotBlogListResponse, HubSpotBlogPost } from "@/types
 
 const stripHtml = (value = "") => value.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 
+const truncateExcerpt = (value: string, maxLength = 220) => {
+  if (value.length <= maxLength) return value;
+  return `${value.slice(0, maxLength).replace(/\s+\S*$/, "").trim()}…`;
+};
+
 const localSlug = (slug: string) => {
   const segments = slug.split("/").filter(Boolean);
   return segments.at(-1) ?? slug;
@@ -11,7 +16,7 @@ export const mapHubSpotPost = (post: HubSpotBlogPost): BlogPost => ({
   id: post.id,
   slug: localSlug(post.slug),
   title: post.name,
-  excerpt: stripHtml(post.postSummary || post.metaDescription || ""),
+  excerpt: truncateExcerpt(stripHtml(post.postSummary || post.metaDescription || "")),
   content: post.postBody || "",
   author: post.authorName || "Fil One Team",
   publishedAt: post.publishDate || post.createdAt || new Date(0).toISOString(),
