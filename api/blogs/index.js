@@ -1,4 +1,5 @@
 const HUBSPOT_API_BASE = "https://api.hubapi.com/cms/blogs/2026-03/posts";
+const HUBSPOT_BLOG_CONTENT_GROUP_ID = "217378575467";
 
 export default async function handler(request, response) {
   if (request.method !== "GET") {
@@ -15,11 +16,9 @@ export default async function handler(request, response) {
     state: "PUBLISHED",
     sort: "-createdAt",
     limit: String(Math.min(Number(request.query.limit) || 20, 100)),
+    contentGroupId: HUBSPOT_BLOG_CONTENT_GROUP_ID,
   });
   if (request.query.after) params.set("after", String(request.query.after));
-  if (process.env.HUBSPOT_BLOG_CONTENT_GROUP_ID) {
-    params.set("contentGroupId", process.env.HUBSPOT_BLOG_CONTENT_GROUP_ID);
-  }
 
   try {
     const hubspotResponse = await fetch(`${HUBSPOT_API_BASE}?${params}`, {

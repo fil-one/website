@@ -83,7 +83,7 @@ Blog content is read through server-side Vercel functions so the private app tok
 - `GET /api/blogs` — published post list
 - `GET /api/blogs/:id` — published post detail
 
-Copy `.env.example` to `.env` and set `HUBSPOT_PRIVATE_APP_ACCESS_TOKEN` to a HubSpot service key or private app token with the `content` scope. Set `HUBSPOT_BLOG_CONTENT_GROUP_ID` to the target Blog ID.
+Copy `.env.example` to `.env` and set `HUBSPOT_PRIVATE_APP_ACCESS_TOKEN` to a HubSpot service key or private app token with the `content` scope. The blog group ID is fixed in the server-side list endpoint.
 
 ## Pages & routes
 
