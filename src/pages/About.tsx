@@ -66,6 +66,12 @@ const LEADERSHIP = [
     bio: "R.W. leads Fil One’s revenue and go-to-market strategy. Throughout his career, R.W. has specialized in scaling enterprise sales organizations and building the channel partnerships that turn emerging technology into durable, repeatable revenue. Prior to joining Filecoin Foundation, R.W. served as Chief Commercial Officer at Storj, where he led enterprise storage sales and built relationships across the industry’s major distributors and master agents. Previously, he served as Chief Revenue Officer at Inveniam, where he helped scale go-to-market strategy across the company’s data infrastructure business.",
     photo: rwPhoto,
   },
+  {
+    name: "Chris Rocco",
+    title: "Head of Product, Fil One",
+    bio: "Chris Rocco leads product and marketing for Fil One, focused on making decentralized storage simple, usable, and valuable for enterprise customers and developers. He brings more than 20 years of experience building and scaling SaaS, cloud, security, and data infrastructure products. Prior to joining Filecoin Foundation, Chris held leadership roles across product, marketing, and go-to-market, including developer experience at CARIAD (Volkswagen Group) and, most recently, distributed cloud storage at Storj.",
+    photo: undefined,
+  },
 ];
 
 // Shared type/layout recipes, expressed with design tokens.
