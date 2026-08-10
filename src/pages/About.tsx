@@ -13,6 +13,7 @@ import claraPhoto from "@/assets/team-clara-tsao.jpg";
 import hannahPhoto from "@/assets/team-hannah-howard.jpg";
 import jamesPhoto from "@/assets/team-james-kurz.jpg";
 import rwPhoto from "@/assets/team-rw-holleman.jpg";
+import chrisPhoto from "@/assets/team-chris-rocco.jpg";
 
 const PRINCIPLES = [
   {
@@ -70,7 +71,7 @@ const LEADERSHIP = [
     name: "Chris Rocco",
     title: "Head of Product, Fil One",
     bio: "Chris Rocco leads product and marketing for Fil One, focused on making decentralized storage simple, usable, and valuable for enterprise customers and developers. He brings more than 20 years of experience building and scaling SaaS, cloud, security, and data infrastructure products. Prior to joining Filecoin Foundation, Chris held leadership roles across product, marketing, and go-to-market, including developer experience at CARIAD (Volkswagen Group) and, most recently, distributed cloud storage at Storj.",
-    photo: undefined,
+    photo: chrisPhoto,
   },
 ];
 
