@@ -166,7 +166,7 @@ export default async function handler(request, response) {
   }
 
   const description =
-    truncate(stripHtml(post.postSummary || post.metaDescription || "")) ||
+    truncate(stripHtml(post.metaDescription || post.postSummary || "")) ||
     "Ideas and practical guidance on object storage, AI infrastructure, and the cost of moving data at scale.";
   const publishedAt = post.publishDate || post.createdAt;
 

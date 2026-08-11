@@ -7,6 +7,14 @@ const COVER_STYLES: CoverStyle[] = ["cyan", "violet", "lime"];
 
 export const stripHtml = (value = "") => value.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 
+/**
+ * Drop leading headings before flattening, so a post that opens with
+ * <h2>Introduction</h2> doesn't get "Introduction" as the first word of its
+ * excerpt. Headings are labels, not prose.
+ */
+export const stripLeadingHeadings = (html = "") =>
+  html.replace(/^(?:\s*<h[1-6][^>]*>[\s\S]*?<\/h[1-6]>)+/i, "");
+
 export const truncateExcerpt = (value: string, maxLength = 220) => {
   if (value.length <= maxLength) return value;
   return `${value.slice(0, maxLength).replace(/\s+\S*$/, "").trim()}…`;
@@ -32,7 +40,9 @@ export const mapHubSpotPost = (post: HubSpotBlogPost): BlogPost => ({
   id: post.id,
   slug: localSlug(post.slug),
   title: post.name,
-  excerpt: truncateExcerpt(stripHtml(post.postSummary || post.metaDescription || "")),
+  // metaDescription first: HubSpot's importer can put an entire article body in
+  // postSummary, and truncating 20k characters produces an arbitrary excerpt.
+  excerpt: truncateExcerpt(stripHtml(stripLeadingHeadings(post.metaDescription || post.postSummary || ""))),
   content: post.postBody || "",
   author: post.authorName || "Fil One Team",
   publishedAt: post.publishDate || post.createdAt,

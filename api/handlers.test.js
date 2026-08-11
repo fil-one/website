@@ -113,6 +113,7 @@ describe("GET /api/blogs", () => {
   it("returns projected summaries with CDN caching and browser revalidation", async () => {
     stubFetch([
       ["tags", jsonResponse({ results: [{ id: 5, name: "Changelog" }] })],
+      ["authors", jsonResponse({ results: [] })],
       ["posts", jsonResponse({ results: [hubspotPost()], total: 1 })],
     ]);
 
@@ -131,6 +132,7 @@ describe("GET /api/blogs", () => {
   it("maps a HubSpot error status through", async () => {
     stubFetch([
       ["tags", jsonResponse({ results: [] })],
+      ["authors", jsonResponse({ results: [] })],
       ["posts", jsonResponse({}, 429)],
     ]);
 
@@ -145,6 +147,7 @@ describe("GET /api/blogs", () => {
   it("?slug= returns one post with its body", async () => {
     stubFetch([
       ["tags", jsonResponse({ results: [] })],
+      ["authors", jsonResponse({ results: [] })],
       ["posts/1001", jsonResponse(hubspotPost())],
       ["posts", jsonResponse({ results: [hubspotPost()] })],
     ]);
@@ -160,6 +163,7 @@ describe("GET /api/blogs", () => {
   it("?slug= 404s for an unknown slug", async () => {
     stubFetch([
       ["tags", jsonResponse({ results: [] })],
+      ["authors", jsonResponse({ results: [] })],
       ["posts", jsonResponse({ results: [] })],
     ]);
 
@@ -183,6 +187,7 @@ describe("GET /api/blogs/:id", () => {
   it("404s for a post in another blog group", async () => {
     stubFetch([
       ["tags", jsonResponse({ results: [] })],
+      ["authors", jsonResponse({ results: [] })],
       ["posts/1001", jsonResponse(hubspotPost({ contentGroupId: "999" }))],
     ]);
 
@@ -198,6 +203,7 @@ describe("GET /blog/rss.xml", () => {
   it("emits a valid feed with per-post categories", async () => {
     stubFetch([
       ["tags", jsonResponse({ results: [{ id: 5, name: "Product launches" }] })],
+      ["authors", jsonResponse({ results: [] })],
       ["posts", jsonResponse({ results: [hubspotPost({ tagIds: [5] })] })],
     ]);
 
@@ -245,6 +251,7 @@ describe("GET /blog/:slug (request-time meta)", () => {
     stubFetch([
       ["/index.html", textResponse(SHELL)],
       ["tags", jsonResponse({ results: [] })],
+      ["authors", jsonResponse({ results: [] })],
       ["posts/1001", jsonResponse(hubspotPost())],
       ["posts", jsonResponse({ results: [hubspotPost()] })],
     ]);
@@ -265,6 +272,7 @@ describe("GET /blog/:slug (request-time meta)", () => {
     stubFetch([
       ["/index.html", textResponse(SHELL)],
       ["tags", jsonResponse({ results: [] })],
+      ["authors", jsonResponse({ results: [] })],
       ["posts", jsonResponse({ results: [] })],
     ]);
 
@@ -284,6 +292,7 @@ describe("GET /blog/:slug (request-time meta)", () => {
     stubFetch([
       ["/index.html", textResponse(SHELL)],
       ["tags", jsonResponse({ results: [] })],
+      ["authors", jsonResponse({ results: [] })],
       ["posts/1001", jsonResponse(hubspotPost({ name: 'Quotes "and" <tags>' }))],
       ["posts", jsonResponse({ results: [hubspotPost({ name: 'Quotes "and" <tags>' })] })],
     ]);
@@ -302,6 +311,7 @@ describe("GET /blog/:slug (request-time meta)", () => {
     stubFetch([
       ["/index.html", textResponse(bare)],
       ["tags", jsonResponse({ results: [] })],
+      ["authors", jsonResponse({ results: [] })],
       ["posts/1001", jsonResponse(hubspotPost())],
       ["posts", jsonResponse({ results: [hubspotPost()] })],
     ]);
@@ -323,6 +333,7 @@ describe("GET /blog/:slug (request-time meta)", () => {
     stubFetch([
       ["/index.html", textResponse("<div id=\"root\"></div>")],
       ["tags", jsonResponse({ results: [] })],
+      ["authors", jsonResponse({ results: [] })],
       ["posts/1001", jsonResponse(hubspotPost())],
       ["posts", jsonResponse({ results: [hubspotPost()] })],
     ]);

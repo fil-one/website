@@ -22,6 +22,18 @@ const HUBSPOT_TAGS_URLS = [
   "https://api.hubapi.com/cms/v3/blogs/tags",
 ];
 
+/**
+ * Blog authors, resolved the same way as tags.
+ *
+ * A post's `authorName` is the user who last published it, NOT the blog author
+ * shown in HubSpot — that has to be looked up by `blogAuthorId`.
+ * See developers.hubspot.com/docs/api-reference/cms-authors-v3.
+ */
+const HUBSPOT_AUTHORS_URLS = [
+  "https://api.hubapi.com/cms/blogs/2026-03/authors",
+  "https://api.hubapi.com/cms/v3/blogs/authors",
+];
+
 /** Fil One's HubSpot blog group. Override per portal (e.g. a sandbox) with env. */
 const DEFAULT_CONTENT_GROUP_ID = "217378575467";
 
@@ -45,11 +57,13 @@ const PUBLIC_FIELDS = [
   "featuredImageAltText",
   "tagIds",
   "topicIds",
+  "blogAuthorId",
 ];
 
-/** Resolved blog tags, cached per warm function instance. */
+/** Resolved blog tags and authors, cached per warm function instance. */
 const TAG_CACHE_TTL_MS = 5 * 60 * 1000;
 let tagCache = { expiresAt: 0, tags: null };
+let authorCache = { expiresAt: 0, authors: null };
 
 /**
  * slug → post id, cached per warm instance so a repeat article view costs one
@@ -128,11 +142,9 @@ export function slugifyTag(value = "") {
  * carry only `tagIds`. Failures degrade to an empty map (posts render without
  * categories) rather than taking the whole blog down.
  */
-export async function fetchTagMap({ accessToken }) {
-  if (tagCache.tags && tagCache.expiresAt > Date.now()) return tagCache.tags;
-
-  const tags = new Map();
-  for (const url of HUBSPOT_TAGS_URLS) {
+async function fetchLookup(urls, accessToken, collect) {
+  const entries = new Map();
+  for (const url of urls) {
     try {
       const response = await fetch(`${url}?limit=300`, {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -140,31 +152,69 @@ export async function fetchTagMap({ accessToken }) {
       if (!response.ok) continue;
 
       const data = await response.json();
-      for (const tag of data.results || []) {
-        if (!tag?.id || !tag?.name) continue;
-        tags.set(String(tag.id), {
-          id: String(tag.id),
-          // v3 tag objects carry no slug, so derive one for the ?category= param.
-          name: tag.name,
-          slug: tag.slug || slugifyTag(tag.name),
-        });
-      }
+      for (const item of data.results || []) collect(entries, item);
       break;
     } catch {
-      // Try the next path; an empty map just means no category tabs.
+      // Try the next path; an empty map degrades gracefully at the call site.
     }
   }
+  return entries;
+}
+
+export async function fetchTagMap({ accessToken }) {
+  if (tagCache.tags && tagCache.expiresAt > Date.now()) return tagCache.tags;
+
+  const tags = await fetchLookup(HUBSPOT_TAGS_URLS, accessToken, (entries, tag) => {
+    if (!tag?.id || !tag?.name) return;
+    entries.set(String(tag.id), {
+      id: String(tag.id),
+      // v3 tag objects carry no slug, so derive one for the ?category= param.
+      name: tag.name,
+      slug: tag.slug || slugifyTag(tag.name),
+    });
+  });
 
   tagCache = { tags, expiresAt: Date.now() + TAG_CACHE_TTL_MS };
   return tags;
 }
 
-/** Swap a post's `tagIds` for resolved `tags`, dropping ids we can't name. */
-function withTags(post, tagMap) {
-  const { tagIds, topicIds, ...rest } = post;
+/** id → display name for every blog author in the portal. */
+export async function fetchAuthorMap({ accessToken }) {
+  if (authorCache.authors && authorCache.expiresAt > Date.now()) return authorCache.authors;
+
+  const authors = await fetchLookup(HUBSPOT_AUTHORS_URLS, accessToken, (entries, author) => {
+    const name = author?.displayName || author?.fullName || author?.name;
+    if (!author?.id || !name) return;
+    entries.set(String(author.id), name);
+  });
+
+  authorCache = { authors, expiresAt: Date.now() + TAG_CACHE_TTL_MS };
+  return authors;
+}
+
+/**
+ * Swap raw ids for resolved values: `tagIds` become `tags`, and `blogAuthorId`
+ * becomes the `authorName` the site displays.
+ *
+ * HubSpot's own `authorName` is whoever last published the post, so it is
+ * dropped when the post has a blog author — showing an unresolvable author as
+ * the publisher's name would credit the wrong person. The client falls back to
+ * "Fil One Team" when there is no name at all.
+ */
+function withRelations(post, { tagMap, authorMap }) {
+  const { tagIds, topicIds, blogAuthorId, ...rest } = post;
+
   const ids = tagIds || topicIds || [];
   const tags = ids.map((id) => tagMap.get(String(id))).filter(Boolean);
-  return tags.length ? { ...rest, tags } : rest;
+  if (tags.length) rest.tags = tags;
+
+  if (blogAuthorId) {
+    const authorName = authorMap.get(String(blogAuthorId));
+    if (authorName) rest.authorName = authorName;
+    else delete rest.authorName;
+  }
+
+  return rest;
 }
 
 /**
@@ -180,13 +230,14 @@ export async function fetchPublishedPage({ accessToken, contentGroupId, limit, a
   });
   if (after) params.set("after", String(after));
 
-  const [data, tagMap] = await Promise.all([
+  const [data, tagMap, authorMap] = await Promise.all([
     hubspotFetch("", { accessToken, params }),
     fetchTagMap({ accessToken }),
+    fetchAuthorMap({ accessToken }),
   ]);
   const results = (data.results || [])
     .filter(isPublished)
-    .map((post) => withTags(projectPost(post), tagMap));
+    .map((post) => withRelations(projectPost(post), { tagMap, authorMap }));
   return { results, total: data.total, paging: data.paging };
 }
 
@@ -197,8 +248,11 @@ export async function fetchPublishedPostById({ accessToken, contentGroupId, id }
   // Scope to our blog group so /blog/... can't surface another blog's content.
   if (String(post.contentGroupId) !== String(contentGroupId)) return undefined;
 
-  const tagMap = await fetchTagMap({ accessToken });
-  return withTags(projectPost(post, { includeBody: true }), tagMap);
+  const [tagMap, authorMap] = await Promise.all([
+    fetchTagMap({ accessToken }),
+    fetchAuthorMap({ accessToken }),
+  ]);
+  return withRelations(projectPost(post, { includeBody: true }), { tagMap, authorMap });
 }
 
 /**
