@@ -42,6 +42,14 @@ export const mapHubSpotPost = (post: HubSpotBlogPost): BlogPost => ({
   tags: post.tags || [],
 });
 
+/** Post date as displayed on the index and article pages; "" when unusable. */
+export const formatPostDate = (date?: string) => {
+  if (!date) return "";
+  const parsed = new Date(date);
+  if (Number.isNaN(parsed.getTime())) return "";
+  return new Intl.DateTimeFormat("en", { month: "long", day: "numeric", year: "numeric" }).format(parsed);
+};
+
 /** Category slug meaning "no filter" — the leading tab, as on Linear's blog. */
 export const ALL_CATEGORY = "all";
 

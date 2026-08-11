@@ -5,16 +5,9 @@ import BlogCover from "@/components/BlogCover";
 import Footer from "@/components/Footer";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import { useSeo } from "@/hooks/useSeo";
-import { fetchBlogPostBySlug } from "@/lib/blog";
+import { fetchBlogPostBySlug, formatPostDate } from "@/lib/blog";
 import { sanitizeHtml } from "@/lib/sanitizeHtml";
 import type { BlogPost as BlogPostType } from "@/types/blog";
-
-const formatDate = (date?: string) => {
-  if (!date) return "";
-  const parsed = new Date(date);
-  if (Number.isNaN(parsed.getTime())) return "";
-  return new Intl.DateTimeFormat("en", { month: "long", day: "numeric", year: "numeric" }).format(parsed);
-};
 
 const BlogPost = () => {
   const { slug = "" } = useParams();
@@ -52,7 +45,7 @@ const BlogPost = () => {
     ogImage: post?.featuredImage || "https://www.fil.one/og-image.png",
   });
 
-  const publishedLabel = formatDate(post?.publishedAt);
+  const publishedLabel = formatPostDate(post?.publishedAt);
 
   return (
     <div className="min-h-screen bg-white">

@@ -43,37 +43,68 @@ async function fetchShell(request) {
   return shell.text();
 }
 
-function injectMeta(shell, { title, description, canonical, image, jsonLd }) {
+/**
+ * Apply one replacement, reporting when the pattern didn't match.
+ *
+ * The shell's <head> is matched by regex (the same approach as
+ * scripts/prerender.mjs — HTML comment placeholders can't be used inside <title>
+ * or attribute values, where they'd render as literal text). A silent miss would
+ * ship an article with the homepage's meta, so misses are logged loudly.
+ */
+function replaceOrWarn(html, pattern, replacement, label) {
+  if (!pattern.test(html)) {
+    console.error(`blog-page: shell is missing ${label} — article meta not injected`);
+    return html;
+  }
+  return html.replace(pattern, replacement);
+}
+
+function injectMeta(shell, { title, description, canonical, image, jsonLd, type = "website" }) {
   const safeTitle = escapeAttribute(title);
   const safeDescription = escapeAttribute(description);
   const safeCanonical = escapeAttribute(canonical);
   const safeImage = escapeAttribute(image);
 
-  let html = shell
-    .replace(/<title>[\s\S]*?<\/title>/, `<title>${safeTitle}</title>`)
-    .replace(
+  const replacements = [
+    [/<title>[\s\S]*?<\/title>/, `<title>${safeTitle}</title>`, "<title>"],
+    [
       /<meta name="description" content="[^"]*"/,
-      `<meta name="description" content="${safeDescription}"`
-    )
-    .replace(/<link rel="canonical" href="[^"]*"/, `<link rel="canonical" href="${safeCanonical}"`)
-    .replace(/<meta property="og:title" content="[^"]*"/, `<meta property="og:title" content="${safeTitle}"`)
-    .replace(
+      `<meta name="description" content="${safeDescription}"`,
+      "meta description",
+    ],
+    [
+      /<link rel="canonical" href="[^"]*"/,
+      `<link rel="canonical" href="${safeCanonical}"`,
+      "canonical link",
+    ],
+    [/<meta property="og:title" content="[^"]*"/, `<meta property="og:title" content="${safeTitle}"`, "og:title"],
+    [
       /<meta property="og:description" content="[^"]*"/,
-      `<meta property="og:description" content="${safeDescription}"`
-    )
-    .replace(/<meta property="og:type" content="[^"]*"/, `<meta property="og:type" content="article"`)
-    .replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${safeCanonical}"`)
-    .replace(/<meta property="og:image" content="[^"]*"/, `<meta property="og:image" content="${safeImage}"`)
-    .replace(/<meta name="twitter:title" content="[^"]*"/, `<meta name="twitter:title" content="${safeTitle}"`)
-    .replace(
+      `<meta property="og:description" content="${safeDescription}"`,
+      "og:description",
+    ],
+    [/<meta property="og:type" content="[^"]*"/, `<meta property="og:type" content="${type}"`, "og:type"],
+    [/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${safeCanonical}"`, "og:url"],
+    [/<meta property="og:image" content="[^"]*"/, `<meta property="og:image" content="${safeImage}"`, "og:image"],
+    [/<meta name="twitter:title" content="[^"]*"/, `<meta name="twitter:title" content="${safeTitle}"`, "twitter:title"],
+    [
       /<meta name="twitter:description" content="[^"]*"/,
-      `<meta name="twitter:description" content="${safeDescription}"`
-    )
-    .replace(/<meta name="twitter:image" content="[^"]*"/, `<meta name="twitter:image" content="${safeImage}"`);
+      `<meta name="twitter:description" content="${safeDescription}"`,
+      "twitter:description",
+    ],
+    [/<meta name="twitter:image" content="[^"]*"/, `<meta name="twitter:image" content="${safeImage}"`, "twitter:image"],
+  ];
+
+  let html = shell;
+  for (const [pattern, replacement, label] of replacements) {
+    html = replaceOrWarn(html, pattern, replacement, label);
+  }
 
   if (jsonLd) {
-    // JSON-LD sits inside a <script>, so "</" is the only sequence that can break out.
-    const serialised = JSON.stringify(jsonLd).replace(/<\//g, "<\\/");
+    // Post titles reach this from HubSpot, so escape every "<" as \u003c (valid
+    // inside a JSON string). That covers "</script" and the "<!--" sequence that
+    // flips the HTML parser into script-data-escaped state.
+    const serialised = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
     html = html.replace(
       "<!--META_JSON_LD-->",
       `<script type="application/ld+json">${serialised}</script>`
@@ -141,6 +172,7 @@ export default async function handler(request, response) {
       title: `${post.name} · Fil One`,
       description,
       canonical,
+      type: "article",
       image: post.featuredImage || FALLBACK_OG_IMAGE,
       jsonLd: {
         "@context": "https://schema.org",

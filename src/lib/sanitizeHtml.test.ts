@@ -53,3 +53,20 @@ describe("isSafeUrl", () => {
     (url) => expect(isSafeUrl(url)).toBe(false)
   );
 });
+
+describe("rel handling", () => {
+  it("keeps existing rel tokens when adding noopener", () => {
+    const html = sanitizeHtml('<a href="https://x" target="_blank" rel="nofollow author">x</a>');
+    const rel = html.match(/rel="([^"]*)"/)?.[1].split(" ").sort();
+    expect(rel).toEqual(["author", "nofollow", "noopener", "noreferrer"]);
+  });
+
+  it("does not duplicate tokens already present", () => {
+    const html = sanitizeHtml('<a href="https://x" target="_blank" rel="noopener">x</a>');
+    expect(html.match(/rel="([^"]*)"/)?.[1]).toBe("noopener noreferrer");
+  });
+
+  it("leaves rel alone on same-tab links", () => {
+    expect(sanitizeHtml('<a href="https://x" rel="nofollow">x</a>')).toContain('rel="nofollow"');
+  });
+});

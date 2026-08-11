@@ -31,11 +31,16 @@ const Blog = () => {
   const category = searchParams.get("category") || ALL_CATEGORY;
   const query = searchParams.get("q") || "";
 
-  const setParam = (key: string, value: string) => {
+  /**
+   * Category changes push a history entry, so Back returns to the previous tab
+   * rather than leaving the blog. Typing replaces, so Back doesn't walk the
+   * search box one character at a time.
+   */
+  const setParam = (key: string, value: string, { push = false } = {}) => {
     const next = new URLSearchParams(searchParams);
     if (value && !(key === "category" && value === ALL_CATEGORY)) next.set(key, value);
     else next.delete(key);
-    setSearchParams(next, { replace: true });
+    setSearchParams(next, { replace: !push });
   };
 
   useEffect(() => {
@@ -88,7 +93,7 @@ const Blog = () => {
                 <BlogFilters
                   categories={categories}
                   category={category}
-                  onCategoryChange={(slug) => setParam("category", slug)}
+                  onCategoryChange={(slug) => setParam("category", slug, { push: true })}
                   query={query}
                   onQueryChange={(value) => setParam("q", value)}
                   resultCount={matching.length}

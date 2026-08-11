@@ -51,6 +51,19 @@ const PUBLIC_FIELDS = [
 const TAG_CACHE_TTL_MS = 5 * 60 * 1000;
 let tagCache = { expiresAt: 0, tags: null };
 
+/**
+ * slug → post id, cached per warm instance so a repeat article view costs one
+ * HubSpot call instead of re-walking the published list. Ids never change, so a
+ * hit stays valid; a miss falls through to the scan below.
+ */
+const SLUG_CACHE_TTL_MS = 5 * 60 * 1000;
+let slugCache = { expiresAt: 0, ids: new Map() };
+
+function rememberSlug(slug, id) {
+  if (slugCache.expiresAt < Date.now()) slugCache = { expiresAt: Date.now() + SLUG_CACHE_TTL_MS, ids: new Map() };
+  slugCache.ids.set(slug, id);
+}
+
 export function getHubSpotConfig() {
   return {
     accessToken: process.env.HUBSPOT_PRIVATE_APP_ACCESS_TOKEN || "",
@@ -161,7 +174,7 @@ function withTags(post, tagMap) {
 export async function fetchPublishedPage({ accessToken, contentGroupId, limit, after }) {
   const params = new URLSearchParams({
     state: "PUBLISHED",
-    sort: "-publishDate",
+    sort: "-createdAt",
     limit: String(limit),
     contentGroupId,
   });
@@ -197,6 +210,14 @@ export async function fetchPublishedPostById({ accessToken, contentGroupId, id }
  */
 export async function fetchPublishedPostBySlug({ accessToken, contentGroupId, slug }) {
   const target = localSlug(slug);
+
+  const cachedId = slugCache.expiresAt > Date.now() ? slugCache.ids.get(target) : undefined;
+  if (cachedId) {
+    const post = await fetchPublishedPostById({ accessToken, contentGroupId, id: cachedId });
+    if (post) return post;
+    // Unpublished or retargeted since we cached it — fall through to a fresh scan.
+  }
+
   let after;
 
   for (let page = 0; page < MAX_SLUG_SCAN_PAGES; page += 1) {
@@ -206,6 +227,8 @@ export async function fetchPublishedPostBySlug({ accessToken, contentGroupId, sl
       limit: MAX_LIMIT,
       after,
     });
+
+    for (const post of results) rememberSlug(localSlug(post.slug), post.id);
 
     const match = results.find((post) => localSlug(post.slug) === target);
     if (match) return fetchPublishedPostById({ accessToken, contentGroupId, id: match.id });

@@ -84,6 +84,11 @@ Blog content is read through server-side Vercel functions so the private app tok
 - `GET /api/blogs?slug=…` — one published post, body included
 - `GET /api/blogs/:id` — one published post by ID
 - `/blog/:slug` → `api/blog-page.js` — serves the SPA shell with the article's title, description, OG tags and `BlogPosting` JSON-LD injected at request time (rewrite in `vercel.json`)
+- `/blog/rss.xml` → `api/rss.js` — RSS 2.0 feed built at request time from the same published feed
+
+Categories are HubSpot blog **tags**: posts carry `tagIds`, which the server resolves to names (cached 5 minutes per instance). The tab bar is built from tags present on published posts, so retagging in HubSpot changes it without a deploy.
+
+The SPA catch-all rewrite excludes `/api/` — Vercel resolves dynamic function routes (`api/blogs/[id].js`) *after* rewrites, so a bare `/(.*)` catch-all silently shadows them and returns `index.html` instead.
 
 Only posts that are `PUBLISHED` **and** in the configured blog group are served; drafts and other blogs' posts return 404.
 
@@ -98,7 +103,8 @@ Copy `.env.example` to `.env` and set `HUBSPOT_PRIVATE_APP_ACCESS_TOKEN` to a Hu
 | `/` | Main landing page |
 | `/contact-sales` | Contact sales form |
 | `/blog` | HubSpot-powered blog index |
-| `/blog/:slug` | Blog article |
+| `/blog/:slug` | Blog article (request-time meta) |
+| `/blog/rss.xml` | RSS feed |
 | `/privacy` | Privacy Policy |
 | `/terms` | Terms of Use |
 

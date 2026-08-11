@@ -57,7 +57,11 @@ const sanitizeElement = (element: Element) => {
   }
 
   if (tag === "a" && element.getAttribute("target") === "_blank") {
-    element.setAttribute("rel", "noopener noreferrer");
+    // Merge, don't overwrite — an author's rel="nofollow author" must survive.
+    const tokens = new Set((element.getAttribute("rel") || "").split(/\s+/).filter(Boolean));
+    tokens.add("noopener");
+    tokens.add("noreferrer");
+    element.setAttribute("rel", [...tokens].join(" "));
   }
 };
 

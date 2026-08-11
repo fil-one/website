@@ -46,8 +46,10 @@ export default async function handler(request, response) {
     return response.status(200).json(page);
   } catch (error) {
     if (error instanceof HubSpotError) {
+      console.error(`${request.url}: HubSpot responded ${error.status}`);
       return response.status(error.status).json({ error: "HubSpot request failed" });
     }
+    console.error(`${request.url}: HubSpot unreachable — ${error?.message}`);
     return response.status(502).json({ error: "Unable to reach HubSpot" });
   }
 }

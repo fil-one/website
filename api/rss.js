@@ -59,6 +59,7 @@ export default async function handler(request, response) {
 
   const { accessToken, contentGroupId } = getHubSpotConfig();
   if (!accessToken) {
+    response.setHeader("Content-Type", "text/plain; charset=utf-8");
     return response.status(503).send("HubSpot access token is not configured");
   }
 
@@ -69,8 +70,14 @@ export default async function handler(request, response) {
       contentGroupId,
       limit: Math.min(ITEM_LIMIT, MAX_LIMIT),
     });
-    posts = page.results;
-  } catch {
+    // The feed is date-ordered regardless of how HubSpot sorted the page.
+    posts = page.results.sort(
+      (a, b) =>
+        new Date(b.publishDate || b.createdAt || 0) - new Date(a.publishDate || a.createdAt || 0)
+    );
+  } catch (error) {
+    console.error(`rss: HubSpot request failed — ${error?.status || error?.message}`);
+    response.setHeader("Content-Type", "text/plain; charset=utf-8");
     return response.status(502).send("Unable to reach HubSpot");
   }
 
