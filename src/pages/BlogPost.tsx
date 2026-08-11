@@ -92,9 +92,6 @@ const BlogPost = () => {
                   {[publishedLabel, post.author].filter(Boolean).join(" · ")}
                 </p>
                 <h1 className="mt-4 font-display text-[36px] font-medium leading-[1.1] tracking-[-0.032em] text-zinc-950 sm:text-[42px] md:text-[54px]">{post.title}</h1>
-                {post.excerpt && (
-                  <p className="mt-5 text-[17px] leading-7 text-zinc-600 md:mt-6 md:text-lg md:leading-8">{post.excerpt}</p>
-                )}
               </div>
             </header>
 
