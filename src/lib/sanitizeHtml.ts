@@ -90,6 +90,9 @@ export function sanitizeHtml(html: string): string {
   if (!html) return "";
 
   if (typeof window === "undefined" || typeof window.DOMParser === "undefined") {
+    // console.error, not warn: this branch is unreachable in normal operation,
+    // so if it ever fires an article shipped with an empty body — a user-visible
+    // defect worth alerting on, not routine noise.
     console.error(
       "sanitizeHtml: no DOM available, returning empty content. This is client-only — " +
         "render article bodies in the browser, or add a server-side DOM parser before calling it here."
