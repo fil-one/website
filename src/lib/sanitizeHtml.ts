@@ -76,10 +76,26 @@ const unwrap = (element: Element) => {
   parent.removeChild(element);
 };
 
+/**
+ * Sanitise an article body for client-side rendering.
+ *
+ * Client-only by design. Without a DOM this returns "" rather than raw HubSpot
+ * HTML — emitting unsanitised markup would defeat the point — and logs, so a
+ * future server-side caller sees why its content vanished instead of shipping a
+ * silently empty article. `/blog/:slug` is not prerendered (`prerender: false`
+ * in src/routes.tsx); its <head> is templated by api/blog-page.js and the body
+ * renders in the browser, so nothing calls this on the server today.
+ */
 export function sanitizeHtml(html: string): string {
   if (!html) return "";
-  // No DOM (SSR / prerender) — fail closed rather than emitting raw HubSpot HTML.
-  if (typeof window === "undefined" || typeof window.DOMParser === "undefined") return "";
+
+  if (typeof window === "undefined" || typeof window.DOMParser === "undefined") {
+    console.error(
+      "sanitizeHtml: no DOM available, returning empty content. This is client-only — " +
+        "render article bodies in the browser, or add a server-side DOM parser before calling it here."
+    );
+    return "";
+  }
 
   const parsed = new window.DOMParser().parseFromString(html, "text/html");
 

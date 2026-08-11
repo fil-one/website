@@ -60,7 +60,7 @@ async function fetchShell(request) {
 function writeTag(html, pattern, tag, label) {
   if (pattern.test(html)) return html.replace(pattern, tag);
 
-  console.error(`blog-page: shell has no ${label}; inserting it`);
+  console.warn(`blog-page: shell has no ${label}; inserting it`);
   if (html.includes("</head>")) return html.replace("</head>", `  ${tag}\n  </head>`);
 
   console.error(`blog-page: shell has no </head> either; ${label} not set`);

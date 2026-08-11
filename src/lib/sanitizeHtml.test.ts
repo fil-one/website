@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { isSafeUrl, sanitizeHtml } from "./sanitizeHtml";
 
 describe("sanitizeHtml", () => {
@@ -68,5 +68,22 @@ describe("rel handling", () => {
 
   it("leaves rel alone on same-tab links", () => {
     expect(sanitizeHtml('<a href="https://x" rel="nofollow">x</a>')).toContain('rel="nofollow"');
+  });
+});
+
+describe("without a DOM", () => {
+  it("returns empty content and says why, instead of emitting raw HTML", () => {
+    const { DOMParser } = window;
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    // Simulate a server/prerender environment.
+    delete window.DOMParser;
+
+    try {
+      expect(sanitizeHtml("<p>Body</p><script>alert(1)</script>")).toBe("");
+      expect(error).toHaveBeenCalledWith(expect.stringContaining("client-only"));
+    } finally {
+      window.DOMParser = DOMParser;
+      error.mockRestore();
+    }
   });
 });

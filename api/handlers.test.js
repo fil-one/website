@@ -77,6 +77,7 @@ beforeEach(() => {
   process.env.HUBSPOT_PRIVATE_APP_ACCESS_TOKEN = TOKEN;
   process.env.HUBSPOT_BLOG_CONTENT_GROUP_ID = "42";
   vi.spyOn(console, "error").mockImplementation(() => {});
+  vi.spyOn(console, "warn").mockImplementation(() => {});
 });
 
 afterEach(() => {
@@ -314,7 +315,8 @@ describe("GET /blog/:slug (request-time meta)", () => {
     expect(response.body).toContain('property="og:image"');
     expect(response.body).toContain('property="og:url" content="https://www.fil.one/blog/my-post"');
     expect(response.body).toContain('"@type":"BlogPosting"');
-    expect(console.error).toHaveBeenCalled();
+    // An insertion is a warning, not an error — it self-heals.
+    expect(console.warn).toHaveBeenCalled();
   });
 
   it("still renders when the shell has no </head>", async () => {
