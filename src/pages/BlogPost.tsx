@@ -91,7 +91,7 @@ const BlogPost = () => {
                 <p className="mt-8 font-mono text-xs uppercase tracking-[0.12em] text-zinc-500 md:mt-10">
                   {[publishedLabel, post.author].filter(Boolean).join(" · ")}
                 </p>
-                <h1 className="mt-4 font-display text-[36px] font-medium leading-[1.1] tracking-[-0.032em] text-zinc-950 sm:text-[42px] md:text-[54px]">{post.title}</h1>
+                <h1 className="mt-4 font-display text-[32px] font-medium leading-[1.1] tracking-[-0.032em] text-zinc-950 sm:text-[38px] md:text-[46px]">{post.title}</h1>
               </div>
             </header>
 
