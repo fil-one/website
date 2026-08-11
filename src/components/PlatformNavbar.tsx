@@ -104,12 +104,14 @@ const SOLUTIONS_ES = [
 
 const UTILITY_LINKS_EN = [
   { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
   { label: "Pricing", href: "/pricing" },
   { label: "Enterprise", href: "/enterprise" },
 ];
 
 const UTILITY_LINKS_ES = [
   { label: "Nosotros", href: "/about" },
+  { label: "Blog", href: "/blog" },
   { label: "Precios", href: "/pricing" },
   { label: "Empresas", href: "/enterprise" },
 ];

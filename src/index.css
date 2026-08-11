@@ -355,6 +355,101 @@
   .marquee-track { animation: none; }
 }
 
+/* ── HubSpot blog article content ───────────────────────────────────────── */
+.blog-content {
+  color: #3f3f46;
+  font-size: 18px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.blog-content > * + * {
+  margin-top: 1.5rem;
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3 {
+  margin-top: 3rem;
+  color: #09090b;
+  font-family: 'Aspekta', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.blog-content h1,
+.blog-content h2 { font-size: 31px; }
+.blog-content h3 { font-size: 23px; }
+.blog-content strong { color: #18181b; font-weight: 600; }
+.blog-content ul,
+.blog-content ol { padding-left: 1.4rem; }
+.blog-content ul { list-style: disc; }
+.blog-content ol { list-style: decimal; }
+.blog-content li + li { margin-top: 0.6rem; }
+.blog-content a { color: #0070CC; text-decoration: underline; text-underline-offset: 3px; }
+.blog-content figure {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.blog-content img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 520px;
+  height: auto;
+  margin-inline: auto;
+  border-radius: 12px;
+  object-fit: contain;
+}
+.blog-content pre {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  border-left: 3px solid #38A6FF;
+  border-radius: 0 10px 10px 0;
+  background: #FAFAFA;
+  padding: 1rem 1.25rem;
+  color: #3f3f46;
+  font-family: 'DM Mono', monospace;
+  font-size: 15px;
+}
+.blog-content table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.blog-content th,
+.blog-content td {
+  min-width: 140px;
+  border-bottom: 1px solid #e4e4e7;
+  padding: 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+.blog-content blockquote {
+  margin: 2.5rem 0;
+  border-left: 3px solid #38A6FF;
+  padding: 0.35rem 0 0.35rem 1.5rem;
+  color: #18181b;
+  font-size: 20px;
+  line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .blog-content { font-size: 17px; line-height: 1.75; }
+  .blog-content h1,
+  .blog-content h2 { font-size: 27px; }
+  .blog-content h3 { font-size: 21px; }
+  .blog-content img { max-height: 360px; }
+  .blog-content pre { padding: 0.9rem 1rem; }
+  .blog-content blockquote { font-size: 18px; padding-left: 1rem; }
+}
+
 /* Hide scrollbar on feature card strip */
 .features-scroll::-webkit-scrollbar {
   display: none;

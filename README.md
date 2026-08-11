@@ -78,12 +78,33 @@ Two forms submit to HubSpot via the [Forms API v3](https://developers.hubspot.co
 
 Portal ID and form GUIDs are centralised in `src/lib/hubspot.ts`.
 
+Blog content is read through server-side Vercel functions so the private app token is never exposed to the browser. Responses are projected down to the fields the site renders, so HubSpot's internal fields never reach the client:
+
+- `GET /api/blogs` — page of published post summaries (`?limit=`, `?after=` cursor)
+- `GET /api/blogs?slug=…` — one published post, body included
+- `GET /api/blogs/:id` — one published post by ID
+- `/blog/:slug` → `api/blog-page.js` — serves the SPA shell with the article's title, description, OG tags and `BlogPosting` JSON-LD injected at request time (rewrite in `vercel.json`)
+- `/blog/rss.xml` → `api/rss.js` — RSS 2.0 feed built at request time from the same published feed
+
+Categories are HubSpot blog **tags**: posts carry `tagIds`, which the server resolves to names (cached 5 minutes per instance). The tab bar is built from tags present on published posts, so retagging in HubSpot changes it without a deploy.
+
+The SPA catch-all rewrite excludes `/api/` — Vercel resolves dynamic function routes (`api/blogs/[id].js`) *after* rewrites, so a bare `/(.*)` catch-all silently shadows them and returns `index.html` instead.
+
+Only posts that are `PUBLISHED` **and** in the configured blog group are served; drafts and other blogs' posts return 404.
+
+Article slugs can't be prerendered (posts are published from HubSpot without a deploy), which is why `/blog/:slug` is marked `prerender: false` in `src/routes.tsx` and gets its meta from the request-time function instead.
+
+Copy `.env.example` to `.env` and set `HUBSPOT_PRIVATE_APP_ACCESS_TOKEN` to a HubSpot service key or private app token with the `content` scope. `HUBSPOT_BLOG_CONTENT_GROUP_ID` is optional — it defaults to Fil One's production blog group and only needs setting to point a preview deployment at a different portal.
+
 ## Pages & routes
 
 | Route | Description |
 |---|---|
 | `/` | Main landing page |
 | `/contact-sales` | Contact sales form |
+| `/blog` | HubSpot-powered blog index |
+| `/blog/:slug` | Blog article (request-time meta) |
+| `/blog/rss.xml` | RSS feed |
 | `/privacy` | Privacy Policy |
 | `/terms` | Terms of Use |
 

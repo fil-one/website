@@ -8,7 +8,8 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     setupFiles: ["./src/test/setup.ts"],
-    include: ["src/**/*.{test,spec}.{ts,tsx}"],
+    // api/ handlers are plain JS (Vercel functions), so their tests are .js too.
+    include: ["src/**/*.{test,spec}.{ts,tsx}", "api/**/*.{test,spec}.js"],
   },
   resolve: {
     alias: { "@": path.resolve(__dirname, "./src") },
