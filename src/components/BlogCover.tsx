@@ -300,7 +300,7 @@ const Field = ({ slug, phase, id }: { slug: string; phase: number; id: string })
   return (
     <g clipPath={`url(#${id}-frame)`}>
       <g
-        opacity={0.15}
+        opacity={0.1}
         stroke="#FFFFFF"
         strokeWidth={1}
         fill="none"
