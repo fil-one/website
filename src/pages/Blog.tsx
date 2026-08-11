@@ -7,8 +7,12 @@ import { useSeo } from "@/hooks/useSeo";
 import { fetchBlogPosts } from "@/lib/blog";
 import type { BlogPost } from "@/types/blog";
 
-const formatDate = (date: string) =>
-  new Intl.DateTimeFormat("en", { month: "long", day: "numeric", year: "numeric" }).format(new Date(date));
+const formatDate = (date?: string) => {
+  if (!date) return "";
+  const parsed = new Date(date);
+  if (Number.isNaN(parsed.getTime())) return "";
+  return new Intl.DateTimeFormat("en", { month: "long", day: "numeric", year: "numeric" }).format(parsed);
+};
 
 const Blog = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -31,10 +35,10 @@ const Blog = () => {
   }, []);
 
   useSeo({
-    title: "Blog — Fil One",
-    description: "Ideas and practical guidance on object storage, AI infrastructure, and verifiable data.",
-    canonical: "https://filone.io/blog",
-    ogImage: "https://filone.io/og-image.png",
+    title: "Blog · Fil One",
+    description: "Ideas and practical guidance on object storage, AI infrastructure, and the cost of moving data at scale.",
+    canonical: "https://www.fil.one/blog",
+    ogImage: "https://www.fil.one/og-image.png",
   });
 
   const [featured, ...rest] = posts;
@@ -45,33 +49,42 @@ const Blog = () => {
       <main id="main-content" className="pt-[58px] md:pt-[94px]">
         <section className="px-5 py-10 sm:px-6 md:px-8 md:py-16">
           <div className="mx-auto max-w-[1160px]">
+            <header className="mb-10 md:mb-14">
+              <h1 className="font-display text-[36px] font-medium leading-[1.1] tracking-[-0.03em] text-zinc-950 md:text-[48px]">Blog</h1>
+              <p className="mt-4 max-w-[620px] text-[17px] leading-7 text-zinc-600 md:text-lg">
+                Ideas and practical guidance on object storage, AI infrastructure, and the cost of moving data at scale.
+              </p>
+            </header>
+
             {loading && (
-              <div className="min-h-[55vh] py-12 text-sm text-[#71717A]" aria-live="polite">Loading articles…</div>
+              <div className="min-h-[55vh] text-sm text-zinc-500" aria-live="polite">Loading articles…</div>
             )}
 
             {loadError && (
-              <div className="min-h-[55vh] py-12">
-                <h1 className="font-['Aspekta'] text-3xl font-medium tracking-[-0.025em] text-[#09090B]">Unable to load articles</h1>
-                <p className="mt-3 text-[#52525B]">Please try again shortly.</p>
+              <div className="min-h-[55vh]">
+                <h2 className="font-display text-3xl font-medium tracking-[-0.025em] text-zinc-950">Unable to load articles</h2>
+                <p className="mt-3 text-zinc-600">Please try again shortly.</p>
               </div>
             )}
 
             {!loading && !loadError && posts.length === 0 && (
-              <div className="min-h-[55vh] py-12">
-                <h1 className="font-['Aspekta'] text-3xl font-medium tracking-[-0.025em] text-[#09090B]">No articles yet</h1>
+              <div className="min-h-[55vh]">
+                <h2 className="font-display text-3xl font-medium tracking-[-0.025em] text-zinc-950">No articles yet</h2>
               </div>
             )}
 
             {featured && (
-              <a href={`/blog/${featured.slug}`} className="group grid overflow-hidden rounded-2xl border border-black/[0.08] bg-[#FAFAFA] text-inherit no-underline shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors hover:border-black/[0.14] md:grid-cols-[0.95fr_1.05fr]">
+              <a href={`/blog/${featured.slug}`} className="group grid overflow-hidden rounded-2xl border border-black/[0.08] bg-zinc-50 text-inherit no-underline shadow-elevated-sm transition-colors hover:border-black/[0.14] md:grid-cols-[0.95fr_1.05fr]">
                 <div className="aspect-[16/10] overflow-hidden md:aspect-auto md:min-h-[410px]">
                   <BlogCover post={featured} priority />
                 </div>
                 <div className="flex flex-col justify-center p-6 sm:p-8 md:p-10 lg:p-12">
-                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-[#71717A]">Featured · {formatDate(featured.publishedAt)}</p>
-                  <h2 className="mt-4 font-['Aspekta'] text-[30px] font-medium leading-[1.12] tracking-[-0.025em] text-[#09090B] md:text-[38px] lg:text-[42px]">{featured.title}</h2>
-                  <p className="mt-4 line-clamp-5 text-base leading-7 text-[#52525B] md:line-clamp-4">{featured.excerpt}</p>
-                  <span className="mt-6 inline-flex items-center gap-2 text-[15px] font-medium text-[#09090B] md:mt-8">
+                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-zinc-500">
+                    {[ "Featured", formatDate(featured.publishedAt) ].filter(Boolean).join(" · ")}
+                  </p>
+                  <h2 className="mt-4 font-display text-[30px] font-medium leading-[1.12] tracking-[-0.025em] text-zinc-950 md:text-[38px] lg:text-[42px]">{featured.title}</h2>
+                  <p className="mt-4 line-clamp-5 text-base leading-7 text-zinc-600 md:line-clamp-4">{featured.excerpt}</p>
+                  <span className="mt-6 inline-flex items-center gap-2 text-[15px] font-medium text-zinc-950 md:mt-8">
                     Read article <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
@@ -86,9 +99,11 @@ const Blog = () => {
                       <div className="aspect-[16/10] overflow-hidden rounded-xl border border-black/[0.07]">
                         <BlogCover post={post} />
                       </div>
-                      <p className="mt-5 font-mono text-xs uppercase tracking-[0.1em] text-[#71717A]">{formatDate(post.publishedAt)}</p>
-                      <h2 className="mt-3 font-['Aspekta'] text-2xl font-medium leading-[1.2] tracking-[-0.018em] text-[#09090B] transition-colors group-hover:text-[#1684C5] md:text-[26px]">{post.title}</h2>
-                      <p className="mt-3 line-clamp-3 text-base leading-7 text-[#52525B]">{post.excerpt}</p>
+                      {formatDate(post.publishedAt) && (
+                        <p className="mt-5 font-mono text-xs uppercase tracking-[0.1em] text-zinc-500">{formatDate(post.publishedAt)}</p>
+                      )}
+                      <h2 className="mt-3 font-display text-2xl font-medium leading-[1.2] tracking-[-0.018em] text-zinc-950 transition-colors group-hover:text-brand-600 md:text-[26px]">{post.title}</h2>
+                      <p className="mt-3 line-clamp-3 text-base leading-7 text-zinc-600">{post.excerpt}</p>
                     </a>
                   </article>
                 ))}

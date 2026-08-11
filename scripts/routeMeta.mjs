@@ -20,7 +20,7 @@ export const ROUTE_META = {
   "/blog": {
     title: "Blog · Fil One",
     description:
-      "Ideas and practical guidance on object storage, AI infrastructure, and verifiable data.",
+      "Ideas and practical guidance on object storage, AI infrastructure, and the cost of moving data at scale.",
   },
   "/": {
     title: "Fil One | S3 object storage built for the AI era",

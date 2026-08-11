@@ -83,7 +83,11 @@ export const routeDefs: RouteDef[] = [
 export const notFoundLoad: PageLoader = () => import("./pages/NotFound");
 
 /**
- * Flat list of every route path. Single source of truth for the prerender
+ * Every prerenderable route path. Single source of truth for the prerender
  * script (which routes to render + the sitemap) and the route-parity test.
+ *
+ * Routes marked `prerender: false` are excluded: their paths are dynamic
+ * (/blog/:slug) so there's nothing to render at build time. Those are served by
+ * a request-time function instead — see api/blog-page.js.
  */
 export const routePaths: string[] = routeDefs.filter((r) => r.prerender !== false).map((r) => r.path);

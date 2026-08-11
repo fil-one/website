@@ -387,7 +387,7 @@
 .blog-content ul { list-style: disc; }
 .blog-content ol { list-style: decimal; }
 .blog-content li + li { margin-top: 0.6rem; }
-.blog-content a { color: #087fc0; text-decoration: underline; text-underline-offset: 3px; }
+.blog-content a { color: #0070CC; text-decoration: underline; text-underline-offset: 3px; }
 .blog-content figure {
   max-width: 100%;
   overflow-x: auto;
@@ -406,12 +406,13 @@
   max-width: 100%;
   overflow-wrap: anywhere;
   white-space: pre-wrap;
-  border-left: 3px solid #47afff;
+  border-left: 3px solid #38A6FF;
   border-radius: 0 10px 10px 0;
-  background: #f8fafc;
+  background: #FAFAFA;
   padding: 1rem 1.25rem;
   color: #3f3f46;
-  font: inherit;
+  font-family: 'DM Mono', monospace;
+  font-size: 15px;
 }
 .blog-content table {
   display: block;
@@ -432,7 +433,7 @@
 }
 .blog-content blockquote {
   margin: 2.5rem 0;
-  border-left: 3px solid #47afff;
+  border-left: 3px solid #38A6FF;
   padding: 0.35rem 0 0.35rem 1.5rem;
   color: #18181b;
   font-size: 20px;

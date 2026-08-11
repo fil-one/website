@@ -19,7 +19,7 @@
       ]
     },
     {
-      "source": "/:path((?!assets/|fonts/).*)",
+      "source": "/:path((?!assets/|fonts/|api/|blog/).*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
@@ -47,6 +47,7 @@
     { "source": "/solutions/backup", "destination": "/", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/blog/:slug", "destination": "/api/blog-page?slug=:slug" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
