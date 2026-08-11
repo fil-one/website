@@ -295,6 +295,44 @@ describe("GET /blog/:slug (request-time meta)", () => {
     expect(response.body).not.toContain("<tags>");
   });
 
+  it("inserts meta the shell is missing instead of leaving the default", async () => {
+    // A shell stripped of og:image and JSON-LD, as if index.html were edited.
+    const bare = `<!doctype html><html><head><title>Fil One</title></head><body><div id="root"></div></body></html>`;
+    stubFetch([
+      ["/index.html", textResponse(bare)],
+      ["tags", jsonResponse({ results: [] })],
+      ["posts/1001", jsonResponse(hubspotPost())],
+      ["posts", jsonResponse({ results: [hubspotPost()] })],
+    ]);
+
+    const handler = await load("./blog-page.js");
+    const response = makeResponse();
+    await handler(request({ query: { slug: "my-post" } }), response);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toContain("<title>My post · Fil One</title>");
+    expect(response.body).toContain('property="og:image"');
+    expect(response.body).toContain('property="og:url" content="https://www.fil.one/blog/my-post"');
+    expect(response.body).toContain('"@type":"BlogPosting"');
+    expect(console.error).toHaveBeenCalled();
+  });
+
+  it("still renders when the shell has no </head>", async () => {
+    stubFetch([
+      ["/index.html", textResponse("<div id=\"root\"></div>")],
+      ["tags", jsonResponse({ results: [] })],
+      ["posts/1001", jsonResponse(hubspotPost())],
+      ["posts", jsonResponse({ results: [hubspotPost()] })],
+    ]);
+
+    const handler = await load("./blog-page.js");
+    const response = makeResponse();
+    await handler(request({ query: { slug: "my-post" } }), response);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toContain('<div id="root"></div>');
+  });
+
   it("502s when the shell can't be fetched", async () => {
     stubFetch([["/index.html", textResponse("nope", 500)]]);
 

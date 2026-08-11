@@ -44,19 +44,27 @@ async function fetchShell(request) {
 }
 
 /**
- * Apply one replacement, reporting when the pattern didn't match.
+ * Write one tag into the shell's <head>, inserting it if the shell doesn't have
+ * it yet.
  *
- * The shell's <head> is matched by regex (the same approach as
- * scripts/prerender.mjs — HTML comment placeholders can't be used inside <title>
- * or attribute values, where they'd render as literal text). A silent miss would
- * ship an article with the homepage's meta, so misses are logged loudly.
+ * Tags are matched by regex rather than by comment placeholders: a placeholder
+ * inside <title> renders as literal text (the same reason scripts/prerender.mjs
+ * matches tags directly), and adding markers for the rest would mean keeping
+ * index.html in sync with two independent injectors. Patterns match the whole
+ * tag via [^>]*, so extra or reordered attributes still match.
+ *
+ * A miss used to leave the homepage's meta in place, which is exactly the silent
+ * failure that matters here — an article unfurling as the landing page. Now the
+ * tag is inserted before </head> and the miss is logged.
  */
-function replaceOrWarn(html, pattern, replacement, label) {
-  if (!pattern.test(html)) {
-    console.error(`blog-page: shell is missing ${label} — article meta not injected`);
-    return html;
-  }
-  return html.replace(pattern, replacement);
+function writeTag(html, pattern, tag, label) {
+  if (pattern.test(html)) return html.replace(pattern, tag);
+
+  console.error(`blog-page: shell has no ${label}; inserting it`);
+  if (html.includes("</head>")) return html.replace("</head>", `  ${tag}\n  </head>`);
+
+  console.error(`blog-page: shell has no </head> either; ${label} not set`);
+  return html;
 }
 
 function injectMeta(shell, { title, description, canonical, image, jsonLd, type = "website" }) {
@@ -65,39 +73,35 @@ function injectMeta(shell, { title, description, canonical, image, jsonLd, type 
   const safeCanonical = escapeAttribute(canonical);
   const safeImage = escapeAttribute(image);
 
-  const replacements = [
+  const tags = [
     [/<title>[\s\S]*?<\/title>/, `<title>${safeTitle}</title>`, "<title>"],
     [
-      /<meta name="description" content="[^"]*"/,
-      `<meta name="description" content="${safeDescription}"`,
+      /<meta name="description"[^>]*>/,
+      `<meta name="description" content="${safeDescription}" />`,
       "meta description",
     ],
+    [/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${safeCanonical}" />`, "canonical link"],
+    [/<meta property="og:title"[^>]*>/, `<meta property="og:title" content="${safeTitle}" />`, "og:title"],
     [
-      /<link rel="canonical" href="[^"]*"/,
-      `<link rel="canonical" href="${safeCanonical}"`,
-      "canonical link",
-    ],
-    [/<meta property="og:title" content="[^"]*"/, `<meta property="og:title" content="${safeTitle}"`, "og:title"],
-    [
-      /<meta property="og:description" content="[^"]*"/,
-      `<meta property="og:description" content="${safeDescription}"`,
+      /<meta property="og:description"[^>]*>/,
+      `<meta property="og:description" content="${safeDescription}" />`,
       "og:description",
     ],
-    [/<meta property="og:type" content="[^"]*"/, `<meta property="og:type" content="${type}"`, "og:type"],
-    [/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${safeCanonical}"`, "og:url"],
-    [/<meta property="og:image" content="[^"]*"/, `<meta property="og:image" content="${safeImage}"`, "og:image"],
-    [/<meta name="twitter:title" content="[^"]*"/, `<meta name="twitter:title" content="${safeTitle}"`, "twitter:title"],
+    [/<meta property="og:type"[^>]*>/, `<meta property="og:type" content="${type}" />`, "og:type"],
+    [/<meta property="og:url"[^>]*>/, `<meta property="og:url" content="${safeCanonical}" />`, "og:url"],
+    [/<meta property="og:image"[^>]*>/, `<meta property="og:image" content="${safeImage}" />`, "og:image"],
+    [/<meta name="twitter:title"[^>]*>/, `<meta name="twitter:title" content="${safeTitle}" />`, "twitter:title"],
     [
-      /<meta name="twitter:description" content="[^"]*"/,
-      `<meta name="twitter:description" content="${safeDescription}"`,
+      /<meta name="twitter:description"[^>]*>/,
+      `<meta name="twitter:description" content="${safeDescription}" />`,
       "twitter:description",
     ],
-    [/<meta name="twitter:image" content="[^"]*"/, `<meta name="twitter:image" content="${safeImage}"`, "twitter:image"],
+    [/<meta name="twitter:image"[^>]*>/, `<meta name="twitter:image" content="${safeImage}" />`, "twitter:image"],
   ];
 
   let html = shell;
-  for (const [pattern, replacement, label] of replacements) {
-    html = replaceOrWarn(html, pattern, replacement, label);
+  for (const [pattern, tag, label] of tags) {
+    html = writeTag(html, pattern, tag, label);
   }
 
   if (jsonLd) {
@@ -105,10 +109,10 @@ function injectMeta(shell, { title, description, canonical, image, jsonLd, type 
     // inside a JSON string). That covers "</script" and the "<!--" sequence that
     // flips the HTML parser into script-data-escaped state.
     const serialised = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
-    html = html.replace(
-      "<!--META_JSON_LD-->",
-      `<script type="application/ld+json">${serialised}</script>`
-    );
+    const script = `<script type="application/ld+json">${serialised}</script>`;
+    html = html.includes("<!--META_JSON_LD-->")
+      ? html.replace("<!--META_JSON_LD-->", script)
+      : writeTag(html, /<script type="application\/ld\+json">[\s\S]*?<\/script>/, script, "JSON-LD");
   }
 
   return html;
