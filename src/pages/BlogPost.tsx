@@ -52,15 +52,15 @@ const BlogPost = () => {
       <PlatformNavbar />
       <main id="main-content" className="pt-[58px] md:pt-[94px]">
         {loading ? (
-          <div className="mx-auto min-h-[60vh] max-w-[760px] px-5 py-20 text-sm text-zinc-500 md:px-8" aria-live="polite">Loading article…</div>
+          <div className="mx-auto min-h-[60vh] max-w-container-prose px-5 py-20 text-sm text-zinc-500 md:px-8" aria-live="polite">Loading article…</div>
         ) : loadError ? (
-          <div className="mx-auto min-h-[60vh] max-w-[760px] px-5 py-20 md:px-8">
+          <div className="mx-auto min-h-[60vh] max-w-container-prose px-5 py-20 md:px-8">
             <h1 className="font-display text-4xl font-medium tracking-[-0.03em] text-zinc-950">Unable to load article</h1>
             <p className="mt-3 text-zinc-600">Please try again shortly.</p>
             <a href="/blog" className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-brand-600"><ArrowLeft size={16} /> Back to blog</a>
           </div>
         ) : !post ? (
-          <div className="mx-auto min-h-[60vh] max-w-[760px] px-5 py-20 md:px-8">
+          <div className="mx-auto min-h-[60vh] max-w-container-prose px-5 py-20 md:px-8">
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-zinc-500">404</p>
             <h1 className="mt-4 font-display text-4xl font-medium tracking-[-0.03em] text-zinc-950">Article not found</h1>
             <a href="/blog" className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-brand-600"><ArrowLeft size={16} /> Back to blog</a>
@@ -68,14 +68,14 @@ const BlogPost = () => {
         ) : (
           <article>
             <header className="px-5 pb-10 pt-10 sm:px-6 md:px-8 md:pb-14 md:pt-16">
-              <div className="mx-auto max-w-[780px]">
+              <div className="mx-auto max-w-container-prose">
                 <a href="/blog" className="inline-flex items-center gap-2 text-[15px] text-zinc-600 no-underline transition-colors hover:text-zinc-950"><ArrowLeft size={16} /> All articles</a>
                 <p className="mt-8 font-mono text-xs uppercase tracking-[0.12em] text-zinc-500 md:mt-10">
                   {[publishedLabel, post.author].filter(Boolean).join(" · ")}
                 </p>
                 <h1 className="mt-4 font-display text-[36px] font-medium leading-[1.1] tracking-[-0.032em] text-zinc-950 sm:text-[42px] md:text-[54px]">{post.title}</h1>
                 {post.excerpt && (
-                  <p className="mt-5 max-w-[700px] text-[17px] leading-7 text-zinc-600 md:mt-6 md:text-lg md:leading-8">{post.excerpt}</p>
+                  <p className="mt-5 text-[17px] leading-7 text-zinc-600 md:mt-6 md:text-lg md:leading-8">{post.excerpt}</p>
                 )}
               </div>
             </header>
