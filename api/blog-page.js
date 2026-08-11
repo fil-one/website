@@ -135,7 +135,7 @@ export default async function handler(request, response) {
     "Ideas and practical guidance on object storage, AI infrastructure, and the cost of moving data at scale.";
   const publishedAt = post.publishDate || post.createdAt;
 
-  response.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=3600");
+  response.setHeader("Cache-Control", "public, max-age=0, s-maxage=300, stale-while-revalidate=3600");
   return response.status(200).send(
     injectMeta(shell, {
       title: `${post.name} · Fil One`,

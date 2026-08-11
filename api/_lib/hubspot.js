@@ -11,6 +11,7 @@
  */
 
 const HUBSPOT_API_BASE = "https://api.hubapi.com/cms/blogs/2026-03/posts";
+const HUBSPOT_TAGS_URL = "https://api.hubapi.com/cms/blogs/2026-03/tags";
 
 /** Fil One's HubSpot blog group. Override per portal (e.g. a sandbox) with env. */
 const DEFAULT_CONTENT_GROUP_ID = "217378575467";
@@ -33,7 +34,12 @@ const PUBLIC_FIELDS = [
   "createdAt",
   "featuredImage",
   "featuredImageAltText",
+  "tagIds",
 ];
+
+/** Resolved blog tags, cached per warm function instance. */
+const TAG_CACHE_TTL_MS = 5 * 60 * 1000;
+let tagCache = { expiresAt: 0, tags: null };
 
 export function getHubSpotConfig() {
   return {
@@ -84,6 +90,55 @@ async function hubspotFetch(path, { accessToken, params }) {
   return response.json();
 }
 
+/** "Product launches" → "product-launches", for the ?category= query param. */
+export function slugifyTag(value = "") {
+  return String(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/**
+ * id → { id, name, slug } for every blog tag in the portal.
+ *
+ * Tags are the categories the blog filters on. Resolved separately because posts
+ * carry only `tagIds`. Failures degrade to an empty map (posts render without
+ * categories) rather than taking the whole blog down.
+ */
+export async function fetchTagMap({ accessToken }) {
+  if (tagCache.tags && tagCache.expiresAt > Date.now()) return tagCache.tags;
+
+  const tags = new Map();
+  try {
+    const response = await fetch(`${HUBSPOT_TAGS_URL}?limit=300`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      for (const tag of data.results || []) {
+        if (!tag?.id || !tag?.name) continue;
+        tags.set(String(tag.id), {
+          id: String(tag.id),
+          name: tag.name,
+          slug: tag.slug || slugifyTag(tag.name),
+        });
+      }
+    }
+  } catch {
+    // Leave the map empty — see above.
+  }
+
+  tagCache = { tags, expiresAt: Date.now() + TAG_CACHE_TTL_MS };
+  return tags;
+}
+
+/** Swap a post's `tagIds` for resolved `tags`, dropping ids we can't name. */
+function withTags(post, tagMap) {
+  const { tagIds, ...rest } = post;
+  const tags = (tagIds || []).map((id) => tagMap.get(String(id))).filter(Boolean);
+  return tags.length ? { ...rest, tags } : rest;
+}
+
 /**
  * One page of published posts from the configured blog group, newest first.
  * Returns projected summaries (no post body) plus the paging cursor.
@@ -97,8 +152,13 @@ export async function fetchPublishedPage({ accessToken, contentGroupId, limit, a
   });
   if (after) params.set("after", String(after));
 
-  const data = await hubspotFetch("", { accessToken, params });
-  const results = (data.results || []).filter(isPublished).map((post) => projectPost(post));
+  const [data, tagMap] = await Promise.all([
+    hubspotFetch("", { accessToken, params }),
+    fetchTagMap({ accessToken }),
+  ]);
+  const results = (data.results || [])
+    .filter(isPublished)
+    .map((post) => withTags(projectPost(post), tagMap));
   return { results, total: data.total, paging: data.paging };
 }
 
@@ -108,7 +168,9 @@ export async function fetchPublishedPostById({ accessToken, contentGroupId, id }
   if (!isPublished(post)) return undefined;
   // Scope to our blog group so /blog/... can't surface another blog's content.
   if (String(post.contentGroupId) !== String(contentGroupId)) return undefined;
-  return projectPost(post, { includeBody: true });
+
+  const tagMap = await fetchTagMap({ accessToken });
+  return withTags(projectPost(post, { includeBody: true }), tagMap);
 }
 
 /**

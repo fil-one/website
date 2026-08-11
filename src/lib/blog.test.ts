@@ -1,6 +1,9 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import {
+  ALL_CATEGORY,
+  buildCategories,
   coverStyleFor,
+  filterPosts,
   fetchBlogPostBySlug,
   fetchBlogPosts,
   localSlug,
@@ -113,5 +116,55 @@ describe("fetchBlogPostBySlug", () => {
   it("throws on a server error", async () => {
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue(jsonResponse({}, 502)));
     await expect(fetchBlogPostBySlug("my-post")).rejects.toThrow("502");
+  });
+});
+
+const CHANGELOG = { id: "1", name: "Changelog", slug: "changelog" };
+const TEAM = { id: "2", name: "From the team", slug: "from-the-team" };
+
+const mapped = (overrides: Partial<HubSpotBlogPost> = {}) => mapHubSpotPost(post(overrides));
+
+describe("buildCategories", () => {
+  it("lists tags present on posts, most-used first", () => {
+    const posts = [
+      mapped({ id: "1", tags: [CHANGELOG] }),
+      mapped({ id: "2", tags: [TEAM, CHANGELOG] }),
+      mapped({ id: "3", tags: [CHANGELOG] }),
+    ];
+    expect(buildCategories(posts).map((c) => [c.slug, c.count])).toEqual([
+      ["changelog", 3],
+      ["from-the-team", 1],
+    ]);
+  });
+
+  it("is empty when no post carries a tag", () => {
+    expect(buildCategories([mapped()])).toEqual([]);
+  });
+});
+
+describe("filterPosts", () => {
+  const posts = [
+    mapped({ id: "1", name: "Egress fees explained", tags: [CHANGELOG] }),
+    mapped({ id: "2", name: "Hiring an SRE", postSummary: "Team update", tags: [TEAM] }),
+  ];
+
+  it("returns everything for the All category and an empty query", () => {
+    expect(filterPosts(posts, { category: ALL_CATEGORY, query: "" })).toHaveLength(2);
+    expect(filterPosts(posts)).toHaveLength(2);
+  });
+
+  it("filters by category slug", () => {
+    expect(filterPosts(posts, { category: "from-the-team" }).map((p) => p.id)).toEqual(["2"]);
+  });
+
+  it("searches title, excerpt and category name, case-insensitively", () => {
+    expect(filterPosts(posts, { query: "EGRESS" }).map((p) => p.id)).toEqual(["1"]);
+    expect(filterPosts(posts, { query: "team update" }).map((p) => p.id)).toEqual(["2"]);
+    expect(filterPosts(posts, { query: "changelog" }).map((p) => p.id)).toEqual(["1"]);
+    expect(filterPosts(posts, { query: "   " })).toHaveLength(2);
+  });
+
+  it("combines category and query", () => {
+    expect(filterPosts(posts, { category: "changelog", query: "hiring" })).toEqual([]);
   });
 });

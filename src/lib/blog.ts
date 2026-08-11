@@ -1,4 +1,4 @@
-import type { BlogPost, CoverStyle, HubSpotBlogListResponse, HubSpotBlogPost } from "@/types/blog";
+import type { BlogPost, BlogTag, CoverStyle, HubSpotBlogListResponse, HubSpotBlogPost } from "@/types/blog";
 
 /** Pages to walk when loading the index (the API caps each page at 100). */
 const MAX_PAGES = 10;
@@ -39,7 +39,47 @@ export const mapHubSpotPost = (post: HubSpotBlogPost): BlogPost => ({
   featuredImage: post.featuredImage || undefined,
   featuredImageAlt: post.featuredImageAltText || post.name,
   coverStyle: coverStyleFor(post.id),
+  tags: post.tags || [],
 });
+
+/** Category slug meaning "no filter" — the leading tab, as on Linear's blog. */
+export const ALL_CATEGORY = "all";
+
+/**
+ * The category tabs to show: every tag present on a loaded post, most-used
+ * first so the busiest categories lead. Tags nobody has used never appear.
+ */
+export function buildCategories(posts: BlogPost[]): Array<BlogTag & { count: number }> {
+  const counts = new Map<string, BlogTag & { count: number }>();
+
+  for (const post of posts) {
+    for (const tag of post.tags) {
+      const existing = counts.get(tag.slug);
+      if (existing) existing.count += 1;
+      else counts.set(tag.slug, { ...tag, count: 1 });
+    }
+  }
+
+  return [...counts.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+}
+
+/** Filter by category tab and search text (title, excerpt and category names). */
+export function filterPosts(
+  posts: BlogPost[],
+  { category = ALL_CATEGORY, query = "" }: { category?: string; query?: string } = {}
+): BlogPost[] {
+  const needle = query.trim().toLowerCase();
+
+  return posts.filter((post) => {
+    if (category !== ALL_CATEGORY && !post.tags.some((tag) => tag.slug === category)) return false;
+    if (!needle) return true;
+
+    const haystack = [post.title, post.excerpt, ...post.tags.map((tag) => tag.name)]
+      .join(" ")
+      .toLowerCase();
+    return haystack.includes(needle);
+  });
+}
 
 const byNewestFirst = (a: BlogPost, b: BlogPost) =>
   new Date(b.publishedAt ?? 0).getTime() - new Date(a.publishedAt ?? 0).getTime();

@@ -1,23 +1,42 @@
-import { useEffect, useState } from "react";
-import { ArrowRight } from "@phosphor-icons/react";
-import BlogCover from "@/components/BlogCover";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import BlogFilters from "@/components/BlogFilters";
+import BlogPostCard from "@/components/BlogPostCard";
+import { Button } from "@/components/Button";
 import Footer from "@/components/Footer";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import { useSeo } from "@/hooks/useSeo";
-import { fetchBlogPosts } from "@/lib/blog";
+import { ALL_CATEGORY, buildCategories, fetchBlogPosts, filterPosts } from "@/lib/blog";
 import type { BlogPost } from "@/types/blog";
 
-const formatDate = (date?: string) => {
-  if (!date) return "";
-  const parsed = new Date(date);
-  if (Number.isNaN(parsed.getTime())) return "";
-  return new Intl.DateTimeFormat("en", { month: "long", day: "numeric", year: "numeric" }).format(parsed);
-};
+/**
+ * Grid cards shown before "Load more". The full archive is already in memory
+ * (search and category filtering need it), so this caps rendering, not fetching.
+ *
+ * Both counts are multiples of 6 — the grid is 2 columns at `sm` and 3 at `lg`,
+ * so a multiple of 6 always leaves the last row full. The featured card sits
+ * outside the grid and isn't counted here.
+ */
+const GRID_BATCH = 12;
+const LOAD_MORE_STEP = 6;
 
 const Blog = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
+
+  // Filter state lives in the URL so a filtered view can be linked and the back
+  // button works.
+  const [searchParams, setSearchParams] = useSearchParams();
+  const category = searchParams.get("category") || ALL_CATEGORY;
+  const query = searchParams.get("q") || "";
+
+  const setParam = (key: string, value: string) => {
+    const next = new URLSearchParams(searchParams);
+    if (value && !(key === "category" && value === ALL_CATEGORY)) next.set(key, value);
+    else next.delete(key);
+    setSearchParams(next, { replace: true });
+  };
 
   useEffect(() => {
     let active = true;
@@ -41,19 +60,40 @@ const Blog = () => {
     ogImage: "https://www.fil.one/og-image.png",
   });
 
-  const [featured, ...rest] = posts;
+  const categories = useMemo(() => buildCategories(posts), [posts]);
+  const matching = useMemo(() => filterPosts(posts, { category, query }), [posts, category, query]);
+  const isFiltered = category !== ALL_CATEGORY || query.trim() !== "";
+
+  const [gridShown, setGridShown] = useState(GRID_BATCH);
+  // A new filter starts a fresh list, so collapse back to the first batch.
+  useEffect(() => setGridShown(GRID_BATCH), [category, query]);
+
+  // The featured slot is a front-page device. In a filtered or searched view the
+  // top post is just the newest match, so everything gets equal weight instead.
+  const featured = isFiltered ? undefined : matching[0];
+  const gridPosts = featured ? matching.slice(1) : matching;
+
+  const rest = gridPosts.slice(0, gridShown);
+  const remaining = gridPosts.length - rest.length;
 
   return (
     <div className="min-h-screen bg-white">
       <PlatformNavbar />
       <main id="main-content" className="pt-[58px] md:pt-[94px]">
-        <section className="px-5 py-10 sm:px-6 md:px-8 md:py-16">
-          <div className="mx-auto max-w-[1160px]">
+        <section className="px-5 pb-20 pt-10 sm:px-6 md:px-8 md:pb-section md:pt-16">
+          <div className="mx-auto max-w-container">
             <header className="mb-10 md:mb-14">
               <h1 className="font-display text-[36px] font-medium leading-[1.1] tracking-[-0.03em] text-zinc-950 md:text-[48px]">Blog</h1>
-              <p className="mt-4 max-w-[620px] text-[17px] leading-7 text-zinc-600 md:text-lg">
-                Ideas and practical guidance on object storage, AI infrastructure, and the cost of moving data at scale.
-              </p>
+              {!loading && !loadError && posts.length > 0 && (
+                <BlogFilters
+                  categories={categories}
+                  category={category}
+                  onCategoryChange={(slug) => setParam("category", slug)}
+                  query={query}
+                  onQueryChange={(value) => setParam("q", value)}
+                  resultCount={matching.length}
+                />
+              )}
             </header>
 
             {loading && (
@@ -62,51 +102,43 @@ const Blog = () => {
 
             {loadError && (
               <div className="min-h-[55vh]">
-                <h2 className="font-display text-3xl font-medium tracking-[-0.025em] text-zinc-950">Unable to load articles</h2>
+                <h2 className="font-display text-2xl font-medium tracking-[-0.025em] text-zinc-950">Unable to load articles</h2>
                 <p className="mt-3 text-zinc-600">Please try again shortly.</p>
               </div>
             )}
 
             {!loading && !loadError && posts.length === 0 && (
               <div className="min-h-[55vh]">
-                <h2 className="font-display text-3xl font-medium tracking-[-0.025em] text-zinc-950">No articles yet</h2>
+                <h2 className="font-display text-2xl font-medium tracking-[-0.025em] text-zinc-950">No articles yet</h2>
               </div>
             )}
 
-            {featured && (
-              <a href={`/blog/${featured.slug}`} className="group grid overflow-hidden rounded-2xl border border-black/[0.08] bg-zinc-50 text-inherit no-underline shadow-elevated-sm transition-colors hover:border-black/[0.14] md:grid-cols-[0.95fr_1.05fr]">
-                <div className="aspect-[16/10] overflow-hidden md:aspect-auto md:min-h-[410px]">
-                  <BlogCover post={featured} priority />
-                </div>
-                <div className="flex flex-col justify-center p-6 sm:p-8 md:p-10 lg:p-12">
-                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-zinc-500">
-                    {[ "Featured", formatDate(featured.publishedAt) ].filter(Boolean).join(" · ")}
-                  </p>
-                  <h2 className="mt-4 font-display text-[30px] font-medium leading-[1.12] tracking-[-0.025em] text-zinc-950 md:text-[38px] lg:text-[42px]">{featured.title}</h2>
-                  <p className="mt-4 line-clamp-5 text-base leading-7 text-zinc-600 md:line-clamp-4">{featured.excerpt}</p>
-                  <span className="mt-6 inline-flex items-center gap-2 text-[15px] font-medium text-zinc-950 md:mt-8">
-                    Read article <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </a>
+            {!loading && !loadError && posts.length > 0 && matching.length === 0 && (
+              <div className="min-h-[40vh]">
+                <h2 className="font-display text-2xl font-medium tracking-[-0.025em] text-zinc-950">No matching articles</h2>
+                <p className="mt-3 text-zinc-600">Try a different search or category.</p>
+              </div>
             )}
 
+            {featured && <BlogPostCard post={featured} variant="featured" />}
+
             {rest.length > 0 && (
-              <div className="mt-10 grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 md:mt-14">
+              <div className={`grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 ${featured ? "mt-10 md:mt-14" : ""}`}>
                 {rest.map((post) => (
-                  <article key={post.id}>
-                    <a href={`/blog/${post.slug}`} className="group block text-inherit no-underline">
-                      <div className="aspect-[16/10] overflow-hidden rounded-xl border border-black/[0.07]">
-                        <BlogCover post={post} />
-                      </div>
-                      {formatDate(post.publishedAt) && (
-                        <p className="mt-5 font-mono text-xs uppercase tracking-[0.1em] text-zinc-500">{formatDate(post.publishedAt)}</p>
-                      )}
-                      <h2 className="mt-3 font-display text-2xl font-medium leading-[1.2] tracking-[-0.018em] text-zinc-950 transition-colors group-hover:text-brand-600 md:text-[26px]">{post.title}</h2>
-                      <p className="mt-3 line-clamp-3 text-base leading-7 text-zinc-600">{post.excerpt}</p>
-                    </a>
-                  </article>
+                  <BlogPostCard key={post.id} post={post} />
                 ))}
+              </div>
+            )}
+
+            {remaining > 0 && (
+              <div className="mt-12 flex justify-center md:mt-16">
+                <Button
+                  variant="secondary"
+                  onClick={() => setGridShown((current) => current + LOAD_MORE_STEP)}
+                >
+                  Load more
+                  <span className="sr-only"> articles ({remaining} remaining)</span>
+                </Button>
               </div>
             )}
           </div>

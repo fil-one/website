@@ -1,5 +1,12 @@
 export type CoverStyle = "cyan" | "violet" | "lime";
 
+/** A HubSpot blog tag — the blog's categories. */
+export interface BlogTag {
+  id: string;
+  name: string;
+  slug: string;
+}
+
 export interface BlogPost {
   id: string;
   slug: string;
@@ -12,6 +19,7 @@ export interface BlogPost {
   featuredImage?: string;
   featuredImageAlt?: string;
   coverStyle?: CoverStyle;
+  tags: BlogTag[];
 }
 
 /** The projected shape /api/blogs returns — a subset of HubSpot's post object. */
@@ -27,6 +35,7 @@ export interface HubSpotBlogPost {
   createdAt?: string;
   featuredImage?: string;
   featuredImageAltText?: string;
+  tags?: BlogTag[];
 }
 
 export interface HubSpotBlogListResponse {

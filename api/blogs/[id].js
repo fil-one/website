@@ -23,7 +23,7 @@ export default async function handler(request, response) {
     const post = await fetchPublishedPostById({ accessToken, contentGroupId, id });
     if (!post) return response.status(404).json({ error: "Blog post not found" });
 
-    response.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=3600");
+    response.setHeader("Cache-Control", "public, max-age=0, s-maxage=300, stale-while-revalidate=3600");
     return response.status(200).json(post);
   } catch (error) {
     if (error instanceof HubSpotError) {
