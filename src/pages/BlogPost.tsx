@@ -2,10 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft } from "@phosphor-icons/react";
 import { useParams } from "react-router-dom";
 import BlogCover from "@/components/BlogCover";
+import BlogPostCard from "@/components/BlogPostCard";
 import Footer from "@/components/Footer";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import { useSeo } from "@/hooks/useSeo";
-import { fetchBlogPostBySlug, formatPostDate } from "@/lib/blog";
+import { fetchBlogPostBySlug, fetchBlogPosts, formatPostDate, selectRelatedPosts } from "@/lib/blog";
 import { sanitizeHtml } from "@/lib/sanitizeHtml";
 import type { BlogPost as BlogPostType } from "@/types/blog";
 
@@ -14,6 +15,7 @@ const BlogPost = () => {
   const [post, setPost] = useState<BlogPostType | undefined>();
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
+  const [related, setRelated] = useState<BlogPostType[]>([]);
 
   useEffect(() => {
     let active = true;
@@ -32,6 +34,22 @@ const BlogPost = () => {
       });
     return () => { active = false; };
   }, [slug]);
+
+  // Loaded separately so the article renders without waiting on the index, and a
+  // failure here costs the suggestions rather than the post.
+  useEffect(() => {
+    if (!post) return;
+    let active = true;
+    fetchBlogPosts()
+      .then((posts) => {
+        // Two, because the section is the width of the reading column.
+        if (active) setRelated(selectRelatedPosts(posts, post, 2));
+      })
+      .catch(() => {
+        if (active) setRelated([]);
+      });
+    return () => { active = false; };
+  }, [post]);
 
   const safeContent = useMemo(() => sanitizeHtml(post?.content || ""), [post?.content]);
 
@@ -80,14 +98,27 @@ const BlogPost = () => {
               </div>
             </header>
 
-            <div className="mx-auto aspect-[2/1] max-w-[960px] overflow-hidden sm:rounded-2xl">
+            <div className="mx-auto aspect-[2/1] max-w-[880px] overflow-hidden sm:rounded-2xl">
               <BlogCover post={post} priority />
             </div>
 
-            <div className="px-5 py-12 sm:px-6 md:px-8 md:py-16">
+            <div className="px-5 pb-24 pt-12 sm:px-6 md:px-8 md:pb-section md:pt-16">
               <div className="blog-content mx-auto max-w-container-prose" dangerouslySetInnerHTML={{ __html: safeContent }} />
             </div>
           </article>
+        )}
+
+        {post && related.length > 0 && (
+          <section aria-labelledby="keep-reading" className="border-t border-black/[0.07] bg-zinc-50 px-5 pb-20 pt-16 sm:px-6 md:px-8 md:pb-section md:pt-24">
+            <div className="mx-auto max-w-container-prose">
+              <h2 id="keep-reading" className="font-display text-2xl font-medium tracking-[-0.02em] text-zinc-950 md:text-[28px]">Keep reading</h2>
+              <div className="mt-8 grid gap-x-7 gap-y-10 sm:grid-cols-2 md:mt-10">
+                {related.map((item) => (
+                  <BlogPostCard key={item.id} post={item} />
+                ))}
+              </div>
+            </div>
+          </section>
         )}
       </main>
       <Footer />

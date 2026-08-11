@@ -397,13 +397,14 @@
 .blog-content a {
   color: theme('colors.brand.600');
   text-decoration: underline;
+  /* Fixed thickness and a muted underline that solidifies on hover: the weight
+     never changes, so the line of text cannot shift or shimmer under the cursor. */
   text-decoration-thickness: 1px;
+  text-decoration-color: rgb(0 112 204 / 0.4);
   text-underline-offset: 3px;
-  transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 .blog-content a:hover {
-  color: theme('colors.brand.700');
-  text-decoration-thickness: 2px;
+  text-decoration-color: currentColor;
 }
 .blog-content a:focus-visible {
   outline: 2px solid theme('colors.brand.500');

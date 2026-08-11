@@ -8,6 +8,7 @@ import {
   fetchBlogPosts,
   localSlug,
   mapHubSpotPost,
+  selectRelatedPosts,
   stripLeadingHeadings,
   stripHtml,
   truncateExcerpt,
@@ -188,5 +189,29 @@ describe("filterPosts", () => {
 
   it("combines category and query", () => {
     expect(filterPosts(posts, { category: "changelog", query: "hiring" })).toEqual([]);
+  });
+});
+
+describe("selectRelatedPosts", () => {
+  const p = (id: string, tags: typeof CHANGELOG[] = []) => mapHubSpotPost(post({ id, tags }));
+  const current = p("1", [CHANGELOG]);
+  const all = [current, p("2", [TEAM]), p("3", [CHANGELOG]), p("4"), p("5", [CHANGELOG])];
+
+  it("never includes the post being read", () => {
+    expect(selectRelatedPosts(all, current).map((x) => x.id)).not.toContain("1");
+  });
+
+  it("puts same-category posts first, then fills from the rest", () => {
+    expect(selectRelatedPosts(all, current).map((x) => x.id)).toEqual(["3", "5", "2"]);
+  });
+
+  it("falls back to recent posts when the current one has no category", () => {
+    const untagged = p("9");
+    expect(selectRelatedPosts([untagged, ...all], untagged, 2).map((x) => x.id)).toEqual(["1", "2"]);
+  });
+
+  it("respects the limit and copes with a thin archive", () => {
+    expect(selectRelatedPosts(all, current, 2)).toHaveLength(2);
+    expect(selectRelatedPosts([current], current)).toEqual([]);
   });
 });

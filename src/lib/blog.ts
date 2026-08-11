@@ -99,6 +99,21 @@ export function filterPosts(
   });
 }
 
+/**
+ * Posts to offer at the end of an article: same category first so the suggestion
+ * is relevant, then the most recent of everything else to fill the row. The
+ * current post is always excluded.
+ */
+export function selectRelatedPosts(posts: BlogPost[], current: BlogPost, limit = 3): BlogPost[] {
+  const others = posts.filter((post) => post.id !== current.id);
+  const categories = new Set(current.tags.map((tag) => tag.slug));
+
+  const sameCategory = others.filter((post) => post.tags.some((tag) => categories.has(tag.slug)));
+  const rest = others.filter((post) => !sameCategory.includes(post));
+
+  return [...sameCategory, ...rest].slice(0, limit);
+}
+
 const byNewestFirst = (a: BlogPost, b: BlogPost) =>
   new Date(b.publishedAt ?? 0).getTime() - new Date(a.publishedAt ?? 0).getTime();
 
