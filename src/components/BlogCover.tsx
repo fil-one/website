@@ -302,7 +302,7 @@ const Field = ({ slug, phase, id }: { slug: string; phase: number; id: string })
       <g
         opacity={0.1}
         stroke="#FFFFFF"
-        strokeWidth={1}
+        strokeWidth={0.6}
         fill="none"
         vectorEffect="non-scaling-stroke"
         transform={`translate(${x} ${y}) scale(${BLEED})`}
