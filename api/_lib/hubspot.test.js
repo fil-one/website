@@ -123,3 +123,89 @@ describe("fetchPublishedPostBySlug", () => {
     await expect(fetchPublishedPostBySlug({ ...CONFIG, slug: "missing" })).resolves.toBeUndefined();
   });
 });
+
+describe("tag resolution", () => {
+  /**
+   * Tags are cached at module scope, so each case needs a fresh module. Mocks are
+   * keyed by URL rather than call order — fetchPublishedPage fires the posts and
+   * tags requests together via Promise.all.
+   */
+  const withFreshModule = async (routes) => {
+    vi.resetModules();
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url) => {
+        for (const [match, response] of routes) {
+          if (String(url).includes(match)) return response;
+        }
+        throw new Error(`unexpected fetch: ${url}`);
+      })
+    );
+    return import("./hubspot.js");
+  };
+
+  const postsWith = (overrides) =>
+    jsonResponse({ results: [hubspotPost(overrides)] });
+
+  it("resolves categories from the dated tags path", async () => {
+    const { fetchPublishedPage } = await withFreshModule([
+      ["2026-03/tags", jsonResponse({ results: [{ id: 7, name: "Product launches" }] })],
+      ["2026-03/posts", postsWith({ tagIds: [7] })],
+    ]);
+
+    const page = await fetchPublishedPage({ ...CONFIG, limit: 20 });
+
+    // v3 tag objects carry no slug, so it is derived from the name.
+    expect(page.results[0].tags).toEqual([
+      { id: "7", name: "Product launches", slug: "product-launches" },
+    ]);
+  });
+
+  it("falls back to the documented v3 tags path when the dated one 404s", async () => {
+    const { fetchPublishedPage } = await withFreshModule([
+      ["2026-03/tags", jsonResponse({}, 404)],
+      ["cms/v3/blogs/tags", jsonResponse({ results: [{ id: 7, name: "Changelog" }] })],
+      ["2026-03/posts", postsWith({ tagIds: [7] })],
+    ]);
+
+    const page = await fetchPublishedPage({ ...CONFIG, limit: 20 });
+
+    expect(page.results[0].tags).toEqual([{ id: "7", name: "Changelog", slug: "changelog" }]);
+  });
+
+  it("reads the pre-v3 topicIds field too", async () => {
+    const { fetchPublishedPage } = await withFreshModule([
+      ["2026-03/tags", jsonResponse({ results: [{ id: 9, name: "Press" }] })],
+      ["2026-03/posts", postsWith({ tagIds: undefined, topicIds: [9] })],
+    ]);
+
+    const page = await fetchPublishedPage({ ...CONFIG, limit: 20 });
+
+    expect(page.results[0].tags).toEqual([{ id: "9", name: "Press", slug: "press" }]);
+    expect(page.results[0].topicIds).toBeUndefined();
+  });
+
+  it("renders posts without categories when tag lookup fails entirely", async () => {
+    const { fetchPublishedPage } = await withFreshModule([
+      ["tags", jsonResponse({}, 500)],
+      ["2026-03/posts", postsWith({ tagIds: [7] })],
+    ]);
+
+    const page = await fetchPublishedPage({ ...CONFIG, limit: 20 });
+
+    expect(page.results).toHaveLength(1);
+    expect(page.results[0].tags).toBeUndefined();
+    expect(page.results[0].tagIds).toBeUndefined();
+  });
+
+  it("drops tag ids it cannot name", async () => {
+    const { fetchPublishedPage } = await withFreshModule([
+      ["2026-03/tags", jsonResponse({ results: [{ id: 1, name: "Changelog" }] })],
+      ["2026-03/posts", postsWith({ tagIds: [1, 404] })],
+    ]);
+
+    const page = await fetchPublishedPage({ ...CONFIG, limit: 20 });
+
+    expect(page.results[0].tags).toHaveLength(1);
+  });
+});

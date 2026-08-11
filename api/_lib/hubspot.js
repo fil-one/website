@@ -11,7 +11,16 @@
  */
 
 const HUBSPOT_API_BASE = "https://api.hubapi.com/cms/blogs/2026-03/posts";
-const HUBSPOT_TAGS_URL = "https://api.hubapi.com/cms/blogs/2026-03/tags";
+/**
+ * Blog tags are documented only at the unversioned v3 path
+ * (developers.hubspot.com/docs/api-reference/cms-tags-v3), but portals on the
+ * dated API expose the dated one. Try dated first to match the posts base
+ * above, then fall back to the documented path.
+ */
+const HUBSPOT_TAGS_URLS = [
+  "https://api.hubapi.com/cms/blogs/2026-03/tags",
+  "https://api.hubapi.com/cms/v3/blogs/tags",
+];
 
 /** Fil One's HubSpot blog group. Override per portal (e.g. a sandbox) with env. */
 const DEFAULT_CONTENT_GROUP_ID = "217378575467";
@@ -35,6 +44,7 @@ const PUBLIC_FIELDS = [
   "featuredImage",
   "featuredImageAltText",
   "tagIds",
+  "topicIds",
 ];
 
 /** Resolved blog tags, cached per warm function instance. */
@@ -109,23 +119,27 @@ export async function fetchTagMap({ accessToken }) {
   if (tagCache.tags && tagCache.expiresAt > Date.now()) return tagCache.tags;
 
   const tags = new Map();
-  try {
-    const response = await fetch(`${HUBSPOT_TAGS_URL}?limit=300`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-    if (response.ok) {
+  for (const url of HUBSPOT_TAGS_URLS) {
+    try {
+      const response = await fetch(`${url}?limit=300`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      if (!response.ok) continue;
+
       const data = await response.json();
       for (const tag of data.results || []) {
         if (!tag?.id || !tag?.name) continue;
         tags.set(String(tag.id), {
           id: String(tag.id),
+          // v3 tag objects carry no slug, so derive one for the ?category= param.
           name: tag.name,
           slug: tag.slug || slugifyTag(tag.name),
         });
       }
+      break;
+    } catch {
+      // Try the next path; an empty map just means no category tabs.
     }
-  } catch {
-    // Leave the map empty — see above.
   }
 
   tagCache = { tags, expiresAt: Date.now() + TAG_CACHE_TTL_MS };
@@ -134,8 +148,9 @@ export async function fetchTagMap({ accessToken }) {
 
 /** Swap a post's `tagIds` for resolved `tags`, dropping ids we can't name. */
 function withTags(post, tagMap) {
-  const { tagIds, ...rest } = post;
-  const tags = (tagIds || []).map((id) => tagMap.get(String(id))).filter(Boolean);
+  const { tagIds, topicIds, ...rest } = post;
+  const ids = tagIds || topicIds || [];
+  const tags = ids.map((id) => tagMap.get(String(id))).filter(Boolean);
   return tags.length ? { ...rest, tags } : rest;
 }
 
