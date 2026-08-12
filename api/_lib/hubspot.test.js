@@ -209,3 +209,62 @@ describe("tag resolution", () => {
     expect(page.results[0].tags).toHaveLength(1);
   });
 });
+
+describe("author resolution", () => {
+  const withFresh = async (routes) => {
+    vi.resetModules();
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url) => {
+        for (const [match, response] of routes) {
+          if (String(url).includes(match)) return response;
+        }
+        throw new Error(`unexpected fetch: ${url}`);
+      })
+    );
+    return import("./hubspot.js");
+  };
+
+  it("uses the blog author, not the user who published the post", async () => {
+    const { fetchPublishedPage } = await withFresh([
+      ["tags", jsonResponse({ results: [] })],
+      ["authors", jsonResponse({ results: [{ id: 77, displayName: "Fil One Research" }] })],
+      ["posts", jsonResponse({ results: [hubspotPost({ authorName: "Charlie Qiu", blogAuthorId: 77 })] })],
+    ]);
+
+    const page = await fetchPublishedPage({ ...CONFIG, limit: 20 });
+
+    expect(page.results[0].authorName).toBe("Fil One Research");
+    expect(page.results[0].blogAuthorId).toBeUndefined();
+  });
+
+  it("falls back to fullName when displayName is unset", async () => {
+    const { fetchPublishedPage } = await withFresh([
+      ["tags", jsonResponse({ results: [] })],
+      ["authors", jsonResponse({ results: [{ id: 77, fullName: "Ada Lovelace" }] })],
+      ["posts", jsonResponse({ results: [hubspotPost({ blogAuthorId: 77 })] })],
+    ]);
+
+    expect((await fetchPublishedPage({ ...CONFIG, limit: 20 })).results[0].authorName).toBe("Ada Lovelace");
+  });
+
+  it("drops the name rather than crediting the publisher when the author can't be resolved", async () => {
+    const { fetchPublishedPage } = await withFresh([
+      ["tags", jsonResponse({ results: [] })],
+      ["authors", jsonResponse({}, 500)],
+      ["posts", jsonResponse({ results: [hubspotPost({ authorName: "Charlie Qiu", blogAuthorId: 77 })] })],
+    ]);
+
+    expect((await fetchPublishedPage({ ...CONFIG, limit: 20 })).results[0].authorName).toBeUndefined();
+  });
+
+  it("keeps authorName when a post has no blog author at all", async () => {
+    const { fetchPublishedPage } = await withFresh([
+      ["tags", jsonResponse({ results: [] })],
+      ["authors", jsonResponse({ results: [] })],
+      ["posts", jsonResponse({ results: [hubspotPost({ authorName: "Legacy Author" })] })],
+    ]);
+
+    expect((await fetchPublishedPage({ ...CONFIG, limit: 20 })).results[0].authorName).toBe("Legacy Author");
+  });
+});

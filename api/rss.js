@@ -35,7 +35,7 @@ const rfc822 = (value) => {
 const item = (post) => {
   const url = `${BASE_URL}/blog/${localSlug(post.slug)}`;
   const published = rfc822(post.publishDate || post.createdAt);
-  const description = stripHtml(post.postSummary || post.metaDescription || "");
+  const description = stripHtml(post.metaDescription || post.postSummary || "");
 
   return [
     "    <item>",

@@ -8,6 +8,8 @@ import {
   fetchBlogPosts,
   localSlug,
   mapHubSpotPost,
+  selectRelatedPosts,
+  stripLeadingHeadings,
   stripHtml,
   truncateExcerpt,
 } from "./blog";
@@ -45,6 +47,27 @@ describe("blog helpers", () => {
   it("assigns a stable cover style per post id", () => {
     expect(coverStyleFor("12345")).toBe(coverStyleFor("12345"));
     expect(["cyan", "violet", "lime"]).toContain(coverStyleFor("98765"));
+  });
+});
+
+describe("excerpt source", () => {
+  it("drops a leading heading so it doesn't open the excerpt", () => {
+    const mapped = mapHubSpotPost(
+      post({ postSummary: "<h2>Introduction</h2><p>The actual first sentence.</p>" })
+    );
+    expect(mapped.excerpt).toBe("The actual first sentence.");
+  });
+
+  it("prefers metaDescription over postSummary", () => {
+    // HubSpot's importer can dump a whole article into postSummary.
+    const mapped = mapHubSpotPost(
+      post({ postSummary: "<p>" + "body ".repeat(2000) + "</p>", metaDescription: "A real description." })
+    );
+    expect(mapped.excerpt).toBe("A real description.");
+  });
+
+  it("leaves headings mid-content alone", () => {
+    expect(stripLeadingHeadings("<p>Lead</p><h2>Section</h2>")).toBe("<p>Lead</p><h2>Section</h2>");
   });
 });
 
@@ -166,5 +189,29 @@ describe("filterPosts", () => {
 
   it("combines category and query", () => {
     expect(filterPosts(posts, { category: "changelog", query: "hiring" })).toEqual([]);
+  });
+});
+
+describe("selectRelatedPosts", () => {
+  const p = (id: string, tags: typeof CHANGELOG[] = []) => mapHubSpotPost(post({ id, tags }));
+  const current = p("1", [CHANGELOG]);
+  const all = [current, p("2", [TEAM]), p("3", [CHANGELOG]), p("4"), p("5", [CHANGELOG])];
+
+  it("never includes the post being read", () => {
+    expect(selectRelatedPosts(all, current).map((x) => x.id)).not.toContain("1");
+  });
+
+  it("puts same-category posts first, then fills from the rest", () => {
+    expect(selectRelatedPosts(all, current).map((x) => x.id)).toEqual(["3", "5", "2"]);
+  });
+
+  it("falls back to recent posts when the current one has no category", () => {
+    const untagged = p("9");
+    expect(selectRelatedPosts([untagged, ...all], untagged, 2).map((x) => x.id)).toEqual(["1", "2"]);
+  });
+
+  it("respects the limit and copes with a thin archive", () => {
+    expect(selectRelatedPosts(all, current, 2)).toHaveLength(2);
+    expect(selectRelatedPosts([current], current)).toEqual([]);
   });
 });
