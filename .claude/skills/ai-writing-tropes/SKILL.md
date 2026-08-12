@@ -1,6 +1,7 @@
 ---
 name: ai-writing-tropes
-description: Catalog of the stylistic tells that mark prose as unedited LLM output (magic adverbs, "delve", negative parallelism, "Here's the kicker", em-dash addiction, fractal summaries, bold-first bullets) plus how to revise them out. Use this skill whenever writing or editing prose a human will read — blog posts, READMEs, marketing and landing-page copy, docs, release notes, emails, PR descriptions, social posts, essays — and whenever the user asks to make writing sound less like AI, "less ChatGPT", more human, or asks for an edit pass on a draft. Trigger even when the request never mentions AI or tropes: "tighten this intro", "write the launch announcement", and "why does this read weird?" all count.
+description: >-
+  Catalog of the stylistic tells that mark prose as unedited LLM output (magic adverbs, "delve", negative parallelism, "Here's the kicker", em-dash addiction, fractal summaries, bold-first bullets) plus how to revise them out. Use this skill whenever writing or editing prose a human will read — blog posts, READMEs, marketing and landing-page copy, docs, release notes, emails, PR descriptions, social posts, essays — and whenever the user asks to make writing sound less like AI, "less ChatGPT", more human, or asks for an edit pass on a draft. Trigger even when the request never mentions AI or tropes: "tighten this intro", "write the launch announcement", and "why does this read weird?" all count.
 ---
 
 # AI writing tropes
