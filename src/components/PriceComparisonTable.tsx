@@ -13,6 +13,12 @@ export interface PriceComparisonColumn {
   colorByValue?: boolean;
   /** The bill total: rendered larger and bolder on the highlighted row. */
   total?: boolean;
+  /**
+   * A qualifying note rather than a figure (e.g. the catch attached to a
+   * provider's cheap rate). Set smaller, and italic on the competitor rows so
+   * it reads as an aside; upright on the highlighted row, where it is a claim.
+   */
+  note?: boolean;
 }
 
 export interface PriceComparisonRow {
@@ -91,6 +97,7 @@ const PriceComparisonTable = ({
   /** Text colour for a value cell, given the row and column it sits in. */
   const cellTone = (row: PriceComparisonRow, col: PriceComparisonColumn) => {
     if (row.isFilOne) return col.total ? "text-brand-600" : "text-zinc-950";
+    if (col.note) return "text-zinc-500";
     if (col.colorByValue) return valueTone(row.values[col.key]);
     return "text-zinc-600";
   };
@@ -166,18 +173,25 @@ const PriceComparisonTable = ({
                   )}
                 </th>
                 {columns.map((col) => {
-                  const weight = row.isFilOne
-                    ? col.total
-                      ? "font-bold"
-                      : "font-semibold"
-                    : col.colorByValue
-                      ? "font-medium"
-                      : "font-normal";
-                  const size = col.total && row.isFilOne ? "text-[19.5px]" : "text-[15.5px]";
+                  const weight = col.note
+                    ? "font-normal"
+                    : row.isFilOne
+                      ? col.total
+                        ? "font-bold"
+                        : "font-semibold"
+                      : col.colorByValue
+                        ? "font-medium"
+                        : "font-normal";
+                  const size = col.note
+                    ? "text-[13.5px]"
+                    : col.total && row.isFilOne
+                      ? "text-[19.5px]"
+                      : "text-[15.5px]";
+                  const style = col.note && !row.isFilOne ? " italic" : "";
                   return (
                     <td
                       key={col.key}
-                      className={`px-4 py-5 border-b border-black/[0.06] ${size} ${weight} ${cellTone(row, col)}`}
+                      className={`px-4 py-5 border-b border-black/[0.06] ${size} ${weight}${style} ${cellTone(row, col)}`}
                     >
                       {row.values[col.key]}
                     </td>
