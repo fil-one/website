@@ -441,7 +441,7 @@ export const ROUTE_META = {
   "/lp/collections-access": {
     title: "Fil One · Open the collection. Skip the egress bill.",
     description:
-      `Serve digital collections and IIIF imagery with $0 egress. Flat ${PRICE_PER_TB_SHORT} storage, S3-compatible for IIIF image servers, 11 nines durability.`,
+      `Serve digital collections and IIIF imagery with $0 egress. Flat ${PRICE_PER_TB_SHORT} storage, S3-compatible for IIIF image servers.`,
   },
   "/lp/digital-preservation": {
     title: "Fil One · Preservation you can afford to check",
