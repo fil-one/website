@@ -436,7 +436,7 @@ export const ROUTE_META = {
   "/lp/grant-funded": {
     title: "Fil One · Storage that outlives the grant cycle",
     description:
-      `Flat ${PRICE_PER_TB_SHORT} research data storage with no exit fees and integrity verification every ~24 hours. Predictable for multi-year grants, S3-compatible.`,
+      `Flat ${PRICE_PER_TB_SHORT} research data storage with no exit fees. Predictable for multi-year grants, S3-compatible.`,
   },
   "/lp/collections-access": {
     title: "Fil One · Open the collection. Skip the egress bill.",
