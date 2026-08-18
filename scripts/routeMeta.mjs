@@ -264,7 +264,7 @@ export const ROUTE_META = {
   "/lp/multi-cloud": {
     title: "Multi-Cloud Object Storage · S3-Compatible | Fil One",
     description:
-      `Add a cost-effective, verifiable storage tier to your multi-cloud stack. ${PRICE_PER_TB_SHORT}, no egress, S3-compatible — works alongside AWS, GCP, and Azure.`,
+      `Add a cost-effective storage tier to your multi-cloud stack. ${PRICE_PER_TB_SHORT}, no egress, S3-compatible — works alongside AWS, GCP, and Azure.`,
   },
   "/lp/data-sovereignty": {
     title: "Data Sovereignty Storage · Verifiable, Decentralized | Fil One",
