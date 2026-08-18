@@ -362,9 +362,9 @@ export const ROUTE_META = {
       `Point your Web3 product's storage at Filecoin infrastructure without rebuilding your stack. S3-compatible, no egress fees, no lock-in, at ${PRICE_PER_TB_SHORT} flat.`,
   },
   "/lp/web3-native": {
-    title: "Native Web3 Object Storage · Filecoin-Backed | Fil One",
+    title: "Native Web3 Object Storage · Built on Filecoin | Fil One",
     description:
-      `Purpose-built for Web3-native apps. S3-compatible, cryptographically verifiable storage on Filecoin at ${PRICE_PER_TB_SHORT}, integrity proven daily.`,
+      `Purpose-built for Web3-native apps. S3-compatible object storage built on Filecoin infrastructure at ${PRICE_PER_TB_SHORT}, no egress, no lock-in.`,
   },
   "/lp/barcelona": {
     title: `Fil One for Barcelona: European Storage, ${PRICE_PER_TB_SHORT}, No Egress Fees`,
