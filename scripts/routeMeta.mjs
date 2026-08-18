@@ -254,7 +254,7 @@ export const ROUTE_META = {
   "/lp/log-retention": {
     title: `Cheap Log Retention Storage · ${PRICE_PER_TB_SHORT} | Fil One`,
     description:
-      `Store logs long-term at ${PRICE_PER_TB_SHORT} with no egress fees. S3-compatible, verifiable, and far cheaper than CloudWatch or Datadog for long-term retention.`,
+      `Store logs long-term at ${PRICE_PER_TB_SHORT} with no egress fees. S3-compatible, and far cheaper than CloudWatch or Datadog for long-term retention.`,
   },
   "/lp/web-scraping": {
     title: "Storage for Web Scraping & Data Collection · Fil One",
