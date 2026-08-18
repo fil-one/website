@@ -1,37 +1,39 @@
-import { ArrowsOut, ChartLine, Plug, ShieldCheck } from "@phosphor-icons/react";
+import { ArrowsOut, ChartLine, Plug, Database } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
-import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
-import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
+import Hero from "@/components/Hero";
+import FeatureCard from "@/components/FeatureCard";
+import CtaBanner from "@/components/CtaBanner";
+import CodeBlock from "@/components/CodeBlock";
+import PriceComparisonTable, {
+  type PriceComparisonColumn,
+  type PriceComparisonRow,
+} from "@/components/PriceComparisonTable";
+import TextLink from "@/components/TextLink";
+import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
 
+const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
+const SALES_URL = "/contact-sales";
 
-// Price delta scenario: 10 TB stored + 10 TB reads + 1M GET operations
-// AWS S3 Standard us-east-1 Q2 2026:
-//   Storage: 10,240 GB × $0.023 = $235.52
-//   Egress: 10,240 GB × $0.09 = $921.60
-//   GETs: 1,000,000 / 1,000 × $0.0004 = $0.40
-//   Total: ~$1,157.52
-// Fil One: 10 TB × $4.99 = $49.90
+const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
 
-const COMPARISON_ROWS = [
-  {
-    provider: "AWS S3 Standard",
-    storage: "$236",
-    egress: "$922",
-    api: "$0.40",
-    total: "$1,158",
-    isFilOne: false,
-  },
-  {
-    provider: "Fil One",
-    storage: "$50",
-    egress: "$0",
-    api: "$0",
-    total: "$50",
-    isFilOne: true,
-  },
+// 10 TB stored, 10 TB read/month, 1M GET operations.
+// AWS S3 Standard us-east-1 Q2 2026: storage 10,240 GB x $0.023 = $235.52,
+// egress 10,240 GB x $0.09 = $921.60, ops 1,000,000 / 1,000 x $0.0004 = $0.40.
+// Fil One: 10 TB x $4.99 = $49.90, egress $0, ops $0.
+const PRICING_COLUMNS: PriceComparisonColumn[] = [
+  { key: "storage", header: "Storage" },
+  { key: "egress", header: "Egress", colorByValue: true },
+  { key: "api", header: "API / ops", colorByValue: true },
+  { key: "total", header: "Total / month", total: true },
+];
+
+const PRICING_ROWS: PriceComparisonRow[] = [
+  { provider: "AWS S3 Standard", values: { storage: "$236", egress: "$922", api: "$0.40", total: "$1,158" } },
+  { provider: "Fil One", isFilOne: true, values: { storage: "$50", egress: "$0", api: "$0", total: "$50" } },
 ];
 
 const FEATURES = [
@@ -51,32 +53,19 @@ const FEATURES = [
     desc: `Storage at ${PRICE_PER_TB_SHORT}. No egress, no per-request fees, no storage tier waterfall. The line item you plan for is the line item that ships.`,
   },
   {
-    icon: ShieldCheck,
-    title: "Recurring integrity verification",
-    desc: "Every object is verified approximately every 24 hours. Data does not silently corrupt or disappear without detection — no extra configuration required.",
+    icon: Database,
+    title: "Flat cost at any scale",
+    desc: `${PRICE_PER_TB_SHORT} whether you migrate 1 TB or 1 PB. The rate per TB does not change as the dataset grows.`,
   },
 ];
 
-const MigrateFromS3LandingPage = () => {
-  useSeo({
-    title: "Fil One · Leaving S3 is a config change, not a rewrite",
-    description:
-      `Same SDK. New endpoint. Lower bill. Point your existing S3 tools at Fil One and cut storage costs to ${PRICE_PER_TB_SHORT} flat with $0 egress.`,
-    canonical: "https://www.fil.one/lp/migrate-from-s3",
-  });
-
-  const { ref: codeRef, inView: codeInView } = useInView({ threshold: 0.05 });
-  const { ref: tableRef, inView: tableInView } = useInView({ threshold: 0.05 });
-  const { ref: featuresRef, inView: featuresInView } = useInView({ threshold: 0.05 });
-  const { ref: ctaRef, inView: ctaInView } = useInView({ threshold: 0.05 });
-
-  const BOTO3_BEFORE = `# Before — AWS S3
+const BOTO3_CODE = `# Before — AWS S3
 s3 = boto3.client(
     "s3",
     region_name="us-east-1",
-)`;
+)
 
-  const BOTO3_AFTER = `# After · Fil One (no other changes)
+# After · Fil One (no other changes)
 s3 = boto3.client(
     "s3",
     endpoint_url="https://eu-west-1.s3.fil.one",
@@ -85,10 +74,10 @@ s3 = boto3.client(
     region_name="eu-west-1",
 )`;
 
-  const NODE_BEFORE = `// Before — AWS S3
-const s3 = new S3Client({ region: "us-east-1" });`;
+const NODE_CODE = `// Before — AWS S3
+const s3 = new S3Client({ region: "us-east-1" });
 
-  const NODE_AFTER = `// After · Fil One
+// After · Fil One
 const s3 = new S3Client({
   endpoint: "https://eu-west-1.s3.fil.one",
   region: "eu-west-1",
@@ -98,125 +87,64 @@ const s3 = new S3Client({
   },
 });`;
 
+const MigrateFromS3LandingPage = () => {
+  useSeo({
+    title: "Fil One · Leaving S3 is a config change, not a rewrite",
+    description: `Same SDK. New endpoint. Lower bill. Point your existing S3 tools at Fil One and cut storage costs to ${PRICE_PER_TB_SHORT} flat with $0 egress.`,
+    canonical: "https://www.fil.one/lp/migrate-from-s3",
+  });
+
+  const { ref: codeRef, inView: codeInView } = useInView({ threshold: 0.05 });
+  const { ref: tableRef, inView: tableInView } = useInView({ threshold: 0.05 });
+  const { ref: featuresRef, inView: featuresInView } = useInView({ threshold: 0.05 });
+
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
+    <div className="min-h-screen overflow-x-hidden bg-white">
       <PlatformNavbar />
 
       <main id="main-content">
-        {/* Hero */}
-        <section className="relative isolate pt-[58px] md:pt-[94px]" style={{ backgroundColor: "#FFFFFF" }}>
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 pointer-events-none -z-10"
-            style={{
-              background:
-                "radial-gradient(ellipse 55% 40% at 50% 0%, rgba(0,144,255,0.13) 0%, transparent 70%)",
-            }}
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 pointer-events-none -z-10"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,${GRID_SVG}")`,
-              backgroundSize: "60px 60px",
-              backgroundPosition: "center top",
-              maskImage:
-                "radial-gradient(ellipse 80% 65% at 50% 0%, black 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 65%, transparent 80%)",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 80% 65% at 50% 0%, black 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 65%, transparent 80%)",
-            }}
-          />
-
-          <div className="flex flex-col items-center gap-6 px-5 md:px-8 w-full max-w-[1120px] mx-auto pt-20 md:pt-[120px] pb-20 md:pb-28">
-            <div
-              className="hero-fade-1 flex items-center gap-1.5 text-center"
-              style={{
-                backgroundColor: "#EFF8FF",
-                border: "1px solid rgba(0,144,255,0.2)",
-                borderRadius: 14,
-                padding: "10px 14px",
-                maxWidth: "90vw",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "'Funnel Sans', sans-serif",
-                  fontWeight: 500,
-                  fontSize: 13.5,
-                  lineHeight: 1,
-                  color: "#0070CC",
-                }}
-              >
+        {/* ── Hero ─────────────────────────────────────────────────────────── */}
+        <Hero
+          glow
+          grid
+          titleSize="text-[30px] sm:text-[38px] md:text-[54px]"
+          titleMaxWidth={800}
+          descriptionMaxWidth={580}
+          contentClassName="pb-20 md:pb-28"
+          badge={
+            <div className="inline-flex items-center rounded-full border border-brand/20 bg-brand-50 px-3.5 py-2.5 text-center max-w-[90vw]">
+              <span className="whitespace-nowrap font-sans text-[13.5px] font-medium leading-none text-brand-600">
                 For teams on AWS S3 looking to reduce storage costs
               </span>
             </div>
+          }
+          title={
+            <>
+              Leaving S3 is a config change,
+              <br />
+              <span className="text-brand-500">not a rewrite.</span>
+            </>
+          }
+          description={
+            <>Point your existing S3 tools at Fil One. {PRICE_PER_TB_SHORT} flat, no egress. Same SDK, same API, lower bill.</>
+          }
+          ctas={[
+            { label: "Start for free", href: SIGNUP_URL, variant: "primary" },
+            { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+          ]}
+          tagline={TAGLINE}
+        />
 
-            <h1
-              className="text-[30px] sm:text-[38px] md:text-[54px] hero-fade-2"
-              style={{
-                fontFamily: "'Aspekta', sans-serif",
-                fontWeight: 500,
-                lineHeight: "1.08",
-                letterSpacing: "-0.025em",
-                color: "#09090B",
-                textAlign: "center",
-                maxWidth: 800,
-                margin: 0,
-              }}
-            >
-              Leaving S3 is a config change,<br />
-              <span style={{ color: "#0090FF" }}>not a rewrite.</span>
-            </h1>
-
-            <p
-              className="text-[15px] md:text-[17px] hero-fade-2"
-              style={{
-                fontFamily: "'Funnel Sans', sans-serif",
-                fontWeight: 400,
-                lineHeight: "1.65",
-                color: "#71717A",
-                textAlign: "center",
-                maxWidth: 580,
-                margin: 0,
-              }}
-            >
-              Point your existing S3 tools at Fil One. {PRICE_PER_TB_SHORT} flat, no egress. Same SDK, same API, lower bill.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
-                <span className="btn-primary-inner">Start for free</span>
-              </a>
-              <a href="/contact-sales" className="btn-secondary">
-                Talk to an expert
-              </a>
-            </div>
-
-            <p
-              className="hero-fade-4"
-              style={{
-                fontFamily: "'Funnel Sans', sans-serif",
-                fontWeight: 400,
-                fontSize: 13,
-                color: "#71717A",
-                textAlign: "center",
-              }}
-            >
-              No credit card required · No egress fees · Connects in minutes
-            </p>
-          </div>
-        </section>
-
-        {/* Code block — the endpoint swap */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full" style={{ backgroundColor: "#F9FAFB" }}>
+        {/* ── Code block — the endpoint swap ──────────────────────────────── */}
+        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-zinc-50">
           <div
             ref={codeRef}
-            className={`flex flex-col gap-10 w-full max-w-[1120px] mx-auto reveal${codeInView ? " in-view" : ""}`}
+            className={`flex flex-col gap-10 w-full max-w-container mx-auto reveal${codeInView ? " in-view" : ""}`}
           >
             <div className="flex flex-col gap-3">
               <SectionLabel>The migration</SectionLabel>
               <SectionHeading>
-                Change the endpoint. <span style={{ color: "#0090FF" }}>Nothing else.</span>
+                Change the endpoint. <span className="text-brand-500">Nothing else.</span>
               </SectionHeading>
               <SectionSub maxWidth={620}>
                 Fil One implements the S3 API. The code that works on AWS works here — PutObject, GetObject, ListObjectsV2, multipart upload, presigned URLs.
@@ -224,404 +152,83 @@ const s3 = new S3Client({
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Python */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                <p
-                  style={{
-                    fontFamily: "'DM Mono', monospace",
-                    fontSize: 11,
-                    fontWeight: 500,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#71717A",
-                    margin: 0,
-                  }}
-                >
-                  Python (boto3)
-                </p>
-                <div
-                  style={{
-                    borderRadius: 16,
-                    overflow: "hidden",
-                    border: "1px solid rgba(0,0,0,0.08)",
-                    backgroundColor: "#0F172A",
-                  }}
-                >
-                  <pre
-                    style={{
-                      margin: 0,
-                      padding: "20px 18px",
-                      fontFamily: "'DM Mono', monospace",
-                      fontSize: 12.5,
-                      lineHeight: 1.65,
-                      color: "#E2E8F0",
-                      overflowX: "auto",
-                    }}
-                  >
-                    {BOTO3_BEFORE + "\n\n" + BOTO3_AFTER}
-                  </pre>
-                </div>
-              </div>
-
-              {/* Node */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                <p
-                  style={{
-                    fontFamily: "'DM Mono', monospace",
-                    fontSize: 11,
-                    fontWeight: 500,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#71717A",
-                    margin: 0,
-                  }}
-                >
-                  Node.js (@aws-sdk/client-s3)
-                </p>
-                <div
-                  style={{
-                    borderRadius: 16,
-                    overflow: "hidden",
-                    border: "1px solid rgba(0,0,0,0.08)",
-                    backgroundColor: "#0F172A",
-                  }}
-                >
-                  <pre
-                    style={{
-                      margin: 0,
-                      padding: "20px 18px",
-                      fontFamily: "'DM Mono', monospace",
-                      fontSize: 12.5,
-                      lineHeight: 1.65,
-                      color: "#E2E8F0",
-                      overflowX: "auto",
-                    }}
-                  >
-                    {NODE_BEFORE + "\n\n" + NODE_AFTER}
-                  </pre>
-                </div>
-              </div>
+              <CodeBlock snippets={[{ lang: "python", label: "Python (boto3)", code: BOTO3_CODE }]} />
+              <CodeBlock snippets={[{ lang: "typescript", label: "Node.js (@aws-sdk/client-s3)", code: NODE_CODE }]} />
             </div>
 
-            <div
-              style={{
-                border: "1px solid rgba(0,0,0,0.07)",
-                borderRadius: 14,
-                backgroundColor: "#FFFFFF",
-                padding: "20px 24px",
-                maxWidth: 680,
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: "'Funnel Sans', sans-serif",
-                  fontWeight: 500,
-                  fontSize: 14,
-                  color: "#09090B",
-                  marginBottom: 8,
-                }}
-              >
-                What is compatible
-              </p>
-              <p
-                style={{
-                  fontFamily: "'Funnel Sans', sans-serif",
-                  fontWeight: 400,
-                  fontSize: 13.5,
-                  lineHeight: 1.65,
-                  color: "#71717A",
-                  margin: 0,
-                }}
-              >
+            <div className="max-w-[680px] rounded-2xl border border-black/[0.07] bg-white p-6">
+              <p className="m-0 mb-2 font-sans font-medium text-[14px] text-zinc-950">What is compatible</p>
+              <p className="m-0 font-sans text-[13.5px] leading-[1.65] text-zinc-500">
                 PutObject, GetObject, DeleteObject, HeadObject, CopyObject, ListObjectsV2, CreateBucket, DeleteBucket, multipart upload, presigned URLs. Standard Auth v4 signing. For a full compatibility list, see{" "}
-                <a href="https://docs.fil.one" style={{ color: "#0070CC" }}>
+                <TextLink href="https://docs.fil.one" tone="brand" external className="inline">
                   docs.fil.one
-                </a>.
+                </TextLink>
+                .
               </p>
             </div>
           </div>
         </section>
 
-        {/* Price comparison */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full" style={{ backgroundColor: "#FFFFFF" }}>
+        {/* ── Price comparison ─────────────────────────────────────────────── */}
+        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-white">
           <div
             ref={tableRef}
-            className={`flex flex-col gap-8 w-full max-w-[1120px] mx-auto reveal${tableInView ? " in-view" : ""}`}
+            className={`flex flex-col gap-8 w-full max-w-container mx-auto reveal${tableInView ? " in-view" : ""}`}
           >
             <div className="flex flex-col gap-3">
               <SectionLabel>The delta</SectionLabel>
               <SectionHeading>
-                10 TB stored, 10 TB read/month. <span style={{ color: "#0090FF" }}>What changes.</span>
+                10 TB stored, 10 TB read/month. <span className="text-brand-500">What changes.</span>
               </SectionHeading>
             </div>
 
-            <div style={{ overflowX: "auto" }}>
-              <table
-                style={{
-                  width: "100%",
-                  minWidth: 480,
-                  borderCollapse: "collapse",
-                  fontFamily: "'Funnel Sans', sans-serif",
-                }}
-              >
-                <thead>
-                  <tr>
-                    {["Provider", "Storage", "Egress", "API / ops", "Total / month"].map((h) => (
-                      <th
-                        key={h}
-                        style={{
-                          textAlign: "left",
-                          padding: "11px 16px",
-                          fontSize: 11,
-                          fontWeight: 500,
-                          letterSpacing: "0.06em",
-                          textTransform: "uppercase",
-                          color: "#71717A",
-                          borderBottom: "1px solid rgba(0,0,0,0.07)",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        {h}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {COMPARISON_ROWS.map((row) => (
-                    <tr key={row.provider} style={{ backgroundColor: row.isFilOne ? "#EFF8FF" : "transparent" }}>
-                      <td
-                        style={{
-                          padding: "14px 16px",
-                          borderBottom: "1px solid rgba(0,0,0,0.06)",
-                          fontSize: 14,
-                          fontWeight: row.isFilOne ? 700 : 500,
-                          color: row.isFilOne ? "#0070CC" : "#09090B",
-                        }}
-                      >
-                        {row.provider}
-                        {row.isFilOne && (
-                          <span
-                            style={{
-                              display: "inline-flex",
-                              alignItems: "center",
-                              marginLeft: 8,
-                              backgroundColor: "#EFF8FF",
-                              border: "1px solid rgba(0,144,255,0.2)",
-                              color: "#0070CC",
-                              fontFamily: "'Funnel Sans', sans-serif",
-                              fontSize: 11,
-                              fontWeight: 500,
-                              padding: "2px 8px",
-                              borderRadius: 9999,
-                              verticalAlign: "middle",
-                              whiteSpace: "nowrap",
-                            }}
-                          >
-                            You
-                          </span>
-                        )}
-                      </td>
-                      {[row.storage, row.egress, row.api, row.total].map((v, i) => (
-                        <td
-                          key={i}
-                          style={{
-                            padding: "14px 16px",
-                            borderBottom: "1px solid rgba(0,0,0,0.06)",
-                            fontSize: i === 3 ? (row.isFilOne ? 17 : 13.5) : 13.5,
-                            fontWeight: i === 3 ? 700 : row.isFilOne ? 600 : 400,
-                            color:
-                              v === "$0" ? "#16a34a"
-                              : i === 3 && !row.isFilOne ? "#dc2626"
-                              : row.isFilOne ? "#0070CC"
-                              : "#52525B",
-                          }}
-                        >
-                          {v}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="text-xs text-slate-500">
-              AWS S3 Standard us-east-1 Q2 2026: $0.023/GB storage, $0.09/GB internet egress, $0.0004/1K GET. Computed from stated inputs — 10,240 GB × $0.023 = $235.52 storage; 10,240 GB × $0.09 = $921.60 egress; 1M × $0.0004/1K = $0.40 ops. Fil One: 10 TB × $4.99 = $49.90, egress $0, ops $0.
-            </p>
+            <PriceComparisonTable
+              columns={PRICING_COLUMNS}
+              rows={PRICING_ROWS}
+              caption="Monthly cost for 10 TB stored, 10 TB read, AWS S3 Standard vs Fil One"
+              footnote="AWS S3 Standard us-east-1 Q2 2026: $0.023/GB storage, $0.09/GB internet egress, $0.0004/1K GET. Computed from stated inputs — 10,240 GB × $0.023 = $235.52 storage; 10,240 GB × $0.09 = $921.60 egress; 1M × $0.0004/1K = $0.40 ops. Fil One: 10 TB × $4.99 = $49.90, egress $0, ops $0."
+            />
           </div>
         </section>
 
-        {/* Features */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full" style={{ backgroundColor: "#F9FAFB" }}>
-          <div
-            ref={featuresRef}
-            className={`flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto reveal${featuresInView ? " in-view" : ""}`}
-          >
-            <div className="flex flex-col gap-3 items-center">
+        {/* ── Features ─────────────────────────────────────────────────────── */}
+        <section className="w-full bg-zinc-50">
+          <div className="flex flex-col gap-12 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-container mx-auto">
+            <div className="flex flex-col gap-3 items-center text-center">
               <SectionLabel>What carries over</SectionLabel>
               <SectionHeading>
-                S3 parity. <span style={{ color: "#0090FF" }}>Lower bill.</span>
+                S3 parity. <span className="text-brand-500">Lower bill.</span>
               </SectionHeading>
               <SectionSub maxWidth={560}>
                 The same tools, the same APIs, the same integration patterns. The line items that dominated the invoice do not exist here.
               </SectionSub>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-              {FEATURES.map(({ icon: Icon, title, desc }) => (
-                <div
+            <div
+              ref={featuresRef}
+              className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full reveal-group reveal${featuresInView ? " in-view" : ""}`}
+            >
+              {FEATURES.map(({ icon, title, desc }) => (
+                <FeatureCard
                   key={title}
-                  className="flex flex-col gap-4 p-6 rounded-2xl border"
-                  style={{
-                    borderColor: "rgba(0,0,0,0.07)",
-                    backgroundColor: "#FFFFFF",
-                    boxShadow: "0px 1px 3px rgba(0,0,0,0.04)",
-                    textAlign: "left",
-                  }}
-                >
-                  <div
-                    className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
-                    style={{ backgroundColor: "#EFF8FF" }}
-                  >
-                    <Icon size={18} color="#0090FF" />
-                  </div>
-                  <p
-                    style={{
-                      fontFamily: "'Funnel Sans', sans-serif",
-                      fontWeight: 500,
-                      fontSize: 15,
-                      lineHeight: "1.3",
-                      color: "#09090B",
-                    }}
-                  >
-                    {title}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "'Funnel Sans', sans-serif",
-                      fontWeight: 400,
-                      fontSize: 13.5,
-                      lineHeight: "1.6",
-                      color: "#71717A",
-                    }}
-                  >
-                    {desc}
-                  </p>
-                </div>
+                  icon={icon}
+                  title={title}
+                  description={desc}
+                  className={`reveal${featuresInView ? " in-view" : ""}`}
+                />
               ))}
             </div>
           </div>
         </section>
 
-        {/* Pricing */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full" style={{ backgroundColor: "#FFFFFF" }}>
-          <div className="flex flex-col gap-10 items-center text-center w-full max-w-[1120px] mx-auto">
-            <div className="flex flex-col gap-3 items-center">
-              <SectionLabel>Pricing</SectionLabel>
-              <SectionHeading>
-                One rate. <span style={{ color: "#0090FF" }}>{PRICE_PER_TB_MONTH}.</span>
-              </SectionHeading>
-              <SectionSub maxWidth={520}>
-                Storage. That is the whole bill. No egress fees, no per-request charges. The S3 code carries over; the invoice does not.
-              </SectionSub>
-            </div>
-            <div className="flex flex-col sm:flex-row items-center gap-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
-                <span className="btn-primary-inner">Start for free</span>
-              </a>
-              <a href="/contact-sales" className="btn-secondary">
-                Talk to an expert
-              </a>
-            </div>
-            <p
-              style={{
-                fontFamily: "'Funnel Sans', sans-serif",
-                fontWeight: 400,
-                fontSize: 13,
-                color: "#71717A",
-              }}
-            >
-              No credit card required · No egress fees · Connects in minutes
-            </p>
-          </div>
-        </section>
-
-        {/* Dark CTA */}
-        <section className="px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full" style={{ backgroundColor: "#FFFFFF" }}>
-          <div
-            ref={ctaRef}
-            className={`w-full max-w-[1120px] mx-auto reveal${ctaInView ? " in-view" : ""}`}
-          >
-            <div
-              style={{
-                position: "relative",
-                overflow: "hidden",
-                background: "linear-gradient(135deg, #020D1A 0%, #0D2847 55%, #041525 100%)",
-                borderRadius: 20,
-                textAlign: "center",
-              }}
-              className="px-6 md:px-12 py-16 md:py-[104px]"
-            >
-              <div
-                aria-hidden="true"
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
-                    '<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1"/></svg>'
-                  )}")`,
-                  backgroundSize: "60px 60px",
-                  maskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)",
-                  WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)",
-                  pointerEvents: "none",
-                }}
-              />
-              <div style={{ position: "relative" }}>
-                <h2
-                  className="text-[26px] md:text-[32px]"
-                  style={{
-                    fontFamily: "'Aspekta', sans-serif",
-                    fontWeight: 500,
-                    letterSpacing: "-0.025em",
-                    lineHeight: "1.12",
-                    color: "#FFFFFF",
-                    marginBottom: 12,
-                  }}
-                >
-                  Same SDK. New endpoint. Lower bill.
-                </h2>
-                <p
-                  style={{
-                    fontFamily: "'Funnel Sans', sans-serif",
-                    fontWeight: 400,
-                    fontSize: 17,
-                    color: "rgba(255,255,255,0.60)",
-                    marginBottom: 32,
-                  }}
-                >
-                  Free 1 TB evaluation. Change two lines and run the same workload. The egress line will not be there.
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark">
-                    <span className="btn-primary-inner">Start for free</span>
-                  </a>
-                  <a href="/contact-sales" className="btn-secondary btn-secondary-dark">
-                    Talk to an expert
-                  </a>
-                </div>
-                <p
-                  style={{
-                    fontFamily: "'Funnel Sans', sans-serif",
-                    fontSize: 13,
-                    color: "rgba(255,255,255,0.60)",
-                    marginTop: 16,
-                  }}
-                >
-                  No credit card required · No egress fees · Connects in minutes
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* ── CTA Banner ────────────────────────────────────────────────────── */}
+        <CtaBanner
+          heading="Same SDK. New endpoint. Lower bill."
+          subhead="Free 1 TB evaluation. Change two lines and run the same workload. The egress line will not be there."
+          cta={{ label: "Start for free", href: SIGNUP_URL }}
+          secondaryCta={{ label: "Talk to an expert", href: SALES_URL }}
+          note={TAGLINE}
+          surface="grey"
+        />
       </main>
 
       <Footer />
