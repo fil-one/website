@@ -1,133 +1,118 @@
 import { useState, useEffect, useRef } from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { List, X, ArrowUpRight, CaretDown, Brain, LinkSimple, FilmSlate, ShieldCheck } from "@phosphor-icons/react";
+import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
 import { useLocation } from "react-router-dom";
 import filOneLogo from "../assets/fil-one-logo.svg";
 import { trackDocsClick } from "@/lib/analytics";
 import { Button } from "@/components/Button";
 import Icon from "@/components/Icon";
+import { localize, type Lang, type Localized } from "@/lib/i18n";
 
-const PRODUCTS_EN = [
+/** One entry in a nav or footer link list. */
+interface NavLinkItem {
+  href: string;
+  label: Localized;
+  external?: boolean;
+}
+
+interface ProductItem extends NavLinkItem {
+  description: Localized;
+  badge: Localized | null;
+}
+
+interface SolutionItem extends NavLinkItem {
+  description: Localized;
+  icon: PhosphorIcon;
+}
+
+const PRODUCTS = [
   {
-    label: "Object Storage",
-    description: "S3-compatible, verifiably durable",
-    badge: null,
     href: "/storage",
-  },
-  {
-    label: "Bucket Intelligence",
-    description: "Turn buckets into knowledge bases",
-    badge: "Early access",
-    href: "/bucket-intelligence",
-  },
-  {
-    label: "AI Agent Toolkit",
-    description: "MCP, OAuth & SDK integrations",
-    badge: "Early access",
-    href: "/ai-agent-toolkit",
-  },
-];
-
-const PRODUCTS_ES = [
-  {
-    label: "Almacenamiento de objetos",
-    description: "Compatible con S3, con durabilidad verificable",
     badge: null,
-    href: "/storage",
+    label: { en: "Object Storage", es: "Almacenamiento de objetos" },
+    description: {
+      en: "S3-compatible, verifiably durable",
+      es: "Compatible con S3, con durabilidad verificable",
+    },
   },
   {
-    label: "Bucket Intelligence",
-    description: "Convierte tus buckets en bases de conocimiento",
-    badge: "Acceso anticipado",
     href: "/bucket-intelligence",
+    badge: { en: "Early access", es: "Acceso anticipado" },
+    label: "Bucket Intelligence",
+    description: {
+      en: "Turn buckets into knowledge bases",
+      es: "Convierte tus buckets en bases de conocimiento",
+    },
   },
   {
-    label: "AI Agent Toolkit",
-    description: "Integraciones MCP, OAuth y SDK",
-    badge: "Acceso anticipado",
     href: "/ai-agent-toolkit",
+    badge: { en: "Early access", es: "Acceso anticipado" },
+    label: "AI Agent Toolkit",
+    description: {
+      en: "MCP, OAuth & SDK integrations",
+      es: "Integraciones MCP, OAuth y SDK",
+    },
   },
-];
+] satisfies readonly ProductItem[];
 
-const SOLUTIONS_EN = [
+const SOLUTIONS = [
   {
     icon: Brain,
-    label: "AI Training & Inference",
-    description: "Storage that keeps your GPUs fed",
     href: "/solutions/ai-training",
+    label: { en: "AI Training & Inference", es: "Entrenamiento e inferencia de IA" },
+    description: {
+      en: "Storage that keeps your GPUs fed",
+      es: "Almacenamiento que mantiene tus GPU alimentadas",
+    },
   },
   {
     icon: LinkSimple,
-    label: "Web3 & dApps",
-    description: "Storage your smart contracts can trust",
     href: "/solutions/web3-dapps",
+    label: { en: "Web3 & dApps", es: "Web3 y dApps" },
+    description: {
+      en: "Storage your smart contracts can trust",
+      es: "Almacenamiento en el que tus smart contracts pueden confiar",
+    },
   },
   {
     icon: FilmSlate,
-    label: "Media & Archive",
-    description: "Archive petabytes, pay nothing to get them back",
     href: "/solutions/media-archive",
+    label: { en: "Media & Archive", es: "Medios y archivo" },
+    description: {
+      en: "Archive petabytes, pay nothing to get them back",
+      es: "Archiva petabytes y no pagues nada por recuperarlos",
+    },
   },
   {
     icon: ShieldCheck,
-    label: "Enterprise Backup & DR",
-    description: "Backups ransomware can't touch",
     href: "/solutions/enterprise-backup",
+    label: { en: "Enterprise Backup & DR", es: "Backup empresarial y DR" },
+    description: {
+      en: "Backups ransomware can't touch",
+      es: "Copias de seguridad que el ransomware no puede tocar",
+    },
   },
-];
+] satisfies readonly SolutionItem[];
 
-const SOLUTIONS_ES = [
-  {
-    icon: Brain,
-    label: "Entrenamiento e inferencia de IA",
-    description: "Almacenamiento que mantiene tus GPU alimentadas",
-    href: "/solutions/ai-training",
-  },
-  {
-    icon: LinkSimple,
-    label: "Web3 y dApps",
-    description: "Almacenamiento en el que tus smart contracts pueden confiar",
-    href: "/solutions/web3-dapps",
-  },
-  {
-    icon: FilmSlate,
-    label: "Medios y archivo",
-    description: "Archiva petabytes y no pagues nada por recuperarlos",
-    href: "/solutions/media-archive",
-  },
-  {
-    icon: ShieldCheck,
-    label: "Backup empresarial y DR",
-    description: "Copias de seguridad que el ransomware no puede tocar",
-    href: "/solutions/enterprise-backup",
-  },
-];
+const UTILITY_LINKS = [
+  { href: "/about", label: { en: "About", es: "Nosotros" } },
+  { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
+  { href: "/enterprise", label: { en: "Enterprise", es: "Empresas" } },
+  { href: "/blog", label: "Blog" },
+] satisfies readonly NavLinkItem[];
 
-const UTILITY_LINKS_EN = [
-  { label: "About", href: "/about" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Enterprise", href: "/enterprise" },
-  { label: "Blog", href: "/blog" },
-];
-
-const UTILITY_LINKS_ES = [
-  { label: "Nosotros", href: "/about" },
-  { label: "Precios", href: "/pricing" },
-  { label: "Empresas", href: "/enterprise" },
-  { label: "Blog", href: "/blog" },
-];
-
-const utilityBarLinksEn = (supportHref: string) => [
-  { label: "Documentation", href: "https://docs.fil.one", external: true },
-  { label: "Partners", href: "/partners" },
-  { label: "Support", href: supportHref },
-];
-
-const utilityBarLinksEs = (supportHref: string) => [
-  { label: "Documentación", href: "https://docs.fil.one", external: true },
-  { label: "Partners", href: "/partners" },
-  { label: "Soporte", href: supportHref },
-];
+/** Support is a prop because some landing pages point it at their own page. */
+const utilityBarLinks = (supportHref: string) =>
+  [
+    {
+      href: "https://docs.fil.one",
+      external: true,
+      label: { en: "Documentation", es: "Documentación" },
+    },
+    { href: "/partners", label: "Partners" },
+    { href: supportHref, label: { en: "Support", es: "Soporte" } },
+  ] satisfies readonly NavLinkItem[];
 
 const UTILITY_BAR_HEIGHT = 36;
 
@@ -155,7 +140,7 @@ const BADGE_CLASS =
   "rounded-full border border-zinc-200 bg-zinc-100 px-1.5 py-px font-mono text-[10px] font-medium uppercase tracking-[0.05em] text-zinc-600";
 
 interface PlatformNavbarProps {
-  lang?: "en" | "es";
+  lang?: Lang;
   /** Override the utility bar's Support link — defaults to the general /support page. */
   supportHref?: string;
   /** Override the "Contact Sales" CTA — defaults to the general /contact-sales page. */
@@ -168,10 +153,9 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
   const lastScrollY = useRef(0);
   const { pathname } = useLocation();
 
-  const PRODUCTS = lang === "es" ? PRODUCTS_ES : PRODUCTS_EN;
-  const SOLUTIONS = lang === "es" ? SOLUTIONS_ES : SOLUTIONS_EN;
-  const UTILITY_LINKS = lang === "es" ? UTILITY_LINKS_ES : UTILITY_LINKS_EN;
-  const UTILITY_BAR_LINKS = (lang === "es" ? utilityBarLinksEs : utilityBarLinksEn)(supportHref);
+  const UTILITY_BAR_LINKS = utilityBarLinks(supportHref);
+  /** Resolve a list entry's copy for the active language. */
+  const l = (value: Localized) => localize(value, lang);
   const t = lang === "es"
     ? {
         skipToContent: "Saltar al contenido principal",
@@ -240,12 +224,12 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
         <div className="mx-auto flex w-full max-w-container-wide items-center justify-end gap-1">
           {UTILITY_BAR_LINKS.map(({ label, href, external }) => (
             <a
-              key={label}
+              key={href}
               href={href}
               {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className={UTILITY_BAR_LINK_CLASS}
             >
-              {label}
+              {l(label)}
               {external && <Icon icon={ArrowUpRight} size={11} className="mt-px text-zinc-600" aria-hidden="true" />}
             </a>
           ))}
@@ -283,16 +267,16 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                   <NavigationMenuPrimitive.Content>
                     <div className="min-w-[240px] py-2">
                       {PRODUCTS.map(({ label, description, badge, href }) => (
-                        <NavigationMenuPrimitive.Link asChild key={label}>
+                        <NavigationMenuPrimitive.Link asChild key={href}>
                           <a
                             href={href.startsWith("#") ? anchorHref(href.slice(1)) : href}
                             className="flex flex-col gap-0.5 px-4 py-2.5 no-underline transition-colors hover:bg-black/[0.03]"
                           >
                             <div className="flex items-center gap-2">
-                              <span className="font-sans text-[14px] font-medium text-zinc-950">{label}</span>
-                              {badge && <span className={BADGE_CLASS}>{badge}</span>}
+                              <span className="font-sans text-[14px] font-medium text-zinc-950">{l(label)}</span>
+                              {badge && <span className={BADGE_CLASS}>{l(badge)}</span>}
                             </div>
-                            <span className="font-sans text-[12.5px] font-normal text-zinc-500">{description}</span>
+                            <span className="font-sans text-[12.5px] font-normal text-zinc-500">{l(description)}</span>
                           </a>
                         </NavigationMenuPrimitive.Link>
                       ))}
@@ -310,7 +294,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                   <NavigationMenuPrimitive.Content>
                     <div className="min-w-[280px] py-2">
                       {SOLUTIONS.map(({ icon: SolutionIcon, label, description, href }) => (
-                        <NavigationMenuPrimitive.Link asChild key={label}>
+                        <NavigationMenuPrimitive.Link asChild key={href}>
                           <a
                             href={href}
                             className="flex items-start gap-3 px-4 py-2.5 no-underline transition-colors hover:bg-black/[0.03]"
@@ -319,8 +303,8 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                               <Icon icon={SolutionIcon} size={13} weight="duotone" />
                             </div>
                             <div className="flex flex-col gap-0.5">
-                              <span className="font-sans text-[14px] font-medium text-zinc-950">{label}</span>
-                              <span className="font-sans text-[12.5px] font-normal text-zinc-500">{description}</span>
+                              <span className="font-sans text-[14px] font-medium text-zinc-950">{l(label)}</span>
+                              <span className="font-sans text-[12.5px] font-normal text-zinc-500">{l(description)}</span>
                             </div>
                           </a>
                         </NavigationMenuPrimitive.Link>
@@ -339,8 +323,8 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
             {/* Utility links */}
             {UTILITY_LINKS.map(({ label, href }) => (
-              <a key={label} href={href} className={NAV_ITEM_CLASS}>
-                {label}
+              <a key={href} href={href} className={NAV_ITEM_CLASS}>
+                {l(label)}
               </a>
             ))}
           </div>
@@ -376,13 +360,13 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
             <p className={MOBILE_SECTION_LABEL_CLASS}>{t.products}</p>
             {PRODUCTS.map(({ label, badge, href }) => (
               <a
-                key={label}
+                key={href}
                 href={href.startsWith("#") ? anchorHref(href.slice(1)) : href}
                 onClick={() => setMobileOpen(false)}
                 className={`${MOBILE_ROW_CLASS} justify-between`}
               >
-                {label}
-                {badge && <span className={BADGE_CLASS}>{badge}</span>}
+                {l(label)}
+                {badge && <span className={BADGE_CLASS}>{l(badge)}</span>}
               </a>
             ))}
 
@@ -395,32 +379,32 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                 onClick={() => setMobileOpen(false)}
                 className={MOBILE_ROW_CLASS}
               >
-                {label}
+                {l(label)}
               </a>
             ))}
 
             <div className="my-1 h-px w-full bg-black/[0.06]" />
             {UTILITY_LINKS.map(({ label, href }) => (
               <a
-                key={label}
+                key={href}
                 href={href}
                 onClick={() => setMobileOpen(false)}
                 className={`${MOBILE_ROW_CLASS} gap-1`}
               >
-                {label}
+                {l(label)}
               </a>
             ))}
 
             <div className="my-1 h-px w-full bg-black/[0.06]" />
             {UTILITY_BAR_LINKS.map(({ label, href, external }) => (
               <a
-                key={label}
+                key={href}
                 href={href}
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 onClick={() => { setMobileOpen(false); if (href?.includes("docs.fil.one")) trackDocsClick(href); }}
                 className={MOBILE_ROW_CLASS}
               >
-                {label}
+                {l(label)}
               </a>
             ))}
 
