@@ -317,9 +317,9 @@ export const ROUTE_META = {
     ],
   },
   "/lp/compliance": {
-    title: "Compliant Object Storage with Verifiable Integrity · Fil One",
+    title: "Compliance-Ready Object Storage · Fil One",
     description:
-      `Meet compliance requirements with cryptographically verifiable storage. Integrity proven daily, 11 nines durability, S3-compatible at ${PRICE_PER_TB_SHORT}.`,
+      `S3-compatible storage with Object Lock retention, full version history, and encryption at rest and in transit, at ${PRICE_PER_TB_SHORT} flat.`,
   },
   "/lp/archival": {
     title: "Archival Object Storage · Flat-Rate, No Retrieval Fees | Fil One",
