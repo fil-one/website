@@ -1,4 +1,4 @@
-import { ShieldCheck, ArrowsOut, ChartLine, Plug } from "@phosphor-icons/react";
+import { ShieldCheck, ArrowsOut, Plug } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
 
@@ -68,6 +68,7 @@ const config: LandingPageConfig = {
       </>
     ),
     sub: "An EU endpoint, a free exit, and standard S3 tooling — the concrete pieces that make control real.",
+    columns: 3,
     items: [
       {
         icon: ShieldCheck,
@@ -83,11 +84,6 @@ const config: LandingPageConfig = {
         icon: Plug,
         title: "S3-compatible tooling",
         desc: "Standard S3 API — your existing SDKs, CLIs, and audit tooling work without custom adapters. Control does not require a new stack.",
-      },
-      {
-        icon: ChartLine,
-        title: "Operator-level placement",
-        desc: "{{NEEDS PROOF: specific region and operator-pinning capability — which operators/regions can be selected, and how this is configured}}",
       },
     ],
   },

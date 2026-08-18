@@ -1,4 +1,4 @@
-import { ArrowsOut, ChartLine, Plug, ShieldCheck } from "@phosphor-icons/react";
+import { ArrowsOut, Plug, ShieldCheck } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
 
@@ -67,6 +67,7 @@ const config: LandingPageConfig = {
       </>
     ),
     sub: "An EU endpoint, standard S3 tooling, and a free exit — the concrete pieces of data residency.",
+    columns: 3,
     items: [
       {
         icon: ShieldCheck,
@@ -82,11 +83,6 @@ const config: LandingPageConfig = {
         icon: ArrowsOut,
         title: "No egress on portability",
         desc: "Move data in and out of the EU endpoint without egress fees. Portability is not penalised — the exit cost is $0.",
-      },
-      {
-        icon: ChartLine,
-        title: "Operator-level placement",
-        desc: "{{NEEDS PROOF: specific region and operator-pinning capability — which operators and regions can be pinned, and how}}",
       },
     ],
   },
