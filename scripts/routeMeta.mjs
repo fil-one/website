@@ -456,7 +456,7 @@ export const ROUTE_META = {
   "/lp/go-global": {
     title: "Fil One · Go global. Skip the multi-year build.",
     description:
-      `Embed S3-compatible object storage into your product. Global network, SLA-backed, ${PRICE_PER_TB_SHORT} flat. No capex, no infrastructure build — contact for enterprise and embedding terms.`,
+      `Embed S3-compatible object storage into your product. US and EU regions, SLA-backed, ${PRICE_PER_TB_SHORT} flat. No capex, no infrastructure build — contact for enterprise and embedding terms.`,
   },
   "/lp/metro": {
     title: "Fil One · Hyperscaler speed. Budget-tier bills.",
