@@ -36,8 +36,12 @@ export interface LandingMetric {
 export interface LandingPageConfig {
   seo: { title: string; description: string; canonical: string; ogImage?: string };
   hero: {
-    /** Sentence-length audience line above the heading. */
-    badge?: string;
+    /**
+     * Sentence-length audience line above the heading, wrapped in a Pill
+     * automatically. Pass a ReactNode instead (e.g. AnnouncementBadge) for a
+     * custom badge, such as a "Coming soon" feature announcement.
+     */
+    badge?: ReactNode;
     title: ReactNode;
     description: ReactNode;
     titleSize?: string;
@@ -137,7 +141,13 @@ const LandingPage = ({ config }: { config: LandingPageConfig }) => {
         <Hero
           glow
           grid
-          badge={hero.badge ? <Pill wrap>{hero.badge}</Pill> : undefined}
+          badge={
+            hero.badge == null
+              ? undefined
+              : typeof hero.badge === "string"
+                ? <Pill wrap>{hero.badge}</Pill>
+                : hero.badge
+          }
           titleSize={hero.titleSize ?? "text-[30px] sm:text-[38px] md:text-[54px]"}
           titleMaxWidth={hero.titleMaxWidth}
           descriptionMaxWidth={hero.descriptionMaxWidth}

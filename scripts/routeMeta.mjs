@@ -357,9 +357,9 @@ export const ROUTE_META = {
       `Verifiable, decentralized storage for Web3 and fintech workloads. Integrity proven daily, ${PRICE_PER_TB_SHORT}, no egress, built on Filecoin.`,
   },
   "/lp/web3-pivot": {
-    title: "Decentralized Storage for Web3 Projects · Fil One",
+    title: "S3-Compatible Storage for Web3 Projects · Fil One",
     description:
-      `Transition to decentralized storage without rebuilding your stack. Fil One is S3-compatible, Filecoin-backed, and ${PRICE_PER_TB_SHORT} with no egress fees.`,
+      `Point your Web3 product's storage at Filecoin infrastructure without rebuilding your stack. S3-compatible, no egress fees, no lock-in, at ${PRICE_PER_TB_SHORT} flat.`,
   },
   "/lp/web3-native": {
     title: "Native Web3 Object Storage · Filecoin-Backed | Fil One",
