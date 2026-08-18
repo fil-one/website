@@ -334,7 +334,7 @@ export const ROUTE_META = {
   "/lp/regional-cloud": {
     title: "Regional Cloud Storage Alternative · Fil One",
     description:
-      `A globally distributed, cost-effective alternative to regional cloud storage. ${PRICE_PER_TB_SHORT}, no egress, S3-compatible, and verifiably durable.`,
+      `A cost-effective alternative to building your own regional cloud storage. ${PRICE_PER_TB_SHORT}, no egress, S3-compatible.`,
   },
   "/lp/media": {
     title: "Media & Asset Storage · S3-Compatible, No Egress | Fil One",
