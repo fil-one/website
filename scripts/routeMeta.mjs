@@ -154,7 +154,7 @@ export const ROUTE_META = {
   "/lp/rag-storage": {
     title: "Object Storage for RAG Pipelines · Fil One",
     description:
-      `Store and retrieve RAG corpora, embeddings, and vector indexes at ${PRICE_PER_TB_SHORT}. S3-compatible, no egress fees, verifiable integrity — built for LLM pipelines.`,
+      `Store and retrieve RAG corpora, embeddings, and vector indexes at ${PRICE_PER_TB_SHORT}. S3-compatible, no egress fees — built for LLM pipelines.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
