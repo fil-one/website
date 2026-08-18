@@ -444,9 +444,9 @@ export const ROUTE_META = {
       `Serve digital collections and IIIF imagery with $0 egress. Flat ${PRICE_PER_TB_SHORT} storage, S3-compatible for IIIF image servers, 11 nines durability.`,
   },
   "/lp/digital-preservation": {
-    title: "Fil One · Preservation you can verify, not just trust",
+    title: "Fil One · Preservation you can afford to check",
     description:
-      `Flat ${PRICE_PER_TB_SHORT} digital preservation storage with integrity verification every ~24 hours. No retrieval fees, no egress. 11 nines durability, S3-compatible.`,
+      `Flat ${PRICE_PER_TB_SHORT} digital preservation storage. No retrieval fees, no egress — run fixity checks as often as your program requires. S3-compatible.`,
   },
   "/lp/affordable": {
     title: "Fil One · Make storage your lowest line item",
