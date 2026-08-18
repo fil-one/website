@@ -267,9 +267,9 @@ export const ROUTE_META = {
       `Add a cost-effective storage tier to your multi-cloud stack. ${PRICE_PER_TB_SHORT}, no egress, S3-compatible — works alongside AWS, GCP, and Azure.`,
   },
   "/lp/data-sovereignty": {
-    title: "Data Sovereignty Storage · Verifiable, Decentralized | Fil One",
+    title: "EU Data Residency Storage · S3-Compatible | Fil One",
     description:
-      `Own your data with cryptographic proof. Fil One's Filecoin-backed storage gives you verifiable custody, no vendor lock-in, and S3-compatible access at ${PRICE_PER_TB_SHORT}.`,
+      `S3-compatible object storage with an EU region endpoint. No egress fees, no vendor lock-in, at ${PRICE_PER_TB_SHORT} flat.`,
   },
   "/lp/migrate-from-s3": {
     title: "Migrate from AWS S3 to Fil One · Drop-In S3 Replacement",
