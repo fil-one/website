@@ -14,6 +14,7 @@ import PriceComparisonTable, {
 } from "@/components/PriceComparisonTable";
 import WorkloadCard, { type Workload } from "@/components/WorkloadCard";
 import MetricCard from "@/components/MetricCard";
+import FeatureCard from "@/components/FeatureCard";
 import CtaBanner from "@/components/CtaBanner";
 
 /** Copy shared by every content section: eyebrow, heading, supporting line. */
@@ -56,6 +57,8 @@ export interface LandingPageConfig {
   };
   /** Per-workload cards with bar comparisons. */
   workloads?: SectionCopy & { items: Workload[] };
+  /** Icon/title/description capability cards, e.g. a general features grid. */
+  features?: SectionCopy & { items: { icon: PhosphorIcon; title: string; desc: string }[]; columns?: 2 | 3 | 4 };
   /** Figure cards, e.g. the flat-rate breakdown or measured performance. */
   metrics?: SectionCopy & { items: LandingMetric[]; valueSize?: "md" | "lg" };
   cta: {
@@ -97,13 +100,14 @@ const SectionHead = ({ copy, center = false }: { copy: SectionCopy; center?: boo
  * on a different skeleton (proof bar → features → steps or cards → FAQ).
  */
 const LandingPage = ({ config }: { config: LandingPageConfig }) => {
-  const { seo, hero, problem, comparison, workloads, metrics, cta } = config;
+  const { seo, hero, problem, comparison, workloads, features, metrics, cta } = config;
 
   useSeo({ ogImage: "https://www.fil.one/og-image.png", ...seo });
 
   const problemView = useInView({ threshold: 0.05 });
   const comparisonView = useInView({ threshold: 0.05 });
   const workloadsView = useInView({ threshold: 0.05 });
+  const featuresView = useInView({ threshold: 0.05 });
   const metricsView = useInView({ threshold: 0.05 });
 
   // Surfaces alternate in render order, starting grey under the hero. The
@@ -118,6 +122,7 @@ const LandingPage = ({ config }: { config: LandingPageConfig }) => {
   const problemSurface = problem && nextSurface();
   const comparisonSurface = comparison && nextSurface();
   const workloadsSurface = workloads && nextSurface();
+  const featuresSurface = features && nextSurface();
   const metricsSurface = metrics && nextSurface();
   // The dark card is inset, so the banner has to match the section it sits
   // under rather than continue the alternation.
@@ -190,6 +195,25 @@ const LandingPage = ({ config }: { config: LandingPageConfig }) => {
                     className={`reveal${workloadsView.inView ? " in-view" : ""}`}
                     delayMs={workloadsView.inView ? i * 70 : 0}
                   />
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── Features ─────────────────────────────────────────────────────── */}
+        {features && (
+          <section className={`px-5 md:px-8 py-24 md:py-32 w-full ${featuresSurface}`}>
+            <div
+              ref={featuresView.ref}
+              className={`flex flex-col gap-10 items-center text-center w-full max-w-container mx-auto reveal${featuresView.inView ? " in-view" : ""}`}
+            >
+              <SectionHead copy={features} center />
+              <div
+                className={`grid grid-cols-1 md:grid-cols-2 ${features.columns === 3 ? "lg:grid-cols-3" : features.columns === 2 ? "" : "lg:grid-cols-4"} gap-4 w-full text-left`}
+              >
+                {features.items.map(({ icon, title, desc }) => (
+                  <FeatureCard key={title} icon={icon} title={title} description={desc} />
                 ))}
               </div>
             </div>

@@ -349,7 +349,7 @@ export const ROUTE_META = {
   "/lp/genomics": {
     title: "Genomics & Life Sciences Data Storage · Fil One",
     description:
-      `Store genomics datasets, sequencing data, and research archives at ${PRICE_PER_TB_SHORT} with 11 nines durability, integrity proven daily, and zero egress fees.`,
+      `Store genomics datasets, sequencing data, and research archives at ${PRICE_PER_TB_SHORT} with zero egress fees on re-analysis, at any scale.`,
   },
   "/lp/web3-fintech": {
     title: "Web3 & Fintech Data Storage · Verifiable, S3-Compatible | Fil One",
