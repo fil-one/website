@@ -62,7 +62,18 @@ export interface LandingPageConfig {
   /** Per-workload cards with bar comparisons. */
   workloads?: SectionCopy & { items: Workload[] };
   /** Icon/title/description capability cards, e.g. a general features grid. */
-  features?: SectionCopy & { items: { icon: PhosphorIcon; title: string; desc: string }[]; columns?: 2 | 3 | 4 };
+  features?: SectionCopy & {
+    items: {
+      icon: PhosphorIcon;
+      title: string;
+      desc: string;
+      /** Status tag for a not-yet-live feature, e.g. "Coming soon". */
+      badge?: string;
+      /** Trailing link, e.g. a waitlist signup for a not-yet-live feature. */
+      cta?: { label: string; href: string };
+    }[];
+    columns?: 2 | 3 | 4;
+  };
   /** Figure cards, e.g. the flat-rate breakdown or measured performance. */
   metrics?: SectionCopy & { items: LandingMetric[]; valueSize?: "md" | "lg" };
   cta: {
@@ -222,8 +233,8 @@ const LandingPage = ({ config }: { config: LandingPageConfig }) => {
               <div
                 className={`grid grid-cols-1 md:grid-cols-2 ${features.columns === 3 ? "lg:grid-cols-3" : features.columns === 2 ? "" : "lg:grid-cols-4"} gap-4 w-full text-left`}
               >
-                {features.items.map(({ icon, title, desc }) => (
-                  <FeatureCard key={title} icon={icon} title={title} description={desc} />
+                {features.items.map(({ icon, title, desc, badge, cta }) => (
+                  <FeatureCard key={title} icon={icon} title={title} description={desc} badge={badge} cta={cta} />
                 ))}
               </div>
             </div>
