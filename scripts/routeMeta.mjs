@@ -466,7 +466,7 @@ export const ROUTE_META = {
   "/lp/data-control": {
     title: "Fil One · Your data, under your control",
     description:
-      `S3-compatible storage with EU region endpoint, recurring integrity verification, $0 exit egress, and no vendor lock-in. Flat ${PRICE_PER_TB_SHORT}.`,
+      `S3-compatible storage with an EU region endpoint, $0 exit egress, and no vendor lock-in. Flat ${PRICE_PER_TB_SHORT}.`,
   },
   "/lp/ml-training": {
     title: "Fil One · Build around the clock",
