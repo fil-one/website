@@ -322,9 +322,9 @@ export const ROUTE_META = {
       `Meet compliance requirements with cryptographically verifiable storage. Integrity proven daily, 11 nines durability, S3-compatible at ${PRICE_PER_TB_SHORT}.`,
   },
   "/lp/archival": {
-    title: "Archival Object Storage · Cheap, Durable & Verifiable | Fil One",
+    title: "Archival Object Storage · Flat-Rate, No Retrieval Fees | Fil One",
     description:
-      `Archive cold data at ${PRICE_PER_TB_SHORT} with 11 nines durability and integrity proven daily. No egress fees when you need to restore. S3-compatible.`,
+      `Archive cold data at ${PRICE_PER_TB_SHORT} flat. No egress fees or retrieval delay when you need to restore. S3-compatible.`,
   },
   "/lp/versioning": {
     title: "Object Storage with Versioning · Fil One",
