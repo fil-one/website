@@ -329,7 +329,7 @@ export const ROUTE_META = {
   "/lp/versioning": {
     title: "Object Storage with Versioning · Fil One",
     description:
-      `S3-compatible versioning on Filecoin. Keep every version of every object at ${PRICE_PER_TB_SHORT} with no egress fees and cryptographic integrity guarantees.`,
+      `S3-compatible versioning, built on Filecoin infrastructure. Keep every version of every object and download any of them at ${PRICE_PER_TB_SHORT} with no egress fees.`,
   },
   "/lp/regional-cloud": {
     title: "Regional Cloud Storage Alternative · Fil One",
