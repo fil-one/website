@@ -461,7 +461,7 @@ export const ROUTE_META = {
   "/lp/metro": {
     title: "Fil One · Hyperscaler speed. Budget-tier bills.",
     description:
-      `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. A global network of storage providers — fast reads without the hyperscaler price tag. No egress fees.`,
+      `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. Always-hot storage with no egress fees — fast reads without the hyperscaler price tag.`,
   },
   "/lp/data-control": {
     title: "Fil One · Your data, under your control",
