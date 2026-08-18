@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 type PillVariant = "soft" | "solid";
-type PillTone = "brand" | "success";
+type PillTone = "brand" | "success" | "warning" | "danger";
 
 interface PillProps {
   children: ReactNode;
@@ -11,6 +11,11 @@ interface PillProps {
   tone?: PillTone;
   /** pulsing ring animation, for "New"/"Soon" status pills */
   pulse?: boolean;
+  /**
+   * Let the label wrap instead of staying on one line. Needed for the longer
+   * sentence-length hero badges, which overflow a narrow phone on one line.
+   */
+  wrap?: boolean;
   className?: string;
 }
 
@@ -23,6 +28,16 @@ const TONE_CLASSES: Record<PillTone, Record<PillVariant, string>> = {
     soft: "border border-success-600/20 bg-success-50 text-success-700",
     solid: "bg-success-600 text-white",
   },
+  // warning-700 / danger-700 on their own 50 tints; the 600 steps land under
+  // AA at this size, and the pill text is 11px.
+  warning: {
+    soft: "border border-warning-600/20 bg-warning-50 text-warning-700",
+    solid: "bg-warning-600 text-white",
+  },
+  danger: {
+    soft: "border border-danger-600/20 bg-danger-50 text-danger-700",
+    solid: "bg-danger-600 text-white",
+  },
 };
 
 /**
@@ -30,9 +45,18 @@ const TONE_CLASSES: Record<PillTone, Record<PillVariant, string>> = {
  * Formalises the tinted/filled pills previously inlined across the site,
  * using the brand/success color + font-mono design tokens.
  */
-const Pill = ({ children, variant = "soft", tone = "brand", pulse = false, className = "" }: PillProps) => (
+const Pill = ({
+  children,
+  variant = "soft",
+  tone = "brand",
+  pulse = false,
+  wrap = false,
+  className = "",
+}: PillProps) => (
   <span
-    className={`inline-flex items-center whitespace-nowrap rounded-full px-2 py-[3px] font-mono text-[11px] font-medium uppercase leading-[1.4] tracking-[0.06em] ${TONE_CLASSES[tone][variant]}${pulse ? " badge-pulse" : ""}${className ? ` ${className}` : ""}`}
+    className={`inline-flex items-center rounded-full px-2 py-[3px] font-mono text-[11px] font-medium uppercase leading-[1.4] tracking-[0.06em] ${
+      wrap ? "max-w-full text-center text-balance" : "whitespace-nowrap"
+    } ${TONE_CLASSES[tone][variant]}${pulse ? " badge-pulse" : ""}${className ? ` ${className}` : ""}`}
   >
     {children}
   </span>
