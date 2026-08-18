@@ -199,7 +199,7 @@ export const ROUTE_META = {
   "/lp/ml-checkpoints": {
     title: "ML Checkpoint Storage · Save Model Weights Cheaply | Fil One",
     description:
-      `Store ML checkpoints and model artifacts at ${PRICE_PER_TB_SHORT} with no egress fees. S3-compatible, durable, and verifiable — ideal for training runs on any cloud.`,
+      `Store ML checkpoints and model artifacts at ${PRICE_PER_TB_SHORT} with no egress fees. S3-compatible — ideal for training runs on any cloud.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
