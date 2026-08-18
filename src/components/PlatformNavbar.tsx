@@ -26,7 +26,7 @@ interface SolutionItem extends NavLinkItem {
   icon: PhosphorIcon;
 }
 
-const PRODUCTS = [
+const PRODUCTS: readonly ProductItem[] = [
   {
     href: "/storage",
     badge: null,
@@ -54,9 +54,9 @@ const PRODUCTS = [
       es: "Integraciones MCP, OAuth y SDK",
     },
   },
-] satisfies readonly ProductItem[];
+];
 
-const SOLUTIONS = [
+const SOLUTIONS: readonly SolutionItem[] = [
   {
     icon: Brain,
     href: "/solutions/ai-training",
@@ -93,18 +93,17 @@ const SOLUTIONS = [
       es: "Copias de seguridad que el ransomware no puede tocar",
     },
   },
-] satisfies readonly SolutionItem[];
+];
 
-const UTILITY_LINKS = [
+const UTILITY_LINKS: readonly NavLinkItem[] = [
   { href: "/about", label: { en: "About", es: "Nosotros" } },
   { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
   { href: "/enterprise", label: { en: "Enterprise", es: "Empresas" } },
   { href: "/blog", label: "Blog" },
-] satisfies readonly NavLinkItem[];
+];
 
 /** Support is a prop because some landing pages point it at their own page. */
-const utilityBarLinks = (supportHref: string) =>
-  [
+const utilityBarLinks = (supportHref: string): readonly NavLinkItem[] => [
     {
       href: "https://docs.fil.one",
       external: true,
@@ -112,7 +111,7 @@ const utilityBarLinks = (supportHref: string) =>
     },
     { href: "/partners", label: "Partners" },
     { href: supportHref, label: { en: "Support", es: "Soporte" } },
-  ] satisfies readonly NavLinkItem[];
+  ];
 
 const UTILITY_BAR_HEIGHT = 36;
 
@@ -416,7 +415,6 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                 href="https://app.fil.one/login?screen_hint=signup"
                 variant="primary"
                 fullWidth
-               
                 onClick={() => setMobileOpen(false)}
               >
                 {t.startForFree}
