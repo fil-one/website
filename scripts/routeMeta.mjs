@@ -259,7 +259,7 @@ export const ROUTE_META = {
   "/lp/web-scraping": {
     title: "Storage for Web Scraping & Data Collection · Fil One",
     description:
-      `Store scraped datasets, crawl archives, and raw HTML at ${PRICE_PER_TB_SHORT}. No egress fees when feeding data into pipelines. S3-compatible and verifiable.`,
+      `Store scraped datasets, crawl archives, and raw HTML at ${PRICE_PER_TB_SHORT}. No egress fees when feeding data into pipelines. S3-compatible.`,
   },
   "/lp/multi-cloud": {
     title: "Multi-Cloud Object Storage · S3-Compatible | Fil One",
