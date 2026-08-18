@@ -352,9 +352,9 @@ export const ROUTE_META = {
       `Store genomics datasets, sequencing data, and research archives at ${PRICE_PER_TB_SHORT} with zero egress fees on re-analysis, at any scale.`,
   },
   "/lp/web3-fintech": {
-    title: "Web3 & Fintech Data Storage · Verifiable, S3-Compatible | Fil One",
+    title: "Web3 & Fintech Data Storage · S3-Compatible | Fil One",
     description:
-      `Verifiable, decentralized storage for Web3 and fintech workloads. Integrity proven daily, ${PRICE_PER_TB_SHORT}, no egress, built on Filecoin.`,
+      `S3-compatible storage for Web3 and fintech workloads, built on Filecoin infrastructure. ${PRICE_PER_TB_SHORT} flat, no egress, no lock-in.`,
   },
   "/lp/web3-pivot": {
     title: "S3-Compatible Storage for Web3 Projects · Fil One",
