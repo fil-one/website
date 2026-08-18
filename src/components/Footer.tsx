@@ -3,6 +3,8 @@ import { trackDocsClick } from "@/lib/analytics";
 import { localize, type Lang, type Localized } from "@/lib/i18n";
 
 interface FooterGroup {
+  /** Stable key: the title is localized, so it would change with `lang`. */
+  id: string;
   title: Localized;
   items: { href: string; label: Localized }[];
 }
@@ -23,6 +25,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
    */
   const groups: FooterGroup[] = [
     {
+      id: "products",
       title: { en: "Products", es: "Productos" },
       items: [
         { href: "/storage", label: { en: "Object Storage", es: "Almacenamiento de objetos" } },
@@ -31,6 +34,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
       ],
     },
     {
+      id: "solutions",
       title: { en: "Solutions", es: "Soluciones" },
       items: [
         {
@@ -46,6 +50,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
       ],
     },
     {
+      id: "company",
       title: { en: "Company", es: "Empresa" },
       items: [
         { href: "/about", label: { en: "About", es: "Nosotros" } },
@@ -56,6 +61,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
       ],
     },
     {
+      id: "resources",
       title: { en: "Resources", es: "Recursos" },
       items: [
         { href: "https://docs.fil.one", label: { en: "Documentation", es: "Documentación" } },
@@ -66,6 +72,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
       ],
     },
     {
+      id: "legal",
       title: "Legal",
       items: [
         { href: "/privacy", label: { en: "Privacy Policy", es: "Política de privacidad" } },
@@ -99,8 +106,8 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
 
           {/* Right: link groups */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 md:flex md:flex-row md:gap-16 items-start">
-            {groups.map(({ title, items }) => (
-              <div key={l(title)} className="flex flex-col gap-3 items-start">
+            {groups.map(({ id, title, items }) => (
+              <div key={id} className="flex flex-col gap-3 items-start">
                 <p className="font-sans text-[12.5px] font-medium tracking-[0.02em] text-zinc-950">{l(title)}</p>
                 {items.map(({ label, href }) => (
                   <a

@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { List, X, ArrowUpRight, CaretDown, Brain, LinkSimple, FilmSlate, ShieldCheck } from "@phosphor-icons/react";
-import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
 import { useLocation } from "react-router-dom";
 import filOneLogo from "../assets/fil-one-logo.svg";
 import { trackDocsClick } from "@/lib/analytics";
 import { Button } from "@/components/Button";
-import Icon from "@/components/Icon";
+import Icon, { type IconProps } from "@/components/Icon";
 import { localize, type Lang, type Localized } from "@/lib/i18n";
 
 /** One entry in a nav or footer link list. */
@@ -23,7 +22,8 @@ interface ProductItem extends NavLinkItem {
 
 interface SolutionItem extends NavLinkItem {
   description: Localized;
-  icon: PhosphorIcon;
+  /** Derived from the shared <Icon> so the two can never disagree. */
+  icon: IconProps["icon"];
 }
 
 const PRODUCTS: readonly ProductItem[] = [
