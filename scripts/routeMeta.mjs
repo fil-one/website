@@ -64,7 +64,7 @@ export const ROUTE_META = {
   "/lp/agents": {
     title: "Fil One for AI Agents · S3 Storage for RAG, Agent Memory & Datasets",
     description:
-      `Give your AI agents durable, verifiable storage. S3-compatible, ${PRICE_PER_TB_SHORT}, no egress fees, integrity proven daily. Drop-in replacement for AWS S3.`,
+      `Give your AI agents S3-compatible storage at ${PRICE_PER_TB_SHORT}, no egress fees. Drop-in replacement for AWS S3.`,
     jsonLd: [
       {
         "@context": "https://schema.org",

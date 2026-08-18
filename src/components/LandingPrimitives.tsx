@@ -17,13 +17,16 @@ export const SectionLabel = ({ children }: { children: React.ReactNode }) => (
 export const SectionHeading = ({
   children,
   maxWidth,
+  size = "text-[24px] md:text-[34px]",
 }: {
   children: React.ReactNode;
   /** Optional cap on the heading's width (px) to control where it wraps. */
   maxWidth?: number;
+  /** Responsive font-size classes; defaults to the standard heading scale. */
+  size?: string;
 }) => (
   <h2
-    className="font-display font-medium text-[24px] md:text-[34px] leading-[1.2] tracking-[-0.02em] text-zinc-950 m-0"
+    className={`font-display font-medium ${size} leading-[1.2] tracking-[-0.02em] text-zinc-950 m-0`}
     style={maxWidth ? { maxWidth } : undefined}
   >
     {children}
