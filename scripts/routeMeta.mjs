@@ -344,7 +344,7 @@ export const ROUTE_META = {
   "/lp/gaming": {
     title: "Game Asset & Save-Data Storage · Fil One",
     description:
-      `Durable, verifiable storage for game assets, saves, and telemetry at ${PRICE_PER_TB_SHORT}. Zero egress fees and S3-compatible — built for game backends.`,
+      `S3-compatible storage for game assets, saves, and telemetry at ${PRICE_PER_TB_SHORT}. Zero egress fees — built for game backends.`,
   },
   "/lp/genomics": {
     title: "Genomics & Life Sciences Data Storage · Fil One",
