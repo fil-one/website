@@ -87,60 +87,30 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
     : "© 2026 Fil One. All rights reserved.";
 
   return (
-    <footer
-      className="flex flex-col px-6 md:px-12 pt-14 pb-10 w-full border-t"
-      style={{ borderColor: "rgba(0,0,0,0.07)", backgroundColor: "#FFFFFF" }}
-    >
-      <div className="flex flex-col gap-12 w-full max-w-[1400px] mx-auto">
+    <footer className="flex w-full flex-col border-t border-black/[0.07] bg-white px-6 pb-10 pt-14 md:px-12">
+      <div className="mx-auto flex w-full max-w-container-wide flex-col gap-12">
         {/* Top row */}
         <div className="flex flex-col md:flex-row md:justify-between gap-10 md:gap-0">
           {/* Left: logo + tagline */}
           <div className="flex flex-col gap-3 items-start max-w-[220px]">
-            <a href="/" style={{ textDecoration: "none" }}>
-              <img src={filOneLogo} alt="Fil One" style={{ height: 18, width: "auto", display: "block" }} />
+            <a href="/" className="no-underline">
+              <img src={filOneLogo} alt="Fil One" className="block h-[18px] w-auto" />
             </a>
-            <p
-              style={{
-                fontFamily: "'Funnel Sans', sans-serif",
-                fontWeight: 400,
-                fontSize: 13,
-                lineHeight: "1.6",
-                color: "#71717A",
-              }}
-            >
-              {tagline}
-            </p>
+            <p className="font-sans text-[13px] font-normal leading-[1.6] text-zinc-500">{tagline}</p>
           </div>
 
           {/* Right: link groups */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 md:flex md:flex-row md:gap-16 items-start">
             {Object.entries(links).map(([title, items]) => (
               <div key={title} className="flex flex-col gap-3 items-start">
-                <p
-                  style={{
-                    fontFamily: "'Funnel Sans', sans-serif",
-                    fontWeight: 500,
-                    fontSize: 12.5,
-                    letterSpacing: "0.02em",
-                    color: "#09090B",
-                  }}
-                >
-                  {title}
-                </p>
+                <p className="font-sans text-[12.5px] font-medium tracking-[0.02em] text-zinc-950">{title}</p>
                 {items.map(({ label, href }) => (
                   <a
                     key={label}
                     href={href}
                     {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     onClick={href.includes("docs.fil.one") ? () => trackDocsClick(href) : undefined}
-                    style={{
-                      fontFamily: "'Funnel Sans', sans-serif",
-                      fontWeight: 400,
-                      fontSize: 13.5,
-                      lineHeight: "1.4",
-                      textDecoration: "none",
-                    }}
-                    className="text-[#52525B] hover:text-[#09090B] transition-colors duration-150"
+                    className="font-sans text-[13.5px] font-normal leading-[1.4] text-zinc-600 no-underline transition-colors duration-150 hover:text-zinc-950"
                   >
                     {label}
                   </a>
@@ -151,17 +121,8 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
         </div>
 
         {/* Bottom: divider + copyright */}
-        <div className="flex flex-col gap-4 border-t pt-6" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
-          <p
-            style={{
-              fontFamily: "'Funnel Sans', sans-serif",
-              fontWeight: 400,
-              fontSize: 12,
-              color: "#71717A",
-            }}
-          >
-            {copyright}
-          </p>
+        <div className="flex flex-col gap-4 border-t border-black/[0.06] pt-6">
+          <p className="font-sans text-[12px] font-normal text-zinc-500">{copyright}</p>
         </div>
       </div>
     </footer>

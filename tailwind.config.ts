@@ -179,6 +179,8 @@ export default {
         "brand-glow": "0px 12px 32px -8px rgba(0,144,255,0.28), 0px 2px 6px rgba(0,0,0,0.05)",
         // Subtle resting brand tint under a highlighted accent card (pricing teaser)
         "brand-ambient": "0 2px 20px rgba(0,144,255,0.07)",
+        // Floating overlay panel — the navbar's dropdown viewport
+        dropdown: "0px 4px 24px rgba(0,0,0,0.08), 0px 1px 4px rgba(0,0,0,0.04)",
       },
 
       // Repeated background gradients (usable as bg-hero-grid-mask, bg-dark-section…)
