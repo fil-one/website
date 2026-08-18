@@ -31,6 +31,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
     ],
     Resources: [
       { label: "Documentation", href: "https://docs.fil.one" },
+      { label: "Blog", href: "/blog" },
       { label: "Support", href: supportHref },
       { label: "Status", href: "https://status.fil.one" },
       { label: "Filecoin", href: "https://filecoin.io" },
@@ -64,6 +65,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
     ],
     Recursos: [
       { label: "Documentación", href: "https://docs.fil.one" },
+      { label: "Blog", href: "/blog" },
       { label: "Soporte", href: supportHref },
       { label: "Estado", href: "https://status.fil.one" },
       { label: "Filecoin", href: "https://filecoin.io" },
