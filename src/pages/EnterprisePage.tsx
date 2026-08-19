@@ -52,8 +52,8 @@ const FEATURES = [
   },
   {
     icon: Certificate,
-    title: "Compliance roadmap",
-    description: "SOC 2 Type II and ISO 27001 in progress. Ask us for current documentation.",
+    title: "Certified infrastructure",
+    description: "Our services are delivered through top-tier data centers that are certified to ISO 27001, SOC 2, and PCI DSS standards.",
   },
 ];
 
@@ -87,7 +87,7 @@ const FAQS = [
   },
   {
     q: "What compliance certifications do you have?",
-    a: "SOC 2 Type II and ISO 27001 are actively in progress. Contact us for a current controls overview and compliance documentation for your procurement team.",
+    a: "Our services are delivered through top-tier data centers that are certified to ISO 27001, SOC 2, and PCI DSS standards. Contact us for a current controls overview and compliance documentation for your procurement team.",
   },
   {
     q: "How does enterprise pricing work?",

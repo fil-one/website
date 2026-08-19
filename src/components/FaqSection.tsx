@@ -32,7 +32,7 @@ const faqs = [
     question: "How does Fil One approach security and compliance?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Encryption is industry-standard, with per-object data encryption keys that protect your data regardless of which provider it's stored with. SOC 2 Type II and ISO 27001 certifications are actively in progress. Reach out to <a href="mailto:security@fil.one" className="faq-link">security@fil.one</a> if you'd like to be notified when those finalize, or have other questions about security.</p>
+        <p>Encryption is industry-standard, with per-object data encryption keys that protect your data regardless of which provider it's stored with. Our services are delivered through top-tier data centers that are certified to ISO 27001, SOC 2, and PCI DSS standards. Reach out to <a href="mailto:security@fil.one" className="faq-link">security@fil.one</a> for compliance documentation or any other security questions.</p>
       </div>
     ),
   },
