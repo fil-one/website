@@ -22,6 +22,24 @@ import { resolve } from "path";
 import { fileURLToPath, pathToFileURL } from "url";
 import { BASE_URL, ROUTE_META } from "./routeMeta.mjs";
 
+/**
+ * Inline `font-family` declarations in the site chrome (`<nav>`, `<footer>`),
+ * which render on every page. Asserted at build time by step 4 below.
+ *
+ * Scoped to the chrome deliberately: page bodies still carry their own inline
+ * fonts until each page is migrated (FIL-689/FIL-690), so a whole-document
+ * assertion would sit red for reasons unrelated to the chrome and block every
+ * build until that work finishes. Tighten the scope as pages land.
+ */
+const chromeInlineFontCount = (html) => {
+  const segments = [/<nav\b[\s\S]*?<\/nav>/, /<footer\b[\s\S]*?<\/footer>/];
+  return segments.reduce((total, pattern) => {
+    const match = html.match(pattern);
+    if (!match) return total;
+    return total + (match[0].match(/style="[^"]*font-family/g) ?? []).length;
+  }, 0);
+};
+
 // ── DOM environment ──────────────────────────────────────────────────────────
 // Must happen before any dynamic import of the SSR bundle, because third-party
 // packages (e.g. sonner) call document.createTextNode / similar at module
@@ -247,6 +265,16 @@ async function prerender() {
 
       if (!existsSync(outDir)) {
         mkdirSync(outDir, { recursive: true });
+      }
+
+      // The chrome must ship zero inline fonts. It appears on every page, so a
+      // regression here silently undoes the token migration everywhere at once.
+      const inlineFonts = chromeInlineFontCount(html);
+      if (inlineFonts > 0) {
+        failures.push({
+          route,
+          error: `${inlineFonts} inline font-family declaration(s) in <nav>/<footer> — use font-sans / font-mono instead`,
+        });
       }
 
       writeFileSync(resolve(outDir, "index.html"), html);
