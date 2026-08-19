@@ -58,6 +58,13 @@ const WORKLOADS = {
   ],
 };
 
+const FEATURES = {
+  label: "Features",
+  heading: "Features heading",
+  sub: "Features sub",
+  items: [{ icon: ArrowsOut, title: "Feature title", desc: "Feature desc" }],
+};
+
 const METRICS = {
   label: "Pricing",
   heading: "Metrics heading",
@@ -80,8 +87,15 @@ const surfaces = (config: LandingPageConfig) => {
 describe("LandingPage — surface alternation", () => {
   it("alternates grey/white starting grey, with the banner matching the section above it", () => {
     expect(
-      surfaces({ ...BASE, problem: PROBLEM, comparison: COMPARISON, workloads: WORKLOADS, metrics: METRICS })
-    ).toEqual(["grey", "white", "grey", "white", "white"]);
+      surfaces({
+        ...BASE,
+        problem: PROBLEM,
+        comparison: COMPARISON,
+        workloads: WORKLOADS,
+        features: FEATURES,
+        metrics: METRICS,
+      })
+    ).toEqual(["grey", "white", "grey", "white", "grey", "grey"]);
   });
 
   it("keeps alternating when a middle section is omitted", () => {
@@ -120,13 +134,21 @@ describe("LandingPage — optional sections", () => {
     const { container, getByText } = render(
       <MemoryRouter>
         <LandingPage
-          config={{ ...BASE, problem: PROBLEM, comparison: COMPARISON, workloads: WORKLOADS, metrics: METRICS }}
+          config={{
+            ...BASE,
+            problem: PROBLEM,
+            comparison: COMPARISON,
+            workloads: WORKLOADS,
+            features: FEATURES,
+            metrics: METRICS,
+          }}
         />
       </MemoryRouter>
     );
     getByText("Problem heading");
     getByText("Comparison heading");
     getByText("Workloads heading");
+    getByText("Features heading");
     getByText("Metrics heading");
     expect(container.querySelector("#compare")).not.toBeNull();
     expect(container.querySelector("#workloads")).not.toBeNull();

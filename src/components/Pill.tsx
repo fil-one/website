@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 type PillVariant = "soft" | "solid";
-type PillTone = "brand" | "success" | "warning" | "danger";
+type PillTone = "brand" | "neutral" | "success" | "warning" | "danger";
 
 interface PillProps {
   children: ReactNode;
@@ -23,6 +23,12 @@ const TONE_CLASSES: Record<PillTone, Record<PillVariant, string>> = {
   brand: {
     soft: "border border-brand/20 bg-brand-50 text-brand-600",
     solid: "bg-brand-500 text-white",
+  },
+  // For status pills with no brand meaning (e.g. "Coming soon" on a card that
+  // isn't itself a highlight) — neutral zinc instead of brand-tinted.
+  neutral: {
+    soft: "border border-black/[0.08] bg-zinc-100 text-zinc-500",
+    solid: "bg-zinc-500 text-white",
   },
   success: {
     soft: "border border-success-600/20 bg-success-50 text-success-700",
