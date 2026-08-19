@@ -13,6 +13,7 @@ import TextLink from "@/components/TextLink";
 import FeatureList from "@/components/FeatureList";
 import CodeBlock, { type CodeSnippet } from "@/components/CodeBlock";
 import Table from "@/components/Table";
+import { signupUrl } from "@/lib/console-url";
 
 const DOCS_URL = "https://docs.fil.one";
 
@@ -82,7 +83,6 @@ Contents?.forEach((obj) => console.log(obj.Key, obj.Size));`,
     code: `package main
 
 import (
-import { signupUrl } from "@/lib/console-url";
     "context"
     "fmt"
     "os"
