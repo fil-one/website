@@ -1,8 +1,8 @@
 import { Database, ChartLine, Plug, ShieldCheck } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No per-request fees · Connects in minutes";
@@ -30,7 +30,7 @@ const config: LandingPageConfig = {
     ),
     description: `S3-compatible storage at ${PRICE_PER_TB_SHORT} flat. No per-request fees, no egress. Keep every event, every span, every audit trail — without watching the PUT counter.`,
     ctas: [
-      { label: "Start for free", href: SIGNUP_URL, variant: "primary" },
+      { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
@@ -124,7 +124,7 @@ const config: LandingPageConfig = {
   cta: {
     heading: "Keep every log.",
     subhead: "Free 1 TB evaluation. Point your existing collector at the endpoint and watch the request line zero out.",
-    cta: { label: "Start for free", href: SIGNUP_URL },
+    cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,
   },

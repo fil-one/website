@@ -1,8 +1,8 @@
 import { Database, ArrowsOut, ChartLine, Lock } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
@@ -27,7 +27,7 @@ const config: LandingPageConfig = {
     ),
     description: `S3-compatible storage with built-in version history. Download any prior version by ID. ${PRICE_PER_TB_SHORT} flat, no egress on reads.`,
     ctas: [
-      { label: "Start for free", href: SIGNUP_URL, variant: "primary" },
+      { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
@@ -94,7 +94,7 @@ const config: LandingPageConfig = {
   cta: {
     heading: "Not a backup. The exact state.",
     subhead: "Free 1 TB evaluation. Create a versioned bucket, write a few objects, and download a specific prior version in one call.",
-    cta: { label: "Start for free", href: SIGNUP_URL },
+    cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,
   },

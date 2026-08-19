@@ -1,8 +1,8 @@
 import { ArrowsOut, ChartLine, Plug, Database } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
 import { PRICE_DISPLAY, PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
@@ -33,7 +33,7 @@ const config: LandingPageConfig = {
     ),
     description: `S3-compatible object storage, ${PRICE_PER_TB_SHORT} flat, $0 egress. Store the library and deliver at scale without egress fees eating margin.`,
     ctas: [
-      { label: "Start for free", href: SIGNUP_URL, variant: "primary" },
+      { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
@@ -127,7 +127,7 @@ const config: LandingPageConfig = {
   cta: {
     heading: "Store the library. Skip the egress.",
     subhead: "Free 1 TB evaluation. Upload a few assets, stream them, and watch the egress line stay at zero.",
-    cta: { label: "Start for free", href: SIGNUP_URL },
+    cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,
   },

@@ -14,7 +14,6 @@ import FeatureList from "@/components/FeatureList";
 import CodeBlock, { type CodeSnippet } from "@/components/CodeBlock";
 import Table from "@/components/Table";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const DOCS_URL = "https://docs.fil.one";
 
 // ─── Comparison table data ─────────────────────────────────────────────────────
@@ -83,6 +82,7 @@ Contents?.forEach((obj) => console.log(obj.Key, obj.Size));`,
     code: `package main
 
 import (
+import { signupUrl } from "@/lib/console-url";
     "context"
     "fmt"
     "os"
@@ -148,7 +148,7 @@ const USE_CASES = [
     icon: ShieldCheck,
     title: "Persistent agent memory and artifacts",
     description: "Your agents write session state, conversation history, checkpoints, and generated outputs straight to S3 buckets, and read them back on the next run. Flat pricing means the loop doesn't cost you: thousands of small reads and writes price the same as a handful. Keep everything your agents produce instead of deleting it to stay in budget. Plain S3: works today with boto3, the AWS CLI, or any SDK.",
-    cta: { label: "Start now", href: SIGNUP_URL },
+    cta: { label: "Start now", href: signupUrl() },
   },
   {
     icon: Plug,
@@ -234,7 +234,7 @@ const AgentsLandingPage = () => {
             </>
           }
           ctas={[
-            { label: "Start for free", href: SIGNUP_URL, variant: "primary" },
+            { label: "Start for free", href: signupUrl(), variant: "primary" },
             { label: "Read the docs", href: DOCS_URL, variant: "secondary", target: "_blank", rel: "noopener noreferrer" },
           ]}
           tagline="No credit card required · 30 days free · Connects in minutes"
@@ -315,7 +315,7 @@ const AgentsLandingPage = () => {
                 <div className="grid grid-cols-2 border-t border-brand/10">
                   <div className="border-r border-brand/10" />
                   <div className="p-6">
-                    <Button variant="primary" href={SIGNUP_URL}>
+                    <Button variant="primary" href={signupUrl()}>
                       Start for free
                     </Button>
                   </div>
@@ -472,7 +472,7 @@ const AgentsLandingPage = () => {
                   Free trial: 1 TB storage + 2 TB bandwidth, 30 days.<br />No credit card required.
                 </p>
 
-                <Button variant="primary" href={SIGNUP_URL}>
+                <Button variant="primary" href={signupUrl()}>
                   Start for free
                 </Button>
               </div>

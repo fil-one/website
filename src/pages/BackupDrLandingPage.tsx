@@ -1,8 +1,8 @@
 import { ArrowsOut, Clock, ShieldCheck } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No retrieval fees · S3-compatible";
@@ -27,7 +27,7 @@ const config: LandingPageConfig = {
     ),
     description: `Flat ${PRICE_PER_TB_SHORT}. No retrieval fees, no egress, no archive-tier wait. A hot, S3-compatible backup target you can actually afford to restore from.`,
     ctas: [
-      { label: "Start for free", href: SIGNUP_URL, variant: "primary" },
+      { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
@@ -223,7 +223,7 @@ const config: LandingPageConfig = {
     heading: "A backup target you'll actually test.",
     subhead: "Free 1 TB evaluation. Point Veeam, Restic, MSP360, or any S3 client at the endpoint.",
     headingMaxWidth: 560,
-    cta: { label: "Start for free", href: SIGNUP_URL },
+    cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,
   },

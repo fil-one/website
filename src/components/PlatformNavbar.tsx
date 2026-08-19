@@ -5,141 +5,142 @@ import { useLocation } from "react-router-dom";
 import filOneLogo from "../assets/fil-one-logo.svg";
 import { trackDocsClick } from "@/lib/analytics";
 import { Button } from "@/components/Button";
+import Icon, { type IconProps } from "@/components/Icon";
+import { localize, type Lang, type Localized } from "@/lib/i18n";
+import { consoleUrl, signupUrl } from "@/lib/console-url";
 
-const PRODUCTS_EN = [
+/** One entry in a nav or footer link list. */
+interface NavLinkItem {
+  href: string;
+  label: Localized;
+  external?: boolean;
+}
+
+interface ProductItem extends NavLinkItem {
+  description: Localized;
+  badge: Localized | null;
+}
+
+interface SolutionItem extends NavLinkItem {
+  description: Localized;
+  /** Derived from the shared <Icon> so the two can never disagree. */
+  icon: IconProps["icon"];
+}
+
+const PRODUCTS: readonly ProductItem[] = [
   {
-    label: "Object Storage",
-    description: "S3-compatible, verifiably durable",
-    badge: null,
     href: "/storage",
+    badge: null,
+    label: { en: "Object Storage", es: "Almacenamiento de objetos" },
+    description: {
+      en: "S3-compatible, verifiably durable",
+      es: "Compatible con S3, con durabilidad verificable",
+    },
   },
   {
-    label: "Bucket Intelligence",
-    description: "Turn buckets into knowledge bases",
-    badge: "Early access",
     href: "/bucket-intelligence",
+    badge: { en: "Early access", es: "Acceso anticipado" },
+    label: "Bucket Intelligence",
+    description: {
+      en: "Turn buckets into knowledge bases",
+      es: "Convierte tus buckets en bases de conocimiento",
+    },
   },
   {
-    label: "AI Agent Toolkit",
-    description: "MCP, OAuth & SDK integrations",
-    badge: "Early access",
     href: "/ai-agent-toolkit",
+    badge: { en: "Early access", es: "Acceso anticipado" },
+    label: "AI Agent Toolkit",
+    description: {
+      en: "MCP, OAuth & SDK integrations",
+      es: "Integraciones MCP, OAuth y SDK",
+    },
   },
 ];
 
-const PRODUCTS_ES = [
-  {
-    label: "Almacenamiento de objetos",
-    description: "Compatible con S3, con durabilidad verificable",
-    badge: null,
-    href: "/storage",
-  },
-  {
-    label: "Bucket Intelligence",
-    description: "Convierte tus buckets en bases de conocimiento",
-    badge: "Acceso anticipado",
-    href: "/bucket-intelligence",
-  },
-  {
-    label: "AI Agent Toolkit",
-    description: "Integraciones MCP, OAuth y SDK",
-    badge: "Acceso anticipado",
-    href: "/ai-agent-toolkit",
-  },
-];
-
-const SOLUTIONS_EN = [
+const SOLUTIONS: readonly SolutionItem[] = [
   {
     icon: Brain,
-    label: "AI Training & Inference",
-    description: "Storage that keeps your GPUs fed",
     href: "/solutions/ai-training",
+    label: { en: "AI Training & Inference", es: "Entrenamiento e inferencia de IA" },
+    description: {
+      en: "Storage that keeps your GPUs fed",
+      es: "Almacenamiento que mantiene tus GPU alimentadas",
+    },
   },
   {
     icon: LinkSimple,
-    label: "Web3 & dApps",
-    description: "Storage your smart contracts can trust",
     href: "/solutions/web3-dapps",
+    label: { en: "Web3 & dApps", es: "Web3 y dApps" },
+    description: {
+      en: "Storage your smart contracts can trust",
+      es: "Almacenamiento en el que tus smart contracts pueden confiar",
+    },
   },
   {
     icon: FilmSlate,
-    label: "Media & Archive",
-    description: "Archive petabytes, pay nothing to get them back",
     href: "/solutions/media-archive",
+    label: { en: "Media & Archive", es: "Medios y archivo" },
+    description: {
+      en: "Archive petabytes, pay nothing to get them back",
+      es: "Archiva petabytes y no pagues nada por recuperarlos",
+    },
   },
   {
     icon: ShieldCheck,
-    label: "Enterprise Backup & DR",
-    description: "Backups ransomware can't touch",
     href: "/solutions/enterprise-backup",
+    label: { en: "Enterprise Backup & DR", es: "Backup empresarial y DR" },
+    description: {
+      en: "Backups ransomware can't touch",
+      es: "Copias de seguridad que el ransomware no puede tocar",
+    },
   },
 ];
 
-const SOLUTIONS_ES = [
-  {
-    icon: Brain,
-    label: "Entrenamiento e inferencia de IA",
-    description: "Almacenamiento que mantiene tus GPU alimentadas",
-    href: "/solutions/ai-training",
-  },
-  {
-    icon: LinkSimple,
-    label: "Web3 y dApps",
-    description: "Almacenamiento en el que tus smart contracts pueden confiar",
-    href: "/solutions/web3-dapps",
-  },
-  {
-    icon: FilmSlate,
-    label: "Medios y archivo",
-    description: "Archiva petabytes y no pagues nada por recuperarlos",
-    href: "/solutions/media-archive",
-  },
-  {
-    icon: ShieldCheck,
-    label: "Backup empresarial y DR",
-    description: "Copias de seguridad que el ransomware no puede tocar",
-    href: "/solutions/enterprise-backup",
-  },
+const UTILITY_LINKS: readonly NavLinkItem[] = [
+  { href: "/about", label: { en: "About", es: "Nosotros" } },
+  { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
+  { href: "/enterprise", label: { en: "Enterprise", es: "Empresas" } },
+  { href: "/blog", label: "Blog" },
 ];
 
-const UTILITY_LINKS_EN = [
-  { label: "About", href: "/about" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Enterprise", href: "/enterprise" },
-];
-
-const UTILITY_LINKS_ES = [
-  { label: "Nosotros", href: "/about" },
-  { label: "Precios", href: "/pricing" },
-  { label: "Empresas", href: "/enterprise" },
-];
-
-const utilityBarLinksEn = (supportHref: string) => [
-  { label: "Documentation", href: "https://docs.fil.one", external: true },
-  { label: "Partners", href: "/partners" },
-  { label: "Support", href: supportHref },
-];
-
-const utilityBarLinksEs = (supportHref: string) => [
-  { label: "Documentación", href: "https://docs.fil.one", external: true },
-  { label: "Partners", href: "/partners" },
-  { label: "Soporte", href: supportHref },
-];
+/** Support is a prop because some landing pages point it at their own page. */
+const utilityBarLinks = (supportHref: string): readonly NavLinkItem[] => [
+    {
+      href: "https://docs.fil.one",
+      external: true,
+      label: { en: "Documentation", es: "Documentación" },
+    },
+    { href: "/partners", label: "Partners" },
+    { href: supportHref, label: { en: "Support", es: "Soporte" } },
+  ];
 
 const UTILITY_BAR_HEIGHT = 36;
 
-const triggerStyle = {
-  fontFamily: "'Funnel Sans', sans-serif",
-  fontWeight: 400,
-  fontSize: 14,
-  color: "#52525B",
-  background: "none",
-  border: "none",
-  cursor: "pointer",
-} as const;
+/** Top-level nav item (dropdown trigger or plain link) — shared so both match. */
+const NAV_ITEM_CLASS =
+  "flex items-center gap-1 rounded-md px-3.5 py-1.5 font-sans text-[14px] font-normal text-zinc-600 no-underline transition-colors hover:bg-black/[0.04]";
+
+/** The dropdown trigger is a <button>, so it also has to shed the UA button chrome. */
+const NAV_TRIGGER_CLASS = `${NAV_ITEM_CLASS} cursor-pointer border-none bg-none`;
+
+/** Utility-bar link / Sign in — the smaller grey strip above the navbar. */
+const UTILITY_BAR_LINK_CLASS =
+  "flex items-center gap-0.5 rounded-[6px] px-2.5 py-0.5 font-sans text-[12.5px] font-normal text-zinc-500 no-underline transition-colors hover:bg-black/[0.04]";
+
+/** Uppercase mono section label inside the mobile panel. */
+const MOBILE_SECTION_LABEL_CLASS =
+  "px-3 pb-1 pt-2 font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-zinc-600";
+
+/** Row in the mobile panel. */
+const MOBILE_ROW_CLASS =
+  "flex items-center rounded-lg px-3 py-2.5 font-sans text-[15px] font-normal text-zinc-950 no-underline transition-colors hover:bg-black/[0.04]";
+
+/** "Early access" pill, used in both the desktop dropdown and the mobile panel. */
+const BADGE_CLASS =
+  "rounded-full border border-zinc-200 bg-zinc-100 px-1.5 py-px font-mono text-[10px] font-medium uppercase tracking-[0.05em] text-zinc-600";
 
 interface PlatformNavbarProps {
-  lang?: "en" | "es";
+  lang?: Lang;
   /** Override the utility bar's Support link — defaults to the general /support page. */
   supportHref?: string;
   /** Override the "Contact Sales" CTA — defaults to the general /contact-sales page. */
@@ -152,10 +153,9 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
   const lastScrollY = useRef(0);
   const { pathname } = useLocation();
 
-  const PRODUCTS = lang === "es" ? PRODUCTS_ES : PRODUCTS_EN;
-  const SOLUTIONS = lang === "es" ? SOLUTIONS_ES : SOLUTIONS_EN;
-  const UTILITY_LINKS = lang === "es" ? UTILITY_LINKS_ES : UTILITY_LINKS_EN;
-  const UTILITY_BAR_LINKS = (lang === "es" ? utilityBarLinksEs : utilityBarLinksEn)(supportHref);
+  const UTILITY_BAR_LINKS = utilityBarLinks(supportHref);
+  /** Resolve a list entry's copy for the active language. */
+  const l = (value: Localized) => localize(value, lang);
   const t = lang === "es"
     ? {
         skipToContent: "Saltar al contenido principal",
@@ -217,53 +217,24 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
       {/* Utility bar */}
       <div
-        className="fixed top-0 left-0 right-0 z-[51] hidden md:flex items-center justify-end border-b px-6 md:px-12"
-        style={{
-          height: UTILITY_BAR_HEIGHT,
-          backgroundColor: "rgba(255,255,255,0.95)",
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
-          borderColor: "rgba(0,0,0,0.06)",
-          transform: utilityVisible ? "translateY(0)" : `translateY(-${UTILITY_BAR_HEIGHT}px)`,
-          transition: "transform 0.2s ease",
-          pointerEvents: utilityVisible ? "auto" : "none",
-        }}
+        className={`fixed left-0 right-0 top-0 z-[51] hidden h-9 items-center justify-end border-b border-black/[0.06] bg-white/95 px-6 backdrop-blur-md transition-transform duration-200 md:flex md:px-12 ${
+          utilityVisible ? "translate-y-0" : "pointer-events-none -translate-y-9"
+        }`}
       >
-        <div className="max-w-[1400px] mx-auto w-full flex items-center justify-end gap-1">
+        <div className="mx-auto flex w-full max-w-container-wide items-center justify-end gap-1">
           {UTILITY_BAR_LINKS.map(({ label, href, external }) => (
             <a
-              key={label}
+              key={href}
               href={href}
               {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="flex items-center gap-0.5 hover:bg-black/[0.04] transition-colors"
-              style={{
-                fontFamily: "'Funnel Sans', sans-serif",
-                fontSize: 12.5,
-                fontWeight: 400,
-                color: "#71717A",
-                textDecoration: "none",
-                padding: "2px 10px",
-                borderRadius: 6,
-              }}
+              className={UTILITY_BAR_LINK_CLASS}
             >
-              {label}
-              {external && <ArrowUpRight size={11} style={{ color: "#52525B", marginTop: 1 }} aria-hidden="true" />}
+              {l(label)}
+              {external && <Icon icon={ArrowUpRight} size={11} className="mt-px text-zinc-600" aria-hidden="true" />}
             </a>
           ))}
-          <div style={{ width: 1, height: 14, backgroundColor: "rgba(0,0,0,0.1)", margin: "0 4px" }} />
-          <a
-            href="https://app.fil.one/login"
-            style={{
-              fontFamily: "'Funnel Sans', sans-serif",
-              fontSize: 12.5,
-              fontWeight: 400,
-              color: "#71717A",
-              textDecoration: "none",
-              padding: "2px 10px",
-              borderRadius: 6,
-            }}
-            className="hover:bg-black/[0.04] transition-colors"
-          >
+          <div className="mx-1 h-3.5 w-px bg-black/10" />
+          <a href={consoleUrl("/login")} className={UTILITY_BAR_LINK_CLASS}>
             {t.signIn}
           </a>
         </div>
@@ -271,68 +242,41 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
       {/* Main navbar */}
       <nav
-        className={`fixed left-0 right-0 z-50 border-b px-6 md:px-12 top-0 transition-[top] duration-200 ${utilityVisible ? "md:top-9" : "md:top-0"}`}
-        style={{
-          backgroundColor: "rgba(255,255,255,0.85)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderColor: "rgba(0,0,0,0.06)",
-        }}
+        className={`fixed left-0 right-0 top-0 z-50 border-b border-black/[0.06] bg-white/85 px-6 backdrop-blur-[20px] transition-[top] duration-200 md:px-12 ${
+          utilityVisible ? "md:top-9" : "md:top-0"
+        }`}
       >
-        <div className="flex items-center justify-between h-[58px] max-w-[1400px] mx-auto w-full">
+        <div className="mx-auto flex h-[58px] w-full max-w-container-wide items-center justify-between gap-4 lg:gap-8">
           {/* Logo */}
-          <a href="/" className="shrink-0" style={{ textDecoration: "none" }}>
-            <img src={filOneLogo} alt="Fil One" style={{ height: 20, width: "auto", display: "block" }} />
+          <a href="/" className="shrink-0 no-underline">
+            <img src={filOneLogo} alt="Fil One" className="block h-5 w-auto" />
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-0.5">
+          <div className="hidden lg:flex items-center gap-0.5">
             <NavigationMenuPrimitive.Root className="relative">
               <NavigationMenuPrimitive.List className="flex items-center gap-0.5 list-none m-0 p-0">
 
                 {/* Products */}
                 <NavigationMenuPrimitive.Item>
-                  <NavigationMenuPrimitive.Trigger
-                    className="flex items-center gap-1 px-3.5 py-1.5 rounded-md transition-colors hover:bg-black/[0.04]"
-                    style={triggerStyle}
-                  >
+                  <NavigationMenuPrimitive.Trigger className={NAV_TRIGGER_CLASS}>
                     {t.products}
-                    <CaretDown size={12} color="#52525B" className="nav-caret" />
+                    <Icon icon={CaretDown} size={12} className="nav-caret text-zinc-600" />
                   </NavigationMenuPrimitive.Trigger>
 
                   <NavigationMenuPrimitive.Content>
-                    <div className="py-2" style={{ minWidth: 240 }}>
+                    <div className="min-w-[240px] py-2">
                       {PRODUCTS.map(({ label, description, badge, href }) => (
-                        <NavigationMenuPrimitive.Link asChild key={label}>
+                        <NavigationMenuPrimitive.Link asChild key={href}>
                           <a
                             href={href.startsWith("#") ? anchorHref(href.slice(1)) : href}
-                            className="flex flex-col gap-0.5 px-4 py-2.5 hover:bg-black/[0.03] transition-colors"
-                            style={{ textDecoration: "none" }}
+                            className="flex flex-col gap-0.5 px-4 py-2.5 no-underline transition-colors hover:bg-black/[0.03]"
                           >
                             <div className="flex items-center gap-2">
-                              <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#09090B" }}>
-                                {label}
-                              </span>
-                              {badge && (
-                                <span style={{
-                                  fontFamily: "'DM Mono', monospace",
-                                  fontWeight: 500,
-                                  fontSize: 10,
-                                  letterSpacing: "0.05em",
-                                  color: "#52525B",
-                                  textTransform: "uppercase",
-                                  backgroundColor: "#F4F4F5",
-                                  border: "1px solid #E4E4E7",
-                                  borderRadius: 9999,
-                                  padding: "1px 6px",
-                                }}>
-                                  {badge}
-                                </span>
-                              )}
+                              <span className="font-sans text-[14px] font-medium text-zinc-950">{l(label)}</span>
+                              {badge && <span className={BADGE_CLASS}>{l(badge)}</span>}
                             </div>
-                            <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, color: "#6B7280" }}>
-                              {description}
-                            </span>
+                            <span className="font-sans text-[12.5px] font-normal text-zinc-500">{l(description)}</span>
                           </a>
                         </NavigationMenuPrimitive.Link>
                       ))}
@@ -342,36 +286,25 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
                 {/* Solutions */}
                 <NavigationMenuPrimitive.Item>
-                  <NavigationMenuPrimitive.Trigger
-                    className="flex items-center gap-1 px-3.5 py-1.5 rounded-md transition-colors hover:bg-black/[0.04]"
-                    style={triggerStyle}
-                  >
+                  <NavigationMenuPrimitive.Trigger className={NAV_TRIGGER_CLASS}>
                     {t.solutions}
-                    <CaretDown size={12} color="#52525B" className="nav-caret" />
+                    <Icon icon={CaretDown} size={12} className="nav-caret text-zinc-600" />
                   </NavigationMenuPrimitive.Trigger>
 
                   <NavigationMenuPrimitive.Content>
-                    <div className="py-2" style={{ minWidth: 280 }}>
-                      {SOLUTIONS.map(({ icon: Icon, label, description, href }) => (
-                        <NavigationMenuPrimitive.Link asChild key={label}>
+                    <div className="min-w-[280px] py-2">
+                      {SOLUTIONS.map(({ icon: SolutionIcon, label, description, href }) => (
+                        <NavigationMenuPrimitive.Link asChild key={href}>
                           <a
                             href={href}
-                            className="flex items-start gap-3 px-4 py-2.5 hover:bg-black/[0.03] transition-colors"
-                            style={{ textDecoration: "none" }}
+                            className="flex items-start gap-3 px-4 py-2.5 no-underline transition-colors hover:bg-black/[0.03]"
                           >
-                            <div
-                              className="flex items-center justify-center rounded-md shrink-0 mt-0.5"
-                              style={{ width: 26, height: 26, backgroundColor: "#EFF8FF", color: "#0070CC" }}
-                            >
-                              <Icon size={13} weight="duotone" />
+                            <div className="mt-0.5 flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-md bg-brand-50 text-brand-600">
+                              <Icon icon={SolutionIcon} size={13} weight="duotone" />
                             </div>
                             <div className="flex flex-col gap-0.5">
-                              <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#09090B" }}>
-                                {label}
-                              </span>
-                              <span style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 12.5, color: "#6B7280" }}>
-                                {description}
-                              </span>
+                              <span className="font-sans text-[14px] font-medium text-zinc-950">{l(label)}</span>
+                              <span className="font-sans text-[12.5px] font-normal text-zinc-500">{l(description)}</span>
                             </div>
                           </a>
                         </NavigationMenuPrimitive.Link>
@@ -384,169 +317,103 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
               {/* Viewport — renders the active dropdown content */}
               <div className="absolute top-[calc(100%+6px)] left-0 z-[100]">
-                <NavigationMenuPrimitive.Viewport
-                  className="NavigationMenuViewport rounded-xl border overflow-hidden"
-                  style={{
-                    backgroundColor: "#FFFFFF",
-                    borderColor: "rgba(0,0,0,0.08)",
-                    boxShadow: "0px 4px 24px rgba(0,0,0,0.08), 0px 1px 4px rgba(0,0,0,0.04)",
-                  }}
-                />
+                <NavigationMenuPrimitive.Viewport className="NavigationMenuViewport overflow-hidden rounded-xl border border-black/[0.08] bg-white shadow-dropdown" />
               </div>
             </NavigationMenuPrimitive.Root>
 
             {/* Utility links */}
             {UTILITY_LINKS.map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                className="flex items-center gap-0.5 px-3.5 py-1.5 rounded-md transition-colors hover:bg-black/[0.04]"
-                style={{
-                  fontFamily: "'Funnel Sans', sans-serif",
-                  fontWeight: 400,
-                  fontSize: 14,
-                  color: "#52525B",
-                  textDecoration: "none",
-                }}
-              >
-                {label}
+              <a key={href} href={href} className={NAV_ITEM_CLASS}>
+                {l(label)}
               </a>
             ))}
           </div>
 
           {/* Desktop right CTAs */}
-          <div className="hidden md:flex items-center gap-2.5 shrink-0">
+          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
             <Button href={contactSalesHref} variant="secondary">
               {t.contactSales}
             </Button>
-            <Button href="https://app.fil.one/login?screen_hint=signup" variant="primary" size="sm">
+            <Button href={signupUrl()} variant="primary" size="sm">
               {t.startForFree}
             </Button>
           </div>
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg hover:bg-black/[0.04] transition-colors"
+            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border-none bg-transparent text-zinc-950 transition-colors hover:bg-black/[0.04] lg:hidden"
             onClick={() => setMobileOpen((o) => !o)}
-            style={{ border: "none", backgroundColor: "transparent", cursor: "pointer" }}
             aria-label={mobileOpen ? t.closeMenu : t.openMenu}
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X size={18} color="#09090B" /> : <List size={18} color="#09090B" />}
+            <Icon icon={mobileOpen ? X : List} size={18} />
           </button>
         </div>
 
         {/* Mobile menu */}
         {mobileOpen && (
           <div
-            className="md:hidden border-t px-5 py-3 flex flex-col gap-0.5 max-h-[calc(100dvh-58px)] overflow-y-auto overscroll-contain"
-            style={{
-              backgroundColor: "rgba(255,255,255,0.97)",
-              borderColor: "rgba(0,0,0,0.06)",
-            }}
+            className={`flex flex-col gap-0.5 overflow-y-auto overscroll-contain border-t border-black/[0.06] bg-white/[0.97] px-5 py-3 lg:hidden ${
+              utilityVisible ? "max-h-[calc(100dvh-58px)] md:max-h-[calc(100dvh-94px)]" : "max-h-[calc(100dvh-58px)]"
+            }`}
           >
-            <p
-              className="px-3 pt-2 pb-1"
-              style={{
-                fontFamily: "'DM Mono', monospace",
-                fontWeight: 500,
-                fontSize: 10.5,
-                letterSpacing: "0.08em",
-                color: "#52525B",
-                textTransform: "uppercase",
-              }}
-            >
-              {t.products}
-            </p>
+            <p className={MOBILE_SECTION_LABEL_CLASS}>{t.products}</p>
             {PRODUCTS.map(({ label, badge, href }) => (
               <a
-                key={label}
+                key={href}
                 href={href.startsWith("#") ? anchorHref(href.slice(1)) : href}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-black/[0.04] transition-colors"
-                style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 15, color: "#09090B", textDecoration: "none" }}
+                className={`${MOBILE_ROW_CLASS} justify-between`}
               >
-                {label}
-                {badge && (
-                  <span
-                    style={{
-                      fontFamily: "'DM Mono', monospace",
-                      fontWeight: 500,
-                      fontSize: 10,
-                      letterSpacing: "0.05em",
-                      color: "#52525B",
-                      textTransform: "uppercase",
-                      backgroundColor: "#F4F4F5",
-                      border: "1px solid #E4E4E7",
-                      borderRadius: 9999,
-                      padding: "1px 6px",
-                    }}
-                  >
-                    {badge}
-                  </span>
-                )}
+                {l(label)}
+                {badge && <span className={BADGE_CLASS}>{l(badge)}</span>}
               </a>
             ))}
 
-            <div className="w-full h-px my-1" style={{ backgroundColor: "rgba(0,0,0,0.06)" }} />
-            <p
-              className="px-3 pt-2 pb-1"
-              style={{
-                fontFamily: "'DM Mono', monospace",
-                fontWeight: 500,
-                fontSize: 10.5,
-                letterSpacing: "0.08em",
-                color: "#52525B",
-                textTransform: "uppercase",
-              }}
-            >
-              {t.solutions}
-            </p>
+            <div className="my-1 h-px w-full bg-black/[0.06]" />
+            <p className={MOBILE_SECTION_LABEL_CLASS}>{t.solutions}</p>
             {SOLUTIONS.map(({ label, href }) => (
               <a
                 key={href}
                 href={href}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center px-3 py-2.5 rounded-lg hover:bg-black/[0.04] transition-colors"
-                style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 15, color: "#09090B", textDecoration: "none" }}
+                className={MOBILE_ROW_CLASS}
               >
-                {label}
+                {l(label)}
               </a>
             ))}
 
-            <div className="w-full h-px my-1" style={{ backgroundColor: "rgba(0,0,0,0.06)" }} />
+            <div className="my-1 h-px w-full bg-black/[0.06]" />
             {UTILITY_LINKS.map(({ label, href }) => (
               <a
-                key={label}
+                key={href}
                 href={href}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-1 px-3 py-2.5 rounded-lg hover:bg-black/[0.04] transition-colors"
-                style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 15, color: "#09090B", textDecoration: "none" }}
+                className={`${MOBILE_ROW_CLASS} gap-1`}
               >
-                {label}
+                {l(label)}
               </a>
             ))}
 
-            <div className="w-full h-px my-1" style={{ backgroundColor: "rgba(0,0,0,0.06)" }} />
+            <div className="my-1 h-px w-full bg-black/[0.06]" />
             {UTILITY_BAR_LINKS.map(({ label, href, external }) => (
               <a
-                key={label}
+                key={href}
                 href={href}
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 onClick={() => { setMobileOpen(false); if (href?.includes("docs.fil.one")) trackDocsClick(href); }}
-                className="flex items-center px-3 py-2.5 rounded-lg hover:bg-black/[0.04] transition-colors"
-                style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 15, color: "#09090B", textDecoration: "none" }}
+                className={MOBILE_ROW_CLASS}
               >
-                {label}
+                {l(label)}
               </a>
             ))}
 
-            <div className="pt-3 mt-1 border-t flex flex-col gap-2" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
+            <div className="mt-1 flex flex-col gap-2 border-t border-black/[0.06] pt-3 sm:grid sm:grid-cols-2">
               <Button href={contactSalesHref} variant="secondary" fullWidth onClick={() => setMobileOpen(false)}>
                 {t.contactSales}
               </Button>
               <Button
-                href="https://app.fil.one/login?screen_hint=signup"
+                href={signupUrl()}
                 variant="primary"
                 fullWidth
                 onClick={() => setMobileOpen(false)}

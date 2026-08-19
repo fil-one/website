@@ -2,8 +2,8 @@ import { Database, ArrowsOut, ChartLine, Plug } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
 import AnnouncementBadge from "@/components/AnnouncementBadge";
 import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No per-request fees · Connects in minutes";
@@ -28,7 +28,7 @@ const config: LandingPageConfig = {
     ),
     description: "S3 object storage with a built-in RAG pipeline. No stitching required, no per-query fees.",
     ctas: [
-      { label: "Start storing for free", href: SIGNUP_URL, variant: "primary" },
+      { label: "Start storing for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
@@ -108,7 +108,7 @@ const config: LandingPageConfig = {
     heading: `One rate. ${PRICE_PER_TB_MONTH}.`,
     headingMaxWidth: 560,
     subhead: "Storage only — no PUT fees, no GET fees, no egress. Try it free with 1 TB: one place to store your data, retrieve it, and put it to work.",
-    cta: { label: "Start for free", href: SIGNUP_URL },
+    cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,
   },

@@ -1,8 +1,8 @@
 import { Database, ArrowsOut, ChartLine, Plug } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
 import { PRICE_DISPLAY, PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
@@ -32,7 +32,7 @@ const config: LandingPageConfig = {
     ),
     description: `Training-data storage at ${PRICE_PER_TB_SHORT} flat. No egress on dataset reads. fsspec, PyArrow, and HuggingFace datasets work natively — change the endpoint, keep the code.`,
     ctas: [
-      { label: "Start for free", href: SIGNUP_URL, variant: "primary" },
+      { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
@@ -124,7 +124,7 @@ const config: LandingPageConfig = {
   cta: {
     heading: "Run as many times as the model needs.",
     subhead: "Free 1 TB evaluation. Point fsspec or PyArrow at the endpoint and run the training loop — the egress line will not be there.",
-    cta: { label: "Start for free", href: SIGNUP_URL },
+    cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,
   },

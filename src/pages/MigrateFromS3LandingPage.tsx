@@ -14,8 +14,8 @@ import PriceComparisonTable, {
 } from "@/components/PriceComparisonTable";
 import TextLink from "@/components/TextLink";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
@@ -129,7 +129,7 @@ const MigrateFromS3LandingPage = () => {
             <>Point your existing S3 tools at Fil One. {PRICE_PER_TB_SHORT} flat, no egress. Same SDK, same API, lower bill.</>
           }
           ctas={[
-            { label: "Start for free", href: SIGNUP_URL, variant: "primary" },
+            { label: "Start for free", href: signupUrl(), variant: "primary" },
             { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
           ]}
           tagline={TAGLINE}
@@ -224,7 +224,7 @@ const MigrateFromS3LandingPage = () => {
         <CtaBanner
           heading="Same SDK. New endpoint. Lower bill."
           subhead="Free 1 TB evaluation. Change two lines and run the same workload. The egress line will not be there."
-          cta={{ label: "Start for free", href: SIGNUP_URL }}
+          cta={{ label: "Start for free", href: signupUrl() }}
           secondaryCta={{ label: "Talk to an expert", href: SALES_URL }}
           note={TAGLINE}
           surface="grey"

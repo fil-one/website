@@ -8,6 +8,7 @@ import FeatureList from "@/components/FeatureList";
 import TextLink from "@/components/TextLink";
 import ProductCard from "@/components/ProductCard";
 import { PRICE_DISPLAY } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
 const STORAGE_FEATURES = [
   "11 nines durability, verified daily",
@@ -97,7 +98,7 @@ const ProductsSection = () => {
                 </div>
                 <div className="flex items-center gap-4">
                   <TextLink href="/storage">Learn more</TextLink>
-                  <Button variant="primary" href="https://app.fil.one/login?screen_hint=signup" onClick={() => trackCtaClick("Start free trial", "https://app.fil.one/login?screen_hint=signup", "primary")}>
+                  <Button variant="primary" href={signupUrl()} onClick={() => trackCtaClick("Start free trial", signupUrl(), "primary")}>
                     Start free trial
                   </Button>
                 </div>

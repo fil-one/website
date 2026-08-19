@@ -1,8 +1,8 @@
 import { ArrowsOut, ChartLine, Plug, ShieldCheck } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "Enterprise and embedding terms available · Contact-led";
@@ -31,7 +31,7 @@ const config: LandingPageConfig = {
     description: `Embed S3-compatible object storage into your product. US and EU regions, SLA-backed, ${PRICE_PER_TB_SHORT} flat. Your customers get reliable storage — you skip the infrastructure capex.`,
     ctas: [
       { label: "Talk to our team", href: SALES_URL, variant: "primary" },
-      { label: "Evaluate the API", href: SIGNUP_URL, variant: "secondary" },
+      { label: "Evaluate the API", href: signupUrl(), variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -123,7 +123,7 @@ const config: LandingPageConfig = {
     heading: "Global reach in your product. None of the capex.",
     subhead: "Talk to the Fil One team about embedding the storage layer in your product. Enterprise and multi-year terms available.",
     cta: { label: "Talk to our team", href: SALES_URL },
-    secondaryCta: { label: "Evaluate the API", href: SIGNUP_URL },
+    secondaryCta: { label: "Evaluate the API", href: signupUrl() },
     note: "Enterprise and embedding terms available · sales@fil.one",
   },
 };

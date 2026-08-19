@@ -1,8 +1,8 @@
 import { Lock, Database, ShieldCheck, Plug } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
@@ -27,7 +27,7 @@ const config: LandingPageConfig = {
     ),
     description: `S3-compatible storage with Object Lock retention, full version history, and encryption at rest and in transit. ${PRICE_PER_TB_SHORT} flat.`,
     ctas: [
-      { label: "Start for free", href: SIGNUP_URL, variant: "primary" },
+      { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
@@ -85,8 +85,8 @@ const config: LandingPageConfig = {
       },
       {
         icon: ShieldCheck,
-        title: "Cert status: in pursuit",
-        desc: "SOC 2 Type II and ISO 27001 are actively being pursued. We do not hold these certifications today — check docs.fil.one for current status.",
+        title: "Certified infrastructure",
+        desc: "Our services are delivered through top-tier data centers that are certified to ISO 27001, SOC 2, and PCI DSS standards.",
       },
     ],
   },
@@ -94,7 +94,7 @@ const config: LandingPageConfig = {
   cta: {
     heading: "Compliance controls, not just claims.",
     subhead: "Free 1 TB evaluation. Bring your existing S3 audit tooling and configure Object Lock and versioning on a real bucket.",
-    cta: { label: "Start for free", href: SIGNUP_URL },
+    cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,
   },

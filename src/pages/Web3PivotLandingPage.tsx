@@ -1,8 +1,8 @@
 import { Plug, ArrowsOut, ChartLine, Lock } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · Built on Filecoin · One endpoint change";
@@ -27,7 +27,7 @@ const config: LandingPageConfig = {
     ),
     description: `S3-compatible object storage built on Filecoin infrastructure — not a relabeled hyperscaler bucket. No egress, no lock-in, one endpoint change. ${PRICE_PER_TB_SHORT} flat.`,
     ctas: [
-      { label: "Start for free", href: SIGNUP_URL, variant: "primary" },
+      { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
@@ -95,7 +95,7 @@ const config: LandingPageConfig = {
   cta: {
     heading: "Make the storage layer match the product.",
     subhead: "Free 1 TB evaluation. Change the endpoint in your config and store data on Filecoin infrastructure today.",
-    cta: { label: "Start for free", href: SIGNUP_URL },
+    cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,
   },

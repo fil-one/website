@@ -10,8 +10,8 @@ import CtaBanner from "@/components/CtaBanner";
 import CodeBlock from "@/components/CodeBlock";
 import ProblemCards from "@/components/ProblemCards";
 import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const SALES_URL = "/contact-sales";
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
 
@@ -97,7 +97,7 @@ const AgentReadableLandingPage = () => {
             <>Flat {PRICE_PER_TB_SHORT}, published in machine-readable llms.txt with full S3 parity. No gated quotes, no "contact sales" for a number — an agent parses the price and the API in one pass.</>
           }
           ctas={[
-            { label: "Start for free", href: SIGNUP_URL, variant: "primary" },
+            { label: "Start for free", href: signupUrl(), variant: "primary" },
             { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
           ]}
           tagline={TAGLINE}
@@ -164,7 +164,7 @@ const AgentReadableLandingPage = () => {
           heading={`One rate. ${PRICE_PER_TB_MONTH}.`}
           headingMaxWidth={560}
           subhead="Storage. No egress, no per-request fees, no tiers. Free 1 TB evaluation — point your agent at llms.txt, confirm the parity, and connect against the documented endpoint."
-          cta={{ label: "Start for free", href: SIGNUP_URL }}
+          cta={{ label: "Start for free", href: signupUrl() }}
           secondaryCta={{ label: "Talk to an expert", href: SALES_URL }}
           note={TAGLINE}
         />
