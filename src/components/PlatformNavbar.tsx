@@ -107,12 +107,14 @@ const UTILITY_LINKS_EN = [
   { label: "About", href: "/about" },
   { label: "Pricing", href: "/pricing" },
   { label: "Enterprise", href: "/enterprise" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const UTILITY_LINKS_ES = [
   { label: "Nosotros", href: "/about" },
   { label: "Precios", href: "/pricing" },
   { label: "Empresas", href: "/enterprise" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const utilityBarLinksEn = (supportHref: string) => [
@@ -280,14 +282,14 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
           borderColor: "rgba(0,0,0,0.06)",
         }}
       >
-        <div className="flex items-center justify-between h-[58px] max-w-[1400px] mx-auto w-full">
+        <div className="flex items-center justify-between gap-4 lg:gap-8 h-[58px] max-w-[1400px] mx-auto w-full">
           {/* Logo */}
           <a href="/" className="shrink-0" style={{ textDecoration: "none" }}>
             <img src={filOneLogo} alt="Fil One" style={{ height: 20, width: "auto", display: "block" }} />
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-0.5">
+          <div className="hidden lg:flex items-center gap-0.5">
             <NavigationMenuPrimitive.Root className="relative">
               <NavigationMenuPrimitive.List className="flex items-center gap-0.5 list-none m-0 p-0">
 
@@ -416,7 +418,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
           </div>
 
           {/* Desktop right CTAs */}
-          <div className="hidden md:flex items-center gap-2.5 shrink-0">
+          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
             <Button href={contactSalesHref} variant="secondary">
               {t.contactSales}
             </Button>
@@ -427,7 +429,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg hover:bg-black/[0.04] transition-colors"
+            className="lg:hidden flex items-center justify-center w-9 h-9 rounded-lg hover:bg-black/[0.04] transition-colors"
             onClick={() => setMobileOpen((o) => !o)}
             style={{ border: "none", backgroundColor: "transparent", cursor: "pointer" }}
             aria-label={mobileOpen ? t.closeMenu : t.openMenu}
@@ -440,7 +442,9 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
         {/* Mobile menu */}
         {mobileOpen && (
           <div
-            className="md:hidden border-t px-5 py-3 flex flex-col gap-0.5 max-h-[calc(100dvh-58px)] overflow-y-auto overscroll-contain"
+            className={`lg:hidden border-t px-5 py-3 flex flex-col gap-0.5 overflow-y-auto overscroll-contain ${
+              utilityVisible ? "max-h-[calc(100dvh-58px)] md:max-h-[calc(100dvh-94px)]" : "max-h-[calc(100dvh-58px)]"
+            }`}
             style={{
               backgroundColor: "rgba(255,255,255,0.97)",
               borderColor: "rgba(0,0,0,0.06)",
@@ -542,7 +546,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
               </a>
             ))}
 
-            <div className="pt-3 mt-1 border-t flex flex-col gap-2" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
+            <div className="pt-3 mt-1 border-t flex flex-col gap-2 sm:grid sm:grid-cols-2" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
               <Button href={contactSalesHref} variant="secondary" fullWidth onClick={() => setMobileOpen(false)}>
                 {t.contactSales}
               </Button>
@@ -550,6 +554,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                 href={signupUrl()}
                 variant="primary"
                 fullWidth
+               
                 onClick={() => setMobileOpen(false)}
               >
                 {t.startForFree}
