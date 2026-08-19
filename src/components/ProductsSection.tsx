@@ -12,7 +12,7 @@ import { signupUrl } from "@/lib/console-url";
 
 const STORAGE_FEATURES = [
   "11 nines durability, verified daily",
-  "Fully S3-compatible, no code changes needed",
+  "S3-compatible, no code changes needed",
   "No egress fees, no API request charges",
 ];
 
