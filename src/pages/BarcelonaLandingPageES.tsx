@@ -17,8 +17,9 @@ import PriceComparisonTable, {
   type PriceComparisonRow,
 } from "@/components/PriceComparisonTable";
 import { PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
+const SIGNUP_URL = signupUrl();
 const SUPPORT_HREF = "/lp/es/soporte";
 const CONTACT_SALES_HREF = "/lp/es/contacto";
 

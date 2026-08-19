@@ -7,6 +7,7 @@ import { trackDocsClick } from "@/lib/analytics";
 import { Button } from "@/components/Button";
 import Icon, { type IconProps } from "@/components/Icon";
 import { localize, type Lang, type Localized } from "@/lib/i18n";
+import { consoleUrl, signupUrl } from "@/lib/console-url";
 
 /** One entry in a nav or footer link list. */
 interface NavLinkItem {
@@ -233,7 +234,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
             </a>
           ))}
           <div className="mx-1 h-3.5 w-px bg-black/10" />
-          <a href="https://app.fil.one/login" className={UTILITY_BAR_LINK_CLASS}>
+          <a href={consoleUrl("/login")} className={UTILITY_BAR_LINK_CLASS}>
             {t.signIn}
           </a>
         </div>
@@ -333,7 +334,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
             <Button href={contactSalesHref} variant="secondary">
               {t.contactSales}
             </Button>
-            <Button href="https://app.fil.one/login?screen_hint=signup" variant="primary" size="sm">
+            <Button href={signupUrl()} variant="primary" size="sm">
               {t.startForFree}
             </Button>
           </div>
@@ -412,7 +413,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                 {t.contactSales}
               </Button>
               <Button
-                href="https://app.fil.one/login?screen_hint=signup"
+                href={signupUrl()}
                 variant="primary"
                 fullWidth
                 onClick={() => setMobileOpen(false)}

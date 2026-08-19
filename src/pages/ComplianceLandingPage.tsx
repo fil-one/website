@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
 import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
 
 const FEATURES = [
@@ -129,7 +130,7 @@ const ComplianceLandingPage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+              <a href={signupUrl()} className="btn-primary">
                 <span className="btn-primary-inner">Start for free</span>
               </a>
               <a href="/contact-sales" className="btn-secondary">
@@ -271,8 +272,8 @@ const ComplianceLandingPage = () => {
                   sub: "Designed for 11 nines of durability. Data loss is a detectable and recoverable event, not a silent failure.",
                 },
                 {
-                  heading: "Cert status: in pursuit",
-                  sub: "SOC 2 Type II and ISO 27001 are actively being pursued. We do not hold these certifications today — check docs.fil.one for current status.",
+                  heading: "Certified infrastructure",
+                  sub: "Our services are delivered through top-tier data centers that are certified to ISO 27001, SOC 2, and PCI DSS standards.",
                 },
               ].map(({ heading, sub }) => (
                 <div
@@ -387,7 +388,7 @@ const ComplianceLandingPage = () => {
               </SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+              <a href={signupUrl()} className="btn-primary">
                 <span className="btn-primary-inner">Start for free</span>
               </a>
               <a href="/contact-sales" className="btn-secondary">
@@ -463,7 +464,7 @@ const ComplianceLandingPage = () => {
                   Free 1 TB evaluation. Bring your existing S3 audit tooling and see the integrity layer in action.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark">
+                  <a href={signupUrl()} className="btn-primary btn-primary-dark">
                     <span className="btn-primary-inner">Start for free</span>
                   </a>
                   <a href="/contact-sales" className="btn-secondary btn-secondary-dark">

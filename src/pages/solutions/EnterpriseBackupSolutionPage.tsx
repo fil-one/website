@@ -8,6 +8,7 @@ import {
 } from "@phosphor-icons/react";
 import SolutionPage, { type SolutionPageConfig } from "@/components/SolutionPage";
 import { PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
 const config: SolutionPageConfig = {
   seo: {
@@ -27,7 +28,7 @@ const config: SolutionPageConfig = {
       "Immutable, S3-compatible backup storage with object lock and zero egress fees, so your data is ready when disaster strikes and you need to restore.",
     descriptionMaxWidth: 520,
     ctas: [
-      { label: "Start for free", href: "https://app.fil.one/login?screen_hint=signup", variant: "primary", size: "lg", glow: true },
+      { label: "Start for free", href: signupUrl(), variant: "primary", size: "lg", glow: true },
     ],
     tagline: "1 TB free for 30 days · No credit card required",
   },
@@ -74,7 +75,7 @@ const config: SolutionPageConfig = {
       },
     ],
     ctas: [
-      { label: "Start for free", href: "https://app.fil.one/login?screen_hint=signup", variant: "primary" },
+      { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Explore documentation", href: "https://docs.fil.one", variant: "secondary" },
     ],
   },

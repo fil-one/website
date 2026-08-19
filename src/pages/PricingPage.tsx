@@ -10,6 +10,7 @@ import StatGridSection from "@/components/StatGridSection";
 import CostCalculatorSection from "@/components/CostCalculatorSection";
 import CtaBanner from "@/components/CtaBanner";
 import { COMPETITORS, PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
 // ─── Pricing tiers ─────────────────────────────────────────────────────────────
 const PAYGO_FEATURES = [
@@ -73,7 +74,7 @@ const PricingPage = () => {
                 priceSuffix="/ TB / month"
                 priceNote="Free for the first 30 days."
                 features={PAYGO_FEATURES}
-                cta={{ label: "Start for free", href: "https://app.fil.one/login?screen_hint=signup", variant: "primary" }}
+                cta={{ label: "Start for free", href: signupUrl(), variant: "primary" }}
                 highlighted
               />
               <PricingCard
@@ -119,7 +120,7 @@ const PricingPage = () => {
         <CtaBanner
           heading="Up to 22× cheaper than AWS"
           subhead={`${PRICE_DISPLAY}/TB, no egress fees, up and running in minutes.`}
-          cta={{ label: "Start for free", href: "https://app.fil.one/login?screen_hint=signup" }}
+          cta={{ label: "Start for free", href: signupUrl() }}
           note="No credit card required"
         />
 

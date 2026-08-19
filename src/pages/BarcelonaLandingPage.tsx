@@ -16,8 +16,9 @@ import PriceComparisonTable, {
   type PriceComparisonRow,
 } from "@/components/PriceComparisonTable";
 import { PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
+const SIGNUP_URL = signupUrl();
 
 /** The modelled workload: 10 TB stored, 10 TB egress, 500K operations a month. */
 const WORKLOAD_TB = 10;

@@ -1,8 +1,8 @@
 import { ArrowsOut, ChartLine, Plug } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
 import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
@@ -27,7 +27,7 @@ const config: LandingPageConfig = {
     ),
     description: `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. No egress. No per-request fees. Read your warehouse, eval set, or media library as often as your team needs to.`,
     ctas: [
-      { label: "Start for free", href: SIGNUP_URL, variant: "primary" },
+      { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
@@ -231,7 +231,7 @@ const config: LandingPageConfig = {
     heading: "Stop paying to read your own data.",
     subhead: "Free 1 TB evaluation bucket. Drop your existing S3 endpoint in and run the same queries.",
     headingMaxWidth: 560,
-    cta: { label: "Start for free", href: SIGNUP_URL },
+    cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,
   },

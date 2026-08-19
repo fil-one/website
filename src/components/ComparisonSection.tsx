@@ -1,5 +1,6 @@
 import { Check, Minus, X } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
+import { signupUrl } from "@/lib/console-url";
 
 type CellValue = "check" | "x" | "warn";
 
@@ -199,7 +200,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
                   borderBottom: "1px solid rgba(0,0,0,0.06)",
                 })}
               >
-                <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary w-full">
+                <a href={signupUrl()} className="btn-primary w-full">
                   <span className="btn-primary-inner w-full justify-center">Try for free</span>
                 </a>
               </div>
@@ -281,7 +282,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
             — Possible, but significantly more expensive at scale.
           </p>
           <div className="flex justify-center">
-            <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+            <a href={signupUrl()} className="btn-primary">
               <span className="btn-primary-inner justify-center px-8">Try for free</span>
             </a>
           </div>
