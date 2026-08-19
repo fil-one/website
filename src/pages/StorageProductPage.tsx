@@ -56,7 +56,7 @@ const StorageProductPage = () => {
           badge={<Pill>Object Storage · S3-compatible</Pill>}
           titleSize="text-[28px] sm:text-[34px] md:text-[44px]"
           title={<>Store more. Pay less.<br />Own it completely.</>}
-          description={"Fully S3-compatible object storage with no egress fees, no API request charges, and verifiable data integrity on every byte."}
+          description={"S3-compatible object storage with no egress fees, no API request charges, and verifiable data integrity on every byte."}
           titleMaxWidth={560}
           descriptionMaxWidth={500}
           contentClassName="pb-24 md:pb-32"

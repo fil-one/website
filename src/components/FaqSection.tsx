@@ -66,7 +66,7 @@ const faqs = [
   {
     question: "Do I need to use all three products together?",
     answer:
-      "Not required. Object Storage is the foundation every Fil One account starts with, and it works great on its own as a fully S3-compatible store. Both additional products connect directly to your existing buckets when they launch, with no data migration needed.",
+      "Not required. Object Storage is the foundation every Fil One account starts with, and it works great on its own as an S3-compatible store. Both additional products connect directly to your existing buckets when they launch, with no data migration needed.",
   },
   {
     question: "What counts as egress?",

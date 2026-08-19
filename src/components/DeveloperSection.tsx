@@ -107,7 +107,7 @@ const DeveloperSection = () => {
           className={`max-w-[480px] reveal${inView ? " in-view" : ""}`}
           label="Developer first"
           title="Your existing S3 code runs here."
-          subtitle="Fil One is fully S3-compatible. Change the endpoint URL and you're done. Every tool you already use keeps working."
+          subtitle="Fil One is S3-compatible. Point your existing tools at the new endpoint, enable path-style requests, and most keep working."
         />
 
         {/* Step pills */}
