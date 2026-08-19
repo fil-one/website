@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import filOneLogo from "../assets/fil-one-logo.svg";
 import { trackDocsClick } from "@/lib/analytics";
 import { Button } from "@/components/Button";
+import { consoleUrl, signupUrl } from "@/lib/console-url";
 
 const PRODUCTS_EN = [
   {
@@ -252,7 +253,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
           ))}
           <div style={{ width: 1, height: 14, backgroundColor: "rgba(0,0,0,0.1)", margin: "0 4px" }} />
           <a
-            href="https://app.fil.one/login"
+            href={consoleUrl("/login")}
             style={{
               fontFamily: "'Funnel Sans', sans-serif",
               fontSize: 12.5,
@@ -419,7 +420,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
             <Button href={contactSalesHref} variant="secondary">
               {t.contactSales}
             </Button>
-            <Button href="https://app.fil.one/login?screen_hint=signup" variant="primary" size="sm">
+            <Button href={signupUrl()} variant="primary" size="sm">
               {t.startForFree}
             </Button>
           </div>
@@ -546,7 +547,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                 {t.contactSales}
               </Button>
               <Button
-                href="https://app.fil.one/login?screen_hint=signup"
+                href={signupUrl()}
                 variant="primary"
                 fullWidth
                 onClick={() => setMobileOpen(false)}

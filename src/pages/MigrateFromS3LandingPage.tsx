@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
 import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
 
 // Price delta scenario: 10 TB stored + 10 TB reads + 1M GET operations
@@ -184,7 +185,7 @@ const s3 = new S3Client({
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+              <a href={signupUrl()} className="btn-primary">
                 <span className="btn-primary-inner">Start for free</span>
               </a>
               <a href="/contact-sales" className="btn-secondary">
@@ -525,7 +526,7 @@ const s3 = new S3Client({
               </SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+              <a href={signupUrl()} className="btn-primary">
                 <span className="btn-primary-inner">Start for free</span>
               </a>
               <a href="/contact-sales" className="btn-secondary">
@@ -601,7 +602,7 @@ const s3 = new S3Client({
                   Free 1 TB evaluation. Change two lines and run the same workload. The egress line will not be there.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark">
+                  <a href={signupUrl()} className="btn-primary btn-primary-dark">
                     <span className="btn-primary-inner">Start for free</span>
                   </a>
                   <a href="/contact-sales" className="btn-secondary btn-secondary-dark">

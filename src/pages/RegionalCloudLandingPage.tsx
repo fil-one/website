@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
 import { PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
 
 const FEATURES = [
@@ -49,7 +50,7 @@ const RegionalCloudLandingPage = () => {
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
               <a href="/contact-sales" className="btn-primary"><span className="btn-primary-inner">Talk to our team</span></a>
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-secondary">Evaluate the API</a>
+              <a href={signupUrl()} className="btn-secondary">Evaluate the API</a>
             </div>
             <p className="hero-fade-4" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 13, color: "#71717A", textAlign: "center" }}>Partner and enterprise terms available · Contact-led</p>
           </div>
@@ -136,7 +137,7 @@ const RegionalCloudLandingPage = () => {
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.60)", marginBottom: 32 }}>Talk to the Fil One partnerships team about embedding the storage layer in your cloud product. Enterprise and multi-year terms available.</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a href="/contact-sales" className="btn-primary btn-primary-dark"><span className="btn-primary-inner">Talk to our team</span></a>
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-secondary btn-secondary-dark">Evaluate the API</a>
+                  <a href={signupUrl()} className="btn-secondary btn-secondary-dark">Evaluate the API</a>
                 </div>
                 <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.60)", marginTop: 16 }}>Partner and enterprise terms available · sales@fil.one</p>
               </div>

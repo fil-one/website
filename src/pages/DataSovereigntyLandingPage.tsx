@@ -5,6 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { GRID_SVG, SectionLabel, SectionHeading, SectionSub } from '@/components/LandingPrimitives';
 import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
 
 const FEATURES = [
@@ -133,7 +134,7 @@ const DataSovereigntyLandingPage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 hero-fade-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+              <a href={signupUrl()} className="btn-primary">
                 <span className="btn-primary-inner">Start for free</span>
               </a>
               <a href="/contact-sales" className="btn-secondary">
@@ -385,7 +386,7 @@ s3.upload_file("dataset.parquet", "eu-data", "uploads/dataset.parquet")`}</pre>
               </SectionSub>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3">
-              <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary">
+              <a href={signupUrl()} className="btn-primary">
                 <span className="btn-primary-inner">Start for free</span>
               </a>
               <a href="/contact-sales" className="btn-secondary">
@@ -461,7 +462,7 @@ s3.upload_file("dataset.parquet", "eu-data", "uploads/dataset.parquet")`}</pre>
                   Free 1 TB evaluation on the EU endpoint. Point your existing S3 tools and run the same workload in EU infrastructure.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <a href="https://app.fil.one/login?screen_hint=signup" className="btn-primary btn-primary-dark">
+                  <a href={signupUrl()} className="btn-primary btn-primary-dark">
                     <span className="btn-primary-inner">Start for free</span>
                   </a>
                   <a href="/contact-sales" className="btn-secondary btn-secondary-dark">
