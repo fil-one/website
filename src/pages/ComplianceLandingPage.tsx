@@ -272,8 +272,8 @@ const ComplianceLandingPage = () => {
                   sub: "Designed for 11 nines of durability. Data loss is a detectable and recoverable event, not a silent failure.",
                 },
                 {
-                  heading: "Cert status: in pursuit",
-                  sub: "SOC 2 Type II and ISO 27001 are actively being pursued. We do not hold these certifications today — check docs.fil.one for current status.",
+                  heading: "Certified infrastructure",
+                  sub: "Our services are delivered through top-tier data centers that are certified to ISO 27001, SOC 2, and PCI DSS standards.",
                 },
               ].map(({ heading, sub }) => (
                 <div
