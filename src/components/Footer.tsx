@@ -1,8 +1,16 @@
 import filOneLogo from "../assets/fil-one-logo.svg";
 import { trackDocsClick } from "@/lib/analytics";
+import { localize, type Lang, type Localized } from "@/lib/i18n";
+
+interface FooterGroup {
+  /** Stable key: the title is localized, so it would change with `lang`. */
+  id: string;
+  title: Localized;
+  items: { href: string; label: Localized }[];
+}
 
 interface FooterProps {
-  lang?: "en" | "es";
+  lang?: Lang;
   /** Override the Support link — defaults to the general /support page. */
   supportHref?: string;
   /** Override the Contact Sales link — defaults to the general /contact-sales page. */
@@ -10,75 +18,72 @@ interface FooterProps {
 }
 
 const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/contact-sales" }: FooterProps) => {
-  const linksEn: Record<string, { label: string; href: string }[]> = {
-    Products: [
-      { label: "Object Storage", href: "/storage" },
-      { label: "Bucket Intelligence", href: "/bucket-intelligence" },
-      { label: "AI Agent Toolkit", href: "/ai-agent-toolkit" },
-    ],
-    Solutions: [
-      { label: "AI Training & Inference", href: "/solutions/ai-training" },
-      { label: "Web3 & dApps", href: "/solutions/web3-dapps" },
-      { label: "Media & Archive", href: "/solutions/media-archive" },
-      { label: "Enterprise Backup & DR", href: "/solutions/enterprise-backup" },
-    ],
-    Company: [
-      { label: "About", href: "/about" },
-      { label: "Pricing", href: "/pricing" },
-      { label: "Enterprise", href: "/enterprise" },
-      { label: "Partners", href: "/partners" },
-      { label: "Contact Sales", href: contactSalesHref },
-    ],
-    Resources: [
-      { label: "Documentation", href: "https://docs.fil.one" },
-      { label: "Blog", href: "/blog" },
-      { label: "Support", href: supportHref },
-      { label: "Status", href: "https://status.fil.one" },
-      { label: "Filecoin", href: "https://filecoin.io" },
-    ],
-    Legal: [
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Terms of Use", href: "/terms" },
-      { label: "Acceptable Use", href: "/aup" },
-      { label: "SLA", href: "/sla" },
-    ],
-  };
+  /**
+   * Declared once, with only the copy varying by language — so a group's
+   * hrefs cannot drift between the two translations, and adding a link is a
+   * one-line change instead of two.
+   */
+  const groups: FooterGroup[] = [
+    {
+      id: "products",
+      title: { en: "Products", es: "Productos" },
+      items: [
+        { href: "/storage", label: { en: "Object Storage", es: "Almacenamiento de objetos" } },
+        { href: "/bucket-intelligence", label: "Bucket Intelligence" },
+        { href: "/ai-agent-toolkit", label: "AI Agent Toolkit" },
+      ],
+    },
+    {
+      id: "solutions",
+      title: { en: "Solutions", es: "Soluciones" },
+      items: [
+        {
+          href: "/solutions/ai-training",
+          label: { en: "AI Training & Inference", es: "Entrenamiento e inferencia de IA" },
+        },
+        { href: "/solutions/web3-dapps", label: { en: "Web3 & dApps", es: "Web3 y dApps" } },
+        { href: "/solutions/media-archive", label: { en: "Media & Archive", es: "Medios y archivo" } },
+        {
+          href: "/solutions/enterprise-backup",
+          label: { en: "Enterprise Backup & DR", es: "Backup empresarial y DR" },
+        },
+      ],
+    },
+    {
+      id: "company",
+      title: { en: "Company", es: "Empresa" },
+      items: [
+        { href: "/about", label: { en: "About", es: "Nosotros" } },
+        { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
+        { href: "/enterprise", label: { en: "Enterprise", es: "Empresas" } },
+        { href: "/partners", label: "Partners" },
+        { href: contactSalesHref, label: { en: "Contact Sales", es: "Contactar con ventas" } },
+      ],
+    },
+    {
+      id: "resources",
+      title: { en: "Resources", es: "Recursos" },
+      items: [
+        { href: "https://docs.fil.one", label: { en: "Documentation", es: "Documentación" } },
+        { href: "/blog", label: "Blog" },
+        { href: supportHref, label: { en: "Support", es: "Soporte" } },
+        { href: "https://status.fil.one", label: { en: "Status", es: "Estado" } },
+        { href: "https://filecoin.io", label: "Filecoin" },
+      ],
+    },
+    {
+      id: "legal",
+      title: "Legal",
+      items: [
+        { href: "/privacy", label: { en: "Privacy Policy", es: "Política de privacidad" } },
+        { href: "/terms", label: { en: "Terms of Use", es: "Términos de uso" } },
+        { href: "/aup", label: { en: "Acceptable Use", es: "Uso aceptable" } },
+        { href: "/sla", label: "SLA" },
+      ],
+    },
+  ];
 
-  const linksEs: Record<string, { label: string; href: string }[]> = {
-    Productos: [
-      { label: "Almacenamiento de objetos", href: "/storage" },
-      { label: "Bucket Intelligence", href: "/bucket-intelligence" },
-      { label: "AI Agent Toolkit", href: "/ai-agent-toolkit" },
-    ],
-    Soluciones: [
-      { label: "Entrenamiento e inferencia de IA", href: "/solutions/ai-training" },
-      { label: "Web3 y dApps", href: "/solutions/web3-dapps" },
-      { label: "Medios y archivo", href: "/solutions/media-archive" },
-      { label: "Backup empresarial y DR", href: "/solutions/enterprise-backup" },
-    ],
-    Empresa: [
-      { label: "Nosotros", href: "/about" },
-      { label: "Precios", href: "/pricing" },
-      { label: "Empresas", href: "/enterprise" },
-      { label: "Partners", href: "/partners" },
-      { label: "Contactar con ventas", href: contactSalesHref },
-    ],
-    Recursos: [
-      { label: "Documentación", href: "https://docs.fil.one" },
-      { label: "Blog", href: "/blog" },
-      { label: "Soporte", href: supportHref },
-      { label: "Estado", href: "https://status.fil.one" },
-      { label: "Filecoin", href: "https://filecoin.io" },
-    ],
-    Legal: [
-      { label: "Política de privacidad", href: "/privacy" },
-      { label: "Términos de uso", href: "/terms" },
-      { label: "Uso aceptable", href: "/aup" },
-      { label: "SLA", href: "/sla" },
-    ],
-  };
-
-  const links = lang === "es" ? linksEs : linksEn;
+  const l = (value: Localized) => localize(value, lang);
   const tagline = lang === "es"
     ? "Almacenamiento de objetos S3 diseñado para la era de la IA."
     : "S3 object storage built for the AI era.";
@@ -101,18 +106,18 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
 
           {/* Right: link groups */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 md:flex md:flex-row md:gap-16 items-start">
-            {Object.entries(links).map(([title, items]) => (
-              <div key={title} className="flex flex-col gap-3 items-start">
-                <p className="font-sans text-[12.5px] font-medium tracking-[0.02em] text-zinc-950">{title}</p>
+            {groups.map(({ id, title, items }) => (
+              <div key={id} className="flex flex-col gap-3 items-start">
+                <p className="font-sans text-[12.5px] font-medium tracking-[0.02em] text-zinc-950">{l(title)}</p>
                 {items.map(({ label, href }) => (
                   <a
-                    key={label}
+                    key={href}
                     href={href}
                     {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     onClick={href.includes("docs.fil.one") ? () => trackDocsClick(href) : undefined}
                     className="font-sans text-[13.5px] font-normal leading-[1.4] text-zinc-600 no-underline transition-colors duration-150 hover:text-zinc-950"
                   >
-                    {label}
+                    {l(label)}
                   </a>
                 ))}
               </div>
