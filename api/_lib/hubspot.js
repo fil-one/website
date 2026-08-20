@@ -1,0 +1,295 @@
+/**
+ * Server-only HubSpot Blog helpers.
+ *
+ * Shared by the /api/blogs endpoints and the /blog/:slug HTML renderer. Lives
+ * under api/_lib/ so Vercel treats it as a library rather than a route.
+ *
+ * Two rules everything here follows:
+ *  1. The private app token never leaves this process.
+ *  2. Responses are projected down to the fields the site renders, so HubSpot's
+ *     internal/campaign/analytics fields are never forwarded to the browser.
+ */
+
+const HUBSPOT_API_BASE = "https://api.hubapi.com/cms/blogs/2026-03/posts";
+/**
+ * Blog tags are documented only at the unversioned v3 path
+ * (developers.hubspot.com/docs/api-reference/cms-tags-v3), but portals on the
+ * dated API expose the dated one. Try dated first to match the posts base
+ * above, then fall back to the documented path.
+ */
+const HUBSPOT_TAGS_URLS = [
+  "https://api.hubapi.com/cms/blogs/2026-03/tags",
+  "https://api.hubapi.com/cms/v3/blogs/tags",
+];
+
+/**
+ * Blog authors, resolved the same way as tags.
+ *
+ * A post's `authorName` is the user who last published it, NOT the blog author
+ * shown in HubSpot — that has to be looked up by `blogAuthorId`.
+ * See developers.hubspot.com/docs/api-reference/cms-authors-v3.
+ */
+const HUBSPOT_AUTHORS_URLS = [
+  "https://api.hubapi.com/cms/blogs/2026-03/authors",
+  "https://api.hubapi.com/cms/v3/blogs/authors",
+];
+
+/** Fil One's HubSpot blog group. Override per portal (e.g. a sandbox) with env. */
+const DEFAULT_CONTENT_GROUP_ID = "217378575467";
+
+export const DEFAULT_LIMIT = 20;
+export const MAX_LIMIT = 100;
+
+/** Pages to scan when resolving a slug → post (MAX_LIMIT posts per page). */
+const MAX_SLUG_SCAN_PAGES = 10;
+
+/** Fields forwarded to the browser. Anything not listed is dropped. */
+const PUBLIC_FIELDS = [
+  "id",
+  "slug",
+  "name",
+  "postSummary",
+  "metaDescription",
+  "authorName",
+  "publishDate",
+  "createdAt",
+  "featuredImage",
+  "featuredImageAltText",
+  "tagIds",
+  "topicIds",
+  "blogAuthorId",
+];
+
+/** Resolved blog tags and authors, cached per warm function instance. */
+const TAG_CACHE_TTL_MS = 5 * 60 * 1000;
+let tagCache = { expiresAt: 0, tags: null };
+let authorCache = { expiresAt: 0, authors: null };
+
+/**
+ * slug → post id, cached per warm instance so a repeat article view costs one
+ * HubSpot call instead of re-walking the published list. Ids never change, so a
+ * hit stays valid; a miss falls through to the scan below.
+ */
+const SLUG_CACHE_TTL_MS = 5 * 60 * 1000;
+let slugCache = { expiresAt: 0, ids: new Map() };
+
+function rememberSlug(slug, id) {
+  if (slugCache.expiresAt < Date.now()) slugCache = { expiresAt: Date.now() + SLUG_CACHE_TTL_MS, ids: new Map() };
+  slugCache.ids.set(slug, id);
+}
+
+export function getHubSpotConfig() {
+  return {
+    accessToken: process.env.HUBSPOT_PRIVATE_APP_ACCESS_TOKEN || "",
+    contentGroupId: process.env.HUBSPOT_BLOG_CONTENT_GROUP_ID || DEFAULT_CONTENT_GROUP_ID,
+  };
+}
+
+/** HubSpot slugs can be nested ("blog/my-post"); the site routes on the last segment. */
+export function localSlug(slug = "") {
+  const segments = String(slug).split("/").filter(Boolean);
+  return segments.at(-1) ?? slug;
+}
+
+/** Clamp a caller-supplied limit into [1, MAX_LIMIT]. */
+export function clampLimit(value) {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return DEFAULT_LIMIT;
+  return Math.min(Math.max(Math.trunc(parsed), 1), MAX_LIMIT);
+}
+
+/** Strip a HubSpot post down to the public field set. */
+export function projectPost(post, { includeBody = false } = {}) {
+  const projected = {};
+  for (const field of PUBLIC_FIELDS) {
+    if (post[field] !== undefined && post[field] !== null) projected[field] = post[field];
+  }
+  if (includeBody) projected.postBody = post.postBody || "";
+  return projected;
+}
+
+const isPublished = (post) => post?.state === "PUBLISHED" || post?.currentState === "PUBLISHED";
+
+/** Thrown for any non-2xx HubSpot response so callers can map the status through. */
+export class HubSpotError extends Error {
+  constructor(status) {
+    super(`HubSpot request failed with ${status}`);
+    this.status = status;
+  }
+}
+
+async function hubspotFetch(path, { accessToken, params }) {
+  const query = params ? `?${params}` : "";
+  const response = await fetch(`${HUBSPOT_API_BASE}${path}${query}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  if (!response.ok) throw new HubSpotError(response.status);
+  return response.json();
+}
+
+/** "Product launches" → "product-launches", for the ?category= query param. */
+export function slugifyTag(value = "") {
+  return String(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/**
+ * id → { id, name, slug } for every blog tag in the portal.
+ *
+ * Tags are the categories the blog filters on. Resolved separately because posts
+ * carry only `tagIds`. Failures degrade to an empty map (posts render without
+ * categories) rather than taking the whole blog down.
+ */
+async function fetchLookup(urls, accessToken, collect) {
+  const entries = new Map();
+  for (const url of urls) {
+    try {
+      const response = await fetch(`${url}?limit=300`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      if (!response.ok) continue;
+
+      const data = await response.json();
+      for (const item of data.results || []) collect(entries, item);
+      break;
+    } catch {
+      // Try the next path; an empty map degrades gracefully at the call site.
+    }
+  }
+  return entries;
+}
+
+export async function fetchTagMap({ accessToken }) {
+  if (tagCache.tags && tagCache.expiresAt > Date.now()) return tagCache.tags;
+
+  const tags = await fetchLookup(HUBSPOT_TAGS_URLS, accessToken, (entries, tag) => {
+    if (!tag?.id || !tag?.name) return;
+    entries.set(String(tag.id), {
+      id: String(tag.id),
+      // v3 tag objects carry no slug, so derive one for the ?category= param.
+      name: tag.name,
+      slug: tag.slug || slugifyTag(tag.name),
+    });
+  });
+
+  tagCache = { tags, expiresAt: Date.now() + TAG_CACHE_TTL_MS };
+  return tags;
+}
+
+/** id → display name for every blog author in the portal. */
+export async function fetchAuthorMap({ accessToken }) {
+  if (authorCache.authors && authorCache.expiresAt > Date.now()) return authorCache.authors;
+
+  const authors = await fetchLookup(HUBSPOT_AUTHORS_URLS, accessToken, (entries, author) => {
+    const name = author?.displayName || author?.fullName || author?.name;
+    if (!author?.id || !name) return;
+    entries.set(String(author.id), name);
+  });
+
+  authorCache = { authors, expiresAt: Date.now() + TAG_CACHE_TTL_MS };
+  return authors;
+}
+
+/**
+ * Swap raw ids for resolved values: `tagIds` become `tags`, and `blogAuthorId`
+ * becomes the `authorName` the site displays.
+ *
+ * HubSpot's own `authorName` is whoever last published the post, so it is
+ * dropped when the post has a blog author — showing an unresolvable author as
+ * the publisher's name would credit the wrong person. The client falls back to
+ * "Fil One Team" when there is no name at all.
+ */
+function withRelations(post, { tagMap, authorMap }) {
+  const { tagIds, topicIds, blogAuthorId, ...rest } = post;
+
+  const ids = tagIds || topicIds || [];
+  const tags = ids.map((id) => tagMap.get(String(id))).filter(Boolean);
+  if (tags.length) rest.tags = tags;
+
+  if (blogAuthorId) {
+    const authorName = authorMap.get(String(blogAuthorId));
+    if (authorName) rest.authorName = authorName;
+    else delete rest.authorName;
+  }
+
+  return rest;
+}
+
+/**
+ * One page of published posts from the configured blog group, newest first.
+ * Returns projected summaries (no post body) plus the paging cursor.
+ */
+export async function fetchPublishedPage({ accessToken, contentGroupId, limit, after }) {
+  const params = new URLSearchParams({
+    state: "PUBLISHED",
+    sort: "-createdAt",
+    limit: String(limit),
+    contentGroupId,
+  });
+  if (after) params.set("after", String(after));
+
+  const [data, tagMap, authorMap] = await Promise.all([
+    hubspotFetch("", { accessToken, params }),
+    fetchTagMap({ accessToken }),
+    fetchAuthorMap({ accessToken }),
+  ]);
+  const results = (data.results || [])
+    .filter(isPublished)
+    .map((post) => withRelations(projectPost(post), { tagMap, authorMap }));
+  return { results, total: data.total, paging: data.paging };
+}
+
+/** Fetch one published post in the configured group by ID, body included. */
+export async function fetchPublishedPostById({ accessToken, contentGroupId, id }) {
+  const post = await hubspotFetch(`/${encodeURIComponent(id)}`, { accessToken });
+  if (!isPublished(post)) return undefined;
+  // Scope to our blog group so /blog/... can't surface another blog's content.
+  if (String(post.contentGroupId) !== String(contentGroupId)) return undefined;
+
+  const [tagMap, authorMap] = await Promise.all([
+    fetchTagMap({ accessToken }),
+    fetchAuthorMap({ accessToken }),
+  ]);
+  return withRelations(projectPost(post, { includeBody: true }), { tagMap, authorMap });
+}
+
+/**
+ * Resolve a local slug to a published post, body included.
+ *
+ * Pages through the published list (IDs + slugs only) to find the match, then
+ * fetches that single post's body — so the whole archive is reachable, not just
+ * the first page.
+ */
+export async function fetchPublishedPostBySlug({ accessToken, contentGroupId, slug }) {
+  const target = localSlug(slug);
+
+  const cachedId = slugCache.expiresAt > Date.now() ? slugCache.ids.get(target) : undefined;
+  if (cachedId) {
+    const post = await fetchPublishedPostById({ accessToken, contentGroupId, id: cachedId });
+    if (post) return post;
+    // Unpublished or retargeted since we cached it — fall through to a fresh scan.
+  }
+
+  let after;
+
+  for (let page = 0; page < MAX_SLUG_SCAN_PAGES; page += 1) {
+    const { results, paging } = await fetchPublishedPage({
+      accessToken,
+      contentGroupId,
+      limit: MAX_LIMIT,
+      after,
+    });
+
+    for (const post of results) rememberSlug(localSlug(post.slug), post.id);
+
+    const match = results.find((post) => localSlug(post.slug) === target);
+    if (match) return fetchPublishedPostById({ accessToken, contentGroupId, id: match.id });
+
+    after = paging?.next?.after;
+    if (!after) break;
+  }
+
+  return undefined;
+}

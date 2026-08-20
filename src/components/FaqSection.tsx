@@ -5,6 +5,7 @@ import JsonLd from "@/components/JsonLd";
 import SectionHeader from "@/components/SectionHeader";
 import { trackEvent, trackDocsClick } from "@/lib/analytics";
 import { PRICE_DISPLAY } from "@/lib/pricing";
+import { consoleOrigin } from "@/lib/console-url";
 
 const faqs = [
   {
@@ -18,7 +19,7 @@ const faqs = [
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
         <p>The S3-compatible API means anything built for AWS S3 works here too. Point your SDK or CLI at our endpoint and authenticate with your API keys.</p>
         <p>Security comes first in the S3-compatible design: setup and migration stay simple, and buckets are private by default. Public access with full S3 parity is coming soon.</p>
-        <p>Read <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link" onClick={() => trackDocsClick("https://docs.fil.one")}>Fil One docs</a>, <a href="https://app.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link">access the app</a> to get started with no code required, or <a href="/contact-sales" className="faq-link">talk to someone on our team</a> to get started.</p>
+        <p>Read <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link" onClick={() => trackDocsClick("https://docs.fil.one")}>Fil One docs</a>, <a href={consoleOrigin()} target="_blank" rel="noopener noreferrer" className="faq-link">access the app</a> to get started with no code required, or <a href="/contact-sales" className="faq-link">talk to someone on our team</a> to get started.</p>
       </div>
     ),
   },
@@ -31,7 +32,7 @@ const faqs = [
     question: "How does Fil One approach security and compliance?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Encryption is industry-standard, with per-object data encryption keys that protect your data regardless of which provider it's stored with. SOC 2 Type II and ISO 27001 certifications are actively in progress. Reach out to <a href="mailto:security@fil.one" className="faq-link">security@fil.one</a> if you'd like to be notified when those finalize, or have other questions about security.</p>
+        <p>Encryption is industry-standard, with per-object data encryption keys that protect your data regardless of which provider it's stored with. Our services are delivered through top-tier data centers that are certified to ISO 27001, SOC 2, and PCI DSS standards. Reach out to <a href="mailto:security@fil.one" className="faq-link">security@fil.one</a> for compliance documentation or any other security questions.</p>
       </div>
     ),
   },
@@ -65,7 +66,7 @@ const faqs = [
   {
     question: "Do I need to use all three products together?",
     answer:
-      "Not required. Object Storage is the foundation every Fil One account starts with, and it works great on its own as a fully S3-compatible store. Both additional products connect directly to your existing buckets when they launch, with no data migration needed.",
+      "Not required. Object Storage is the foundation every Fil One account starts with, and it works great on its own as an S3-compatible store. Both additional products connect directly to your existing buckets when they launch, with no data migration needed.",
   },
   {
     question: "What counts as egress?",
@@ -93,7 +94,7 @@ const faqs = [
   {
     question: "Where is my data stored?",
     answer:
-      "It depends on the bucket region you choose. We currently offer an EU region (France) and a US region (Michigan) launching soon, with more regions on the way.",
+      "It depends on the bucket region you choose. We currently offer an EU region (France) and a US region (Michigan), with more regions on the way.",
   },
   {
     question: "Is there a free trial?",

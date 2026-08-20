@@ -16,21 +16,18 @@ import PriceComparisonTable, {
   type PriceComparisonColumn,
   type PriceComparisonRow,
 } from "@/components/PriceComparisonTable";
-import {
-  PRICE_PER_TB_EUR,
-  PRICE_PER_TB_SHORT_EUR_ES,
-  EUR_USD_RATE_ES,
-  EUR_USD_RATE_SOURCE_ES,
-  eurEs,
-} from "@/lib/pricing";
+import { PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = "https://app.fil.one/login?screen_hint=signup";
+const SIGNUP_URL = signupUrl();
 const SUPPORT_HREF = "/lp/es/soporte";
 const CONTACT_SALES_HREF = "/lp/es/contacto";
 
 /** The modelled workload: 10 TB stored, 10 TB egress, 500K operations a month. */
 const WORKLOAD_TB = 10;
-const FIL_ONE_TOTAL = eurEs(PRICE_PER_TB_EUR * WORKLOAD_TB);
+// Prices stay in the site-wide USD format ("$4.99/TB") on the Spanish pages
+// too, so the headline rate reads identically everywhere it appears.
+const FIL_ONE_TOTAL = `$${(PRICE_PER_TB * WORKLOAD_TB).toFixed(2)}`;
 
 const PRICING_COLUMNS: PriceComparisonColumn[] = [
   { key: "region", header: "Región" },
@@ -47,8 +44,8 @@ const PRICING_ROWS: PriceComparisonRow[] = [
     values: {
       region: "EU-West",
       storage: FIL_ONE_TOTAL,
-      egress: eurEs(0, 0),
-      api: eurEs(0, 0),
+      egress: "$0",
+      api: "$0",
       total: FIL_ONE_TOTAL,
     },
   },
@@ -56,37 +53,37 @@ const PRICING_ROWS: PriceComparisonRow[] = [
     provider: "Backblaze B2",
     values: {
       region: "eu-central-003 Amsterdam",
-      storage: eurEs(59.6),
-      egress: eurEs(0, 0),
-      api: eurEs(0, 0),
-      total: eurEs(59.6),
+      storage: "$69.50",
+      egress: "$0",
+      api: "$0",
+      total: "$69.50",
     },
   },
   {
     provider: "Wasabi",
     values: {
       region: "eu-west-2 Paris",
-      storage: eurEs(59.9),
-      egress: eurEs(0, 0),
-      api: eurEs(0, 0),
-      total: eurEs(59.9),
+      storage: "$79.90",
+      egress: "$0",
+      api: "$0",
+      total: "$79.90",
     },
   },
   {
     provider: "AWS S3 Standard",
     values: {
       region: "eu-south-2 Madrid",
-      storage: eurEs(197, 0),
-      egress: eurEs(790, 0),
-      api: eurEs(1.83),
-      total: eurEs(990, 0),
+      storage: "$230",
+      egress: "$900",
+      api: "$2.50",
+      total: "$1,132.50",
     },
   },
 ];
 
 const STATS = [
-  { stat: PRICE_PER_TB_SHORT_EUR_ES, label: "Precio fijo mensual" },
-  { stat: eurEs(0, 0), label: "Costes por egress" },
+  { stat: PRICE_PER_TB_SHORT, label: "Precio fijo mensual" },
+  { stat: "$0", label: "Costes por egress" },
   // El 20× es sobre la factura total, que depende del egress, así que
   // solo se cumple con un uso intensivo de lectura. La nota indica el escenario.
   {
@@ -109,9 +106,9 @@ const FEATURES = [
 const BarcelonaLandingPageES = () => {
   useLang("es");
   useSeo({
-    title: `Fil One para Barcelona: Almacenamiento Europeo, ${PRICE_PER_TB_SHORT_EUR_ES}, Sin Egress`,
+    title: `Fil One para Barcelona: Almacenamiento Europeo, ${PRICE_PER_TB_SHORT}, Sin Egress`,
     description:
-      `Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a ${PRICE_PER_TB_SHORT_EUR_ES}. Intégralo en tu stack actual en minutos.`,
+      `Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a ${PRICE_PER_TB_SHORT}. Intégralo en tu stack actual en minutos.`,
     canonical: "https://www.fil.one/lp/es/barcelona",
   });
 
@@ -130,7 +127,7 @@ const BarcelonaLandingPageES = () => {
           glow
           grid
           titleSize="text-[34px] sm:text-[44px] md:text-[62px]"
-          // 900, not the EN page's 760: the Spanish second line measures 881px
+          // 900, not the EN page's 760: the Spanish second line measures 862px
           // at the 62px display size and would otherwise wrap to three lines.
           titleMaxWidth={900}
           descriptionMaxWidth={520}
@@ -139,7 +136,7 @@ const BarcelonaLandingPageES = () => {
             <>
               Almacenamiento europeo.
               <br />
-              <span className="text-brand-500">{PRICE_PER_TB_SHORT_EUR_ES}, sin cargos por egress.</span>
+              <span className="text-brand-500">{PRICE_PER_TB_SHORT}, sin cargos por egress.</span>
             </>
           }
           description="Almacenamiento de objetos compatible con S3 que mantiene tus datos en Europa. Funciona con las herramientas que ya utilizas, sin necesidad de migraciones."
@@ -198,13 +195,7 @@ const BarcelonaLandingPageES = () => {
               providerHeader="Proveedor"
               highlightLabel="Tú"
               centerFootnote
-              footnote={
-                <>
-                  Los precios de los demás proveedores se han convertido de USD a EUR utilizando un tipo de cambio de
-                  1 €&nbsp;= {EUR_USD_RATE_ES} ({EUR_USD_RATE_SOURCE_ES}). Fil One tiene un precio nativo en euros de{" "}
-                  {PRICE_PER_TB_SHORT_EUR_ES}.
-                </>
-              }
+              footnote="Los precios de los demás proveedores son sus tarifas de lista publicadas para regiones de la UE. Todos los precios se indican en USD."
             />
 
             {/* Mid-page CTA after pricing table */}
@@ -259,7 +250,7 @@ const BarcelonaLandingPageES = () => {
         <CtaBanner
           heading="El almacenamiento de objetos más económico de Europa"
           headingMaxWidth={620}
-          subhead={`${PRICE_PER_TB_SHORT_EUR_ES}, sin costes por egress y listo para usar en minutos.`}
+          subhead={`${PRICE_PER_TB_SHORT}, sin costes por egress y listo para usar en minutos.`}
           cta={{ label: "Empieza con 30 días gratis", href: SIGNUP_URL }}
           note="No necesitas tarjeta de crédito."
         />

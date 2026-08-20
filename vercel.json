@@ -1,6 +1,15 @@
 {
   "headers": [
     {
+      "source": "/(.*)",
+      "has": [
+        { "type": "host", "value": "(www\\.)?filone\\.ai" }
+      ],
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
+    {
       "source": "/assets/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
@@ -19,7 +28,7 @@
       ]
     },
     {
-      "source": "/:path((?!assets/|fonts/).*)",
+      "source": "/:path((?!assets/|fonts/|api/|blog/).*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
@@ -47,6 +56,8 @@
     { "source": "/solutions/backup", "destination": "/", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/blog/rss.xml", "destination": "/api/rss" },
+    { "source": "/blog/:slug", "destination": "/api/blog-page?slug=:slug" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }

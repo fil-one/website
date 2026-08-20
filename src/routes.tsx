@@ -5,6 +5,7 @@ export type PageLoader = () => Promise<{ default: ComponentType }>;
 export interface RouteDef {
   path: string;
   load: PageLoader;
+  prerender?: boolean;
 }
 
 /**
@@ -75,12 +76,18 @@ export const routeDefs: RouteDef[] = [
   { path: "/solutions/enterprise-backup", load: () => import("./pages/solutions/EnterpriseBackupSolutionPage") },
   { path: "/partners", load: () => import("./pages/PartnersPage") },
   { path: "/partners/apply", load: () => import("./pages/PartnerApplyPage") },
+  { path: "/blog", load: () => import("./pages/Blog") },
+  { path: "/blog/:slug", load: () => import("./pages/BlogPost"), prerender: false },
 ];
 
 export const notFoundLoad: PageLoader = () => import("./pages/NotFound");
 
 /**
- * Flat list of every route path. Single source of truth for the prerender
+ * Every prerenderable route path. Single source of truth for the prerender
  * script (which routes to render + the sitemap) and the route-parity test.
+ *
+ * Routes marked `prerender: false` are excluded: their paths are dynamic
+ * (/blog/:slug) so there's nothing to render at build time. Those are served by
+ * a request-time function instead — see api/blog-page.js.
  */
-export const routePaths: string[] = routeDefs.map((r) => r.path);
+export const routePaths: string[] = routeDefs.filter((r) => r.prerender !== false).map((r) => r.path);

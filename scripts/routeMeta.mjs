@@ -12,13 +12,16 @@ import {
   PRICE_PER_TB_SHORT,
   PRICE_PER_TB_MONTH,
   PRICE_AMOUNT,
-  PRICE_PER_TB_SHORT_EUR,
-  PRICE_PER_TB_SHORT_EUR_ES,
 } from "../src/lib/pricing.constants.mjs";
 
 export const BASE_URL = "https://www.fil.one";
 
 export const ROUTE_META = {
+  "/blog": {
+    title: "Blog · Fil One",
+    description:
+      "Ideas and practical guidance on object storage, AI infrastructure, and the cost of moving data at scale.",
+  },
   "/": {
     title: "Fil One | S3 object storage built for the AI era",
     description:
@@ -61,7 +64,7 @@ export const ROUTE_META = {
   "/lp/agents": {
     title: "Fil One for AI Agents · S3 Storage for RAG, Agent Memory & Datasets",
     description:
-      `Give your AI agents durable, verifiable storage. S3-compatible, ${PRICE_PER_TB_SHORT}, no egress fees, integrity proven daily. Drop-in replacement for AWS S3.`,
+      `Give your AI agents S3-compatible storage at ${PRICE_PER_TB_SHORT}, no egress fees. Drop-in replacement for AWS S3.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -151,7 +154,7 @@ export const ROUTE_META = {
   "/lp/rag-storage": {
     title: "Object Storage for RAG Pipelines · Fil One",
     description:
-      `Store and retrieve RAG corpora, embeddings, and vector indexes at ${PRICE_PER_TB_SHORT}. S3-compatible, no egress fees, verifiable integrity — built for LLM pipelines.`,
+      `Store and retrieve RAG corpora, embeddings, and vector indexes at ${PRICE_PER_TB_SHORT}. S3-compatible, no egress fees — built for LLM pipelines.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -196,7 +199,7 @@ export const ROUTE_META = {
   "/lp/ml-checkpoints": {
     title: "ML Checkpoint Storage · Save Model Weights Cheaply | Fil One",
     description:
-      `Store ML checkpoints and model artifacts at ${PRICE_PER_TB_SHORT} with no egress fees. S3-compatible, durable, and verifiable — ideal for training runs on any cloud.`,
+      `Store ML checkpoints and model artifacts at ${PRICE_PER_TB_SHORT} with no egress fees. S3-compatible — ideal for training runs on any cloud.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -251,22 +254,22 @@ export const ROUTE_META = {
   "/lp/log-retention": {
     title: `Cheap Log Retention Storage · ${PRICE_PER_TB_SHORT} | Fil One`,
     description:
-      `Store logs long-term at ${PRICE_PER_TB_SHORT} with no egress fees. S3-compatible, verifiable, and far cheaper than CloudWatch or Datadog for long-term retention.`,
+      `Store logs long-term at ${PRICE_PER_TB_SHORT} with no egress fees. S3-compatible, and far cheaper than CloudWatch or Datadog for long-term retention.`,
   },
   "/lp/web-scraping": {
     title: "Storage for Web Scraping & Data Collection · Fil One",
     description:
-      `Store scraped datasets, crawl archives, and raw HTML at ${PRICE_PER_TB_SHORT}. No egress fees when feeding data into pipelines. S3-compatible and verifiable.`,
+      `Store scraped datasets, crawl archives, and raw HTML at ${PRICE_PER_TB_SHORT}. No egress fees when feeding data into pipelines. S3-compatible.`,
   },
   "/lp/multi-cloud": {
     title: "Multi-Cloud Object Storage · S3-Compatible | Fil One",
     description:
-      `Add a cost-effective, verifiable storage tier to your multi-cloud stack. ${PRICE_PER_TB_SHORT}, no egress, S3-compatible — works alongside AWS, GCP, and Azure.`,
+      `Add a cost-effective storage tier to your multi-cloud stack. ${PRICE_PER_TB_SHORT}, no egress, S3-compatible — works alongside AWS, GCP, and Azure.`,
   },
   "/lp/data-sovereignty": {
-    title: "Data Sovereignty Storage · Verifiable, Decentralized | Fil One",
+    title: "EU Data Residency Storage · S3-Compatible | Fil One",
     description:
-      `Own your data with cryptographic proof. Fil One's Filecoin-backed storage gives you verifiable custody, no vendor lock-in, and S3-compatible access at ${PRICE_PER_TB_SHORT}.`,
+      `S3-compatible object storage with an EU region endpoint. No egress fees, no vendor lock-in, at ${PRICE_PER_TB_SHORT} flat.`,
   },
   "/lp/migrate-from-s3": {
     title: "Migrate from AWS S3 to Fil One · Drop-In S3 Replacement",
@@ -314,24 +317,24 @@ export const ROUTE_META = {
     ],
   },
   "/lp/compliance": {
-    title: "Compliant Object Storage with Verifiable Integrity · Fil One",
+    title: "Compliance-Ready Object Storage · Fil One",
     description:
-      `Meet compliance requirements with cryptographically verifiable storage. Integrity proven daily, 11 nines durability, S3-compatible at ${PRICE_PER_TB_SHORT}.`,
+      `S3-compatible storage with Object Lock retention, full version history, and encryption at rest and in transit, at ${PRICE_PER_TB_SHORT} flat.`,
   },
   "/lp/archival": {
-    title: "Archival Object Storage · Cheap, Durable & Verifiable | Fil One",
+    title: "Archival Object Storage · Flat-Rate, No Retrieval Fees | Fil One",
     description:
-      `Archive cold data at ${PRICE_PER_TB_SHORT} with 11 nines durability and integrity proven daily. No egress fees when you need to restore. S3-compatible.`,
+      `Archive cold data at ${PRICE_PER_TB_SHORT} flat. No egress fees or retrieval delay when you need to restore. S3-compatible.`,
   },
   "/lp/versioning": {
     title: "Object Storage with Versioning · Fil One",
     description:
-      `S3-compatible versioning on Filecoin. Keep every version of every object at ${PRICE_PER_TB_SHORT} with no egress fees and cryptographic integrity guarantees.`,
+      `S3-compatible versioning, built on Filecoin infrastructure. Keep every version of every object and download any of them at ${PRICE_PER_TB_SHORT} with no egress fees.`,
   },
   "/lp/regional-cloud": {
     title: "Regional Cloud Storage Alternative · Fil One",
     description:
-      `A globally distributed, cost-effective alternative to regional cloud storage. ${PRICE_PER_TB_SHORT}, no egress, S3-compatible, and verifiably durable.`,
+      `A cost-effective alternative to building your own regional cloud storage. ${PRICE_PER_TB_SHORT}, no egress, S3-compatible.`,
   },
   "/lp/media": {
     title: "Media & Asset Storage · S3-Compatible, No Egress | Fil One",
@@ -341,38 +344,38 @@ export const ROUTE_META = {
   "/lp/gaming": {
     title: "Game Asset & Save-Data Storage · Fil One",
     description:
-      `Durable, verifiable storage for game assets, saves, and telemetry at ${PRICE_PER_TB_SHORT}. Zero egress fees and S3-compatible — built for game backends.`,
+      `S3-compatible storage for game assets, saves, and telemetry at ${PRICE_PER_TB_SHORT}. Zero egress fees — built for game backends.`,
   },
   "/lp/genomics": {
     title: "Genomics & Life Sciences Data Storage · Fil One",
     description:
-      `Store genomics datasets, sequencing data, and research archives at ${PRICE_PER_TB_SHORT} with 11 nines durability, integrity proven daily, and zero egress fees.`,
+      `Store genomics datasets, sequencing data, and research archives at ${PRICE_PER_TB_SHORT} with zero egress fees on re-analysis, at any scale.`,
   },
   "/lp/web3-fintech": {
-    title: "Web3 & Fintech Data Storage · Verifiable, S3-Compatible | Fil One",
+    title: "Web3 & Fintech Data Storage · S3-Compatible | Fil One",
     description:
-      `Verifiable, decentralized storage for Web3 and fintech workloads. Integrity proven daily, ${PRICE_PER_TB_SHORT}, no egress, built on Filecoin.`,
+      `S3-compatible storage for Web3 and fintech workloads, built on Filecoin infrastructure. ${PRICE_PER_TB_SHORT} flat, no egress, no lock-in.`,
   },
   "/lp/web3-pivot": {
-    title: "Decentralized Storage for Web3 Projects · Fil One",
+    title: "S3-Compatible Storage for Web3 Projects · Fil One",
     description:
-      `Transition to decentralized storage without rebuilding your stack. Fil One is S3-compatible, Filecoin-backed, and ${PRICE_PER_TB_SHORT} with no egress fees.`,
+      `Point your Web3 product's storage at Filecoin infrastructure without rebuilding your stack. S3-compatible, no egress fees, no lock-in, at ${PRICE_PER_TB_SHORT} flat.`,
   },
   "/lp/web3-native": {
-    title: "Native Web3 Object Storage · Filecoin-Backed | Fil One",
+    title: "Native Web3 Object Storage · Built on Filecoin | Fil One",
     description:
-      `Purpose-built for Web3-native apps. S3-compatible, cryptographically verifiable storage on Filecoin at ${PRICE_PER_TB_SHORT}, integrity proven daily.`,
+      `Purpose-built for Web3-native apps. S3-compatible object storage built on Filecoin infrastructure at ${PRICE_PER_TB_SHORT}, no egress, no lock-in.`,
   },
   "/lp/barcelona": {
-    title: `Fil One for Barcelona: European Storage, ${PRICE_PER_TB_SHORT_EUR}, No Egress Fees`,
+    title: `Fil One for Barcelona: European Storage, ${PRICE_PER_TB_SHORT}, No Egress Fees`,
     description:
-      `S3-compatible object storage for teams in Barcelona. EU data sovereignty, zero egress fees, at ${PRICE_PER_TB_SHORT_EUR}. Drop into your existing stack in minutes.`,
+      `S3-compatible object storage for teams in Barcelona. EU data sovereignty, zero egress fees, at ${PRICE_PER_TB_SHORT}. Drop into your existing stack in minutes.`,
   },
   "/lp/es/barcelona": {
     lang: "es",
-    title: `Fil One para Barcelona: Almacenamiento Europeo, ${PRICE_PER_TB_SHORT_EUR_ES}, Sin Egress`,
+    title: `Fil One para Barcelona: Almacenamiento Europeo, ${PRICE_PER_TB_SHORT}, Sin Egress`,
     description:
-      `Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a ${PRICE_PER_TB_SHORT_EUR_ES}. Intégralo en tu stack actual en minutos.`,
+      `Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a ${PRICE_PER_TB_SHORT}. Intégralo en tu stack actual en minutos.`,
   },
   "/contact-sales": {
     title: "Contact Sales · Fil One",
@@ -433,17 +436,17 @@ export const ROUTE_META = {
   "/lp/grant-funded": {
     title: "Fil One · Storage that outlives the grant cycle",
     description:
-      `Flat ${PRICE_PER_TB_SHORT} research data storage with no exit fees and integrity verification every ~24 hours. Predictable for multi-year grants, S3-compatible.`,
+      `Flat ${PRICE_PER_TB_SHORT} research data storage with no exit fees. Predictable for multi-year grants, S3-compatible.`,
   },
   "/lp/collections-access": {
     title: "Fil One · Open the collection. Skip the egress bill.",
     description:
-      `Serve digital collections and IIIF imagery with $0 egress. Flat ${PRICE_PER_TB_SHORT} storage, S3-compatible for IIIF image servers, 11 nines durability.`,
+      `Serve digital collections and IIIF imagery with $0 egress. Flat ${PRICE_PER_TB_SHORT} storage, S3-compatible for IIIF image servers.`,
   },
   "/lp/digital-preservation": {
-    title: "Fil One · Preservation you can verify, not just trust",
+    title: "Fil One · Preservation you can afford to check",
     description:
-      `Flat ${PRICE_PER_TB_SHORT} digital preservation storage with integrity verification every ~24 hours. No retrieval fees, no egress. 11 nines durability, S3-compatible.`,
+      `Flat ${PRICE_PER_TB_SHORT} digital preservation storage. No retrieval fees, no egress — run fixity checks as often as your program requires. S3-compatible.`,
   },
   "/lp/affordable": {
     title: "Fil One · Make storage your lowest line item",
@@ -453,17 +456,17 @@ export const ROUTE_META = {
   "/lp/go-global": {
     title: "Fil One · Go global. Skip the multi-year build.",
     description:
-      `Embed S3-compatible object storage into your product. Global network, SLA-backed, ${PRICE_PER_TB_SHORT} flat. No capex, no infrastructure build — contact for enterprise and embedding terms.`,
+      `Embed S3-compatible object storage into your product. US and EU regions, SLA-backed, ${PRICE_PER_TB_SHORT} flat. No capex, no infrastructure build — contact for enterprise and embedding terms.`,
   },
   "/lp/metro": {
     title: "Fil One · Hyperscaler speed. Budget-tier bills.",
     description:
-      `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. A global network of storage providers — fast reads without the hyperscaler price tag. No egress fees.`,
+      `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. Always-hot storage with no egress fees — fast reads without the hyperscaler price tag.`,
   },
   "/lp/data-control": {
     title: "Fil One · Your data, under your control",
     description:
-      `S3-compatible storage with EU region endpoint, recurring integrity verification, $0 exit egress, and no vendor lock-in. Flat ${PRICE_PER_TB_SHORT}.`,
+      `S3-compatible storage with an EU region endpoint, $0 exit egress, and no vendor lock-in. Flat ${PRICE_PER_TB_SHORT}.`,
   },
   "/lp/ml-training": {
     title: "Fil One · Build around the clock",

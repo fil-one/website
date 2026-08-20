@@ -7,6 +7,7 @@ import {
   ShieldCheck,
 } from "@phosphor-icons/react";
 import SolutionPage, { type SolutionPageConfig } from "@/components/SolutionPage";
+import { signupUrl } from "@/lib/console-url";
 
 const config: SolutionPageConfig = {
   seo: {
@@ -29,7 +30,7 @@ const config: SolutionPageConfig = {
     ctas: [
       {
         label: "Start for free",
-        href: "https://app.fil.one/login?screen_hint=signup",
+        href: signupUrl(),
         variant: "primary",
         size: "lg",
         glow: true,
@@ -113,7 +114,7 @@ const config: SolutionPageConfig = {
     heading: "Cut your archive bill by up to 80%",
     subhead: "Start with 1 TB free. No credit card, no egress fees, no surprises.",
     note: "S3-compatible · Verifiable integrity · $4.99/TB/month after trial",
-    cta: { label: "Start for free", href: "https://app.fil.one/login?screen_hint=signup" },
+    cta: { label: "Start for free", href: signupUrl() },
   },
 };
 

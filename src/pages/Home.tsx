@@ -13,6 +13,7 @@ import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
+import { signupUrl } from "@/lib/console-url";
 
 const Home = () => {
   const { heroEndRef } = useScrollTracking();
@@ -56,9 +57,9 @@ const Home = () => {
             ctas={[
               {
                 label: "Start for free",
-                href: "https://app.fil.one/login?screen_hint=signup",
+                href: signupUrl(),
                 variant: "primary",
-                onClick: () => trackCtaClick("Start for free", "https://app.fil.one/login?screen_hint=signup", "primary"),
+                onClick: () => trackCtaClick("Start for free", signupUrl(), "primary"),
               },
               {
                 label: "Explore docs",

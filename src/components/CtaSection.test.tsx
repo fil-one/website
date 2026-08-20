@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import CtaSection from "./CtaSection";
+import { signupUrl } from "@/lib/console-url";
 
 // Mock useInView so we don't need IntersectionObserver
 vi.mock("@/hooks/useInView", () => ({
@@ -29,7 +30,7 @@ describe("CtaSection — analytics", () => {
       props: expect.objectContaining({
         label: "Start at no cost to you",
         variant: "primary",
-        destination: "https://app.fil.one/login?screen_hint=signup",
+        destination: signupUrl(),
       }),
     });
   });

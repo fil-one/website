@@ -98,8 +98,11 @@ const Hero = ({
         <div className="w-full flex flex-col items-center hero-fade-2">{children}</div>
       )}
 
+      {/* Stacked below sm: two buttons side by side overflow a narrow phone. */}
       {ctas && ctas.length > 0 && (
-        <div className={`flex flex-row items-center justify-center gap-3 ${ctaMargin} ${ctaFade}`}>
+        <div
+          className={`flex flex-col sm:flex-row items-center justify-center gap-3 ${ctaMargin} ${ctaFade}`}
+        >
           {ctas.map((cta) => (
             <Button
               key={cta.label}

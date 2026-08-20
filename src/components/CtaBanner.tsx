@@ -15,6 +15,11 @@ interface CtaBannerProps {
   note?: ReactNode;
   /** Cap on the heading width (px). Longer translations need more room. */
   headingMaxWidth?: number;
+  /**
+   * Background behind the dark card, so the banner sits flush on pages whose
+   * preceding section is grey rather than white.
+   */
+  surface?: "white" | "grey";
 }
 
 /**
@@ -22,11 +27,21 @@ interface CtaBannerProps {
  * and a breathing glow, a headline, and a glowing primary button. Tuned for
  * the closing section of a page (sits on white, above the footer).
  */
-const CtaBanner = ({ heading, subhead, cta, secondaryCta, note, headingMaxWidth = 480 }: CtaBannerProps) => {
+const CtaBanner = ({
+  heading,
+  subhead,
+  cta,
+  secondaryCta,
+  note,
+  headingMaxWidth = 480,
+  surface = "white",
+}: CtaBannerProps) => {
   const { ref, inView } = useInView({ threshold: 0.05 });
 
   return (
-    <section className="px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full bg-white">
+    <section
+      className={`px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full ${surface === "grey" ? "bg-zinc-50" : "bg-white"}`}
+    >
       <div ref={ref} className={`w-full max-w-container mx-auto reveal${inView ? " in-view" : ""}`}>
         <div className="relative overflow-hidden rounded-[20px] text-center bg-dark-section px-6 md:px-12 py-16 md:py-section">
           {/* White grid texture, drifting slowly */}
