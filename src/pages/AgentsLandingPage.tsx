@@ -14,6 +14,7 @@ import FeatureList from "@/components/FeatureList";
 import CodeBlock, { type CodeSnippet } from "@/components/CodeBlock";
 import Table from "@/components/Table";
 import { signupUrl } from "@/lib/console-url";
+import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
 const DOCS_URL = "https://docs.fil.one";
 
@@ -35,7 +36,7 @@ const AGENT_SNIPPETS: CodeSnippet[] = [
 
 s3 = boto3.client(
     "s3",
-    endpoint_url="https://eu-west-1.s3.fil.one",
+    endpoint_url="${S3_ENDPOINT}",
     aws_access_key_id="YOUR_ACCESS_KEY",
     aws_secret_access_key="YOUR_SECRET_KEY",
 )
@@ -55,7 +56,7 @@ for obj in response.get("Contents", []):
 import { readFileSync } from "fs";
 
 const client = new S3Client({
-  endpoint: "https://eu-west-1.s3.fil.one",
+  endpoint: "${S3_ENDPOINT}",
   region: "eu-west-1",
   forcePathStyle: true,
   credentials: {
@@ -94,7 +95,7 @@ import (
 
 func main() {
     client := s3.New(s3.Options{
-        BaseEndpoint: aws.String("https://eu-west-1.s3.fil.one"),
+        BaseEndpoint: aws.String("${S3_ENDPOINT}"),
         Region:       "eu-west-1",
         UsePathStyle: true,
         Credentials: credentials.NewStaticCredentialsProvider(

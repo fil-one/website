@@ -11,6 +11,7 @@ import CodeBlock from "@/components/CodeBlock";
 import ProblemCards from "@/components/ProblemCards";
 import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
+import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
 const SALES_URL = "/contact-sales";
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
@@ -51,7 +52,7 @@ const LLMS_TXT = `$ curl -s https://www.fil.one/llms.txt
 - Free trial: 30 days, 1 TB included, no credit card
 
 ## How to connect
-- Endpoint: https://eu-west-1.s3.fil.one
+- Endpoint: ${S3_ENDPOINT}
 - Auth: standard AWS Access Key ID + Secret
 - Drop-in S3 replacement — no SDK changes required`;
 

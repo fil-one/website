@@ -1,6 +1,7 @@
 import { useInView } from "@/hooks/useInView";
 import SectionHeader from "@/components/SectionHeader";
 import CodeBlock, { type CodeSnippet } from "@/components/CodeBlock";
+import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
 const STEPS = [
   "Install the AWS SDK",
@@ -17,7 +18,7 @@ const SNIPPETS: CodeSnippet[] = [
 # One line change — your endpoint
 s3 = boto3.client(
     "s3",
-    endpoint_url="https://eu-west-1.s3.fil.one",
+    endpoint_url="${S3_ENDPOINT}",
     aws_access_key_id=os.environ["FIL_ACCESS_KEY"],
     aws_secret_access_key=os.environ["FIL_SECRET_KEY"],
     region_name="eu-west-1",
@@ -41,7 +42,7 @@ import { readFileSync } from "fs";
 
 // One line change — your endpoint
 const s3 = new S3Client({
-  endpoint: "https://eu-west-1.s3.fil.one",
+  endpoint: "${S3_ENDPOINT}",
   region: "eu-west-1",
   credentials: {
     accessKeyId: process.env.FIL_ACCESS_KEY!,
@@ -74,7 +75,7 @@ const url = await getSignedUrl(s3,
 
 // One line change — your endpoint
 client := s3.New(s3.Options{
-    BaseEndpoint: aws.String("https://eu-west-1.s3.fil.one"),
+    BaseEndpoint: aws.String("${S3_ENDPOINT}"),
     Region:       "eu-west-1",
     UsePathStyle: true,
     Credentials: credentials.NewStaticCredentialsProvider(

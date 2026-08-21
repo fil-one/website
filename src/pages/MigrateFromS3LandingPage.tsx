@@ -15,6 +15,7 @@ import PriceComparisonTable, {
 import TextLink from "@/components/TextLink";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
+import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
 const SALES_URL = "/contact-sales";
 
@@ -68,7 +69,7 @@ s3 = boto3.client(
 # After · Fil One (no other changes)
 s3 = boto3.client(
     "s3",
-    endpoint_url="https://eu-west-1.s3.fil.one",
+    endpoint_url="${S3_ENDPOINT}",
     aws_access_key_id=os.environ["FIL_ACCESS_KEY"],
     aws_secret_access_key=os.environ["FIL_SECRET_KEY"],
     region_name="eu-west-1",
@@ -79,7 +80,7 @@ const s3 = new S3Client({ region: "us-east-1" });
 
 // After · Fil One
 const s3 = new S3Client({
-  endpoint: "https://eu-west-1.s3.fil.one",
+  endpoint: "${S3_ENDPOINT}",
   region: "eu-west-1",
   credentials: {
     accessKeyId: process.env.FIL_ONE_ACCESS_KEY,
