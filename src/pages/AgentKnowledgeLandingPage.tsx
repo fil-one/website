@@ -80,17 +80,17 @@ const config: LandingPageConfig = {
       {
         icon: Database,
         title: "Agent memory & state",
-        desc: "Persist conversation history, task queues, episodic memory, and checkpoint files across agent restarts. Standard PutObject/GetObject — the agent writes, the agent reads.",
+        desc: "Persist conversation history, task queues, episodic memory, and checkpoint files across agent restarts. Standard PutObject/GetObject. The agent writes, the agent reads.",
       },
       {
         icon: ChartLine,
         title: "Flat cost for loop traffic",
-        desc: `Agents write frequently and read back their own outputs. Per-request billing makes loops expensive. ${PRICE_PER_TB_SHORT} flat — no PUT fees, no GET fees, no egress.`,
+        desc: `Agents write frequently and read back their own outputs. Per-request billing makes loops expensive. ${PRICE_PER_TB_SHORT} flat. No PUT fees, no GET fees, no egress.`,
       },
       {
         icon: ArrowsOut,
         title: "RAG corpus storage",
-        desc: "Store raw documents, chunked text, and embeddings backing a retrieval pipeline. Reads are included in flat storage — no per-retrieval egress counter.",
+        desc: "Store raw documents, chunked text, and embeddings backing a retrieval pipeline. Reads are included in flat storage. No per-retrieval egress counter.",
         badge: "Coming soon",
         cta: { label: "Join the waitlist", href: "/waitlist/bucket-intelligence" },
       },
@@ -107,7 +107,7 @@ const config: LandingPageConfig = {
   cta: {
     heading: `One rate. ${PRICE_PER_TB_MONTH}.`,
     headingMaxWidth: 560,
-    subhead: "Storage only — no PUT fees, no GET fees, no egress. Try it free with 1 TB: one place to store your data, retrieve it, and put it to work.",
+    subhead: "Storage only. No PUT fees, no GET fees, no egress. Try it free with 1 TB: one place to store your data, retrieve it, and put it to work.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

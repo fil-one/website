@@ -46,7 +46,7 @@ const config: LandingPageConfig = {
         label: "Egress is the lock",
         tone: "warning",
         catch: "Leaving 100 TB costs $9,216 on AWS.",
-        body: "At $0.09/GB internet egress, the bill to move data out scales with how valuable your dataset has become. The lock isn't in the contract — it's in the exit invoice.",
+        body: "At $0.09/GB internet egress, the bill to move data out scales with how valuable your dataset has become. The lock isn't in the contract. It's in the exit invoice.",
       },
       {
         label: "Proprietary surface",
@@ -58,7 +58,7 @@ const config: LandingPageConfig = {
         label: "The untested exit",
         tone: "brand",
         catch: "You learn the cost only when you try to go.",
-        body: "Most teams never run the migration until they have to — by then the dataset is large, the egress bill is real, and the \"no lock-in\" promise meets the actual number.",
+        body: "Most teams never run the migration until they have to. By then the dataset is large, the egress bill is real, and the \"no lock-in\" promise meets the actual number.",
       },
     ],
   },
@@ -70,7 +70,7 @@ const config: LandingPageConfig = {
         The way out is <span className="text-brand-500">one command and $0.</span>
       </>
     ),
-    sub: "Here is the migration off Fil One — before you've put anything in. Same S3 API on both ends, no egress charge to move data out.",
+    sub: "Here is the migration off Fil One, before you've put anything in. Same S3 API on both ends, no egress charge to move data out.",
     subMaxWidth: 620,
     caption: "Cost to move 100 TB out, by provider",
     columns: [
@@ -104,7 +104,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "$0 egress on exit",
-        desc: "Moving your data out costs nothing. The exit is a sync command you can run today, for free — not a contract renegotiation or a budget request.",
+        desc: "Moving your data out costs nothing. The exit is a sync command you can run today, for free, not a contract renegotiation or a budget request.",
       },
       {
         icon: ChartLine,
@@ -122,7 +122,7 @@ const config: LandingPageConfig = {
   cta: {
     heading: "Know the exit before you commit.",
     headingMaxWidth: 560,
-    subhead: `${PRICE_PER_TB_MONTH} — storage only, no egress in or out. Free 1 TB evaluation: put data in, run the migrate-off command, and watch it cost nothing. Then decide.`,
+    subhead: `${PRICE_PER_TB_MONTH}. Storage only, no egress in or out. Free 30-day trial, 1 TB of storage and 2 TB of egress: put data in, run the migrate-off command, and watch it cost nothing. Then decide.`,
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

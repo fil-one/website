@@ -25,7 +25,7 @@ const config: LandingPageConfig = {
         <span className="text-brand-500">just playing with crypto.</span>
       </>
     ),
-    description: `S3-compatible object storage built on Filecoin infrastructure — not a relabeled hyperscaler bucket. No egress, no lock-in, one endpoint change. ${PRICE_PER_TB_SHORT} flat.`,
+    description: `S3-compatible object storage built on Filecoin infrastructure, not a relabeled hyperscaler bucket. No egress, no lock-in, one endpoint change. ${PRICE_PER_TB_SHORT} flat.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
@@ -72,7 +72,7 @@ const config: LandingPageConfig = {
       {
         icon: Plug,
         title: "Endpoint swap · nothing else changes",
-        desc: "Fil One implements the S3 API. Swap the endpoint in your config. Your existing upload code, SDKs, and tooling connect immediately — no migration project, no new library.",
+        desc: "Fil One implements the S3 API. Swap the endpoint in your config. Your existing upload code, SDKs, and tooling connect immediately. No migration project, no new library.",
       },
       {
         icon: Lock,
@@ -82,7 +82,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "No egress on reads",
-        desc: "Reading back transaction history, user data, or audit logs costs $0 in egress. Crypto products that read frequently — wallets, explorers, dashboards — pay for storage, not for reads.",
+        desc: "Reading back transaction history, user data, or audit logs costs $0 in egress. Crypto products that read frequently (wallets, explorers, dashboards) pay for storage, not for reads.",
       },
       {
         icon: ChartLine,
@@ -94,7 +94,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Make the storage layer match the product.",
-    subhead: "Free 1 TB evaluation. Change the endpoint in your config and store data on Filecoin infrastructure today.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Change the endpoint in your config and store data on Filecoin infrastructure today.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

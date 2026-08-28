@@ -14,17 +14,17 @@ import { signupUrl } from "@/lib/console-url";
 
 // ─── Pricing tiers ─────────────────────────────────────────────────────────────
 const PAYGO_FEATURES = [
-  "1 TB free for 30 days",
+  "1 TB storage + 2 TB egress free for 30 days",
   "Pay monthly",
   `${PRICE_DISPLAY}/month minimum`,
   "No egress or API request fees",
-  "Data integrity guarantees",
+  "Object Lock retention and version history",
 ];
 
 const BUSINESS_FEATURES = [
-  "Purchase in 1, 3, or 5-year increments",
+  "Committed capacity on multi-year terms",
   "No egress or API request fees",
-  "Data integrity guarantees",
+  "Object Lock retention and version history",
   "Capacity assurance and deployment SLAs",
 ];
 
@@ -68,7 +68,7 @@ const PricingPage = () => {
             {/* Pricing cards */}
             <div className="flex flex-col md:flex-row gap-4 w-full max-w-[800px]">
               <PricingCard
-                name="Pay-as-you-go"
+                name="Pay as you go"
                 tagline="For teams getting started"
                 price={PRICE_DISPLAY}
                 priceSuffix="/ TB / month"

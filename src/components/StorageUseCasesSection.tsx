@@ -15,7 +15,7 @@ const USE_CASES = [
   {
     title: "Back up databases with proof of integrity",
     description:
-      "Ship snapshots to Fil One. Every backup is verified daily, so you know it's intact before you ever need to restore.",
+      "Ship snapshots to Fil One and lock them under retention, so ransomware cannot overwrite what it cannot delete. Test the restore as often as you like: reads are free."
   },
   {
     title: "Archive at scale, access without penalty",

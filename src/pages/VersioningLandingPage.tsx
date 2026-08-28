@@ -42,7 +42,7 @@ const config: LandingPageConfig = {
         label: "The backup gap",
         tone: "warning",
         catch: "Backups are periodic. Bugs are not.",
-        body: "A nightly backup captures yesterday. If a data-quality issue was introduced at 2pm and discovered at 11pm, the prior-clean state is between two backup windows — and unavailable.",
+        body: "A nightly backup captures yesterday. If a data-quality issue was introduced at 2pm and discovered at 11pm, the prior-clean state is between two backup windows, and unavailable.",
       },
       {
         label: "The debug state",
@@ -54,7 +54,7 @@ const config: LandingPageConfig = {
         label: "The audit requirement",
         tone: "brand",
         catch: "Auditors ask for the specific record, not a backup.",
-        body: "Evidence requests for specific records at specific points in time require version history. A backup restore retrieves the whole snapshot — version download returns the specific object at the specific time.",
+        body: "Evidence requests for specific records at specific points in time require version history. A backup restore retrieves the whole snapshot. Version download returns the specific object at the specific time.",
       },
     ],
   },
@@ -66,7 +66,7 @@ const config: LandingPageConfig = {
         Version history that <span className="text-brand-500">costs what it stores.</span>
       </>
     ),
-    sub: `Standard S3 versioning API. Versions billed at ${PRICE_PER_TB_SHORT} like any stored object — no retrieval fee on any read.`,
+    sub: `Standard S3 versioning API. Versions billed at ${PRICE_PER_TB_SHORT} like any stored object. No retrieval fee on any read.`,
     items: [
       {
         icon: Database,
@@ -76,7 +76,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "No egress on version reads",
-        desc: "Downloading any prior version — for debugging, audit, or reconstruction — is included in flat storage. No egress charge per read.",
+        desc: "Downloading any prior version (for debugging, audit, or reconstruction) is included in flat storage. No egress charge per read.",
       },
       {
         icon: Lock,
@@ -93,7 +93,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Not a backup. The exact state.",
-    subhead: "Free 1 TB evaluation. Create a versioned bucket, write a few objects, and download a specific prior version in one call.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Create a versioned bucket, write a few objects, and download a specific prior version in one call.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

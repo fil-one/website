@@ -44,7 +44,7 @@ const FAQS = [
   },
   {
     q: "How do I migrate from Storacha or another S3-compatible provider?",
-    a: `Fil One is S3-compatible, so tools like rclone work out of the box. Point rclone at ${S3_ENDPOINT_HOST} with your Fil One credentials and sync your data across. If you need help with a larger migration, reach out and we'll guide you through it.`,
+    a: `Fil One is S3-compatible, so an S3 tool like rclone needs a remote rather than a plugin. Configure it as a generic S3 remote with endpoint ${S3_ENDPOINT_HOST}, your Fil One credentials, and path-style addressing, then sync your data across. If you need help with a larger migration, reach out and we'll guide you through it.`,
   },
   {
     q: "Can I pay with FIL tokens?",

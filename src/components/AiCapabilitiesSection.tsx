@@ -2,8 +2,8 @@ import { Brain, Robot, Check, ArrowRight } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 
 const RAG_FEATURES = [
-  "Auto-indexes files on upload — no scripts to run",
-  "Semantic search powered by your own LLM keys",
+  "Indexes new files on a recurring pass, no scripts to run",
+  "Semantic search on a model we host and pay for",
   "Supports PDF, Markdown, DOCX, HTML, and more",
   "One-click enable on existing buckets",
 ];
@@ -11,7 +11,7 @@ const RAG_FEATURES = [
 const AGENT_FEATURES = [
   "MCP server for Claude Desktop & Cursor",
   "OAuth connectors for Zapier, Make.com & n8n",
-  "Persistent agent memory with verifiable storage",
+  "Persistent agent memory in a bucket you own",
   "No extra infrastructure to manage",
 ];
 
@@ -65,7 +65,7 @@ const AiCapabilitiesSection = () => {
               color: "#52525B",
             }}
           >
-            Two AI-native capabilities built on top of your Fil One storage. Bring your own keys. Your data never leaves your buckets.
+            Two AI-native capabilities built on top of your Fil One storage. Both are in development, and both read from the buckets you already have.
           </p>
         </div>
 
@@ -129,7 +129,7 @@ const AiCapabilitiesSection = () => {
                   color: "#71717A",
                 }}
               >
-                Turn any bucket into a queryable knowledge base. Files get indexed automatically as they arrive — ask questions in plain language, powered by your own LLM keys.
+                Turn any bucket into a queryable knowledge base. Files get indexed automatically as they arrive. Ask questions in plain language, powered by your own LLM keys.
               </p>
             </div>
 
@@ -266,7 +266,7 @@ const AiCapabilitiesSection = () => {
                   color: "#71717A",
                 }}
               >
-                Plug Fil One into AI assistants and automation tools. Connect Claude, Cursor, Zapier, and 10+ more integrations — your agent data stays in your buckets, not theirs.
+                Plug Fil One into AI assistants and automation tools. Connect Claude, Cursor, Zapier, and 10+ more integrations. Your agent data stays in your buckets, not theirs.
               </p>
             </div>
 

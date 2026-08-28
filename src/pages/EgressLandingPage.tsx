@@ -222,14 +222,14 @@ const config: LandingPageConfig = {
     valueSize: "lg",
     items: [
       { icon: ArrowsOut, label: "Egress", value: "$0", note: "Read as often as you want." },
-      { icon: ChartLine, label: "Per-request fees", value: "$0", note: "PUT, GET, LIST — all included." },
+      { icon: ChartLine, label: "Per-request fees", value: "$0", note: "PUT, GET, LIST, all included." },
       { icon: Plug, label: "S3 compatibility", value: "Drop-in", note: "Point your SDK at the endpoint." },
     ],
   },
 
   cta: {
     heading: "Stop paying to read your own data.",
-    subhead: "Free 1 TB evaluation bucket. Drop your existing S3 endpoint in and run the same queries.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Drop your existing S3 endpoint in and run the same queries.",
     headingMaxWidth: 560,
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },

@@ -4,7 +4,7 @@ import Icon from "@/components/Icon";
 import { Button } from "@/components/Button";
 
 interface PricingCardProps {
-  /** Plan name, e.g. "Pay-as-you-go" */
+  /** Plan name, e.g. "Pay as you go" (canonical console casing) */
   name: string;
   /** Short supporting line under the name */
   tagline: string;

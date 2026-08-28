@@ -178,7 +178,7 @@ const SolutionPage = ({ config }: { config: SolutionPageConfig }) => {
           </div>
         </section>
 
-        {/* Detail — steps or use-case cards */}
+        {/* Detail. Steps or use-case cards */}
         <section className="w-full bg-zinc-100 border-y border-zinc-200">
           <div className="flex flex-col gap-12 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-container mx-auto">
             <SectionHead label={detail.label} heading={detail.heading} />

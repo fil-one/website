@@ -37,7 +37,7 @@ const PriceLandingPage = () => {
       <PlatformNavbar />
       <main id="main-content">
 
-        {/* Hero — price comparison in the shared Hero's children slot */}
+        {/* Hero. Price comparison in the shared Hero's children slot */}
         <Hero
           glow
           grid
@@ -66,7 +66,7 @@ const PriceLandingPage = () => {
                     : "border border-black/[0.06] bg-white py-7 shadow-elevated")
                 }
               >
-                {/* Logo row — fixed height so all three logos share a baseline.
+                {/* Logo row. Fixed height so all three logos share a baseline.
                     Competitor marks keep brand colour but are dimmed so Fil One
                     stays the visual focus. */}
                 <div className="flex h-6 items-center justify-center">
@@ -77,7 +77,7 @@ const PriceLandingPage = () => {
                   />
                 </div>
 
-                {/* Price row — number + suffix share a baseline */}
+                {/* Price row. Number + suffix share a baseline */}
                 <div className="flex items-end justify-center gap-1.5">
                   <span
                     className={

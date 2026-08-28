@@ -94,7 +94,7 @@ export function sanitizeHtml(html: string): string {
     // so if it ever fires an article shipped with an empty body — a user-visible
     // defect worth alerting on, not routine noise.
     console.error(
-      "sanitizeHtml: no DOM available, returning empty content. This is client-only — " +
+      "sanitizeHtml: no DOM available, returning empty content. This is client-only. " +
         "render article bodies in the browser, or add a server-side DOM parser before calling it here."
     );
     return "";

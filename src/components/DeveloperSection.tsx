@@ -15,7 +15,7 @@ const SNIPPETS: CodeSnippet[] = [
     label: "Python",
     code: `import boto3, os
 
-# One line change — your endpoint
+# One line change. Your endpoint
 s3 = boto3.client(
     "s3",
     endpoint_url="${S3_ENDPOINT}",

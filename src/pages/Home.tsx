@@ -28,7 +28,7 @@ const Home = () => {
   useSeo({
     title: "Fil One | S3 object storage built for the AI era",
     description:
-      "Store, search, and connect your data to AI. Object Storage, RAG Pipeline, and AI Agent Toolkit — on one verifiable, vendor-independent platform.",
+      "S3-compatible object storage at $4.99/TB/month with no egress fees and no API request charges. Immutable Object Lock retention, full version history, US and EU regions.",
     canonical: "https://www.fil.one/",
     ogImage: "https://www.fil.one/og-image.png",
   });
@@ -51,7 +51,7 @@ const Home = () => {
           <Hero
             badge={<AnnouncementBadge pill="Soon">Bucket Intelligence &amp; AI Agent Toolkit</AnnouncementBadge>}
             title={<>S3 object storage built <br className="sm:hidden" />for the AI era</>}
-            description={<>Your data, your keys, your control.<br />For when every byte matters.</>}
+            description={<>One flat rate per TB, and reading your own data back costs nothing.<br />Your existing S3 tools connect as they are.</>}
             titleMaxWidth={520}
             descriptionMaxWidth={600}
             ctas={[
@@ -73,11 +73,11 @@ const Home = () => {
                 },
               },
             ]}
-            tagline="1TB free for 30 days · No credit card required · No egress fees"
+            tagline="1 TB storage and 2 TB egress free for 30 days · No credit card required"
           />
           <DashboardPreview />
           <PressBar />
-          {/* Products section replaces the features section — this is the platform's core nav anchor */}
+          {/* Products section replaces the features section. This is the platform's core nav anchor */}
           <div ref={heroEndRef}>
             <ProductsSection />
           </div>

@@ -88,7 +88,7 @@ const About = () => {
   useSeo({
     title: "About · Fil One",
     description:
-      "Fil One exists to put you back in control of your data. Learn who we are, why we built verifiable S3-compatible storage, and the principles behind it.",
+      "Fil One exists to put you back in control of your data. Learn who we are, why we built S3-compatible storage with no egress fees, and the principles behind it.",
     canonical: "https://www.fil.one/about",
     ogImage: "https://www.fil.one/og-image.png",
   });
@@ -149,19 +149,19 @@ const About = () => {
             </div>
             <div className="flex flex-col gap-4">
               <p className={BODY}>
-                If you store serious data in the cloud, you know the bargain: your provider promises eleven nines of durability and asks you to trust it, egress fees punish you for using your own data, and staying longer only makes leaving more expensive.
+                If you store serious data in the cloud, you know the bargain: the rate card is only half the story, egress fees charge you for reading your own data, and the longer you stay the more it costs to leave.
               </p>
               <p className={BODY}>
-                We built Fil One because that bargain is backwards. Every file gets a cryptographic fingerprint, verified independently, so durability is something you can check, not a claim you have to trust. Pricing is one flat rate with zero egress fees, and because everything is S3-compatible, moving to or from Fil One is an endpoint change, not a migration project.
+                We built Fil One because that bargain is backwards. One flat rate per TB, no egress fees and no request charges, so reading your data back costs exactly what leaving it alone costs: nothing. And because everything speaks the S3 API, moving in or out is an endpoint change rather than a migration project. The cheapest way to keep a customer should be to be worth staying with.
               </p>
               <p className={BODY}>
-                Behind the product is the team behind Filecoin, the world’s largest decentralized storage network, live since 2020 with thousands of independent operators and exabytes of proven capacity. It’s the same infrastructure trusted by the Internet Archive and the Smithsonian, so your data never depends on any single company staying honest. Not even us.
+                Behind the product is the team behind Filecoin, the world’s largest decentralized storage network, live since 2020 with thousands of independent operators and exabytes of committed capacity. It’s the same infrastructure trusted by the Internet Archive and the Smithsonian, so your data never depends on any single company staying honest. Not even us.
               </p>
             </div>
           </div>
         </section>
 
-        {/* What we believe — pillars */}
+        {/* What we believe. Pillars */}
         <section className="w-full bg-white">
           <div className="flex flex-col gap-12 items-center px-5 md:px-8 py-16 md:py-24 w-full max-w-container mx-auto">
             <div className="flex flex-col gap-3 items-center text-center max-w-[480px]">
@@ -191,7 +191,7 @@ const About = () => {
           </div>
         </section>
 
-        {/* Recognition — temporarily removed; parked in src/components/AboutRecognitionSection.tsx.
+        {/* Recognition. Temporarily removed; parked in src/components/AboutRecognitionSection.tsx.
             To restore, import it and render <AboutRecognitionSection /> here. */}
 
         {/* Leadership */}

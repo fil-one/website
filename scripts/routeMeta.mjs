@@ -25,7 +25,7 @@ export const ROUTE_META = {
   "/": {
     title: "Fil One | S3 object storage built for the AI era",
     description:
-      `S3-compatible object storage on Filecoin. ${PRICE_PER_TB_MONTH}, no egress fees, 11 nines durability, proven daily.`,
+      `S3-compatible object storage on Filecoin. ${PRICE_PER_TB_MONTH}, no egress fees, no API request charges, immutable Object Lock retention.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -34,14 +34,14 @@ export const ROUTE_META = {
         url: "https://www.fil.one",
         logo: "https://www.fil.one/fil-one-logo.svg",
         description:
-          "S3-compatible object storage built on Filecoin. Enterprise-grade durability, no egress fees, and verifiable data integrity.",
+          "S3-compatible object storage built on Filecoin. No egress fees, no API request charges, and immutable Object Lock retention.",
       },
       {
         "@context": "https://schema.org",
         "@type": "Product",
         name: "Fil One Object Storage",
         description:
-          "S3-compatible object storage on Filecoin with no egress fees and verifiable data integrity, proven daily.",
+          "S3-compatible object storage on Filecoin with no egress fees, no API request charges, and Object Lock retention in Governance or Compliance mode.",
         brand: { "@type": "Brand", name: "Fil One" },
         offers: {
           "@type": "Offer",
@@ -75,7 +75,7 @@ export const ROUTE_META = {
             name: "Why is Fil One good for AI agents?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: `AI agents read and write storage in tight loops — fetching context, writing results, reading back artifacts. On AWS S3, each read triggers an egress charge and each operation a request fee, so agent loops compound costs fast. Fil One charges a flat ${PRICE_PER_TB_MONTH} with $0 egress and $0 per request, so agents can run thousands of iterations without the bill growing.`,
+              text: `AI agents read and write storage in tight loops. Fetching context, writing results, reading back artifacts. On AWS S3, each read triggers an egress charge and each operation a request fee, so agent loops compound costs fast. Fil One charges a flat ${PRICE_PER_TB_MONTH} with $0 egress and $0 per request, so agents can run thousands of iterations without the bill growing.`,
             },
           },
           {
@@ -91,7 +91,7 @@ export const ROUTE_META = {
             name: "Does Fil One work with existing agent frameworks?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Yes. Any framework that supports an S3-compatible backend works with Fil One — including LangChain, LlamaIndex, and custom agents using boto3 or the AWS SDK. Change the endpoint URL; everything else stays the same.",
+              text: "Yes. Any framework that supports an S3-compatible backend works with Fil One, including LangChain, LlamaIndex, and custom agents using boto3 or the AWS SDK. Change the endpoint URL; everything else stays the same.",
             },
           },
           {
@@ -99,7 +99,7 @@ export const ROUTE_META = {
             name: "How much does it cost to run an AI agent that makes 500,000 S3 requests per month?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: `On AWS S3, 100 GB storage + 500K PUT/GET requests + 100 GB egress costs roughly $14/month. On Fil One, the same workload costs $0.50 — just 100 GB of storage at ${PRICE_PER_TB_SHORT}, with requests and egress included at no charge.`,
+              text: `On AWS S3, 100 GB storage + 500K PUT/GET requests + 100 GB egress costs roughly $14/month. On Fil One, the same workload costs $0.50, just 100 GB of storage at ${PRICE_PER_TB_SHORT}, with requests and egress included at no charge.`,
             },
           },
         ],
@@ -109,7 +109,7 @@ export const ROUTE_META = {
   "/lp/egress": {
     title: "Zero Egress Fee Object Storage · Fil One vs AWS S3, Backblaze, Wasabi",
     description:
-      "Stop paying egress fees. Fil One charges $0 for data transfer out — save thousands vs AWS S3 ($90+/TB) and Wasabi ($0.007/GB) with no API fees either.",
+      "Stop paying egress fees. Fil One charges $0 for data transfer out. Save thousands vs AWS S3 ($90+/TB) and Wasabi ($0.007/GB) with no API fees either.",
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -128,7 +128,7 @@ export const ROUTE_META = {
             name: "How much can I save switching from AWS S3 to Fil One?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "A team with 10 TB stored and 10 TB of reads per month pays roughly $1,151/month on AWS S3 (storage + egress + requests). The same workload on Fil One costs $50/month — a saving of over $1,100/month, or $13,200/year.",
+              text: "A team with 10 TB stored and 10 TB of reads per month pays roughly $1,151/month on AWS S3 (storage + egress + requests). The same workload on Fil One costs $50/month. A saving of over $1,100/month, or $13,200/year.",
             },
           },
           {
@@ -136,7 +136,7 @@ export const ROUTE_META = {
             name: "How does Fil One compare to Cloudflare R2 for egress fees?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: `Both Fil One and Cloudflare R2 charge $0 for egress. Fil One's storage rate is ${PRICE_PER_TB_MONTH} versus R2's $15/TB/month — making Fil One roughly 3× cheaper on storage while matching R2 on egress.`,
+              text: `Both Fil One and Cloudflare R2 charge $0 for egress. Fil One's storage rate is ${PRICE_PER_TB_MONTH} versus R2's $15/TB/month. Making Fil One roughly 3× cheaper on storage while matching R2 on egress.`,
             },
           },
           {
@@ -144,7 +144,7 @@ export const ROUTE_META = {
             name: "Why do hyperscalers charge so much for egress?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Hyperscaler pricing was designed to monetise data retrieval — once your data is in, leaving (or reading it frequently) is expensive. Egress fees on AWS average $0.09/GB, meaning 10 TB read once costs $921 in transfer alone. Fil One is built on Filecoin's decentralised network with a different cost structure, allowing $0 egress at a flat storage rate.",
+              text: "Hyperscaler pricing was designed to monetise data retrieval. Once your data is in, leaving (or reading it frequently) is expensive. Egress fees on AWS average $0.09/GB, meaning 10 TB read once costs $921 in transfer alone. Fil One is built on Filecoin's decentralised network with a different cost structure, allowing $0 egress at a flat storage rate.",
             },
           },
         ],
@@ -154,7 +154,7 @@ export const ROUTE_META = {
   "/lp/rag-storage": {
     title: "Object Storage for RAG Pipelines · Fil One",
     description:
-      `Store and retrieve RAG corpora, embeddings, and vector indexes at ${PRICE_PER_TB_SHORT}. S3-compatible, no egress fees — built for LLM pipelines.`,
+      `Store and retrieve RAG corpora, embeddings, and vector indexes at ${PRICE_PER_TB_SHORT}. S3-compatible, no egress fees. Built for LLM pipelines.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -173,7 +173,7 @@ export const ROUTE_META = {
             name: "How much can I save vs. AWS S3 for a RAG pipeline?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "A 1 TB corpus read 5× per month costs $484/month on AWS S3 ($23.55 storage + $460 egress). On Fil One the same workload costs $4.99/month — a 97% reduction — because retrieval reads are included at no charge.",
+              text: "A 1 TB corpus read 5× per month costs $484/month on AWS S3 ($23.55 storage + $460 egress). On Fil One the same workload costs $4.99/month, a 97% reduction, because retrieval reads are included at no charge.",
             },
           },
           {
@@ -199,7 +199,7 @@ export const ROUTE_META = {
   "/lp/ml-checkpoints": {
     title: "ML Checkpoint Storage · Save Model Weights Cheaply | Fil One",
     description:
-      `Store ML checkpoints and model artifacts at ${PRICE_PER_TB_SHORT} with no egress fees. S3-compatible — ideal for training runs on any cloud.`,
+      `Store ML checkpoints and model artifacts at ${PRICE_PER_TB_SHORT} with no egress fees. S3-compatible. Ideal for training runs on any cloud.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -210,7 +210,7 @@ export const ROUTE_META = {
             name: "How much does it cost to store ML checkpoints on Fil One?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: `Flat ${PRICE_PER_TB_MONTH} with no egress fees. 10 TB of checkpoints costs $49.90/month; 100 TB costs $499/month. Evaluation runs that load checkpoints are included — reads cost nothing extra.`,
+              text: `Flat ${PRICE_PER_TB_MONTH} with no egress fees. 10 TB of checkpoints costs $49.90/month; 100 TB costs $499/month. Evaluation runs that load checkpoints are included. Reads cost nothing extra.`,
             },
           },
           {
@@ -218,7 +218,7 @@ export const ROUTE_META = {
             name: "Do I pay every time I load a checkpoint for evaluation?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "No. Fil One charges $0 for egress and $0 per request. You can load any checkpoint as many times as needed — running 50 evaluation passes on the same artifact costs the same as running it once.",
+              text: "No. Fil One charges $0 for egress and $0 per request. You can load any checkpoint as many times as needed. Running 50 evaluation passes on the same artifact costs the same as running it once.",
             },
           },
           {
@@ -226,7 +226,7 @@ export const ROUTE_META = {
             name: "How does Fil One compare to AWS S3 for ML checkpoint storage?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "A team with 10 TB of checkpoints loading 5 TB for evals each month pays roughly $680/month on AWS S3 ($230 storage + $450 egress). On Fil One the same workload costs $49.90/month — the egress line disappears entirely.",
+              text: "A team with 10 TB of checkpoints loading 5 TB for evals each month pays roughly $680/month on AWS S3 ($230 storage + $450 egress). On Fil One the same workload costs $49.90/month. The egress line disappears entirely.",
             },
           },
           {
@@ -244,12 +244,12 @@ export const ROUTE_META = {
   "/lp/startups": {
     title: `Object Storage for Startups · ${PRICE_PER_TB_SHORT}, No Egress | Fil One`,
     description:
-      `Predictable, affordable cloud storage for startups. ${PRICE_PER_TB_SHORT}, zero egress fees, S3-compatible. No surprise bills — just storage that scales with you.`,
+      `Predictable, affordable cloud storage for startups. ${PRICE_PER_TB_SHORT}, zero egress fees, S3-compatible. No surprise bills, just storage that scales with you.`,
   },
   "/lp/backup-dr": {
     title: "Backup & Disaster Recovery Storage · Fil One",
     description:
-      `Durable, verifiable backup storage at ${PRICE_PER_TB_SHORT}. 11 nines durability, proven daily, zero egress for restores. S3-compatible drop-in for DR workflows.`,
+      `Backup storage at ${PRICE_PER_TB_SHORT} with zero egress on restores, so testing a restore costs nothing. Object Lock retention against ransomware. S3-compatible drop-in for DR workflows.`,
   },
   "/lp/log-retention": {
     title: `Cheap Log Retention Storage · ${PRICE_PER_TB_SHORT} | Fil One`,
@@ -264,7 +264,7 @@ export const ROUTE_META = {
   "/lp/multi-cloud": {
     title: "Multi-Cloud Object Storage · S3-Compatible | Fil One",
     description:
-      `Add a cost-effective storage tier to your multi-cloud stack. ${PRICE_PER_TB_SHORT}, no egress, S3-compatible — works alongside AWS, GCP, and Azure.`,
+      `Add a cost-effective storage tier to your multi-cloud stack. ${PRICE_PER_TB_SHORT}, no egress, S3-compatible. Works alongside AWS, GCP, and Azure.`,
   },
   "/lp/data-sovereignty": {
     title: "EU Data Residency Storage · S3-Compatible | Fil One",
@@ -274,7 +274,7 @@ export const ROUTE_META = {
   "/lp/migrate-from-s3": {
     title: "Migrate from AWS S3 to Fil One · Drop-In S3 Replacement",
     description:
-      `Switch from AWS S3 to Fil One in minutes. Fully S3-compatible API, ${PRICE_PER_TB_SHORT} vs AWS $23+/TB, and $0 egress vs AWS $90+/TB. No code changes required.`,
+      `Switch from AWS S3 to Fil One in minutes. S3-compatible API, ${PRICE_PER_TB_SHORT} vs AWS $23+/TB, and $0 egress vs AWS $90+/TB. Change the endpoint, not the code.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -285,7 +285,7 @@ export const ROUTE_META = {
             name: "Do I need to rewrite my code to migrate from AWS S3 to Fil One?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "No. Fil One is a drop-in S3 replacement. The only change is the endpoint URL — your existing boto3, AWS SDK v3, or other S3 client code continues to work without modification. All standard S3 operations are supported: PutObject, GetObject, ListObjectsV2, multipart upload, presigned URLs, and more.",
+              text: "Two settings, not a rewrite. Point your existing boto3, AWS SDK v3, or other S3 client at the Fil One endpoint and enable path-style addressing. The object operations your code relies on behave as they do on AWS: PutObject, GetObject, HeadObject, DeleteObject, ListObjectsV2, ListObjectVersions, multipart upload, and presigned URLs. The docs publish a per-operation compatibility matrix, including the bucket-configuration calls that differ by region.",
             },
           },
           {
@@ -293,7 +293,7 @@ export const ROUTE_META = {
             name: "How much cheaper is Fil One than AWS S3?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: `A workload with 10 TB stored and 10 TB read per month costs roughly $1,158/month on AWS S3 (storage + egress + request fees). The same workload on Fil One costs $50/month — about 96% less — because Fil One charges a flat ${PRICE_PER_TB_MONTH} with $0 egress and $0 per request.`,
+              text: `A workload with 10 TB stored and 10 TB read per month costs roughly $1,158/month on AWS S3 (storage + egress + request fees). The same workload on Fil One costs $50/month, about 96% less, because Fil One charges a flat ${PRICE_PER_TB_MONTH} with $0 egress and $0 per request.`,
             },
           },
           {
@@ -344,7 +344,7 @@ export const ROUTE_META = {
   "/lp/gaming": {
     title: "Game Asset & Save-Data Storage · Fil One",
     description:
-      `S3-compatible storage for game assets, saves, and telemetry at ${PRICE_PER_TB_SHORT}. Zero egress fees — built for game backends.`,
+      `S3-compatible storage for game assets, saves, and telemetry at ${PRICE_PER_TB_SHORT}. Zero egress fees. Built for game backends.`,
   },
   "/lp/genomics": {
     title: "Genomics & Life Sciences Data Storage · Fil One",
@@ -431,7 +431,7 @@ export const ROUTE_META = {
   "/lp/agent-readable": {
     title: "Fil One · Priced so plainly your agent can read it",
     description:
-      `Flat ${PRICE_PER_TB_SHORT} pricing published in machine-readable llms.txt, with full S3 parity. No gated quotes — an AI coding agent can evaluate Fil One in one pass.`,
+      `Flat ${PRICE_PER_TB_SHORT} pricing published in machine-readable llms.txt, with full S3 parity. No gated quotes. An AI coding agent can evaluate Fil One in one pass.`,
   },
   "/lp/grant-funded": {
     title: "Fil One · Storage that outlives the grant cycle",
@@ -446,7 +446,7 @@ export const ROUTE_META = {
   "/lp/digital-preservation": {
     title: "Fil One · Preservation you can afford to check",
     description:
-      `Flat ${PRICE_PER_TB_SHORT} digital preservation storage. No retrieval fees, no egress — run fixity checks as often as your program requires. S3-compatible.`,
+      `Flat ${PRICE_PER_TB_SHORT} digital preservation storage. No retrieval fees, no egress. Run fixity checks as often as your program requires. S3-compatible.`,
   },
   "/lp/affordable": {
     title: "Fil One · Make storage your lowest line item",
@@ -456,12 +456,12 @@ export const ROUTE_META = {
   "/lp/go-global": {
     title: "Fil One · Go global. Skip the multi-year build.",
     description:
-      `Embed S3-compatible object storage into your product. US and EU regions, SLA-backed, ${PRICE_PER_TB_SHORT} flat. No capex, no infrastructure build — contact for enterprise and embedding terms.`,
+      `Embed S3-compatible object storage into your product. US and EU regions, SLA-backed, ${PRICE_PER_TB_SHORT} flat. No capex, no infrastructure build. Contact for enterprise and embedding terms.`,
   },
   "/lp/metro": {
     title: "Fil One · Hyperscaler speed. Budget-tier bills.",
     description:
-      `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. Always-hot storage with no egress fees — fast reads without the hyperscaler price tag.`,
+      `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. Always-hot storage with no egress fees. Fast reads without the hyperscaler price tag.`,
   },
   "/lp/data-control": {
     title: "Fil One · Your data, under your control",
@@ -488,7 +488,7 @@ export const ROUTE_META = {
   "/storage": {
     title: "Object Storage · Fil One",
     description:
-      `S3-compatible object storage built for the AI era. Verifiable data integrity, no egress fees, ${PRICE_PER_TB_MONTH}. The foundation every Fil One account starts with.`,
+      `S3-compatible object storage at ${PRICE_PER_TB_MONTH} with no egress fees and no API request charges. Object Lock retention and full version history included. The foundation every Fil One account starts with.`,
   },
   "/bucket-intelligence": {
     title: "Bucket Intelligence · Fil One",
@@ -508,27 +508,27 @@ export const ROUTE_META = {
   "/enterprise": {
     title: "Enterprise · Fil One",
     description:
-      "Fil One for enterprise: verifiable data integrity, S3-compatible, no egress fees, SLA-backed. Custom pricing for teams that need storage at scale.",
+      "Fil One for enterprise: S3-compatible object storage with no egress fees, immutable Object Lock retention, and an SLA-backed uptime commitment. Custom pricing at scale.",
   },
   "/partners": {
     title: "Partners · Fil One",
     description:
-      "Channel, Technology, and MSP partner programs for Fil One. Resell, integrate, or bundle verifiable cloud storage with your business.",
+      "Channel, Technology, and MSP partner programs for Fil One. Resell, integrate, or bundle S3-compatible cloud storage with no egress fees.",
   },
   "/partners/apply": {
     title: "Partner Application · Fil One",
     description:
-      "Apply to the Fil One partner program. Resell, integrate, or bundle verifiable S3-compatible cloud storage with your business.",
+      "Apply to the Fil One partner program. Resell, integrate, or bundle S3-compatible cloud storage with no egress fees.",
   },
   "/solutions/ai-training": {
     title: "AI Training & Inference Storage · Fil One",
     description:
-      "S3-compatible object storage built for AI workloads. Store training datasets, model weights, and checkpoints with verifiable integrity and no egress fees.",
+      "S3-compatible object storage built for AI workloads. Store training datasets, model weights, and checkpoints, and read them back as often as you like at no charge.",
   },
   "/solutions/web3-dapps": {
     title: "Web3 & dApp Storage · Fil One",
     description:
-      "Verifiable, decentralized object storage for NFTs, dApps, and on-chain assets. S3-compatible, no egress fees, cryptographic proof on every object.",
+      "Decentralized object storage for NFTs, dApps, and on-chain assets. S3-compatible, no egress fees, and Object Lock so metadata cannot change after mint.",
   },
   "/solutions/media-archive": {
     title: "Media & Archive Storage · Fil One",
@@ -553,6 +553,6 @@ export const ROUTE_META = {
   "/about": {
     title: "About · Fil One",
     description:
-      "Fil One exists to put you back in control of your data. Learn who we are, why we built verifiable S3-compatible storage, and the principles behind it.",
+      "Fil One exists to put you back in control of your data. Learn who we are, why we built S3-compatible storage with no egress fees, and the principles behind it.",
   },
 };

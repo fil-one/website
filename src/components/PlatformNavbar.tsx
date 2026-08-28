@@ -33,8 +33,8 @@ const PRODUCTS: readonly ProductItem[] = [
     badge: null,
     label: { en: "Object Storage", es: "Almacenamiento de objetos" },
     description: {
-      en: "S3-compatible, verifiably durable",
-      es: "Compatible con S3, con durabilidad verificable",
+      en: "S3-compatible, no egress fees",
+      es: "Compatible con S3, sin cargos de egress",
     },
   },
   {
@@ -315,7 +315,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
               </NavigationMenuPrimitive.List>
 
-              {/* Viewport — renders the active dropdown content */}
+              {/* Viewport. Renders the active dropdown content */}
               <div className="absolute top-[calc(100%+6px)] left-0 z-[100]">
                 <NavigationMenuPrimitive.Viewport className="NavigationMenuViewport overflow-hidden rounded-xl border border-black/[0.08] bg-white shadow-dropdown" />
               </div>

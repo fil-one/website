@@ -33,7 +33,7 @@ const config: LandingPageConfig = {
         <span className="text-brand-500">without bill shock.</span>
       </>
     ),
-    description: `${PRICE_PER_TB_SHORT} flat. No egress, no per-request fees, S3-compatible. Storage cost grows linearly with your player base — not ahead of it.`,
+    description: `${PRICE_PER_TB_SHORT} flat. No egress, no per-request fees, S3-compatible. Storage cost grows linearly with your player base, not ahead of it.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
@@ -44,13 +44,13 @@ const config: LandingPageConfig = {
   problem: {
     label: "The trap",
     heading: "Spiky growth makes hyperscaler storage bills unpredictable.",
-    sub: "Player data, UGC, replays, and game assets grow with the game. On AWS, storage cost scales with volume but egress scales with activity — and player activity is exactly what you're trying to drive.",
+    sub: "Player data, UGC, replays, and game assets grow with the game. On AWS, storage cost scales with volume but egress scales with activity, and player activity is exactly what you're trying to drive.",
     items: [
       {
         label: "Launch day",
         tone: "warning",
         catch: "Traffic spikes become egress bills.",
-        body: "A successful launch or live event brings player spikes. On AWS, every asset served — game files, player avatars, replays — adds to the egress counter. The best day for the game is the most expensive day for the storage bill.",
+        body: "A successful launch or live event brings player spikes. On AWS, every asset served (game files, player avatars, replays) adds to the egress counter. The best day for the game is the most expensive day for the storage bill.",
       },
       {
         label: "UGC growth",
@@ -95,7 +95,7 @@ const config: LandingPageConfig = {
       },
     ],
     footnote:
-      "AWS S3 Standard us-east-1 Q2 2026: storage tiered $0.023/GB (first 50 TB), $0.022/GB (next 450 TB); egress $0.09/GB. Fil One $4.99/TB flat, egress $0. Computed from stated inputs — 1 TB: 1,024 GB × $0.023 = $23.55 storage + 512 GB × $0.09 = $46.08 egress; 500 TB: (51,200 × $0.023) + (460,800 × $0.022) = $11,315.20 storage + 256,000 × $0.09 = $23,040 egress.",
+      "AWS S3 Standard us-east-1 Q2 2026: storage tiered $0.023/GB (first 50 TB), $0.022/GB (next 450 TB); egress $0.09/GB. Fil One $4.99/TB flat, egress $0. Computed from stated inputs. 1 TB: 1,024 GB × $0.023 = $23.55 storage + 512 GB × $0.09 = $46.08 egress; 500 TB: (51,200 × $0.023) + (460,800 × $0.022) = $11,315.20 storage + 256,000 × $0.09 = $23,040 egress.",
   },
 
   features: {
@@ -132,7 +132,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Flat storage for unpredictable growth.",
-    subhead: "Free 1 TB evaluation. Connect your existing S3 asset pipeline and see a storage bill that doesn't react to player activity.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Connect your existing S3 asset pipeline and see a storage bill that doesn't react to player activity.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

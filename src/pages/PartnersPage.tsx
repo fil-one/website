@@ -67,8 +67,8 @@ const WHY_FEATURES = [
   },
   {
     icon: Cube,
-    title: "11 nines durability",
-    body: "Distributed, redundant storage with daily, audit-ready integrity proof.",
+    title: "Controls that pass an audit",
+    body: "Object Lock retention in Governance or Compliance mode, plus a full version history on every object.",
   },
   {
     icon: ArrowsLeftRight,
@@ -125,7 +125,7 @@ const PartnersPage = () => {
   useSeo({
     title: "Partners · Fil One",
     description:
-      "Channel, Technology, and MSP partner programs for Fil One. Resell, integrate, or bundle verifiable cloud storage with your business.",
+      "Channel, Technology, and MSP partner programs for Fil One. Resell, integrate, or bundle S3-compatible cloud storage with no egress fees.",
     canonical: "https://www.fil.one/partners",
     ogImage: "https://www.fil.one/og-image.png",
   });

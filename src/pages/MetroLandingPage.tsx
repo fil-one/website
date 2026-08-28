@@ -16,7 +16,7 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Hyperscaler speed. Budget-tier bills.",
-    description: `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. Always-hot storage with no egress fees — fast reads without the hyperscaler price tag.`,
+    description: `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. Always-hot storage with no egress fees. Fast reads without the hyperscaler price tag.`,
     canonical: "https://www.fil.one/lp/metro",
   },
 
@@ -31,7 +31,7 @@ const config: LandingPageConfig = {
         <span className="text-brand-500">Budget-tier bills.</span>
       </>
     ),
-    description: `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat, always hot with $0 egress fees — fast reads without the hyperscaler price tag.`,
+    description: `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat, always hot with $0 egress fees. Fast reads without the hyperscaler price tag.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
@@ -55,13 +55,13 @@ const config: LandingPageConfig = {
         label: "The egress multiplier",
         tone: "danger",
         catch: "Reading your data adds to the bill every time.",
-        body: "At $0.09/GB egress, a team reading 10 TB of assets per month pays $921 just to access their own data — on top of $236 in storage. Storing is cheap; reading is where the bill compounds.",
+        body: "At $0.09/GB egress, a team reading 10 TB of assets per month pays $921 just to access their own data, on top of $236 in storage. Storing is cheap; reading is where the bill compounds.",
       },
       {
         label: "The cheap-but-slow assumption",
         tone: "brand",
         catch: "Teams assume affordable storage means archive tiers.",
-        body: "The reason most teams stay on hyperscaler storage is the fear that cheaper alternatives are cold-tier, slow-to-restore options. Fil One is hot, S3-compatible storage at a flat rate — without the hyperscaler invoice.",
+        body: "The reason most teams stay on hyperscaler storage is the fear that cheaper alternatives are cold-tier, slow-to-restore options. Fil One is hot, S3-compatible storage at a flat rate, without the hyperscaler invoice.",
       },
     ],
   },
@@ -73,7 +73,7 @@ const config: LandingPageConfig = {
         10 TB stored. <span className="text-brand-500">10 TB read per month.</span>
       </>
     ),
-    sub: "Same workload, six providers. Storage is a small line — egress is the bill on hyperscalers. On Fil One, egress does not exist as a line item.",
+    sub: "Same workload, six providers. Storage is a small line. Egress is the bill on hyperscalers. On Fil One, egress does not exist as a line item.",
     subMaxWidth: 620,
     caption: "Monthly cost for 10 TB stored, 10 TB read, by provider",
     columns: [
@@ -90,7 +90,7 @@ const config: LandingPageConfig = {
       { provider: "Fil One", isFilOne: true, values: { storage: "$50", egress: "$0", total: "$50" } },
     ],
     footnote:
-      "AWS S3 Standard, Google Cloud Storage, Azure Blob Hot — public US rate cards Q2 2026. AWS: 10,240 GB × $0.023 storage + 10,240 GB × $0.09 egress. GCP: $0.020/GB storage + $0.12/GB egress first 10 TB. Azure: ~$0.018/GB storage + $0.087/GB egress. Wasabi $6.99/TB. Backblaze B2 $6/TB. Fil One $4.99/TB, $0 egress.",
+      "AWS S3 Standard, Google Cloud Storage, Azure Blob Hot. Public US rate cards Q2 2026. AWS: 10,240 GB × $0.023 storage + 10,240 GB × $0.09 egress. GCP: $0.020/GB storage + $0.12/GB egress first 10 TB. Azure: ~$0.018/GB storage + $0.087/GB egress. Wasabi $6.99/TB. Backblaze B2 $6/TB. Fil One $4.99/TB, $0 egress.",
   },
 
   features: {
@@ -111,7 +111,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "No egress fees",
-        desc: "$0 to read your own data. The cost of accessing your data is the same as the cost of storing it — nothing extra.",
+        desc: "$0 to read your own data. The cost of accessing your data is the same as the cost of storing it. Nothing extra.",
       },
       {
         icon: Plug,
@@ -128,7 +128,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Hyperscaler speed. Budget-tier bills.",
-    subhead: "Free 1 TB evaluation. Point your existing S3 tools at the endpoint and run the same workload.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Point your existing S3 tools at the endpoint and run the same workload.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

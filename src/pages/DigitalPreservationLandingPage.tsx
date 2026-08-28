@@ -16,7 +16,7 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Preservation you can afford to check",
-    description: `Flat ${PRICE_PER_TB_SHORT} digital preservation storage. No retrieval fees, no egress — run fixity checks as often as your program requires. S3-compatible.`,
+    description: `Flat ${PRICE_PER_TB_SHORT} digital preservation storage. No retrieval fees, no egress. Run fixity checks as often as your program requires. S3-compatible.`,
     canonical: "https://www.fil.one/lp/digital-preservation",
   },
 
@@ -31,7 +31,7 @@ const config: LandingPageConfig = {
         <span className="text-brand-500">afford to check.</span>
       </>
     ),
-    description: `Run fixity checks as often as you want — reading the collection back costs $0, so verification isn't rationed to once a year. Built in at ${PRICE_PER_TB_SHORT} flat.`,
+    description: `Run fixity checks as often as you want. Reading the collection back costs $0, so verification isn't rationed to once a year. Built in at ${PRICE_PER_TB_SHORT} flat.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
@@ -49,13 +49,13 @@ const config: LandingPageConfig = {
         label: "The annual blind spot",
         tone: "warning",
         catch: "A year is a long time to not know.",
-        body: "A once-a-year fixity review confirms integrity on the day it runs. For the other 364 days the collection is unchecked. A problem that lands in month two surfaces ten months later — if the next review even catches it.",
+        body: "A once-a-year fixity review confirms integrity on the day it runs. For the other 364 days the collection is unchecked. A problem that lands in month two surfaces ten months later, if the next review even catches it.",
       },
       {
         label: "The cost of checking",
         tone: "danger",
         catch: "Verifying your archive is a metered read.",
-        body: "On metered tiers, every fixity review is a full-collection read priced per GB in retrieval and egress. The more thoroughly you preserve, the more it costs to check it — so teams check less than they should.",
+        body: "On metered tiers, every fixity review is a full-collection read priced per GB in retrieval and egress. The more thoroughly you preserve, the more it costs to check it, so teams check less than they should.",
       },
       {
         label: "The format you cannot open",
@@ -70,7 +70,7 @@ const config: LandingPageConfig = {
     label: "The comparison",
     heading: (
       <>
-        10 TB collection. <span className="text-brand-500">One fixity review a year — or as often as you want.</span>
+        10 TB collection. <span className="text-brand-500">One fixity review a year, or as often as you want.</span>
       </>
     ),
     sub: "Same preservation workload, four providers. Monthly storage plus the cost of reading the collection back to check it.",
@@ -94,7 +94,7 @@ const config: LandingPageConfig = {
   features: {
     label: "Preservation built for checking",
     heading: <>Reading included. <span className="text-brand-500">Checking costs nothing.</span></>,
-    sub: "Free reads, no archive-tier wait, and standard S3 tooling — so fixity checks stop being an annual event.",
+    sub: "Free reads, no archive-tier wait, and standard S3 tooling, so fixity checks stop being an annual event.",
     items: [
       {
         icon: ShieldCheck,
@@ -104,7 +104,7 @@ const config: LandingPageConfig = {
       {
         icon: ChartLine,
         title: "No archive-tier wait",
-        desc: "Objects are readable the instant you request them — no rehydration delay before a fixity check or an access request can run.",
+        desc: "Objects are readable the instant you request them. No rehydration delay before a fixity check or an access request can run.",
       },
       {
         icon: Database,
@@ -121,7 +121,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Preservation you can afford to check.",
-    subhead: "Free 1 TB evaluation. Write a collection and read it back to check it — at zero retrieval cost.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Write a collection and read it back to check it, at zero retrieval cost.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

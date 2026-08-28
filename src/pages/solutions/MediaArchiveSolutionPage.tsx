@@ -36,13 +36,13 @@ const config: SolutionPageConfig = {
         glow: true,
       },
     ],
-    tagline: "1 TB free for 30 days · No credit card required · No egress fees",
+    tagline: "1 TB storage + 2 TB egress free for 30 days · No credit card",
   },
   proof: [
     "$4.99 / TB / month",
     "No retrieval penalties",
     "S3-compatible",
-    "Verifiable provenance",
+    "Immutable Object Lock",
   ],
   features: {
     label: "Built for media teams",
@@ -76,8 +76,8 @@ const config: SolutionPageConfig = {
       },
       {
         icon: ShieldCheck,
-        title: "Verifiable asset provenance",
-        body: "Every file gets a cryptographic seal. Prove a master was never altered after delivery, useful for licensing disputes and compliance audits.",
+        title: "Masters that cannot be overwritten",
+        body: "Lock a delivered master under Object Lock retention and nothing can overwrite or delete it for the term you set. Versioning keeps every earlier cut alongside it, with the full history of the key."
       },
     ],
   },
@@ -96,7 +96,7 @@ const config: SolutionPageConfig = {
       },
       {
         title: "News & documentary teams",
-        body: "Archive years of footage with verifiable provenance. Prove a clip was never altered, essential for editorial credibility and licensing.",
+        body: "Archive years of footage under locked retention, with every prior version kept and listed. Reading any of it back costs nothing, so a licensing check is never a budget decision."
       },
       {
         title: "Sports rights & licensing",
@@ -108,12 +108,12 @@ const config: SolutionPageConfig = {
     "Is Fil One hot, warm, or cold storage? Is it like Glacier?",
     "How do I migrate from AWS / Azure / Google Cloud?",
     "Is Fil One compatible with my existing tools?",
-    "How does data integrity verification work with Fil One?",
+    "How do I stop data from being altered or deleted?",
   ],
   cta: {
     heading: "Cut your archive bill by up to 80%",
-    subhead: "Start with 1 TB free. No credit card, no egress fees, no surprises.",
-    note: "S3-compatible · Verifiable integrity · $4.99/TB/month after trial",
+    subhead: "Start with 1 TB of storage and 2 TB of egress free. No credit card, and no charge to read it back out.",
+    note: "S3-compatible · Object Lock retention · $4.99/TB/month after trial",
     cta: { label: "Start for free", href: signupUrl() },
   },
 };

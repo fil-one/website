@@ -41,13 +41,13 @@ const config: LandingPageConfig = {
   problem: {
     label: "The mechanism",
     heading: "Egress is the lock-in mechanism, not the vendor relationship.",
-    sub: "Hyperscaler object storage is cheap to enter and expensive to leave. The exit cost is not in the contract — it is in the egress rate. Portability requires planning it in before the data accumulates.",
+    sub: "Hyperscaler object storage is cheap to enter and expensive to leave. The exit cost is not in the contract. It is in the egress rate. Portability requires planning it in before the data accumulates.",
     items: [
       {
         label: "The entry cost",
         tone: "warning",
         catch: "Cheap to start. Invisible exit bill.",
-        body: "Hyperscaler storage is priced to win the initial migration. The egress charge is the asymmetry — it does not appear until data is large enough that the exit cost becomes a reason to stay.",
+        body: "Hyperscaler storage is priced to win the initial migration. The egress charge is the asymmetry. It does not appear until data is large enough that the exit cost becomes a reason to stay.",
       },
       {
         label: "The growth trap",
@@ -88,7 +88,7 @@ const config: LandingPageConfig = {
       { provider: "Fil One", isFilOne: true, values: { storage: "$499", rate: "$0", exit: "$0" } },
     ],
     footnote:
-      "Storage at 100 TB using published US rate cards, Q2 2026. AWS exit: 102,400 GB × $0.09 = $9,216. GCP exit: tiered — 10 TB @ $0.12 + 40 TB @ $0.11 + 50 TB @ $0.08 = $9,831. Azure exit: tiered — 10 TB @ $0.087 + 40 TB @ $0.083 + 50 TB @ $0.07 = $7,602. Wasabi, Backblaze B2, Fil One: $0 egress.",
+      "Storage at 100 TB using published US rate cards, Q2 2026. AWS exit: 102,400 GB × $0.09 = $9,216. GCP exit: tiered, 10 TB @ $0.12 + 40 TB @ $0.11 + 50 TB @ $0.08 = $9,831. Azure exit: tiered, 10 TB @ $0.087 + 40 TB @ $0.083 + 50 TB @ $0.07 = $7,602. Wasabi, Backblaze B2, Fil One: $0 egress.",
   },
 
   features: {
@@ -98,12 +98,12 @@ const config: LandingPageConfig = {
         An S3 endpoint that doesn't <span className="text-brand-500">penalise the exit.</span>
       </>
     ),
-    sub: "Same tools, same APIs. The architecture that works today works tomorrow — on any cloud that reads S3.",
+    sub: "Same tools, same APIs. The architecture that works today works tomorrow. On any cloud that reads S3.",
     items: [
       {
         icon: Plug,
         title: "S3-compatible portability",
-        desc: "Any tool that writes S3 — SDKs, rclone, s5cmd, Terraform — works with an endpoint change. Moving in does not require a rewrite. Moving out does not either.",
+        desc: "Any tool that writes S3 (SDKs, rclone, s5cmd, Terraform) works with an endpoint change. Moving in does not require a rewrite. Moving out does not either.",
       },
       {
         icon: ArrowsOut,
@@ -118,14 +118,14 @@ const config: LandingPageConfig = {
       {
         icon: Lock,
         title: "Object Lock for compliance",
-        desc: "Configure retention from 1 day to 100 years at the bucket level, for data that must not be altered or deleted early — even mid-migration.",
+        desc: "Configure retention from 1 day to 100 years at the bucket level, for data that must not be altered or deleted early, even mid-migration.",
       },
     ],
   },
 
   cta: {
     heading: "Portable by default, not by promise.",
-    subhead: "Free 1 TB evaluation. Point your S3 tools at the endpoint. The exit is $0 from day one.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Point your S3 tools at the endpoint. The exit is $0 from day one.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

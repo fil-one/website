@@ -130,7 +130,7 @@ export const RadioField = ({
 }) => (
   <fieldset className="m-0 flex flex-col gap-3 border-none p-0">
     {/* A <legend> is not a flex item, so the fieldset's gap never spaces it
-        from the options — the heading→options gap must live on the legend. */}
+        from the options. The heading→options gap must live on the legend. */}
     <legend className={`mb-3 p-0 ${LABEL_CLASS}`}>
       {legend}
       {required && REQUIRED_MARK}

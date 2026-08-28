@@ -18,9 +18,9 @@ import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPr
 const WAITLIST_URL = "/waitlist/ai-agent-toolkit";
 
 const PROOF = [
-  "Works with Claude, Cursor & ChatGPT",
-  "Automate via Zapier, n8n & webhooks",
-  "SDKs for LangChain, LlamaIndex & more",
+  "Planned: Claude, Cursor & ChatGPT",
+  "Planned: Zapier, n8n & webhooks",
+  "Today: LangChain, LlamaIndex via S3 key",
 ];
 
 const WHY = [
@@ -28,7 +28,7 @@ const WHY = [
     icon: LockKey,
     title: "Data sovereignty",
     description:
-      "Agent data lives in your buckets, not a third-party SaaS you don't control. Your keys, your data.",
+      "Agent data will live in your buckets, not in a third-party SaaS you do not control. Your bucket, your region, your access keys.",
   },
   {
     icon: ArrowsLeftRight,
@@ -46,14 +46,12 @@ const WHY = [
     icon: Wrench,
     title: "No infrastructure to manage",
     description:
-      "Fil One handles durability, scaling, and replication as your agents grow. You just write to a bucket.",
+      "Fil One runs the storage layer as your agents grow. You write to a bucket and read it back at no charge.",
   },
 ];
 
 const PRICING_TAGS = [
-  "MCP server included",
-  "OAuth connectors included",
-  "SDK support included",
+  "Planned at no extra charge",
   "No per-request fees",
   "No per-connection fees",
 ];
@@ -64,8 +62,8 @@ const FAQS = [
     a: "Model Context Protocol, an open standard for connecting AI models to tools and data sources. Supported by Claude, Cursor, Continue, and others.",
   },
   {
-    q: "Which apps are supported at launch?",
-    a: "Claude Desktop, Cursor, Continue, Claude.ai, ChatGPT, Zapier, Make.com, and n8n. More coming.",
+    q: "Which apps are planned for launch?",
+    a: "The target list is Claude Desktop, Cursor, Continue, Claude.ai, ChatGPT, Zapier, Make.com, and n8n. It is a plan rather than a commitment, and it may change before the toolkit ships. In the meantime any of these that accepts S3 credentials can already reach your buckets with an access key.",
   },
   {
     q: "Is my agent data private?",
@@ -73,7 +71,7 @@ const FAQS = [
   },
   {
     q: "Do I need the toolkit to use Fil One with code?",
-    a: "No. Any S3-compatible SDK works out of the box. The toolkit adds MCP, OAuth connectors, and pre-built integrations on top.",
+    a: "No. An ordinary Fil One access key is enough for any S3-compatible SDK today. The toolkit is planned to add MCP, OAuth connectors, and pre-built integrations on top of that."
   },
   {
     q: "Can I use it with Claude?",
@@ -103,10 +101,10 @@ const AgentToolkitProductPage = () => {
         <Hero
           glow
           grid
-          badge={<Pill>Early access</Pill>}
+          badge={<Pill>Coming soon</Pill>}
           titleSize="text-[34px] sm:text-[44px] md:text-[58px]"
           title={<><span className="text-brand-500">Connect your AI stack</span> to your buckets</>}
-          description="Let AI tools like Claude and Cursor read and write files directly in your buckets. Your data, your keys, no lock-in."
+          description="A planned way to let AI tools like Claude and Cursor read and write files directly in your buckets. Not shipped yet, and free to early testers when it is."
           titleMaxWidth={585}
           descriptionMaxWidth={460}
           contentClassName="pb-14 md:pb-20"

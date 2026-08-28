@@ -7,7 +7,7 @@ vi.mock("@/hooks/useInView", () => ({
   useInView: () => ({ ref: { current: null as HTMLDivElement | null }, inView: true }),
 }));
 
-describe("FaqSection — analytics", () => {
+describe("FaqSection. Analytics", () => {
   let plausibleSpy: ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe("FaqSection — analytics", () => {
     delete window.plausible;
   });
 
-  const Q1 = "How does data integrity verification work with Fil One?";
+  const Q1 = "How do I stop data from being altered or deleted?";
   const Q2 = "Is Fil One compatible with my existing tools?";
 
   it('fires "FAQ Expand" when a question is clicked', () => {
@@ -30,7 +30,7 @@ describe("FaqSection — analytics", () => {
 
     expect(plausibleSpy).toHaveBeenCalledWith("FAQ Expand", {
       props: expect.objectContaining({
-        question: expect.stringContaining("data integrity"),
+        question: expect.stringContaining("altered or deleted"),
         page: window.location.pathname,
       }),
     });
@@ -69,7 +69,7 @@ describe("FaqSection — analytics", () => {
       (c: unknown[]) => c[0] === "FAQ Expand",
     );
     expect(faqCalls).toHaveLength(2);
-    expect(faqCalls[0][1].props.question).toContain("data integrity");
+    expect(faqCalls[0][1].props.question).toContain("altered or deleted");
     expect(faqCalls[1][1].props.question).toContain("compatible");
   });
 });

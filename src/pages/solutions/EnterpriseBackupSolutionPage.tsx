@@ -30,7 +30,7 @@ const config: SolutionPageConfig = {
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary", size: "lg", glow: true },
     ],
-    tagline: "1 TB free for 30 days · No credit card required",
+    tagline: "1 TB storage + 2 TB egress free for 30 days · No credit card",
   },
   proof: [
     "Immutable object lock",

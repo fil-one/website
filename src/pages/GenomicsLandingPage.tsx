@@ -46,7 +46,7 @@ const config: LandingPageConfig = {
         label: "The storage bill",
         tone: "warning",
         catch: "1 PB on AWS costs $22,067/month.",
-        body: "AWS S3 Standard at tiered rates — $0.023/GB for the first 50 TB, $0.022 for the next 450 TB, $0.021 after — adds up to $22,067/month for a single petabyte. Before a single analysis read.",
+        body: "AWS S3 Standard at tiered rates ($0.023/GB for the first 50 TB, $0.022 for the next 450 TB, $0.021 after) add up to $22,067/month for a single petabyte, before a single analysis read.",
       },
       {
         label: "The re-analysis cost",
@@ -90,7 +90,7 @@ const config: LandingPageConfig = {
       },
     ],
     footnote:
-      "AWS S3 Standard us-east-1 Q2 2026 storage: tiered rates — first 50 TB $0.023/GB ($1,177.60), next 450 TB $0.022/GB ($10,137.60), over 500 TB $0.021/GB ($10,752.00) = $22,067.20 for 1,024,000 GB. AWS egress: 204,800 GB × $0.09 = $18,432. Fil One: 1,000 TB × $4.99 = $4,990, egress $0.",
+      "AWS S3 Standard us-east-1 Q2 2026 storage: tiered rates. First 50 TB $0.023/GB ($1,177.60), next 450 TB $0.022/GB ($10,137.60), over 500 TB $0.021/GB ($10,752.00) = $22,067.20 for 1,024,000 GB. AWS egress: 204,800 GB × $0.09 = $18,432. Fil One: 1,000 TB × $4.99 = $4,990, egress $0.",
   },
 
   features: {
@@ -127,7 +127,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Keep the whole dataset. For years.",
-    subhead: "Free 1 TB evaluation. Upload a dataset slice and confirm your existing analysis tooling connects without modification.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Upload a dataset slice and confirm your existing analysis tooling connects without modification.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

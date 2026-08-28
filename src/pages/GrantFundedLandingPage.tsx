@@ -49,7 +49,7 @@ const config: LandingPageConfig = {
         label: "The budget you cannot forecast",
         tone: "warning",
         catch: "Variable costs, fixed award.",
-        body: "A data-management plan needs a storage number that holds for the life of the grant. Metered tiers with egress and retrieval charges produce a bill that moves with usage — impossible to commit to in a proposal written years in advance.",
+        body: "A data-management plan needs a storage number that holds for the life of the grant. Metered tiers with egress and retrieval charges produce a bill that moves with usage. Impossible to commit to in a proposal written years in advance.",
       },
       {
         label: "The cost after the money",
@@ -61,7 +61,7 @@ const config: LandingPageConfig = {
         label: "The toll to leave",
         tone: "brand",
         catch: "Moving the data costs money.",
-        body: "When the project ends, and data migrates to an institutional or disciplinary repository, retrieval fees turn the handover into an unbudgeted expense — charged precisely when every dollar has been spoken for.",
+        body: "When the project ends, and data migrates to an institutional or disciplinary repository, retrieval fees turn the handover into an unbudgeted expense. Charged precisely when every dollar has been spoken for.",
       },
     ],
   },
@@ -94,7 +94,7 @@ const config: LandingPageConfig = {
   features: {
     label: "Built for the long award",
     heading: <><span className="text-brand-500">One number for the budget.</span> Accessible for the duration.</>,
-    sub: "A flat rate, no exit fees, and no archive-tier wait — for data that has to outlast the grant that funded it.",
+    sub: "A flat rate, no exit fees, and no archive-tier wait. For data that has to outlast the grant that funded it.",
     items: [
       {
         icon: CurrencyDollar,
@@ -104,24 +104,24 @@ const config: LandingPageConfig = {
       {
         icon: Wallet,
         title: "No exit fees",
-        desc: "Leaving costs nothing. When the grant ends or the data moves to an institutional repository, you read everything back at $0 — no invoice on the way out.",
+        desc: "Leaving costs nothing. When the grant ends or the data moves to an institutional repository, you read everything back at $0. No invoice on the way out.",
       },
       {
         icon: Clock,
         title: "No archive-tier wait",
-        desc: "Objects are readable the instant they're requested — no rehydration delay for whoever inherits the data after the grant closes.",
+        desc: "Objects are readable the instant they're requested. No rehydration delay for whoever inherits the data after the grant closes.",
       },
       {
         icon: Database,
         title: "S3-compatible",
-        desc: "Standard S3 API. The tools, scripts, and repository software your project already uses connect without modification — and so will whoever inherits the data later.",
+        desc: "Standard S3 API. The tools, scripts, and repository software your project already uses connect without modification, and so will whoever inherits the data later.",
       },
     ],
   },
 
   cta: {
     heading: "A number that outlives the award.",
-    subhead: "Free 1 TB evaluation. Put a flat, predictable storage line in your next data management plan.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Put a flat, predictable storage line in your next data management plan.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

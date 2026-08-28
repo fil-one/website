@@ -28,7 +28,7 @@ const config: LandingPageConfig = {
         <span className="text-brand-500">to save money.</span>
       </>
     ),
-    description: `S3-compatible storage at ${PRICE_PER_TB_SHORT} flat. No per-request fees, no egress. Keep every event, every span, every audit trail — without watching the PUT counter.`,
+    description: `S3-compatible storage at ${PRICE_PER_TB_SHORT} flat. No per-request fees, no egress. Keep every event, every span, every audit trail, without watching the PUT counter.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
@@ -39,7 +39,7 @@ const config: LandingPageConfig = {
   problem: {
     label: "The trap",
     heading: "Logs are billed per write. Logs are written constantly.",
-    sub: "Hyperscaler object storage charges per PUT. A logging pipeline writes by definition. The cheapest way to make the bill smaller is to keep fewer logs — and the price paid for that decision is paid later, in the incident postmortem you cannot reconstruct.",
+    sub: "Hyperscaler object storage charges per PUT. A logging pipeline writes by definition. The cheapest way to make the bill smaller is to keep fewer logs, and the price paid for that decision is paid later, in the incident postmortem you cannot reconstruct.",
     items: [
       {
         label: "What you write",
@@ -51,7 +51,7 @@ const config: LandingPageConfig = {
         label: "What you store",
         tone: "danger",
         catch: "Storage is the smaller line.",
-        body: "10 TB of compressed log data per month is normal for a mid-size platform. Add storage at $0.023/GB and egress for any query that reads back — the bill closes in on $750 a month before you draw a single dashboard.",
+        body: "10 TB of compressed log data per month is normal for a mid-size platform. Add storage at $0.023/GB and egress for any query that reads back. The bill closes in on $750 a month before you draw a single dashboard.",
       },
       {
         label: "What you give up",
@@ -69,7 +69,7 @@ const config: LandingPageConfig = {
         A logging sink that <span className="text-brand-500">doesn't bill per event.</span>
       </>
     ),
-    sub: "Vector, Fluent Bit, Logstash, OpenTelemetry — anything that already writes S3 — gets a new endpoint. The PUT counter stops mattering.",
+    sub: "Vector, Fluent Bit, Logstash, OpenTelemetry: anything that already writes S3 gets a new endpoint. The PUT counter stops mattering.",
     subMaxWidth: 620,
     caption: "Per-request cost at 100M PUTs/month, by provider",
     columns: [
@@ -85,7 +85,7 @@ const config: LandingPageConfig = {
       { provider: "Fil One", isFilOne: true, values: { rate: "$0 per request", total: "$0" } },
     ],
     footnote:
-      "Public US rate cards, Q2 2026. Storage and egress not included in this line — they are extra on the metered tiers, and zero on Fil One.",
+      "Public US rate cards, Q2 2026. Storage and egress not included in this line. They are extra on the metered tiers, and zero on Fil One.",
   },
 
   features: {
@@ -101,12 +101,12 @@ const config: LandingPageConfig = {
       {
         icon: Database,
         title: "No per-request fees",
-        desc: "PUT, GET, LIST, HEAD — all included. The line item that dominates a logging workload on AWS does not exist here.",
+        desc: "PUT, GET, LIST, HEAD, all included. The line item that dominates a logging workload on AWS does not exist here.",
       },
       {
         icon: Plug,
         title: "S3-compatible logging",
-        desc: "Vector, Fluent Bit, Logstash, OpenTelemetry collectors, Loki — all of them write S3. Point them at the Fil One endpoint and ship.",
+        desc: "Vector, Fluent Bit, Logstash, OpenTelemetry collectors, Loki: all of them write S3. Point them at the Fil One endpoint and ship.",
       },
       {
         icon: ChartLine,
@@ -123,7 +123,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Keep every log.",
-    subhead: "Free 1 TB evaluation. Point your existing collector at the endpoint and watch the request line zero out.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Point your existing collector at the endpoint and watch the request line zero out.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

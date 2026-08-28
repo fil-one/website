@@ -22,8 +22,11 @@ interface IntegrationsSectionProps {
 }
 
 /**
- * Auto-scrolling marquee of supported integrations — S3-compatibility
- * reassurance shared by the /lp/price and Barcelona landing pages.
+ * Auto-scrolling marquee of S3-speaking tools customers connect. The copy
+ * deliberately claims the mechanism (S3 endpoint + access key), not per-tool
+ * certification: no versioned compatibility run exists for these yet (FIL-892).
+ *
+ * Shared by the /lp/price and Barcelona landing pages.
  *
  * Copy is overridable so the Spanish pages can share the section rather than
  * inlining a translated copy of it; the defaults are the English strings.
@@ -36,7 +39,7 @@ const IntegrationsSection = ({
       Works with your <span className="text-brand-500">existing stack</span>
     </>
   ),
-  description = "S3 API compatible. If it talks to AWS, it talks to us.",
+  description = "No plugin and no connector to install. These tools already speak the S3 API, so they reach Fil One through a regional endpoint and an access key.",
   ctaLabel = "View documentation →",
 }: IntegrationsSectionProps) => {
   const { ref, inView } = useInView({ threshold: 0.05 });

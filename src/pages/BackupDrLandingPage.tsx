@@ -48,7 +48,7 @@ const config: LandingPageConfig = {
         label: "Hot tiers",
         tone: "brand",
         catch: "Restore costs the same as everyday reads.",
-        body: "S3 Standard restores instantly — and bills $90 per TB on the way out. A full-region restore on a 50 TB workload is several thousand dollars in egress alone, on top of the monthly storage line that was already the largest in your S3 invoice.",
+        body: "S3 Standard restores instantly, and bills $90 per TB on the way out. A full-region restore on a 50 TB workload is several thousand dollars in egress alone, on top of the monthly storage line that was already the largest in your S3 invoice.",
       },
       {
         label: "Untested DR plans",
@@ -102,7 +102,7 @@ const config: LandingPageConfig = {
       },
     ],
     footnote:
-      "AWS S3 Standard, Glacier Instant Retrieval, and Deep Archive rates from public US Q2 2026 rate cards. Restore line combines retrieval + egress for one 5 TB pull. Wasabi pricing assumes 90-day minimum retention met. Fil One is a flat-rate hot tier — no separate restore line.",
+      "AWS S3 Standard, Glacier Instant Retrieval, and Deep Archive rates from public US Q2 2026 rate cards. Restore line combines retrieval + egress for one 5 TB pull. Wasabi pricing assumes 90-day minimum retention met. Fil One is a flat-rate hot tier. No separate restore line.",
   },
 
   workloads: {
@@ -114,7 +114,7 @@ const config: LandingPageConfig = {
       {
         tag: "Full-region restore",
         title: "Recover a workload when the primary is gone",
-        desc: "Pull every byte back. Standard S3 GET. No retrieval line item, no egress charge — the bill for the worst day is the same as the bill for any other day.",
+        desc: "Pull every byte back. Standard S3 GET. No retrieval line item, no egress charge. The bill for the worst day is the same as the bill for any other day.",
         stats: [
           {
             label: "5 TB full restore",
@@ -130,7 +130,7 @@ const config: LandingPageConfig = {
       {
         tag: "Quarterly DR drills",
         title: "Test the restore plan as often as it should be tested",
-        desc: "Most DR plans go untested because each drill costs real money. Free retrieval means quarterly — or monthly — drills cost what they should: nothing.",
+        desc: "Most DR plans go untested because each drill costs real money. Free retrieval means quarterly, or monthly, drills cost what they should: nothing.",
         stats: [
           {
             label: "Cost per drill (1 TB pull)",
@@ -153,7 +153,7 @@ const config: LandingPageConfig = {
       {
         tag: "Granular file-level recovery",
         title: "Pull back a single file without a retrieval ticket",
-        desc: "Tape and archive tiers tax small restores the same as full ones. Hot, S3-compatible storage means a single file recovery is a single GET — for $0.",
+        desc: "Tape and archive tiers tax small restores the same as full ones. Hot, S3-compatible storage means a single file recovery is a single GET. For $0.",
         stats: [
           {
             label: "1 GB single-file restore",
@@ -169,7 +169,7 @@ const config: LandingPageConfig = {
       {
         tag: "Object Lock & retention",
         title: "Compliance and ransomware protections, built in",
-        desc: "Object Lock in Compliance or Governance mode. Per-object retention periods. Versioning. Ransomware can't overwrite or delete what is locked.",
+        desc: "Object Lock in Compliance or Governance mode, with a default retention period set when the bucket is created and versioning underneath it. Ransomware cannot overwrite or delete what is locked, and neither can a stolen access key.",
         stats: [
           {
             label: "Lock modes",
@@ -179,10 +179,10 @@ const config: LandingPageConfig = {
             ],
           },
           {
-            label: "Retention granularity",
+            label: "Max retention period",
             rows: [
-              { name: "Fil One", val: "Per-object", win: true },
-              { name: "S3 Standard", val: "Per-object" },
+              { name: "Fil One", val: "100 years", win: true },
+              { name: "S3 Standard", val: "100 years" },
             ],
           },
         ],
@@ -200,28 +200,28 @@ const config: LandingPageConfig = {
     items: [
       {
         icon: Clock,
-        label: "Restore latency",
-        value: "{{NEEDS PROOF: measured restore latency to first byte}}",
-        note: "Standard S3 GET — no thaw, no retrieval queue.",
+        label: "Restore path",
+        value: "One GET",
+        note: "No thaw, no retrieval tier, no restore job to schedule.",
       },
       {
         icon: ArrowsOut,
-        label: "Restore throughput",
-        value: "{{NEEDS PROOF: measured restore throughput per client}}",
-        note: "Parallel-read friendly. Saturates a tuned S3 client.",
+        label: "Cost to test a restore",
+        value: "$0",
+        note: "No egress and no request charges, so a full restore drill costs nothing.",
       },
       {
         icon: ShieldCheck,
         label: "Object Lock & versioning",
         value: "Available",
-        note: "Compliance and Governance modes. Per-object retention.",
+        note: "Compliance and Governance modes, set at bucket creation.",
       },
     ],
   },
 
   cta: {
     heading: "A backup target you'll actually test.",
-    subhead: "Free 1 TB evaluation. Point Veeam, Restic, MSP360, or any S3 client at the endpoint.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Point Veeam, Restic, MSP360, or any S3 client at the endpoint.",
     headingMaxWidth: 560,
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },

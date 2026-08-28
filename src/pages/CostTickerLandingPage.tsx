@@ -30,7 +30,7 @@ const config: LandingPageConfig = {
         <span className="text-brand-500">you're not paying.</span>
       </>
     ),
-    description: `Hyperscalers meter every read, every request, every byte out. Fil One is flat ${PRICE_PER_TB_SHORT} — no egress, no per-request fees. Same workload, side by side.`,
+    description: `Hyperscalers meter every read, every request, every byte out. Fil One is flat ${PRICE_PER_TB_SHORT}. No egress, no per-request fees. Same workload, side by side.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
@@ -41,14 +41,14 @@ const config: LandingPageConfig = {
   problem: {
     label: "The invisible meter",
     heading: "The bill is a surprise because the meter runs where you can't see it.",
-    sub: "Storage looks cheap on the rate card. The cost shows up later, metered against activity you don't watch in real time — and lands as a number nobody forecast.",
+    sub: "Storage looks cheap on the rate card. The cost shows up later, metered against activity you don't watch in real time, and lands as a number nobody forecast.",
     subMaxWidth: 620,
     items: [
       {
         label: "The egress meter",
         tone: "warning",
         catch: "Every read ticks at $0.09/GB.",
-        body: "Reading 10 TB back from AWS in a month adds $922 — nearly 4× the $236 storage charge. The meter runs hardest exactly when your data is most useful.",
+        body: "Reading 10 TB back from AWS in a month adds $922, nearly 4× the $236 storage charge. The meter runs hardest exactly when your data is most useful.",
       },
       {
         label: "The request meter",
@@ -60,7 +60,7 @@ const config: LandingPageConfig = {
         label: "The month-end reveal",
         tone: "brand",
         catch: "You learn the cost after you've spent it.",
-        body: "Activity-metered billing means the invoice is a report of what already happened. There's no knob to turn in advance — only a number to absorb afterward.",
+        body: "Activity-metered billing means the invoice is a report of what already happened. There's no knob to turn in advance, only a number to absorb afterward.",
       },
     ],
   },
@@ -72,7 +72,7 @@ const config: LandingPageConfig = {
         10 TB stored, <span className="text-brand-500">10 TB read in a month.</span>
       </>
     ),
-    sub: "The same workload on four providers. Storage barely moves; the egress meter is the whole story — and on Fil One it reads zero.",
+    sub: "The same workload on four providers. Storage barely moves; the egress meter is the whole story, and on Fil One it reads zero.",
     subMaxWidth: 620,
     caption: "Monthly cost for 10 TB stored, 10 TB read, by provider",
     columns: [
@@ -102,7 +102,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "No egress meter",
-        desc: "Every byte you read on a hyperscaler ticks the egress meter at $0.09/GB. On Fil One that meter doesn't exist — reads are included.",
+        desc: "Every byte you read on a hyperscaler ticks the egress meter at $0.09/GB. On Fil One that meter doesn't exist. Reads are included.",
       },
       {
         icon: ChartLine,
@@ -112,7 +112,7 @@ const config: LandingPageConfig = {
       {
         icon: Plug,
         title: "S3-compatible",
-        desc: "Point your existing tools at the endpoint. The workload doesn't change — only the meter that was quietly running underneath it.",
+        desc: "Point your existing tools at the endpoint. The workload doesn't change, only the meter that was quietly running underneath it.",
       },
       {
         icon: ShieldCheck,
@@ -125,7 +125,7 @@ const config: LandingPageConfig = {
   cta: {
     heading: `Turn off the meter. ${PRICE_PER_TB_MONTH}.`,
     headingMaxWidth: 560,
-    subhead: "Storage only — no egress meter, no request meter, no tiers. Free 1 TB evaluation: run your real workload and compare the invoice. The egress line will read zero.",
+    subhead: "Storage only. No egress meter, no request meter, no tiers. Free 30-day trial, 1 TB of storage and 2 TB of egress: run your real workload and compare the invoice. The egress line will read zero.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

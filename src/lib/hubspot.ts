@@ -124,7 +124,7 @@ export async function submitHubSpotForm(opts: {
       ok: false,
       error:
         opts.networkErrorMessage ??
-        "Network error — please check your connection and try again.",
+        "Network error. Please check your connection and try again.",
     };
   }
 }

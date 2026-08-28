@@ -25,7 +25,7 @@ const config: LandingPageConfig = {
         <span className="text-brand-500">your app does too.</span>
       </>
     ),
-    description: `S3-compatible object storage built on Filecoin infrastructure — a different provider than the hyperscaler your smart contracts don't depend on. No egress, no lock-in, ${PRICE_PER_TB_SHORT} flat.`,
+    description: `S3-compatible object storage built on Filecoin infrastructure. A different provider than the hyperscaler your smart contracts don't depend on. No egress, no lock-in, ${PRICE_PER_TB_SHORT} flat.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
@@ -67,17 +67,17 @@ const config: LandingPageConfig = {
         Infrastructure that <span className="text-brand-500">matches your values.</span>
       </>
     ),
-    sub: "S3-compatible, built on Filecoin, and free to leave — infrastructure independence for the data layer, not just the contracts.",
+    sub: "S3-compatible, built on Filecoin, and free to leave. Infrastructure independence for the data layer, not just the contracts.",
     items: [
       {
         icon: Lock,
         title: "Built on Filecoin infrastructure",
-        desc: "S3-compatible object storage built on Filecoin infrastructure — not a repackaged hyperscaler bucket. Your custody, exchange, and indexer data doesn't share a failure domain with your compute.",
+        desc: "S3-compatible object storage built on Filecoin infrastructure, not a repackaged hyperscaler bucket. Your custody, exchange, and indexer data doesn't share a failure domain with your compute.",
       },
       {
         icon: ArrowsOut,
         title: "S3-compatible, zero lock-in",
-        desc: "Standard S3 API with $0 exit egress. If you ever need to move data out — to another provider, another region — it costs nothing.",
+        desc: "Standard S3 API with $0 exit egress. If you ever need to move data out, to another provider or another region, it costs nothing.",
       },
       {
         icon: Plug,
@@ -94,7 +94,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Walk the walk.",
-    subhead: "Free 1 TB evaluation. Connect your existing S3 client and store data on Filecoin infrastructure in minutes.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Connect your existing S3 client and store data on Filecoin infrastructure in minutes.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

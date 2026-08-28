@@ -1,21 +1,23 @@
-# Fil One — Full Reference for AI Agents and Developers
+# Fil One. Full Reference for AI Agents and Developers
 
 > Fil One is the storage layer for AI agents. S3-compatible object storage built on
-> Filecoin with verifiable data integrity, no egress fees, and flat pricing at
-> $4.99/TB/month. Free 30-day trial, no credit card required.
+> Filecoin, with no egress fees, no per-request charges, and flat pricing at
+> $4.99/TB/month ($4.99/month minimum). Free 30-day trial with 1 TB of storage and
+> 2 TB of egress, no credit card required.
 
 ---
 
 ## What is Fil One?
 
-Fil One provides S3-compatible object storage backed by the Filecoin network. Every
-object stored on Fil One receives a cryptographic content identifier (CID) and is
-verified continuously via Filecoin's Proof of Spacetime (PoSt) — a cryptographic
-proof that data exists and is intact, checked approximately every 24 hours.
+Fil One provides S3-compatible object storage backed by the Filecoin network, an
+open market of independent storage providers rather than a single proprietary
+vendor. You reach it with the S3 SDK, CLI, or client you already use.
 
-This makes Fil One uniquely suited to AI agent workloads where data integrity and
-auditability matter: you can independently verify that your training data, model
-weights, or agent memory has not been altered or silently corrupted.
+Two things make it suit AI agent workloads. Reads are not billed, so retrieval
+loops, evaluation passes, and repeated dataset iteration cost the same as leaving
+the data untouched. And any bucket can be created with Object Lock retention and
+versioning, so a training set or an inference log can be made impossible to
+overwrite or delete for a fixed period.
 
 ---
 
@@ -37,6 +39,7 @@ s3 = boto3.client(
     aws_access_key_id=os.environ["FIL_ONE_ACCESS_KEY"],
     aws_secret_access_key=os.environ["FIL_ONE_SECRET_KEY"],
     region_name="eu-west-1",
+    config=boto3.session.Config(s3={"addressing_style": "path"}),
 )
 
 # Ingest a document chunk
@@ -56,7 +59,7 @@ source_text = obj["Body"].read().decode()
 
 Persist episodic memory, conversation history, task queues, scratchpads, and
 structured world-state between agent runs. Fil One is a durable key-value store
-accessible from any process with S3 credentials — no database required.
+accessible from any process with S3 credentials. No database required.
 
 ```python
 import json, boto3
@@ -69,6 +72,7 @@ class AgentMemory:
             aws_access_key_id=os.environ["FIL_ONE_ACCESS_KEY"],
             aws_secret_access_key=os.environ["FIL_ONE_SECRET_KEY"],
             region_name="eu-west-1",
+            config=boto3.session.Config(s3={"addressing_style": "path"}),
         )
         self.bucket = bucket
         self.prefix = f"agents/{agent_id}/memory"
@@ -143,7 +147,7 @@ def load_traces_for_eval(run_id: str) -> list[dict]:
 ### 5. Training and evaluation datasets
 
 Store JSONL, Parquet, CSV, or HDF5 datasets. Stream them back to training jobs at
-any throughput — no egress fee means iterating over datasets repeatedly costs only
+any throughput. No egress fee means iterating over datasets repeatedly costs only
 the storage price.
 
 ```python
@@ -156,6 +160,7 @@ fs = pafs.S3FileSystem(
     access_key=os.environ["FIL_ONE_ACCESS_KEY"],
     secret_key=os.environ["FIL_ONE_SECRET_KEY"],
     scheme="https",
+    force_virtual_addressing=False,
 )
 
 table = pq.read_table("my-datasets/train/sft-v3.parquet", filesystem=fs)
@@ -168,10 +173,11 @@ table = pq.read_table("my-datasets/train/sft-v3.parquet", filesystem=fs)
 | Parameter | Value |
 |-----------|-------|
 | Endpoint URL | `https://eu-west-1.s3.filonecontent.com` |
-| Region | `eu-west-1` |
-| Auth | AWS Signature V4 (Access Key ID + Secret Access Key) |
+| Region | `eu-west-1` (Europe, France). US East (Michigan) is `us-east-1`. |
+| Auth | AWS Signature V4 only (Access Key ID + Secret Access Key) |
 | Protocol | HTTPS |
-| Path style | Both path-style and virtual-hosted-style supported |
+| Path style | **Path-style is required.** Virtual-hosted style is not supported. |
+| Key scope | An access key authenticates against one region only |
 
 Fil One is compatible with any S3-compatible client or SDK:
 - **Python:** boto3, s3fs, fsspec, PyArrow S3FileSystem
@@ -193,22 +199,29 @@ export FIL_ONE_SECRET_KEY=your_secret_access_key
 
 ---
 
-## Data integrity
+## Immutability and version history
 
-Every object stored on Fil One:
+Two bucket settings cover the "this must not change" requirement. Both are chosen
+when the bucket is created and cannot be added to an existing bucket, so decide
+before the first upload.
 
-1. Receives a **CID (Content Identifier)** — a cryptographic hash of the object's
-   content using the IPLD data model
-2. Is sealed into a Filecoin sector and proven to exist via **Proof of Spacetime
-   (PoSt)** approximately every 24 hours
-3. Can be independently verified against its CID at any time — without trusting Fil
-   One as an intermediary
+1. **Versioning.** Every write keeps the prior version of the key. You can list the
+   full version history and download any specific version by its Version ID.
+2. **Object Lock retention (WORM).** Governance or Compliance mode, with a default
+   retention period from one day to 100 years. In Compliance mode a locked object
+   cannot be overwritten or deleted before retention expires. Object Lock requires
+   versioning, and retention requires Object Lock.
 
-This is particularly valuable for AI workloads:
-- Training datasets can be verified before a training run (no silent corruption)
-- Model checkpoints have provenance — you can prove which dataset version produced
-  which model
-- Inference logs are tamper-evident for compliance and audit purposes
+For AI workloads this covers:
+- A training set that must stay byte-identical for the life of a model
+- Model checkpoints that cannot be overwritten by a later run
+- Inference logs held for a fixed retention period an auditor can inspect
+
+**Encryption.** Objects are encrypted at rest by the storage gateway using AES256
+(SSE-S3) and every request runs over TLS. It is always on and there is nothing to
+configure. Keys are held by the regional storage operator, and there is no
+customer-managed-key option, so if you need to hold the keys yourself, encrypt
+client-side before upload.
 
 ---
 
@@ -216,39 +229,47 @@ This is particularly valuable for AI workloads:
 
 | Plan | Price | Notes |
 |------|-------|-------|
-| Pay-as-you-go | $4.99/TB/month | No egress fees, no API request fees |
-| Free trial | $0 | 30 days, 1 TB included, no credit card required |
-| Business | Custom | 1, 3, or 5-year terms; capacity assurance; deployment SLAs |
+| Pay as you go | $4.99/TB/month | $4.99/month minimum. No egress fees, no API request fees. |
+| Free trial | $0 | 30 days, 1 TB storage + 2 TB egress, no credit card |
+| Business | Custom | Committed capacity on multi-year terms; capacity assurance; deployment SLAs |
 
-No egress fees means agent workloads that read data frequently — RAG pipelines,
-evaluation loops, inference servers pulling weights — pay only for storage, not for
+No egress fees means agent workloads that read data frequently. RAG pipelines,
+evaluation loops, inference servers pulling weights. Pay only for storage, not for
 bandwidth.
 
 ---
 
 ## S3 API compatibility
 
-Fil One implements the S3 REST API. Supported operations include:
+Fil One implements the S3 REST API. The operations below are the ones agent and
+data workloads rely on:
 
-- Bucket: CreateBucket, DeleteBucket, ListBuckets, GetBucketLocation,
-  PutBucketCors, GetBucketCors
-- Object: PutObject, GetObject, DeleteObject, HeadObject, CopyObject,
-  ListObjectsV2, ListObjectVersions
+- Object: PutObject, GetObject, DeleteObject, HeadObject, ListObjectsV2,
+  ListObjectVersions
 - Multipart: CreateMultipartUpload, UploadPart, CompleteMultipartUpload,
   AbortMultipartUpload, ListMultipartUploads
-- Presigned URLs: GET and PUT presigned URLs supported
+- Presigned URLs: GET and PUT
+- Object Lock: GetObjectLockConfiguration, PutObjectLockConfiguration,
+  GetObjectRetention
+- Bucket: ListBuckets. Create and delete a bucket from the Fil One console, or via
+  the S3 API in `us-east-1`.
+
+Behaviour differs between regions on some bucket-configuration calls, and a few
+operations are not implemented. Read the per-operation compatibility reference in
+the docs before you depend on one:
+https://docs.fil.one/reference/s3-compatibility
 
 ---
 
 ## Pages and documentation
 
-- [Homepage](https://www.fil.one) — product overview, feature comparison, pricing, FAQ
-- [Fil One for AI Agents](https://www.fil.one/lp/agents) — dedicated page for AI agent
+- [Homepage](https://www.fil.one). Product overview, feature comparison, pricing, FAQ
+- [Fil One for AI Agents](https://www.fil.one/lp/agents). Dedicated page for AI agent
   developers; covers agent storage use cases, S3 connection examples, pricing, and
   free trial details
-- [Documentation](https://docs.fil.one) — quickstart, SDK examples, API reference,
+- [Documentation](https://docs.fil.one). Quickstart, SDK examples, API reference,
   security, billing, limits
-- [Contact Sales](https://www.fil.one/contact-sales) — enterprise and high-volume
+- [Contact Sales](https://www.fil.one/contact-sales). Enterprise and high-volume
   inquiries; also at sales@fil.one
 - [Privacy Policy](https://www.fil.one/privacy)
 - [Terms of Service](https://www.fil.one/terms)

@@ -4,6 +4,7 @@ import { ArrowRight } from "@phosphor-icons/react";
 import HeroLens from "./HeroLens";
 import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 import { signupUrl } from "@/lib/console-url";
+import { PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 const HeroSection = () => {
   const h1Ref = useRef<HTMLHeadingElement>(null);
@@ -92,7 +93,7 @@ const HeroSection = () => {
               margin: 0,
             }}
           >
-            Your data, your keys, your control — for when every byte matters.
+            {PRICE_PER_TB_MONTH}. Reading your own data back costs nothing. Your S3 tools connect as they are.
           </p>
         </div>
 
@@ -135,7 +136,7 @@ const HeroSection = () => {
         >
           <img
             src={imgDashboard}
-            alt="Fil One dashboard — bucket management, storage metrics, API keys, and usage trends"
+            alt="Fil One dashboard. Bucket management, storage metrics, API keys, and usage trends"
             className="w-full h-auto block"
           />
           <div
@@ -145,7 +146,7 @@ const HeroSection = () => {
             }}
           />
         </div>
-        {/* Overlay to fade shadow into background — extends beyond container to cover side glow */}
+        {/* Overlay to fade shadow into background. Extends beyond container to cover side glow */}
         <div
           className="absolute bottom-0 pointer-events-none"
           style={{

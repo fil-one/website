@@ -96,9 +96,8 @@ const STATS = [
 const FEATURES = [
   { icon: Plug, title: "Compatibilidad inmediata con S3", desc: "La misma API, los mismos SDK y herramientas. Conecta tu flujo de trabajo a nuestro endpoint y sigue trabajando." },
   { icon: ArrowsOut, title: "Sin cargos por egress", desc: "Cada lectura es gratis, así que tu factura se mantiene plana sin importar cuánto uses el servicio." },
-  // Espacio fino antes del %, según la convención del SI y la RAE.
-  { icon: ShieldCheck, title: "Once nueves de durabilidad", desc: "99,999999999 % de durabilidad, replicada en varias ubicaciones y monitorizada permanentemente." },
-  { icon: Lock, title: "Object Lock y versionado", desc: "Modos de cumplimiento, periodos de retención y registros de auditoría a prueba de manipulaciones." },
+  { icon: ShieldCheck, title: "Respaldado por un SLA publicado", desc: "Un compromiso de disponibilidad con crédito por servicio y una página de estado pública en status.fil.one." },
+  { icon: Lock, title: "Object Lock y versionado", desc: "Modo Governance o Compliance, retención de hasta 100 años y un historial de versiones completo." },
   { icon: MapPin, title: "Tus datos nunca salen de la UE", desc: "La infraestructura de almacenamiento permanece dentro de las fronteras europeas." },
   { icon: Rocket, title: "Listo en cuestión de minutos", desc: "Genera tus claves de acceso, apunta tus herramientas a nuestro endpoint y empieza a subir datos." },
 ];
@@ -252,7 +251,7 @@ const BarcelonaLandingPageES = () => {
           headingMaxWidth={620}
           subhead={`${PRICE_PER_TB_SHORT}, sin costes por egress y listo para usar en minutos.`}
           cta={{ label: "Empieza con 30 días gratis", href: SIGNUP_URL }}
-          note="No necesitas tarjeta de crédito."
+          note="1 TB de almacenamiento y 2 TB de egress gratis durante 30 días. No necesitas tarjeta de crédito."
         />
       </main>
 
