@@ -39,13 +39,13 @@ const config: LandingPageConfig = {
   problem: {
     label: "The trap",
     heading: "High-write pipelines pay per write.",
-    sub: "A scraping pipeline writes constantly by design. At per-PUT pricing, the collection operation itself — not the dataset it produces — becomes the largest line item.",
+    sub: "A scraping pipeline writes constantly by design. At per-PUT pricing, the collection operation itself, not the dataset it produces, becomes the largest line item.",
     items: [
       {
         label: "The PUT bill",
         tone: "warning",
         catch: "1 billion writes. $5,000 in fees.",
-        body: "AWS S3 charges $0.005 per 1,000 PUTs. A pipeline writing 1 billion objects per month incurs $5,000 in PUT fees alone — before a byte of storage is billed. The collection operation is its own cost centre.",
+        body: "AWS S3 charges $0.005 per 1,000 PUTs. A pipeline writing 1 billion objects per month incurs $5,000 in PUT fees alone, before a byte of storage is billed. The collection operation is its own cost centre.",
       },
       {
         label: "The coverage decision",
@@ -85,7 +85,7 @@ const config: LandingPageConfig = {
       { provider: "Fil One", isFilOne: true, values: { rate: "$0 per request", total: "$0" } },
     ],
     footnote:
-      "Public US rate cards, Q2 2026. Storage and egress not included — request fees only. AWS: 1,000,000,000 / 1,000 × $0.005 = $5,000. Google: 1,000,000,000 / 10,000 × $0.05 = $5,000. Azure: 1,000,000,000 / 10,000 × $0.055 = $5,500.",
+      "Public US rate cards, Q2 2026. Storage and egress not included. Request fees only. AWS: 1,000,000,000 / 1,000 × $0.005 = $5,000. Google: 1,000,000,000 / 10,000 × $0.05 = $5,000. Azure: 1,000,000,000 / 10,000 × $0.055 = $5,500.",
   },
 
   features: {
@@ -116,7 +116,7 @@ const config: LandingPageConfig = {
       {
         icon: Plug,
         title: "S3-compatible, drop-in",
-        desc: "Any framework that writes files — Scrapy, Crawlee, Playwright pipelines — works with standard S3 upload APIs. Swap the endpoint.",
+        desc: "Any framework that writes files (Scrapy, Crawlee, Playwright pipelines) works with standard S3 upload APIs. Swap the endpoint.",
       },
     ],
   },

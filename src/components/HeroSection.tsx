@@ -136,7 +136,7 @@ const HeroSection = () => {
         >
           <img
             src={imgDashboard}
-            alt="Fil One dashboard — bucket management, storage metrics, API keys, and usage trends"
+            alt="Fil One dashboard. Bucket management, storage metrics, API keys, and usage trends"
             className="w-full h-auto block"
           />
           <div
@@ -146,7 +146,7 @@ const HeroSection = () => {
             }}
           />
         </div>
-        {/* Overlay to fade shadow into background — extends beyond container to cover side glow */}
+        {/* Overlay to fade shadow into background. Extends beyond container to cover side glow */}
         <div
           className="absolute bottom-0 pointer-events-none"
           style={{

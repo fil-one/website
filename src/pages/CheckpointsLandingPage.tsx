@@ -40,13 +40,13 @@ const config: LandingPageConfig = {
   problem: {
     label: "The trap",
     heading: "The bill decides which runs survive.",
-    sub: "A checkpoint is 2–10 GB. A training run has dozens of them. At hyperscaler pricing, keeping the full history of an experiment — plus reading it back for evaluation — costs more than the training compute.",
+    sub: "A checkpoint is 2–10 GB. A training run has dozens of them. At hyperscaler pricing, keeping the full history of an experiment, plus reading it back for evaluation, costs more than the training compute.",
     items: [
       {
         label: "The deletion decision",
         tone: "warning",
         catch: "Storage pressure picks which runs survive.",
-        body: "A checkpoint file runs 2–10 GB. Keep 100 runs with 10 checkpoints each and you are holding 2–10 TB. On AWS S3 that is $46–$230/month in storage alone — before a single eval read.",
+        body: "A checkpoint file runs 2–10 GB. Keep 100 runs with 10 checkpoints each and you are holding 2–10 TB. On AWS S3 that is $46–$230/month in storage alone, before a single eval read.",
       },
       {
         label: "The eval bill",
@@ -70,7 +70,7 @@ const config: LandingPageConfig = {
         Same boto3. Checkpoints that cost <span className="text-brand-500">what they weigh.</span>
       </>
     ),
-    sub: "Point your existing checkpointing code at the Fil One endpoint. Eval reads are included in flat storage — no egress line.",
+    sub: "Point your existing checkpointing code at the Fil One endpoint. Eval reads are included in flat storage. No egress line.",
     subMaxWidth: 620,
     caption: "Monthly cost for 10 TB stored, 5 TB eval reads, AWS S3 Standard vs Fil One",
     columns: [
@@ -79,10 +79,10 @@ const config: LandingPageConfig = {
     ],
     rows: [
       { provider: "AWS S3 Standard", values: { breakdown: "$230 storage + $450 egress", total: "$680/mo" } },
-      { provider: "Fil One", isFilOne: true, values: { breakdown: "10 TB × $4.99 — egress $0", total: "$49.90/mo" } },
+      { provider: "Fil One", isFilOne: true, values: { breakdown: "10 TB × $4.99. Egress $0", total: "$49.90/mo" } },
     ],
     footnote:
-      "AWS S3 Standard us-east-1 Q2 2026: $0.023/GB storage, $0.09/GB egress. Computed from stated inputs — 10,240 GB × $0.023 = $235.52 storage; 5,120 GB × $0.09 = $460.80 egress. Fil One: 10 TB × $4.99 = $49.90, egress $0.",
+      "AWS S3 Standard us-east-1 Q2 2026: $0.023/GB storage, $0.09/GB egress. Computed from stated inputs. 10,240 GB × $0.023 = $235.52 storage; 5,120 GB × $0.09 = $460.80 egress. Fil One: 10 TB × $4.99 = $49.90, egress $0.",
   },
 
   features: {
@@ -113,7 +113,7 @@ const config: LandingPageConfig = {
       {
         icon: Plug,
         title: "S3-compatible",
-        desc: "boto3, HuggingFace Hub, PyTorch Lightning checkpointing — any S3-compatible tool connects with an endpoint swap and no SDK changes.",
+        desc: "boto3, HuggingFace Hub, PyTorch Lightning checkpointing: any S3-compatible tool connects with an endpoint swap and no SDK changes.",
       },
     ],
   },

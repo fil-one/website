@@ -43,7 +43,7 @@ const config: LandingPageConfig = {
         label: "The region illusion",
         tone: "warning",
         catch: "A region setting is not the whole story.",
-        body: "Cloud providers replicate, migrate, and process data across infrastructure according to their own operational needs. An EU region bucket stays in EU storage — but the operational boundary is defined by the vendor, not you.",
+        body: "Cloud providers replicate, migrate, and process data across infrastructure according to their own operational needs. An EU region bucket stays in EU storage, but the operational boundary is defined by the vendor, not you.",
       },
       {
         label: "The exit penalty",
@@ -55,7 +55,7 @@ const config: LandingPageConfig = {
         label: "The audit assumption",
         tone: "brand",
         catch: "Compliance asks where data lives, not just where you say it does.",
-        body: "Audit and regulatory frameworks increasingly ask for a specific, documented region and a workable exit path — not a vendor SLA promise. An EU endpoint with $0 exit egress gives you both to point to.",
+        body: "Audit and regulatory frameworks increasingly ask for a specific, documented region and a workable exit path, not a vendor SLA promise. An EU endpoint with $0 exit egress gives you both to point to.",
       },
     ],
   },
@@ -67,23 +67,23 @@ const config: LandingPageConfig = {
         Control that is <span className="text-brand-500">structural, not contractual.</span>
       </>
     ),
-    sub: "An EU endpoint, a free exit, and standard S3 tooling — the concrete pieces that make control real.",
+    sub: "An EU endpoint, a free exit, and standard S3 tooling. The concrete pieces that make control real.",
     columns: 3,
     items: [
       {
         icon: ShieldCheck,
         title: "Encryption at rest and in transit",
-        desc: "TLS protects data moving to and from the endpoint, and objects are encrypted at rest by the storage gateway — always on, no configuration required.",
+        desc: "TLS protects data moving to and from the endpoint, and objects are encrypted at rest by the storage gateway, always on, no configuration required.",
       },
       {
         icon: ArrowsOut,
         title: "No exit egress",
-        desc: "$0 to move data out. Portability is not penalised. You can leave without an exit bill — which means staying is a choice, not a lock-in.",
+        desc: "$0 to move data out. Portability is not penalised. You can leave without an exit bill, which means staying is a choice, not a lock-in.",
       },
       {
         icon: Plug,
         title: "S3-compatible tooling",
-        desc: "Standard S3 API — your existing SDKs, CLIs, and audit tooling work without custom adapters. Control does not require a new stack.",
+        desc: "Standard S3 API. Your existing SDKs, CLIs, and audit tooling work without custom adapters. Control does not require a new stack.",
       },
     ],
   },

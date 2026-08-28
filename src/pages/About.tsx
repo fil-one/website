@@ -161,7 +161,7 @@ const About = () => {
           </div>
         </section>
 
-        {/* What we believe — pillars */}
+        {/* What we believe. Pillars */}
         <section className="w-full bg-white">
           <div className="flex flex-col gap-12 items-center px-5 md:px-8 py-16 md:py-24 w-full max-w-container mx-auto">
             <div className="flex flex-col gap-3 items-center text-center max-w-[480px]">
@@ -191,7 +191,7 @@ const About = () => {
           </div>
         </section>
 
-        {/* Recognition — temporarily removed; parked in src/components/AboutRecognitionSection.tsx.
+        {/* Recognition. Temporarily removed; parked in src/components/AboutRecognitionSection.tsx.
             To restore, import it and render <AboutRecognitionSection /> here. */}
 
         {/* Leadership */}

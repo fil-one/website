@@ -86,7 +86,7 @@ const config: LandingPageConfig = {
       { provider: "Fil One", isFilOne: true, values: { rate: "$0 per request", monthly: "$0" } },
     ],
     footnote:
-      "Public US rate cards, Q2 2026. Request fees only — storage and egress are separate on metered tiers and zero on Fil One. AWS: 1,000,000,000 / 1,000 × $0.005 = $5,000. Google: $0.05/10K × 1B = $5,000. Azure: $0.055/10K × 1B = $5,500.",
+      "Public US rate cards, Q2 2026. Request fees only. Storage and egress are separate on metered tiers and zero on Fil One. AWS: 1,000,000,000 / 1,000 × $0.005 = $5,000. Google: $0.05/10K × 1B = $5,000. Azure: $0.055/10K × 1B = $5,500.",
   },
 
   features: {
@@ -102,7 +102,7 @@ const config: LandingPageConfig = {
       {
         icon: Database,
         title: "No per-request fees",
-        desc: "PUT, GET, LIST, HEAD — all included in flat storage. Agents that write state every turn and read context on every call pay $0 in request fees.",
+        desc: "PUT, GET, LIST, HEAD, all included in flat storage. Agents that write state every turn and read context on every call pay $0 in request fees.",
       },
       {
         icon: ArrowsOut,
@@ -112,7 +112,7 @@ const config: LandingPageConfig = {
       {
         icon: Plug,
         title: "S3-compatible · existing tools work",
-        desc: "boto3, @aws-sdk/client-s3, LangChain S3 loaders, LlamaIndex — any tool that reads or writes S3 connects with an endpoint change. No new SDK.",
+        desc: "boto3, @aws-sdk/client-s3, LangChain S3 loaders, LlamaIndex: any tool that reads or writes S3 connects with an endpoint change. No new SDK.",
       },
       {
         icon: ChartLine,

@@ -30,7 +30,7 @@ const config: LandingPageConfig = {
         <span className="text-brand-500">the clock.</span>
       </>
     ),
-    description: `Training-data storage at ${PRICE_PER_TB_SHORT} flat. No egress on dataset reads. fsspec, PyArrow, and HuggingFace datasets work natively — change the endpoint, keep the code.`,
+    description: `Training-data storage at ${PRICE_PER_TB_SHORT} flat. No egress on dataset reads. fsspec, PyArrow, and HuggingFace datasets work natively. Change the endpoint, keep the code.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
@@ -48,7 +48,7 @@ const config: LandingPageConfig = {
         label: "The EFS tax",
         tone: "warning",
         catch: "$307/TB for in-cluster storage.",
-        body: "AWS EFS costs $0.30/GB — $307/TB — because it is optimised for latency, not cost. A 10 TB training corpus costs $3,072/month. Teams pay that to avoid the alternative: slow, metered S3.",
+        body: "AWS EFS costs $0.30/GB ($307/TB) because it is optimised for latency, not cost. A 10 TB training corpus costs $3,072/month. Teams pay that to avoid the alternative: slow, metered S3.",
       },
       {
         label: "The egress trap",
@@ -96,12 +96,12 @@ const config: LandingPageConfig = {
         Training cost that scales with <span className="text-brand-500">dataset size, not run count.</span>
       </>
     ),
-    sub: "fsspec, PyArrow, and HuggingFace datasets work natively — change the endpoint, keep the code.",
+    sub: "fsspec, PyArrow, and HuggingFace datasets work natively. Change the endpoint, keep the code.",
     items: [
       {
         icon: ChartLine,
         title: "62× cheaper than EFS",
-        desc: `AWS EFS costs $0.30/GB ($307/TB). Fil One costs ${PRICE_PER_TB_SHORT}. At 10 TB of training data, that is $3,072/month vs $50 — before a single training run reads a byte.`,
+        desc: `AWS EFS costs $0.30/GB ($307/TB). Fil One costs ${PRICE_PER_TB_SHORT}. At 10 TB of training data, that is $3,072/month vs $50, before a single training run reads a byte.`,
       },
       {
         icon: ArrowsOut,
@@ -111,7 +111,7 @@ const config: LandingPageConfig = {
       {
         icon: Plug,
         title: "fsspec / PyArrow / HuggingFace native",
-        desc: "PyTorch DataLoader, JAX, HuggingFace datasets, and PyArrow all support S3-compatible storage via fsspec. Change the endpoint — nothing else changes.",
+        desc: "PyTorch DataLoader, JAX, HuggingFace datasets, and PyArrow all support S3-compatible storage via fsspec. Change the endpoint. Nothing else changes.",
       },
       {
         icon: Database,
@@ -123,7 +123,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Run as many times as the model needs.",
-    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Point fsspec or PyArrow at the endpoint and run the training loop — the egress line will not be there.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Point fsspec or PyArrow at the endpoint and run the training loop. The egress line will not be there.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

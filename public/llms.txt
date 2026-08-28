@@ -12,17 +12,17 @@
 AI agents need durable, cost-predictable storage for the artifacts they produce and
 consume. Fil One is optimised for these workloads:
 
-- **RAG / vector store document corpus** — store and retrieve the raw documents,
+- **RAG / vector store document corpus**. Store and retrieve the raw documents,
   chunked text, or embeddings backing a retrieval-augmented generation pipeline
-- **Agent memory and state** — persist conversation history, episodic memory, task
+- **Agent memory and state**. Persist conversation history, episodic memory, task
   queues, and checkpoint files across agent restarts
-- **Model artifacts** — host fine-tuned weights, GGUF/ONNX model files, LoRA
+- **Model artifacts**. Host fine-tuned weights, GGUF/ONNX model files, LoRA
   adapters, and tokenizer configs that agents load at runtime
-- **Inference inputs and outputs** — archive prompts, completions, traces, and
+- **Inference inputs and outputs**. Archive prompts, completions, traces, and
   structured outputs for evaluation, fine-tuning, or audit
-- **Training and evaluation datasets** — store JSONL, Parquet, or HDF5 datasets;
+- **Training and evaluation datasets**. Store JSONL, Parquet, or HDF5 datasets;
   read them back at any throughput with no egress cost
-- **Tool / plugin asset storage** — back a code-interpreter sandbox, image
+- **Tool / plugin asset storage**. Back a code-interpreter sandbox, image
   generation pipeline, or document-processing tool with persistent file storage
 
 ## How to connect
@@ -127,7 +127,7 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
 
 - [Homepage](https://www.fil.one): Product overview, feature comparison, pricing, and FAQ
 - [Fil One for AI Agents](https://www.fil.one/lp/agents): Landing page for AI agent
-  developers — S3-compatible storage at $4.99/TB flat, no egress fees, free 30-day
+  developers. S3-compatible storage at $4.99/TB flat, no egress fees, free 30-day
   trial. Covers agent use cases, code examples, and pricing.
 - [Contact Sales](https://www.fil.one/contact-sales): Enterprise and high-volume inquiries;
   also reachable at sales@fil.one

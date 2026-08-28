@@ -8,7 +8,7 @@ vi.mock("@/hooks/useInView", () => ({
   useInView: () => ({ ref: { current: null as HTMLDivElement | null }, inView: true }),
 }));
 
-describe("CtaSection — analytics", () => {
+describe("CtaSection. Analytics", () => {
   let plausibleSpy: ReturnType<typeof vi.fn>;
 
   beforeEach(() => {

@@ -77,7 +77,7 @@ const Home = () => {
           />
           <DashboardPreview />
           <PressBar />
-          {/* Products section replaces the features section — this is the platform's core nav anchor */}
+          {/* Products section replaces the features section. This is the platform's core nav anchor */}
           <div ref={heroEndRef}>
             <ProductsSection />
           </div>

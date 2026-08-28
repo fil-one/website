@@ -36,13 +36,13 @@ const config: LandingPageConfig = {
   problem: {
     label: "The audit gap",
     heading: "Standard object storage asks you to trust that data hasn't been overwritten.",
-    sub: "Most object storage lets any write silently replace the previous object, with nothing kept and nothing locked. Regulated teams need controls they can show an auditor — not an assumption.",
+    sub: "Most object storage lets any write silently replace the previous object, with nothing kept and nothing locked. Regulated teams need controls they can show an auditor, not an assumption.",
     items: [
       {
         label: "Untracked changes",
         tone: "warning",
         catch: "Overwrites erase the evidence.",
-        body: "Standard S3-compatible storage lets any write silently replace the previous object. Without version history or Object Lock, there's no record of what a file looked like before the last write — and nothing stopping it from being overwritten again.",
+        body: "Standard S3-compatible storage lets any write silently replace the previous object. Without version history or Object Lock, there's no record of what a file looked like before the last write, and nothing stopping it from being overwritten again.",
       },
       {
         label: "Version accountability",
@@ -66,12 +66,12 @@ const config: LandingPageConfig = {
         Controls, <span className="text-brand-500">not just claims.</span>
       </>
     ),
-    sub: "Object Lock, version history, and encryption — the concrete pieces an audit actually asks for.",
+    sub: "Object Lock, version history, and encryption. The concrete pieces an audit actually asks for.",
     items: [
       {
         icon: Lock,
         title: "Object Lock (WORM) retention",
-        desc: "Configure retention from 1 day to 100 years in Governance or Compliance mode. Once locked, an object can't be deleted or overwritten before its retention period ends — not even by an admin key.",
+        desc: "Configure retention from 1 day to 100 years in Governance or Compliance mode. Once locked, an object can't be deleted or overwritten before its retention period ends, not even by an admin key.",
       },
       {
         icon: Database,
@@ -81,7 +81,7 @@ const config: LandingPageConfig = {
       {
         icon: Plug,
         title: "Encryption at rest and in transit",
-        desc: "TLS protects data moving to and from the endpoint, and objects are encrypted at rest by the storage gateway — always on, no configuration required.",
+        desc: "TLS protects data moving to and from the endpoint, and objects are encrypted at rest by the storage gateway, always on, no configuration required.",
       },
       {
         icon: ShieldCheck,

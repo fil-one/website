@@ -1,4 +1,4 @@
-# Fil One — Full Reference for AI Agents and Developers
+# Fil One. Full Reference for AI Agents and Developers
 
 > Fil One is the storage layer for AI agents. S3-compatible object storage built on
 > Filecoin, with no egress fees, no per-request charges, and flat pricing at
@@ -59,7 +59,7 @@ source_text = obj["Body"].read().decode()
 
 Persist episodic memory, conversation history, task queues, scratchpads, and
 structured world-state between agent runs. Fil One is a durable key-value store
-accessible from any process with S3 credentials — no database required.
+accessible from any process with S3 credentials. No database required.
 
 ```python
 import json, boto3
@@ -147,7 +147,7 @@ def load_traces_for_eval(run_id: str) -> list[dict]:
 ### 5. Training and evaluation datasets
 
 Store JSONL, Parquet, CSV, or HDF5 datasets. Stream them back to training jobs at
-any throughput — no egress fee means iterating over datasets repeatedly costs only
+any throughput. No egress fee means iterating over datasets repeatedly costs only
 the storage price.
 
 ```python
@@ -233,8 +233,8 @@ client-side before upload.
 | Free trial | $0 | 30 days, 1 TB storage + 2 TB egress, no credit card |
 | Business | Custom | Committed capacity on multi-year terms; capacity assurance; deployment SLAs |
 
-No egress fees means agent workloads that read data frequently — RAG pipelines,
-evaluation loops, inference servers pulling weights — pay only for storage, not for
+No egress fees means agent workloads that read data frequently. RAG pipelines,
+evaluation loops, inference servers pulling weights. Pay only for storage, not for
 bandwidth.
 
 ---
@@ -263,13 +263,13 @@ https://docs.fil.one/reference/s3-compatibility
 
 ## Pages and documentation
 
-- [Homepage](https://www.fil.one) — product overview, feature comparison, pricing, FAQ
-- [Fil One for AI Agents](https://www.fil.one/lp/agents) — dedicated page for AI agent
+- [Homepage](https://www.fil.one). Product overview, feature comparison, pricing, FAQ
+- [Fil One for AI Agents](https://www.fil.one/lp/agents). Dedicated page for AI agent
   developers; covers agent storage use cases, S3 connection examples, pricing, and
   free trial details
-- [Documentation](https://docs.fil.one) — quickstart, SDK examples, API reference,
+- [Documentation](https://docs.fil.one). Quickstart, SDK examples, API reference,
   security, billing, limits
-- [Contact Sales](https://www.fil.one/contact-sales) — enterprise and high-volume
+- [Contact Sales](https://www.fil.one/contact-sales). Enterprise and high-volume
   inquiries; also at sales@fil.one
 - [Privacy Policy](https://www.fil.one/privacy)
 - [Terms of Service](https://www.fil.one/terms)

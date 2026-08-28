@@ -191,7 +191,7 @@ async function prerender() {
   const templatePath = resolve(rootDir, "dist/index.html");
   if (!existsSync(templatePath)) {
     throw new Error(
-      "dist/index.html not found — run `vite build` before the prerender script."
+      "dist/index.html not found. Run `vite build` before the prerender script."
     );
   }
   const template = readFileSync(templatePath, "utf-8");
@@ -273,7 +273,7 @@ async function prerender() {
       if (inlineFonts > 0) {
         failures.push({
           route,
-          error: `${inlineFonts} inline font-family declaration(s) in <nav>/<footer> — use font-sans / font-mono instead`,
+          error: `${inlineFonts} inline font-family declaration(s) in <nav>/<footer>. Use font-sans / font-mono instead`,
         });
       }
 
@@ -284,7 +284,7 @@ async function prerender() {
       // falls back to the SPA shell (no prerendered HTML → generic title +
       // homepage canonical), which is exactly how the original broken-LP
       // incident shipped. Better to break the build than deploy a broken page.
-      console.error(`  ✗ ${route} — ${err.message}`);
+      console.error(`  ✗ ${route}. ${err.message}`);
       failures.push({ route, error: err.message });
     }
   }

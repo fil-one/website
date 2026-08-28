@@ -15,7 +15,7 @@ const TAGLINE = "No credit card required · No retrieval fees · Connects in min
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Know your archive works before you need it",
-    description: `Flat ${PRICE_PER_TB_SHORT} archival storage with no retrieval fees or egress. Test a restore any time — the bill doesn't change.`,
+    description: `Flat ${PRICE_PER_TB_SHORT} archival storage with no retrieval fees or egress. Test a restore any time. The bill doesn't change.`,
     canonical: "https://www.fil.one/lp/archival",
   },
 
@@ -30,7 +30,7 @@ const config: LandingPageConfig = {
         <span className="text-brand-500">before you need it.</span>
       </>
     ),
-    description: `Flat ${PRICE_PER_TB_SHORT}. No egress, no retrieval tax — so testing a restore doesn't cost you anything extra.`,
+    description: `Flat ${PRICE_PER_TB_SHORT}. No egress, no retrieval tax, so testing a restore doesn't cost you anything extra.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
@@ -47,19 +47,19 @@ const config: LandingPageConfig = {
         label: "The untested archive",
         tone: "warning",
         catch: "Nobody tests a restore that costs money.",
-        body: "Retrieval fees turn a routine restore drill into a budget request. Most archives are never actually restored until the day they're needed — by then, a broken export script or a misconfigured lifecycle rule is a crisis, not a fire drill.",
+        body: "Retrieval fees turn a routine restore drill into a budget request. Most archives are never actually restored until the day they're needed. By then, a broken export script or a misconfigured lifecycle rule is a crisis, not a fire drill.",
       },
       {
         label: "The retrieval penalty",
         tone: "danger",
         catch: "Testing your archive costs money.",
-        body: "Glacier-tier storage charges per-GB retrieval plus egress on every restore. A single annual test of 10 TB costs over $1,000 on AWS. Teams stop testing their archives — not because they do not need to, but because the bill makes them.",
+        body: "Glacier-tier storage charges per-GB retrieval plus egress on every restore. A single annual test of 10 TB costs over $1,000 on AWS. Teams stop testing their archives, not because they do not need to, but because the bill makes them.",
       },
       {
         label: "The day-you-need-it cost",
         tone: "brand",
         catch: "Disaster recovery events are expensive on metered tiers.",
-        body: "A large restore event — the one you actually need the archive for — is a large retrieval and egress event. The cost arrives at the worst possible time. A flat-rate archive has no such moment.",
+        body: "A large restore event, the one you actually need the archive for, is a large retrieval and egress event. The cost arrives at the worst possible time. A flat-rate archive has no such moment.",
       },
     ],
   },
@@ -102,7 +102,7 @@ const config: LandingPageConfig = {
       {
         icon: ShieldCheck,
         title: "No archive-tier wait",
-        desc: "Objects are readable the instant you request them — no rehydration delay like Glacier's retrieval tiers. A restore starts immediately.",
+        desc: "Objects are readable the instant you request them. No rehydration delay like Glacier's retrieval tiers. A restore starts immediately.",
       },
       {
         icon: ArrowsOut,
@@ -124,7 +124,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "An archive you can actually test.",
-    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Write your archive and restore it — at zero retrieval cost.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Write your archive and restore it, at zero retrieval cost.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

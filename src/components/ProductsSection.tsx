@@ -51,7 +51,7 @@ const ProductsSection = () => {
           subtitle="Storage is the foundation. Bucket Intelligence and AI Agent Toolkit will soon connect directly to your buckets, no extra infrastructure needed."
         />
 
-        {/* Foundation card — Object Storage */}
+        {/* Foundation card. Object Storage */}
         <div
           ref={storageRef}
           className={`w-full reveal${storageInView ? " in-view" : ""}`}

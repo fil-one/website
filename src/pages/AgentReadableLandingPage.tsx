@@ -20,7 +20,7 @@ const FEATURES = [
   { icon: FileText, title: "Machine-readable llms.txt", desc: "Pricing, endpoint, and S3 compatibility are published in a structured llms.txt at a stable URL. An agent fetches one file and has the full picture." },
   { icon: ChartLine, title: "One rate, no tiers", desc: `${PRICE_PER_TB_MONTH}. No per-GB-vs-per-TB ambiguity, no tiered egress table, no request classes to reconcile. A single number an agent can compute against.` },
   { icon: Plug, title: "Compatibility, per operation", desc: "The API surface an agent already knows, with a published matrix stating what each operation does in each region. No PDF to open, no parity left to guess at." },
-  { icon: MagnifyingGlass, title: "No gated pricing", desc: "The price is on the page and in llms.txt — not behind a 'contact sales' form. An agent evaluating vendors never hits a wall where the number should be." },
+  { icon: MagnifyingGlass, title: "No gated pricing", desc: "The price is on the page and in llms.txt, not behind a 'contact sales' form. An agent evaluating vendors never hits a wall where the number should be." },
 ];
 
 const PROBLEM_ITEMS = [
@@ -28,7 +28,7 @@ const PROBLEM_ITEMS = [
     label: "Gated behind a form",
     tone: "warning" as const,
     catch: "The price is a sales motion, not a fact.",
-    body: "'Contact sales for pricing' is a dead end for an agent. It cannot fill a lead form or wait for a callback, so the vendor is silently dropped from the shortlist — not on merit, but on legibility.",
+    body: "'Contact sales for pricing' is a dead end for an agent. It cannot fill a lead form or wait for a callback, so the vendor is silently dropped from the shortlist, not on merit, but on legibility.",
   },
   {
     label: "Ambiguous units",
@@ -48,7 +48,7 @@ const LLMS_TXT = `$ curl -s https://www.fil.one/llms.txt
 
 ## Pricing
 - Pay as you go: ${PRICE_PER_TB_MONTH} ($4.99/mo minimum)
-  — no egress fees, no API request fees
+ . No egress fees, no API request fees
 - Free trial: 30 days, 1 TB storage and 2 TB egress included, no credit card
 
 ## How to connect
@@ -119,7 +119,7 @@ const AgentReadableLandingPage = () => {
           </div>
         </section>
 
-        {/* ── Proof — llms.txt ─────────────────────────────────────────────── */}
+        {/* ── Proof. Llms.txt ─────────────────────────────────────────────── */}
         <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-white">
           <div
             ref={proofRef}

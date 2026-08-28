@@ -20,7 +20,7 @@ const DashboardPreview = () => (
       >
         <img
           src={imgDashboard}
-          alt="Fil One platform — object storage, RAG pipeline, and AI agent toolkit"
+          alt="Fil One platform. Object storage, RAG pipeline, and AI agent toolkit"
           className="w-full h-auto block"
         />
         <div

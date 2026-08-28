@@ -13,7 +13,7 @@ const TAGLINE = "Enterprise and embedding terms available · Contact-led";
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Go global. Skip the multi-year build.",
-    description: `Embed S3-compatible object storage into your product. US and EU regions, SLA-backed, ${PRICE_PER_TB_SHORT} flat. No capex, no infrastructure build — contact for enterprise and embedding terms.`,
+    description: `Embed S3-compatible object storage into your product. US and EU regions, SLA-backed, ${PRICE_PER_TB_SHORT} flat. No capex, no infrastructure build. Contact for enterprise and embedding terms.`,
     canonical: "https://www.fil.one/lp/go-global",
   },
 
@@ -28,7 +28,7 @@ const config: LandingPageConfig = {
         <span className="text-brand-500">Skip the multi-year build.</span>
       </>
     ),
-    description: `Embed S3-compatible object storage into your product. US and EU regions, SLA-backed, ${PRICE_PER_TB_SHORT} flat. Your customers get reliable storage — you skip the infrastructure capex.`,
+    description: `Embed S3-compatible object storage into your product. US and EU regions, SLA-backed, ${PRICE_PER_TB_SHORT} flat. Your customers get reliable storage. You skip the infrastructure capex.`,
     ctas: [
       { label: "Talk to our team", href: SALES_URL, variant: "primary" },
       { label: "Evaluate the API", href: signupUrl(), variant: "secondary" },
@@ -94,7 +94,7 @@ const config: LandingPageConfig = {
         Storage that your <span className="text-brand-500">customers already know how to use.</span>
       </>
     ),
-    sub: "S3-compatible, no egress, and enterprise terms — built to embed.",
+    sub: "S3-compatible, no egress, and enterprise terms. Built to embed.",
     items: [
       {
         icon: Plug,
@@ -114,7 +114,7 @@ const config: LandingPageConfig = {
       {
         icon: ChartLine,
         title: "Flat pricing that scales linearly",
-        desc: `${PRICE_PER_TB_SHORT} regardless of volume. At 1 PB, that is $4,990/month — a number you can build a product margin on. No tier waterfall to model.`,
+        desc: `${PRICE_PER_TB_SHORT} regardless of volume. At 1 PB, that is $4,990/month. A number you can build a product margin on. No tier waterfall to model.`,
       },
     ],
   },

@@ -15,7 +15,7 @@ const DRIFT_SPEED     = 0.00022;// radians/ms for autonomous drift
 const FOLLOW_LERP     = 0.07;   // mouse-follow smoothing factor
 const DRIFT_RADIUS_X  = 0.18;   // drift ellipse half-width (fraction of canvas)
 const DRIFT_RADIUS_Y  = 0.18;   // drift ellipse half-height
-const BOTTOM_PAD      = 0.10;   // extra canvas height below glyph — white space so CLAMP_TO_EDGE never repeats a descender pixel
+const BOTTOM_PAD      = 0.10;   // extra canvas height below glyph. White space so CLAMP_TO_EDGE never repeats a descender pixel
 const SAFE_OVERFLOW   = 18;     // max CSS px the canvas may extend below h1
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -39,7 +39,7 @@ const FRAG_TEMPLATE = /* glsl */`
 
   uniform sampler2D u_tex;
   uniform vec2      u_res;       // canvas physical size (px)
-  uniform vec2      u_center;    // lens centre in UV [0,1] — WebGL orientation
+  uniform vec2      u_center;    // lens centre in UV [0,1]. WebGL orientation
   uniform float     u_radius;    // lens radius in UV (fraction of width)
   uniform float     u_refr;      // refraction strength
   uniform float     u_blur;      // blur spread in px

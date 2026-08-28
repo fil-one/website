@@ -92,22 +92,22 @@ const StorageProductPage = () => {
           />
         </div>
 
-        {/* Features — what it does */}
+        {/* Features. What it does */}
         <UseCasesSection heading="S3 storage made simple" />
 
-        {/* Integrations — works with your existing stack */}
+        {/* Integrations. Works with your existing stack */}
         <IntegrationsSection tone="grey" />
 
-        {/* Use cases — what you build with it */}
+        {/* Use cases. What you build with it */}
         <StorageUseCasesSection />
 
-        {/* Comparison — how it stacks up */}
+        {/* Comparison. How it stacks up */}
         <ComparisonSection bordered />
 
-        {/* Pricing teaser — the savings payoff */}
+        {/* Pricing teaser. The savings payoff */}
         <PricingTeaserSection />
 
-        {/* FAQ — objection handling, right before the CTA */}
+        {/* FAQ. Objection handling, right before the CTA */}
         <FaqSection include={[
           "Is Fil One hot, warm, or cold storage? Is it like Glacier?",
           "How do I stop data from being altered or deleted?",

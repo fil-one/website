@@ -210,7 +210,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
 
             {/* Footnote */}
             <p className="mt-4 px-4" style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12, color: "#71717A" }}>
-              — Possible, but significantly more expensive at scale.
+             . Possible, but significantly more expensive at scale.
             </p>
           </div>
         </div>
@@ -223,7 +223,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
           className="min-[960px]:hidden grid"
           style={{ gridTemplateColumns: "minmax(100px, 2fr) 1fr 1fr 1fr 1fr" }}
         >
-          {/* Column headers — display:contents row so grid layout is preserved */}
+          {/* Column headers. Display:contents row so grid layout is preserved */}
           <div role="row" style={{ display: "contents" }}>
             <div role="columnheader" className="pr-2 py-4" aria-label="Feature" />
             <div role="columnheader" className="px-2 py-4 flex items-center justify-center">
@@ -244,7 +244,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
             </div>
           </div>
 
-          {/* Data rows — display:contents makes wrappers invisible to the grid */}
+          {/* Data rows. Display:contents makes wrappers invisible to the grid */}
           {comparisonRows.map((row, i) => {
             const isLast = i === comparisonRows.length - 1;
             return (
@@ -281,7 +281,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
         {/* Footnote + CTA (mobile) */}
         <div className="min-[960px]:hidden mt-4 flex flex-col gap-4">
           <p style={{ fontFamily: "'Funnel Sans', sans-serif", fontSize: 12, color: "#71717A" }}>
-            — Possible, but significantly more expensive at scale.
+           . Possible, but significantly more expensive at scale.
           </p>
           <div className="flex justify-center">
             <a href={signupUrl()} className="btn-primary">

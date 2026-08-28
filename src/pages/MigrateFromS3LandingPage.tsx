@@ -60,7 +60,7 @@ const FEATURES = [
   },
 ];
 
-const BOTO3_CODE = `# Before — AWS S3
+const BOTO3_CODE = `# Before. AWS S3
 s3 = boto3.client(
     "s3",
     region_name="us-east-1",
@@ -76,7 +76,7 @@ s3 = boto3.client(
     config=Config(s3={"addressing_style": "path"}),  # required
 )`;
 
-const NODE_CODE = `// Before — AWS S3
+const NODE_CODE = `// Before. AWS S3
 const s3 = new S3Client({ region: "us-east-1" });
 
 // After · Fil One
@@ -138,7 +138,7 @@ const MigrateFromS3LandingPage = () => {
           tagline={TAGLINE}
         />
 
-        {/* ── Code block — the endpoint swap ──────────────────────────────── */}
+        {/* ── Code block. The endpoint swap ──────────────────────────────── */}
         <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-zinc-50">
           <div
             ref={codeRef}
@@ -189,7 +189,7 @@ const MigrateFromS3LandingPage = () => {
               columns={PRICING_COLUMNS}
               rows={PRICING_ROWS}
               caption="Monthly cost for 10 TB stored, 10 TB read, AWS S3 Standard vs Fil One"
-              footnote="AWS S3 Standard us-east-1 Q2 2026: $0.023/GB storage, $0.09/GB internet egress, $0.0004/1K GET. Computed from stated inputs — 10,240 GB × $0.023 = $235.52 storage; 10,240 GB × $0.09 = $921.60 egress; 1M × $0.0004/1K = $0.40 ops. Fil One: 10 TB × $4.99 = $49.90, egress $0, ops $0."
+              footnote="AWS S3 Standard us-east-1 Q2 2026: $0.023/GB storage, $0.09/GB internet egress, $0.0004/1K GET. Computed from stated inputs. 10,240 GB × $0.023 = $235.52 storage; 10,240 GB × $0.09 = $921.60 egress; 1M × $0.0004/1K = $0.40 ops. Fil One: 10 TB × $4.99 = $49.90, egress $0, ops $0."
             />
           </div>
         </section>

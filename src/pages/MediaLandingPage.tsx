@@ -42,7 +42,7 @@ const config: LandingPageConfig = {
   problem: {
     label: "The trap",
     heading: "Storage is cheap. Delivery is the bill.",
-    sub: "Media storage pricing looks manageable until someone streams it. The egress line grows proportionally to usage — exactly the direction the business wants to go.",
+    sub: "Media storage pricing looks manageable until someone streams it. The egress line grows proportionally to usage. Exactly the direction the business wants to go.",
     items: [
       {
         label: "The storage illusion",
@@ -54,7 +54,7 @@ const config: LandingPageConfig = {
         label: "The usage trap",
         tone: "danger",
         catch: "More viewers means a higher storage bill.",
-        body: "Egress fees scale with audience. A viral clip, a successful release, a live event — the moments that make media valuable are the moments the storage bill peaks. The business model works against itself.",
+        body: "Egress fees scale with audience. A viral clip, a successful release, a live event. The moments that make media valuable are the moments the storage bill peaks. The business model works against itself.",
       },
       {
         label: "The margin problem",
@@ -89,7 +89,7 @@ const config: LandingPageConfig = {
       { provider: "Fil One", isFilOne: true, values: { storage: "$50", egress: "$0", total: "$50" } },
     ],
     footnote:
-      "AWS S3 Standard us-east-1, GCP Standard, Azure Blob Hot East US — public US rate cards Q2 2026. AWS storage: 10,240 GB × $0.023 = $235.52. AWS egress 50 TB: 10,240 GB × $0.09 + 40,960 GB × $0.085 = $4,403.20. GCP egress 50 TB: 10,240 × $0.12 + 40,960 × $0.11 = $5,734.40. Azure egress 50 TB: 10,240 × $0.087 + 40,960 × $0.083 = $4,290.56. Wasabi $6.99/TB. Backblaze B2 $6/TB. Fil One $4.99/TB, $0 egress.",
+      "AWS S3 Standard us-east-1, GCP Standard, Azure Blob Hot East US. Public US rate cards Q2 2026. AWS storage: 10,240 GB × $0.023 = $235.52. AWS egress 50 TB: 10,240 GB × $0.09 + 40,960 GB × $0.085 = $4,403.20. GCP egress 50 TB: 10,240 × $0.12 + 40,960 × $0.11 = $5,734.40. Azure egress 50 TB: 10,240 × $0.087 + 40,960 × $0.083 = $4,290.56. Wasabi $6.99/TB. Backblaze B2 $6/TB. Fil One $4.99/TB, $0 egress.",
   },
 
   features: {

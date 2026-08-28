@@ -10,7 +10,7 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-# AI crawlers — explicitly allowed
+# AI crawlers. Explicitly allowed
 User-agent: GPTBot
 Allow: /
 

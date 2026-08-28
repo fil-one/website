@@ -315,7 +315,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
               </NavigationMenuPrimitive.List>
 
-              {/* Viewport — renders the active dropdown content */}
+              {/* Viewport. Renders the active dropdown content */}
               <div className="absolute top-[calc(100%+6px)] left-0 z-[100]">
                 <NavigationMenuPrimitive.Viewport className="NavigationMenuViewport overflow-hidden rounded-xl border border-black/[0.08] bg-white shadow-dropdown" />
               </div>

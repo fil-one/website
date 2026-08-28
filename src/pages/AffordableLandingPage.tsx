@@ -54,13 +54,13 @@ const config: LandingPageConfig = {
         label: "Egress surprise",
         tone: "danger",
         catch: "The biggest line comes from reading your data.",
-        body: "At $0.09/GB, downloading 2 TB from AWS costs $184 — 78% of the $236 storage charge for that 10 TB dataset. The bill for 'storing' data is smaller than the bill for using it.",
+        body: "At $0.09/GB, downloading 2 TB from AWS costs $184. 78% of the $236 storage charge for that 10 TB dataset. The bill for 'storing' data is smaller than the bill for using it.",
       },
       {
         label: "The switch friction",
         tone: "brand",
         catch: "Migration looks hard. It isn't.",
-        body: "Teams stay on expensive storage because switching seems like a project. Fil One implements the same S3 API — any tool that writes S3 today connects with a one-line config change.",
+        body: "Teams stay on expensive storage because switching seems like a project. Fil One implements the same S3 API, so any tool that writes S3 today connects with a one-line config change.",
       },
     ],
   },
@@ -109,7 +109,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "No egress fees",
-        desc: "Reads are included in flat storage. Download your own data as many times as you need — $0 in egress.",
+        desc: "Reads are included in flat storage. Download your own data as many times as you need. $0 in egress.",
       },
       {
         icon: Plug,

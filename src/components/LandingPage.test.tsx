@@ -84,7 +84,7 @@ const surfaces = (config: LandingPageConfig) => {
     .map((s) => (s.className.includes("bg-zinc-50") ? "grey" : "white"));
 };
 
-describe("LandingPage — surface alternation", () => {
+describe("LandingPage. Surface alternation", () => {
   it("alternates grey/white starting grey, with the banner matching the section above it", () => {
     expect(
       surfaces({
@@ -118,7 +118,7 @@ describe("LandingPage — surface alternation", () => {
   });
 });
 
-describe("LandingPage — optional sections", () => {
+describe("LandingPage. Optional sections", () => {
   it("omits every content section the config leaves out", () => {
     const { container } = render(
       <MemoryRouter>

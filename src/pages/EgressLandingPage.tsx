@@ -222,7 +222,7 @@ const config: LandingPageConfig = {
     valueSize: "lg",
     items: [
       { icon: ArrowsOut, label: "Egress", value: "$0", note: "Read as often as you want." },
-      { icon: ChartLine, label: "Per-request fees", value: "$0", note: "PUT, GET, LIST — all included." },
+      { icon: ChartLine, label: "Per-request fees", value: "$0", note: "PUT, GET, LIST, all included." },
       { icon: Plug, label: "S3 compatibility", value: "Drop-in", note: "Point your SDK at the endpoint." },
     ],
   },

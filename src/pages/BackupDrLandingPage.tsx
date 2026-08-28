@@ -48,7 +48,7 @@ const config: LandingPageConfig = {
         label: "Hot tiers",
         tone: "brand",
         catch: "Restore costs the same as everyday reads.",
-        body: "S3 Standard restores instantly — and bills $90 per TB on the way out. A full-region restore on a 50 TB workload is several thousand dollars in egress alone, on top of the monthly storage line that was already the largest in your S3 invoice.",
+        body: "S3 Standard restores instantly, and bills $90 per TB on the way out. A full-region restore on a 50 TB workload is several thousand dollars in egress alone, on top of the monthly storage line that was already the largest in your S3 invoice.",
       },
       {
         label: "Untested DR plans",
@@ -102,7 +102,7 @@ const config: LandingPageConfig = {
       },
     ],
     footnote:
-      "AWS S3 Standard, Glacier Instant Retrieval, and Deep Archive rates from public US Q2 2026 rate cards. Restore line combines retrieval + egress for one 5 TB pull. Wasabi pricing assumes 90-day minimum retention met. Fil One is a flat-rate hot tier — no separate restore line.",
+      "AWS S3 Standard, Glacier Instant Retrieval, and Deep Archive rates from public US Q2 2026 rate cards. Restore line combines retrieval + egress for one 5 TB pull. Wasabi pricing assumes 90-day minimum retention met. Fil One is a flat-rate hot tier. No separate restore line.",
   },
 
   workloads: {
@@ -114,7 +114,7 @@ const config: LandingPageConfig = {
       {
         tag: "Full-region restore",
         title: "Recover a workload when the primary is gone",
-        desc: "Pull every byte back. Standard S3 GET. No retrieval line item, no egress charge — the bill for the worst day is the same as the bill for any other day.",
+        desc: "Pull every byte back. Standard S3 GET. No retrieval line item, no egress charge. The bill for the worst day is the same as the bill for any other day.",
         stats: [
           {
             label: "5 TB full restore",
@@ -130,7 +130,7 @@ const config: LandingPageConfig = {
       {
         tag: "Quarterly DR drills",
         title: "Test the restore plan as often as it should be tested",
-        desc: "Most DR plans go untested because each drill costs real money. Free retrieval means quarterly — or monthly — drills cost what they should: nothing.",
+        desc: "Most DR plans go untested because each drill costs real money. Free retrieval means quarterly, or monthly, drills cost what they should: nothing.",
         stats: [
           {
             label: "Cost per drill (1 TB pull)",
@@ -153,7 +153,7 @@ const config: LandingPageConfig = {
       {
         tag: "Granular file-level recovery",
         title: "Pull back a single file without a retrieval ticket",
-        desc: "Tape and archive tiers tax small restores the same as full ones. Hot, S3-compatible storage means a single file recovery is a single GET — for $0.",
+        desc: "Tape and archive tiers tax small restores the same as full ones. Hot, S3-compatible storage means a single file recovery is a single GET. For $0.",
         stats: [
           {
             label: "1 GB single-file restore",

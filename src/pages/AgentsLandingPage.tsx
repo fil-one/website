@@ -161,7 +161,7 @@ const USE_CASES = [
   {
     icon: TrendUp,
     title: "A queryable knowledge base over your buckets",
-    description: "Point a retrieval agent at a bucket and query it in plain language. Files index as they land; semantic search runs on your own model keys. Store the whole corpus at volume — flat pricing makes a large document set a storage cost, not a per-query tax.",
+    description: "Point a retrieval agent at a bucket and query it in plain language. Files index as they land; semantic search runs on your own model keys. Store the whole corpus at volume. Flat pricing makes a large document set a storage cost, not a per-query tax.",
     badge: "RAG Coming soon",
     waitlist: "/waitlist/bucket-intelligence",
   },
@@ -307,12 +307,12 @@ const AgentsLandingPage = () => {
                       {PRICE_DISPLAY}
                     </span>
                     <span className="mt-0.5 font-sans text-[12.5px] leading-[1.5] text-zinc-600">
-                      storage only — requests and egress included
+                      storage only. Requests and egress included
                     </span>
                   </div>
                 </div>
 
-                {/* CTA row — aligned to Fil One column */}
+                {/* CTA row. Aligned to Fil One column */}
                 <div className="grid grid-cols-2 border-t border-brand/10">
                   <div className="border-r border-brand/10" />
                   <div className="p-6">
@@ -458,7 +458,7 @@ const AgentsLandingPage = () => {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-stretch">
 
-              {/* Left: pricing card — stretches to match right column height */}
+              {/* Left: pricing card. Stretches to match right column height */}
               <div className="flex flex-col items-center justify-center gap-8 rounded-3xl border border-brand/20 bg-brand-50 px-8 py-14 text-center">
                 <div className="flex flex-col items-center gap-2">
                   <span className="font-display font-medium text-[clamp(48px,7vw,72px)] leading-none tracking-[-0.03em] text-brand-600">

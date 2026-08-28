@@ -52,7 +52,7 @@ const HeroGridDots = () => {
       // The SVG grid uses backgroundPosition:"center top"
       // so intersection columns are offset by (width % GRID) / 2
       const offsetX = (canvasW % GRID) / 2;
-      const offsetY = 0; // "top" — starts flush
+      const offsetY = 0; // "top". Starts flush
 
       const cols = Math.floor((canvasW - offsetX) / GRID) + 1;
       const rows = Math.floor(canvasH / GRID) + 1;

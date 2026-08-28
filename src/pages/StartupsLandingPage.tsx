@@ -39,7 +39,7 @@ const config: LandingPageConfig = {
   problem: {
     label: "The trap",
     heading: "The cloud bill scales with success.",
-    sub: "Hyperscaler pricing was written assuming the buyer is a hyperscaler customer. For a five-person startup, that means a bill that compounds with growth in three directions at once — storage tier, egress, and per-request fees — none of which line up with your revenue curve.",
+    sub: "Hyperscaler pricing was written assuming the buyer is a hyperscaler customer. For a five-person startup, that means a bill that compounds with growth in three directions at once: storage tier, egress, and per-request fees, none of which line up with your revenue curve.",
     items: [
       {
         label: "Month 1",
@@ -83,7 +83,7 @@ const config: LandingPageConfig = {
       { provider: "Fil One", isFilOne: true, values: { t1: "$5", t10: "$50", t50: "$250", t100: "$499" } },
     ],
     footnote:
-      "AWS S3 Standard storage tiers and egress rates from public US Q2 2026 rate card. Egress estimated at 50% of stored volume read per month — conservative for an active product. Per-request fees not included.",
+      "AWS S3 Standard storage tiers and egress rates from public US Q2 2026 rate card. Egress estimated at 50% of stored volume read per month. Conservative for an active product. Per-request fees not included.",
   },
 
   features: {
@@ -114,7 +114,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "No egress on customer reads",
-        desc: "Customer downloads, embedded media, dashboard fetches, mobile app pulls — every read is included.",
+        desc: "Customer downloads, embedded media, dashboard fetches, mobile app pulls. Every read is included.",
       },
     ],
   },

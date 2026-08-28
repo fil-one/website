@@ -129,7 +129,7 @@ const AiCapabilitiesSection = () => {
                   color: "#71717A",
                 }}
               >
-                Turn any bucket into a queryable knowledge base. Files get indexed automatically as they arrive — ask questions in plain language, powered by your own LLM keys.
+                Turn any bucket into a queryable knowledge base. Files get indexed automatically as they arrive. Ask questions in plain language, powered by your own LLM keys.
               </p>
             </div>
 
@@ -266,7 +266,7 @@ const AiCapabilitiesSection = () => {
                   color: "#71717A",
                 }}
               >
-                Plug Fil One into AI assistants and automation tools. Connect Claude, Cursor, Zapier, and 10+ more integrations — your agent data stays in your buckets, not theirs.
+                Plug Fil One into AI assistants and automation tools. Connect Claude, Cursor, Zapier, and 10+ more integrations. Your agent data stays in your buckets, not theirs.
               </p>
             </div>
 

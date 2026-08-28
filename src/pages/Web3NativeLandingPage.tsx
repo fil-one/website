@@ -25,7 +25,7 @@ const config: LandingPageConfig = {
         <span className="text-brand-500">to end up fully dependent on Amazon.</span>
       </>
     ),
-    description: `S3-compatible object storage built on Filecoin infrastructure. No egress, no lock-in — your existing tools connect today. ${PRICE_PER_TB_SHORT} flat.`,
+    description: `S3-compatible object storage built on Filecoin infrastructure. No egress, no lock-in. Your existing tools connect today. ${PRICE_PER_TB_SHORT} flat.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
       { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
@@ -43,7 +43,7 @@ const config: LandingPageConfig = {
         label: "The integration tax",
         tone: "warning",
         catch: "Non-S3 storage breaks the data stack.",
-        body: "Your analytics pipeline uses PyArrow, DuckDB, and Spark — all of which read S3. The moment decentralized storage requires a different API, you're rewriting tooling instead of building product. Teams choose AWS S3 to avoid the rewrite.",
+        body: "Your analytics pipeline uses PyArrow, DuckDB, and Spark, all of which read S3. The moment decentralized storage requires a different API, you're rewriting tooling instead of building product. Teams choose AWS S3 to avoid the rewrite.",
       },
       {
         label: "The S3 dependency",
@@ -72,12 +72,12 @@ const config: LandingPageConfig = {
       {
         icon: Plug,
         title: "S3-compatible · existing tools work",
-        desc: "boto3, aws-sdk, rclone, DuckDB, PyArrow fsspec — any tool that reads or writes S3 connects with an endpoint change. No new SDK, no wrapper library.",
+        desc: "boto3, aws-sdk, rclone, DuckDB, PyArrow fsspec: any tool that reads or writes S3 connects with an endpoint change. No new SDK, no wrapper library.",
       },
       {
         icon: Lock,
         title: "Built on Filecoin infrastructure",
-        desc: "S3-compatible object storage built on Filecoin infrastructure — not a repackaged hyperscaler bucket. Your data lives on the same network your product is built around.",
+        desc: "S3-compatible object storage built on Filecoin infrastructure, not a repackaged hyperscaler bucket. Your data lives on the same network your product is built around.",
       },
       {
         icon: ArrowsOut,

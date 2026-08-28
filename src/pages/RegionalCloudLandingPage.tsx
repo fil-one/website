@@ -36,7 +36,7 @@ const config: LandingPageConfig = {
   problem: {
     label: "Build vs buy",
     heading: "Storage infrastructure is a capex commitment, not a feature.",
-    sub: "Building durable, S3-compatible object storage from scratch requires hardware capex, operational headcount, and years of iteration. Partners who embed Fil One skip that — and launch with a production-grade storage layer on day one.",
+    sub: "Building durable, S3-compatible object storage from scratch requires hardware capex, operational headcount, and years of iteration. Partners who embed Fil One skip that, and launch with a production-grade storage layer on day one.",
     items: [
       {
         label: "The build cost",
@@ -66,12 +66,12 @@ const config: LandingPageConfig = {
         What your cloud <span className="text-brand-500">runs on.</span>
       </>
     ),
-    sub: "SLA-backed capacity, full S3 compatibility, and flat pricing — the storage layer your customers see is standard S3, no custom integration required.",
+    sub: "SLA-backed capacity, full S3 compatibility, and flat pricing. The storage layer your customers see is standard S3, no custom integration required.",
     items: [
       {
         icon: Plug,
         title: "S3-compatible API",
-        desc: "Your customers use standard S3 tooling — the same SDKs, CLIs, and integrations they already run. No custom adapters.",
+        desc: "Your customers use standard S3 tooling. The same SDKs, CLIs, and integrations they already run. No custom adapters.",
       },
       {
         icon: ShieldCheck,
@@ -81,7 +81,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "No egress penalty",
-        desc: "Your customers move data in and out without egress fees. The cost model does not penalise usage — predictable for them and for you.",
+        desc: "Your customers move data in and out without egress fees. The cost model does not penalise usage. Predictable for them and for you.",
       },
       {
         icon: ChartLine,
