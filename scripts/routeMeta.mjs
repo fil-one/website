@@ -25,7 +25,7 @@ export const ROUTE_META = {
   "/": {
     title: "Fil One | S3 object storage built for the AI era",
     description:
-      `S3-compatible object storage on Filecoin. ${PRICE_PER_TB_MONTH}, no egress fees, 11 nines durability, proven daily.`,
+      `S3-compatible object storage on Filecoin. ${PRICE_PER_TB_MONTH}, no egress fees, no API request charges, immutable Object Lock retention.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -34,14 +34,14 @@ export const ROUTE_META = {
         url: "https://www.fil.one",
         logo: "https://www.fil.one/fil-one-logo.svg",
         description:
-          "S3-compatible object storage built on Filecoin. Enterprise-grade durability, no egress fees, and verifiable data integrity.",
+          "S3-compatible object storage built on Filecoin. No egress fees, no API request charges, and immutable Object Lock retention.",
       },
       {
         "@context": "https://schema.org",
         "@type": "Product",
         name: "Fil One Object Storage",
         description:
-          "S3-compatible object storage on Filecoin with no egress fees and verifiable data integrity, proven daily.",
+          "S3-compatible object storage on Filecoin with no egress fees, no API request charges, and Object Lock retention in Governance or Compliance mode.",
         brand: { "@type": "Brand", name: "Fil One" },
         offers: {
           "@type": "Offer",
@@ -249,7 +249,7 @@ export const ROUTE_META = {
   "/lp/backup-dr": {
     title: "Backup & Disaster Recovery Storage · Fil One",
     description:
-      `Durable, verifiable backup storage at ${PRICE_PER_TB_SHORT}. 11 nines durability, proven daily, zero egress for restores. S3-compatible drop-in for DR workflows.`,
+      `Backup storage at ${PRICE_PER_TB_SHORT} with zero egress on restores, so testing a restore costs nothing. Object Lock retention against ransomware. S3-compatible drop-in for DR workflows.`,
   },
   "/lp/log-retention": {
     title: `Cheap Log Retention Storage · ${PRICE_PER_TB_SHORT} | Fil One`,
@@ -274,7 +274,7 @@ export const ROUTE_META = {
   "/lp/migrate-from-s3": {
     title: "Migrate from AWS S3 to Fil One · Drop-In S3 Replacement",
     description:
-      `Switch from AWS S3 to Fil One in minutes. Fully S3-compatible API, ${PRICE_PER_TB_SHORT} vs AWS $23+/TB, and $0 egress vs AWS $90+/TB. No code changes required.`,
+      `Switch from AWS S3 to Fil One in minutes. S3-compatible API, ${PRICE_PER_TB_SHORT} vs AWS $23+/TB, and $0 egress vs AWS $90+/TB. Change the endpoint, not the code.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -285,7 +285,7 @@ export const ROUTE_META = {
             name: "Do I need to rewrite my code to migrate from AWS S3 to Fil One?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "No. Fil One is a drop-in S3 replacement. The only change is the endpoint URL — your existing boto3, AWS SDK v3, or other S3 client code continues to work without modification. All standard S3 operations are supported: PutObject, GetObject, ListObjectsV2, multipart upload, presigned URLs, and more.",
+              text: "Two settings, not a rewrite. Point your existing boto3, AWS SDK v3, or other S3 client at the Fil One endpoint and enable path-style addressing. The object operations your code relies on behave as they do on AWS: PutObject, GetObject, HeadObject, DeleteObject, ListObjectsV2, ListObjectVersions, multipart upload, and presigned URLs. The docs publish a per-operation compatibility matrix, including the bucket-configuration calls that differ by region.",
             },
           },
           {
@@ -488,7 +488,7 @@ export const ROUTE_META = {
   "/storage": {
     title: "Object Storage · Fil One",
     description:
-      `S3-compatible object storage built for the AI era. Verifiable data integrity, no egress fees, ${PRICE_PER_TB_MONTH}. The foundation every Fil One account starts with.`,
+      `S3-compatible object storage at ${PRICE_PER_TB_MONTH} with no egress fees and no API request charges. Object Lock retention and full version history included. The foundation every Fil One account starts with.`,
   },
   "/bucket-intelligence": {
     title: "Bucket Intelligence · Fil One",
@@ -508,27 +508,27 @@ export const ROUTE_META = {
   "/enterprise": {
     title: "Enterprise · Fil One",
     description:
-      "Fil One for enterprise: verifiable data integrity, S3-compatible, no egress fees, SLA-backed. Custom pricing for teams that need storage at scale.",
+      "Fil One for enterprise: S3-compatible object storage with no egress fees, immutable Object Lock retention, and an SLA-backed uptime commitment. Custom pricing at scale.",
   },
   "/partners": {
     title: "Partners · Fil One",
     description:
-      "Channel, Technology, and MSP partner programs for Fil One. Resell, integrate, or bundle verifiable cloud storage with your business.",
+      "Channel, Technology, and MSP partner programs for Fil One. Resell, integrate, or bundle S3-compatible cloud storage with no egress fees.",
   },
   "/partners/apply": {
     title: "Partner Application · Fil One",
     description:
-      "Apply to the Fil One partner program. Resell, integrate, or bundle verifiable S3-compatible cloud storage with your business.",
+      "Apply to the Fil One partner program. Resell, integrate, or bundle S3-compatible cloud storage with no egress fees.",
   },
   "/solutions/ai-training": {
     title: "AI Training & Inference Storage · Fil One",
     description:
-      "S3-compatible object storage built for AI workloads. Store training datasets, model weights, and checkpoints with verifiable integrity and no egress fees.",
+      "S3-compatible object storage built for AI workloads. Store training datasets, model weights, and checkpoints, and read them back as often as you like at no charge.",
   },
   "/solutions/web3-dapps": {
     title: "Web3 & dApp Storage · Fil One",
     description:
-      "Verifiable, decentralized object storage for NFTs, dApps, and on-chain assets. S3-compatible, no egress fees, cryptographic proof on every object.",
+      "Decentralized object storage for NFTs, dApps, and on-chain assets. S3-compatible, no egress fees, and Object Lock so metadata cannot change after mint.",
   },
   "/solutions/media-archive": {
     title: "Media & Archive Storage · Fil One",
@@ -553,6 +553,6 @@ export const ROUTE_META = {
   "/about": {
     title: "About · Fil One",
     description:
-      "Fil One exists to put you back in control of your data. Learn who we are, why we built verifiable S3-compatible storage, and the principles behind it.",
+      "Fil One exists to put you back in control of your data. Learn who we are, why we built S3-compatible storage with no egress fees, and the principles behind it.",
   },
 };

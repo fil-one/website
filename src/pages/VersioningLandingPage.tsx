@@ -93,7 +93,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Not a backup. The exact state.",
-    subhead: "Free 1 TB evaluation. Create a versioned bucket, write a few objects, and download a specific prior version in one call.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Create a versioned bucket, write a few objects, and download a specific prior version in one call.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

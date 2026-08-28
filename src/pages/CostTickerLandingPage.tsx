@@ -125,7 +125,7 @@ const config: LandingPageConfig = {
   cta: {
     heading: `Turn off the meter. ${PRICE_PER_TB_MONTH}.`,
     headingMaxWidth: 560,
-    subhead: "Storage only — no egress meter, no request meter, no tiers. Free 1 TB evaluation: run your real workload and compare the invoice. The egress line will read zero.",
+    subhead: "Storage only — no egress meter, no request meter, no tiers. Free 30-day trial, 1 TB of storage and 2 TB of egress: run your real workload and compare the invoice. The egress line will read zero.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

@@ -30,7 +30,7 @@ const CtaSection = () => {
             className="font-sans text-white/60 text-[14.5px] max-w-[380px]"
             style={{ lineHeight: "1.6" }}
           >
-            Try Fil One for 30 days. 1 TB included, no credit card required. Or talk to our team about enterprise pricing or migrating your existing storage today.
+            Try Fil One for 30 days with 1 TB of storage and 2 TB of egress included, and no credit card. Or talk to our team about enterprise pricing and moving your existing storage across.
           </p>
         </div>
 

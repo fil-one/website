@@ -94,7 +94,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Walk the walk.",
-    subhead: "Free 1 TB evaluation. Connect your existing S3 client and store data on Filecoin infrastructure in minutes.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Connect your existing S3 client and store data on Filecoin infrastructure in minutes.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

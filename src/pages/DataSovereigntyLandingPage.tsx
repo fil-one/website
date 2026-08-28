@@ -89,7 +89,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "EU storage. S3 tools. No egress.",
-    subhead: "Free 1 TB evaluation on the EU endpoint. Point your existing S3 tools and run the same workload in EU infrastructure.",
+    subhead: "Free 30-day trial on the EU endpoint, with 1 TB of storage and 2 TB of egress. Point your existing S3 tools and run the same workload in EU infrastructure.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

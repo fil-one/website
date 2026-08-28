@@ -132,7 +132,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Flat storage for unpredictable growth.",
-    subhead: "Free 1 TB evaluation. Connect your existing S3 asset pipeline and see a storage bill that doesn't react to player activity.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Connect your existing S3 asset pipeline and see a storage bill that doesn't react to player activity.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

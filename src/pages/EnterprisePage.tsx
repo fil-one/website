@@ -60,7 +60,7 @@ const FEATURES = [
 const STATS = [
   { value: "~79%", label: "Less than AWS S3" },
   { value: "$0", label: "Egress fees" },
-  { value: "11 9s", label: "Durability" },
+  { value: "$0", label: "API request fees" },
 ];
 
 const PRICING_TAGS = [
@@ -83,7 +83,7 @@ const FAQS = [
   },
   {
     q: "Where is my data stored?",
-    a: "We currently offer two regions: EU (France) and US (Detroit). More regions are on the way.",
+    a: "Two regions are generally available: Europe (France) and US East (Michigan). You pick one when you create a bucket, and it is fixed there, so data written to a region stays in that region. Each region has its own endpoint, and an access key is scoped to a single region."
   },
   {
     q: "What compliance certifications do you have?",
@@ -108,7 +108,7 @@ const EnterprisePage = () => {
   useSeo({
     title: "Enterprise · Fil One",
     description:
-      "Fil One for enterprise: verifiable data integrity, S3-compatible, no egress fees, SLA-backed. Custom pricing for teams that need storage at scale.",
+      "Fil One for enterprise: S3-compatible object storage with no egress fees, immutable Object Lock retention, and an SLA-backed uptime commitment. Custom pricing at scale.",
     canonical: "https://www.fil.one/enterprise",
     ogImage: "https://www.fil.one/og-image.png",
   });
@@ -124,7 +124,7 @@ const EnterprisePage = () => {
           grid
           titleSize="text-[34px] sm:text-[44px] md:text-[62px]"
           title={<>Storage infrastructure<br /><span className="text-brand-500">your team can rely on</span></>}
-          description="Verifiable data integrity, predictable costs, and S3-compatible from day one. Built for teams that need control at scale."
+          description="Immutable retention, predictable costs, and S3-compatible from day one. Built for teams that need control at scale."
           titleMaxWidth={760}
           descriptionMaxWidth={520}
           contentClassName="pb-10 md:pb-14"

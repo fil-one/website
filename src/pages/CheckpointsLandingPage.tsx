@@ -120,7 +120,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Keep every checkpoint.",
-    subhead: "Free 1 TB evaluation. Point your existing checkpoint code at the endpoint and stop rationing runs.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Point your existing checkpoint code at the endpoint and stop rationing runs.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

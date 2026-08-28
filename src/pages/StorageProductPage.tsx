@@ -23,7 +23,7 @@ const DOCS_URL = "https://docs.fil.one";
 const STATS = [
   { stat: PRICE_DISPLAY, label: "Per TB / month" },
   { stat: "$0", label: "Egress fees" },
-  { stat: "11 9s", label: "Durability" },
+  { stat: "$0", label: "API request fees" },
 ];
 
 const StorageProductPage = () => {
@@ -39,7 +39,7 @@ const StorageProductPage = () => {
   useSeo({
     title: "Object Storage · Fil One",
     description:
-      `S3-compatible object storage built for the AI era. Verifiable data integrity, no egress fees, ${PRICE_PER_TB_MONTH}. The foundation every Fil One account starts with.`,
+      `S3-compatible object storage at ${PRICE_PER_TB_MONTH} with no egress fees and no API request charges. Object Lock retention and full version history included. The foundation every Fil One account starts with.`,
     canonical: "https://www.fil.one/storage",
     ogImage: "https://www.fil.one/og-image.png",
   });
@@ -55,12 +55,12 @@ const StorageProductPage = () => {
           grid
           badge={<Pill>Object Storage · S3-compatible</Pill>}
           titleSize="text-[28px] sm:text-[34px] md:text-[44px]"
-          title={<>Store more. Pay less.<br />Own it completely.</>}
-          description={"S3-compatible object storage with no egress fees, no API request charges, and verifiable data integrity on every byte."}
+          title={<>Store more. Pay less.<br />Leave whenever you like.</>}
+          description={"S3-compatible object storage with no egress fees, no API request charges, and immutable Object Lock retention on any bucket you want it."}
           titleMaxWidth={560}
           descriptionMaxWidth={500}
           contentClassName="pb-24 md:pb-32"
-          tagline="1 TB free for 30 days · No credit card required · No egress fees"
+          tagline="1 TB storage and 2 TB egress free for 30 days · No credit card required"
           ctas={[
             {
               label: "Start for free",
@@ -87,7 +87,7 @@ const StorageProductPage = () => {
           <StatGridSection
             label="By the numbers"
             heading="No surprises"
-            description={`Flat ${PRICE_PER_TB_MONTH} for storage. No egress fees, no API charges, and verifiable durability on every byte.`}
+            description={`Flat ${PRICE_PER_TB_MONTH} for storage. Reads, writes, and requests are not billed, so the only number on the invoice is what you store.`}
             stats={STATS}
           />
         </div>
@@ -110,7 +110,7 @@ const StorageProductPage = () => {
         {/* FAQ — objection handling, right before the CTA */}
         <FaqSection include={[
           "Is Fil One hot, warm, or cold storage? Is it like Glacier?",
-          "How does data integrity verification work with Fil One?",
+          "How do I stop data from being altered or deleted?",
           "Is Fil One compatible with my existing tools?",
           "What kinds of organizations use Fil One?",
           "How does Fil One approach security and compliance?",
@@ -120,14 +120,14 @@ const StorageProductPage = () => {
 
         {/* CTA Banner */}
         <CtaBanner
-          heading="Your data, your keys, your control"
-          subhead="Start with 1 TB free. No credit card, no egress fees, no surprises."
+          heading="Your data, your region, your exit"
+          subhead="Start with 1 TB of storage and 2 TB of egress free. No credit card, and no charge to read it all back out."
           cta={{
             label: "Start for free",
             href: SIGNUP_URL,
             onClick: () => trackCtaClick("Start for free", SIGNUP_URL, "primary"),
           }}
-          note={`S3-compatible · Verifiable integrity · ${PRICE_PER_TB_MONTH} after trial`}
+          note={`S3-compatible · Object Lock retention · ${PRICE_PER_TB_MONTH} after trial`}
         />
 
       </main>

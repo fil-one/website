@@ -123,7 +123,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Run as many times as the model needs.",
-    subhead: "Free 1 TB evaluation. Point fsspec or PyArrow at the endpoint and run the training loop — the egress line will not be there.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Point fsspec or PyArrow at the endpoint and run the training loop — the egress line will not be there.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

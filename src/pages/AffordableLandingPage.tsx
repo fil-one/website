@@ -126,7 +126,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "One number. No surprises.",
-    subhead: "Free 1 TB evaluation. Swap the endpoint in your S3 config and check the invoice at the end of the trial.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Swap the endpoint in your S3 config and check the invoice at the end of the trial.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

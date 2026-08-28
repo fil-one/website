@@ -33,8 +33,8 @@ const PRODUCTS: readonly ProductItem[] = [
     badge: null,
     label: { en: "Object Storage", es: "Almacenamiento de objetos" },
     description: {
-      en: "S3-compatible, verifiably durable",
-      es: "Compatible con S3, con durabilidad verificable",
+      en: "S3-compatible, no egress fees",
+      es: "Compatible con S3, sin cargos de egress",
     },
   },
   {

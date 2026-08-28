@@ -121,7 +121,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Pick the line item you don't have to optimise.",
-    subhead: "Free 1 TB evaluation. The same SDK calls. A different bill.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. The same SDK calls. A different bill.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

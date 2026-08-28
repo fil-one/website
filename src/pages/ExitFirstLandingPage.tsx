@@ -122,7 +122,7 @@ const config: LandingPageConfig = {
   cta: {
     heading: "Know the exit before you commit.",
     headingMaxWidth: 560,
-    subhead: `${PRICE_PER_TB_MONTH} — storage only, no egress in or out. Free 1 TB evaluation: put data in, run the migrate-off command, and watch it cost nothing. Then decide.`,
+    subhead: `${PRICE_PER_TB_MONTH} — storage only, no egress in or out. Free 30-day trial, 1 TB of storage and 2 TB of egress: put data in, run the migrate-off command, and watch it cost nothing. Then decide.`,
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

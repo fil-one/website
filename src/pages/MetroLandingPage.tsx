@@ -128,7 +128,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Hyperscaler speed. Budget-tier bills.",
-    subhead: "Free 1 TB evaluation. Point your existing S3 tools at the endpoint and run the same workload.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Point your existing S3 tools at the endpoint and run the same workload.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

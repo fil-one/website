@@ -123,7 +123,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Collect without the PUT counter.",
-    subhead: "Free 1 TB evaluation. Swap the endpoint in your existing scraping framework and watch the request line zero out.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Swap the endpoint in your existing scraping framework and watch the request line zero out.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

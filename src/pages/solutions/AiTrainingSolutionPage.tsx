@@ -14,7 +14,7 @@ const config: SolutionPageConfig = {
   seo: {
     title: "AI Training & Inference Storage · Fil One",
     description:
-      "S3-compatible object storage built for AI workloads. Store training datasets, model weights, and checkpoints with verifiable integrity and no egress fees.",
+      "S3-compatible object storage built for AI workloads. Store training datasets, model weights, and checkpoints, and read them back as often as you like at no charge.",
     canonical: "https://www.fil.one/solutions/ai-training",
   },
   hero: {
@@ -26,7 +26,7 @@ const config: SolutionPageConfig = {
     ),
     titleMaxWidth: 620,
     description:
-      "Keep training datasets, model weights, and checkpoints on S3-compatible storage. High-throughput reads keep your GPUs busy, with verifiable integrity and zero egress fees.",
+      "Keep training datasets, model weights, and checkpoints on S3-compatible storage. Reads are not metered, so re-running an epoch or reloading a checkpoint costs nothing.",
     descriptionMaxWidth: 540,
     ctas: [
       {
@@ -37,13 +37,13 @@ const config: SolutionPageConfig = {
         glow: true,
       },
     ],
-    tagline: "1 TB free for 30 days · No credit card required",
+    tagline: "1 TB storage + 2 TB egress free for 30 days · No credit card",
   },
   proof: [
     "S3-compatible drop-in replacement",
     `${PRICE_DISPLAY} / TB / month`,
-    "Cryptographic data integrity",
-    "Multi-region redundancy",
+    "Immutable Object Lock",
+    "US and EU regions",
   ],
   features: {
     label: "Built for AI teams",
@@ -63,7 +63,7 @@ const config: SolutionPageConfig = {
       {
         icon: Lock,
         title: "Immutable object lock",
-        body: "Lock objects so your training data can't be altered or deleted, even with your keys.",
+        body: "Lock a dataset under Object Lock retention and it cannot be altered or deleted for the term you set, even by an access key with full write permission."
       },
       {
         icon: CurrencyDollar,
@@ -121,7 +121,7 @@ const config: SolutionPageConfig = {
         Stop paying egress fees<br />on every training run
       </>
     ),
-    subhead: "1 TB free for 30 days. No credit card and no egress fees.",
+    subhead: "1 TB of storage and 2 TB of egress, free for 30 days. No credit card.",
     cta: { label: "Start for free", href: signupUrl() },
   },
 };

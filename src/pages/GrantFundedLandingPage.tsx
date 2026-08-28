@@ -121,7 +121,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "A number that outlives the award.",
-    subhead: "Free 1 TB evaluation. Put a flat, predictable storage line in your next data management plan.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Put a flat, predictable storage line in your next data management plan.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

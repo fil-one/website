@@ -169,7 +169,7 @@ const config: LandingPageConfig = {
       {
         tag: "Object Lock & retention",
         title: "Compliance and ransomware protections, built in",
-        desc: "Object Lock in Compliance or Governance mode. Per-object retention periods. Versioning. Ransomware can't overwrite or delete what is locked.",
+        desc: "Object Lock in Compliance or Governance mode, with a default retention period set when the bucket is created and versioning underneath it. Ransomware cannot overwrite or delete what is locked, and neither can a stolen access key.",
         stats: [
           {
             label: "Lock modes",
@@ -179,10 +179,10 @@ const config: LandingPageConfig = {
             ],
           },
           {
-            label: "Retention granularity",
+            label: "Max retention period",
             rows: [
-              { name: "Fil One", val: "Per-object", win: true },
-              { name: "S3 Standard", val: "Per-object" },
+              { name: "Fil One", val: "100 years", win: true },
+              { name: "S3 Standard", val: "100 years" },
             ],
           },
         ],
@@ -200,28 +200,28 @@ const config: LandingPageConfig = {
     items: [
       {
         icon: Clock,
-        label: "Restore latency",
-        value: "{{NEEDS PROOF: measured restore latency to first byte}}",
-        note: "Standard S3 GET — no thaw, no retrieval queue.",
+        label: "Restore path",
+        value: "One GET",
+        note: "No thaw, no retrieval tier, no restore job to schedule.",
       },
       {
         icon: ArrowsOut,
-        label: "Restore throughput",
-        value: "{{NEEDS PROOF: measured restore throughput per client}}",
-        note: "Parallel-read friendly. Saturates a tuned S3 client.",
+        label: "Cost to test a restore",
+        value: "$0",
+        note: "No egress and no request charges, so a full restore drill costs nothing.",
       },
       {
         icon: ShieldCheck,
         label: "Object Lock & versioning",
         value: "Available",
-        note: "Compliance and Governance modes. Per-object retention.",
+        note: "Compliance and Governance modes, set at bucket creation.",
       },
     ],
   },
 
   cta: {
     heading: "A backup target you'll actually test.",
-    subhead: "Free 1 TB evaluation. Point Veeam, Restic, MSP360, or any S3 client at the endpoint.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Point Veeam, Restic, MSP360, or any S3 client at the endpoint.",
     headingMaxWidth: 560,
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },

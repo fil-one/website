@@ -215,7 +215,7 @@ async function prerender() {
       const title = meta.title ?? "Fil One | S3 object storage built for the AI era";
       const description =
         meta.description ??
-        "S3-compatible object storage built on Filecoin. Enterprise-grade durability, no egress fees, and verifiable data integrity.";
+        "S3-compatible object storage built on Filecoin. No egress fees, no API request charges, and immutable Object Lock retention.";
       const lang = meta.lang ?? "en";
 
       // Reciprocal hreflang alternates for translated page clusters (no-op for

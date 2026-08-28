@@ -94,7 +94,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Make the storage layer match the product.",
-    subhead: "Free 1 TB evaluation. Change the endpoint in your config and store data on Filecoin infrastructure today.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Change the endpoint in your config and store data on Filecoin infrastructure today.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

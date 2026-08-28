@@ -40,8 +40,8 @@ const PRICING_ROWS: PriceComparisonRow[] = [
 const FEATURES = [
   {
     icon: Plug,
-    title: "Full S3 API parity",
-    desc: "PutObject, GetObject, DeleteObject, ListObjectsV2, multipart upload, presigned URLs, and bucket operations all work as on AWS. Existing S3 code connects without modification.",
+    title: "The calls you already make",
+    desc: "PutObject, GetObject, DeleteObject, HeadObject, ListObjectsV2, ListObjectVersions, multipart upload, and presigned URLs behave as they do on AWS. Your call sites do not change, only the client config does.",
   },
   {
     icon: ArrowsOut,
@@ -66,13 +66,14 @@ s3 = boto3.client(
     region_name="us-east-1",
 )
 
-# After · Fil One (no other changes)
+# After · Fil One (config only, no call-site changes)
 s3 = boto3.client(
     "s3",
     endpoint_url="${S3_ENDPOINT}",
     aws_access_key_id=os.environ["FIL_ACCESS_KEY"],
     aws_secret_access_key=os.environ["FIL_SECRET_KEY"],
     region_name="eu-west-1",
+    config=Config(s3={"addressing_style": "path"}),  # required
 )`;
 
 const NODE_CODE = `// Before — AWS S3
@@ -82,6 +83,7 @@ const s3 = new S3Client({ region: "us-east-1" });
 const s3 = new S3Client({
   endpoint: "${S3_ENDPOINT}",
   region: "eu-west-1",
+  forcePathStyle: true, // required
   credentials: {
     accessKeyId: process.env.FIL_ONE_ACCESS_KEY,
     secretAccessKey: process.env.FIL_ONE_SECRET_KEY,
@@ -145,10 +147,10 @@ const MigrateFromS3LandingPage = () => {
             <div className="flex flex-col gap-3">
               <SectionLabel>The migration</SectionLabel>
               <SectionHeading>
-                Change the endpoint. <span className="text-brand-500">Nothing else.</span>
+                Change the config. <span className="text-brand-500">Not the code.</span>
               </SectionHeading>
               <SectionSub maxWidth={620}>
-                Fil One implements the S3 API. The code that works on AWS works here — PutObject, GetObject, ListObjectsV2, multipart upload, presigned URLs.
+                Fil One implements the S3 API. Point the client at a Fil One endpoint, add your key, and switch on path-style addressing. The calls stay exactly as they are: PutObject, GetObject, ListObjectsV2, multipart upload, presigned URLs.
               </SectionSub>
             </div>
 
@@ -160,7 +162,7 @@ const MigrateFromS3LandingPage = () => {
             <div className="max-w-[680px] rounded-2xl border border-black/[0.07] bg-white p-6">
               <p className="m-0 mb-2 font-sans font-medium text-[14px] text-zinc-950">What is compatible</p>
               <p className="m-0 font-sans text-[13.5px] leading-[1.65] text-zinc-500">
-                PutObject, GetObject, DeleteObject, HeadObject, CopyObject, ListObjectsV2, CreateBucket, DeleteBucket, multipart upload, presigned URLs. Standard Auth v4 signing. For a full compatibility list, see{" "}
+                PutObject, GetObject, DeleteObject, HeadObject, ListObjectsV2, ListObjectVersions, multipart upload, presigned URLs, and Object Lock retention. SigV4 signing, path-style addressing. Create and delete buckets from the console in either region. For the per-operation matrix, including the bucket-configuration calls that differ by region, see{" "}
                 <TextLink href="https://docs.fil.one" tone="brand" external className="inline">
                   docs.fil.one
                 </TextLink>
@@ -224,7 +226,7 @@ const MigrateFromS3LandingPage = () => {
         {/* ── CTA Banner ────────────────────────────────────────────────────── */}
         <CtaBanner
           heading="Same SDK. New endpoint. Lower bill."
-          subhead="Free 1 TB evaluation. Change two lines and run the same workload. The egress line will not be there."
+          subhead="Free 30-day trial with 1 TB of storage and 2 TB of egress. Change two lines and run the same workload. The egress line will not be there."
           cta={{ label: "Start for free", href: signupUrl() }}
           secondaryCta={{ label: "Talk to an expert", href: SALES_URL }}
           note={TAGLINE}

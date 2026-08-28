@@ -11,14 +11,14 @@ import { PRICE_DISPLAY } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
 const STORAGE_FEATURES = [
-  "11 nines durability, verified daily",
-  "S3-compatible, no code changes needed",
+  "Object Lock retention and full version history",
+  "S3-compatible, config change not a code change",
   "No egress fees, no API request charges",
 ];
 
 const RAG_FEATURES = [
-  "Auto-indexes files in your bucket on upload",
-  "Semantic search powered by your own LLM keys",
+  "Indexes new files on a recurring pass, no pipeline to run",
+  "Semantic search on a model we host and pay for",
   "Supports PDF, Markdown, DOCX, HTML, and more",
 ];
 
@@ -74,7 +74,7 @@ const ProductsSection = () => {
 
               {/* Description */}
               <p className="-mt-2 max-w-[600px] font-sans text-[15px] font-normal leading-[1.6] text-zinc-600">
-                S3-compatible, verifiably durable object storage. Drop-in compatible with every S3 SDK and workflow, and the substrate every other capability runs on.
+                S3-compatible object storage with immutable retention and full version history. It speaks the S3 API your tools already use, and it is the substrate every other capability runs on.
               </p>
 
               {/* Features */}
@@ -136,11 +136,11 @@ const ProductsSection = () => {
             title="Bucket Intelligence"
             badge="Coming soon"
             subtitle="Turn any bucket into a queryable knowledge base"
-            description="Powered by a built-in RAG Pipeline. Files are auto-indexed as they land in your bucket. Ask questions in plain language using your own OpenAI, Anthropic, or Cohere keys."
+            description="Powered by a built-in RAG Pipeline. Files in your bucket are indexed for you on a recurring pass. Ask questions in plain language against a model we host, with no API key of your own to supply."
             features={RAG_FEATURES}
             learnMoreHref="/bucket-intelligence"
             footerTitle="Included at no charge during early testing"
-            footerNote="LLM usage is billed by your provider"
+            footerNote="Model usage included, no provider account needed"
             waitlistHref="/waitlist/bucket-intelligence"
             onWaitlistClick={() => trackCtaClick("Join waitlist", "/waitlist/bucket-intelligence", "secondary")}
           />

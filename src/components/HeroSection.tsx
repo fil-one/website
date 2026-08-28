@@ -4,6 +4,7 @@ import { ArrowRight } from "@phosphor-icons/react";
 import HeroLens from "./HeroLens";
 import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 import { signupUrl } from "@/lib/console-url";
+import { PRICE_PER_TB_MONTH } from "@/lib/pricing";
 
 const HeroSection = () => {
   const h1Ref = useRef<HTMLHeadingElement>(null);
@@ -92,7 +93,7 @@ const HeroSection = () => {
               margin: 0,
             }}
           >
-            Your data, your keys, your control — for when every byte matters.
+            {PRICE_PER_TB_MONTH}. Reading your own data back costs nothing. Your S3 tools connect as they are.
           </p>
         </div>
 

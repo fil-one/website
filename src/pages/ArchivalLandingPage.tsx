@@ -124,7 +124,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "An archive you can actually test.",
-    subhead: "Free 1 TB evaluation. Write your archive and restore it — at zero retrieval cost.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Write your archive and restore it — at zero retrieval cost.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

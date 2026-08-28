@@ -229,7 +229,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Stop paying to read your own data.",
-    subhead: "Free 1 TB evaluation bucket. Drop your existing S3 endpoint in and run the same queries.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Drop your existing S3 endpoint in and run the same queries.",
     headingMaxWidth: 560,
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },

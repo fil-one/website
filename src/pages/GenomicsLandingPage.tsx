@@ -127,7 +127,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Keep the whole dataset. For years.",
-    subhead: "Free 1 TB evaluation. Upload a dataset slice and confirm your existing analysis tooling connects without modification.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Upload a dataset slice and confirm your existing analysis tooling connects without modification.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

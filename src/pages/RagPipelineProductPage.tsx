@@ -34,7 +34,7 @@ const FEATURES = [
     icon: Cpu,
     title: "Managed model in early access",
     description:
-      "During early access, queries run on a model we manage for you. Bring your own OpenAI, Anthropic, or Cohere keys after launch, with no markup from Fil One.",
+      "Queries run on a model Fil One hosts and pays for, so there is no provider account to open and no API key to supply. Model usage is included while Bucket Intelligence is in early access.",
   },
   {
     icon: ArrowsClockwise,
@@ -46,7 +46,7 @@ const FEATURES = [
     icon: PlugsConnected,
     title: "Query it your way",
     description:
-      "Ask questions from the Fil One dashboard or your own app via the REST API and scoped API keys. An MCP server for Claude and Cursor is coming soon.",
+      "Ask questions from the Fil One dashboard, or from your own app over the REST API using a scoped API key. Any client that can make an HTTP request can query a bucket."
   },
   {
     icon: StackSimple,
@@ -151,11 +151,11 @@ const FAQS = [
   },
   {
     q: "How fast is indexing?",
-    a: "Indexing runs automatically in the background. New and changed files are picked up on a regular schedule, so your index stays current without any manual steps.",
+    a: "Indexing runs automatically in the background. New and changed files are picked up on a recurring pass, so allow up to six hours for a fresh upload to become answerable. There are no manual steps either way.",
   },
   {
     q: "Can I use my own model or embeddings?",
-    a: "Not during early access, when queries use a model we manage for you. After launch you will be able to bring your own OpenAI, Anthropic, or Cohere keys and any OpenAI-compatible embedding endpoint, including self-hosted models.",
+    a: "No. Queries run on a model Fil One hosts and pays for, and the embedding model is managed the same way, so there is nothing for you to supply or configure. Customer-supplied models are a common request and something we are looking at, but there is no date on it yet.",
   },
   {
     q: "What happens when I delete a file from my bucket?",
@@ -174,7 +174,7 @@ const RagPipelineProductPage = () => {
   useSeo({
     title: "Bucket Intelligence · Fil One",
     description:
-      "Turn any Fil One bucket into a queryable knowledge base. Auto-index files, semantic search, and a managed model. Free during early access.",
+      "Turn any Fil One bucket into a queryable knowledge base. Automatic indexing, semantic search, and a hosted model. Free during early access.",
     canonical: "https://www.fil.one/bucket-intelligence",
     ogImage: "https://www.fil.one/og-image.png",
   });
@@ -191,7 +191,7 @@ const RagPipelineProductPage = () => {
           badge={<Pill>Early access</Pill>}
           titleSize="text-[34px] sm:text-[44px] md:text-[58px]"
           title={<>Turn any bucket into a <span className="text-brand-500">queryable knowledge base</span></>}
-          description="Auto-index your files and ask questions in plain language, powered by a model we manage for you during early access. Support for your own keys is coming soon."
+          description="Index your files and ask questions in plain language, on a model we host and pay for. Free while Bucket Intelligence is in early access."
           titleMaxWidth={760}
           descriptionMaxWidth={480}
           contentClassName="pb-14 md:pb-20"

@@ -126,7 +126,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Store the library. Skip the egress.",
-    subhead: "Free 1 TB evaluation. Upload a few assets, stream them, and watch the egress line stay at zero.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Upload a few assets, stream them, and watch the egress line stay at zero.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,

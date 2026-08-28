@@ -6,8 +6,8 @@ import FeatureCard from "@/components/FeatureCard";
 const FEATURES = [
   { icon: Plug,        title: "Drop-in S3 compatibility",     desc: "Same API, same SDKs, same tools. Point your existing workflow at our endpoint." },
   { icon: ArrowsOut,   title: "Zero egress fees",             desc: "Every read is free, so your bill stays flat no matter how busy the month." },
-  { icon: ShieldCheck, title: "Eleven nines of durability",   desc: "99.999999999% durability, replicated across locations and monitored around the clock." },
-  { icon: Lock,        title: "Object Lock and versioning",   desc: "Compliance modes and retention periods keep every object protected." },
+  { icon: ShieldCheck, title: "Backed by a published SLA",    desc: "An uptime commitment with service credits, and a public status page at status.fil.one." },
+  { icon: Lock,        title: "Object Lock and versioning",   desc: "Governance or Compliance mode, retention from a day to a century, and a full version history." },
   { icon: SignOut,     title: "No lock-in",                   desc: "Leave whenever you want, no exit fees. Export everything with the standard S3 API." },
   { icon: Rocket,      title: "Up and running in minutes",    desc: "Generate access keys, point your tools at our endpoint, and start uploading." },
 ];

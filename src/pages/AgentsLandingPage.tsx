@@ -139,7 +139,7 @@ const VALUE_PROPS = [
   {
     icon: HardDrives,
     title: "Storage your agents can rely on",
-    body: "S3-compatible object storage in US and EU regions, with the same durability and availability guarantees you'd expect from S3 — no egress fees when your agents need to read it all back.",
+    body: "S3-compatible object storage in a US or EU region, behind a published uptime SLA with service credits. No egress fees when your agents need to read all of it back."
   },
 ];
 
@@ -190,7 +190,7 @@ const AgentsLandingPage = () => {
   useSeo({
     title: "Fil One for AI Agents · Flat storage. No egress. No billing surprises.",
     description:
-      `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. No egress fees, no per-request charges. Built for agentic workloads that read and write constantly. Start free — 1 TB included.`,
+      `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. No egress fees, no per-request charges. Built for agentic workloads that read and write constantly. Start free with 1 TB of storage and 2 TB of egress.`,
     canonical: "https://www.fil.one/lp/agents",
   });
 

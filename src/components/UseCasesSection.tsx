@@ -8,25 +8,25 @@ const USE_CASES = [
     icon: ShieldCheck,
     title: "Immutable by design",
     description:
-      "Object Lock and retention make data impossible to delete or tamper with.",
+      "Object Lock in Compliance mode: once written, an object cannot be altered or deleted until retention expires.",
   },
   {
     icon: Plug,
     title: "S3-compatible from day one",
     description:
-      "Full S3 API compatibility, so your existing tools, SDKs, and workflows just connect.",
+      "The S3 API your tools already speak. Point your existing SDK or CLI at the endpoint and keep your workflow.",
   },
   {
     icon: Database,
-    title: "Eleven nines of durability",
+    title: "An audit trail, not a promise",
     description:
-      "Distributed, redundant storage with 11 nines of durability and audit-ready integrity.",
+      "Full version history on every object and locked retention on the record in question. Controls you can show, not just cite.",
   },
   {
     icon: ArrowsLeftRight,
     title: "Portability from day one",
     description:
-      "Multi-cloud by design, with data spread across an independent provider network.",
+      "Built on Filecoin, an open network of independent providers. No single vendor owns your exit.",
   },
   {
     icon: TrendUp,
@@ -38,7 +38,7 @@ const USE_CASES = [
     icon: Sliders,
     title: "Your data, under your control",
     description:
-      "Decide where your data lives and how it’s managed, with no single-provider lock-in.",
+      "Choose US or EU at bucket creation, and that is where it stays. No single-provider lock-in.",
   },
 ];
 
@@ -88,7 +88,7 @@ const UseCasesSection = ({ heading = "Enterprise storage made simple" }: { headi
             color: "#52525B",
           }}
         >
-          S3-compatible storage that's easy to set up and easier to scale, built for reliability, portability, and verifiable data integrity, without the egress bill.
+          S3-compatible storage that is quick to set up and quicker to leave, with immutable retention, full version history, and no egress bill.
         </p>
       </div>
 

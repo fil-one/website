@@ -19,7 +19,7 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 const FEATURES = [
   { icon: FileText, title: "Machine-readable llms.txt", desc: "Pricing, endpoint, and S3 compatibility are published in a structured llms.txt at a stable URL. An agent fetches one file and has the full picture." },
   { icon: ChartLine, title: "One rate, no tiers", desc: `${PRICE_PER_TB_MONTH}. No per-GB-vs-per-TB ambiguity, no tiered egress table, no request classes to reconcile. A single number an agent can compute against.` },
-  { icon: Plug, title: "Full S3 parity", desc: "The same API surface an agent already knows. Compatibility is stated plainly, not scattered across PDFs — drop-in against the documented endpoint." },
+  { icon: Plug, title: "Compatibility, per operation", desc: "The API surface an agent already knows, with a published matrix stating what each operation does in each region. No PDF to open, no parity left to guess at." },
   { icon: MagnifyingGlass, title: "No gated pricing", desc: "The price is on the page and in llms.txt — not behind a 'contact sales' form. An agent evaluating vendors never hits a wall where the number should be." },
 ];
 
@@ -47,19 +47,19 @@ const PROBLEM_ITEMS = [
 const LLMS_TXT = `$ curl -s https://www.fil.one/llms.txt
 
 ## Pricing
-- Pay-as-you-go: ${PRICE_PER_TB_MONTH}
+- Pay as you go: ${PRICE_PER_TB_MONTH} ($4.99/mo minimum)
   — no egress fees, no API request fees
-- Free trial: 30 days, 1 TB included, no credit card
+- Free trial: 30 days, 1 TB storage and 2 TB egress included, no credit card
 
 ## How to connect
 - Endpoint: ${S3_ENDPOINT}
 - Auth: standard AWS Access Key ID + Secret
-- Drop-in S3 replacement — no SDK changes required`;
+- Addressing: path-style required (forcePathStyle: true)`;
 
 const AgentReadableLandingPage = () => {
   useSeo({
     title: "Fil One · Priced so plainly your agent can read it",
-    description: `Flat ${PRICE_PER_TB_SHORT} pricing published in machine-readable llms.txt, with full S3 parity. No gated quotes — an AI coding agent can evaluate Fil One in one pass.`,
+    description: `Flat ${PRICE_PER_TB_SHORT} pricing published in machine-readable llms.txt, with the S3 compatibility matrix published per operation. No gated quotes: an AI coding agent can evaluate Fil One in one pass.`,
     canonical: "https://www.fil.one/lp/agent-readable",
   });
 
@@ -95,7 +95,7 @@ const AgentReadableLandingPage = () => {
             </>
           }
           description={
-            <>Flat {PRICE_PER_TB_SHORT}, published in machine-readable llms.txt with full S3 parity. No gated quotes, no "contact sales" for a number — an agent parses the price and the API in one pass.</>
+            <>Flat {PRICE_PER_TB_SHORT}, published in machine-readable llms.txt alongside a per-operation compatibility matrix. No gated quotes, no "contact sales" for a number. An agent parses the price and the API in one pass.</>
           }
           ctas={[
             { label: "Start for free", href: signupUrl(), variant: "primary" },
@@ -164,7 +164,7 @@ const AgentReadableLandingPage = () => {
         <CtaBanner
           heading={`One rate. ${PRICE_PER_TB_MONTH}.`}
           headingMaxWidth={560}
-          subhead="Storage. No egress, no per-request fees, no tiers. Free 1 TB evaluation — point your agent at llms.txt, confirm the parity, and connect against the documented endpoint."
+          subhead="Storage. No egress, no per-request fees, no tiers. Free 30-day trial with 1 TB of storage and 2 TB of egress: point your agent at llms.txt, read the compatibility matrix, and connect against the documented endpoint."
           cta={{ label: "Start for free", href: signupUrl() }}
           secondaryCta={{ label: "Talk to an expert", href: SALES_URL }}
           note={TAGLINE}

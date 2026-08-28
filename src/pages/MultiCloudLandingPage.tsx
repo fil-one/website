@@ -125,7 +125,7 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Portable by default, not by promise.",
-    subhead: "Free 1 TB evaluation. Point your S3 tools at the endpoint. The exit is $0 from day one.",
+    subhead: "Free 30-day trial with 1 TB of storage and 2 TB of egress. Point your S3 tools at the endpoint. The exit is $0 from day one.",
     cta: { label: "Start for free", href: signupUrl() },
     secondaryCta: { label: "Talk to an expert", href: SALES_URL },
     note: TAGLINE,
