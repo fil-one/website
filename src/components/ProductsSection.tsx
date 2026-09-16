@@ -1,4 +1,4 @@
-import { ShieldCheck, PlugsConnected, ArrowsLeftRight } from "@phosphor-icons/react";
+import { ShieldCheck, PlugsConnected, ArrowsLeftRight, MapPin } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
 import Icon from "@/components/Icon";
@@ -22,6 +22,11 @@ const STORAGE_FEATURES = [
     icon: ArrowsLeftRight,
     title: "No egress fees",
     description: "No egress fees, no API request charges. Read your own data back for free.",
+  },
+  {
+    icon: MapPin,
+    title: "Choose your region",
+    description: "Choose your bucket's region and know exactly where your data lives.",
   },
 ];
 
@@ -52,7 +57,7 @@ const ProductsSection = () => {
         {/* Feature cards */}
         <div
           ref={cardsRef}
-          className={`grid grid-cols-1 md:grid-cols-3 gap-5 w-full reveal-group`}
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 w-full reveal-group`}
         >
           {STORAGE_FEATURES.map(({ icon, title, description }) => (
             <div

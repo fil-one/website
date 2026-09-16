@@ -69,9 +69,9 @@ const Home = () => {
               </a>
             }
             titleSize="text-[34px] sm:text-[44px] md:text-[62px]"
-            title={<>Stop paying hot prices <br className="sm:hidden" />for cold data</>}
-            description={<>One flat rate per TB with zero egress fees, plus S3 compatibility<br />that keeps your existing tools and workflows working without changes.</>}
-            titleMaxWidth={620}
+            title={<>Keep your data <br className="sm:hidden" />where you need it</>}
+            description={<>Choose where your data lives, pay one flat rate per TB, and access it<br />with no egress fees. All with your existing S3 tools.</>}
+            titleMaxWidth={480}
             descriptionMaxWidth={620}
             contentClassName="pb-2 md:pb-4"
             ctas={[
