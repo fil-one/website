@@ -161,7 +161,7 @@ const USE_CASES = [
   {
     icon: TrendUp,
     title: "A queryable knowledge base over your buckets",
-    description: "Point a retrieval agent at a bucket and query it in plain language. Files index as they land; semantic search runs on your own model keys. Store the whole corpus at volume — flat pricing makes a large document set a storage cost, not a per-query tax.",
+    description: "Point a retrieval agent at a bucket and query it in plain language. Files are indexed automatically, and semantic search runs on your own model keys. Store the whole corpus at volume: flat pricing makes a large document set a storage cost, not a per-query tax.",
     badge: "RAG Coming soon",
     waitlist: "/waitlist/bucket-intelligence",
   },

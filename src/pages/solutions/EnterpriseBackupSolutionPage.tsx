@@ -106,8 +106,6 @@ const config: SolutionPageConfig = {
     "How does Fil One approach security and compliance?",
     "Is Fil One compatible with my existing tools?",
     "How do I migrate from AWS / Azure / Google Cloud?",
-    "Is there a free trial?",
-    "What kinds of organizations use Fil One?",
   ],
   cta: {
     heading: "Your recovery plan deserves better storage",

@@ -107,7 +107,7 @@ const DeveloperSection = () => {
         <SectionHeader
           className={`max-w-[480px] reveal${inView ? " in-view" : ""}`}
           label="Developer first"
-          title="Your existing S3 code runs here."
+          title="Your existing S3 code runs here"
           subtitle="Fil One is S3-compatible. Point your existing tools at the new endpoint, enable path-style requests, and most keep working."
         />
 

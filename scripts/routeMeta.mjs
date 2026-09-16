@@ -513,12 +513,12 @@ export const ROUTE_META = {
   "/partners": {
     title: "Partners · Fil One",
     description:
-      "Channel, Technology, and MSP partner programs for Fil One. Resell, integrate, or bundle verifiable cloud storage with your business.",
+      "Neocloud, Channel, Technology, and MSP partner programs for Fil One. Resell, integrate, bundle, or co-locate verifiable cloud storage with your business.",
   },
   "/partners/apply": {
     title: "Partner Application · Fil One",
     description:
-      "Apply to the Fil One partner program. Resell, integrate, or bundle verifiable S3-compatible cloud storage with your business.",
+      "Apply to the Fil One partner program as a Neocloud, Channel, Technology, or MSP partner.",
   },
   "/solutions/ai-training": {
     title: "AI Training & Inference Storage · Fil One",

@@ -100,6 +100,7 @@ const UTILITY_LINKS: readonly NavLinkItem[] = [
   { href: "/about", label: { en: "About", es: "Nosotros" } },
   { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
   { href: "/enterprise", label: { en: "Enterprise", es: "Empresas" } },
+  { href: "/partners", label: "Partners" },
   { href: "/blog", label: "Blog" },
 ];
 
@@ -110,7 +111,6 @@ const utilityBarLinks = (supportHref: string): readonly NavLinkItem[] => [
       external: true,
       label: { en: "Documentation", es: "Documentación" },
     },
-    { href: "/partners", label: "Partners" },
     { href: supportHref, label: { en: "Support", es: "Soporte" } },
   ];
 

@@ -109,13 +109,9 @@ const StorageProductPage = () => {
 
         {/* FAQ — objection handling, right before the CTA */}
         <FaqSection include={[
-          "Is Fil One hot, warm, or cold storage? Is it like Glacier?",
-          "How does data integrity verification work with Fil One?",
           "Is Fil One compatible with my existing tools?",
-          "What kinds of organizations use Fil One?",
           "How does Fil One approach security and compliance?",
           "How do I migrate from AWS / Azure / Google Cloud?",
-          "What is Filecoin?",
         ]} />
 
         {/* CTA Banner */}

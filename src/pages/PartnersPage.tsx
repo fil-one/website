@@ -11,6 +11,7 @@ import {
   ArrowsLeftRight,
   ChartLineUp,
   Chat,
+  Cpu,
 } from "@phosphor-icons/react";
 import Hero from "@/components/Hero";
 import Pill from "@/components/Pill";
@@ -24,6 +25,17 @@ import RoleCard from "@/components/RoleCard";
 import { Button } from "@/components/Button";
 
 const PARTNER_ROLES = [
+  {
+    icon: Cpu,
+    title: "Neocloud / Infrastructure Partner",
+    subtitle: "GPU Clouds · Neoclouds · Data Center Operators",
+    description: "You run GPU infrastructure and want to offer storage without buying hardware or hiring a team.",
+    bullets: [
+      "We install and operate NVMe storage inside your data center",
+      "Wholesale per-TB pricing, you set the retail price",
+      "Zero-latency, zero-egress cross-connect to your GPU nodes",
+    ],
+  },
   {
     icon: Users,
     title: "Channel Partner",
@@ -112,7 +124,7 @@ const STEPS = [
 
 const PROOF_POINTS = [
   "Competitive partner margins",
-  "Deal registration & co-sell support",
+  "No hardware to buy, no team to hire",
   "Simple pricing, easy to quote and win",
   "No egress fees, no surprise bills",
 ];
@@ -125,7 +137,7 @@ const PartnersPage = () => {
   useSeo({
     title: "Partners · Fil One",
     description:
-      "Channel, Technology, and MSP partner programs for Fil One. Resell, integrate, or bundle verifiable cloud storage with your business.",
+      "Neocloud, Channel, Technology, and MSP partner programs for Fil One. Resell, integrate, bundle, or co-locate verifiable cloud storage with your business.",
     canonical: "https://www.fil.one/partners",
     ogImage: "https://www.fil.one/og-image.png",
   });
@@ -143,7 +155,7 @@ const PartnersPage = () => {
           badge={<Pill>Partner Program</Pill>}
           title={<>Choose the way to partner <span className="text-brand-500">that fits your business</span></>}
           titleMaxWidth={620}
-          description="However you reach customers, there's a path to partner with Fil One. Pick a role to start the conversation."
+          description="Whether you sell, build, manage, or run infrastructure, there's a path to partner with Fil One. Pick a role to start the conversation."
           descriptionMaxWidth={460}
           ctas={[
             { label: "Become a partner", href: "/partners/apply", variant: "primary", size: "lg", glow: true },
@@ -216,7 +228,7 @@ const PartnersPage = () => {
               label="One program, multiple roles"
               title="Find the role that fits"
             />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {PARTNER_ROLES.map((role) => (
                 <RoleCard key={role.title} {...role} />
               ))}
