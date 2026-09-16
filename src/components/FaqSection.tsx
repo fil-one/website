@@ -69,11 +69,6 @@ const faqs = [
       "You choose when you create the bucket: Europe (France) or US East (Michigan). A bucket's region is fixed at creation, so data written there stays there. Each region has its own endpoint, and an access key is scoped to a single region.",
   },
   {
-    question: "Is there a free trial?",
-    answer:
-      "Yes. Thirty days with 1 TB of storage and 2 TB of egress included, and no credit card to start. Reaching the storage allowance pauses new uploads while reads keep working; reaching the egress allowance ends access until you move to a paid plan.",
-  },
-  {
     question: "Does Fil One support IPFS or CIDs?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
@@ -85,11 +80,6 @@ const faqs = [
     question: "Can I make a bucket public?",
     answer:
       "Public buckets are not currently supported. To share individual files, you can generate a presigned URL from the dashboard or via the S3 API. This gives time-limited access to a specific object without making the entire bucket public.",
-  },
-  {
-    question: "Are there any hidden fees on top of the storage price?",
-    answer:
-      "No. Fil One charges a flat rate per TB stored per month with no egress fees, no API request charges, and no retrieval penalties. What you see is what you pay.",
   },
   {
     question: "How do I migrate from Storacha or another S3-compatible provider?",
