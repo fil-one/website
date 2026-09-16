@@ -50,7 +50,7 @@ const ProductsSection = () => {
             Storage without surprises
           </h2>
           <p className="m-0 max-w-[460px] text-balance font-sans text-[15px] md:text-[16px] font-normal leading-[1.6] text-zinc-500">
-            S3-compatible object storage, priced simply, with nothing else required to get started.
+            S3-compatible object storage with flat, predictable pricing and nothing extra to configure before you start.
           </p>
         </div>
 
