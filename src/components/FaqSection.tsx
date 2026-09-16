@@ -40,7 +40,7 @@ const faqs = [
     question: "What is Bucket Intelligence and how does it work?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Bucket Intelligence turns any bucket into a queryable knowledge base. Files are indexed automatically as they land, and you can ask questions in plain language and get answers grounded in your own data, with sources cited.</p>
+        <p>Bucket Intelligence turns any bucket into a queryable knowledge base. Files are indexed automatically, and you can ask questions in plain language and get answers grounded in your own data, with sources cited.</p>
         <p>The embedding and answering models are hosted and paid for by Fil One, so there is no provider account or API key to supply. Bucket Intelligence is in early access, and free while it is.</p>
       </div>
     ),
