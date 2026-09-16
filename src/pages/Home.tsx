@@ -15,7 +15,6 @@ import FaqSection from "@/components/FaqSection";
 import CtaBanner from "@/components/CtaBanner";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/Button";
-import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
 import { useSeo } from "@/hooks/useSeo";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
 import { signupUrl } from "@/lib/console-url";
@@ -101,15 +100,20 @@ const Home = () => {
 
         {/* Light-touch partner door — one message, no mechanics. The full
             pitch belongs on a dedicated partner page, not the homepage. */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-white">
+        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-dark-section">
           <div className="flex flex-col gap-6 items-center text-center w-full max-w-container mx-auto">
-            <SectionLabel>Partners</SectionLabel>
-            <SectionHeading>Running a GPU cloud?</SectionHeading>
-            <SectionSub maxWidth={480}>
+            <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.08em] text-white/50">
+              Partners
+            </span>
+            <h2 className="m-0 font-display text-[26px] md:text-[34px] font-medium leading-[1.2] tracking-[-0.02em] text-white">
+              Running a GPU cloud?
+            </h2>
+            <p className="m-0 max-w-[480px] font-sans text-[15px] md:text-[17px] leading-[1.65] text-white/60">
               Add a storage line to your invoice, with no hardware to buy and no team to hire. We install and run it inside your data center, cross-connected to your GPU nodes.
-            </SectionSub>
+            </p>
             <Button
               variant="primary"
+              tone="dark"
               size="lg"
               href="/partners"
               onClick={() => trackCtaClick("See our partner program", "/partners", "secondary")}
