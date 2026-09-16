@@ -2,7 +2,7 @@ import { Brain, Robot, Check, ArrowRight } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 
 const RAG_FEATURES = [
-  "Auto-indexes files on upload — no scripts to run",
+  "Indexes files automatically, no scripts to run",
   "Semantic search powered by your own LLM keys",
   "Supports PDF, Markdown, DOCX, HTML, and more",
   "One-click enable on existing buckets",
