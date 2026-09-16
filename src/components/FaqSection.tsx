@@ -65,8 +65,12 @@ const faqs = [
   },
   {
     question: "Where is my data stored?",
-    answer:
-      "You choose when you create the bucket: Europe (France) or US East (Michigan). A bucket's region is fixed at creation, so data written there stays there. Each region has its own endpoint, and an access key is scoped to a single region.",
+    answer: (
+      <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
+        <p>You choose when you create the bucket: Europe (France) or US East (Michigan), with more regions on the way. A bucket's region is fixed at creation, so data written there stays there. Each region has its own endpoint, and an access key is scoped to a single region.</p>
+        <p>Running a GPU cloud? We can also install storage directly inside your own data center. <a href="/partners" className="faq-link">See our partner program</a>.</p>
+      </div>
+    ),
   },
   {
     question: "Does Fil One support IPFS or CIDs?",
