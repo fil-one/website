@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
-import { List, X, ArrowUpRight, CaretDown, Brain, LinkSimple, FilmSlate, ShieldCheck } from "@phosphor-icons/react";
+import { List, X, ArrowUpRight, CaretDown, Brain, LinkSimple, FilmSlate, ShieldCheck, Cpu } from "@phosphor-icons/react";
 import { useLocation } from "react-router-dom";
 import filOneLogo from "../assets/fil-one-logo.svg";
 import { trackDocsClick } from "@/lib/analytics";
@@ -92,6 +92,15 @@ const SOLUTIONS: readonly SolutionItem[] = [
     description: {
       en: "Backups ransomware can't touch",
       es: "Copias de seguridad que el ransomware no puede tocar",
+    },
+  },
+  {
+    icon: Cpu,
+    href: "/partners",
+    label: { en: "Neocloud & GPU Infrastructure", es: "Neocloud e infraestructura GPU" },
+    description: {
+      en: "Storage installed inside your data center",
+      es: "Almacenamiento instalado en tu centro de datos",
     },
   },
 ];

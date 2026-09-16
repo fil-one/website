@@ -105,7 +105,6 @@ const config: SolutionPageConfig = {
     ],
   },
   faq: [
-    "What is Filecoin?",
     "Is Fil One compatible with my existing tools?",
     "How does Fil One approach security and compliance?",
   ],

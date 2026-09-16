@@ -47,6 +47,10 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
           href: "/solutions/enterprise-backup",
           label: { en: "Enterprise Backup & DR", es: "Backup empresarial y DR" },
         },
+        {
+          href: "/partners",
+          label: { en: "Neocloud & GPU Infrastructure", es: "Neocloud e infraestructura GPU" },
+        },
       ],
     },
     {

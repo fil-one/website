@@ -20,6 +20,7 @@ import {
 } from "@/lib/hubspot";
 
 const PARTNER_TYPES = [
+  { value: "Neocloud / Infrastructure Partner", label: "Neocloud / Infrastructure Partner", sub: "You run GPU infrastructure and want to offer storage without buying hardware or hiring a team." },
   { value: "Channel partner", label: "Channel Partner", sub: "You sell technology solutions to customers and want to add cloud storage to your portfolio." },
   { value: "Technology Partner", label: "Technology Partner", sub: "You build software and want to integrate storage directly into your product." },
   { value: "Managed Service Provider (MSP)", label: "Managed Service Provider (MSP)", sub: "You manage infrastructure, backup, or data services on behalf of clients." },
@@ -30,7 +31,7 @@ const COMPANY_SIZES = ["1-10 employees", "11-50 employees", "51-200 employees", 
 const PartnerApplyPage = () => {
   useSeo({
     title: "Partner Application · Fil One",
-    description: "Apply to join the Fil One partner program as a Channel, Technology, or MSP partner.",
+    description: "Apply to join the Fil One partner program as a Neocloud, Channel, Technology, or MSP partner.",
     canonical: "https://www.fil.one/partners/apply",
   });
 

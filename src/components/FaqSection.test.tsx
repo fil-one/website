@@ -19,8 +19,8 @@ describe("FaqSection — analytics", () => {
     delete window.plausible;
   });
 
-  const Q1 = "How does data integrity verification work with Fil One?";
-  const Q2 = "Is Fil One compatible with my existing tools?";
+  const Q1 = "Is Fil One compatible with my existing tools?";
+  const Q2 = "How does Fil One approach security and compliance?";
 
   it('fires "FAQ Expand" when a question is clicked', () => {
     render(<FaqSection />);
@@ -30,7 +30,7 @@ describe("FaqSection — analytics", () => {
 
     expect(plausibleSpy).toHaveBeenCalledWith("FAQ Expand", {
       props: expect.objectContaining({
-        question: expect.stringContaining("data integrity"),
+        question: expect.stringContaining("compatible"),
         page: window.location.pathname,
       }),
     });
@@ -69,7 +69,7 @@ describe("FaqSection — analytics", () => {
       (c: unknown[]) => c[0] === "FAQ Expand",
     );
     expect(faqCalls).toHaveLength(2);
-    expect(faqCalls[0][1].props.question).toContain("data integrity");
-    expect(faqCalls[1][1].props.question).toContain("compatible");
+    expect(faqCalls[0][1].props.question).toContain("compatible");
+    expect(faqCalls[1][1].props.question).toContain("security");
   });
 });
