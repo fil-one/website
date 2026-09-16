@@ -30,6 +30,8 @@ interface HeroProps {
   descriptionMaxWidth?: number;
   /** Responsive font-size classes for the heading; defaults to the standard hero scale. */
   titleSize?: string;
+  /** Line-height for the heading; defaults to 1.1. */
+  titleLeading?: string;
   /** Blue radial halo background layer. */
   glow?: boolean;
   /** Grid texture background layer. */
@@ -56,6 +58,7 @@ const Hero = ({
   titleMaxWidth,
   descriptionMaxWidth,
   titleSize,
+  titleLeading,
   glow = false,
   grid = false,
   contentClassName = "",
@@ -91,6 +94,7 @@ const Hero = ({
           titleMaxWidth={titleMaxWidth}
           descriptionMaxWidth={descriptionMaxWidth}
           titleSize={titleSize}
+          titleLeading={titleLeading}
         />
       </div>
 

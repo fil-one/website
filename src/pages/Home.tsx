@@ -69,6 +69,7 @@ const Home = () => {
               </a>
             }
             titleSize="text-[34px] sm:text-[44px] md:text-[62px]"
+            titleLeading="1.02"
             title={<>Keep your data <br className="sm:hidden" />where you need it</>}
             description={<>Choose where your data lives, pay one flat rate per TB, and access it<br />with no egress fees. All with your existing S3 tools.</>}
             titleMaxWidth={480}
