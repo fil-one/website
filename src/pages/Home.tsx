@@ -1,19 +1,32 @@
 import { useEffect } from "react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Hero from "@/components/Hero";
-import AnnouncementBadge from "@/components/AnnouncementBadge";
 import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 import DashboardPreview from "@/components/DashboardPreview";
 import { PressBar } from "@/components/PressBar";
 import HeroGridDots from "@/components/HeroGridDots";
-import ProductsSection from "@/components/ProductsSection";
-import DeveloperSection from "@/components/DeveloperSection";
+import StatGridSection from "@/components/StatGridSection";
+import UseCasesSection from "@/components/UseCasesSection";
+import IntegrationsSection from "@/components/IntegrationsSection";
+import StorageUseCasesSection from "@/components/StorageUseCasesSection";
+import ComparisonSection from "@/components/ComparisonSection";
+import PricingTeaserSection from "@/components/PricingTeaserSection";
+import EnterpriseSection from "@/components/EnterpriseSection";
 import FaqSection from "@/components/FaqSection";
 import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
+import { PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
+
+const SIGNUP_URL = signupUrl();
+
+const STATS = [
+  { stat: PRICE_DISPLAY, label: "Per TB / month" },
+  { stat: "$0", label: "Egress fees" },
+  { stat: "11 9s", label: "Durability" },
+];
 
 const Home = () => {
   const { heroEndRef } = useScrollTracking();
@@ -28,7 +41,7 @@ const Home = () => {
   useSeo({
     title: "Fil One | S3 object storage built for the AI era",
     description:
-      "Store, search, and connect your data to AI. Object Storage, RAG Pipeline, and AI Agent Toolkit — on one verifiable, vendor-independent platform.",
+      `S3-compatible object storage on Filecoin. ${PRICE_PER_TB_MONTH}, no egress fees, 11 nines durability, proven daily.`,
     canonical: "https://www.fil.one/",
     ogImage: "https://www.fil.one/og-image.png",
   });
@@ -49,17 +62,16 @@ const Home = () => {
           />
           <HeroGridDots />
           <Hero
-            badge={<AnnouncementBadge pill="Soon">Bucket Intelligence &amp; AI Agent Toolkit</AnnouncementBadge>}
-            title={<>S3 object storage built <br className="sm:hidden" />for the AI era</>}
-            description={<>Your data, your keys, your control.<br />For when every byte matters.</>}
+            title={<>Sovereign storage<br />for the AI age</>}
+            description={<>Choose where your data lives, pay one flat rate per TB, and access it<br />with no egress fees. All with your existing S3 tools.</>}
             titleMaxWidth={520}
-            descriptionMaxWidth={600}
+            descriptionMaxWidth={620}
             ctas={[
               {
                 label: "Start for free",
-                href: signupUrl(),
+                href: SIGNUP_URL,
                 variant: "primary",
-                onClick: () => trackCtaClick("Start for free", signupUrl(), "primary"),
+                onClick: () => trackCtaClick("Start for free", SIGNUP_URL, "primary"),
               },
               {
                 label: "Explore docs",
@@ -77,13 +89,39 @@ const Home = () => {
           />
           <DashboardPreview />
           <PressBar />
-          {/* Products section replaces the features section — this is the platform's core nav anchor */}
-          <div ref={heroEndRef}>
-            <ProductsSection />
-          </div>
         </div>
-        <DeveloperSection />
+
+        {/* Stats */}
+        <div ref={heroEndRef}>
+          <StatGridSection
+            label="By the numbers"
+            heading="No surprises"
+            description={`Flat ${PRICE_PER_TB_MONTH} for storage. No egress fees, no API charges, and verifiable durability on every byte.`}
+            stats={STATS}
+          />
+        </div>
+
+        {/* Features — what it does */}
+        <UseCasesSection heading="S3 storage made simple" />
+
+        {/* Integrations — works with your existing stack */}
+        <IntegrationsSection tone="grey" />
+
+        {/* Use cases — what you build with it */}
+        <StorageUseCasesSection />
+
+        {/* Comparison — how it stacks up */}
+        <ComparisonSection bordered />
+
+        {/* Pricing teaser — the savings payoff */}
+        <PricingTeaserSection />
+
+        {/* Enterprise — the "and if you need more than self-serve" step after pricing */}
+        <EnterpriseSection />
+
+        {/* FAQ — objection handling, right before the CTA */}
         <FaqSection />
+
         <CtaSection />
       </main>
       <Footer />

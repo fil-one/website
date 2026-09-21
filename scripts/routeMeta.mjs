@@ -485,30 +485,10 @@ export const ROUTE_META = {
   },
 
   // ── Product / solutions / marketing pages ─────────────────────────────────
-  "/storage": {
-    title: "Object Storage · Fil One",
-    description:
-      `S3-compatible object storage built for the AI era. Verifiable data integrity, no egress fees, ${PRICE_PER_TB_MONTH}. The foundation every Fil One account starts with.`,
-  },
-  "/bucket-intelligence": {
-    title: "Bucket Intelligence · Fil One",
-    description:
-      "Turn any Fil One bucket into a queryable knowledge base. Auto-index files, semantic search, and a managed model. Free during early access.",
-  },
-  "/ai-agent-toolkit": {
-    title: "AI Agent Toolkit · Fil One",
-    description:
-      "Plug Fil One into Claude, Cursor, Zapier, and 10+ more integrations via MCP and OAuth. Free with your storage plan.",
-  },
   "/pricing": {
     title: "Pricing · Fil One",
     description:
       "Simple, predictable pricing for Object Storage, RAG Pipeline, and AI Agent Toolkit. Start free, scale as you grow.",
-  },
-  "/enterprise": {
-    title: "Enterprise · Fil One",
-    description:
-      "Fil One for enterprise: verifiable data integrity, S3-compatible, no egress fees, SLA-backed. Custom pricing for teams that need storage at scale.",
   },
   "/partners": {
     title: "Partners · Fil One",
@@ -539,16 +519,6 @@ export const ROUTE_META = {
     title: "Enterprise Backup & Disaster Recovery · Fil One",
     description:
       "Immutable, S3-compatible backup storage with object lock and no egress fees. Ransomware-resilient, WORM-compliant, and built for enterprise recovery.",
-  },
-  "/waitlist/bucket-intelligence": {
-    title: "Join the Bucket Intelligence Waitlist · Fil One",
-    description:
-      "Get early access to Fil One RAG Pipeline. Turn any bucket into a queryable knowledge base with semantic search and your own LLM keys.",
-  },
-  "/waitlist/ai-agent-toolkit": {
-    title: "Join the AI Agent Toolkit Waitlist · Fil One",
-    description:
-      "Get early access to the Fil One AI Agent Toolkit. Connect storage to Claude, Cursor, and your agent stack via MCP and OAuth.",
   },
   "/about": {
     title: "About · Fil One",

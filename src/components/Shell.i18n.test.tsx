@@ -52,24 +52,19 @@ describe("shell localization", () => {
   });
 
   it.each([
-    ["en", { product: "Object Storage", solution: "AI Training & Inference", badge: "Early access", group: "Resources", utility: "Pricing" }],
-    ["es", { product: "Almacenamiento de objetos", solution: "Entrenamiento e inferencia de IA", badge: "Acceso anticipado", group: "Recursos", utility: "Precios" }],
+    ["en", { solution: "AI Training & Inference", group: "Resources", utility: "Pricing" }],
+    ["es", { solution: "Entrenamiento e inferencia de IA", group: "Recursos", utility: "Precios" }],
   ] as const)("resolves %s copy in the component that declares it", (lang, copy) => {
     const { nav, footer } = renderShell(lang);
     // Navbar's own lists — scoped to <nav> so the footer cannot satisfy these.
-    expect(within(nav).getAllByText(copy.product).length).toBeGreaterThan(0);
     expect(within(nav).getAllByText(copy.solution).length).toBeGreaterThan(0);
-    expect(within(nav).getAllByText(copy.badge).length).toBe(2);
     expect(within(nav).getAllByText(copy.utility).length).toBeGreaterThan(0);
     // Footer's own group titles.
     expect(within(footer).getAllByText(copy.group).length).toBe(1);
   });
 
   it.each(["en", "es"] as const)("keeps loanwords untranslated in %s", (lang) => {
-    const { nav, footer } = renderShell(lang);
-    for (const shared of ["Bucket Intelligence", "AI Agent Toolkit"]) {
-      expect(within(nav).getAllByText(shared).length).toBeGreaterThan(0);
-    }
+    const { footer } = renderShell(lang);
     for (const shared of ["Partners", "Blog", "SLA", "Filecoin"]) {
       expect(within(footer).getAllByText(shared).length).toBeGreaterThan(0);
     }

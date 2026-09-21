@@ -53,7 +53,13 @@
     { "source": "/resources/news/qamcom-dds-destor-partnership", "destination": "/", "permanent": true },
     { "source": "/resources/news/solana-integrates-filecoin", "destination": "/", "permanent": true },
     { "source": "/solutions/archival", "destination": "/", "permanent": true },
-    { "source": "/solutions/backup", "destination": "/", "permanent": true }
+    { "source": "/solutions/backup", "destination": "/", "permanent": true },
+    { "source": "/storage", "destination": "/", "permanent": true },
+    { "source": "/bucket-intelligence", "destination": "/", "permanent": true },
+    { "source": "/ai-agent-toolkit", "destination": "/", "permanent": true },
+    { "source": "/waitlist/bucket-intelligence", "destination": "/", "permanent": true },
+    { "source": "/waitlist/ai-agent-toolkit", "destination": "/", "permanent": true },
+    { "source": "/enterprise", "destination": "/", "permanent": true }
   ],
   "rewrites": [
     { "source": "/blog/rss.xml", "destination": "/api/rss" },

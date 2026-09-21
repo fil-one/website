@@ -16,10 +16,6 @@ interface NavLinkItem {
   external?: boolean;
 }
 
-interface ProductItem extends NavLinkItem {
-  description: Localized;
-  badge: Localized | null;
-}
 
 interface SolutionItem extends NavLinkItem {
   description: Localized;
@@ -27,35 +23,6 @@ interface SolutionItem extends NavLinkItem {
   icon: IconProps["icon"];
 }
 
-const PRODUCTS: readonly ProductItem[] = [
-  {
-    href: "/storage",
-    badge: null,
-    label: { en: "Object Storage", es: "Almacenamiento de objetos" },
-    description: {
-      en: "S3-compatible, verifiably durable",
-      es: "Compatible con S3, con durabilidad verificable",
-    },
-  },
-  {
-    href: "/bucket-intelligence",
-    badge: { en: "Early access", es: "Acceso anticipado" },
-    label: "Bucket Intelligence",
-    description: {
-      en: "Turn buckets into knowledge bases",
-      es: "Convierte tus buckets en bases de conocimiento",
-    },
-  },
-  {
-    href: "/ai-agent-toolkit",
-    badge: { en: "Early access", es: "Acceso anticipado" },
-    label: "AI Agent Toolkit",
-    description: {
-      en: "MCP, OAuth & SDK integrations",
-      es: "Integraciones MCP, OAuth y SDK",
-    },
-  },
-];
 
 const SOLUTIONS: readonly SolutionItem[] = [
   {
@@ -99,17 +66,12 @@ const SOLUTIONS: readonly SolutionItem[] = [
 const UTILITY_LINKS: readonly NavLinkItem[] = [
   { href: "/about", label: { en: "About", es: "Nosotros" } },
   { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
-  { href: "/enterprise", label: { en: "Enterprise", es: "Empresas" } },
+  { href: "https://docs.fil.one", external: true, label: "Docs" },
   { href: "/blog", label: "Blog" },
 ];
 
 /** Support is a prop because some landing pages point it at their own page. */
 const utilityBarLinks = (supportHref: string): readonly NavLinkItem[] => [
-    {
-      href: "https://docs.fil.one",
-      external: true,
-      label: { en: "Documentation", es: "Documentación" },
-    },
     { href: "/partners", label: "Partners" },
     { href: supportHref, label: { en: "Support", es: "Soporte" } },
   ];
@@ -135,9 +97,6 @@ const MOBILE_SECTION_LABEL_CLASS =
 const MOBILE_ROW_CLASS =
   "flex items-center rounded-lg px-3 py-2.5 font-sans text-[15px] font-normal text-zinc-950 no-underline transition-colors hover:bg-black/[0.04]";
 
-/** "Early access" pill, used in both the desktop dropdown and the mobile panel. */
-const BADGE_CLASS =
-  "rounded-full border border-zinc-200 bg-zinc-100 px-1.5 py-px font-mono text-[10px] font-medium uppercase tracking-[0.05em] text-zinc-600";
 
 interface PlatformNavbarProps {
   lang?: Lang;
@@ -160,7 +119,6 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
     ? {
         skipToContent: "Saltar al contenido principal",
         signIn: "Iniciar sesión",
-        products: "Productos",
         solutions: "Soluciones",
         contactSales: "Contactar con ventas",
         startForFree: "Empieza gratis",
@@ -170,7 +128,6 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
     : {
         skipToContent: "Skip to main content",
         signIn: "Sign in",
-        products: "Products",
         solutions: "Solutions",
         contactSales: "Contact Sales",
         startForFree: "Start for free",
@@ -192,8 +149,6 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isV2 = pathname === "/";
-  const anchorHref = (anchor: string) => (isV2 ? `#${anchor}` : `/#${anchor}`);
 
   return (
     <>
@@ -257,32 +212,6 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
             <NavigationMenuPrimitive.Root className="relative">
               <NavigationMenuPrimitive.List className="flex items-center gap-0.5 list-none m-0 p-0">
 
-                {/* Products */}
-                <NavigationMenuPrimitive.Item>
-                  <NavigationMenuPrimitive.Trigger className={NAV_TRIGGER_CLASS}>
-                    {t.products}
-                    <Icon icon={CaretDown} size={12} className="nav-caret text-zinc-600" />
-                  </NavigationMenuPrimitive.Trigger>
-
-                  <NavigationMenuPrimitive.Content>
-                    <div className="min-w-[240px] py-2">
-                      {PRODUCTS.map(({ label, description, badge, href }) => (
-                        <NavigationMenuPrimitive.Link asChild key={href}>
-                          <a
-                            href={href.startsWith("#") ? anchorHref(href.slice(1)) : href}
-                            className="flex flex-col gap-0.5 px-4 py-2.5 no-underline transition-colors hover:bg-black/[0.03]"
-                          >
-                            <div className="flex items-center gap-2">
-                              <span className="font-sans text-[14px] font-medium text-zinc-950">{l(label)}</span>
-                              {badge && <span className={BADGE_CLASS}>{l(badge)}</span>}
-                            </div>
-                            <span className="font-sans text-[12.5px] font-normal text-zinc-500">{l(description)}</span>
-                          </a>
-                        </NavigationMenuPrimitive.Link>
-                      ))}
-                    </div>
-                  </NavigationMenuPrimitive.Content>
-                </NavigationMenuPrimitive.Item>
 
                 {/* Solutions */}
                 <NavigationMenuPrimitive.Item>
@@ -322,9 +251,16 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
             </NavigationMenuPrimitive.Root>
 
             {/* Utility links */}
-            {UTILITY_LINKS.map(({ label, href }) => (
-              <a key={href} href={href} className={NAV_ITEM_CLASS}>
+            {UTILITY_LINKS.map(({ label, href, external }) => (
+              <a
+                key={href}
+                href={href}
+                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                onClick={() => { if (href.includes("docs.fil.one")) trackDocsClick(href); }}
+                className={`${NAV_ITEM_CLASS} gap-1`}
+              >
                 {l(label)}
+                {external && <Icon icon={ArrowUpRight} size={11} className="mt-px text-zinc-600" aria-hidden="true" />}
               </a>
             ))}
           </div>
@@ -357,20 +293,6 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
               utilityVisible ? "max-h-[calc(100dvh-58px)] md:max-h-[calc(100dvh-94px)]" : "max-h-[calc(100dvh-58px)]"
             }`}
           >
-            <p className={MOBILE_SECTION_LABEL_CLASS}>{t.products}</p>
-            {PRODUCTS.map(({ label, badge, href }) => (
-              <a
-                key={href}
-                href={href.startsWith("#") ? anchorHref(href.slice(1)) : href}
-                onClick={() => setMobileOpen(false)}
-                className={`${MOBILE_ROW_CLASS} justify-between`}
-              >
-                {l(label)}
-                {badge && <span className={BADGE_CLASS}>{l(badge)}</span>}
-              </a>
-            ))}
-
-            <div className="my-1 h-px w-full bg-black/[0.06]" />
             <p className={MOBILE_SECTION_LABEL_CLASS}>{t.solutions}</p>
             {SOLUTIONS.map(({ label, href }) => (
               <a
@@ -384,14 +306,16 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
             ))}
 
             <div className="my-1 h-px w-full bg-black/[0.06]" />
-            {UTILITY_LINKS.map(({ label, href }) => (
+            {UTILITY_LINKS.map(({ label, href, external }) => (
               <a
                 key={href}
                 href={href}
-                onClick={() => setMobileOpen(false)}
+                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                onClick={() => { setMobileOpen(false); if (href.includes("docs.fil.one")) trackDocsClick(href); }}
                 className={`${MOBILE_ROW_CLASS} gap-1`}
               >
                 {l(label)}
+                {external && <Icon icon={ArrowUpRight} size={11} className="mt-px text-zinc-600" aria-hidden="true" />}
               </a>
             ))}
 

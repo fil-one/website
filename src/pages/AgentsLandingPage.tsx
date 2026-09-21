@@ -156,14 +156,12 @@ const USE_CASES = [
     title: "A storage tool your agent can call directly",
     description: "Give your agent read/write/list access to your buckets without hand-writing the S3 glue. The Agent Toolkit exposes storage as a native tool you drop into Claude Desktop, Cursor, or your framework via MCP, so the agent reaches storage through a clean interface, and the data stays in buckets you own, not a third-party SaaS.",
     badge: "Agent Toolkit coming soon",
-    waitlist: "/waitlist/ai-agent-toolkit",
   },
   {
     icon: TrendUp,
     title: "A queryable knowledge base over your buckets",
     description: "Point a retrieval agent at a bucket and query it in plain language. Files index as they land; semantic search runs on your own model keys. Store the whole corpus at volume — flat pricing makes a large document set a storage cost, not a per-query tax.",
     badge: "RAG Coming soon",
-    waitlist: "/waitlist/bucket-intelligence",
   },
 ];
 
@@ -421,7 +419,7 @@ const AgentsLandingPage = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 reveal-group">
-              {USE_CASES.map(({ icon, title, description, badge, waitlist, cta }) => (
+              {USE_CASES.map(({ icon, title, description, badge, cta }) => (
                 <div
                   key={title}
                   className={`flex flex-col gap-5 p-8 rounded-2xl border border-black/[0.07] bg-white shadow-elevated reveal${useCasesInView ? " in-view" : ""}`}
@@ -437,11 +435,6 @@ const AgentsLandingPage = () => {
                   {cta && (
                     <TextLink href={cta.href} tone="brand" arrow className="mt-1 self-start">
                       {cta.label}
-                    </TextLink>
-                  )}
-                  {waitlist && (
-                    <TextLink href={waitlist} tone="brand" arrow className="mt-1 self-start">
-                      Join the waitlist
                     </TextLink>
                   )}
                 </div>

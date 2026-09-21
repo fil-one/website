@@ -110,7 +110,7 @@ const config: SolutionPageConfig = {
     ],
   },
   faq: [
-    "Is Fil One hot, warm, or cold storage? Is it like Glacier?",
+    "What counts as egress?",
     "Is Fil One compatible with my existing tools?",
     "How do I migrate from AWS / Azure / Google Cloud?",
     "How does Fil One approach security and compliance?",

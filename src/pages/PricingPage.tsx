@@ -111,7 +111,7 @@ const PricingPage = () => {
         {/* ── FAQ ──────────────────────────────────────────────────────────── */}
         <FaqSection include={[
           "What counts as egress?",
-          "How is my bill calculated?",
+          "How is my bill calculated, and is there a minimum charge?",
           "Do you offer annual or reserved capacity plans?",
           "Where is my data stored?",
         ]} />

@@ -20,7 +20,7 @@ const DashboardPreview = () => (
       >
         <img
           src={imgDashboard}
-          alt="Fil One platform — object storage, RAG pipeline, and AI agent toolkit"
+          alt="The Fil One dashboard, showing bucket storage usage and monthly spend"
           className="w-full h-auto block"
         />
         <div

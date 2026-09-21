@@ -6,33 +6,24 @@ import SectionHeader from "@/components/SectionHeader";
 import { trackEvent, trackDocsClick } from "@/lib/analytics";
 import { PRICE_DISPLAY } from "@/lib/pricing";
 import { consoleOrigin } from "@/lib/console-url";
+import { S3_ENDPOINT_HOST } from "@/lib/s3-endpoint";
 
 const faqs = [
-  {
-    question: "How does data integrity verification work with Fil One?",
-    answer:
-      "Each dataset is assigned a unique digital fingerprint (CID) at upload, creating a verifiable record of its contents. The system then automatically checks your data on a recurring basis (about every 24 hours) to confirm that the data still matches that original fingerprint, ensuring nothing has been altered.",
-  },
   {
     question: "Is Fil One compatible with my existing tools?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>The S3-compatible API means anything built for AWS S3 works here too. Point your SDK or CLI at our endpoint and authenticate with your API keys.</p>
-        <p>Security comes first in the S3-compatible design: setup and migration stay simple, and buckets are private by default. Public access with full S3 parity is coming soon.</p>
+        <p>Fil One speaks the S3 API, so you keep the SDK and CLI you already use. Point it at your region&rsquo;s endpoint, switch on path-style addressing, and authenticate with a Fil One access key. Everyday object work behaves the way your code expects: put, get, head, list, delete, presigned URLs, and multipart upload from your own SDK.</p>
+        <p>Buckets are private by default. For the operation-by-operation detail, including the calls that differ between regions, see the S3 compatibility reference in the docs.</p>
         <p>Read <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link" onClick={() => trackDocsClick("https://docs.fil.one")}>Fil One docs</a>, <a href={consoleOrigin()} target="_blank" rel="noopener noreferrer" className="faq-link">access the app</a> to get started with no code required, or <a href="/contact-sales" className="faq-link">talk to someone on our team</a> to get started.</p>
       </div>
     ),
   },
   {
-    question: "What kinds of organizations use Fil One?",
-    answer:
-      "Built for large-scale storage needs, including AI and data-intensive workloads, multi-cloud strategies, audit-sensitive data, and long-term retention.",
-  },
-  {
     question: "How does Fil One approach security and compliance?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Encryption is industry-standard, with per-object data encryption keys that protect your data regardless of which provider it's stored with. Our services are delivered through top-tier data centers that are certified to ISO 27001, SOC 2, and PCI DSS standards. Reach out to <a href="mailto:security@fil.one" className="faq-link">security@fil.one</a> for compliance documentation or any other security questions.</p>
+        <p>Objects are encrypted at rest by the storage gateway using AES256 (SSE-S3), and every request runs over TLS. It is on by default with nothing to configure. Keys are held by the regional storage operator that fulfils your bucket&rsquo;s region, so if your policy requires you to hold the keys yourself, encrypt client-side before upload with the standard S3 tooling and Fil One stores the ciphertext. Our services are delivered through top-tier data centers that are certified to ISO 27001, SOC 2, and PCI DSS standards. Reach out to <a href="mailto:security@fil.one" className="faq-link">security@fil.one</a> for compliance documentation or any other security questions.</p>
       </div>
     ),
   },
@@ -46,67 +37,55 @@ const faqs = [
     ),
   },
   {
-    question: "What is Bucket Intelligence and how does it work?",
-    answer: (
-      <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Every bucket becomes a queryable knowledge base once Bucket Intelligence is connected. Files are auto-indexed as they land, powered by a built-in RAG pipeline. Ask questions in plain language and get answers grounded in your actual data.</p>
-        <p>Bring your own LLM API keys (OpenAI, Anthropic, or Cohere), so AI costs go directly to your provider. Early testers get access at no charge.</p>
-      </div>
-    ),
-  },
-  {
-    question: "What is the AI Agent Toolkit?",
-    answer: (
-      <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>The AI Agent Toolkit lets you connect your AI tools and automations to Fil One. Pick an integration, paste a config block, and your buckets are immediately available for your AI agents to use or to trigger automations from bucket events.</p>
-        <p>It works with your existing buckets, no new setup or credentials needed. Access can be revoked at any time, and there's no cost for early testers.</p>
-      </div>
-    ),
-  },
-  {
-    question: "Do I need to use all three products together?",
-    answer:
-      "Not required. Object Storage is the foundation every Fil One account starts with, and it works great on its own as an S3-compatible store. Both additional products connect directly to your existing buckets when they launch, with no data migration needed.",
-  },
-  {
     question: "What counts as egress?",
     answer:
-      "Egress is any data transferred out of your bucket: to the internet, to another cloud, or to your own servers. With Fil One, all egress is free, always, at any scale.",
+      "Egress is any data transferred out of your bucket: to the internet, to another cloud, or to your own servers. On a paid plan it is free at any scale, and there are no per-request charges either. The 30-day trial includes 2 TB of egress.",
   },
   {
-    question: "Is there a minimum charge?",
+    question: "How is my bill calculated, and is there a minimum charge?",
     answer:
-      `Storage is billed at ${PRICE_DISPLAY} per TB per month, with a ${PRICE_DISPLAY} monthly minimum. Store under 1 TB and you pay the ${PRICE_DISPLAY} minimum; store more and you pay per TB for what you use, with no egress or API fees.`,
-  },
-  {
-    question: "How is my bill calculated?",
-    answer:
-      `Billing is ${PRICE_DISPLAY} per TB stored per month, with no fees for egress or API operations. Your bill is what you store multiplied by the rate, subject to a ${PRICE_DISPLAY} monthly minimum.`,
+      `Billing is ${PRICE_DISPLAY} per TB stored per month, with no fees for egress or API operations, subject to a ${PRICE_DISPLAY} monthly minimum. Store under 1 TB and you pay the minimum; store more and you pay per TB for what you use.`,
   },
   {
     question: "Do you offer annual or reserved capacity plans?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Yes. Teams with predictable storage needs can choose reserved capacity plans on 1, 3, or 5-year terms with volume discounts. <a href="/contact-sales" className="faq-link">Contact sales</a> to get a quote.</p>
+        <p>Yes. Teams with predictable storage needs can talk to us about multi-year committed capacity. <a href="/contact-sales" className="faq-link">Contact sales</a> and we will put a quote together.</p>
       </div>
     ),
   },
   {
     question: "Where is my data stored?",
-    answer:
-      "It depends on the bucket region you choose. We currently offer an EU region (France) and a US region (Michigan), with more regions on the way.",
-  },
-  {
-    question: "Is there a free trial?",
-    answer:
-      "Yes. The trial includes 1 TB free for 30 days, with no credit card required to start.",
-  },
-  {
-    question: "What is Filecoin?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Filecoin is a distributed storage network launched in 2020, designed to make data portable, verifiable, and resilient by default.</p>
-        <p>Instead of relying on a single proprietary vendor, Filecoin uses open protocols and an open market to store data with a global network of independent providers, helping reduce single points of failure and deliver true multi-cloud durability.</p>
+        <p>You choose when you create the bucket: Europe (France) or US East (Michigan), with more regions on the way. A bucket's region is fixed at creation, so data written there stays there. Each region has its own endpoint, and an access key is scoped to a single region.</p>
+        <p>Running a GPU cloud? We can also install storage directly inside your own data center. <a href="/partners" className="faq-link">See our partner program</a>.</p>
+      </div>
+    ),
+  },
+  {
+    question: "Does Fil One support IPFS or CIDs?",
+    answer: (
+      <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
+        <p>No. Fil One is S3-compatible object storage. It does not support IPFS retrieval or content addressing via CIDs. If you need IPFS pinning or CID-based access, take a look at <a href="https://filecoin.cloud/" target="_blank" rel="noopener noreferrer" className="faq-link">Filecoin Open Cloud (FOC)</a>.</p>
+      </div>
+    ),
+  },
+  {
+    question: "Can I make a bucket public?",
+    answer:
+      "Public buckets are not currently supported. To share individual files, you can generate a presigned URL from the dashboard or via the S3 API. This gives time-limited access to a specific object without making the entire bucket public.",
+  },
+  {
+    question: "How do I migrate from Storacha or another S3-compatible provider?",
+    answer:
+      `Fil One is S3-compatible, so tools like rclone work out of the box. Point rclone at ${S3_ENDPOINT_HOST} with your Fil One credentials and sync your data across. If you need help with a larger migration, reach out and we'll guide you through it.`,
+  },
+  {
+    question: "Can I pay with FIL tokens?",
+    answer: (
+      <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
+        <p>Not currently. Billing is in USD. If paying in FIL is a hard requirement, <a href="/contact-sales" className="faq-link">get in touch</a> and we can explore options depending on your storage volume.</p>
       </div>
     ),
   },

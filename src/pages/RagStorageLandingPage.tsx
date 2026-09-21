@@ -113,7 +113,7 @@ const config: LandingPageConfig = {
       {
         icon: Plug,
         title: "Native RAG integrations",
-        desc: "LangChain, LlamaIndex, and Haystack connectors for direct corpus management are in development — join the waitlist at /waitlist/bucket-intelligence for early access.",
+        desc: "LangChain, LlamaIndex, and Haystack connectors for direct corpus management are in development.",
       },
     ],
   },

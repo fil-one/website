@@ -105,10 +105,10 @@ const config: SolutionPageConfig = {
     ],
   },
   faq: [
-    "Is Fil One hot, warm, or cold storage? Is it like Glacier?",
+    "How is my bill calculated, and is there a minimum charge?",
     "How do I migrate from AWS / Azure / Google Cloud?",
     "Is Fil One compatible with my existing tools?",
-    "How does data integrity verification work with Fil One?",
+    "Where is my data stored?",
   ],
   cta: {
     heading: "Cut your archive bill by up to 80%",

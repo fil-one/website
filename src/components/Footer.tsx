@@ -25,15 +25,6 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
    */
   const groups: FooterGroup[] = [
     {
-      id: "products",
-      title: { en: "Products", es: "Productos" },
-      items: [
-        { href: "/storage", label: { en: "Object Storage", es: "Almacenamiento de objetos" } },
-        { href: "/bucket-intelligence", label: "Bucket Intelligence" },
-        { href: "/ai-agent-toolkit", label: "AI Agent Toolkit" },
-      ],
-    },
-    {
       id: "solutions",
       title: { en: "Solutions", es: "Soluciones" },
       items: [
@@ -55,7 +46,6 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
       items: [
         { href: "/about", label: { en: "About", es: "Nosotros" } },
         { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
-        { href: "/enterprise", label: { en: "Enterprise", es: "Empresas" } },
         { href: "/partners", label: "Partners" },
         { href: contactSalesHref, label: { en: "Contact Sales", es: "Contactar con ventas" } },
       ],

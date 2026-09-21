@@ -105,7 +105,8 @@ const config: SolutionPageConfig = {
     ],
   },
   faq: [
-    "What is Filecoin?",
+    "Does Fil One support IPFS or CIDs?",
+    "Can I pay with FIL tokens?",
     "Is Fil One compatible with my existing tools?",
     "How does Fil One approach security and compliance?",
   ],

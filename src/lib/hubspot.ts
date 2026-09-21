@@ -11,12 +11,6 @@
  */
 export const HS_PORTAL_ID = "51191454";
 
-/** Bucket Intelligence waitlist form */
-export const HS_BUCKET_INTELLIGENCE_WAITLIST_FORM_GUID = "39527548-1773-4541-beed-eee6225ae3b2";
-
-/** AI Agent Toolkit waitlist form */
-export const HS_AGENT_TOOLKIT_WAITLIST_FORM_GUID = "4857a0c6-a4a5-459c-bf37-a56d452c7442";
-
 /** Contact Sales form */
 export const HS_CONTACT_FORM_GUID = "f7684332-cc69-4d56-bd8d-12a2b730bceb";
 
