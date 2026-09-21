@@ -12,6 +12,7 @@ import StorageUseCasesSection from "@/components/StorageUseCasesSection";
 import ComparisonSection from "@/components/ComparisonSection";
 import PricingTeaserSection from "@/components/PricingTeaserSection";
 import EnterpriseSection from "@/components/EnterpriseSection";
+import PartnersSection from "@/components/PartnersSection";
 import FaqSection from "@/components/FaqSection";
 import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
@@ -118,6 +119,9 @@ const Home = () => {
 
         {/* Enterprise — the "and if you need more than self-serve" step after pricing */}
         <EnterpriseSection />
+
+        {/* Partners — the other non-self-serve audience, straight after enterprise */}
+        <PartnersSection />
 
         {/* FAQ — objection handling, right before the CTA */}
         <FaqSection />
