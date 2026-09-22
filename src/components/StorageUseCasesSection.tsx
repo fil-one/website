@@ -13,9 +13,9 @@ const USE_CASES = [
       "Images, videos, and documents stored in an S3-compatible bucket. Your presigned URLs and CDN configs work without changes.",
   },
   {
-    title: "Back up databases with proof of integrity",
+    title: "Back up databases without a restore bill",
     description:
-      "Ship snapshots to Fil One. Every backup is verified daily, so you know it's intact before you ever need to restore.",
+      "Ship snapshots to Fil One. Versioning keeps prior copies, and a restore never carries an egress charge, so testing the plan costs nothing."
   },
   {
     title: "Archive at scale, access without penalty",

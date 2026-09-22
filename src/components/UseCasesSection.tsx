@@ -20,7 +20,7 @@ const USE_CASES = [
     icon: Database,
     title: "Eleven nines of durability",
     description:
-      "Distributed, redundant storage with 11 nines of durability and audit-ready integrity.",
+      "Distributed, redundant storage designed for eleven nines of durability.",
   },
   {
     icon: ArrowsLeftRight,
@@ -88,7 +88,7 @@ const UseCasesSection = ({ heading = "Enterprise storage made simple" }: { headi
             color: "#52525B",
           }}
         >
-          S3-compatible storage that's easy to set up and easier to scale, built for reliability, portability, and verifiable data integrity, without the egress bill.
+          S3-compatible storage that's easy to set up and easier to scale, built for reliability, portability, and a bill you can predict.
         </p>
       </div>
 
