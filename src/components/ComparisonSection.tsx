@@ -170,7 +170,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
   });
 
   const rowBorder: React.CSSProperties = { borderTop: "1px solid rgba(0,0,0,0.06)" };
-  const gridColumns = "168px repeat(5, 1fr)";
+  const gridColumns = "200px repeat(5, 1fr)";
 
   return (
     <section
@@ -200,7 +200,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
       {/* Table */}
       <div
         ref={tableRef}
-        className={`w-full max-w-[960px] reveal${tableInView ? " in-view" : ""}`}
+        className={`w-full max-w-container reveal${tableInView ? " in-view" : ""}`}
       >
         {/* ── Desktop table (960px+) ── */}
         <div className="hidden min-[960px]:block">
