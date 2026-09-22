@@ -108,13 +108,13 @@ const COMMERCIALS = [
   },
   {
     icon: Receipt,
-    title: "Your contract, your customer",
-    body: "Your customers buy storage from you, on your paper, alongside the compute they already rent from you. We can stay behind the scenes.",
+    title: "White label, end to end",
+    body: "Your brand on the console, the docs and the S3 endpoint. Your customers buy storage from you, on your paper, alongside the compute they already rent. Fil One stays behind the curtain unless you want us in front of it.",
   },
   {
     icon: UsersThree,
-    title: "Room to start small",
-    body: "Begin on our existing regions in Europe (France) and US East (Michigan) while we work through what a deployment in your building looks like.",
+    title: "Metering that feeds your billing",
+    body: "Per-bucket usage is exported to you, so the storage line lands on your own invoice next to the GPU hours, priced the way you choose.",
   },
 ];
 
@@ -147,6 +147,7 @@ const FAQ_INCLUDE = [
   "What counts as egress?",
   "How is my bill calculated, and is there a minimum charge?",
   "Do you offer annual or reserved capacity plans?",
+  "How does Fil One approach security and compliance?",
 ];
 
 const DEPLOYMENTS = [
@@ -200,7 +201,7 @@ const NeocloudPage = () => {
             </>
           }
           titleMaxWidth={700}
-          description="We fund, install and run S3-compatible object storage, including inside your own data center. You sell it to your GPU customers as part of your own product."
+          description="We fund, install and run S3-compatible object storage, including inside your own data center. You sell it to your GPU customers under your own brand, as part of your own product."
           descriptionMaxWidth={560}
           ctas={[
             {
@@ -322,8 +323,8 @@ const NeocloudPage = () => {
               <SectionLabel>The commercials</SectionLabel>
               <SectionHeading maxWidth={560}>You sell it, you price it</SectionHeading>
               <SectionSub maxWidth={600}>
-                Storage becomes a product on your line card, without a purchase order and without
-                a hire.
+                Storage becomes a product on your line card, under your own brand, without a
+                purchase order and without a hire.
               </SectionSub>
             </div>
             <div
