@@ -98,16 +98,6 @@ const comparisonRows: ComparisonRow[] = [
     },
   },
   {
-    feature: "Account minimum",
-    cells: {
-      aws: { tone: "good", text: "None" },
-      backblaze: { tone: "good", text: "None" },
-      wasabi: { tone: "cost", text: "1 TB of active storage a month, stored or not" },
-      r2: { tone: "good", text: "None" },
-      filone: { tone: "mixed", text: "$4.99 a month" },
-    },
-  },
-  {
     feature: "Storage classes to pick and manage",
     cells: {
       aws: { tone: "mixed", text: "Eight, moved between with lifecycle rules" },
