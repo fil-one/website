@@ -153,7 +153,7 @@ const DEPLOYMENTS = [
   {
     label: "Today",
     title: "On our regions",
-    body: "Europe (France) and US East (Michigan). A bucket's region is fixed when you create it, and an access key is scoped to one region. Start here while we talk about your site.",
+    body: "Europe (France) and US East (Michigan) today, with more regions on the way. A bucket's region is fixed when you create it, and an access key is scoped to one region. Start here while we talk about your site.",
   },
   {
     label: "With your team",

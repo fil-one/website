@@ -87,9 +87,9 @@ const WORKLOADS = [
     id: "research",
     icon: Flask,
     title: "Research and regulated datasets",
-    body: "Choose Europe (France) or US East (Michigan) when you create a bucket. The region is fixed from that moment, and an access key works in one region only, so where a dataset lives is a property of the bucket rather than a policy someone has to remember.",
+    body: "Choose Europe (France) or US East (Michigan) when you create a bucket, with more regions on the way. The region is fixed from that moment, and an access key works in one region only, so where a dataset lives is a property of the bucket rather than a policy someone has to remember.",
     points: [
-      "Region chosen per bucket, fixed at creation",
+      "Region chosen per bucket, more on the way",
       "Access keys scoped to one region",
       "Raw and derived data at the same flat rate",
     ],
@@ -137,7 +137,7 @@ const PLATFORM = [
   {
     icon: Globe,
     title: "You pick the region",
-    description: "Europe (France) or US East (Michigan), decided per bucket and fixed from then on.",
+    description: "Europe (France) or US East (Michigan), decided per bucket and fixed from then on. More regions are on the way.",
   },
 ];
 
