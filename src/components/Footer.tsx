@@ -32,6 +32,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
         { href: "/about", label: { en: "About", es: "Nosotros" } },
         { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
         { href: "/partners", label: "Partners" },
+        { href: "/neocloud", label: { en: "For GPU clouds", es: "Para nubes GPU" } },
         { href: contactSalesHref, label: { en: "Contact Sales", es: "Contactar con ventas" } },
       ],
     },

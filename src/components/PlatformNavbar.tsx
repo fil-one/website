@@ -21,6 +21,7 @@ interface NavLinkItem {
 
 const UTILITY_LINKS: readonly NavLinkItem[] = [
   { href: "/solutions", label: { en: "Solutions", es: "Soluciones" } },
+  { href: "/neocloud", label: { en: "Neoclouds", es: "Neoclouds" } },
   { href: "/about", label: { en: "About", es: "Nosotros" } },
   { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
   { href: "https://docs.fil.one", external: true, label: "Docs" },

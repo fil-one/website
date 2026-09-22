@@ -495,6 +495,11 @@ export const ROUTE_META = {
     description:
       "Channel, Technology, and MSP partner programs for Fil One. Resell, integrate, or bundle verifiable cloud storage with your business.",
   },
+  "/neocloud": {
+    title: "Storage for GPU clouds · Fil One",
+    description:
+      "Add a storage line to your GPU cloud. Fil One funds, installs and runs S3-compatible object storage, including inside your own data center, so you can sell it to your customers.",
+  },
   "/partners/apply": {
     title: "Partner Application · Fil One",
     description:
