@@ -67,8 +67,8 @@ const WHY_FEATURES = [
   },
   {
     icon: Cube,
-    title: "11 nines durability",
-    body: "Distributed, redundant storage with daily, audit-ready integrity proof.",
+    title: "Eleven nines of durability",
+    body: "Distributed, redundant storage run by independent regional operators, designed for eleven nines.",
   },
   {
     icon: ArrowsLeftRight,

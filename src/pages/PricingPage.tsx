@@ -18,13 +18,13 @@ const PAYGO_FEATURES = [
   "Pay monthly",
   `${PRICE_DISPLAY}/month minimum`,
   "No egress or API request fees",
-  "Data integrity guarantees",
+  "Object lock and versioning",
 ];
 
 const BUSINESS_FEATURES = [
   "Purchase in 1, 3, or 5-year increments",
   "No egress or API request fees",
-  "Data integrity guarantees",
+  "Object lock and versioning",
   "Capacity assurance and deployment SLAs",
 ];
 
