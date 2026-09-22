@@ -1,30 +1,6 @@
-import { Check, Minus, X } from "@phosphor-icons/react";
-import Icon from "@/components/Icon";
 import { useInView } from "@/hooks/useInView";
 import { signupUrl } from "@/lib/console-url";
 import { PRICE_DISPLAY } from "@/lib/pricing";
-
-/**
- * Tone of a comparison cell. Every cell carries its own visible text, so the
- * tone icon is an at-a-glance summary of that vendor's published term:
- *
- *   good  — nothing extra to pay, nothing extra to manage
- *   mixed — allowed, but with a documented limit or an extra decision
- *   cost  — a documented charge or a documented minimum
- *   plain — a bare figure (the price row), no icon
- */
-type Tone = "good" | "mixed" | "cost" | "plain";
-
-const toneLabel: Record<Exclude<Tone, "plain">, string> = {
-  good: "Advantage",
-  mixed: "Caveat",
-  cost: "Extra charge",
-};
-
-interface Cell {
-  tone: Tone;
-  text: string;
-}
 
 type ProviderKey = "aws" | "backblaze" | "wasabi" | "r2" | "filone";
 
@@ -32,7 +8,7 @@ interface ComparisonRow {
   feature: string;
   /** Renders the values large, for the headline price row. */
   emphasis?: boolean;
-  cells: Record<ProviderKey, Cell>;
+  cells: Record<ProviderKey, string>;
 }
 
 /** Desktop column order: competitors left to right, Fil One in the card at the right. */
@@ -60,121 +36,97 @@ const comparisonRows: ComparisonRow[] = [
     feature: "Storage, per TB per month",
     emphasis: true,
     cells: {
-      aws: { tone: "plain", text: "$23.00" },
-      backblaze: { tone: "plain", text: "$6.95" },
-      wasabi: { tone: "plain", text: "$7.99" },
-      r2: { tone: "plain", text: "$15.00" },
-      filone: { tone: "plain", text: PRICE_DISPLAY },
+      aws: "$23.00",
+      backblaze: "$6.95",
+      wasabi: "$7.99",
+      r2: "$15.00",
+      filone: PRICE_DISPLAY,
     },
   },
   {
     feature: "Egress",
     cells: {
-      aws: { tone: "cost", text: "$0.09/GB above the first 100 GB a month" },
-      backblaze: { tone: "mixed", text: "Free up to 3x the data stored, then $0.01/GB" },
-      wasabi: { tone: "mixed", text: "Free while monthly egress stays at or below stored volume" },
-      r2: { tone: "good", text: "Free" },
-      filone: { tone: "good", text: "Free, at any volume" },
+      aws: "$0.09/GB above the first 100 GB a month",
+      backblaze: "Free up to 3x the data stored, then $0.01/GB",
+      wasabi: "Free while monthly egress stays at or below stored volume",
+      r2: "Free",
+      filone: "Free, at any volume",
     },
   },
   {
     feature: "Request and API charges",
     cells: {
-      aws: { tone: "cost", text: "$0.005 per 1,000 writes, $0.0004 per 1,000 reads" },
-      backblaze: { tone: "good", text: "None on class A, B and C calls" },
-      wasabi: { tone: "good", text: "None" },
-      r2: { tone: "cost", text: "$4.50 per million writes, $0.36 per million reads" },
-      filone: { tone: "good", text: "None" },
+      aws: "$0.005 per 1,000 writes, $0.0004 per 1,000 reads",
+      backblaze: "None on class A, B and C calls",
+      wasabi: "None",
+      r2: "$4.50 per million writes, $0.36 per million reads",
+      filone: "None",
     },
   },
   {
     feature: "Minimum storage duration",
     cells: {
-      aws: { tone: "cost", text: "30 to 180 days on the IA and Glacier classes" },
-      backblaze: { tone: "good", text: "None" },
-      wasabi: { tone: "cost", text: "90 days. Delete sooner and the remaining days are billed" },
-      r2: { tone: "mixed", text: "30 days on Infrequent Access" },
-      filone: { tone: "good", text: "None" },
+      aws: "30 to 180 days on the IA and Glacier classes",
+      backblaze: "None",
+      wasabi: "90 days. Delete sooner and the remaining days are billed",
+      r2: "30 days on Infrequent Access",
+      filone: "None",
     },
   },
   {
     feature: "Storage classes to pick and manage",
     cells: {
-      aws: { tone: "mixed", text: "Eight, moved between with lifecycle rules" },
-      backblaze: { tone: "good", text: "One" },
-      wasabi: { tone: "good", text: "One" },
-      r2: { tone: "mixed", text: "Two: Standard and Infrequent Access" },
-      filone: { tone: "good", text: "One. No lifecycle rules to write" },
+      aws: "Eight, moved between with lifecycle rules",
+      backblaze: "One",
+      wasabi: "One",
+      r2: "Two: Standard and Infrequent Access",
+      filone: "One. No lifecycle rules to write",
     },
   },
   {
     feature: "Retrieval fees and restore waits",
     cells: {
-      aws: { tone: "cost", text: "$0.01 to $0.03/GB on IA and Glacier, plus a restore wait on archive" },
-      backblaze: { tone: "good", text: "None" },
-      wasabi: { tone: "good", text: "None" },
-      r2: { tone: "cost", text: "$0.01/GB on Infrequent Access" },
-      filone: { tone: "good", text: "None" },
+      aws: "$0.01 to $0.03/GB on IA and Glacier, plus a restore wait on archive",
+      backblaze: "None",
+      wasabi: "None",
+      r2: "$0.01/GB on Infrequent Access",
+      filone: "None",
     },
   },
 ];
 
-const toneIcon = { good: Check, mixed: Minus, cost: X } as const;
-
 /**
- * The tone glyph. Green reads as "nothing extra here" and is applied on
- * competitor columns too, so the table stays legible as a record of published
- * terms rather than a scorecard. Fil One's own glyph takes the brand blue.
+ * A cell is its own evidence: the vendor's published figure or policy, in
+ * words. Fil One's column is set in near-black on its white card, the
+ * competitors in grey, so the eye lands on our terms without a glyph
+ * grading anyone.
  */
-const ToneMark = ({ tone, isFilOne }: { tone: Exclude<Tone, "plain">; isFilOne: boolean }) => (
-  <span
-    role="img"
-    aria-label={toneLabel[tone]}
-    className={
-      tone === "good"
-        ? isFilOne
-          ? "text-brand-500"
-          : "text-success-600"
-        : "text-zinc-500"
-    }
-  >
-    <Icon icon={toneIcon[tone]} size={14} weight="bold" />
-  </span>
-);
-
 const CellContent = ({
-  cell,
+  text,
   isFilOne,
   emphasis,
 }: {
-  cell: Cell;
+  text: string;
   isFilOne: boolean;
   emphasis?: boolean;
-}) => {
-  if (emphasis) {
-    return (
-      <span
-        className={`font-display font-medium tracking-[-0.02em] text-[22px] ${
-          isFilOne ? "text-brand-500" : "text-zinc-600"
-        }`}
-      >
-        {cell.text}
-      </span>
-    );
-  }
-  return (
-    <>
-      {cell.tone !== "plain" && <ToneMark tone={cell.tone} isFilOne={isFilOne} />}
-      <span
-        className={`font-sans text-[12px] leading-[1.45] ${
-          isFilOne ? "font-medium text-zinc-950" : "text-zinc-600"
-        }`}
-      >
-        {cell.text}
-      </span>
-    </>
+}) =>
+  emphasis ? (
+    <span
+      className={`font-display font-medium tracking-[-0.02em] text-[17px] ${
+        isFilOne ? "text-brand-500" : "text-zinc-600"
+      }`}
+    >
+      {text}
+    </span>
+  ) : (
+    <span
+      className={`font-sans text-[12px] leading-[1.45] ${
+        isFilOne ? "font-medium text-zinc-950" : "text-zinc-600"
+      }`}
+    >
+      {text}
+    </span>
   );
-};
 
 const sources: { label: string; href: string }[] = [
   { label: "AWS", href: "https://aws.amazon.com/s3/pricing/" },
@@ -302,7 +254,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
                         style={isFilOne ? filoneCardStyle(rowBorder) : rowBorder}
                       >
                         <CellContent
-                          cell={row.cells[provider.key]}
+                          text={row.cells[provider.key]}
                           isFilOne={isFilOne}
                           emphasis={row.emphasis}
                         />
@@ -380,7 +332,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
                     </div>
                     <div role="cell" className="flex items-start gap-2 min-w-0 flex-1">
                       <CellContent
-                        cell={row.cells[provider.key]}
+                        text={row.cells[provider.key]}
                         isFilOne={isFilOne}
                         emphasis={row.emphasis}
                       />
