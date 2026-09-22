@@ -25,25 +25,10 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
    */
   const groups: FooterGroup[] = [
     {
-      id: "solutions",
-      title: { en: "Solutions", es: "Soluciones" },
-      items: [
-        {
-          href: "/solutions/ai-training",
-          label: { en: "AI Training & Inference", es: "Entrenamiento e inferencia de IA" },
-        },
-        { href: "/solutions/web3-dapps", label: { en: "Web3 & dApps", es: "Web3 y dApps" } },
-        { href: "/solutions/media-archive", label: { en: "Media & Archive", es: "Medios y archivo" } },
-        {
-          href: "/solutions/enterprise-backup",
-          label: { en: "Enterprise Backup & DR", es: "Backup empresarial y DR" },
-        },
-      ],
-    },
-    {
       id: "company",
       title: { en: "Company", es: "Empresa" },
       items: [
+        { href: "/solutions", label: { en: "Solutions", es: "Soluciones" } },
         { href: "/about", label: { en: "About", es: "Nosotros" } },
         { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
         { href: "/partners", label: "Partners" },

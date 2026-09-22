@@ -59,7 +59,11 @@
     { "source": "/ai-agent-toolkit", "destination": "/", "permanent": true },
     { "source": "/waitlist/bucket-intelligence", "destination": "/", "permanent": true },
     { "source": "/waitlist/ai-agent-toolkit", "destination": "/", "permanent": true },
-    { "source": "/enterprise", "destination": "/", "permanent": true }
+    { "source": "/enterprise", "destination": "/", "permanent": true },
+    { "source": "/solutions/ai-training", "destination": "/solutions#ai", "permanent": true },
+    { "source": "/solutions/web3-dapps", "destination": "/solutions", "permanent": true },
+    { "source": "/solutions/media-archive", "destination": "/solutions#media", "permanent": true },
+    { "source": "/solutions/enterprise-backup", "destination": "/solutions#backup", "permanent": true }
   ],
   "rewrites": [
     { "source": "/blog/rss.xml", "destination": "/api/rss" },

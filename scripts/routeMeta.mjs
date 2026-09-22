@@ -500,25 +500,10 @@ export const ROUTE_META = {
     description:
       "Apply to the Fil One partner program. Resell, integrate, or bundle verifiable S3-compatible cloud storage with your business.",
   },
-  "/solutions/ai-training": {
-    title: "AI Training & Inference Storage · Fil One",
+  "/solutions": {
+    title: "Solutions · Fil One",
     description:
-      "S3-compatible object storage built for AI workloads. Store training datasets, model weights, and checkpoints with verifiable integrity and no egress fees.",
-  },
-  "/solutions/web3-dapps": {
-    title: "Web3 & dApp Storage · Fil One",
-    description:
-      "Verifiable, decentralized object storage for NFTs, dApps, and on-chain assets. S3-compatible, no egress fees, cryptographic proof on every object.",
-  },
-  "/solutions/media-archive": {
-    title: "Media & Archive Storage · Fil One",
-    description:
-      `Low-cost, high-durability object storage for video, audio, and long-term archives. No egress fees, no retrieval penalties. ${PRICE_PER_TB_MONTH}.`,
-  },
-  "/solutions/enterprise-backup": {
-    title: "Enterprise Backup & Disaster Recovery · Fil One",
-    description:
-      "Immutable, S3-compatible backup storage with object lock and no egress fees. Ransomware-resilient, WORM-compliant, and built for enterprise recovery.",
+      `Backups, AI training data, media archives, app storage, research data, and logs on one S3-compatible platform. ${PRICE_PER_TB_MONTH}, no egress fees.`,
   },
   "/about": {
     title: "About · Fil One",
