@@ -15,7 +15,7 @@
  */
 
 /** Fil One storage price, in USD per TB per month. */
-export const PRICE_PER_TB = 4.99;
+export const PRICE_PER_TB = 5.99;
 
 /** The numeric amount as a string, for structured data (e.g. JSON-LD price). */
 export const PRICE_AMOUNT = PRICE_PER_TB.toFixed(2);

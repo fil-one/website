@@ -14,7 +14,7 @@ const USE_CASES = [
     icon: Plug,
     title: "S3-compatible from day one",
     description:
-      "Full S3 API compatibility, so your existing tools, SDKs, and workflows just connect.",
+      "S3 API compatibility, so your existing tools, SDKs, and workflows just connect.",
   },
   {
     icon: Database,

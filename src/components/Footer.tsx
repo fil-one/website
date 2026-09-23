@@ -25,14 +25,20 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
    */
   const groups: FooterGroup[] = [
     {
+      id: "product",
+      title: { en: "Product", es: "Producto" },
+      items: [
+        { href: "/solutions", label: { en: "Solutions", es: "Soluciones" } },
+        { href: "/neocloud", label: "Neoclouds" },
+        { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
+      ],
+    },
+    {
       id: "company",
       title: { en: "Company", es: "Empresa" },
       items: [
-        { href: "/solutions", label: { en: "Solutions", es: "Soluciones" } },
-        { href: "/about", label: { en: "About", es: "Nosotros" } },
-        { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
         { href: "/partners", label: "Partners" },
-        { href: "/neocloud", label: { en: "For GPU clouds", es: "Para nubes GPU" } },
+        { href: "/about", label: { en: "About", es: "Nosotros" } },
         { href: contactSalesHref, label: { en: "Contact Sales", es: "Contactar con ventas" } },
       ],
     },
@@ -40,8 +46,8 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
       id: "resources",
       title: { en: "Resources", es: "Recursos" },
       items: [
-        { href: "https://docs.fil.one", label: { en: "Documentation", es: "Documentación" } },
         { href: "/blog", label: "Blog" },
+        { href: "https://docs.fil.one", label: { en: "Documentation", es: "Documentación" } },
         { href: supportHref, label: { en: "Support", es: "Soporte" } },
         { href: "https://status.fil.one", label: { en: "Status", es: "Estado" } },
         { href: "https://filecoin.io", label: "Filecoin" },

@@ -1,6 +1,7 @@
 import { useInView } from "@/hooks/useInView";
 import { signupUrl } from "@/lib/console-url";
 import { PRICE_DISPLAY } from "@/lib/pricing";
+import filOneLogo from "@/assets/fil-one-logo.svg";
 
 type ProviderKey = "aws" | "backblaze" | "wasabi" | "r2" | "filone";
 
@@ -112,16 +113,16 @@ const CellContent = ({
 }) =>
   emphasis ? (
     <span
-      className={`font-display font-medium tracking-[-0.02em] text-[17px] ${
-        isFilOne ? "text-brand-500" : "text-zinc-600"
+      className={`font-display tracking-[-0.02em] ${
+        isFilOne ? "text-[17px] font-semibold text-brand-500" : "text-[13px] font-medium text-zinc-600"
       }`}
     >
       {text}
     </span>
   ) : (
     <span
-      className={`font-sans text-[12px] leading-[1.45] ${
-        isFilOne ? "font-medium text-zinc-950" : "text-zinc-600"
+      className={`font-sans leading-[1.45] ${
+        isFilOne ? "text-[13px] font-medium text-zinc-950" : "text-[12px] text-zinc-600"
       }`}
     >
       {text}
@@ -191,10 +192,6 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
         <h2 className="font-display font-medium text-[26px] md:text-[32px] leading-[1.2] tracking-[-0.02em] text-zinc-950 m-0">
           Cloud Storage Comparison
         </h2>
-        <p className="font-sans text-[15px] leading-[1.6] text-zinc-500 m-0">
-          Storage is the only metered line on a Fil One bill. Here is how that sits next to what the
-          other S3-compatible providers publish.
-        </p>
       </div>
 
       {/* Table */}
@@ -208,23 +205,26 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
             {/* Column headers */}
             <div role="rowgroup">
               <div role="row" className="grid w-full" style={{ gridTemplateColumns: gridColumns }}>
-                <div role="columnheader" className="px-3 py-6" aria-label="Term" />
+                <div role="columnheader" className="px-4 py-7" aria-label="Term" />
                 {providers.map((provider) => {
                   const isFilOne = provider.key === "filone";
+                  const isDivided = !isFilOne;
                   return (
                     <div
                       key={provider.key}
                       role="columnheader"
-                      className={`px-3 py-6 flex items-center justify-center text-center${isFilOne ? " rounded-t-2xl" : ""}`}
+                      className={`px-6 py-7 flex items-center${
+                        isFilOne ? " justify-center text-center rounded-t-2xl" : ` justify-start text-left${isDivided ? " border-l border-black/[0.05]" : ""}`
+                      }`}
                       style={isFilOne ? filoneCardStyle({ borderTop: "1px solid rgba(0,0,0,0.06)" }) : undefined}
                     >
-                      <span
-                        className={`font-sans text-[13px] text-zinc-950 ${
-                          isFilOne ? "font-semibold text-[14px] tracking-[-0.01em]" : "font-medium"
-                        }`}
-                      >
-                        {provider.name}
-                      </span>
+                      {isFilOne ? (
+                        <img src={filOneLogo} alt="Fil One" className="h-4 w-auto" />
+                      ) : (
+                        <span className="font-sans text-[13px] font-medium text-zinc-950">
+                          {provider.name}
+                        </span>
+                      )}
                     </div>
                   );
                 })}
@@ -239,18 +239,21 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
                   className="grid w-full"
                   style={{ gridTemplateColumns: gridColumns }}
                 >
-                  <div role="rowheader" className="px-3 py-4 flex items-center" style={rowBorder}>
+                  <div role="rowheader" className="px-4 py-5 flex items-center" style={rowBorder}>
                     <span className="font-sans font-medium text-[13px] leading-[1.35] text-zinc-950">
                       {row.feature}
                     </span>
                   </div>
                   {providers.map((provider) => {
                     const isFilOne = provider.key === "filone";
+                    const isDivided = !isFilOne;
                     return (
                       <div
                         key={provider.key}
                         role="cell"
-                        className="px-3 py-4 flex flex-col gap-1.5 items-center justify-center text-center"
+                        className={`px-6 py-5 flex flex-col gap-1.5 justify-center${
+                          isFilOne ? " items-center text-center" : ` items-start text-left${isDivided ? " border-l border-black/[0.05]" : ""}`
+                        }`}
                         style={isFilOne ? filoneCardStyle(rowBorder) : rowBorder}
                       >
                         <CellContent
@@ -317,7 +320,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
                   <div
                     key={provider.key}
                     role="row"
-                    className={`flex items-start gap-3 py-2 px-3 ${
+                    className={`flex items-center gap-3 py-2 px-3 ${
                       isFilOne ? "rounded-xl bg-white border border-zinc-200 mb-1" : ""
                     }`}
                   >

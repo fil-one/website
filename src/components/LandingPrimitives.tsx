@@ -63,8 +63,9 @@ export const HeroHeading = ({
   description,
   titleMaxWidth,
   descriptionMaxWidth,
-  titleSize = "text-[32px] sm:text-[40px] md:text-[52px]",
+  titleSize = "text-[36px] sm:text-[44px] md:text-[58px]",
   className,
+  tone = "light",
 }: {
   title: React.ReactNode;
   description?: React.ReactNode;
@@ -73,17 +74,19 @@ export const HeroHeading = ({
   /** Responsive font-size classes for the h1; defaults to the standard hero scale. */
   titleSize?: string;
   className?: string;
+  /** "light" (default, dark text for a white/grey hero) or "brand" (white text for a dark/brand-color hero). */
+  tone?: "light" | "brand";
 }) => (
   <div className={`flex flex-col items-center gap-4 text-center${className ? ` ${className}` : ""}`}>
     <h1
-      className={`m-0 font-display font-medium ${titleSize} leading-[1.1] tracking-[-0.025em] text-zinc-950`}
+      className={`m-0 font-display font-medium ${titleSize} leading-[1.1] tracking-[-0.025em] ${tone === "brand" ? "text-white" : "text-zinc-950"}`}
       style={titleMaxWidth ? { maxWidth: titleMaxWidth } : undefined}
     >
       {title}
     </h1>
     {description && (
       <p
-        className="m-0 font-sans text-[15px] md:text-[17px] leading-[1.65] text-zinc-500"
+        className={`m-0 font-sans text-[15px] md:text-[17px] leading-[1.65] ${tone === "brand" ? "text-white/90" : "text-zinc-500"}`}
         style={descriptionMaxWidth ? { maxWidth: descriptionMaxWidth } : undefined}
       >
         {description}

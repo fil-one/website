@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
 
-const PARTNERS_HREF = "/partners";
+const PARTNERS_HREF = "/neocloud";
 
 /**
  * Light-touch partner door — one message, no mechanics. The full pitch
@@ -19,7 +19,7 @@ const PartnersSection = () => {
         className={`flex flex-col gap-6 items-center text-center w-full max-w-container mx-auto reveal${inView ? " in-view" : ""}`}
       >
         <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.08em] text-white/50">
-          Partners
+          Neoclouds
         </span>
         <h2 className="m-0 font-display text-[26px] md:text-[34px] font-medium leading-[1.2] tracking-[-0.02em] text-white">
           Running a GPU cloud?
@@ -33,9 +33,9 @@ const PartnersSection = () => {
           tone="dark"
           size="lg"
           href={PARTNERS_HREF}
-          onClick={() => trackCtaClick("See our partner program", PARTNERS_HREF, "secondary")}
+          onClick={() => trackCtaClick("See our neoclouds program", PARTNERS_HREF, "secondary")}
         >
-          See our partner program
+          See our neoclouds program
         </Button>
       </div>
     </section>

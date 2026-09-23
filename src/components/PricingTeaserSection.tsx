@@ -1,4 +1,3 @@
-import { ArrowRight } from "@phosphor-icons/react";
 import { Button } from "@/components/Button";
 import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
 import { useInView } from "@/hooks/useInView";
@@ -39,10 +38,9 @@ const PricingTeaserSection = () => {
           variant="primary"
           size="lg"
           href={PRICING_HREF}
-          onClick={() => trackCtaClick("See full pricing", PRICING_HREF, "primary")}
+          onClick={() => trackCtaClick("Pricing details", PRICING_HREF, "primary")}
         >
-          See full pricing
-          <ArrowRight size={16} weight="bold" />
+          Pricing details
         </Button>
       </div>
     </section>

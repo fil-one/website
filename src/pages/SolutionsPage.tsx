@@ -203,13 +203,6 @@ const SolutionsPage = () => {
               glow: true,
               onClick: () => trackCtaClick("Start for free", SIGNUP_URL, "primary"),
             },
-            {
-              label: "Talk to sales",
-              href: "/contact-sales",
-              variant: "secondary",
-              size: "lg",
-              onClick: () => trackCtaClick("Talk to sales", "/contact-sales", "secondary"),
-            },
           ]}
         />
 

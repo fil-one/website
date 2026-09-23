@@ -1,16 +1,15 @@
 import { useEffect } from "react";
 import PlatformNavbar from "@/components/PlatformNavbar";
-import Hero from "@/components/Hero";
-import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
+import { Button } from "@/components/Button";
+import { HeroHeading } from "@/components/LandingPrimitives";
+import { trackCtaClick } from "@/lib/analytics";
 import DashboardPreview from "@/components/DashboardPreview";
 import { PressBar } from "@/components/PressBar";
-import HeroGridDots from "@/components/HeroGridDots";
 import StatGridSection from "@/components/StatGridSection";
 import UseCasesSection from "@/components/UseCasesSection";
 import IntegrationsSection from "@/components/IntegrationsSection";
 import StorageUseCasesSection from "@/components/StorageUseCasesSection";
 import ComparisonSection from "@/components/ComparisonSection";
-import PricingTeaserSection from "@/components/PricingTeaserSection";
 import EnterpriseSection from "@/components/EnterpriseSection";
 import PartnersSection from "@/components/PartnersSection";
 import FaqSection from "@/components/FaqSection";
@@ -52,44 +51,60 @@ const Home = () => {
       <PlatformNavbar />
       <main id="main-content">
         <div className="relative isolate" style={{ backgroundColor: "#FFFFFF" }}>
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 pointer-events-none -z-10 [mask-image:theme(backgroundImage.hero-grid-mask)] [-webkit-mask-image:theme(backgroundImage.hero-grid-mask)]"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#000" stroke-opacity="0.09" stroke-width="1"/></svg>')}")`,
-              backgroundSize: "60px 60px",
-              backgroundPosition: "center top",
-            }}
-          />
-          <HeroGridDots />
-          <Hero
-            title={<>Sovereign storage<br />for the AI age</>}
-            description={<>Choose where your data lives, pay one flat rate per TB, and access it<br />with no egress fees. All with your existing S3 tools.</>}
-            titleMaxWidth={520}
-            descriptionMaxWidth={620}
-            ctas={[
-              {
-                label: "Start for free",
-                href: SIGNUP_URL,
-                variant: "primary",
-                onClick: () => trackCtaClick("Start for free", SIGNUP_URL, "primary"),
-              },
-              {
-                label: "Explore docs",
-                href: "https://docs.fil.one",
-                variant: "secondary",
-                target: "_blank",
-                rel: "noopener noreferrer",
-                onClick: () => {
-                  trackCtaClick("Explore docs", "https://docs.fil.one", "secondary");
-                  trackDocsClick("https://docs.fil.one");
-                },
-              },
-            ]}
-            tagline="1TB free for 30 days · No credit card required · No egress fees"
-          />
-          <DashboardPreview />
-          <PressBar />
+          {/* Brand-blue hero card — a prototype of Cloudflare's full-bleed hero
+              treatment in Fil One's own brand blue instead of a white/grid hero. */}
+          <section className="relative w-full pt-[67px] md:pt-[75px] px-2 md:px-4 max-w-none mx-auto">
+            <div
+              className="relative isolate flex flex-col items-center overflow-hidden rounded-[28px] bg-hero-card-brand px-5 pb-36 pt-36 md:rounded-[32px] md:px-8 md:pb-52 md:pt-52"
+            >
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 -z-10 opacity-[0.15] [mask-image:radial-gradient(ellipse_80%_75%_at_50%_50%,black_40%,transparent_100%)] [-webkit-mask-image:radial-gradient(ellipse_80%_75%_at_50%_50%,black_40%,transparent_100%)]"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="#fff" stroke-width="1"/></svg>')}")`,
+                  backgroundSize: "48px 48px",
+                  backgroundPosition: "center top",
+                }}
+              />
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 -z-10 pointer-events-none bg-hero-card-glow"
+              />
+
+              <div className="flex flex-col items-center gap-6 w-full hero-fade-1">
+                <HeroHeading
+                  tone="brand"
+                  title={<>Sovereign storage<br />for the AI age</>}
+                  description={<>Choose where your data lives, pay one flat rate per TB, and access it<br />with no egress fees. All with your existing S3 tools.</>}
+                  titleMaxWidth={520}
+                  descriptionMaxWidth={620}
+                />
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-10 hero-fade-2">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  className="btn-primary-hero"
+                  style={{ padding: 0 }}
+                  href={SIGNUP_URL}
+                  onClick={() => trackCtaClick("Start for free", SIGNUP_URL, "primary")}
+                >
+                  Start for free
+                </Button>
+              </div>
+
+              <p className="mt-4 hero-fade-3 text-center font-sans text-[13px] font-normal leading-[1.5] text-white">
+                1TB free for 30 days · No credit card required
+              </p>
+            </div>
+          </section>
+          <div className="mt-10 md:mt-16">
+            <PressBar />
+          </div>
+          <div className="mt-6 md:mt-10">
+            <DashboardPreview />
+          </div>
         </div>
 
         {/* Stats */}
@@ -97,7 +112,7 @@ const Home = () => {
           <StatGridSection
             label="By the numbers"
             heading="No surprises"
-            description={`Flat ${PRICE_PER_TB_MONTH} for storage. No egress fees, no API charges, and verifiable durability on every byte.`}
+            description={`Flat ${PRICE_PER_TB_MONTH} for storage, with no egress fees and no API charges.`}
             stats={STATS}
           />
         </div>
@@ -113,9 +128,6 @@ const Home = () => {
 
         {/* Comparison — how it stacks up */}
         <ComparisonSection bordered />
-
-        {/* Pricing teaser — the savings payoff */}
-        <PricingTeaserSection />
 
         {/* Enterprise — the "and if you need more than self-serve" step after pricing */}
         <EnterpriseSection />

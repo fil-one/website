@@ -4,8 +4,8 @@ interface ButtonOwnProps {
   variant: "primary" | "secondary";
   /** Primary only — maps to .btn-primary-sm / .btn-primary-lg */
   size?: "sm" | "lg";
-  /** Maps to .btn-primary-dark/.btn-secondary-dark or .btn-primary-zinc */
-  tone?: "dark" | "zinc";
+  /** Maps to .btn-primary-dark/.btn-secondary-dark, .btn-primary-zinc, or .btn-secondary-brand */
+  tone?: "dark" | "zinc" | "brand";
   /** Primary only — animated gradient border, for hero-style CTAs */
   glow?: boolean;
   fullWidth?: boolean;

@@ -24,7 +24,7 @@ const CtaSection = () => {
             className="font-display font-medium text-white text-[26px] md:text-[32px]"
             style={{ lineHeight: "1.2", letterSpacing: "-0.02em" }}
           >
-            One network. One record. One less thing to worry about.
+            S3 object storage built<br />for the AI era
           </h2>
           <p
             className="font-sans text-white/60 text-[14.5px] max-w-[380px]"
@@ -35,8 +35,8 @@ const CtaSection = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-2.5 justify-center">
-          <Button variant="primary" tone="dark" href={signupUrl()} onClick={() => trackCtaClick("Start at no cost to you", signupUrl(), "primary")}>
-            Start at no cost to you
+          <Button variant="primary" tone="dark" href={signupUrl()} onClick={() => trackCtaClick("Start for free", signupUrl(), "primary")}>
+            Start for free
           </Button>
           <Button variant="secondary" tone="dark" href="/contact-sales" className="w-full sm:w-auto justify-center" onClick={() => trackCtaClick("Talk to our team", "/contact-sales", "secondary")}>
             Talk to our team

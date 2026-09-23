@@ -1,6 +1,21 @@
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 
+// Primary brand blue — hoisted so gradient tokens below can reference its stops
+const brand = {
+  50:  "#EFF8FF", // ✓ tint background
+  100: "#D6EBFF",
+  200: "#ADD7FF",
+  300: "#7AC0FF",
+  400: "#38A6FF",
+  500: "#0090FF", // ✓ primary brand
+  600: "#0070CC", // ✓ hover / links
+  700: "#0055CC", // ✓ pressed / deep
+  800: "#004199",
+  900: "#002E6B",
+  DEFAULT: "#0090FF",
+};
+
 export default {
   darkMode: ["class"],
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
@@ -80,19 +95,7 @@ export default {
          * ─────────────────────────────────────────────────────────────────── */
 
         // Primary brand blue
-        brand: {
-          50:  "#EFF8FF", // ✓ tint background
-          100: "#D6EBFF",
-          200: "#ADD7FF",
-          300: "#7AC0FF",
-          400: "#38A6FF",
-          500: "#0090FF", // ✓ primary brand
-          600: "#0070CC", // ✓ hover / links
-          700: "#0055CC", // ✓ pressed / deep
-          800: "#004199",
-          900: "#002E6B",
-          DEFAULT: "#0090FF",
-        },
+        brand,
 
         // Cyan accent — the primary-button gradient stops
         aqua: {
@@ -194,6 +197,10 @@ export default {
         "section-mask": "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)",
         // Blue highlight halo behind hero copy (~44 uses)
         "blue-halo": "radial-gradient(ellipse 55% 40% at 50% 0%, rgba(0,144,255,0.13) 0%, transparent 70%)",
+        // Brand-blue hero card: deep blue edges lightening toward the bottom centre
+        "hero-card-brand": `radial-gradient(ellipse 70% 60% at 50% 100%, ${brand[400]} 0%, ${brand[700]} 55%, ${brand[800]} 100%)`,
+        // White glow rising from the bottom edge of the brand-blue hero card
+        "hero-card-glow": "radial-gradient(ellipse 60% 50% at 50% 110%, rgba(255,255,255,0.32) 0%, transparent 70%)",
       },
       keyframes: {
         "accordion-down": {

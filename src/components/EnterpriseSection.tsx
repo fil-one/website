@@ -5,10 +5,10 @@ import {
   ArrowsLeftRight,
   LockKey,
   Certificate,
-  ArrowRight,
+  UsersThree,
 } from "@phosphor-icons/react";
 import { Button } from "@/components/Button";
-import Icon from "@/components/Icon";
+import IconTile from "@/components/IconTile";
 import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
 import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
@@ -34,12 +34,18 @@ const CAPABILITIES = [
   {
     icon: ArrowsLeftRight,
     title: "Guided migration",
-    description: "A migration plan and engineering support get most teams live in days.",
+    description: "A migration plan and engineering support.",
   },
   {
     icon: LockKey,
     title: "Access controls",
     description: "Per-bucket API key scoping and fine-grained access policies.",
+  },
+  {
+    icon: UsersThree,
+    title: "Team roles & permissions",
+    description:
+      "Invite teammates to your organization and assign owner, admin, member, or read-only roles.",
   },
   {
     icon: Certificate,
@@ -59,14 +65,14 @@ const EnterpriseSection = () => {
   const { ref, inView } = useInView({ threshold: 0.05 });
 
   return (
-    <section className="w-full px-5 md:px-8 py-24 md:py-32 bg-zinc-50">
+    <section className="w-full px-5 md:px-8 py-24 md:py-32 bg-white">
       <div className="mx-auto grid w-full max-w-container grid-cols-1 gap-12 lg:grid-cols-[minmax(0,340px)_1fr] lg:gap-20">
 
         {/* Pitch column */}
-        <div className="flex flex-col items-start gap-4 lg:sticky lg:top-28 lg:self-start">
+        <div className="mx-auto flex max-w-[560px] flex-col items-center gap-4 text-center lg:mx-0 lg:max-w-none lg:sticky lg:top-28 lg:items-start lg:self-start lg:text-left">
           <SectionLabel>Enterprise</SectionLabel>
-          <SectionHeading maxWidth={320}>Storage your team can rely on</SectionHeading>
-          <SectionSub maxWidth={340}>
+          <SectionHeading>Storage your team can rely on</SectionHeading>
+          <SectionSub>
             Predictable costs, contractual commitments, and hands-on support for teams running
             storage at scale.
           </SectionSub>
@@ -77,7 +83,6 @@ const EnterpriseSection = () => {
             onClick={() => trackCtaClick("Talk to sales", CONTACT_HREF, "primary")}
           >
             Talk to sales
-            <Icon icon={ArrowRight} size={15} weight="bold" />
           </Button>
         </div>
 
@@ -91,9 +96,7 @@ const EnterpriseSection = () => {
                   inView ? " in-view" : ""
                 }`}
               >
-                <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-brand-500 shadow-elevated">
-                  <Icon icon={icon} size={17} />
-                </span>
+                <IconTile icon={icon} size={17} className="mt-0.5" />
                 <div className="flex flex-col gap-1">
                   <h3 className="m-0 font-sans text-[16px] font-medium leading-[1.3] text-zinc-950">
                     {title}

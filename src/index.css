@@ -130,11 +130,18 @@
   width: 100%;
   height: 100%;
   padding: 8px 20px;
+  transition: background-color 150ms ease;
   font-family: 'Funnel Sans', sans-serif;
   font-weight: 500;
   font-size: 14.5px;
   color: theme(colors.zinc.950);
   white-space: nowrap;
+}
+
+/* Hero variant: no visible gradient border (padding: 0), so give the white
+   inner pill its own hover feedback instead of relying on .btn-primary:hover. */
+.btn-primary-hero:hover .btn-primary-inner {
+  background: theme(colors.zinc.100);
 }
 
 /* Hero variant: a light-blue highlight flows evenly around the gradient border */
@@ -219,6 +226,16 @@
 
 .btn-secondary.btn-secondary-dark:hover {
   background-color: theme(colors.zinc.600);
+}
+
+/* Secondary button variant for a brand-blue hero card */
+.btn-secondary.btn-secondary-brand {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: theme(colors.white);
+}
+
+.btn-secondary.btn-secondary-brand:hover {
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 /* Arrow: always visible */
