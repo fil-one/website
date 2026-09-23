@@ -1,15 +1,18 @@
 import { ArrowsOut, ChartLine, Plug, ShieldCheck } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
-import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
 const SALES_URL = "/contact-sales";
 
+/** Whole-dollar display for a monthly total, e.g. 5990 -> "$5,990". */
+const usd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
+
 const TAGLINE = "Enterprise and embedding terms available · Contact-led";
 
-// Scale cost comparison. AWS S3 Standard us-east-1 Q2 2026: tiered storage
+// Scale cost comparison. AWS S3 Standard eu-west-1 Q2 2026: tiered storage
 // $0.023/GB first 50 TB, $0.022/GB next 450 TB, $0.021/GB over 500 TB.
-// Fil One $4.99/TB flat. Storage only; egress additional on AWS, $0 on Fil One.
+// Fil One PRICE_PER_TB flat. Storage only; egress additional on AWS, $0 on Fil One.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Go global. Skip the multi-year build.",
@@ -18,20 +21,20 @@ const config: LandingPageConfig = {
   },
 
   hero: {
-    badge: "For data-heavy scale-ups offering storage as part of their product",
+    badge: "For data-heavy scale-ups",
     titleMaxWidth: 760,
     descriptionMaxWidth: 600,
     title: (
       <>
         Go global.
         <br />
-        <span className="text-brand-500">Skip the multi-year build.</span>
+        <span className="text-brand-500">Skip the multi-year build</span>
       </>
     ),
-    description: `Embed S3-compatible object storage into your product. US and EU regions, SLA-backed, ${PRICE_PER_TB_SHORT} flat. Your customers get reliable storage — you skip the infrastructure capex.`,
+    description: `Embed S3-compatible object storage into your product. US and EU regions, SLA-backed, ${PRICE_PER_TB_SHORT} flat. Your customers get reliable storage, and you skip the infrastructure capex.`,
     ctas: [
-      { label: "Talk to our team", href: SALES_URL, variant: "primary" },
-      { label: "Evaluate the API", href: signupUrl(), variant: "secondary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "primary" },
+      { label: "Start for free", href: signupUrl(), variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -46,7 +49,7 @@ const config: LandingPageConfig = {
         label: "The build cost",
         tone: "warning",
         catch: "Durable S3-compatible storage at scale takes years.",
-        body: "Durability, S3 API parity, multi-region replication, and operational tooling at petabyte scale is a multi-year engineering programme. A product team that builds this is not building the product.",
+        body: "Durability, S3 API parity, multi-region replication, and operational tooling at petabyte scale is a multi-year engineering program. A product team that builds this is not building the product.",
       },
       {
         label: "The capex ceiling",
@@ -81,10 +84,19 @@ const config: LandingPageConfig = {
     ],
     rows: [
       { provider: "AWS S3 Standard", values: { t10: "$236", t100: "$2,304", t500: "$11,315", t1000: "$22,067" } },
-      { provider: "Fil One", isFilOne: true, values: { t10: "$50", t100: "$499", t500: "$2,495", t1000: "$4,990" } },
+      {
+        provider: "Fil One",
+        isFilOne: true,
+        values: {
+          t10: usd(10 * PRICE_PER_TB),
+          t100: usd(100 * PRICE_PER_TB),
+          t500: usd(500 * PRICE_PER_TB),
+          t1000: usd(1000 * PRICE_PER_TB),
+        },
+      },
     ],
     footnote:
-      "AWS S3 Standard us-east-1 Q2 2026: tiered storage $0.023/GB first 50 TB, $0.022/GB next 450 TB, $0.021/GB over 500 TB. Fil One $4.99/TB flat. Storage only; egress additional on AWS, $0 on Fil One.",
+      `AWS S3 Standard eu-west-1 Q2 2026: tiered storage $0.023/GB first 50 TB, $0.022/GB next 450 TB, $0.021/GB over 500 TB. Fil One ${PRICE_PER_TB_SHORT} flat. Storage only; egress additional on AWS, $0 on Fil One.`,
   },
 
   features: {
@@ -94,7 +106,7 @@ const config: LandingPageConfig = {
         Storage that your <span className="text-brand-500">customers already know how to use.</span>
       </>
     ),
-    sub: "S3-compatible, no egress, and enterprise terms — built to embed.",
+    sub: "S3-compatible, no egress, and enterprise terms, built to embed.",
     items: [
       {
         icon: Plug,
@@ -104,7 +116,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "No egress for your customers",
-        desc: "Customers who read their own data at scale pay $0 in egress. A storage product that doesn't penalise usage is easier to sell.",
+        desc: "Customers who read their own data at scale pay $0 in egress. A storage product that doesn't penalize usage is easier to sell.",
       },
       {
         icon: ShieldCheck,
@@ -114,7 +126,7 @@ const config: LandingPageConfig = {
       {
         icon: ChartLine,
         title: "Flat pricing that scales linearly",
-        desc: `${PRICE_PER_TB_SHORT} regardless of volume. At 1 PB, that is $4,990/month — a number you can build a product margin on. No tier waterfall to model.`,
+        desc: `${PRICE_PER_TB_SHORT} regardless of volume. At 1 PB, that is ${usd(1000 * PRICE_PER_TB)}/month, a number you can build a product margin on. No tier waterfall to model.`,
       },
     ],
   },
@@ -122,8 +134,8 @@ const config: LandingPageConfig = {
   cta: {
     heading: "Global reach in your product. None of the capex.",
     subhead: "Talk to the Fil One team about embedding the storage layer in your product. Enterprise and multi-year terms available.",
-    cta: { label: "Talk to our team", href: SALES_URL },
-    secondaryCta: { label: "Evaluate the API", href: signupUrl() },
+    cta: { label: "Talk to sales", href: SALES_URL },
+    secondaryCta: { label: "Start for free", href: signupUrl() },
     note: "Enterprise and embedding terms available · sales@fil.one",
   },
 };

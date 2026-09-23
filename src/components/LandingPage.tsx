@@ -231,7 +231,7 @@ const LandingPage = ({ config }: { config: LandingPageConfig }) => {
             >
               <SectionHead copy={features} center />
               <div
-                className={`grid grid-cols-1 md:grid-cols-2 ${features.columns === 3 ? "lg:grid-cols-3" : features.columns === 2 ? "" : "lg:grid-cols-4"} gap-4 w-full text-left`}
+                className={`grid grid-cols-1 md:grid-cols-2 ${features.columns === 3 ? "lg:grid-cols-3" : features.columns === 2 ? "" : "xl:grid-cols-4"} gap-4 w-full text-left`}
               >
                 {features.items.map(({ icon, title, desc, badge, cta }) => (
                   <FeatureCard key={title} icon={icon} title={title} description={desc} badge={badge} cta={cta} />

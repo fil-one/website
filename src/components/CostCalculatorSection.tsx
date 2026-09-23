@@ -34,25 +34,25 @@ const CostCalculatorSection = ({ competitors, id }: CostCalculatorSectionProps) 
         <div className="flex flex-col sm:flex-row gap-6 w-full max-w-container-narrow mx-auto">
           <div className="flex flex-col gap-3 flex-1">
             <div className="flex justify-between items-center">
-              <label htmlFor="calc-storage" className="font-sans font-medium text-base text-zinc-950">Storage</label>
-              <span className="font-sans font-semibold text-base text-brand-600">{storedTB} TB</span>
+              <label htmlFor="calc-storage" className="font-sans font-medium text-body text-zinc-950">Storage</label>
+              <span className="font-sans font-semibold text-body text-brand-600">{storedTB} TB</span>
             </div>
             <input id="calc-storage" type="range" min={1} max={500} value={storedTB} aria-valuetext={`${storedTB} TB`} onChange={(e) => setStoredTB(Number(e.target.value))} className="w-full calc-slider" />
             <div className="flex justify-between">
-              <span className="font-sans text-xs text-zinc-500">1 TB</span>
-              <span className="font-sans text-xs text-zinc-500">500 TB</span>
+              <span className="font-sans text-small text-zinc-500">1 TB</span>
+              <span className="font-sans text-small text-zinc-500">500 TB</span>
             </div>
           </div>
 
           <div className="flex flex-col gap-3 flex-1">
             <div className="flex justify-between items-center">
-              <label htmlFor="calc-egress" className="font-sans font-medium text-base text-zinc-950">Monthly egress</label>
-              <span className="font-sans font-semibold text-base text-brand-600">{egressTB} TB</span>
+              <label htmlFor="calc-egress" className="font-sans font-medium text-body text-zinc-950">Monthly egress</label>
+              <span className="font-sans font-semibold text-body text-brand-600">{egressTB} TB</span>
             </div>
             <input id="calc-egress" type="range" min={0} max={500} value={egressTB} aria-valuetext={`${egressTB} TB`} onChange={(e) => setEgressTB(Number(e.target.value))} className="w-full calc-slider" />
             <div className="flex justify-between">
-              <span className="font-sans text-xs text-zinc-500">0 TB</span>
-              <span className="font-sans text-xs text-zinc-500">500 TB</span>
+              <span className="font-sans text-small text-zinc-500">0 TB</span>
+              <span className="font-sans text-small text-zinc-500">500 TB</span>
             </div>
           </div>
         </div>
@@ -60,8 +60,8 @@ const CostCalculatorSection = ({ competitors, id }: CostCalculatorSectionProps) 
         {/* Results: stacked cards on mobile, table on tablet / desktop */}
         <PricingComparison competitors={competitors} storedTB={storedTB} egressTB={egressTB} />
 
-        <p className="text-xs text-center text-zinc-500">
-          Prices are published list rates in USD as of July 2026. Backblaze B2 includes free egress up to 3× your monthly stored amount; the $10/TB rate applies beyond that threshold. Regional pricing may vary.
+        <p className="text-small leading-[1.6] text-center text-zinc-500">
+          Published list rates in USD, checked 23 September 2026. Storage and egress only: AWS S3 and Cloudflare R2 also charge per request, which is not included. AWS S3 uses its tiered eu-west-1 rates after 100 GB of free egress a month. Backblaze B2 egress is free up to 3× your average stored amount, then $10/TB. Wasabi egress is free under its reasonable-use policy, which expects monthly egress to stay below your stored amount, and Wasabi bills a 1 TB monthly minimum with a 90-day minimum storage duration. Regional pricing may vary.
         </p>
       </div>
     </section>

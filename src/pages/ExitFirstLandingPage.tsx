@@ -7,9 +7,9 @@ const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
 
-// Exit cost on 100 TB. AWS: 102,400 GB x $0.09 = $9,216.
-// GCP tiered (10 TB @ $0.12 + 40 @ $0.11 + 50 @ $0.08) = $9,831.
-// Azure tiered = $7,602. Fil One: $0 egress.
+// Exit cost on 100 TB, computed the way the pricing calculator does (AWS eu-west-1 tiers,
+// decimal TB, first 100 GB free): 10.24 TB x $90 + 40.96 TB x $85 + 48.7 TB x $70 = $7,812.
+// Fil One: $0 egress.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Here's how to leave. Read it before you start.",
@@ -18,20 +18,20 @@ const config: LandingPageConfig = {
   },
 
   hero: {
-    badge: "For anyone who's been burned by lock-in",
+    badge: "For teams burned by lock-in",
     titleMaxWidth: 800,
     descriptionMaxWidth: 600,
     title: (
       <>
         Here's how to leave.
         <br />
-        <span className="text-brand-500">Read it before you start.</span>
+        <span className="text-brand-500">Read it before you start</span>
       </>
     ),
     description: "S3-compatible, $0 egress. The exit is a documented one-line command you can run on day one. You can verify the way out before you ever commit.",
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
-      { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -45,8 +45,8 @@ const config: LandingPageConfig = {
       {
         label: "Egress is the lock",
         tone: "warning",
-        catch: "Leaving 100 TB costs $9,216 on AWS.",
-        body: "At $0.09/GB internet egress, the bill to move data out scales with how valuable your dataset has become. The lock isn't in the contract — it's in the exit invoice.",
+        catch: "Leaving 100 TB costs $7,812 on AWS.",
+        body: "At up to $0.09/GB internet egress, the bill to move data out scales with how valuable your dataset has become. The lock isn't in the contract. It's in the exit invoice.",
       },
       {
         label: "Proprietary surface",
@@ -58,7 +58,7 @@ const config: LandingPageConfig = {
         label: "The untested exit",
         tone: "brand",
         catch: "You learn the cost only when you try to go.",
-        body: "Most teams never run the migration until they have to — by then the dataset is large, the egress bill is real, and the \"no lock-in\" promise meets the actual number.",
+        body: "Most teams never run the migration until they have to. By then the dataset is large, the egress bill is real, and the \"no lock-in\" promise meets the actual number.",
       },
     ],
   },
@@ -70,7 +70,7 @@ const config: LandingPageConfig = {
         The way out is <span className="text-brand-500">one command and $0.</span>
       </>
     ),
-    sub: "Here is the migration off Fil One — before you've put anything in. Same S3 API on both ends, no egress charge to move data out.",
+    sub: "Here is the migration off Fil One, before you've put anything in. Same S3 API on both ends, no egress charge to move data out.",
     subMaxWidth: 620,
     caption: "Cost to move 100 TB out, by provider",
     columns: [
@@ -78,13 +78,11 @@ const config: LandingPageConfig = {
       { key: "exit", header: "Cost to exit 100 TB", total: true },
     ],
     rows: [
-      { provider: "AWS S3 Standard", values: { rate: "$0.09 / GB", exit: "$9,216" } },
-      { provider: "Google Cloud", values: { rate: "$0.08–$0.12 / GB", exit: "$9,831" } },
-      { provider: "Azure Blob (Hot)", values: { rate: "up to $0.087 / GB", exit: "$7,602" } },
+      { provider: "AWS S3 Standard", values: { rate: "$0.07–$0.09 / GB", exit: "$7,812" } },
       { provider: "Fil One", isFilOne: true, values: { rate: "$0", exit: "$0" } },
     ],
     footnote:
-      "Public US rate cards, Q2 2026. AWS: 102,400 GB × $0.09 = $9,216. GCP tiered (10 TB @ $0.12 + 40 @ $0.11 + 50 @ $0.08) = $9,831. Azure tiered = $7,602. Fil One: $0 egress.",
+      "AWS S3 eu-west-1 list rates, September 2026, tiered: first 100 GB free, then $0.09/GB to 10 TB, $0.085/GB to 50 TB, and $0.07/GB to 150 TB (10.24 TB × $90 + 40.96 TB × $85 + 48.7 TB × $70 = $7,812). Fil One: $0 egress.",
   },
 
   features: {
@@ -104,7 +102,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "$0 egress on exit",
-        desc: "Moving your data out costs nothing. The exit is a sync command you can run today, for free — not a contract renegotiation or a budget request.",
+        desc: "Moving your data out costs nothing. The exit is a sync command you can run today, for free, not a contract renegotiation or a budget request.",
       },
       {
         icon: ChartLine,
@@ -122,9 +120,9 @@ const config: LandingPageConfig = {
   cta: {
     heading: "Know the exit before you commit.",
     headingMaxWidth: 560,
-    subhead: `${PRICE_PER_TB_MONTH} — storage only, no egress in or out. Free 1 TB evaluation: put data in, run the migrate-off command, and watch it cost nothing. Then decide.`,
+    subhead: `${PRICE_PER_TB_MONTH}, storage only, no egress in or out. Free 1 TB evaluation: put data in, run the migrate-off command, and watch it cost nothing. Then decide.`,
     cta: { label: "Start for free", href: signupUrl() },
-    secondaryCta: { label: "Talk to an expert", href: SALES_URL },
+    secondaryCta: { label: "Talk to sales", href: SALES_URL },
     note: TAGLINE,
   },
 };

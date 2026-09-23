@@ -29,15 +29,17 @@ const RoleCard = ({ icon, title, subtitle, description, bullets, className = "" 
       className ? ` ${className}` : ""
     }`}
   >
-    <div className="flex items-start gap-3">
-      <IconTile icon={icon} size={15} className="mt-0.5 h-8 w-8 rounded-lg" />
+    {/* Header reserves room for a two-line title + subtitle, so descriptions
+        line up across a row of cards even when one title wraps. */}
+    <div className="flex min-h-[4.25rem] items-start gap-3">
+      <IconTile icon={icon} />
       <div>
-        <h3 className="m-0 font-display font-medium text-[15.5px] leading-[1.25] text-zinc-950">{title}</h3>
-        <p className="mt-[3px] font-sans text-[11.5px] leading-[1.3] text-zinc-500">{subtitle}</p>
+        <h3 className="m-0 font-display font-medium text-body-lg leading-[1.25] text-zinc-950 text-balance">{title}</h3>
+        <p className="mt-1 font-sans text-small leading-[1.3] text-zinc-500">{subtitle}</p>
       </div>
     </div>
 
-    <p className="m-0 font-sans text-[13.5px] leading-[1.6] text-zinc-600">{description}</p>
+    <p className="m-0 font-sans text-body-sm leading-[1.6] text-zinc-600">{description}</p>
 
     <div className="h-px bg-black/[0.06]" />
 
@@ -45,7 +47,7 @@ const RoleCard = ({ icon, title, subtitle, description, bullets, className = "" 
       {bullets.map((b) => (
         <li key={b} className="flex items-start gap-2.5">
           <Icon icon={Check} size={13} weight="bold" className="mt-[3px] shrink-0 text-brand-500" />
-          <span className="font-sans text-[13px] leading-[1.55] text-zinc-600">{b}</span>
+          <span className="font-sans text-small leading-[1.55] text-zinc-600">{b}</span>
         </li>
       ))}
     </ul>

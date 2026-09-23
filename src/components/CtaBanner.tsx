@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { useInView } from "@/hooks/useInView";
 import { Button } from "@/components/Button";
+import { GRID_SVG_WHITE, SECTION_H2_SIZE } from "@/components/LandingPrimitives";
 
 interface CtaBannerProps {
   heading: ReactNode;
@@ -23,9 +24,9 @@ interface CtaBannerProps {
 }
 
 /**
- * Dark closing CTA banner: a navy gradient card with a drifting grid texture
- * and a breathing glow, a headline, and a glowing primary button. Tuned for
- * the closing section of a page (sits on white, above the footer).
+ * Dark closing CTA banner: a navy gradient card with a static grid texture
+ * and a soft glow, a headline, and a primary button. The one closing CTA
+ * pattern site-wide (sits on white, above the footer).
  */
 const CtaBanner = ({
   heading,
@@ -43,38 +44,28 @@ const CtaBanner = ({
       className={`px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full ${surface === "grey" ? "bg-zinc-50" : "bg-white"}`}
     >
       <div ref={ref} className={`w-full max-w-container mx-auto reveal${inView ? " in-view" : ""}`}>
-        <div className="relative overflow-hidden rounded-[20px] text-center bg-dark-section px-6 md:px-12 py-16 md:py-section">
-          {/* White grid texture, drifting slowly */}
+        <div className="relative overflow-hidden rounded-3xl text-center bg-dark-section px-6 md:px-12 py-16 md:py-section">
+          {/* White grid texture (static) */}
           <div
             aria-hidden="true"
-            className="cta-grid-drift absolute inset-0 pointer-events-none [mask-image:theme(backgroundImage.section-mask)] [-webkit-mask-image:theme(backgroundImage.section-mask)]"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="#fff" stroke-opacity="0.12" stroke-width="1"/></svg>')}")`,
-              backgroundSize: "60px 60px",
-            }}
+            className="absolute inset-0 pointer-events-none bg-[length:60px_60px] [mask-image:theme(backgroundImage.section-mask)] [-webkit-mask-image:theme(backgroundImage.section-mask)]"
+            style={{ backgroundImage: `url("data:image/svg+xml,${GRID_SVG_WHITE}")` }}
           />
 
-          {/* Soft breathing glow behind the copy */}
+          {/* Soft static glow behind the copy */}
           <div
             aria-hidden="true"
-            className="cta-glow-pulse absolute top-1/2 left-1/2 pointer-events-none"
-            style={{
-              width: 480,
-              height: 480,
-              marginLeft: -240,
-              marginTop: -240,
-              background: "radial-gradient(circle, rgba(30,191,255,0.20) 0%, transparent 70%)",
-            }}
+            className="absolute top-1/2 left-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 pointer-events-none bg-cta-glow"
           />
 
           <div className="relative">
             <h2
-              className="text-[26px] md:text-[32px] font-display font-medium text-white mx-auto mb-3"
-              style={{ letterSpacing: "-0.025em", lineHeight: "1.12", maxWidth: headingMaxWidth }}
+              className={`${SECTION_H2_SIZE} font-display font-medium leading-[1.2] tracking-[-0.02em] text-white mx-auto mb-3 text-balance`}
+              style={{ maxWidth: headingMaxWidth }}
             >
               {heading}
             </h2>
-            <p className="font-sans text-[17px] text-white/60 mb-8 mx-auto max-w-[460px]">{subhead}</p>
+            <p className="font-sans text-body md:text-body-lg leading-[1.65] text-white/70 mb-8 mx-auto max-w-[460px] text-pretty">{subhead}</p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Button
                 variant="primary"
@@ -92,7 +83,7 @@ const CtaBanner = ({
                 </Button>
               )}
             </div>
-            {note && <p className="font-sans text-[13px] text-white/60 mt-4">{note}</p>}
+            {note && <p className="font-sans text-small text-white/70 mt-4">{note}</p>}
           </div>
         </div>
       </div>

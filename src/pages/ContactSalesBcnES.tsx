@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
@@ -17,23 +18,23 @@ import {
   HS_MARKETING_SUBSCRIPTION_TYPE_ID,
   submitHubSpotForm,
 } from "@/lib/hubspot";
+import { validateFields, hasErrors, focusFirstInvalid, type FieldErrors } from "@/lib/formValidation";
 
+// Values are the HubSpot dropdown options (hyphenated); labels use en dashes.
 const DATA_OPTIONS = [
-  "0-1 TB",
-  "1-10 TB",
-  "10-100 TB",
-  "100-500 TB",
-  "500-1,000 TB",
-  "1+ PB",
+  { value: "0-1 TB", label: "0–1 TB" },
+  { value: "1-10 TB", label: "1–10 TB" },
+  { value: "10-100 TB", label: "10–100 TB" },
+  { value: "100-500 TB", label: "100–500 TB" },
+  { value: "500-1,000 TB", label: "500–1.000 TB" },
+  { value: "1+ PB", label: "1+ PB" },
 ];
+
+type ContactField = "firstname" | "lastname" | "company" | "email" | "dataStorage";
 
 const ContactSalesBcnES = () => {
   useLang("es");
-  useSeo({
-    title: "Contactar con ventas · Fil One Almacenamiento S3",
-    description: "Habla con el equipo de Fil One sobre almacenamiento de objetos S3 compatible, precios para empresas y acuerdos de nivel de servicio.",
-    canonical: "https://www.fil.one/lp/es/contacto",
-  });
+  useSeo();
 
   const [form, setForm] = useState({
     firstname: "",
@@ -46,26 +47,39 @@ const ContactSalesBcnES = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [radioError, setRadioError] = useState(false);
+  const [errors, setErrors] = useState<FieldErrors<ContactField>>({});
 
-  const set = (key: keyof typeof form) => (
+  const set = (key: ContactField) => (
     e: React.ChangeEvent<HTMLInputElement>
-  ) => setForm((f) => ({ ...f, [key]: e.target.value }));
+  ) => {
+    setForm((f) => ({ ...f, [key]: e.target.value }));
+    setErrors((errs) => ({ ...errs, [key]: undefined }));
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!form.dataStorage) {
-      setRadioError(true);
+    const fieldErrors = validateFields<ContactField>(
+      {
+        firstname: { value: form.firstname, required: true },
+        lastname: { value: form.lastname, required: true },
+        company: { value: form.company, required: true },
+        email: { value: form.email, required: true, email: true },
+        dataStorage: { value: form.dataStorage, required: true, message: "Por favor, selecciona una opción." },
+      },
+      "es",
+    );
+    setErrors(fieldErrors);
+    if (hasErrors(fieldErrors)) {
+      focusFirstInvalid(e.currentTarget);
       return;
     }
     setLoading(true);
     setError(null);
-    setRadioError(false);
 
     const result = await submitHubSpotForm({
       formGuid: HS_CONTACT_FORM_GUID,
       pageName: "Barcelona ES Contacto",
-      networkErrorMessage: "Error de red. Por favor, comprueba tu conexión y vuelve a intentarlo.",
+      lang: "es",
       fields: [
         { objectTypeId: "0-1", name: "firstname", value: form.firstname },
         { objectTypeId: "0-1", name: "lastname", value: form.lastname },
@@ -94,6 +108,7 @@ const ContactSalesBcnES = () => {
       return;
     }
     setSubmitted(true);
+    trackEvent("Form Submit", { form: "contact-sales", page: window.location.pathname });
   };
 
   return (
@@ -117,11 +132,11 @@ const ContactSalesBcnES = () => {
           <div className="h-px w-full bg-black/[0.07]" />
 
           {submitted ? (
-            <FormSuccess title="Nos pondremos en contacto pronto.">
-              Gracias por ponerte en contacto. Nuestro equipo revisará tu mensaje y te responderá en breve.
+            <FormSuccess title="Gracias, nos pondremos en contacto">
+              Nuestro equipo revisará tu mensaje y te responderá en breve.
             </FormSuccess>
           ) : (
-            <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-6" noValidate>
 
               <div className="grid grid-cols-2 gap-4">
                 <TextField
@@ -131,6 +146,7 @@ const ContactSalesBcnES = () => {
                   value={form.firstname}
                   onChange={set("firstname")}
                   placeholder="Ana"
+                  error={errors.firstname}
                 />
                 <TextField
                   label="Apellido"
@@ -139,6 +155,7 @@ const ContactSalesBcnES = () => {
                   value={form.lastname}
                   onChange={set("lastname")}
                   placeholder="García"
+                  error={errors.lastname}
                 />
               </div>
 
@@ -149,6 +166,7 @@ const ContactSalesBcnES = () => {
                 value={form.company}
                 onChange={set("company")}
                 placeholder="Acme Inc."
+                error={errors.company}
               />
 
               <TextField
@@ -158,6 +176,7 @@ const ContactSalesBcnES = () => {
                 value={form.email}
                 onChange={set("email")}
                 placeholder="ana@empresa.com"
+                error={errors.email}
               />
 
               <RadioField
@@ -166,8 +185,11 @@ const ContactSalesBcnES = () => {
                 required
                 options={DATA_OPTIONS}
                 value={form.dataStorage}
-                onChange={(value) => { setForm((f) => ({ ...f, dataStorage: value })); setRadioError(false); }}
-                error={radioError ? "Por favor, selecciona una opción." : undefined}
+                onChange={(value) => {
+                  setForm((f) => ({ ...f, dataStorage: value }));
+                  setErrors((errs) => ({ ...errs, dataStorage: undefined }));
+                }}
+                error={errors.dataStorage}
               />
 
               <div className="h-px w-full bg-black/[0.07]" />

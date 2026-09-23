@@ -20,7 +20,16 @@ import { build } from "vite";
 import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from "fs";
 import { resolve } from "path";
 import { fileURLToPath, pathToFileURL } from "url";
-import { BASE_URL, ROUTE_META } from "./routeMeta.mjs";
+import {
+  BASE_URL,
+  ROUTE_META,
+  isNoindexRoute,
+  NOINDEX_ROBOTS,
+  sitemapPaths,
+} from "./routeMeta.mjs";
+
+/** og:locale per <html lang>; mirrors OG_LOCALE in src/hooks/useSeo.ts. */
+const OG_LOCALE = { en: "en_US", es: "es_ES" };
 
 /**
  * Inline `font-family` declarations in the site chrome (`<nav>`, `<footer>`),
@@ -212,11 +221,13 @@ async function prerender() {
       // here) still get real text — these regexes target the actual tags
       // directly rather than comment markers, which HTML doesn't hide inside
       // <title> or attribute values (they'd render as literal text).
-      const title = meta.title ?? "Fil One | S3 object storage built for the AI era";
-      const description =
-        meta.description ??
-        "S3-compatible object storage built on Filecoin. Enterprise-grade durability, no egress fees, and verifiable data integrity.";
+      const title = meta.title ?? ROUTE_META["/"].title;
+      const description = meta.description ?? ROUTE_META["/"].description;
       const lang = meta.lang ?? "en";
+      const ogLocale = OG_LOCALE[lang] ?? OG_LOCALE.en;
+      const robotsTag = isNoindexRoute(route)
+        ? `<meta name="robots" content="${NOINDEX_ROBOTS}" />`
+        : "";
 
       // Reciprocal hreflang alternates for translated page clusters (no-op for
       // pages without a translation).
@@ -239,6 +250,8 @@ async function prerender() {
           `<meta property="og:description" content="${description}"`
         )
         .replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${canonical}"`)
+        .replace(/<meta property="og:locale" content="[^"]*"/, `<meta property="og:locale" content="${ogLocale}"`)
+        .replace("<!--META_ROBOTS-->", robotsTag)
         .replace(/<meta name="twitter:title" content="[^"]*"/, `<meta name="twitter:title" content="${title}"`)
         .replace(
           /<meta name="twitter:description" content="[^"]*"/,
@@ -291,8 +304,11 @@ async function prerender() {
 
   // ── 5. Generate sitemap.xml from the same route list ─────────────────────
   // Generated (not hand-maintained) so it can never drift from routes.tsx.
-  writeFileSync(resolve(rootDir, "dist", "sitemap.xml"), buildSitemap(ROUTES));
-  console.log(`  ✓ sitemap.xml (${ROUTES.length} urls)`);
+  // noindex routes (/lp/*) are left out: a sitemap should only list pages we
+  // want indexed.
+  const sitemapRoutes = sitemapPaths(ROUTES);
+  writeFileSync(resolve(rootDir, "dist", "sitemap.xml"), buildSitemap(sitemapRoutes));
+  console.log(`  ✓ sitemap.xml (${sitemapRoutes.length} urls)`);
 
   // ── 6. Clean up SSR bundle ───────────────────────────────────────────────
   rmSync(SSR_OUT_DIR, { recursive: true, force: true });

@@ -16,20 +16,20 @@ const config: LandingPageConfig = {
   },
 
   hero: {
-    badge: <AnnouncementBadge pill="Coming soon">RAG Pipeline &amp; Agent Toolkit</AnnouncementBadge>,
+    badge: <AnnouncementBadge pill="Coming soon">RAG pipeline and Agent Toolkit</AnnouncementBadge>,
     titleMaxWidth: 820,
     descriptionMaxWidth: 480,
     title: (
       <>
         Turn object storage into
         <br />
-        <span className="text-brand-500">an agent knowledge layer.</span>
+        <span className="text-brand-500">an agent knowledge layer</span>
       </>
     ),
-    description: "S3 object storage with a built-in RAG pipeline. No stitching required, no per-query fees.",
+    description: "S3 object storage for agent memory and RAG corpora today, with a built-in RAG pipeline coming soon. No per-query fees.",
     ctas: [
-      { label: "Start storing for free", href: signupUrl(), variant: "primary" },
-      { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+      { label: "Start for free", href: signupUrl(), variant: "primary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -79,18 +79,18 @@ const config: LandingPageConfig = {
     items: [
       {
         icon: Database,
-        title: "Agent memory & state",
-        desc: "Persist conversation history, task queues, episodic memory, and checkpoint files across agent restarts. Standard PutObject/GetObject — the agent writes, the agent reads.",
+        title: "Agent memory and state",
+        desc: "Persist conversation history, task queues, episodic memory, and checkpoint files across agent restarts. Standard PutObject/GetObject: the agent writes, the agent reads.",
       },
       {
         icon: ChartLine,
         title: "Flat cost for loop traffic",
-        desc: `Agents write frequently and read back their own outputs. Per-request billing makes loops expensive. ${PRICE_PER_TB_SHORT} flat — no PUT fees, no GET fees, no egress.`,
+        desc: `Agents write frequently and read back their own outputs. Per-request billing makes loops expensive. ${PRICE_PER_TB_SHORT} flat, with no PUT fees, no GET fees, and no egress.`,
       },
       {
         icon: ArrowsOut,
         title: "RAG corpus storage",
-        desc: "Store raw documents, chunked text, and embeddings backing a retrieval pipeline. Reads are included in flat storage — no per-retrieval egress counter.",
+        desc: "Store raw documents, chunked text, and embeddings backing a retrieval pipeline. Reads are included in flat storage, with no per-retrieval egress counter.",
         badge: "Coming soon",
       },
       {
@@ -105,9 +105,9 @@ const config: LandingPageConfig = {
   cta: {
     heading: `One rate. ${PRICE_PER_TB_MONTH}.`,
     headingMaxWidth: 560,
-    subhead: "Storage only — no PUT fees, no GET fees, no egress. Try it free with 1 TB: one place to store your data, retrieve it, and put it to work.",
+    subhead: "Storage only, with no PUT fees, no GET fees, and no egress. Try it free with 1 TB: one place to store your data, retrieve it, and put it to work.",
     cta: { label: "Start for free", href: signupUrl() },
-    secondaryCta: { label: "Talk to an expert", href: SALES_URL },
+    secondaryCta: { label: "Talk to sales", href: SALES_URL },
     note: TAGLINE,
   },
 };

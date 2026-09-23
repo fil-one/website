@@ -37,7 +37,7 @@ const IntegrationsSection = ({
     </>
   ),
   description = "S3 API compatible. If it talks to AWS, it talks to us.",
-  ctaLabel = "View documentation →",
+  ctaLabel = "Read the docs",
 }: IntegrationsSectionProps) => {
   const { ref, inView } = useInView({ threshold: 0.05 });
 

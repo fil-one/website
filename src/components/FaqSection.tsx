@@ -4,7 +4,7 @@ import { useInView } from "@/hooks/useInView";
 import JsonLd from "@/components/JsonLd";
 import SectionHeader from "@/components/SectionHeader";
 import { trackEvent, trackDocsClick } from "@/lib/analytics";
-import { PRICE_DISPLAY } from "@/lib/pricing";
+import { PRICE_DISPLAY, MONTHLY_MINIMUM_DISPLAY } from "@/lib/pricing";
 import { consoleOrigin } from "@/lib/console-url";
 import { S3_ENDPOINT_HOST } from "@/lib/s3-endpoint";
 
@@ -13,7 +13,7 @@ const faqs = [
     question: "Is Fil One compatible with my existing tools?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Fil One speaks the S3 API, so you keep the SDK and CLI you already use. Point it at your region&rsquo;s endpoint, switch on path-style addressing, and authenticate with a Fil One access key. Everyday object work behaves the way your code expects: put, get, head, list, delete, presigned URLs, and multipart upload from your own SDK.</p>
+        <p>Fil One speaks the S3 API, so you keep the SDK and CLI you already use. Point it at your region's endpoint, switch on path-style addressing, and authenticate with a Fil One access key. Everyday object work behaves the way your code expects: put, get, head, list, delete, presigned URLs, and multipart upload from your own SDK.</p>
         <p>Buckets are private by default. For the operation-by-operation detail, including the calls that differ between regions, see the S3 compatibility reference in the docs.</p>
         <p>Read <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link" onClick={() => trackDocsClick("https://docs.fil.one")}>Fil One docs</a>, <a href={consoleOrigin()} target="_blank" rel="noopener noreferrer" className="faq-link">access the app</a> to get started with no code required, or <a href="/contact-sales" className="faq-link">talk to someone on our team</a> to get started.</p>
       </div>
@@ -23,12 +23,12 @@ const faqs = [
     question: "How does Fil One approach security and compliance?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Objects are encrypted at rest by the storage gateway using AES256 (SSE-S3), and every request runs over TLS. It is on by default with nothing to configure. Keys are held by the regional storage operator that fulfils your bucket&rsquo;s region, so if your policy requires you to hold the keys yourself, encrypt client-side before upload with the standard S3 tooling and Fil One stores the ciphertext. Our services are delivered through top-tier data centers that are certified to ISO 27001, SOC 2, and PCI DSS standards. Reach out to <a href="mailto:security@fil.one" className="faq-link">security@fil.one</a> for compliance documentation or any other security questions.</p>
+        <p>Objects are encrypted at rest by the storage gateway using AES256 (SSE-S3), and every request runs over TLS. It is on by default with nothing to configure. Keys are held by the regional storage operator that fulfills your bucket's region, so if your policy requires you to hold the keys yourself, encrypt client-side before upload with the standard S3 tooling and Fil One stores the ciphertext. Our services are delivered through top-tier data centers that are certified to ISO 27001, SOC 2, and PCI DSS standards. Reach out to <a href="mailto:security@fil.one" className="faq-link">security@fil.one</a> for compliance documentation or any other security questions.</p>
       </div>
     ),
   },
   {
-    question: "How do I migrate from AWS / Azure / Google Cloud?",
+    question: "How do I migrate from AWS S3?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
         <p>After you create an account and provision your first bucket, migrating to Fil One is straightforward with our S3-compatible interface. Integrate directly into your codebase with any S3-compatible SDK, or migrate your data with a single AWS CLI command.</p>
@@ -44,13 +44,13 @@ const faqs = [
   {
     question: "How is my bill calculated, and is there a minimum charge?",
     answer:
-      `Billing is ${PRICE_DISPLAY} per TB stored per month, with no fees for egress or API operations, subject to a ${PRICE_DISPLAY} monthly minimum. Store under 1 TB and you pay the minimum; store more and you pay per TB for what you use.`,
+      `Billing is ${PRICE_DISPLAY} per TB stored per month, with no fees for egress or API operations, subject to a ${MONTHLY_MINIMUM_DISPLAY} monthly minimum. Store under 1 TB and you pay the minimum; store more and you pay per TB for what you use.`,
   },
   {
     question: "Do you offer annual or reserved capacity plans?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Yes. Teams with predictable storage needs can talk to us about multi-year committed capacity. <a href="/contact-sales" className="faq-link">Contact sales</a> and we will put a quote together.</p>
+        <p>Yes. Teams with predictable storage needs can talk to us about multi-year committed capacity. <a href="/contact-sales" className="faq-link">Talk to sales</a> and we will put a quote together.</p>
       </div>
     ),
   },
@@ -59,7 +59,7 @@ const faqs = [
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
         <p>You choose when you create the bucket: Europe (France) or US East (Michigan), with more regions on the way. A bucket's region is fixed at creation, so data written there stays there. Each region has its own endpoint, and an access key is scoped to a single region.</p>
-        <p>Running a GPU cloud? We can also install storage directly inside your own data center. <a href="/neocloud" className="faq-link">See our neoclouds program</a>.</p>
+        <p>Running a GPU cloud? We can also install storage directly inside your own data center. <a href="/neocloud" className="faq-link">Explore Neoclouds</a>.</p>
       </div>
     ),
   },

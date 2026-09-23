@@ -67,7 +67,7 @@ const PricingCard = ({
           <span className="font-sans text-[14px] text-zinc-500 pb-1.5">{priceSuffix}</span>
         )}
       </div>
-      {priceNote && <p className="font-sans text-[13.5px] text-zinc-500">{priceNote}</p>}
+      {priceNote && <p className="font-sans text-[13.5px] text-zinc-500 text-pretty">{priceNote}</p>}
     </div>
 
     <div className="w-full h-px bg-black/[0.06]" />

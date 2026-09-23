@@ -7,9 +7,10 @@ const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No per-request fees · Connects in minutes";
 
-// Request-fee-only comparison at 1 billion ops/month.
-// AWS S3: 1,000,000,000 / 1,000 x $0.005 = $5,000. Google: $0.05/10K x 1B = $5,000.
-// Azure: $0.055/10K x 1B = $5,500. Wasabi, Backblaze B2, Fil One: $0 per request.
+// Write-request-fee-only comparison at 1 billion PUTs/month.
+// AWS S3 eu-west-1: 1,000,000,000 / 1,000 x $0.005 = $5,000.
+// Cloudflare R2: (1B - 1M free) / 1M x $4.50 Class A = $4,495.50.
+// Wasabi (no request fees), Backblaze B2 (uploads free), Fil One: $0.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Let agents run. Not your bill.",
@@ -18,20 +19,20 @@ const config: LandingPageConfig = {
   },
 
   hero: {
-    badge: "For developers building AI agents and autonomous pipelines",
+    badge: "For AI agent builders",
     titleMaxWidth: 720,
     descriptionMaxWidth: 580,
     title: (
       <>
         Let agents run.
         <br />
-        <span className="text-brand-500">Not your bill.</span>
+        <span className="text-brand-500">Not your bill</span>
       </>
     ),
     description: `S3-compatible storage at ${PRICE_PER_TB_SHORT} flat. No per-PUT fees, no per-GET fees, no egress. Agent loops run at full speed without a per-call counter.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
-      { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -72,21 +73,20 @@ const config: LandingPageConfig = {
     ),
     sub: "Any S3-compatible tool your agent already uses connects with an endpoint change. Writes, reads, and lists are all included in flat storage.",
     subMaxWidth: 620,
-    caption: "Request fees only, at 1 billion operations/month, by provider",
+    caption: "Write request fees only, at 1 billion PUTs/month, by provider",
     columns: [
-      { key: "rate", header: "Rate" },
-      { key: "monthly", header: "Monthly (1B ops)", total: true },
+      { key: "rate", header: "Write rate" },
+      { key: "monthly", header: "Monthly (1B PUTs)", total: true },
     ],
     rows: [
       { provider: "AWS S3 Standard", values: { rate: "$0.005 / 1K PUTs", monthly: "$5,000" } },
-      { provider: "Google Cloud Storage", values: { rate: "$0.05 / 10K ops", monthly: "$5,000" } },
-      { provider: "Azure Blob Storage", values: { rate: "$0.055 / 10K writes", monthly: "$5,500" } },
+      { provider: "Cloudflare R2", values: { rate: "$4.50 / 1M writes", monthly: "$4,496" } },
       { provider: "Wasabi", values: { rate: "$0 per request", monthly: "$0" } },
-      { provider: "Backblaze B2", values: { rate: "$0 per request", monthly: "$0" } },
+      { provider: "Backblaze B2", values: { rate: "$0 per upload", monthly: "$0" } },
       { provider: "Fil One", isFilOne: true, values: { rate: "$0 per request", monthly: "$0" } },
     ],
     footnote:
-      "Public US rate cards, Q2 2026. Request fees only — storage and egress are separate on metered tiers and zero on Fil One. AWS: 1,000,000,000 / 1,000 × $0.005 = $5,000. Google: $0.05/10K × 1B = $5,000. Azure: $0.055/10K × 1B = $5,500.",
+      "Published list rates, September 2026. Write (PUT) request fees only; storage and egress are billed separately. AWS S3 eu-west-1: 1,000,000,000 / 1,000 × $0.005 = $5,000. Cloudflare R2: first 1M Class A operations free, then $4.50 per million = $4,495.50. Backblaze B2 uploads are free, but downloads and list calls are billed. Wasabi and Fil One charge no request fees.",
   },
 
   features: {
@@ -102,7 +102,7 @@ const config: LandingPageConfig = {
       {
         icon: Database,
         title: "No per-request fees",
-        desc: "PUT, GET, LIST, HEAD — all included in flat storage. Agents that write state every turn and read context on every call pay $0 in request fees.",
+        desc: "PUT, GET, LIST, and HEAD are all included in flat storage. Agents that write state every turn and read context on every call pay $0 in request fees.",
       },
       {
         icon: ArrowsOut,
@@ -112,7 +112,7 @@ const config: LandingPageConfig = {
       {
         icon: Plug,
         title: "S3-compatible · existing tools work",
-        desc: "boto3, @aws-sdk/client-s3, LangChain S3 loaders, LlamaIndex — any tool that reads or writes S3 connects with an endpoint change. No new SDK.",
+        desc: "boto3, @aws-sdk/client-s3, LangChain S3 loaders, LlamaIndex: any tool that reads or writes S3 connects with an endpoint change. No new SDK.",
       },
       {
         icon: ChartLine,
@@ -126,7 +126,7 @@ const config: LandingPageConfig = {
     heading: "Let agents run. Not your bill.",
     subhead: "Free 1 TB evaluation. Connect your existing agent storage code and watch the request counter disappear.",
     cta: { label: "Start for free", href: signupUrl() },
-    secondaryCta: { label: "Talk to an expert", href: SALES_URL },
+    secondaryCta: { label: "Talk to sales", href: SALES_URL },
     note: TAGLINE,
   },
 };

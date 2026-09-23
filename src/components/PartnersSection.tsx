@@ -1,4 +1,5 @@
 import { Button } from "@/components/Button";
+import { SectionHeading, SectionLabel, SectionSub } from "@/components/LandingPrimitives";
 import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
 
@@ -18,24 +19,20 @@ const PartnersSection = () => {
         ref={ref}
         className={`flex flex-col gap-6 items-center text-center w-full max-w-container mx-auto reveal${inView ? " in-view" : ""}`}
       >
-        <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.08em] text-white/50">
-          Neoclouds
-        </span>
-        <h2 className="m-0 font-display text-[26px] md:text-[34px] font-medium leading-[1.2] tracking-[-0.02em] text-white">
-          Running a GPU cloud?
-        </h2>
-        <p className="m-0 max-w-[480px] font-sans text-[15px] md:text-[17px] leading-[1.65] text-white/60">
+        <SectionLabel tone="dark">Neoclouds</SectionLabel>
+        <SectionHeading tone="dark">Running a GPU cloud?</SectionHeading>
+        <SectionSub tone="dark" maxWidth={480}>
           Add a storage line to your invoice, with no hardware to buy and no team to hire. We
           install and run it inside your data center, cross-connected to your GPU nodes.
-        </p>
+        </SectionSub>
         <Button
           variant="primary"
           tone="dark"
           size="lg"
           href={PARTNERS_HREF}
-          onClick={() => trackCtaClick("See our neoclouds program", PARTNERS_HREF, "secondary")}
+          onClick={() => trackCtaClick("Explore Neoclouds", PARTNERS_HREF, "secondary")}
         >
-          See our neoclouds program
+          Explore Neoclouds
         </Button>
       </div>
     </section>

@@ -1,25 +1,20 @@
-import {
-  ShieldCheck,
-  Brain,
-  FilmSlate,
-  Cube,
-  Flask,
-  ListMagnifyingGlass,
-  ArrowRight,
-  CurrencyDollar,
-  ArrowsLeftRight,
-  Plugs,
-  Lock,
-  Key,
-  Globe,
-} from "@phosphor-icons/react";
+import { useEffect, useRef, useState } from "react";
+import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { Check } from "@phosphor-icons/react";
+import backupArt from "@/assets/illustrations/workloads/01-backup-disaster-recovery.svg";
+import aiArt from "@/assets/illustrations/workloads/02-ai-training-checkpoints.svg";
+import mediaArt from "@/assets/illustrations/workloads/03-media-archive.svg";
+import researchArt from "@/assets/illustrations/workloads/04-research-residency.svg";
+import logsArt from "@/assets/illustrations/workloads/05-logs-retention.svg";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
+import { Button } from "@/components/Button";
 import Hero from "@/components/Hero";
 import Icon from "@/components/Icon";
-import IconTile from "@/components/IconTile";
 import ProofBar from "@/components/ProofBar";
-import FeatureCard from "@/components/FeatureCard";
+import TextLink from "@/components/TextLink";
+import IntegrationsSection from "@/components/IntegrationsSection";
+import CostCalculatorSection from "@/components/CostCalculatorSection";
 import Step from "@/components/Step";
 import FaqSection from "@/components/FaqSection";
 import CtaBanner from "@/components/CtaBanner";
@@ -28,44 +23,48 @@ import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
 import { trackCtaClick } from "@/lib/analytics";
-import { PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { COMPETITORS, PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
 const SIGNUP_URL = signupUrl();
 const DOCS_URL = "https://docs.fil.one";
 
 /**
- * Workloads, each anchored so the retired /solutions/* URLs can redirect
- * straight to the section that replaced them.
+ * Workloads, shown one at a time as tabs. Each id doubles as a URL hash, so
+ * the retired /solutions/* URLs (redirected to /solutions#<id>) open the
+ * matching tab.
  */
 const WORKLOADS = [
   {
     id: "backup",
-    icon: ShieldCheck,
+    art: backupArt,
+    tab: "Backup and DR",
     title: "Backup and disaster recovery",
-    body: "Write backups to a bucket with versioning and object lock, set when you create it. Under compliance retention, an object cannot be overwritten or deleted before its term is up, by anyone holding your keys. Restores carry no egress charge, so a recovery drill costs the same as not running one.",
+    body: "A drill or a real recovery pulls everything back out, and elsewhere that is billed per GB. Here reads are free, and object lock keeps backups from being deleted before their term is up.",
     points: [
       "Object lock in governance or compliance mode",
-      "Version history on every object",
+      "Version history in versioned buckets",
       "Restores and drills bill nothing extra",
     ],
   },
   {
     id: "ai",
-    icon: Brain,
+    art: aiArt,
+    tab: "AI training data",
     title: "AI training data and checkpoints",
-    body: "Keep datasets, checkpoints, and model artifacts in buckets your training code already knows how to read. Reading the same corpus for every epoch, or pulling it across to rented GPU capacity somewhere else, does not add a line to the bill. Large objects go up with multipart upload.",
+    body: "Training loops read the same data over and over, often from GPUs in another cloud. The rate stays flat whether you read a dataset once or a hundred times.",
     points: [
-      "Flat rate whether you read a corpus once or a hundred times",
+      "Move data to GPUs in any cloud, egress free",
       "Multipart upload for large artifacts",
       "Works with any S3-compatible loader",
     ],
   },
   {
     id: "media",
-    icon: FilmSlate,
+    art: mediaArt,
+    tab: "Media and archive",
     title: "Media and long-term archive",
-    body: "One storage class at one price. There is no cold tier, so nothing to rehydrate, no retrieval fee, and no minimum storage duration to plan around. Send a client a cut with a presigned link that expires on your schedule, up to seven days, instead of opening the bucket.",
+    body: "There is one storage class at one price, so nothing to rehydrate and no retrieval fee. Share a cut with a presigned link that expires within seven days.",
     points: [
       "No retrieval fees and no rehydration wait",
       "Presigned download links, private bucket",
@@ -73,21 +72,11 @@ const WORKLOADS = [
     ],
   },
   {
-    id: "apps",
-    icon: Cube,
-    title: "Application and platform storage",
-    body: "User uploads, exports, and everything else your product keeps. Point your SDK at a regional endpoint with path-style addressing and keep the code you have. Buckets stay private, and you hand out access with time-limited presigned URLs rather than public objects.",
-    points: [
-      "S3 API with path-style addressing",
-      "Presigned URLs for uploads and downloads",
-      "Per-bucket keys for each service you run",
-    ],
-  },
-  {
     id: "research",
-    icon: Flask,
-    title: "Research and regulated datasets",
-    body: "Choose Europe (France) or US East (Michigan) when you create a bucket, with more regions on the way. The region is fixed from that moment, and an access key works in one region only, so where a dataset lives is a property of the bucket rather than a policy someone has to remember.",
+    art: researchArt,
+    tab: "Research data",
+    title: "Research and residency-sensitive data",
+    body: "Choose Europe (France) or US East (Michigan) when you create a bucket. The region is fixed from then on, and each access key works in one region only.",
     points: [
       "Region chosen per bucket, more on the way",
       "Access keys scoped to one region",
@@ -96,9 +85,10 @@ const WORKLOADS = [
   },
   {
     id: "logs",
-    icon: ListMagnifyingGlass,
+    art: logsArt,
+    tab: "Logs and retention",
     title: "Logs, telemetry, and retention",
-    body: "Retention that does not get more expensive the longer you hold it. Logs and telemetry are billed per TB stored, with nothing charged per request on the way in or out. When the data has to survive for a fixed term, create the bucket with object lock and a retention period.",
+    body: "Logs are billed per TB stored, with no charge per request on the way in or out. When records must survive a fixed term, create the bucket with object lock and a retention period.",
     points: [
       "No per-request charge on writes or reads",
       "Retention periods from days to years",
@@ -107,39 +97,12 @@ const WORKLOADS = [
   },
 ];
 
-/** What holds true in every bucket, whichever workload brought you here. */
-const PLATFORM = [
-  {
-    icon: CurrencyDollar,
-    title: "One line on the bill",
-    description: `Storage is the only thing metered, at ${PRICE_PER_TB_MONTH}. No request charges, no tier to choose, no minimum storage duration.`,
-  },
-  {
-    icon: ArrowsLeftRight,
-    title: "No egress fees",
-    description: "Data out to the internet, to another cloud, or back to your own servers is not billed, at any volume.",
-  },
-  {
-    icon: Plugs,
-    title: "The S3 API you already use",
-    description: "Keep your SDK or CLI. Point it at your region's endpoint, switch on path-style addressing, and carry on.",
-  },
-  {
-    icon: Lock,
-    title: "Object lock and versioning",
-    description: "Governance or compliance retention plus version history, chosen when the bucket is created.",
-  },
-  {
-    icon: Key,
-    title: "Keys scoped to the job",
-    description: "Give a key one bucket or all of them, read, write, list, or delete, and an expiry date if it should not outlive the task.",
-  },
-  {
-    icon: Globe,
-    title: "You pick the region",
-    description: "Europe (France) or US East (Michigan), decided per bucket and fixed from then on. More regions are on the way.",
-  },
-];
+/** The workload named by the URL hash, if it names one. */
+const workloadFromHash = () => {
+  if (typeof window === "undefined") return undefined;
+  const hash = window.location.hash.slice(1);
+  return WORKLOADS.some(({ id }) => id === hash) ? hash : undefined;
+};
 
 const STEPS = [
   {
@@ -167,16 +130,41 @@ const STEPS = [
 const SolutionsPage = () => {
   const { heroEndRef } = useScrollTracking();
   const { ref: workloadsRef, inView: workloadsInView } = useInView({ threshold: 0.03 });
-  const { ref: platformRef, inView: platformInView } = useInView({ threshold: 0.05 });
+  // Start on the first tab so the prerendered HTML and the first client render
+  // match; the effect below then applies any #hash from the URL.
+  const [activeWorkload, setActiveWorkload] = useState(WORKLOADS[0].id);
+
+  // Follow the initial hash, in-page hash links, and back/forward to the matching tab.
+  useEffect(() => {
+    const onHashChange = () => {
+      const id = workloadFromHash();
+      if (id) setActiveWorkload(id);
+    };
+    onHashChange();
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  // On narrow screens the tab track scrolls sideways; keep the selected tab in
+  // view. Scrolls only the track, never the page.
+  const tabTrackRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const track = tabTrackRef.current;
+    const tab = track?.querySelector<HTMLElement>('[role="tab"][data-state="active"]');
+    if (!track || !tab || track.scrollWidth <= track.clientWidth) return;
+    const trackBox = track.getBoundingClientRect();
+    const tabBox = tab.getBoundingClientRect();
+    track.scrollLeft += tabBox.left - trackBox.left - (trackBox.width - tabBox.width) / 2;
+  }, [activeWorkload]);
+
+  // Keep the URL shareable without jumping the page.
+  const selectWorkload = (id: string) => {
+    setActiveWorkload(id);
+    window.history.replaceState(null, "", `#${id}`);
+  };
   const { ref: stepsRef, inView: stepsInView } = useInView({ threshold: 0.05 });
 
-  useSeo({
-    title: "Solutions · Fil One",
-    description:
-      `Backups, training data, archives, app storage, research data, and logs on one S3-compatible platform. Flat ${PRICE_PER_TB_MONTH}, no egress fees, EU or US regions.`,
-    canonical: "https://www.fil.one/solutions",
-    ogImage: "https://www.fil.one/og-image.png",
-  });
+  useSeo();
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-white">
@@ -188,12 +176,12 @@ const SolutionsPage = () => {
           glow
           grid
           titleSize="text-[30px] sm:text-[38px] md:text-[50px]"
-          title={<>One bucket, <span className="text-brand-500">every workload</span></>}
-          description="Backups, training sets, archives, app data, research, and logs. The same flat rate per TB, the same S3 API, and no egress fees whichever one you came for."
-          titleMaxWidth={640}
-          descriptionMaxWidth={560}
+          title={<>Storage for <span className="whitespace-nowrap text-gradient-flow">every workload</span></>}
+          description="From backups and AI training data to media archives, research data, and logs, every workload runs on the same S3-compatible buckets at one flat rate per TB."
+          titleMaxWidth={760}
+          descriptionMaxWidth={640}
           contentClassName="pb-16 md:pb-20"
-          tagline="1 TB free for 30 days · No credit card required · No egress fees"
+          tagline="1 TB free for 30 days · No credit card required"
           ctas={[
             {
               label: "Start for free",
@@ -212,7 +200,7 @@ const SolutionsPage = () => {
               "S3-compatible API",
               `${PRICE_DISPLAY} / TB / month`,
               "No egress fees",
-              "Europe or US East",
+              "Europe or US East, more regions soon",
             ]}
           />
         </div>
@@ -222,79 +210,104 @@ const SolutionsPage = () => {
           <div className="mx-auto flex w-full max-w-container flex-col gap-14 md:gap-16">
             <div className="flex flex-col items-center gap-3 text-center">
               <SectionLabel>Workloads</SectionLabel>
-              <SectionHeading maxWidth={620}>What teams keep here</SectionHeading>
-              <SectionSub maxWidth={560}>
-                Six patterns that share one trait: the data is large, it gets read back, and the
-                reading is what makes it expensive somewhere else.
+              <SectionHeading maxWidth={620}>Find your workload</SectionHeading>
+              <SectionSub maxWidth={620}>
+                Same buckets, same flat rate, no egress fees.
               </SectionSub>
             </div>
 
-            <div ref={workloadsRef} className="grid grid-cols-1 gap-5 lg:grid-cols-2 reveal-group">
-              {WORKLOADS.map(({ id, icon, title, body, points }) => (
-                <article
-                  key={id}
-                  id={id}
-                  className={`flex scroll-mt-28 flex-col gap-4 rounded-2xl border border-black/[0.07] bg-white p-7 shadow-elevated reveal${
-                    workloadsInView ? " in-view" : ""
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <IconTile icon={icon} size={20} className="h-11 w-11" />
-                    <h3 className="m-0 font-display text-[18px] font-medium leading-[1.3] tracking-[-0.015em] text-zinc-950">
-                      {title}
-                    </h3>
-                  </div>
-                  <p className="m-0 font-sans text-[14px] font-normal leading-[1.65] text-zinc-500">
-                    {body}
-                  </p>
-                  <ul className="m-0 mt-auto flex list-none flex-col gap-2 p-0 pt-1">
-                    {points.map((point) => (
-                      <li key={point} className="flex items-start gap-2">
-                        <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-brand-500" aria-hidden="true" />
-                        <span className="font-sans text-[13.5px] leading-[1.5] text-zinc-600">{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
+            {/* Hash targets for /solutions#<id> links, landing just above the tabs. The tabs pull up by one gap (-mt) so this empty row adds no space. */}
+            <div className="relative">
+              {WORKLOADS.map(({ id }) => (
+                <span key={id} id={id} className="absolute -top-28" aria-hidden="true" />
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* Platform */}
-        <section className="w-full bg-zinc-50 px-5 md:px-8 py-24 md:py-32">
-          <div className="mx-auto flex w-full max-w-container flex-col gap-14 md:gap-16">
-            <div className="flex flex-col items-center gap-3 text-center">
-              <SectionLabel>Every bucket</SectionLabel>
-              <SectionHeading maxWidth={620}>The same platform underneath</SectionHeading>
-            </div>
-            <div
-              ref={platformRef}
-              className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 reveal-group"
+            <TabsPrimitive.Root
+              ref={workloadsRef}
+              value={activeWorkload}
+              onValueChange={selectWorkload}
+              className={`-mt-14 flex flex-col gap-8 md:-mt-16 reveal${workloadsInView ? " in-view" : ""}`}
             >
-              {PLATFORM.map(({ icon, title, description }) => (
-                <FeatureCard
-                  key={title}
-                  icon={icon}
-                  title={title}
-                  description={description}
-                  className={`reveal${platformInView ? " in-view" : ""}`}
-                />
+              {/* Segmented control: one track, the active tab lifts onto it. Scrolls sideways on narrow screens instead of wrapping. */}
+              {/* mx-auto (not justify-center) centres the track when it fits and lets it scroll from its first tab when it doesn't */}
+              <div ref={tabTrackRef} className="-mx-5 flex overflow-x-auto px-5 [scrollbar-width:none] md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden">
+                <TabsPrimitive.List
+                  aria-label="Workloads"
+                  className="mx-auto inline-flex shrink-0 gap-1 rounded-full border border-black/[0.06] bg-zinc-100/80 p-1"
+                >
+                  {WORKLOADS.map(({ id, tab }) => (
+                    <TabsPrimitive.Trigger
+                      key={id}
+                      value={id}
+                      className="whitespace-nowrap rounded-full px-4 py-1.5 font-sans text-[13.5px] font-medium text-zinc-600 transition-[color,background-color,box-shadow] duration-200 hover:text-zinc-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 data-[state=active]:bg-white data-[state=active]:text-zinc-950 data-[state=active]:shadow-elevated-sm data-[state=active]:ring-1 data-[state=active]:ring-black/[0.05]"
+                    >
+                      {tab}
+                    </TabsPrimitive.Trigger>
+                  ))}
+                </TabsPrimitive.List>
+              </div>
+
+              {WORKLOADS.map(({ id, title, body, points, art }) => (
+                <TabsPrimitive.Content
+                  key={id}
+                  value={id}
+                  className="grid grid-cols-1 overflow-hidden rounded-2xl border border-black/[0.07] bg-white shadow-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 data-[state=inactive]:hidden data-[state=active]:animate-in data-[state=active]:fade-in-0 data-[state=active]:slide-in-from-bottom-1 data-[state=active]:duration-300 motion-reduce:animate-none lg:grid-cols-2"
+                >
+                  <div className="flex flex-col gap-6 p-8 md:p-10">
+                    <div className="flex flex-col gap-3">
+                      <h3 className="m-0 font-display text-[24px] font-medium leading-[1.25] tracking-[-0.02em] text-zinc-950 md:text-[28px]">
+                        {title}
+                      </h3>
+                      <p className="m-0 max-w-[520px] text-pretty font-sans text-[15px] font-normal leading-[1.65] text-zinc-500">{body}</p>
+                    </div>
+                    <ul className="m-0 flex list-none flex-col gap-3 p-0">
+                      {points.map((point) => (
+                        <li key={point} className="flex items-start gap-3">
+                          <Icon icon={Check} size={15} weight="bold" className="mt-[3px] shrink-0 text-brand-600" aria-hidden="true" />
+                          <span className="text-pretty font-sans text-[14.5px] leading-[1.5] text-zinc-700">{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Decorative workload art; the image is absolutely positioned so the text sets the card height */}
+                  <div className="p-3 pt-0 md:p-4 md:pt-0 lg:pl-0 lg:pt-4">
+                    <div className="relative h-full min-h-[240px] overflow-hidden rounded-2xl border border-black/[0.05] bg-[#F6F6F7] bg-illustration-panel">
+                      <img src={art} alt="" aria-hidden="true" loading="lazy" decoding="async" className="absolute inset-0 block h-full w-full select-none object-contain" />
+                    </div>
+                  </div>
+                </TabsPrimitive.Content>
               ))}
-            </div>
+            </TabsPrimitive.Root>
+
+            <p className="m-0 text-center font-sans text-[14px] text-zinc-500">
+              Running a GPU cloud?{" "}
+              <TextLink href="/neocloud" tone="brand" arrow onClick={() => trackCtaClick("Neoclouds", "/neocloud", "secondary")}>
+                See how neoclouds use Fil One
+              </TextLink>
+            </p>
           </div>
         </section>
 
-        {/* How to start */}
-        <section className="w-full border-y border-zinc-200 bg-white px-5 md:px-8 py-24 md:py-32">
+        <IntegrationsSection tone="grey" description="S3 API compatible. The backup, media, and ML tools you run today already know how to talk to it." />
+
+        <CostCalculatorSection id="calculator" competitors={COMPETITORS} />
+
+        {/* Getting started */}
+        <section className="w-full border-y border-zinc-100 bg-zinc-50 px-5 md:px-8 py-24 md:py-32">
           <div className="mx-auto flex w-full max-w-container flex-col gap-12 items-center">
             <div className="flex flex-col items-center gap-3 text-center">
               <SectionLabel>Getting started</SectionLabel>
-              <SectionHeading>Four steps, whichever workload</SectionHeading>
+              <SectionHeading>Up and running in four steps</SectionHeading>
+              <SectionSub maxWidth={520}>
+                Whether you are starting fresh or moving data from another provider, all you need
+                are the S3 tools you already use.
+              </SectionSub>
             </div>
             <div
               ref={stepsRef}
-              className={`grid w-full grid-cols-1 divide-y divide-zinc-200 lg:grid-cols-4 lg:divide-x lg:divide-y-0 reveal${
+              className={`grid w-full grid-cols-1 gap-8 lg:grid-cols-4 lg:gap-0 reveal${
                 stepsInView ? " in-view" : ""
               }`}
             >
@@ -304,44 +317,31 @@ const SolutionsPage = () => {
                   number={number}
                   title={title}
                   description={body}
-                  className="py-8 first:pt-0 last:pb-0 lg:py-0 lg:px-8 lg:first:pl-0 lg:last:pr-0"
+                  divided
                 />
               ))}
             </div>
-            <a
+            <Button
+              variant="secondary"
               href={DOCS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-sans text-[14px] font-medium text-brand-500 no-underline transition-opacity hover:opacity-70"
               onClick={() => trackCtaClick("Read the docs", DOCS_URL, "secondary")}
             >
               Read the docs
-              <Icon icon={ArrowRight} size={14} weight="bold" aria-hidden="true" />
-            </a>
+            </Button>
           </div>
         </section>
 
-        <FaqSection include={[
-          "Is Fil One compatible with my existing tools?",
-          "How do I migrate from AWS / Azure / Google Cloud?",
-          "Where is my data stored?",
-          "What counts as egress?",
-          "How is my bill calculated, and is there a minimum charge?",
-          "Do you offer annual or reserved capacity plans?",
-        ]} />
+        <FaqSection />
 
         <CtaBanner
-          heading="Start with the workload that hurts most"
-          subhead="1 TB free for 30 days, with 2 TB of egress and no credit card. Move one bucket and compare the bill."
+          heading="Stop paying to read your own data"
+          subhead="1 TB free for 30 days, with 2 TB of egress and no credit card."
           cta={{
             label: "Start for free",
             href: SIGNUP_URL,
             onClick: () => trackCtaClick("Start for free", SIGNUP_URL, "primary"),
-          }}
-          secondaryCta={{
-            label: "Talk to sales",
-            href: "/contact-sales",
-            onClick: () => trackCtaClick("Talk to sales", "/contact-sales", "secondary"),
           }}
           note={`S3-compatible · ${PRICE_PER_TB_MONTH} · Europe or US East`}
         />

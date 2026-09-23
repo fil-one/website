@@ -39,7 +39,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
       items: [
         { href: "/partners", label: "Partners" },
         { href: "/about", label: { en: "About", es: "Nosotros" } },
-        { href: contactSalesHref, label: { en: "Contact Sales", es: "Contactar con ventas" } },
+        { href: contactSalesHref, label: { en: "Talk to sales", es: "Contactar con ventas" } },
       ],
     },
     {
@@ -74,7 +74,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
     : "© 2026 Fil One. All rights reserved.";
 
   return (
-    <footer className="flex w-full flex-col border-t border-black/[0.07] bg-white px-6 pb-10 pt-14 md:px-12">
+    <footer className="flex w-full flex-col border-t border-black/[0.07] bg-white px-5 pb-10 pt-14 md:px-8">
       <div className="mx-auto flex w-full max-w-container-wide flex-col gap-12">
         {/* Top row */}
         <div className="flex flex-col md:flex-row md:justify-between gap-10 md:gap-0">
@@ -83,21 +83,21 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
             <a href="/" className="no-underline">
               <img src={filOneLogo} alt="Fil One" className="block h-[18px] w-auto" />
             </a>
-            <p className="font-sans text-[13px] font-normal leading-[1.6] text-zinc-500">{tagline}</p>
+            <p className="font-sans text-small font-normal leading-[1.6] text-zinc-500">{tagline}</p>
           </div>
 
           {/* Right: link groups */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 md:flex md:flex-row md:gap-16 items-start">
             {groups.map(({ id, title, items }) => (
               <div key={id} className="flex flex-col gap-3 items-start">
-                <p className="font-sans text-[12.5px] font-medium tracking-[0.02em] text-zinc-950">{l(title)}</p>
+                <p className="font-sans text-small font-medium tracking-[0.02em] text-zinc-950">{l(title)}</p>
                 {items.map(({ label, href }) => (
                   <a
                     key={href}
                     href={href}
                     {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     onClick={href.includes("docs.fil.one") ? () => trackDocsClick(href) : undefined}
-                    className="font-sans text-[13.5px] font-normal leading-[1.4] text-zinc-600 no-underline transition-colors duration-150 hover:text-zinc-950"
+                    className="-my-1.5 py-1.5 font-sans text-small font-normal leading-[1.4] text-zinc-600 no-underline transition-colors duration-150 ease-smooth hover:text-zinc-950"
                   >
                     {l(label)}
                   </a>
@@ -109,7 +109,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
 
         {/* Bottom: divider + copyright */}
         <div className="flex flex-col gap-4 border-t border-black/[0.06] pt-6">
-          <p className="font-sans text-[12px] font-normal text-zinc-500">{copyright}</p>
+          <p className="font-sans text-small font-normal text-zinc-500">{copyright}</p>
         </div>
       </div>
     </footer>

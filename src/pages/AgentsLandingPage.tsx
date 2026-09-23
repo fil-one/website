@@ -2,7 +2,7 @@ import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
-import { PRICE_DISPLAY, PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { PRICE_DISPLAY, PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
 import { ArrowUpRight, ShieldCheck, Plug, TrendUp, CurrencyDollar, LockOpen, HardDrives } from "@phosphor-icons/react";
 import Hero from "@/components/Hero";
 import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
@@ -10,6 +10,7 @@ import { Button } from "@/components/Button";
 import Pill from "@/components/Pill";
 import IconTile from "@/components/IconTile";
 import TextLink from "@/components/TextLink";
+import FeatureCard from "@/components/FeatureCard";
 import FeatureList from "@/components/FeatureList";
 import CodeBlock, { type CodeSnippet } from "@/components/CodeBlock";
 import Table from "@/components/Table";
@@ -20,7 +21,7 @@ const DOCS_URL = "https://docs.fil.one";
 
 // ─── Comparison table data ─────────────────────────────────────────────────────
 const COMPARISON_ROWS = [
-  { item: "Storage",           aws: "$0.023/GB/month (~$23/TB)", filone: `~$0.005/GB/month (${PRICE_PER_TB_SHORT})` },
+  { item: "Storage",           aws: "$0.023/GB/month (~$23/TB)", filone: `~$${(PRICE_PER_TB / 1000).toFixed(3)}/GB/month (${PRICE_PER_TB_SHORT})` },
   { item: "PUT requests",      aws: "$0.005 per 1,000",          filone: "Included" },
   { item: "GET requests",      aws: "$0.0004 per 1,000",         filone: "Included" },
   { item: "Egress",            aws: "$0.09/GB",                  filone: "$0" },
@@ -139,7 +140,7 @@ const VALUE_PROPS = [
   {
     icon: HardDrives,
     title: "Storage your agents can rely on",
-    body: "S3-compatible object storage in US and EU regions, with the same durability and availability guarantees you'd expect from S3 — no egress fees when your agents need to read it all back.",
+    body: "S3-compatible object storage in US and EU regions, with the same durability and availability guarantees you'd expect from S3, and no egress fees when your agents need to read it all back.",
   },
 ];
 
@@ -149,7 +150,7 @@ const USE_CASES = [
     icon: ShieldCheck,
     title: "Persistent agent memory and artifacts",
     description: "Your agents write session state, conversation history, checkpoints, and generated outputs straight to S3 buckets, and read them back on the next run. Flat pricing means the loop doesn't cost you: thousands of small reads and writes price the same as a handful. Keep everything your agents produce instead of deleting it to stay in budget. Plain S3: works today with boto3, the AWS CLI, or any SDK.",
-    cta: { label: "Start now", href: signupUrl() },
+    cta: { label: "Start for free", href: signupUrl() },
   },
   {
     icon: Plug,
@@ -160,8 +161,8 @@ const USE_CASES = [
   {
     icon: TrendUp,
     title: "A queryable knowledge base over your buckets",
-    description: "Point a retrieval agent at a bucket and query it in plain language. Files index as they land; semantic search runs on your own model keys. Store the whole corpus at volume — flat pricing makes a large document set a storage cost, not a per-query tax.",
-    badge: "RAG Coming soon",
+    description: "Point a retrieval agent at a bucket and query it in plain language. Files index as they land; semantic search runs on your own model keys. Store the whole corpus at volume: flat pricing makes a large document set a storage cost, not a per-query tax.",
+    badge: "RAG coming soon",
   },
 ];
 
@@ -170,7 +171,7 @@ const NEXT_STEPS = [
   {
     href: "/contact-sales",
     label: "Talk to a person",
-    title: "Get in touch",
+    title: "Talk to sales",
     body: "If you're building something at scale and want to talk through the fit before committing.",
     external: false,
   },
@@ -185,12 +186,7 @@ const NEXT_STEPS = [
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 const AgentsLandingPage = () => {
-  useSeo({
-    title: "Fil One for AI Agents · Flat storage. No egress. No billing surprises.",
-    description:
-      `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. No egress fees, no per-request charges. Built for agentic workloads that read and write constantly. Start free — 1 TB included.`,
-    canonical: "https://www.fil.one/lp/agents",
-  });
+  useSeo();
 
   const { ref: compRef,     inView: compInView     } = useInView({ threshold: 0.04 });
   const { ref: devRef,      inView: devInView      } = useInView({ threshold: 0.04 });
@@ -211,13 +207,7 @@ const AgentsLandingPage = () => {
           titleMaxWidth={640}
           descriptionMaxWidth={400}
           contentClassName="pb-20 md:pb-28"
-          badge={
-            <div className="inline-flex items-center rounded-full border border-brand/20 bg-brand-50 px-3.5 py-2.5 text-center max-w-[90vw]">
-              <span className="whitespace-nowrap font-sans text-[13.5px] font-medium leading-none text-brand-600">
-                For developers building with AI agents
-              </span>
-            </div>
-          }
+          badge={<Pill wrap>For AI agent developers</Pill>}
           title={
             <>
               Agents need space to run.
@@ -393,7 +383,7 @@ const AgentsLandingPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10 w-full">
               {VALUE_PROPS.map(({ icon, title, body }) => (
                 <div key={title} className="flex flex-col gap-4">
-                  <IconTile icon={icon} size={18} className="border border-brand/20" />
+                  <IconTile icon={icon} className="border border-brand/20" />
                   <div className="flex flex-col gap-2">
                     <p className="m-0 font-sans font-semibold text-[15px] leading-[1.35] text-zinc-950">{title}</p>
                     <p className="m-0 font-sans text-[15px] leading-[1.7] text-zinc-500">{body}</p>
@@ -418,14 +408,14 @@ const AgentsLandingPage = () => {
               </SectionSub>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 reveal-group">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 reveal-group">
               {USE_CASES.map(({ icon, title, description, badge, cta }) => (
                 <div
                   key={title}
-                  className={`flex flex-col gap-5 p-8 rounded-2xl border border-black/[0.07] bg-white shadow-elevated reveal${useCasesInView ? " in-view" : ""}`}
+                  className={`flex flex-col gap-5 p-6 sm:p-8 rounded-2xl border border-black/[0.07] bg-white shadow-elevated reveal${useCasesInView ? " in-view" : ""}`}
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <IconTile icon={icon} size={18} />
+                    <IconTile icon={icon} />
                     {badge && <Pill tone="neutral" className="whitespace-nowrap">{badge}</Pill>}
                   </div>
                   <div className="flex flex-1 flex-col gap-2">

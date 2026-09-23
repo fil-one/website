@@ -105,12 +105,7 @@ const FEATURES = [
 
 const BarcelonaLandingPageES = () => {
   useLang("es");
-  useSeo({
-    title: `Fil One para Barcelona: Almacenamiento Europeo, ${PRICE_PER_TB_SHORT}, Sin Egress`,
-    description:
-      `Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a ${PRICE_PER_TB_SHORT}. Intégralo en tu stack actual en minutos.`,
-    canonical: "https://www.fil.one/lp/es/barcelona",
-  });
+  useSeo();
 
   const { ref: posRef, inView: posInView } = useInView({ threshold: 0.05 });
   const { ref: pricingRef, inView: pricingInView } = useInView({ threshold: 0.05 });

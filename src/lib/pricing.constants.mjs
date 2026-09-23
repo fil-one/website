@@ -20,11 +20,20 @@ export const PRICE_PER_TB = 5.99;
 /** The numeric amount as a string, for structured data (e.g. JSON-LD price). */
 export const PRICE_AMOUNT = PRICE_PER_TB.toFixed(2);
 
-/** The bare price with currency symbol, e.g. "$4.99". */
+/** The bare price with currency symbol, e.g. "$5.99". */
 export const PRICE_DISPLAY = `$${PRICE_AMOUNT}`;
 
-/** The short per-TB rate, e.g. "$4.99/TB". */
+/** The short per-TB rate, e.g. "$5.99/TB". */
 export const PRICE_PER_TB_SHORT = `${PRICE_DISPLAY}/TB`;
 
-/** The full per-TB rate for inline copy, e.g. "$4.99/TB/month". */
+/** The full per-TB rate for inline copy, e.g. "$5.99/TB/month". */
 export const PRICE_PER_TB_MONTH = `${PRICE_DISPLAY}/TB/month`;
+
+/**
+ * Monthly account minimum, in USD. Billed from Stripe, not derived from the
+ * per-TB rate, so the two can change independently.
+ */
+export const MONTHLY_MINIMUM = 5.99;
+
+/** The minimum with currency symbol, e.g. "$5.99". */
+export const MONTHLY_MINIMUM_DISPLAY = `$${MONTHLY_MINIMUM.toFixed(2)}`;

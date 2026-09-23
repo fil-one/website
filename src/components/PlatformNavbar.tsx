@@ -34,15 +34,20 @@ const NAV_LINKS: readonly NavLinkItem[] = [
 
 /** Top-level nav item (dropdown trigger or plain link) — shared so both match. */
 const NAV_ITEM_CLASS =
-  "flex items-center gap-1 rounded-md px-2.5 py-1.5 font-sans text-[14px] font-normal text-zinc-600 no-underline transition-colors hover:bg-black/[0.04]";
+  "flex items-center gap-1 rounded-md px-2 py-1.5 font-sans text-body-sm font-normal no-underline transition-colors ease-smooth hover:bg-black/[0.04] xl:px-2.5";
 
-/** Uppercase mono section label inside the mobile panel. */
-const MOBILE_SECTION_LABEL_CLASS =
-  "px-3 pb-1 pt-2 font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-zinc-600";
+/** Current-page treatment: darker text on a faint tint (weight stays fixed so the row never shifts). */
+const NAV_ITEM_ACTIVE_CLASS = "bg-black/[0.04] text-zinc-950";
 
 /** Row in the mobile panel. */
 const MOBILE_ROW_CLASS =
-  "flex items-center rounded-lg px-3 py-2.5 font-sans text-[15px] font-normal text-zinc-950 no-underline transition-colors hover:bg-black/[0.04]";
+  "flex items-center rounded-lg px-3 py-2.5 font-sans text-body font-normal text-zinc-950 no-underline transition-colors ease-smooth hover:bg-black/[0.04]";
+
+/** True when `href` is the current page or a section containing it (e.g. /blog for a post). */
+const isCurrent = (pathname: string, href: string) =>
+  !href.startsWith("http") && (pathname === href || pathname.startsWith(`${href}/`));
+
+const MOBILE_MENU_ID = "mobile-nav-menu";
 
 
 interface PlatformNavbarProps {
@@ -81,22 +86,23 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
       <a href="#main-content" className="skip-link">{t.skipToContent}</a>
 
       {/* Main navbar */}
-      <nav className="fixed left-0 right-0 top-0 z-50 px-4 border-b border-black/[0.06] bg-white/85 backdrop-blur-[20px] md:px-8">
-        <div className="mx-auto flex h-[58px] w-full items-center justify-between gap-4 lg:gap-8">
+      <nav className="fixed left-0 right-0 top-0 z-50 px-5 border-b border-black/[0.06] bg-white/85 backdrop-blur-[20px] md:px-8">
+        <div className="mx-auto flex h-[58px] w-full items-center justify-between gap-4 lg:gap-5 xl:gap-8">
           {/* Logo */}
-          <a href="/" className="shrink-0 no-underline">
+          <a href="/" className="flex h-11 shrink-0 items-center no-underline">
             <img src={filOneLogo} alt="Fil One" className="block h-5 w-auto" />
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-0.5 xl:gap-2">
             {NAV_LINKS.map(({ label, href, external }) => (
               <a
                 key={href}
                 href={href}
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                aria-current={isCurrent(pathname, href) ? "page" : undefined}
                 onClick={() => { if (href.includes("docs.fil.one")) trackDocsClick(href); }}
-                className={`${NAV_ITEM_CLASS} gap-1`}
+                className={`${NAV_ITEM_CLASS} ${isCurrent(pathname, href) ? NAV_ITEM_ACTIVE_CLASS : "text-zinc-600"}`}
               >
                 {l(label)}
                 {external && <Icon icon={ArrowUpRight} size={11} className="mt-px text-zinc-600" aria-hidden="true" />}
@@ -106,7 +112,9 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
           {/* Desktop right CTAs */}
           <div className="hidden lg:flex items-center gap-2.5 shrink-0">
-            <Button href={contactSalesHref} variant="secondary">
+            {/* The longer Spanish labels don't fit beside the links at 1024px, so the
+                sales button waits for xl there (it's still in the mobile menu and page CTAs). */}
+            <Button href={contactSalesHref} variant="secondary" className={lang === "es" ? "!hidden xl:!inline-flex" : undefined}>
               {t.contactSales}
             </Button>
             <Button href={signupUrl()} variant="primary" size="sm">
@@ -116,10 +124,11 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
           {/* Mobile hamburger */}
           <button
-            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border-none bg-transparent text-zinc-950 transition-colors hover:bg-black/[0.04] lg:hidden"
+            className="-mr-1 flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg border-none bg-transparent text-zinc-950 transition-colors hover:bg-black/[0.04] lg:hidden"
             onClick={() => setMobileOpen((o) => !o)}
             aria-label={mobileOpen ? t.closeMenu : t.openMenu}
             aria-expanded={mobileOpen}
+            aria-controls={MOBILE_MENU_ID}
           >
             <Icon icon={mobileOpen ? X : List} size={18} />
           </button>
@@ -127,14 +136,15 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="flex max-h-[calc(100dvh-58px)] flex-col gap-0.5 overflow-y-auto overscroll-contain border-t border-black/[0.06] bg-white/[0.97] px-5 py-3 lg:hidden">
+          <div id={MOBILE_MENU_ID} className="flex max-h-[calc(100dvh-58px)] flex-col gap-0.5 overflow-y-auto overscroll-contain border-t border-black/[0.06] bg-white/[0.97] px-5 py-3 lg:hidden">
             {NAV_LINKS.map(({ label, href, external }) => (
               <a
                 key={href}
                 href={href}
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                aria-current={isCurrent(pathname, href) ? "page" : undefined}
                 onClick={() => { setMobileOpen(false); if (href.includes("docs.fil.one")) trackDocsClick(href); }}
-                className={`${MOBILE_ROW_CLASS} gap-1`}
+                className={`${MOBILE_ROW_CLASS} gap-1${isCurrent(pathname, href) ? " bg-black/[0.04] font-medium" : ""}`}
               >
                 {l(label)}
                 {external && <Icon icon={ArrowUpRight} size={11} className="mt-px text-zinc-600" aria-hidden="true" />}

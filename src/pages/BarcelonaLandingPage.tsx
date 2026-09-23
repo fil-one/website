@@ -74,12 +74,7 @@ const FEATURES = [
 ];
 
 const BarcelonaLandingPage = () => {
-  useSeo({
-    title: `Fil One for Barcelona: European Storage, ${PRICE_PER_TB_SHORT}, No Egress Fees`,
-    description:
-      `S3-compatible object storage for teams in Barcelona. EU data sovereignty, zero egress fees, at ${PRICE_PER_TB_SHORT}. Drop into your existing stack in minutes.`,
-    canonical: "https://www.fil.one/lp/barcelona",
-  });
+  useSeo();
 
   const { ref: posRef, inView: posInView } = useInView({ threshold: 0.05 });
   const { ref: pricingRef, inView: pricingInView } = useInView({ threshold: 0.05 });

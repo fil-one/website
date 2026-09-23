@@ -1,8 +1,8 @@
-# Fil One — Full Reference for AI Agents and Developers
+# Fil One: Full Reference for AI Agents and Developers
 
 > Fil One is the storage layer for AI agents. S3-compatible object storage built on
 > Filecoin with verifiable data integrity, no egress fees, and flat pricing at
-> $4.99/TB/month. Free 30-day trial, no credit card required.
+> $5.99/TB/month. Free 30-day trial, no credit card required.
 
 ---
 
@@ -10,7 +10,7 @@
 
 Fil One provides S3-compatible object storage backed by the Filecoin network. Every
 object stored on Fil One receives a cryptographic content identifier (CID) and is
-verified continuously via Filecoin's Proof of Spacetime (PoSt) — a cryptographic
+verified continuously via Filecoin's Proof of Spacetime (PoSt), a cryptographic
 proof that data exists and is intact, checked approximately every 24 hours.
 
 This makes Fil One uniquely suited to AI agent workloads where data integrity and
@@ -56,7 +56,7 @@ source_text = obj["Body"].read().decode()
 
 Persist episodic memory, conversation history, task queues, scratchpads, and
 structured world-state between agent runs. Fil One is a durable key-value store
-accessible from any process with S3 credentials — no database required.
+accessible from any process with S3 credentials, with no database required.
 
 ```python
 import json, boto3
@@ -143,7 +143,7 @@ def load_traces_for_eval(run_id: str) -> list[dict]:
 ### 5. Training and evaluation datasets
 
 Store JSONL, Parquet, CSV, or HDF5 datasets. Stream them back to training jobs at
-any throughput — no egress fee means iterating over datasets repeatedly costs only
+any throughput. No egress fee means iterating over datasets repeatedly costs only
 the storage price.
 
 ```python
@@ -197,16 +197,16 @@ export FIL_ONE_SECRET_KEY=your_secret_access_key
 
 Every object stored on Fil One:
 
-1. Receives a **CID (Content Identifier)** — a cryptographic hash of the object's
+1. Receives a **CID (Content Identifier)**, a cryptographic hash of the object's
    content using the IPLD data model
 2. Is sealed into a Filecoin sector and proven to exist via **Proof of Spacetime
    (PoSt)** approximately every 24 hours
-3. Can be independently verified against its CID at any time — without trusting Fil
+3. Can be independently verified against its CID at any time, without trusting Fil
    One as an intermediary
 
 This is particularly valuable for AI workloads:
 - Training datasets can be verified before a training run (no silent corruption)
-- Model checkpoints have provenance — you can prove which dataset version produced
+- Model checkpoints have provenance: you can prove which dataset version produced
   which model
 - Inference logs are tamper-evident for compliance and audit purposes
 
@@ -216,13 +216,23 @@ This is particularly valuable for AI workloads:
 
 | Plan | Price | Notes |
 |------|-------|-------|
-| Pay-as-you-go | $4.99/TB/month | No egress fees, no API request fees |
+| Pay-as-you-go | $5.99/TB/month | No egress fees, no API request fees; $5.99 monthly minimum |
 | Free trial | $0 | 30 days, 1 TB included, no credit card required |
 | Business | Custom | 1, 3, or 5-year terms; capacity assurance; deployment SLAs |
 
-No egress fees means agent workloads that read data frequently — RAG pipelines,
-evaluation loops, inference servers pulling weights — pay only for storage, not for
+No egress fees means agent workloads that read data frequently (RAG pipelines,
+evaluation loops, inference servers pulling weights) pay only for storage, not for
 bandwidth.
+
+For comparison, published list rates (checked 2026-09-23):
+
+| Provider | Storage | Egress |
+|----------|---------|--------|
+| Fil One | $5.99/TB/month | $0 |
+| Wasabi | $7.99/TB/month | $0 |
+| Backblaze B2 | $6.95/TB/month | Free up to 3x stored data, then $10/TB |
+| Cloudflare R2 | $15/TB/month | $0 |
+| AWS S3 Standard (eu-west-1) | $23/TB/month (first 50 TB, tiered) | $90/TB (first 10 TB, tiered; first 100 GB free) |
 
 ---
 
@@ -242,13 +252,12 @@ Fil One implements the S3 REST API. Supported operations include:
 
 ## Pages and documentation
 
-- [Homepage](https://www.fil.one) — product overview, feature comparison, pricing, FAQ
-- [Fil One for AI Agents](https://www.fil.one/lp/agents) — dedicated page for AI agent
-  developers; covers agent storage use cases, S3 connection examples, pricing, and
-  free trial details
-- [Documentation](https://docs.fil.one) — quickstart, SDK examples, API reference,
+- [Homepage](https://www.fil.one): product overview, feature comparison, pricing, FAQ
+- [Pricing](https://www.fil.one/pricing): flat per-TB rate and a cost calculator
+  comparing Fil One with AWS S3, Wasabi, Backblaze B2, and Cloudflare R2
+- [Documentation](https://docs.fil.one): quickstart, SDK examples, API reference,
   security, billing, limits
-- [Contact Sales](https://www.fil.one/contact-sales) — enterprise and high-volume
+- [Talk to sales](https://www.fil.one/contact-sales): enterprise and high-volume
   inquiries; also at sales@fil.one
 - [Privacy Policy](https://www.fil.one/privacy)
 - [Terms of Service](https://www.fil.one/terms)

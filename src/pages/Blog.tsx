@@ -58,12 +58,7 @@ const Blog = () => {
     return () => { active = false; };
   }, []);
 
-  useSeo({
-    title: "Blog · Fil One",
-    description: "Ideas and practical guidance on object storage, AI infrastructure, and the cost of moving data at scale.",
-    canonical: "https://www.fil.one/blog",
-    ogImage: "https://www.fil.one/og-image.png",
-  });
+  useSeo();
 
   const categories = useMemo(() => buildCategories(posts), [posts]);
   const matching = useMemo(() => filterPosts(posts, { category, query }), [posts, category, query]);

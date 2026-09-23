@@ -6,7 +6,7 @@ interface ButtonOwnProps {
   size?: "sm" | "lg";
   /** Maps to .btn-primary-dark/.btn-secondary-dark, .btn-primary-zinc, or .btn-secondary-brand */
   tone?: "dark" | "zinc" | "brand";
-  /** Primary only — animated gradient border, for hero-style CTAs */
+  /** Primary only — static gradient border on a white pill, for hero-style CTAs */
   glow?: boolean;
   fullWidth?: boolean;
   children: ReactNode;

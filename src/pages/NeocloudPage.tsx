@@ -1,41 +1,35 @@
 import {
-  Buildings,
+  Check,
+  CloudArrowUp,
+  X,
   Cpu,
-  CurrencyDollar,
   Key,
   ClipboardText,
   LockKey,
   Plug,
   Receipt,
   UsersThree,
-  HardDrives,
 } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-import Pill from "@/components/Pill";
 import ProofBar from "@/components/ProofBar";
 import FeatureCard from "@/components/FeatureCard";
-import IconTile from "@/components/IconTile";
-import Step from "@/components/Step";
+import SplitFeatureSection from "@/components/SplitFeatureSection";
+import Icon from "@/components/Icon";
 import CtaBanner from "@/components/CtaBanner";
-import FaqSection from "@/components/FaqSection";
-import TextLink from "@/components/TextLink";
 import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
 import { useSeo } from "@/hooks/useSeo";
 import { useInView } from "@/hooks/useInView";
-import { PRICE_PER_TB_MONTH } from "@/lib/pricing";
-import { signupUrl } from "@/lib/console-url";
 import { trackCtaClick } from "@/lib/analytics";
 
-const SALES_URL = "/contact-sales";
-const PARTNERS_URL = "/partners";
+const APPLY_URL = "/neocloud/apply";
 
 const PROOF_POINTS = [
   "S3-compatible API",
-  "No egress fees, no request charges",
-  "Storage installed in your data center",
-  "No hardware to buy, no team to hire",
+  "No egress or request fees",
+  "Runs in your data center",
+  "Run by our team",
 ];
 
 /**
@@ -47,119 +41,79 @@ const PROOF_POINTS = [
 const PROBLEM = [
   {
     icon: Cpu,
-    title: "Your fast tier holds finished work",
-    body: "The tier you bought for the working set ends up holding completed checkpoints and last quarter's datasets, because there is nowhere cheaper to put them that is still close by.",
+    title: "Old data fills your fastest storage",
+    body: "Old checkpoints and datasets sit on storage meant for active jobs, with nowhere cheaper nearby.",
   },
   {
-    icon: Plug,
-    title: "Everything else leaves the building",
-    body: "Overflow goes to a general-purpose cloud somewhere else, across the public internet, with a meter running on every read back.",
+    icon: CloudArrowUp,
+    title: "The rest goes to another cloud",
+    body: "Whatever doesn't fit goes to a hyperscaler, and your customers pay egress every time they pull it back.",
   },
   {
     icon: Receipt,
-    title: "The storage line is not yours",
-    body: "The colder the data, the more of it there is. That is a growing line on your customer's bill, and today none of it appears on your invoice.",
+    title: "You don't see that revenue",
+    body: "That storage bill keeps growing, and none of it goes through you.",
+  },
+];
+
+/**
+ * Build it yourself vs. running it with Fil One. Every Fil One cell restates a
+ * claim made elsewhere on this page (install and run, S3 API, your data
+ * center); none adds a new promise such as funding or a launch time.
+ */
+const BUILD_VS_PARTNER = [
+  {
+    aspect: "Software",
+    build: "Build or license an S3-compatible storage stack",
+    partner: "A standard S3 API that works with existing tools",
+  },
+  {
+    aspect: "Hardware",
+    build: "Buy, rack, and replace drives and servers",
+    partner: "We install and run it",
+  },
+  {
+    aspect: "People",
+    build: "Hire a storage team and staff an on-call rotation",
+    partner: "Our team operates it",
+  },
+  {
+    aspect: "Where it runs",
+    build: "Only where you have built it",
+    partner: "In your data center, next to your GPUs",
+  },
+  {
+    aspect: "First customer",
+    build: "Months of work before you have anything to sell",
+    partner: "Sell storage without building a storage product",
   },
 ];
 
 const OFFER = [
   {
-    icon: Buildings,
-    title: "In your data center",
-    body: "We can install and run object storage inside your own facility, next to your GPU nodes, instead of a region away. Talk to us about what a site needs.",
-  },
-  {
     icon: Plug,
-    title: "S3 as your customers know it",
-    body: "A standard S3-compatible API with path-style addressing, multipart upload and presigned URLs. Any tool with an S3-compatible target points at it. Nothing to rewrite.",
+    title: "Works with existing S3 tools",
+    body: "Standard S3 API with path-style addressing, multipart upload, and presigned URLs. Your customers point the tools they already use at it.",
   },
   {
     icon: UsersThree,
-    title: "Multi-tenant from the start",
-    body: "Organization roles for Owner, Admin, Member and ReadOnly, with access keys revoked automatically when someone is demoted.",
+    title: "Roles for every team",
+    body: "Owner, Admin, Member, and ReadOnly roles. When someone is demoted, their access keys are revoked automatically.",
   },
   {
     icon: Key,
-    title: "Keys scoped per bucket",
-    body: "Access keys are scoped to a single bucket and region, with read, write, list and delete granularity and an optional expiry date.",
+    title: "Keys limited to what they need",
+    body: "Give a key access to every bucket or only some, choose read, write, list, or delete, and add an expiry date if you want one. Each key works in one region.",
   },
   {
     icon: LockKey,
-    title: "Retention your customers can rely on",
-    body: "Object lock with governance or compliance retention, alongside versioning. Both are set when the bucket is created.",
+    title: "Object lock and versioning",
+    body: "Governance or compliance retention with full version history, both set when the bucket is created.",
   },
   {
     icon: ClipboardText,
-    title: "An audit log you can export",
-    body: "Account activity is recorded in an audit log that exports to CSV. Sign-in is protected with MFA and passkeys.",
-  },
-];
-
-const COMMERCIALS = [
-  {
-    icon: CurrencyDollar,
-    title: "One metered line",
-    body: `Storage is the only thing metered. No egress charges and no per-request charges. Our public rate is ${PRICE_PER_TB_MONTH}; partner terms are agreed with our team.`,
-  },
-  {
-    icon: HardDrives,
-    title: "We fund and run the hardware",
-    body: "Our capex, our racks, our operations. You add a storage product to your line card without a purchase order and without hiring a storage team.",
-  },
-  {
-    icon: Receipt,
-    title: "White label, end to end",
-    body: "Your brand on the console, the docs and the S3 endpoint. Your customers buy storage from you, on your paper, alongside the compute they already rent. Fil One stays behind the curtain unless you want us in front of it.",
-  },
-  {
-    icon: UsersThree,
-    title: "Metering that feeds your billing",
-    body: "Per-bucket usage is exported to you, so the storage line lands on your own invoice next to the GPU hours, priced the way you choose.",
-  },
-];
-
-const STEPS = [
-  {
-    number: "01",
-    title: "Tell us about the site",
-    body: "Where your compute sits, what your customers store today, and which workload annoys you most: checkpoint sprawl, dataset reloads or a backup target you overpay for.",
-  },
-  {
-    number: "02",
-    title: "Start on our regions",
-    body: "Point one cluster at a Fil One region and run it for real, while we work through the practicalities of putting storage in your building.",
-  },
-  {
-    number: "03",
-    title: "Agree the commercials",
-    body: "We settle the rate, the terms and how your customers are billed, so the storage line is one you can quote and sell with confidence.",
-  },
-  {
-    number: "04",
-    title: "Sell it as your own",
-    body: "Storage becomes a line on your invoice next to the GPU hours, with no hardware for you to buy and no product for you to build.",
-  },
-];
-
-const FAQ_INCLUDE = [
-  "Where is my data stored?",
-  "Is Fil One compatible with my existing tools?",
-  "What counts as egress?",
-  "How is my bill calculated, and is there a minimum charge?",
-  "Do you offer annual or reserved capacity plans?",
-  "How does Fil One approach security and compliance?",
-];
-
-const DEPLOYMENTS = [
-  {
-    label: "Today",
-    title: "On our regions",
-    body: "Europe (France) and US East (Michigan) today, with more regions on the way. A bucket's region is fixed when you create it, and an access key is scoped to one region. Start here while we talk about your site.",
-  },
-  {
-    label: "With your team",
-    title: "In your data center",
-    body: "We install and operate the storage inside your own facility, cross-connected to your GPU nodes, so the bytes never take a trip across the public internet.",
+    title: "An exportable audit log",
+    body: "Account activity is logged and can be exported as CSV. Sign-in supports MFA and passkeys.",
   },
 ];
 
@@ -171,18 +125,9 @@ const DEPLOYMENTS = [
  */
 const NeocloudPage = () => {
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });
-  const { ref: offerRef, inView: offerInView } = useInView({ threshold: 0.05 });
-  const { ref: deployRef, inView: deployInView } = useInView({ threshold: 0.05 });
-  const { ref: commercialsRef, inView: commercialsInView } = useInView({ threshold: 0.05 });
-  const { ref: stepsRef, inView: stepsInView } = useInView({ threshold: 0.05 });
+  const { ref: compareRef, inView: compareInView } = useInView({ threshold: 0.05 });
 
-  useSeo({
-    title: "Storage for GPU clouds · Fil One",
-    description:
-      "Add a storage line to your GPU cloud. Fil One funds, installs and runs S3-compatible object storage, including inside your own data center, so you can sell it to your customers.",
-    canonical: "https://www.fil.one/neocloud",
-    ogImage: "https://www.fil.one/og-image.png",
-  });
+  useSeo();
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-white">
@@ -193,33 +138,25 @@ const NeocloudPage = () => {
           glow
           grid
           contentClassName="pb-24 md:pb-32"
-          badge={<Pill>For GPU clouds</Pill>}
           title={
             <>
-              Extend your neocloud with{" "}
-              <span className="text-brand-500">a storage line of your own</span>
+              Add object storage to{" "}
+              <span className="whitespace-nowrap text-brand-500">your GPU cloud</span>
             </>
           }
           titleMaxWidth={700}
-          description="We fund, install and run S3-compatible object storage, including inside your own data center. You sell it to your GPU customers under your own brand, as part of your own product."
+          description="We install and run S3-compatible storage in your data center, next to your GPUs. You sell it to your customers under your own brand."
           descriptionMaxWidth={560}
           ctas={[
             {
               label: "Talk to our team",
-              href: SALES_URL,
+              href: APPLY_URL,
               variant: "primary",
               size: "lg",
               glow: true,
-              onClick: () => trackCtaClick("Talk to our team", SALES_URL, "primary"),
-            },
-            {
-              label: "Start a 30-day trial",
-              href: signupUrl(),
-              variant: "secondary",
-              onClick: () => trackCtaClick("Start a 30-day trial", signupUrl(), "secondary"),
+              onClick: () => trackCtaClick("Talk to our team", APPLY_URL, "primary"),
             },
           ]}
-          tagline="No hardware to buy · No egress fees · S3-compatible"
         />
 
         {/* Proof bar */}
@@ -230,17 +167,17 @@ const NeocloudPage = () => {
           <div className="flex flex-col gap-14 md:gap-16 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-container mx-auto">
             <div className="flex flex-col gap-3 items-center text-center">
               <SectionLabel>The gap</SectionLabel>
-              <SectionHeading maxWidth={620}>
-                Your customers store more than they compute
+              <SectionHeading maxWidth={480}>
+                Your customers need somewhere to put their data
               </SectionHeading>
-              <SectionSub maxWidth={620}>
-                Training data, checkpoints, model artifacts and job output all have to live
-                somewhere. Right now most of it lives somewhere you do not bill for.
+              <SectionSub maxWidth={520}>
+                Training data, checkpoints, and job output pile up fast. Today most of it ends up
+                with a storage provider you don't bill for.
               </SectionSub>
             </div>
             <div
               ref={problemRef}
-              className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full reveal-group"
+              className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full reveal-group"
             >
               {PROBLEM.map(({ icon, title, body }) => (
                 <FeatureCard
@@ -255,144 +192,102 @@ const NeocloudPage = () => {
           </div>
         </section>
 
+        {/* Build vs partner */}
+        <section className="w-full bg-zinc-50 border-y border-zinc-100">
+          <div className="flex flex-col gap-12 md:gap-14 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-container mx-auto">
+            <div className="flex flex-col gap-3 items-center text-center">
+              <SectionLabel>Build or partner</SectionLabel>
+              <SectionHeading maxWidth={620}>Build it yourself, or work with us</SectionHeading>
+              <SectionSub maxWidth={560}>
+                Running object storage is a business in itself. Here's what each option involves.
+              </SectionSub>
+            </div>
+
+            <div
+              ref={compareRef}
+              className={`w-full max-w-[1040px] overflow-hidden rounded-2xl border border-black/[0.07] bg-white shadow-elevated reveal${compareInView ? " in-view" : ""}`}
+            >
+              {/* Table from md up */}
+              <table className="hidden w-full table-fixed border-collapse text-left md:table">
+                <caption className="sr-only">Building object storage yourself compared with running it with Fil One</caption>
+                {/* Fixed layout: a narrow label column, the two options share the rest equally */}
+                <colgroup>
+                  <col className="w-[180px]" />
+                  <col />
+                  <col />
+                </colgroup>
+                <thead>
+                  <tr className="border-b border-black/[0.06]">
+                    <td className="px-8 py-5" />
+                    <th scope="col" className="px-8 py-5 font-sans text-[15px] font-medium text-zinc-500">Build it yourself</th>
+                    <th scope="col" className="bg-brand-50/60 px-8 py-5 font-sans text-[15px] font-semibold text-brand-600">With Fil One</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {BUILD_VS_PARTNER.map(({ aspect, build, partner }) => (
+                    <tr key={aspect} className="border-b border-black/[0.06] last:border-b-0">
+                      <th scope="row" className="px-8 py-5 align-top font-sans text-[14px] font-medium leading-[1.5] text-zinc-500">
+                        {aspect}
+                      </th>
+                      <td className="px-8 py-5 align-top">
+                        <span className="flex items-start gap-2.5 text-pretty font-sans text-[15px] leading-[1.5] text-zinc-600">
+                          <Icon icon={X} size={14} weight="bold" className="mt-[4px] shrink-0 text-zinc-400" aria-hidden="true" />
+                          {build}
+                        </span>
+                      </td>
+                      <td className="bg-brand-50/60 px-8 py-5 align-top">
+                        <span className="flex items-start gap-2.5 text-pretty font-sans text-[15px] font-medium leading-[1.5] text-zinc-950">
+                          <Icon icon={Check} size={14} weight="bold" className="mt-[4px] shrink-0 text-brand-600" aria-hidden="true" />
+                          {partner}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              {/* Stacked rows on mobile */}
+              <ul className="m-0 list-none divide-y divide-black/[0.06] p-0 md:hidden">
+                {BUILD_VS_PARTNER.map(({ aspect, build, partner }) => (
+                  <li key={aspect} className="flex flex-col gap-3 p-6">
+                    <span className="font-sans text-[14px] font-medium text-zinc-500">{aspect}</span>
+                    <span className="flex items-start gap-2.5 font-sans text-[14.5px] leading-[1.5] text-zinc-600">
+                      <Icon icon={X} size={14} weight="bold" className="mt-[4px] shrink-0 text-zinc-400" aria-hidden="true" />
+                      <span><span className="sr-only">Build it yourself: </span>{build}</span>
+                    </span>
+                    <span className="flex items-start gap-2.5 font-sans text-[14.5px] font-medium leading-[1.5] text-zinc-950">
+                      <Icon icon={Check} size={14} weight="bold" className="mt-[4px] shrink-0 text-brand-600" aria-hidden="true" />
+                      <span><span className="sr-only">With Fil One: </span>{partner}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
         {/* What you get */}
-        <section className="w-full bg-zinc-50 border-y border-zinc-100">
-          <div className="flex flex-col gap-14 md:gap-16 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-container mx-auto">
-            <div className="flex flex-col gap-3 items-center text-center">
-              <SectionLabel>What you get</SectionLabel>
-              <SectionHeading maxWidth={620}>An S3 tier built to be resold</SectionHeading>
-              <SectionSub maxWidth={600}>
-                Object storage is a commodity. One that sits next to your compute and is sold by
-                you is not.
-              </SectionSub>
-            </div>
-            <div
-              ref={offerRef}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full reveal-group"
-            >
-              {OFFER.map(({ icon, title, body }) => (
-                <FeatureCard
-                  key={title}
-                  icon={icon}
-                  title={title}
-                  description={body}
-                  className={`reveal${offerInView ? " in-view" : ""}`}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Deployment options (dark band) */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-dark-section">
-          <div
-            ref={deployRef}
-            className={`flex flex-col gap-12 items-center w-full max-w-container mx-auto reveal${deployInView ? " in-view" : ""}`}
-          >
-            <div className="flex flex-col gap-3 items-center text-center">
-              <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.08em] text-white/50">
-                Two ways to run it
-              </span>
-              <h2 className="m-0 max-w-[620px] font-display text-[24px] md:text-[34px] font-medium leading-[1.2] tracking-[-0.02em] text-white">
-                Start on our regions, then move it into your building
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-              {DEPLOYMENTS.map(({ label, title, body }) => (
-                <div
-                  key={title}
-                  className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-8"
-                >
-                  <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.08em] text-brand-400">
-                    {label}
-                  </span>
-                  <h3 className="m-0 font-display font-medium text-[18px] leading-[1.3] text-white">
-                    {title}
-                  </h3>
-                  <p className="m-0 font-sans text-[14px] leading-[1.6] text-white/60">{body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Commercials */}
-        <section className="w-full bg-white">
-          <div className="flex flex-col gap-14 md:gap-16 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-container mx-auto">
-            <div className="flex flex-col gap-3 items-center text-center">
-              <SectionLabel>The commercials</SectionLabel>
-              <SectionHeading maxWidth={560}>You sell it, you price it</SectionHeading>
-              <SectionSub maxWidth={600}>
-                Storage becomes a product on your line card, under your own brand, without a
-                purchase order and without a hire.
-              </SectionSub>
-            </div>
-            <div
-              ref={commercialsRef}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full reveal-group"
-            >
-              {COMMERCIALS.map(({ icon, title, body }) => (
-                <div
-                  key={title}
-                  className={`flex flex-col gap-4 rounded-2xl border border-black/[0.07] bg-white p-8 shadow-elevated reveal${commercialsInView ? " in-view" : ""}`}
-                >
-                  <IconTile icon={icon} size={22} className="h-12 w-12" />
-                  <div className="flex flex-col gap-2">
-                    <h3 className="m-0 font-sans font-medium text-[18px] leading-[1.3] text-zinc-950">
-                      {title}
-                    </h3>
-                    <p className="m-0 font-sans text-[14px] leading-[1.6] text-zinc-500">{body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <TextLink href={PARTNERS_URL} tone="brand" arrow>
-              See the wider partner program
-            </TextLink>
-          </div>
-        </section>
-
-        {/* How it starts */}
-        <section className="w-full bg-zinc-50 border-y border-zinc-100">
-          <div className="flex flex-col gap-12 items-center px-5 md:px-8 py-24 md:py-32 w-full max-w-container mx-auto">
-            <div className="flex flex-col gap-3 items-center text-center">
-              <SectionLabel>How it starts</SectionLabel>
-              <SectionHeading maxWidth={560}>One workload, one site, one conversation</SectionHeading>
-            </div>
-            <div
-              ref={stepsRef}
-              className={`grid grid-cols-1 divide-y divide-zinc-200 lg:grid-cols-4 lg:divide-x lg:divide-y-0 w-full reveal${stepsInView ? " in-view" : ""}`}
-            >
-              {STEPS.map(({ number, title, body }) => (
-                <Step
-                  key={number}
-                  number={number}
-                  title={title}
-                  description={body}
-                  className="py-8 first:pt-0 last:pb-0 lg:py-0 lg:px-8 lg:first:pl-0 lg:last:pr-0"
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <FaqSection include={FAQ_INCLUDE} />
+        <SplitFeatureSection
+          label="What you get"
+          heading="Built for reselling"
+          description="Standard S3 for your customers, with roles, scoped keys, and an audit log for your team."
+          items={OFFER.map(({ icon, title, body }) => ({ icon, title, description: body }))}
+          cta={{
+            label: "Talk to our team",
+            href: APPLY_URL,
+            onClick: () => trackCtaClick("Talk to our team", APPLY_URL, "primary"),
+          }}
+        />
 
         {/* Closing CTA */}
         <CtaBanner
-          heading="Put a storage line next to your GPU hours"
-          subhead="Tell us where your compute sits and which workload you would start with. We will take it from there."
-          headingMaxWidth={520}
+          heading="Sell storage from your own data center"
+          subhead="We install and run S3-compatible storage next to your GPUs, so you can sell it under your own brand."
+          headingMaxWidth={640}
           cta={{
             label: "Talk to our team",
-            href: SALES_URL,
-            onClick: () => trackCtaClick("Talk to our team", SALES_URL, "primary"),
-          }}
-          secondaryCta={{
-            label: "See the partner program",
-            href: PARTNERS_URL,
-            onClick: () => trackCtaClick("See the partner program", PARTNERS_URL, "secondary"),
+            href: APPLY_URL,
+            onClick: () => trackCtaClick("Talk to our team", APPLY_URL, "primary"),
           }}
         />
       </main>

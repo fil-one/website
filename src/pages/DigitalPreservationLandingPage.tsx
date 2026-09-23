@@ -1,18 +1,23 @@
 import { ShieldCheck, ChartLine, ArrowsOut, Database } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
-import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { PRICE_DISPLAY, PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
 
+/** Whole-dollar amount, e.g. "$60". */
+const usd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
+
+const FIL_10TB = usd(10 * PRICE_PER_TB);
+
 // Preservation comparison scenario: 10 TB collection, one full fixity review per year, amortized monthly.
-// AWS S3 Standard: storage 10,240 GB x $0.023/GB ~= $236/mo. Fixity read: 10 TB x $0.09/GB egress
+// AWS eu-west-1 list rates, Sept 2026. AWS S3 Standard: storage 10,240 GB x $0.023/GB ~= $236/mo. Fixity read: 10 TB x $0.09/GB egress
 //   ~= $900/yr ~= $75/mo. All-in ~= $311/mo.
 // AWS Glacier Deep Archive: storage 10,240 GB x $0.00099/GB ~= $10/mo. Fixity read: 10 TB x
 //   ($0.02 retrieval + $0.09 egress) ~= $1,100/yr ~= $92/mo. All-in ~= $102/mo.
-// Wasabi: $6.99/TB = $70/mo, no retrieval/egress. Fil One: $4.99/TB = $50/mo, no retrieval/egress.
+// Wasabi: 10 TB x $7.99 = $80/mo, no retrieval/egress. Fil One: 10 TB x PRICE_PER_TB, no retrieval/egress.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Preservation you can afford to check",
@@ -21,20 +26,20 @@ const config: LandingPageConfig = {
   },
 
   hero: {
-    badge: "For libraries, archives & memory institutions",
+    badge: "For libraries and archives",
     titleMaxWidth: 820,
     descriptionMaxWidth: 580,
     title: (
       <>
         Preservation you can
         <br />
-        <span className="text-brand-500">afford to check.</span>
+        <span className="text-brand-500">afford to check</span>
       </>
     ),
-    description: `Run fixity checks as often as you want — reading the collection back costs $0, so verification isn't rationed to once a year. Built in at ${PRICE_PER_TB_SHORT} flat.`,
+    description: `Run fixity checks as often as you want. Reading the collection back costs $0, so verification isn't rationed to once a year. Built in at ${PRICE_PER_TB_SHORT} flat.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
-      { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -49,13 +54,13 @@ const config: LandingPageConfig = {
         label: "The annual blind spot",
         tone: "warning",
         catch: "A year is a long time to not know.",
-        body: "A once-a-year fixity review confirms integrity on the day it runs. For the other 364 days the collection is unchecked. A problem that lands in month two surfaces ten months later — if the next review even catches it.",
+        body: "A once-a-year fixity review confirms integrity on the day it runs. For the other 364 days the collection is unchecked. A problem that lands in month two surfaces ten months later, if the next review even catches it.",
       },
       {
         label: "The cost of checking",
         tone: "danger",
         catch: "Verifying your archive is a metered read.",
-        body: "On metered tiers, every fixity review is a full-collection read priced per GB in retrieval and egress. The more thoroughly you preserve, the more it costs to check it — so teams check less than they should.",
+        body: "On metered tiers, every fixity review is a full-collection read priced per GB in retrieval and egress. The more thoroughly you preserve, the more it costs to check it, so teams check less than they should.",
       },
       {
         label: "The format you cannot open",
@@ -70,7 +75,7 @@ const config: LandingPageConfig = {
     label: "The comparison",
     heading: (
       <>
-        10 TB collection. <span className="text-brand-500">One fixity review a year — or as often as you want.</span>
+        10 TB collection. <span className="text-brand-500">One fixity review a year, or as often as you want.</span>
       </>
     ),
     sub: "Same preservation workload, four providers. Monthly storage plus the cost of reading the collection back to check it.",
@@ -84,17 +89,17 @@ const config: LandingPageConfig = {
     rows: [
       { provider: "AWS S3 Standard", values: { storage: "$236", egress: "~$75", allIn: "$311" } },
       { provider: "AWS Glacier Deep Archive", values: { storage: "$10", egress: "~$92", allIn: "$102" } },
-      { provider: "Wasabi", values: { storage: "$70", egress: "$0", allIn: "$70" } },
-      { provider: "Fil One", isFilOne: true, values: { storage: "$50", egress: "$0", allIn: "$50" } },
+      { provider: "Wasabi", values: { storage: "$80", egress: "$0", allIn: "$80" } },
+      { provider: "Fil One", isFilOne: true, values: { storage: FIL_10TB, egress: "$0", allIn: FIL_10TB } },
     ],
     footnote:
-      "Scenario: 10 TB collection with one full fixity read per year, amortized monthly. AWS S3 Standard: ≈$236/mo storage ($0.023/GB) + ≈$75/mo amortized fixity (10 TB × $0.09/GB egress per year) ≈ $311/mo. AWS Glacier Deep Archive: ≈$10/mo storage ($0.00099/GB) + ≈$92/mo amortized fixity (10 TB × ($0.02 retrieval + $0.09 egress)/GB per year) ≈ $102/mo. Wasabi: $6.99/TB = $70/mo, no egress. Fil One: $4.99/TB = $50/mo, $0 egress. AWS and Wasabi rates from public US price cards, Q2 2026; figures indicative and rounded.",
+      `Scenario: 10 TB collection with one full fixity read per year, amortized monthly. AWS S3 Standard (eu-west-1): ≈$236/mo storage ($0.023/GB) + ≈$75/mo amortized fixity (10 TB × $0.09/GB egress per year) ≈ $311/mo. AWS Glacier Deep Archive: ≈$10/mo storage ($0.00099/GB) + ≈$92/mo amortized fixity (10 TB × ($0.02 retrieval + $0.09 egress)/GB per year) ≈ $102/mo. Wasabi: $7.99/TB = $80/mo, no egress. Fil One: ${PRICE_DISPLAY}/TB = ${FIL_10TB}/mo, $0 egress. Published list rates, September 2026; figures indicative and rounded.`,
   },
 
   features: {
     label: "Preservation built for checking",
     heading: <>Reading included. <span className="text-brand-500">Checking costs nothing.</span></>,
-    sub: "Free reads, no archive-tier wait, and standard S3 tooling — so fixity checks stop being an annual event.",
+    sub: "Free reads, no archive-tier wait, and standard S3 tooling, so fixity checks stop being an annual event.",
     items: [
       {
         icon: ShieldCheck,
@@ -104,7 +109,7 @@ const config: LandingPageConfig = {
       {
         icon: ChartLine,
         title: "No archive-tier wait",
-        desc: "Objects are readable the instant you request them — no rehydration delay before a fixity check or an access request can run.",
+        desc: "Objects are readable the instant you request them, with no rehydration delay before a fixity check or an access request can run.",
       },
       {
         icon: Database,
@@ -121,9 +126,9 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Preservation you can afford to check.",
-    subhead: "Free 1 TB evaluation. Write a collection and read it back to check it — at zero retrieval cost.",
+    subhead: "Free 1 TB evaluation. Write a collection and read it back to check it at zero retrieval cost.",
     cta: { label: "Start for free", href: signupUrl() },
-    secondaryCta: { label: "Talk to an expert", href: SALES_URL },
+    secondaryCta: { label: "Talk to sales", href: SALES_URL },
     note: TAGLINE,
   },
 };

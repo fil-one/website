@@ -13,7 +13,7 @@ import ComparisonSection from "@/components/ComparisonSection";
 import EnterpriseSection from "@/components/EnterpriseSection";
 import PartnersSection from "@/components/PartnersSection";
 import FaqSection from "@/components/FaqSection";
-import CtaSection from "@/components/CtaSection";
+import CtaBanner from "@/components/CtaBanner";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
@@ -25,7 +25,7 @@ const SIGNUP_URL = signupUrl();
 const STATS = [
   { stat: PRICE_DISPLAY, label: "Per TB / month" },
   { stat: "$0", label: "Egress fees" },
-  { stat: "11 9s", label: "Durability" },
+  { stat: "11 nines", label: "Durability" },
 ];
 
 const Home = () => {
@@ -38,20 +38,14 @@ const Home = () => {
     if (el) el.scrollIntoView();
   }, []);
 
-  useSeo({
-    title: "Fil One | S3 object storage built for the AI era",
-    description:
-      `S3-compatible object storage on Filecoin. ${PRICE_PER_TB_MONTH}, no egress fees, 11 nines durability, proven daily.`,
-    canonical: "https://www.fil.one/",
-    ogImage: "https://www.fil.one/og-image.png",
-  });
+  useSeo();
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: "#FFFFFF" }}>
+    <div className="min-h-screen overflow-x-hidden bg-white">
       <PlatformNavbar />
       <main id="main-content">
-        <div className="relative isolate" style={{ backgroundColor: "#FFFFFF" }}>
-          {/* Brand-blue hero card — a prototype of Cloudflare's full-bleed hero
+        <div className="relative isolate bg-white">
+          {/* Brand-blue hero card: a prototype of Cloudflare's full-bleed hero
               treatment in Fil One's own brand blue instead of a white/grid hero. */}
           <section className="relative w-full pt-[67px] md:pt-[75px] px-2 md:px-4 max-w-none mx-auto">
             <div
@@ -74,7 +68,7 @@ const Home = () => {
               <div className="flex flex-col items-center gap-6 w-full hero-fade-1">
                 <HeroHeading
                   tone="brand"
-                  title={<>Sovereign storage<br />for the AI age</>}
+                  title={<>Sovereign storage<br />for the AI era</>}
                   description={<>Choose where your data lives, pay one flat rate per TB, and access it<br />with no egress fees. All with your existing S3 tools.</>}
                   titleMaxWidth={520}
                   descriptionMaxWidth={620}
@@ -85,8 +79,6 @@ const Home = () => {
                 <Button
                   variant="primary"
                   size="lg"
-                  className="btn-primary-hero"
-                  style={{ padding: 0 }}
                   href={SIGNUP_URL}
                   onClick={() => trackCtaClick("Start for free", SIGNUP_URL, "primary")}
                 >
@@ -95,7 +87,7 @@ const Home = () => {
               </div>
 
               <p className="mt-4 hero-fade-3 text-center font-sans text-[13px] font-normal leading-[1.5] text-white">
-                1TB free for 30 days · No credit card required
+                1&nbsp;TB free for 30 days · No credit card required
               </p>
             </div>
           </section>
@@ -138,7 +130,20 @@ const Home = () => {
         {/* FAQ — objection handling, right before the CTA */}
         <FaqSection />
 
-        <CtaSection />
+        <CtaBanner
+          heading="S3 object storage built for the AI era"
+          subhead="Try Fil One for 30 days with 1 TB included and no credit card required. Or talk to our team about enterprise pricing or migrating your existing storage."
+          cta={{
+            label: "Start for free",
+            href: signupUrl(),
+            onClick: () => trackCtaClick("Start for free", signupUrl(), "primary"),
+          }}
+          secondaryCta={{
+            label: "Talk to sales",
+            href: "/contact-sales",
+            onClick: () => trackCtaClick("Talk to sales", "/contact-sales", "secondary"),
+          }}
+        />
       </main>
       <Footer />
     </div>

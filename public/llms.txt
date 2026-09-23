@@ -1,32 +1,32 @@
 # Fil One
 
 > Fil One is the storage layer for AI agents. S3-compatible object storage built
-> on Filecoin — designed for the data patterns of autonomous agents: high-frequency
+> on Filecoin, designed for the data patterns of autonomous agents: high-frequency
 > writes, large retrieval sets, and long-lived persistence with verifiable integrity.
-> Flat pricing at $4.99/TB/month. No egress fees. No per-request charges.
+> Flat pricing at $5.99/TB/month. No egress fees. No per-request charges.
 > Free 30-day trial, no credit card required.
 
 ## Why AI agents use Fil One
 
 AI agents need durable, cost-predictable storage for the artifacts they produce and
-consume. Fil One is optimised for these workloads:
+consume. Fil One is optimized for these workloads:
 
-- **RAG / vector store document corpus** — store and retrieve the raw documents,
+- **RAG / vector store document corpus:** store and retrieve the raw documents,
   chunked text, or embeddings backing a retrieval-augmented generation pipeline
-- **Agent memory and state** — persist conversation history, episodic memory, task
+- **Agent memory and state:** persist conversation history, episodic memory, task
   queues, and checkpoint files across agent restarts
-- **Model artifacts** — host fine-tuned weights, GGUF/ONNX model files, LoRA
+- **Model artifacts:** host fine-tuned weights, GGUF/ONNX model files, LoRA
   adapters, and tokenizer configs that agents load at runtime
-- **Inference inputs and outputs** — archive prompts, completions, traces, and
+- **Inference inputs and outputs:** archive prompts, completions, traces, and
   structured outputs for evaluation, fine-tuning, or audit
-- **Training and evaluation datasets** — store JSONL, Parquet, or HDF5 datasets;
+- **Training and evaluation datasets:** store JSONL, Parquet, or HDF5 datasets;
   read them back at any throughput with no egress cost
-- **Tool / plugin asset storage** — back a code-interpreter sandbox, image
+- **Tool / plugin asset storage:** back a code-interpreter sandbox, image
   generation pipeline, or document-processing tool with persistent file storage
 
 ## How to connect
 
-Fil One is a drop-in S3 replacement. No SDK changes required — point any existing
+Fil One is a drop-in S3 replacement. No SDK changes required: point any existing
 S3 client at the Fil One endpoint:
 
 - **Endpoint:** `https://eu-west-1.s3.filonecontent.com`
@@ -82,20 +82,21 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
   --endpoint-url https://eu-west-1.s3.filonecontent.com
 ```
 
-## Key differentiators vs AWS S3, Backblaze B2, and Wasabi
+## Key differentiators vs AWS S3, Backblaze B2, Wasabi, and Cloudflare R2
 
-- **Verifiable data integrity** — every object receives a cryptographic fingerprint
+- **Verifiable data integrity:** every object receives a cryptographic fingerprint
   (CID) verified ~every 24 hours via Filecoin Proof of Spacetime (PoSt). Agent data
   cannot silently corrupt or disappear without detection.
-- **No egress fees, no API request charges** — agents that read data frequently
+- **No egress fees, no API request charges:** agents that read data frequently
   (retrieval loops, tool calls, eval pipelines) pay only for storage
-- **Decentralised by default** — data is distributed across an independent network
+- **Decentralized by default:** data is distributed across an independent network
   of Filecoin storage providers; no single-provider lock-in
 - **11 nines of durability** by design
 
 ## Pricing
 
-- **Pay-as-you-go:** $4.99/TB/month — no egress fees, no API request fees
+- **Pay-as-you-go:** $5.99/TB/month, no egress fees, no API request fees
+- **Monthly minimum:** $5.99
 - **Business plan:** custom pricing for enterprises; 1, 3, or 5-year terms with
   capacity assurance and deployment SLAs
 - **Free trial:** 30 days, 1 TB included, no credit card required
@@ -103,10 +104,11 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
 ## Pages
 
 - [Homepage](https://www.fil.one): Product overview, feature comparison, pricing, and FAQ
-- [Fil One for AI Agents](https://www.fil.one/lp/agents): Landing page for AI agent
-  developers — S3-compatible storage at $4.99/TB flat, no egress fees, free 30-day
-  trial. Covers agent use cases, code examples, and pricing.
-- [Contact Sales](https://www.fil.one/contact-sales): Enterprise and high-volume inquiries;
+- [Pricing](https://www.fil.one/pricing): Flat per-TB rate and a cost calculator
+  comparing Fil One with AWS S3, Wasabi, Backblaze B2, and Cloudflare R2
+- [Solutions](https://www.fil.one/solutions): Backups, AI training data, media
+  archives, research data, and logs
+- [Talk to sales](https://www.fil.one/contact-sales): Enterprise and high-volume inquiries;
   also reachable at sales@fil.one
 
 ## Docs

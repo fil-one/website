@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import imgDashboard from "../assets/dashboard-preview.png";
+import imgDashboard from "../assets/dashboard-preview.webp";
 
 // Scroll-driven "grow in" effect: the screenshot starts slightly undersized
 // as it enters view and eases up to its natural size as the visitor scrolls
@@ -73,7 +73,9 @@ const DashboardPreview = () => {
         <img
           ref={imgRef}
           src={imgDashboard}
-          alt="The Fil One dashboard, showing bucket storage usage and monthly spend"
+          alt="The Fil One console's Buckets page, listing buckets with their size, object count, region and creation date"
+          width={2000}
+          height={1060}
           className="w-full h-auto block"
         />
         <div

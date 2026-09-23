@@ -67,6 +67,7 @@ export const routeDefs: RouteDef[] = [
   { path: "/solutions", load: () => import("./pages/SolutionsPage") },
   { path: "/partners", load: () => import("./pages/PartnersPage") },
   { path: "/neocloud", load: () => import("./pages/NeocloudPage") },
+  { path: "/neocloud/apply", load: () => import("./pages/NeocloudApplyPage") },
   { path: "/partners/apply", load: () => import("./pages/PartnerApplyPage") },
   { path: "/blog", load: () => import("./pages/Blog") },
   { path: "/blog/:slug", load: () => import("./pages/BlogPost"), prerender: false },

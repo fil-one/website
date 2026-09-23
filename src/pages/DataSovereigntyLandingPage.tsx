@@ -15,20 +15,20 @@ const config: LandingPageConfig = {
   },
 
   hero: {
-    badge: "For EU teams with data residency requirements",
+    badge: "For EU data residency",
     titleMaxWidth: 800,
     descriptionMaxWidth: 580,
     title: (
       <>
         Decide where your data lives.
         <br />
-        <span className="text-brand-500">Keep your S3 tools.</span>
+        <span className="text-brand-500">Keep your S3 tools</span>
       </>
     ),
     description: `S3-compatible storage with EU region endpoint. Flat ${PRICE_PER_TB_SHORT}. No egress, no re-architecture.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
-      { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -36,19 +36,19 @@ const config: LandingPageConfig = {
   problem: {
     label: "The constraint",
     heading: "Residency and convenience have been a tradeoff. They do not have to be.",
-    sub: "Regulated EU teams often face a choice between hyperscaler convenience — with opaque data placement — and purpose-built EU storage that requires different tooling. S3 compatibility removes the tooling part of that tradeoff.",
+    sub: "Regulated EU teams often face a choice between hyperscaler convenience (with opaque data placement) and purpose-built EU storage that requires different tooling. S3 compatibility removes the tooling part of that tradeoff.",
     items: [
       {
         label: "The placement question",
         tone: "warning",
         catch: "EU-hosted is not the same as EU-only.",
-        body: "Hyperscalers offer EU regions, but data movement between regions for replication, processing, and backup is governed by their internal architecture — not by the customer's configuration. Audit trails for residency require documentation the platform does not make simple.",
+        body: "Hyperscalers offer EU regions, but data movement between regions for replication, processing, and backup is governed by their internal architecture, not by the customer's configuration. Audit trails for residency require documentation the platform does not make simple.",
       },
       {
         label: "The tooling cost",
         tone: "danger",
         catch: "Sovereign-only products break the existing stack.",
-        body: "Purpose-built EU storage often requires SDKs, APIs, and operational tooling that do not match what teams already run. The migration becomes a re-architecture. S3-compatible storage eliminates this — the tooling does not change.",
+        body: "Purpose-built EU storage often requires SDKs, APIs, and operational tooling that do not match what teams already run. The migration becomes a re-architecture. S3-compatible storage eliminates this: the tooling does not change.",
       },
       {
         label: "The egress penalty",
@@ -66,13 +66,13 @@ const config: LandingPageConfig = {
         EU storage that works with <span className="text-brand-500">existing tools.</span>
       </>
     ),
-    sub: "An EU endpoint, standard S3 tooling, and a free exit — the concrete pieces of data residency.",
+    sub: "An EU endpoint, standard S3 tooling, and a free exit: the concrete pieces of data residency.",
     columns: 3,
     items: [
       {
         icon: ShieldCheck,
         title: "EU-hosted endpoint",
-        desc: "Data written to the eu-west-1 endpoint stays in EU infrastructure. S3-compatible — no changes to your existing tools.",
+        desc: "Data written to the eu-west-1 endpoint stays in EU infrastructure. S3-compatible, with no changes to your existing tools.",
       },
       {
         icon: Plug,
@@ -82,7 +82,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "No egress on portability",
-        desc: "Move data in and out of the EU endpoint without egress fees. Portability is not penalised — the exit cost is $0.",
+        desc: "Move data in and out of the EU endpoint without egress fees. Portability is not penalized: the exit cost is $0.",
       },
     ],
   },
@@ -91,7 +91,7 @@ const config: LandingPageConfig = {
     heading: "EU storage. S3 tools. No egress.",
     subhead: "Free 1 TB evaluation on the EU endpoint. Point your existing S3 tools and run the same workload in EU infrastructure.",
     cta: { label: "Start for free", href: signupUrl() },
-    secondaryCta: { label: "Talk to an expert", href: SALES_URL },
+    secondaryCta: { label: "Talk to sales", href: SALES_URL },
     note: TAGLINE,
   },
 };

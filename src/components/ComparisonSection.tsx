@@ -1,7 +1,8 @@
 import { useInView } from "@/hooks/useInView";
 import { signupUrl } from "@/lib/console-url";
-import { PRICE_DISPLAY } from "@/lib/pricing";
+import { COMPETITORS, PRICE_DISPLAY, type Competitor } from "@/lib/pricing";
 import filOneLogo from "@/assets/fil-one-logo.svg";
+import { SectionLabel, SectionHeading } from "@/components/LandingPrimitives";
 
 type ProviderKey = "aws" | "backblaze" | "wasabi" | "r2" | "filone";
 
@@ -30,25 +31,32 @@ const mobileProviders = [
 /**
  * Every competitor figure below is that vendor's own published list price or
  * published policy, checked on the date in the footnote. Per-TB figures use
- * 1 TB = 1,000 GB so the four columns are directly comparable.
+ * 1 TB = 1,000 GB so the four columns are directly comparable. Storage and
+ * egress rates are read from COMPETITORS so they always match the calculator.
  */
+const rate = (name: string): Competitor => COMPETITORS.find((c) => c.name === name)!;
+const AWS = rate("AWS S3");
+const B2 = rate("Backblaze B2");
+const perTB = (c: Competitor) => `$${c.storagePricePerTB.toFixed(2)}`;
+const perGB = (usdPerTB: number) => `$${(usdPerTB / 1000).toFixed(2)}/GB`;
+
 const comparisonRows: ComparisonRow[] = [
   {
     feature: "Storage, per TB per month",
     emphasis: true,
     cells: {
-      aws: "$23.00",
-      backblaze: "$6.95",
-      wasabi: "$7.99",
-      r2: "$15.00",
+      aws: perTB(AWS),
+      backblaze: perTB(B2),
+      wasabi: perTB(rate("Wasabi")),
+      r2: perTB(rate("Cloudflare R2")),
       filone: PRICE_DISPLAY,
     },
   },
   {
     feature: "Egress",
     cells: {
-      aws: "$0.09/GB above the first 100 GB a month",
-      backblaze: "Free up to 3x the data stored, then $0.01/GB",
+      aws: `${perGB(AWS.egressPricePerTB)} above the first ${(AWS.freeEgressTB ?? 0) * 1000} GB a month`,
+      backblaze: `Free up to ${B2.freeEgressMultiplier}× the data stored, then ${perGB(B2.egressPricePerTB)}`,
       wasabi: "Free while monthly egress stays at or below stored volume",
       r2: "Free",
       filone: "Free, at any volume",
@@ -114,7 +122,7 @@ const CellContent = ({
   emphasis ? (
     <span
       className={`font-display tracking-[-0.02em] ${
-        isFilOne ? "text-[17px] font-semibold text-brand-500" : "text-[13px] font-medium text-zinc-600"
+        isFilOne ? "text-body-lg font-semibold text-brand-600" : "text-small font-medium text-zinc-600"
       }`}
     >
       {text}
@@ -122,7 +130,7 @@ const CellContent = ({
   ) : (
     <span
       className={`font-sans leading-[1.45] ${
-        isFilOne ? "text-[13px] font-medium text-zinc-950" : "text-[12px] text-zinc-600"
+        isFilOne ? "text-small font-medium text-zinc-950" : "text-small text-zinc-600"
       }`}
     >
       {text}
@@ -137,9 +145,9 @@ const sources: { label: string; href: string }[] = [
 ];
 
 const Footnote = () => (
-  <p className="font-sans text-[12px] leading-[1.6] text-zinc-500 m-0">
-    Competitors' published list prices and published policies, checked 21 September 2026. AWS S3
-    Standard and request rates for US East (N. Virginia); Backblaze B2, Wasabi pay as you go and
+  <p className="font-sans text-small leading-[1.6] text-zinc-500 m-0">
+    Competitors' published list prices and published policies, checked 23 September 2026. AWS S3
+    Standard and request rates for Europe (Ireland, eu-west-1); Backblaze B2, Wasabi pay as you go and
     Cloudflare R2 Standard at list. Per-TB figures use 1 TB = 1,000 GB. Vendors change their terms,
     so check before you commit:{" "}
     {sources.map((source, i) => (
@@ -162,16 +170,11 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
   const { ref: headingRef, inView: headingInView } = useInView();
   const { ref: tableRef, inView: tableInView } = useInView({ threshold: 0.04 });
 
-  // Shared border styles for FilOne card column
-  const filoneCardStyle = (extra?: React.CSSProperties): React.CSSProperties => ({
-    backgroundColor: "#FFFFFF",
-    borderLeft: "1px solid rgba(0,0,0,0.06)",
-    borderRight: "1px solid rgba(0,0,0,0.06)",
-    ...extra,
-  });
-
-  const rowBorder: React.CSSProperties = { borderTop: "1px solid rgba(0,0,0,0.06)" };
-  const gridColumns = "200px repeat(5, 1fr)";
+  // Shared border classes: the Fil One column is a white card with side rules;
+  // every body row has a hairline top rule.
+  const FILONE_CARD = "bg-white border-x border-black/[0.06]";
+  const ROW_BORDER = "border-t border-black/[0.06]";
+  const GRID_COLUMNS = "grid-cols-[200px_repeat(5,minmax(0,1fr))]";
 
   return (
     <section
@@ -183,15 +186,8 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
         ref={headingRef}
         className={`flex flex-col gap-3 items-center text-center w-full max-w-[600px] reveal${headingInView ? " in-view" : ""}`}
       >
-        <span
-          aria-hidden="true"
-          className="font-mono font-medium text-[11.5px] tracking-[0.08em] text-zinc-500 uppercase"
-        >
-          Comparison
-        </span>
-        <h2 className="font-display font-medium text-[26px] md:text-[32px] leading-[1.2] tracking-[-0.02em] text-zinc-950 m-0">
-          Cloud Storage Comparison
-        </h2>
+        <SectionLabel>Comparison</SectionLabel>
+        <SectionHeading>Cloud storage comparison</SectionHeading>
       </div>
 
       {/* Table */}
@@ -204,7 +200,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
           <div role="table" aria-label="Cloud storage pricing and terms comparison">
             {/* Column headers */}
             <div role="rowgroup">
-              <div role="row" className="grid w-full" style={{ gridTemplateColumns: gridColumns }}>
+              <div role="row" className={`grid w-full ${GRID_COLUMNS}`}>
                 <div role="columnheader" className="px-4 py-7" aria-label="Term" />
                 {providers.map((provider) => {
                   const isFilOne = provider.key === "filone";
@@ -214,14 +210,13 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
                       key={provider.key}
                       role="columnheader"
                       className={`px-6 py-7 flex items-center${
-                        isFilOne ? " justify-center text-center rounded-t-2xl" : ` justify-start text-left${isDivided ? " border-l border-black/[0.05]" : ""}`
+                        isFilOne ? ` justify-center text-center rounded-t-2xl ${FILONE_CARD} ${ROW_BORDER}` : ` justify-start text-left${isDivided ? " border-l border-black/[0.05]" : ""}`
                       }`}
-                      style={isFilOne ? filoneCardStyle({ borderTop: "1px solid rgba(0,0,0,0.06)" }) : undefined}
                     >
                       {isFilOne ? (
                         <img src={filOneLogo} alt="Fil One" className="h-4 w-auto" />
                       ) : (
-                        <span className="font-sans text-[13px] font-medium text-zinc-950">
+                        <span className="font-sans text-small font-medium text-zinc-950">
                           {provider.name}
                         </span>
                       )}
@@ -236,11 +231,10 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
                 <div
                   key={row.feature}
                   role="row"
-                  className="grid w-full"
-                  style={{ gridTemplateColumns: gridColumns }}
+                  className={`grid w-full ${GRID_COLUMNS}`}
                 >
-                  <div role="rowheader" className="px-4 py-5 flex items-center" style={rowBorder}>
-                    <span className="font-sans font-medium text-[13px] leading-[1.35] text-zinc-950">
+                  <div role="rowheader" className={`px-4 py-5 flex items-center ${ROW_BORDER}`}>
+                    <span className="font-sans font-medium text-small leading-[1.35] text-zinc-950">
                       {row.feature}
                     </span>
                   </div>
@@ -251,10 +245,9 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
                       <div
                         key={provider.key}
                         role="cell"
-                        className={`px-6 py-5 flex flex-col gap-1.5 justify-center${
-                          isFilOne ? " items-center text-center" : ` items-start text-left${isDivided ? " border-l border-black/[0.05]" : ""}`
+                        className={`px-6 py-5 flex flex-col gap-1.5 justify-center ${ROW_BORDER}${
+                          isFilOne ? ` items-center text-center ${FILONE_CARD}` : ` items-start text-left${isDivided ? " border-l border-black/[0.05]" : ""}`
                         }`}
-                        style={isFilOne ? filoneCardStyle(rowBorder) : rowBorder}
                       >
                         <CellContent
                           text={row.cells[provider.key]}
@@ -269,21 +262,17 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
             </div>
 
             {/* CTA row */}
-            <div className="grid w-full" style={{ gridTemplateColumns: gridColumns }}>
+            <div className={`grid w-full ${GRID_COLUMNS}`}>
               <div className="px-3 pt-4" />
               <div className="px-3 pt-4" />
               <div className="px-3 pt-4" />
               <div className="px-3 pt-4" />
               <div className="px-3 pt-4" />
               <div
-                className="px-3 py-5 rounded-b-2xl"
-                style={filoneCardStyle({
-                  borderTop: "1px solid rgba(0,0,0,0.06)",
-                  borderBottom: "1px solid rgba(0,0,0,0.06)",
-                })}
+                className={`px-3 py-5 rounded-b-2xl border-b ${FILONE_CARD} ${ROW_BORDER}`}
               >
                 <a href={signupUrl()} className="btn-primary w-full">
-                  <span className="btn-primary-inner w-full justify-center">Try for free</span>
+                  <span className="btn-primary-inner w-full justify-center">Start for free</span>
                 </a>
               </div>
             </div>
@@ -308,10 +297,9 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
               key={row.feature}
               role="rowgroup"
               aria-label={row.feature}
-              className="flex flex-col pt-4"
-              style={rowBorder}
+              className={`flex flex-col pt-4 ${ROW_BORDER}`}
             >
-              <span aria-hidden="true" className="font-sans font-semibold text-[13px] text-zinc-950 mb-2">
+              <span aria-hidden="true" className="font-sans font-semibold text-small text-zinc-950 mb-2">
                 {row.feature}
               </span>
               {mobileProviders.map((provider) => {
@@ -326,7 +314,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
                   >
                     <div role="rowheader" className="w-[84px] shrink-0">
                       <span
-                        className={`font-sans text-[11.5px] leading-[1.4] ${
+                        className={`font-sans text-eyebrow leading-[1.4] ${
                           isFilOne ? "font-semibold text-zinc-950" : "font-medium text-zinc-600"
                         }`}
                       >
@@ -352,7 +340,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
           <Footnote />
           <div className="flex justify-center">
             <a href={signupUrl()} className="btn-primary">
-              <span className="btn-primary-inner justify-center px-8">Try for free</span>
+              <span className="btn-primary-inner justify-center px-8">Start for free</span>
             </a>
           </div>
         </div>
