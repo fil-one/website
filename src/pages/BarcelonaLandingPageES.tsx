@@ -25,7 +25,7 @@ const CONTACT_SALES_HREF = "/lp/es/contacto";
 
 /** The modelled workload: 10 TB stored, 10 TB egress, 500K operations a month. */
 const WORKLOAD_TB = 10;
-// Prices stay in the site-wide USD format ("$4.99/TB") on the Spanish pages
+// Prices stay in the site-wide USD format ("$5.99/TB") on the Spanish pages
 // too, so the headline rate reads identically everywhere it appears.
 const FIL_ONE_TOTAL = `$${(PRICE_PER_TB * WORKLOAD_TB).toFixed(2)}`;
 
