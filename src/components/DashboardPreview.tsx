@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import imgDashboard from "../assets/dashboard-preview.webp";
+import imgDashboardSmall from "../assets/dashboard-preview-1200.webp";
 
 // Scroll-driven "grow in" effect: the screenshot starts slightly undersized
 // as it enters view and eases up to its natural size as the visitor scrolls
@@ -73,9 +74,12 @@ const DashboardPreview = () => {
         <img
           ref={imgRef}
           src={imgDashboard}
+          // 1200w covers phones; 2400w covers the 1120px container on 2x screens
+          srcSet={`${imgDashboardSmall} 1200w, ${imgDashboard} 2400w`}
+          sizes="(min-width: 1184px) 1120px, (min-width: 768px) calc(100vw - 64px), calc(100vw - 40px)"
           alt="The Fil One console's Buckets page, listing buckets with their size, object count, region and creation date"
-          width={2000}
-          height={1060}
+          width={2400}
+          height={1271}
           className="w-full h-auto block"
         />
         <div
