@@ -2,7 +2,7 @@
 
 > Fil One is the storage layer for AI agents. S3-compatible object storage built
 > on Filecoin, designed for the data patterns of autonomous agents: high-frequency
-> writes, large retrieval sets, and long-lived persistence with verifiable integrity.
+> writes, large retrieval sets, and long-lived persistence.
 > Flat pricing at $5.99/TB/month. No egress fees. No per-request charges.
 > Free 30-day trial, no credit card required.
 
@@ -20,7 +20,7 @@ consume. Fil One is optimized for these workloads:
 - **Inference inputs and outputs:** archive prompts, completions, traces, and
   structured outputs for evaluation, fine-tuning, or audit
 - **Training and evaluation datasets:** store JSONL, Parquet, or HDF5 datasets;
-  read them back at any throughput with no egress cost
+  read them back as often as you need with no egress cost
 - **Tool / plugin asset storage:** back a code-interpreter sandbox, image
   generation pipeline, or document-processing tool with persistent file storage
 
@@ -30,8 +30,10 @@ Fil One is a drop-in S3 replacement. No SDK changes required: point any existing
 S3 client at the Fil One endpoint:
 
 - **Endpoint:** `https://eu-west-1.s3.filonecontent.com`
-- **Region:** `eu-west-1`
+- **Region:** `eu-west-1` (Europe, France; default). `us-east-1` (US East, Michigan)
+  is also available at `https://s3.us-east-1.filonecontent.com`
 - **Auth:** standard AWS Access Key ID + Secret Access Key
+- **Addressing:** path-style only; virtual-hosted-style is not supported
 
 ### Python (boto3)
 
@@ -84,14 +86,13 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
 
 ## Key differentiators vs AWS S3, Backblaze B2, Wasabi, and Cloudflare R2
 
-- **Verifiable data integrity:** every object receives a cryptographic fingerprint
-  (CID) verified ~every 24 hours via Filecoin Proof of Spacetime (PoSt). Agent data
-  cannot silently corrupt or disappear without detection.
 - **No egress fees, no API request charges:** agents that read data frequently
   (retrieval loops, tool calls, eval pipelines) pay only for storage
-- **Decentralized by default:** data is distributed across an independent network
-  of Filecoin storage providers; no single-provider lock-in
-- **11 nines of durability** by design
+- **Independent regional operators:** each region is run by an independent storage
+  operator, and the standard S3 API means no lock-in
+- **Object lock and versioning:** governance or compliance retention, set at bucket
+  creation, alongside versioning
+- **Designed for 11 nines of durability**
 
 ## Pricing
 
@@ -99,7 +100,8 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
 - **Monthly minimum:** $5.99
 - **Business plan:** custom pricing for enterprises; 1, 3, or 5-year terms with
   capacity assurance and deployment SLAs
-- **Free trial:** 30 days, 1 TB included, no credit card required
+- **Free trial:** 30 days, 1 TB storage and 2 TB egress included, no credit card
+  required. Upgrade to a paid plan to keep downloading after the egress allowance
 
 ## Pages
 
@@ -108,6 +110,10 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
   comparing Fil One with AWS S3, Wasabi, Backblaze B2, and Cloudflare R2
 - [Solutions](https://www.fil.one/solutions): Backups, AI training data, media
   archives, research data, and logs
+- [Neoclouds](https://www.fil.one/neocloud): S3 object storage installed in a GPU
+  cloud's own facility, sold under the partner's brand
+- [Partners](https://www.fil.one/partners): Channel, technology, and MSP partner programs
+- [About](https://www.fil.one/about): The team and company behind Fil One
 - [Talk to sales](https://www.fil.one/contact-sales): Enterprise and high-volume inquiries;
   also reachable at sales@fil.one
 
@@ -120,6 +126,6 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
 
 - [Full reference for AI agents and developers](https://www.fil.one/llms-full.txt): SDK
   examples, architecture patterns, multipart upload, presigned URLs, PyArrow/fsspec
-  integration, and full S3 API compatibility list
+  integration, and the supported S3 operations with regional caveats
 - [Privacy Policy](https://www.fil.one/privacy): Data handling and privacy practices
 - [Terms of Service](https://www.fil.one/terms): Terms governing use of the platform

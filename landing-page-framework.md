@@ -79,7 +79,7 @@ Examples:
 - S3-compatible workflow
 - Versioned object storage
 - Retention / Object Lock support
-- Verifiable long-term retrievability
+- Durability, stated as "designed for 11 nines"
 - Transparent pricing
 - Portability / reduced lock-in
 
@@ -116,6 +116,8 @@ Possible proof points:
 - Case studies / logos, if available
 
 **Purpose:** Builds trust and reduces skepticism.
+
+**Only claim what the product does.** Nothing in the product computes CIDs, proofs, or integrity checks, so never claim "verifiable integrity", "cryptographic proof", "tamper-evident", or "integrity verified daily". Two regions are two independent operators with no replication between them, so don't claim multi-region redundancy either. Check claims against the console code before publishing.
 
 ---
 
@@ -466,14 +468,14 @@ The Features section has no visual evidence the product exists. One screenshot o
 At minimum: a "See pricing assumptions" link near the pricing table, and a "View architecture" or "Read technical details" link near the Features section. These clicks will tell you whether visitors have commercial or technical curiosity.
 
 **6. Add a brief trust statement**
-A single sentence near the top about Filecoin infrastructure backing, e.g. *"Built on Filecoin — independently verifiable storage with a cryptographic audit trail."* This is a strong differentiator that currently appears nowhere on the page.
+A single sentence near the top about the infrastructure, e.g. *"Built on Filecoin and run by independent regional operators, designed for 11 nines of durability."* Keep it to what the product does (see §8): no verifiability or cryptographic-proof claims.
 
 ### Low priority
 
 **7. Differentiate the two CTAs at the bottom**
 Instead of two similar CTAs ("Try free" + "Talk to expert"), consider a three-option structure:
-- Primary: Try 30 days for free
-- Secondary: Talk to an expert
+- Primary: Start for free
+- Secondary: Talk to sales
 - Tertiary: View technical details →
 
 This gives you signal on three different intent levels from the same CTA block.
@@ -642,7 +644,7 @@ The bottom CTA banner now uses the dark navy gradient from the homepage's CtaSec
 A single image of the FilOne dashboard would address the single biggest credibility gap. Visitors who have never heard of FilOne need visual evidence the product exists before they sign up.
 
 **2. Add a Filecoin trust statement**
-The eleven-nines durability claim is mentioned in Features but the Filecoin infrastructure backing is never explained. One sentence — *"Built on Filecoin — independently verifiable storage with a cryptographic audit trail."* — would be a meaningful differentiator that no hyperscaler can match.
+The eleven-nines durability claim is mentioned in Features but the Filecoin infrastructure backing is never explained. One sentence, e.g. *"Built on Filecoin and run by independent regional operators, designed for 11 nines of durability."*, would explain it. Keep it to what the product does (see §8): no verifiability or cryptographic-proof claims.
 
 **3. Add secondary depth paths from within the page**
 At minimum: a "See pricing assumptions →" link near the pricing table, and a "View architecture →" link near Features. These clicks tell you whether visitors have commercial or technical curiosity.
@@ -650,7 +652,7 @@ At minimum: a "See pricing assumptions →" link near the pricing table, and a "
 ### Low priority
 
 **4. Add a third CTA at the bottom**
-Add "View technical details →" alongside "Try 30 days for free" and "Talk to an expert" in the final CTA banner. Gives research-mode visitors a path without forcing a commitment.
+Add "View technical details →" alongside the primary and secondary CTAs ("Start for free" and "Talk to sales") in the final CTA banner. Gives research-mode visitors a path without forcing a commitment.
 
 **5. Create a problem-first variant for outbound use**
 The current page works for paid traffic. For cold outbound email campaigns, swap the hero headline to a problem-first statement that continues the exact thought from the email. The infrastructure (problem section, workarounds, features, workloads) is now in place — only the hero needs to change per hypothesis.
