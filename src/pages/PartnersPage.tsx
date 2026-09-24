@@ -151,6 +151,7 @@ const PartnersPage = () => {
         {/* CTA */}
         <CtaBanner
           heading="Let's find the right way to partner"
+          headingMaxWidth={640}
           subhead="Not sure which role fits? Tell us about your business and we'll point you to the best path."
           cta={{ label: "Become a partner", href: "/partners/apply" }}
         />

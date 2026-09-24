@@ -39,7 +39,11 @@ export default {
       },
       colors: {
         border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
+        input: {
+          DEFAULT: "hsl(var(--input))",
+          // Resting text-field border; darkens to DEFAULT on hover
+          rest: "hsl(var(--input-rest))",
+        },
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

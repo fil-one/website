@@ -61,7 +61,10 @@
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 19%;
-    --input: 0 0% 23%;
+    --input: 240 4% 57%; /* #8D8D96, hovered text fields, radios, checkboxes: 3.29:1 on white (WCAG 1.4.11 needs 3:1) */
+    /* Resting text-field border (black/10). 1.25:1 on white, below WCAG 1.4.11's 3:1:
+       a deliberate design choice. Swap FIELD_INPUT_CLASS back to border-input to comply. */
+    --input-rest: 0 0% 0% / 0.1;
     --ring: 200 100% 76%;
 
     --radius: 0.75rem;

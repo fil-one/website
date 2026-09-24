@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
-import { Check } from "@phosphor-icons/react";
+import { ArrowUpRight, Check } from "@phosphor-icons/react";
 import backupArt from "@/assets/illustrations/workloads/01-backup-disaster-recovery.svg";
 import aiArt from "@/assets/illustrations/workloads/02-ai-training-checkpoints.svg";
 import mediaArt from "@/assets/illustrations/workloads/03-media-archive.svg";
@@ -157,6 +157,45 @@ const SolutionsPage = () => {
     track.scrollLeft += tabBox.left - trackBox.left - (trackBox.width - tabBox.width) / 2;
   }, [activeWorkload]);
 
+  // Sliding pill behind the active tab. Measured from the tab itself so it
+  // tracks font loading and resizes; null until measured (tab keeps its own bg).
+  const [pill, setPill] = useState<{ left: number; width: number } | null>(null);
+  useLayoutEffect(() => {
+    const track = tabTrackRef.current;
+    const measure = () => {
+      const tab = track?.querySelector<HTMLElement>('[role="tab"][data-state="active"]');
+      if (tab) setPill({ left: tab.offsetLeft, width: tab.offsetWidth });
+    };
+    measure();
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(measure);
+    track?.querySelectorAll('[role="tab"]').forEach((tab) => observer.observe(tab));
+    return () => observer.disconnect();
+  }, [activeWorkload]);
+
+  // When the track overflows, fade whichever edge has hidden tabs so the cut
+  // reads as "scroll for more" rather than a clipped layout.
+  const [edgeFade, setEdgeFade] = useState({ left: false, right: false });
+  useEffect(() => {
+    const track = tabTrackRef.current;
+    if (!track) return;
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      setEdgeFade({ left: track.scrollLeft > 1, right: track.scrollLeft < max - 1 });
+    };
+    update();
+    track.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      track.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+  const FADE = "40px";
+  const trackMask = `linear-gradient(to right, ${edgeFade.left ? "transparent" : "#000"}, #000 ${FADE}, #000 calc(100% - ${FADE}), ${
+    edgeFade.right ? "transparent" : "#000"
+  })`;
+
   // Keep the URL shareable without jumping the page.
   const selectWorkload = (id: string) => {
     setActiveWorkload(id);
@@ -231,16 +270,29 @@ const SolutionsPage = () => {
             >
               {/* Segmented control: one track, the active tab lifts onto it. Scrolls sideways on narrow screens instead of wrapping. */}
               {/* mx-auto (not justify-center) centres the track when it fits and lets it scroll from its first tab when it doesn't */}
-              <div ref={tabTrackRef} className="-mx-5 flex overflow-x-auto px-5 [scrollbar-width:none] md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden">
+              <div
+                ref={tabTrackRef}
+                className="-mx-5 flex overflow-x-auto px-5 [scrollbar-width:none] md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden"
+                style={{ maskImage: trackMask, WebkitMaskImage: trackMask }}
+              >
                 <TabsPrimitive.List
                   aria-label="Workloads"
-                  className="mx-auto inline-flex shrink-0 gap-1 rounded-full border border-black/[0.06] bg-zinc-100/80 p-1"
+                  className="relative mx-auto inline-flex shrink-0 gap-1 rounded-full border border-black/[0.06] bg-zinc-100/80 p-1"
                 >
+                  {pill && (
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-y-1 left-0 rounded-full bg-white shadow-elevated-sm ring-1 ring-black/[0.05] transition-[transform,width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+                      style={{ width: pill.width, transform: `translateX(${pill.left}px)` }}
+                    />
+                  )}
                   {WORKLOADS.map(({ id, tab }) => (
                     <TabsPrimitive.Trigger
                       key={id}
                       value={id}
-                      className="whitespace-nowrap rounded-full px-4 py-1.5 font-sans text-[13.5px] font-medium text-zinc-600 transition-[color,background-color,box-shadow] duration-200 hover:text-zinc-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 data-[state=active]:bg-white data-[state=active]:text-zinc-950 data-[state=active]:shadow-elevated-sm data-[state=active]:ring-1 data-[state=active]:ring-black/[0.05]"
+                      className={`relative whitespace-nowrap rounded-full px-4 py-1.5 font-sans text-[13.5px] font-medium text-zinc-600 transition-colors duration-200 hover:text-zinc-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 data-[state=active]:text-zinc-950 ${
+                        pill ? "" : "data-[state=active]:bg-white data-[state=active]:shadow-elevated-sm data-[state=active]:ring-1 data-[state=active]:ring-black/[0.05]"
+                      }`}
                     >
                       {tab}
                     </TabsPrimitive.Trigger>
@@ -329,6 +381,7 @@ const SolutionsPage = () => {
               onClick={() => trackCtaClick("Read the docs", DOCS_URL, "secondary")}
             >
               Read the docs
+              <ArrowUpRight size={14} weight="bold" aria-hidden="true" />
             </Button>
           </div>
         </section>
@@ -337,6 +390,7 @@ const SolutionsPage = () => {
 
         <CtaBanner
           heading="Stop paying to read your own data"
+          headingMaxWidth={640}
           subhead="1 TB free for 30 days, with 2 TB of egress and no credit card."
           cta={{
             label: "Start for free",

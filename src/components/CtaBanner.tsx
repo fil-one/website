@@ -16,6 +16,8 @@ interface CtaBannerProps {
   note?: ReactNode;
   /** Cap on the heading width (px). Longer translations need more room. */
   headingMaxWidth?: number;
+  /** Cap on the subhead width (px). Widen for longer subheads so they wrap to two lines, not three. */
+  subheadMaxWidth?: number;
   /**
    * Background behind the dark card, so the banner sits flush on pages whose
    * preceding section is grey rather than white.
@@ -35,6 +37,7 @@ const CtaBanner = ({
   secondaryCta,
   note,
   headingMaxWidth = 480,
+  subheadMaxWidth = 460,
   surface = "white",
 }: CtaBannerProps) => {
   const { ref, inView } = useInView({ threshold: 0.05 });
@@ -65,7 +68,7 @@ const CtaBanner = ({
             >
               {heading}
             </h2>
-            <p className="font-sans text-body md:text-body-lg leading-[1.65] text-white/70 mb-8 mx-auto max-w-[460px] text-pretty">{subhead}</p>
+            <p className="font-sans text-body md:text-body-lg leading-[1.65] text-white/70 mb-8 mx-auto text-balance" style={{ maxWidth: subheadMaxWidth }}>{subhead}</p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Button
                 variant="primary"

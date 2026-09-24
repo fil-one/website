@@ -17,10 +17,10 @@ interface SplitFeatureSectionProps {
   description: ReactNode;
   items: SplitFeatureItem[];
   /**
-   * Optional button under the pitch copy. Sales CTAs ("Talk to sales") use the
-   * secondary variant, matching the navbar hierarchy.
+   * Optional button under the pitch copy. Always the secondary variant: these
+   * are sales CTAs ("Talk to sales"), matching the navbar hierarchy.
    */
-  cta?: { label: string; href: string; onClick?: () => void; variant?: "primary" | "secondary" };
+  cta?: { label: string; href: string; onClick?: () => void };
   /** Section background; grey uses the standard zinc-50 band with hairline borders. */
   tone?: "white" | "grey";
 }
@@ -48,7 +48,7 @@ const SplitFeatureSection = ({ label, heading, description, items, cta, tone = "
           <SectionHeading>{heading}</SectionHeading>
           <SectionSub>{description}</SectionSub>
           {cta && (
-            <Button variant={cta.variant ?? "primary"} href={cta.href} className="mt-2" onClick={cta.onClick}>
+            <Button variant="secondary" href={cta.href} className="mt-2" onClick={cta.onClick}>
               {cta.label}
             </Button>
           )}

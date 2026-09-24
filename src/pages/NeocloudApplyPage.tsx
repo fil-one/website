@@ -137,7 +137,7 @@ const NeocloudApplyPage = () => {
           <div className="flex flex-col gap-3">
             <SectionLabel>Neoclouds</SectionLabel>
             <h1 className="m-0 font-display font-medium text-[28px] md:text-[36px] leading-[1.15] tracking-[-0.02em] text-zinc-950">
-              Add storage to your GPU cloud
+              Talk to our neocloud team
             </h1>
             <p className="m-0 font-sans font-normal text-[15px] leading-[1.6] text-zinc-500 text-pretty">
               Tell us about your platform and where your compute runs. Our team will get back to you shortly.

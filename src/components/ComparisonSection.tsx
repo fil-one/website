@@ -308,11 +308,11 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
                   <div
                     key={provider.key}
                     role="row"
-                    className={`flex items-center gap-3 py-2 px-3 ${
+                    className={`flex ${row.emphasis ? "items-center" : "items-baseline"} gap-3 py-2 px-3 ${
                       isFilOne ? "rounded-xl bg-white border border-zinc-200 mb-1" : ""
                     }`}
                   >
-                    <div role="rowheader" className="w-[84px] shrink-0">
+                    <div role="rowheader" className="flex w-[84px] shrink-0">
                       <span
                         className={`font-sans text-eyebrow leading-[1.4] ${
                           isFilOne ? "font-semibold text-zinc-950" : "font-medium text-zinc-600"
@@ -321,7 +321,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
                         {provider.shortName}
                       </span>
                     </div>
-                    <div role="cell" className="flex items-start gap-2 min-w-0 flex-1">
+                    <div role="cell" className="flex items-baseline gap-2 min-w-0 flex-1">
                       <CellContent
                         text={row.cells[provider.key]}
                         isFilOne={isFilOne}

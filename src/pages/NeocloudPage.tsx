@@ -275,7 +275,7 @@ const NeocloudPage = () => {
           cta={{
             label: "Talk to our team",
             href: APPLY_URL,
-            onClick: () => trackCtaClick("Talk to our team", APPLY_URL, "primary"),
+            onClick: () => trackCtaClick("Talk to our team", APPLY_URL, "secondary"),
           }}
         />
 

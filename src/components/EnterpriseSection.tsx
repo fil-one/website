@@ -63,7 +63,6 @@ const EnterpriseSection = () => (
       label: "Talk to sales",
       href: CONTACT_HREF,
       onClick: () => trackCtaClick("Talk to sales", CONTACT_HREF, "secondary"),
-      variant: "secondary",
     }}
   />
 );

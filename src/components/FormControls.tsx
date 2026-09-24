@@ -17,12 +17,13 @@ import { Check, CaretDown } from "@phosphor-icons/react";
  */
 
 /**
- * Tokenized styling shared by text inputs, textareas and selects. The zinc-500
- * border keeps >= 3:1 against white (WCAG 1.4.11); focus adds the site's 2px
+ * Tokenized styling shared by text inputs, textareas and selects. Rests on the
+ * light `input-rest` border (below WCAG 1.4.11's 3:1, by design choice) and
+ * darkens to the 3:1 `input` border on hover; focus adds the site's 2px
  * brand outline, and invalid fields switch to the danger border.
  */
 export const FIELD_INPUT_CLASS =
-  "w-full rounded-[10px] border border-zinc-500 bg-white px-3.5 py-2.5 font-sans text-[14.5px] font-normal text-zinc-950 transition-colors placeholder:text-zinc-500 focus:border-brand-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 aria-[invalid=true]:border-danger-600";
+  "w-full rounded-[10px] border border-input-rest hover:border-input bg-white px-3.5 py-2.5 font-sans text-[14.5px] font-normal text-zinc-950 transition-colors placeholder:text-zinc-500 focus:border-brand-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 aria-[invalid=true]:border-danger-600";
 
 const REQUIRED_MARK = (
   <span aria-hidden="true" className="ml-0.5 text-danger-600">
@@ -235,7 +236,7 @@ export const RadioField = ({
                     ? "border-[5px] border-zinc-950"
                     : error
                       ? "border-[1.5px] border-danger-600"
-                      : "border-[1.5px] border-zinc-500"
+                      : "border-[1.5px] border-input"
                 }`}
               />
               <span
@@ -268,7 +269,7 @@ const checkboxBoxClass = (
       ? tone === "brand"
         ? "border-none bg-brand-500"
         : "border-none bg-zinc-950"
-      : `border-[1.5px] ${invalid ? "border-danger-600" : "border-zinc-500"} bg-white`
+      : `border-[1.5px] ${invalid ? "border-danger-600" : "border-input"} bg-white`
   }`;
 
 /**

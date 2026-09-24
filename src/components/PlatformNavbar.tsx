@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { List, X, ArrowUpRight } from "@phosphor-icons/react";
 import { useLocation } from "react-router-dom";
 import filOneLogo from "../assets/fil-one-logo.svg";
@@ -62,6 +62,24 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
   const [mobileOpen, setMobileOpen] = useState(false);
   const { pathname } = useLocation();
 
+  // While the mobile menu is open it covers the page: lock page scroll, close
+  // on Escape, and close if the viewport grows past the mobile breakpoint.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMobileOpen(false); };
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const onBreakpoint = () => { if (desktop.matches) setMobileOpen(false); };
+    window.addEventListener("keydown", onKey);
+    desktop.addEventListener("change", onBreakpoint);
+    return () => {
+      document.body.style.overflow = overflow;
+      window.removeEventListener("keydown", onKey);
+      desktop.removeEventListener("change", onBreakpoint);
+    };
+  }, [mobileOpen]);
+
   /** Resolve a list entry's copy for the active language. */
   const l = (value: Localized) => localize(value, lang);
   const t = lang === "es"
@@ -124,7 +142,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
           {/* Mobile hamburger */}
           <button
-            className="-mr-1 flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg border-none bg-transparent text-zinc-950 transition-colors hover:bg-black/[0.04] lg:hidden"
+            className="-mr-1 flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg border-none bg-transparent text-zinc-950 transition-colors hover:bg-black/[0.04] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-500 lg:hidden"
             onClick={() => setMobileOpen((o) => !o)}
             aria-label={mobileOpen ? t.closeMenu : t.openMenu}
             aria-expanded={mobileOpen}
@@ -136,7 +154,8 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div id={MOBILE_MENU_ID} className="flex max-h-[calc(100dvh-58px)] flex-col gap-0.5 overflow-y-auto overscroll-contain border-t border-black/[0.06] bg-white/[0.97] px-5 py-3 lg:hidden">
+          // Full-bleed (cancels the nav's side padding) and fills the rest of the viewport, so no page shows around or below it
+          <div id={MOBILE_MENU_ID} className="-mx-5 flex h-[calc(100dvh-58px)] flex-col gap-0.5 overflow-y-auto overscroll-contain border-t border-black/[0.06] bg-white px-5 py-3 md:-mx-8 md:px-8 lg:hidden">
             {NAV_LINKS.map(({ label, href, external }) => (
               <a
                 key={href}
@@ -144,7 +163,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 aria-current={isCurrent(pathname, href) ? "page" : undefined}
                 onClick={() => { setMobileOpen(false); if (href.includes("docs.fil.one")) trackDocsClick(href); }}
-                className={`${MOBILE_ROW_CLASS} gap-1${isCurrent(pathname, href) ? " bg-black/[0.04] font-medium" : ""}`}
+                className={`${MOBILE_ROW_CLASS} -mx-3 gap-1${isCurrent(pathname, href) ? " bg-black/[0.04] font-medium" : ""}`}
               >
                 {l(label)}
                 {external && <Icon icon={ArrowUpRight} size={11} className="mt-px text-zinc-600" aria-hidden="true" />}

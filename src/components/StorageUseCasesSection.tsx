@@ -93,7 +93,7 @@ const StorageUseCasesSection = () => {
 
           {/* Tall top-right tile: solid brand block */}
           <div
-            className={`flex min-h-[220px] flex-col justify-end gap-6 rounded-3xl bg-use-case-card-blue p-6 sm:p-8 md:col-span-2 lg:col-span-1 lg:row-span-2 reveal${sectionInView ? " in-view" : ""}`}
+            className={`flex min-h-[220px] flex-col justify-end gap-6 rounded-3xl bg-use-case-card-blue p-6 sm:p-8 max-md:order-last md:col-span-2 lg:col-span-1 lg:row-span-2 reveal${sectionInView ? " in-view" : ""}`}
           >
             <Illustration src={userContentArt} tone="blue" className="aspect-[300/310] md:aspect-[3/1] lg:aspect-auto lg:min-h-[160px] lg:flex-1" />
             <div className="flex flex-col gap-2">
