@@ -21,11 +21,13 @@ import {
 import { validateFields, hasErrors, focusFirstInvalid, type FieldErrors } from "@/lib/formValidation";
 
 /*
- * HubSpot form fields this page submits (create the form with these internal
- * names; the neocloud-specific ones are company properties, object 0-2):
- *   contact 0-1: firstname, lastname, email, jobtitle
- *   company 0-2: name, gpu_locations, gpu_fleet_size, start_timeline,
- *                tell_us_about_your_business
+ * HubSpot form fields this page submits, by the internal names and objects the
+ * HubSpot neocloud form uses. Dropdown values must match the properties'
+ * option values exactly (FLEET_SIZES, TIMELINES below):
+ *   contact 0-1: firstname, lastname, email, jobtitle,
+ *                where_are_your_gpus_located, gpu_fleet_size,
+ *                when_are_you_looking_to_start
+ *   company 0-2: name, tell_us_about_your_business
  */
 
 const FLEET_SIZES = ["Under 500 GPUs", "500 to 5,000 GPUs", "Over 5,000 GPUs"];
@@ -73,20 +75,11 @@ const NeocloudApplyPage = () => {
       focusFirstInvalid(e.currentTarget);
       return;
     }
-    if (!HS_NEOCLOUD_FORM_GUID) {
-      setError(
-        <>
-          Applications aren't open online yet. In the meantime, please{" "}
-          <a href="/contact-sales" className="font-medium text-danger-700 underline">contact our sales team</a>.
-        </>
-      );
-      return;
-    }
     setLoading(true);
     setError(null);
 
-    const optional = (name: string, value: string) =>
-      value ? [{ objectTypeId: "0-2", name, value }] : [];
+    const optional = (objectTypeId: "0-1" | "0-2", name: string, value: string) =>
+      value ? [{ objectTypeId, name, value }] : [];
 
     const result = await submitHubSpotForm({
       formGuid: HS_NEOCLOUD_FORM_GUID,
@@ -96,11 +89,11 @@ const NeocloudApplyPage = () => {
         { objectTypeId: "0-1", name: "lastname", value: form.lastname },
         { objectTypeId: "0-1", name: "email", value: form.email },
         { objectTypeId: "0-2", name: "name", value: form.company },
-        ...(form.jobtitle ? [{ objectTypeId: "0-1", name: "jobtitle", value: form.jobtitle }] : []),
-        ...optional("gpu_locations", form.gpuLocations),
-        ...optional("gpu_fleet_size", form.fleetSize),
-        ...optional("start_timeline", form.timeline),
-        ...optional("tell_us_about_your_business", form.message),
+        ...optional("0-1", "jobtitle", form.jobtitle),
+        ...optional("0-1", "where_are_your_gpus_located", form.gpuLocations),
+        ...optional("0-1", "gpu_fleet_size", form.fleetSize),
+        ...optional("0-1", "when_are_you_looking_to_start", form.timeline),
+        ...optional("0-2", "tell_us_about_your_business", form.message),
       ],
       legalConsentOptions: {
         consent: {
