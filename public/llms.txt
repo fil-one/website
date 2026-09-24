@@ -29,7 +29,7 @@ consume. Fil One is optimized for these workloads:
 Fil One is a drop-in S3 replacement. No SDK changes required: point any existing
 S3 client at the Fil One endpoint:
 
-- **Endpoint:** `https://eu-west-1.s3.filonecontent.com`
+- **Endpoint:** `https://s3.eu-west-1.filonecontent.com`
 - **Region:** `eu-west-1` (Europe, France; default). `us-east-1` (US East, Michigan)
   is also available at `https://s3.us-east-1.filonecontent.com`
 - **Auth:** standard AWS Access Key ID + Secret Access Key
@@ -42,7 +42,7 @@ import boto3
 
 s3 = boto3.client(
     "s3",
-    endpoint_url="https://eu-west-1.s3.filonecontent.com",
+    endpoint_url="https://s3.eu-west-1.filonecontent.com",
     aws_access_key_id="YOUR_ACCESS_KEY",
     aws_secret_access_key="YOUR_SECRET_KEY",
     region_name="eu-west-1",
@@ -62,7 +62,7 @@ text = obj["Body"].read().decode()
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
 const s3 = new S3Client({
-  endpoint: "https://eu-west-1.s3.filonecontent.com",
+  endpoint: "https://s3.eu-west-1.filonecontent.com",
   region: "eu-west-1",
   credentials: {
     accessKeyId: process.env.FIL_ONE_ACCESS_KEY,
@@ -81,7 +81,7 @@ await s3.send(new PutObjectCommand({
 
 ```bash
 aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
-  --endpoint-url https://eu-west-1.s3.filonecontent.com
+  --endpoint-url https://s3.eu-west-1.filonecontent.com
 ```
 
 ## Key differentiators vs AWS S3, Backblaze B2, Wasabi, and Cloudflare R2
