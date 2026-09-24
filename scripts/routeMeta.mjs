@@ -52,7 +52,7 @@ export const ROUTE_META = {
   "/": {
     title: "Fil One · S3 object storage built for the AI era",
     description:
-      `S3-compatible object storage on Filecoin. ${PRICE_PER_TB_MONTH}, no egress fees, 11 nines of durability, proven daily.`,
+      `S3-compatible object storage on Filecoin. ${PRICE_PER_TB_MONTH}, no egress fees, designed for 11 nines of durability.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -61,14 +61,14 @@ export const ROUTE_META = {
         url: "https://www.fil.one",
         logo: "https://www.fil.one/fil-one-logo.svg",
         description:
-          "S3-compatible object storage built on Filecoin. Enterprise-grade durability, no egress fees, and verifiable data integrity.",
+          "S3-compatible object storage built on Filecoin. Designed for 11 nines of durability, with no egress fees and no per-request charges.",
       },
       {
         "@context": "https://schema.org",
         "@type": "Product",
         name: "Fil One Object Storage",
         description:
-          "S3-compatible object storage on Filecoin with no egress fees and verifiable data integrity, proven daily.",
+          "S3-compatible object storage on Filecoin with no egress fees, no per-request charges, and object lock with versioning.",
         brand: { "@type": "Brand", name: "Fil One" },
         offers: {
           "@type": "Offer",
@@ -116,7 +116,7 @@ export const ROUTE_META = {
   "/lp/backup-dr": {
     title: "Backup and disaster recovery storage · Fil One",
     description:
-      `Durable, verifiable backup storage at ${PRICE_PER_TB_SHORT}. 11 nines of durability, proven daily, zero egress for restores. S3-compatible for DR workflows.`,
+      `Backup storage at ${PRICE_PER_TB_SHORT}, designed for 11 nines of durability, with zero egress for restores. S3-compatible for DR workflows.`,
   },
   "/lp/log-retention": {
     title: "Log retention storage · Fil One",
@@ -320,7 +320,7 @@ export const ROUTE_META = {
   "/partners": {
     title: "Partners · Fil One",
     description:
-      "Channel, technology, and MSP partner programs for Fil One. Resell, integrate, or bundle verifiable cloud storage with your business.",
+      "Channel, technology, and MSP partner programs for Fil One. Resell, integrate, or bundle S3-compatible cloud storage with your business.",
   },
   "/neocloud": {
     title: "Storage for GPU clouds · Fil One",
@@ -335,7 +335,7 @@ export const ROUTE_META = {
   "/partners/apply": {
     title: "Partner application · Fil One",
     description:
-      "Apply to the Fil One partner program. Resell, integrate, or bundle verifiable S3-compatible cloud storage with your business.",
+      "Apply to the Fil One partner program. Resell, integrate, or bundle S3-compatible cloud storage with your business.",
   },
   "/solutions": {
     title: "Solutions · Fil One",
@@ -345,6 +345,6 @@ export const ROUTE_META = {
   "/about": {
     title: "About · Fil One",
     description:
-      "Fil One exists to put you back in control of your data. Learn who we are, why we built verifiable S3-compatible storage, and the principles behind it.",
+      "Fil One exists to put you back in control of your data. Learn who we are, why we built S3-compatible storage on Filecoin, and the principles behind it.",
   },
 };
