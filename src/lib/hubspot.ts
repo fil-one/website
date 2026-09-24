@@ -11,17 +11,14 @@
  */
 export const HS_PORTAL_ID = "51191454";
 
-/** Bucket Intelligence waitlist form */
-export const HS_BUCKET_INTELLIGENCE_WAITLIST_FORM_GUID = "39527548-1773-4541-beed-eee6225ae3b2";
-
-/** AI Agent Toolkit waitlist form */
-export const HS_AGENT_TOOLKIT_WAITLIST_FORM_GUID = "4857a0c6-a4a5-459c-bf37-a56d452c7442";
-
 /** Contact Sales form */
 export const HS_CONTACT_FORM_GUID = "f7684332-cc69-4d56-bd8d-12a2b730bceb";
 
 /** Partner Apply form */
 export const HS_PARTNER_FORM_GUID = "b18ae776-5b6f-42fa-a6aa-10ce63a36cb5";
+
+/** Neocloud application form (fields listed in NeocloudApplyPage.tsx) */
+export const HS_NEOCLOUD_FORM_GUID = "65ce81c3-07a6-43ef-ab82-95437dba3a3b";
 
 /** Support form */
 export const HS_SUPPORT_FORM_GUID = "44da45a4-b99b-4886-988a-70e27308322d";
@@ -75,12 +72,35 @@ export interface HubSpotSubmitResult {
   error?: string;
 }
 
+type SubmitErrorKind = "email" | "generic" | "network";
+
 /**
- * Submit a form to the HubSpot Forms API and normalise the result.
+ * Visitor-facing copy for submission failures. Raw HubSpot messages are
+ * technical ("Error in 'fields.email'. Invalid email address"), so they are
+ * logged to the console and mapped to one of these instead.
+ */
+const SUBMIT_ERROR_MESSAGES: Record<"en" | "es", Record<SubmitErrorKind, string>> = {
+  en: {
+    email: "We couldn't accept that email address. Please check it, or try a different work email.",
+    generic: "Something went wrong and your message wasn't sent. Please try again in a moment.",
+    network: "We couldn't reach our servers. Please check your connection and try again.",
+  },
+  es: {
+    email: "No hemos podido aceptar ese correo electrónico. Revísalo o prueba con otro correo de trabajo.",
+    generic: "Algo ha fallado y tu mensaje no se ha enviado. Vuelve a intentarlo en unos momentos.",
+    network: "No hemos podido conectar con nuestros servidores. Comprueba tu conexión y vuelve a intentarlo.",
+  },
+};
+
+/** HubSpot `errorType`s that mean the email address itself was rejected. */
+const EMAIL_ERROR_TYPES = new Set(["INVALID_EMAIL", "BLOCKED_EMAIL"]);
+
+/**
+ * Submit a form to the HubSpot Forms API and normalize the result.
  *
  * Wraps the fetch + response parsing shared by every marketing form so pages
  * only build their `fields` array. Resolves to `{ ok: true }` on success or
- * `{ ok: false, error }` with a human-readable message on failure — never
+ * `{ ok: false, error }` with friendly, localized copy on failure; never
  * throws. Callers own the `data-hs-do-not-collect` attribute on their `<form>`
  * and the `role="status"`/`role="alert"` announcements.
  */
@@ -91,9 +111,10 @@ export async function submitHubSpotForm(opts: {
   pageName: string;
   /** Optional HubSpot `legalConsentOptions` payload (consent checkboxes). */
   legalConsentOptions?: unknown;
-  /** Message shown on network failure; override for localized (non-English) pages. */
-  networkErrorMessage?: string;
+  /** Language of the error copy; "es" for the Spanish landing pages. */
+  lang?: "en" | "es";
 }): Promise<HubSpotSubmitResult> {
+  const messages = SUBMIT_ERROR_MESSAGES[opts.lang ?? "en"];
   try {
     const res = await fetch(
       `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${opts.formGuid}`,
@@ -111,20 +132,13 @@ export async function submitHubSpotForm(opts: {
     );
     if (!res.ok) {
       const body = await res.json().catch(() => ({}));
-      const msg =
-        body?.errors?.map((e: { message: string }) => e.message).join(" | ") ||
-        body?.message ||
-        JSON.stringify(body);
       console.error("HubSpot submission error:", body);
-      return { ok: false, error: msg };
+      const errors: { errorType?: string }[] = Array.isArray(body?.errors) ? body.errors : [];
+      const emailRejected = errors.some((e) => e.errorType && EMAIL_ERROR_TYPES.has(e.errorType));
+      return { ok: false, error: emailRejected ? messages.email : messages.generic };
     }
     return { ok: true };
   } catch {
-    return {
-      ok: false,
-      error:
-        opts.networkErrorMessage ??
-        "Network error — please check your connection and try again.",
-    };
+    return { ok: false, error: messages.network };
   }
 }

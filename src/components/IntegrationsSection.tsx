@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "@phosphor-icons/react";
 import type { ReactNode } from "react";
 import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
 import { useInView } from "@/hooks/useInView";
@@ -37,7 +38,7 @@ const IntegrationsSection = ({
     </>
   ),
   description = "S3 API compatible. If it talks to AWS, it talks to us.",
-  ctaLabel = "View documentation →",
+  ctaLabel = "Read the docs",
 }: IntegrationsSectionProps) => {
   const { ref, inView } = useInView({ threshold: 0.05 });
 
@@ -77,6 +78,7 @@ const IntegrationsSection = ({
 
         <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary">
           {ctaLabel}
+          <ArrowUpRight size={14} weight="bold" aria-hidden="true" />
         </a>
       </div>
     </section>

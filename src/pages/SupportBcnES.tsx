@@ -16,6 +16,7 @@ import {
   FormError,
 } from "@/components/FormControls";
 import { HS_SUPPORT_FORM_GUID, submitHubSpotForm } from "@/lib/hubspot";
+import { validateFields, hasErrors, focusFirstInvalid, type FieldErrors } from "@/lib/formValidation";
 import { S3_ENDPOINT_HOST } from "@/lib/s3-endpoint";
 
 const CATEGORY_OPTIONS = [
@@ -55,11 +56,7 @@ const FAQS = [
 
 const SupportBcnES = () => {
   useLang("es");
-  useSeo({
-    title: "Soporte · Fil One Almacenamiento S3",
-    description: "Obtén ayuda del equipo de soporte de Fil One. Envía una solicitud y te responderemos en breve.",
-    canonical: "https://www.fil.one/lp/es/soporte",
-  });
+  useSeo();
 
   const [form, setForm] = useState({
     firstname: "",
@@ -72,14 +69,17 @@ const SupportBcnES = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [categoryError, setCategoryError] = useState(false);
+  const [errors, setErrors] = useState<FieldErrors<keyof typeof form>>({});
 
   const set = (key: keyof Omit<typeof form, "categories">) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => setForm((f) => ({ ...f, [key]: e.target.value }));
+  ) => {
+    setForm((f) => ({ ...f, [key]: e.target.value }));
+    setErrors((errs) => ({ ...errs, [key]: undefined }));
+  };
 
   const toggleCategory = (value: string) => {
-    setCategoryError(false);
+    setErrors((errs) => ({ ...errs, categories: undefined }));
     setForm((f) => ({
       ...f,
       categories: f.categories.includes(value)
@@ -88,20 +88,31 @@ const SupportBcnES = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (form.categories.length === 0) {
-      setCategoryError(true);
+    const fieldErrors = validateFields<keyof typeof form>(
+      {
+        firstname: { value: form.firstname, required: true },
+        lastname: { value: form.lastname },
+        email: { value: form.email, required: true, email: true },
+        company: { value: form.company },
+        content: { value: form.content, required: true },
+        categories: { value: form.categories, required: true, message: "Por favor, selecciona al menos una categoría." },
+      },
+      "es",
+    );
+    setErrors(fieldErrors);
+    if (hasErrors(fieldErrors)) {
+      focusFirstInvalid(e.currentTarget);
       return;
     }
     setLoading(true);
     setError(null);
-    setCategoryError(false);
 
     const result = await submitHubSpotForm({
       formGuid: HS_SUPPORT_FORM_GUID,
       pageName: "Barcelona ES Soporte",
-      networkErrorMessage: "Error de red. Por favor, comprueba tu conexión y vuelve a intentarlo.",
+      lang: "es",
       fields: [
         { objectTypeId: "0-1", name: "firstname", value: form.firstname },
         { objectTypeId: "0-1", name: "lastname", value: form.lastname },
@@ -110,6 +121,12 @@ const SupportBcnES = () => {
         { objectTypeId: "0-5", name: "content", value: form.content },
         { objectTypeId: "0-5", name: "hs_ticket_category", value: form.categories.join(";") },
       ],
+      legalConsentOptions: {
+        consent: {
+          consentToProcess: true,
+          text: "Al hacer clic en enviar, consientes que Fil One almacene y procese la información enviada.",
+        },
+      },
     });
 
     setLoading(false);
@@ -171,21 +188,21 @@ const SupportBcnES = () => {
           </div>
 
           {submitted ? (
-            <FormSuccess title="Nos pondremos en contacto pronto.">
-              Gracias por ponerte en contacto. Nuestro equipo revisará tu solicitud y te responderá en breve.
+            <FormSuccess title="Gracias, nos pondremos en contacto">
+              Nuestro equipo revisará tu solicitud y te responderá en breve.
             </FormSuccess>
           ) : (
-            <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-6" noValidate>
 
               {/* Nombre / Apellido */}
               <div className="grid grid-cols-2 gap-4">
-                <TextField label="Nombre" required type="text" value={form.firstname} onChange={set("firstname")} placeholder="Ana" />
+                <TextField label="Nombre" required type="text" value={form.firstname} onChange={set("firstname")} placeholder="Ana" error={errors.firstname} />
                 <TextField label="Apellido" type="text" value={form.lastname} onChange={set("lastname")} placeholder="García" />
               </div>
 
               {/* Correo / Empresa */}
               <div className="grid grid-cols-2 gap-4">
-                <TextField label="Correo electrónico" required type="email" value={form.email} onChange={set("email")} placeholder="ana@empresa.com" />
+                <TextField label="Correo electrónico" required type="email" value={form.email} onChange={set("email")} placeholder="ana@empresa.com" error={errors.email} />
                 <TextField label="Empresa" type="text" value={form.company} onChange={set("company")} placeholder="Acme Inc." />
               </div>
 
@@ -196,6 +213,7 @@ const SupportBcnES = () => {
                 onChange={set("content")}
                 placeholder="Describe tu problema o pregunta…"
                 rows={5}
+                error={errors.content}
               />
 
               <CheckboxField
@@ -204,7 +222,7 @@ const SupportBcnES = () => {
                 options={CATEGORY_OPTIONS}
                 values={form.categories}
                 onToggle={toggleCategory}
-                error={categoryError ? "Por favor, selecciona al menos una categoría." : undefined}
+                error={errors.categories}
               />
 
               <div className="h-px w-full bg-black/[0.07]" />
@@ -213,6 +231,7 @@ const SupportBcnES = () => {
               <p className="font-sans font-normal text-[13px] leading-[1.7] text-zinc-500">
                 Fil One necesita la información de contacto que nos proporcionas para ponerse en contacto contigo sobre nuestros productos y servicios. Puedes darte de baja de estas comunicaciones en cualquier momento. Para más información sobre cómo darte de baja, así como sobre nuestras prácticas de privacidad y nuestro compromiso de proteger tu privacidad, consulta nuestra{" "}
                 <a href="/privacy" className="text-zinc-500 underline">Política de privacidad</a>.
+                {" "}Al hacer clic en enviar, consientes que Fil One almacene y procese la información enviada.
               </p>
 
               {/* Tiempo de respuesta */}

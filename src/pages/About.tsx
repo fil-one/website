@@ -18,15 +18,15 @@ import chrisPhoto from "@/assets/team-chris-rocco.jpg";
 const PRINCIPLES = [
   {
     icon: Key,
-    title: "Your data belongs to you",
+    title: "You stay in control",
     description:
-      "You hold the keys and set the rules. We're custodians of your data, never gatekeepers.",
+      "You set the rules for your data. We're its custodians, never its gatekeepers.",
   },
   {
     icon: SealCheck,
-    title: "Trust is proven, not promised",
+    title: "Protection you can see",
     description:
-      "Every object carries a fingerprint, verified independently: proof, not promises.",
+      "Object lock and versioning keep data from being overwritten or deleted, on terms you set.",
   },
   {
     icon: DoorOpen,
@@ -39,38 +39,38 @@ const PRINCIPLES = [
 const LEADERSHIP = [
   {
     name: "Marta Belcher",
-    title: "President & Chair, Fil One & Filecoin Foundation",
-    bio: "Marta Belcher leads Filecoin Foundation as President & Chair, and oversees the Fil One product team. She has worked on Filecoin for more than 7 years. Her other current and previous roles include serving as an executive at Protocol Labs, President of the Board of the Blockchain Association; special counsel at the Electronic Frontier Foundation; and as a Board member of the Crypto Council for Innovation, Creative Commons, and Zcash Foundation.",
+    title: "President and Chair, Fil One and Filecoin Foundation",
+    bio: "Marta Belcher leads Filecoin Foundation as President and Chair, oversees the Fil One product team, and has worked on Filecoin for more than 7 years. Her other roles, current and previous, include executive at Protocol Labs, President of the Board of the Blockchain Association, special counsel at the Electronic Frontier Foundation, and Board member of the Crypto Council for Innovation, Creative Commons, and Zcash Foundation.",
     photo: martaPhoto,
   },
   {
     name: "Clara Tsao",
     title: "Fil One Team Lead, Management Committee and Founding Officer at Filecoin Foundation",
-    bio: "Clara Tsao is a founding officer of Filecoin Foundation and a leader of the Fil One product team. She has worked on Filecoin for more than 6 years. Previous roles include serving in a go-to-market role at Microsoft, as a fellow at Google and Mozilla, as an Entrepreneur in Residence in the White House, as co-founder of the Trust & Safety Professional Association, as a senior fellow at the Atlantic Council, and in technical roles at the U.S. Department of Homeland Security.",
+    bio: "Clara Tsao is a founding officer of Filecoin Foundation, a leader of the Fil One product team, and has worked on Filecoin for more than 6 years. Her previous roles include go-to-market at Microsoft, fellow at Google and Mozilla, Entrepreneur in Residence in the White House, co-founder of the Trust & Safety Professional Association, senior fellow at the Atlantic Council, and technical roles at the U.S. Department of Homeland Security.",
     photo: claraPhoto,
   },
   {
     name: "Hannah Howard",
-    title: "Head of Engineering, Fil One & Filecoin Foundation",
+    title: "Head of Engineering, Fil One and Filecoin Foundation",
     bio: "Hannah Howard previously served as Co-Founder and CTO of Storacha, where she led technical strategy for decentralized hot storage on Filecoin and IPFS. An engineering leader in the Protocol Labs ecosystem for eight years, she is focused on building fast, verifiable storage systems for production-scale applications.",
     photo: hannahPhoto,
   },
   {
     name: "James Kurz",
     title: "Chief Strategy Officer, Fil One",
-    bio: "James leads Fil One’s commercial strategy and investor narrative. Throughout his career, James has specialized in scaling innovative SaaS platforms and guiding companies through critical growth stages. Prior to joining Filecoin Foundation, James served as CFO for Sweet, where he led fundraising and strategic finance initiatives. Previously, he served as Chief Financial Officer and Chief Operating Officer at doctor.com which was acquired by PE-backed Press Ganey.",
+    bio: "James Kurz leads Fil One's commercial strategy and investor narrative, and has spent his career scaling innovative SaaS platforms and guiding companies through critical growth stages. Before joining Filecoin Foundation, he was CFO at Sweet, where he led fundraising and strategic finance. Earlier, he was Chief Financial Officer and Chief Operating Officer at doctor.com, which was acquired by PE-backed Press Ganey.",
     photo: jamesPhoto,
   },
   {
     name: "R.W. Holleman",
     title: "Head of Revenue, Fil One",
-    bio: "R.W. leads Fil One’s revenue and go-to-market strategy. Throughout his career, R.W. has specialized in scaling enterprise sales organizations and building the channel partnerships that turn emerging technology into durable, repeatable revenue. Prior to joining Filecoin Foundation, R.W. served as Chief Commercial Officer at Storj, where he led enterprise storage sales and built relationships across the industry’s major distributors and master agents. Previously, he served as Chief Revenue Officer at Inveniam, where he helped scale go-to-market strategy across the company’s data infrastructure business.",
+    bio: "R.W. Holleman leads Fil One's revenue and go-to-market strategy, and has spent his career scaling enterprise sales organizations and building channel partnerships. Before joining Filecoin Foundation, he was Chief Commercial Officer at Storj, where he led enterprise storage sales and built relationships across the industry's major distributors and master agents. Earlier, he was Chief Revenue Officer at Inveniam, where he helped scale go-to-market strategy across its data infrastructure business.",
     photo: rwPhoto,
   },
   {
     name: "Chris Rocco",
     title: "Head of Product, Fil One",
-    bio: "Chris Rocco leads product and marketing for Fil One, focused on making decentralized storage simple, usable, and valuable for enterprise customers and developers. He brings more than 20 years of experience building and scaling SaaS, cloud, security, and data infrastructure products. Prior to joining Filecoin Foundation, Chris held leadership roles across product, marketing, and go-to-market, including developer experience at CARIAD (Volkswagen Group) and, most recently, distributed cloud storage at Storj.",
+    bio: "Chris Rocco leads product and marketing for Fil One, focused on making decentralized storage simple, usable, and valuable for enterprise customers and developers. He brings more than 20 years of experience building and scaling SaaS, cloud, security, and data infrastructure products. Before joining Filecoin Foundation, he held leadership roles across product, marketing, and go-to-market, including developer experience at CARIAD (Volkswagen Group) and, most recently, distributed cloud storage at Storj.",
     photo: chrisPhoto,
   },
 ];
@@ -85,13 +85,7 @@ const About = () => {
   const { ref: pillarsRef, inView: pillarsInView } = useInView({ threshold: 0.05 });
   const { ref: teamRef, inView: teamInView } = useInView({ threshold: 0.05 });
 
-  useSeo({
-    title: "About · Fil One",
-    description:
-      "Fil One exists to put you back in control of your data. Learn who we are, why we built verifiable S3-compatible storage, and the principles behind it.",
-    canonical: "https://www.fil.one/about",
-    ogImage: "https://www.fil.one/og-image.png",
-  });
+  useSeo();
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-white">
@@ -104,7 +98,7 @@ const About = () => {
           grid
           badge={<Pill>About Fil One</Pill>}
           title={<>We believe your data <span className="text-brand-500">belongs to you</span></>}
-          description="Fil One was built by the team behind Filecoin, the world's largest decentralized storage network. We make cloud storage you can verify, access without egress fees, and leave anytime, because your data should belong to you."
+          description="Fil One was built by the team behind Filecoin, the world's largest decentralized storage network. We make cloud storage you can verify, access without egress fees, and leave anytime, so you decide what happens to it."
           titleMaxWidth={620}
           descriptionMaxWidth={600}
           contentClassName="pb-16 md:pb-20"
@@ -152,10 +146,10 @@ const About = () => {
                 If you store serious data in the cloud, you know the bargain: your provider promises eleven nines of durability and asks you to trust it, egress fees punish you for using your own data, and staying longer only makes leaving more expensive.
               </p>
               <p className={BODY}>
-                We built Fil One because that bargain is backwards. Every file gets a cryptographic fingerprint, verified independently, so durability is something you can check, not a claim you have to trust. Pricing is one flat rate with zero egress fees, and because everything is S3-compatible, moving to or from Fil One is an endpoint change, not a migration project.
+                We built Fil One because that bargain is backwards. Pricing is one flat rate with zero egress fees, so reading your own data never costs extra. Object lock and versioning protect what you store. And because everything is S3-compatible, moving to or from Fil One is an endpoint change, not a migration project.
               </p>
               <p className={BODY}>
-                Behind the product is the team behind Filecoin, the world’s largest decentralized storage network, live since 2020 with thousands of independent operators and exabytes of proven capacity. It’s the same infrastructure trusted by the Internet Archive and the Smithsonian, so your data never depends on any single company staying honest. Not even us.
+                Behind the product is the team behind Filecoin, the world's largest decentralized storage network, live since 2020 with thousands of independent operators and exabytes of proven capacity. It's the same infrastructure trusted by the Internet Archive and the Smithsonian, and each Fil One region is run by an independent storage operator.
               </p>
             </div>
           </div>
@@ -171,7 +165,7 @@ const About = () => {
 
             <div
               ref={pillarsRef}
-              className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full reveal-group"
+              className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full reveal-group"
             >
               {PRINCIPLES.map(({ icon: Icon, title, description }) => (
                 <div
@@ -240,12 +234,12 @@ const About = () => {
 
         {/* Contact CTA */}
         <CtaBanner
-          heading="Let’s talk about your storage"
+          heading="Let's talk about your storage"
           subhead="Our team can help with enterprise pricing, migrations, and security reviews. Reach out anytime."
           cta={{
-            label: "Contact sales",
+            label: "Talk to sales",
             href: "/contact-sales",
-            onClick: () => trackCtaClick("Contact sales", "/contact-sales", "primary"),
+            onClick: () => trackCtaClick("Talk to sales", "/contact-sales", "primary"),
           }}
           secondaryCta={{
             label: "Support",

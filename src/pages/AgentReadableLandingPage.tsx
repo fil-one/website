@@ -19,8 +19,8 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 const FEATURES = [
   { icon: FileText, title: "Machine-readable llms.txt", desc: "Pricing, endpoint, and S3 compatibility are published in a structured llms.txt at a stable URL. An agent fetches one file and has the full picture." },
   { icon: ChartLine, title: "One rate, no tiers", desc: `${PRICE_PER_TB_MONTH}. No per-GB-vs-per-TB ambiguity, no tiered egress table, no request classes to reconcile. A single number an agent can compute against.` },
-  { icon: Plug, title: "Full S3 parity", desc: "The same API surface an agent already knows. Compatibility is stated plainly, not scattered across PDFs — drop-in against the documented endpoint." },
-  { icon: MagnifyingGlass, title: "No gated pricing", desc: "The price is on the page and in llms.txt — not behind a 'contact sales' form. An agent evaluating vendors never hits a wall where the number should be." },
+  { icon: Plug, title: "Full S3 parity", desc: "The same API surface an agent already knows. Compatibility is stated plainly, not scattered across PDFs, and it's drop-in against the documented endpoint." },
+  { icon: MagnifyingGlass, title: "No gated pricing", desc: "The price is on the page and in llms.txt, not behind a 'contact sales' form. An agent evaluating vendors never hits a wall where the number should be." },
 ];
 
 const PROBLEM_ITEMS = [
@@ -28,7 +28,7 @@ const PROBLEM_ITEMS = [
     label: "Gated behind a form",
     tone: "warning" as const,
     catch: "The price is a sales motion, not a fact.",
-    body: "'Contact sales for pricing' is a dead end for an agent. It cannot fill a lead form or wait for a callback, so the vendor is silently dropped from the shortlist — not on merit, but on legibility.",
+    body: "'Contact sales for pricing' is a dead end for an agent. It cannot fill a lead form or wait for a callback, so the vendor is silently dropped from the shortlist, not on merit but on legibility.",
   },
   {
     label: "Ambiguous units",
@@ -48,20 +48,16 @@ const LLMS_TXT = `$ curl -s https://www.fil.one/llms.txt
 
 ## Pricing
 - Pay-as-you-go: ${PRICE_PER_TB_MONTH}
-  — no egress fees, no API request fees
+  (no egress fees, no API request fees)
 - Free trial: 30 days, 1 TB included, no credit card
 
 ## How to connect
 - Endpoint: ${S3_ENDPOINT}
 - Auth: standard AWS Access Key ID + Secret
-- Drop-in S3 replacement — no SDK changes required`;
+- Drop-in S3 replacement, no SDK changes required`;
 
 const AgentReadableLandingPage = () => {
-  useSeo({
-    title: "Fil One · Priced so plainly your agent can read it",
-    description: `Flat ${PRICE_PER_TB_SHORT} pricing published in machine-readable llms.txt, with full S3 parity. No gated quotes — an AI coding agent can evaluate Fil One in one pass.`,
-    canonical: "https://www.fil.one/lp/agent-readable",
-  });
+  useSeo();
 
   const { ref: problemRef, inView: problemInView } = useInView({ threshold: 0.05 });
   const { ref: proofRef, inView: proofInView } = useInView({ threshold: 0.05 });
@@ -82,7 +78,7 @@ const AgentReadableLandingPage = () => {
           contentClassName="pb-20 md:pb-28"
           badge={
             <div className="inline-flex items-center rounded-full border border-brand/20 bg-brand-50 px-3.5 py-2.5 text-center max-w-[90vw]">
-              <span className="whitespace-nowrap font-sans text-[13.5px] font-medium leading-none text-brand-600">
+              <span className="text-balance font-sans text-[13.5px] font-medium leading-[1.3] text-brand-600 sm:whitespace-nowrap sm:leading-none">
                 For developers who let an AI agent evaluate vendors
               </span>
             </div>
@@ -91,15 +87,15 @@ const AgentReadableLandingPage = () => {
             <>
               Priced so plainly
               <br />
-              <span className="text-brand-500">your agent can read it.</span>
+              <span className="text-brand-500">your agent can read it</span>
             </>
           }
           description={
-            <>Flat {PRICE_PER_TB_SHORT}, published in machine-readable llms.txt with full S3 parity. No gated quotes, no "contact sales" for a number — an agent parses the price and the API in one pass.</>
+            <>Flat {PRICE_PER_TB_SHORT}, published in machine-readable llms.txt with full S3 parity. No gated quotes, no "contact sales" for a number. An agent parses the price and the API in one pass.</>
           }
           ctas={[
             { label: "Start for free", href: signupUrl(), variant: "primary" },
-            { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+            { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
           ]}
           tagline={TAGLINE}
         />
@@ -119,7 +115,7 @@ const AgentReadableLandingPage = () => {
           </div>
         </section>
 
-        {/* ── Proof — llms.txt ─────────────────────────────────────────────── */}
+        {/* ── Proof: llms.txt ──────────────────────────────────────────────── */}
         <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-white">
           <div
             ref={proofRef}
@@ -145,7 +141,7 @@ const AgentReadableLandingPage = () => {
             </div>
             <div
               ref={featuresRef}
-              className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full reveal-group reveal${featuresInView ? " in-view" : ""}`}
+              className={`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 w-full reveal-group reveal${featuresInView ? " in-view" : ""}`}
             >
               {FEATURES.map(({ icon, title, desc }) => (
                 <FeatureCard
@@ -164,9 +160,9 @@ const AgentReadableLandingPage = () => {
         <CtaBanner
           heading={`One rate. ${PRICE_PER_TB_MONTH}.`}
           headingMaxWidth={560}
-          subhead="Storage. No egress, no per-request fees, no tiers. Free 1 TB evaluation — point your agent at llms.txt, confirm the parity, and connect against the documented endpoint."
+          subhead="Storage. No egress, no per-request fees, no tiers. Free 1 TB evaluation: point your agent at llms.txt, confirm the parity, and connect against the documented endpoint."
           cta={{ label: "Start for free", href: signupUrl() }}
-          secondaryCta={{ label: "Talk to an expert", href: SALES_URL }}
+          secondaryCta={{ label: "Talk to sales", href: SALES_URL }}
           note={TAGLINE}
         />
       </main>

@@ -1,59 +1,49 @@
-# Fil One — Landing Page
+# Fil One website
 
-Marketing landing page for [Fil One](https://fil.one), S3-compatible object storage built on Filecoin.
+Marketing site for [Fil One](https://www.fil.one), S3-compatible object storage built on Filecoin.
 
 ## Tech stack
 
 - **React 18** + **TypeScript**
-- **Vite** (build & dev server)
-- **Tailwind CSS**
-- **shadcn/ui** (Radix primitives)
-- **React Router** (client-side routing)
-- **Framer Motion** (animations)
-- **Vitest** (unit tests)
+- **Vite** (build and dev server), with a custom SSR prerender step (`scripts/prerender.mjs`)
+- **Tailwind CSS** with the site's design tokens in `tailwind.config.ts`
+- **React Router** (client-side routing, lazy-loaded per route)
+- **Phosphor Icons** and **Radix Tabs**
+- **Vercel** functions in `api/` for the HubSpot blog
+- **Vitest** + Testing Library (unit and component tests)
 
 ## Project structure
 
 ```
+api/                    # Vercel functions: blog JSON, blog page meta, RSS
+scripts/
+├── prerender.mjs       # Renders every route to static HTML after `vite build`
+└── routeMeta.mjs       # Title + description for every route (single source for SEO)
+public/
+├── llms.txt            # Summary for AI agents, maintained by hand
+└── llms-full.txt       # Full agent/developer reference, maintained by hand
 src/
-├── assets/                # Images & SVGs (feature cards, logo, dashboard preview, CTA bg)
-├── components/
-│   ├── Navbar.tsx
-│   ├── NavLink.tsx
-│   ├── HeroSection.tsx         # Hero with walkthrough video player
-│   ├── HeroLens.tsx            # WebGL interactive lens effect on logo
-│   ├── IntroSection.tsx
-│   ├── FeaturesSection.tsx     # Horizontal scrolling feature carousel
-│   ├── ComparisonSection.tsx   # Competitor comparison table (responsive)
-│   ├── PricingSection.tsx
-│   ├── SavingsSection.tsx
-│   ├── FaqSection.tsx
-│   ├── CtaSection.tsx
-│   ├── Footer.tsx
-│   ├── JsonLd.tsx              # Structured data for SEO
-│   ├── WaitlistInput.tsx       # HubSpot waitlist form
-│   └── ui/                     # shadcn/ui primitives
-├── pages/
-│   ├── Index.tsx
-│   ├── ContactSales.tsx        # HubSpot-connected contact form
-│   ├── PrivacyPolicy.tsx
-│   ├── TermsOfUse.tsx
-│   └── NotFound.tsx
-├── hooks/
-│   ├── useInView.ts            # Scroll-reveal intersection observer
-│   ├── useSeo.ts               # Per-page meta tags & Open Graph
-│   ├── use-mobile.tsx          # Mobile breakpoint detection
-│   └── use-toast.ts            # Toast notifications
-└── lib/
-    ├── hubspot.ts              # HubSpot portal config & form helpers
-    └── utils.ts                # Shared utilities (cn, etc.)
+├── routes.tsx          # Route manifest: drives the router, prerender, and sitemap
+├── entry-server.tsx    # SSR entry used by the prerender
+├── components/         # Shared sections and primitives (Hero, CtaBanner, FaqSection,
+│                       #   ComparisonSection, LandingPage shell, FormControls, ...)
+├── pages/              # One file per route, including /lp/* campaign pages
+├── hooks/              # useSeo, useLang, useInView, useScrollTracking
+├── lib/
+│   ├── pricing.ts      # Prices and competitor rates (pricing.constants.mjs holds the raw numbers)
+│   ├── hubspot.ts      # Portal ID, form GUIDs, Forms API submit helper
+│   ├── console-url.ts  # Host-aware console links (see "Demo-alias domain")
+│   ├── s3-endpoint.ts  # S3 endpoint quoted in code samples
+│   ├── i18n.ts         # English/Spanish copy for the shared navbar and footer
+│   └── analytics.ts    # Event, CTA, and docs-click tracking
+└── test/               # Test setup and the route/SEO parity test
 ```
 
 ## Getting started
 
 ```sh
-git clone https://github.com/FilecoinFoundationWeb/fil-one.git
-cd fil-one
+git clone https://github.com/fil-one/website.git
+cd website
 
 npm install
 npm run dev
@@ -64,19 +54,32 @@ npm run dev
 | Script | Description |
 |---|---|
 | `npm run dev` | Start Vite dev server |
-| `npm run build` | Production build |
+| `npm run build` | Production build, then prerender every route (`postbuild`) |
+| `npm run build:dev` | Development-mode build |
 | `npm run preview` | Preview production build locally |
 | `npm run lint` | Run ESLint |
-| `npm test` | Run tests with Vitest |
+| `npm run typecheck` | Type-check app and Node configs |
+| `npm test` | Run tests once |
+| `npm run test:watch` | Run tests in watch mode |
+
+## Routes and SEO
+
+Every route is declared once in `src/routes.tsx`. The router, the prerender list, and `sitemap.xml` all derive from it. Each route's title and description live in `scripts/routeMeta.mjs`, which the prerender bakes into static HTML and `useSeo` reads at runtime. `src/test/route-seo-parity.test.ts` fails CI if a route has no metadata.
+
+Main pages: `/`, `/pricing`, `/solutions`, `/neocloud`, `/partners`, `/about`, `/blog`, `/support`, `/contact-sales`, plus the legal pages. `/lp/*` pages are campaign landing pages: they're `noindex`, left out of the sitemap, and never linked from the main site. Retired URLs are 301'd in `vercel.json`.
+
+When copy changes a claim, also update `public/llms.txt` and `public/llms-full.txt`. They're maintained by hand.
 
 ## HubSpot integration
 
-Two forms submit to HubSpot via the [Forms API v3](https://developers.hubspot.com/docs/api/marketing/forms):
+Marketing forms submit to HubSpot via the [Forms API v3](https://developers.hubspot.com/docs/api/marketing/forms):
 
-- **Waitlist** — hero section
-- **Contact Sales** — `/contact-sales`
+- **Contact Sales**: `/contact-sales` and `/lp/es/contacto`
+- **Support**: `/support` and `/lp/es/soporte`
+- **Partner Apply**: `/partners/apply`
+- **Neocloud Apply**: `/neocloud/apply`. Its GPU and timeline fields are custom properties; the internal names and objects are listed at the top of `NeocloudApplyPage.tsx`.
 
-Portal ID and form GUIDs are centralised in `src/lib/hubspot.ts`.
+Portal ID and form GUIDs are centralised in `src/lib/hubspot.ts`. Every Forms-API `<form>` needs `data-hs-do-not-collect`, or HubSpot also logs a duplicate "non-HubSpot form" submission.
 
 Blog content is read through server-side Vercel functions so the private app token is never exposed to the browser. Responses are projected down to the fields the site renders, so HubSpot's internal fields never reach the client:
 
@@ -95,18 +98,6 @@ Only posts that are `PUBLISHED` **and** in the configured blog group are served;
 Article slugs can't be prerendered (posts are published from HubSpot without a deploy), which is why `/blog/:slug` is marked `prerender: false` in `src/routes.tsx` and gets its meta from the request-time function instead.
 
 Copy `.env.example` to `.env` and set `HUBSPOT_PRIVATE_APP_ACCESS_TOKEN` to a HubSpot service key or private app token with the `content` scope. `HUBSPOT_BLOG_CONTENT_GROUP_ID` is optional — it defaults to Fil One's production blog group and only needs setting to point a preview deployment at a different portal.
-
-## Pages & routes
-
-| Route | Description |
-|---|---|
-| `/` | Main landing page |
-| `/contact-sales` | Contact sales form |
-| `/blog` | HubSpot-powered blog index |
-| `/blog/:slug` | Blog article (request-time meta) |
-| `/blog/rss.xml` | RSS feed |
-| `/privacy` | Privacy Policy |
-| `/terms` | Terms of Use |
 
 ## Deployment
 

@@ -1,6 +1,21 @@
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 
+// Primary brand blue — hoisted so gradient tokens below can reference its stops
+const brand = {
+  50:  "#EFF8FF", // ✓ tint background
+  100: "#D6EBFF",
+  200: "#ADD7FF",
+  300: "#7AC0FF",
+  400: "#38A6FF",
+  500: "#0090FF", // ✓ primary brand
+  600: "#0070CC", // ✓ hover / links
+  700: "#0055CC", // ✓ pressed / deep
+  800: "#004199",
+  900: "#002E6B",
+  DEFAULT: "#0090FF",
+};
+
 export default {
   darkMode: ["class"],
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
@@ -24,7 +39,11 @@ export default {
       },
       colors: {
         border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
+        input: {
+          DEFAULT: "hsl(var(--input))",
+          // Resting text-field border; darkens to DEFAULT on hover
+          rest: "hsl(var(--input-rest))",
+        },
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -80,19 +99,7 @@ export default {
          * ─────────────────────────────────────────────────────────────────── */
 
         // Primary brand blue
-        brand: {
-          50:  "#EFF8FF", // ✓ tint background
-          100: "#D6EBFF",
-          200: "#ADD7FF",
-          300: "#7AC0FF",
-          400: "#38A6FF",
-          500: "#0090FF", // ✓ primary brand
-          600: "#0070CC", // ✓ hover / links
-          700: "#0055CC", // ✓ pressed / deep
-          800: "#004199",
-          900: "#002E6B",
-          DEFAULT: "#0090FF",
-        },
+        brand,
 
         // Cyan accent — the primary-button gradient stops
         aqua: {
@@ -141,6 +148,35 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        // Card radii use Tailwind's built-ins: rounded-2xl (16px) for standard
+        // cards and panels, rounded-3xl (24px) for large feature panels and
+        // hero/CTA cards. Avoid one-off 20/28/32px values.
+      },
+
+      /* ───────────────────────────────────────────────────────────────────
+       * Design tokens — type scale
+       *
+       * Sizes only (no line-height), so each usage keeps its own `leading-*`.
+       * Replaces the ad-hoc `text-[Npx]` values. Headings pair a mobile and a
+       * desktop step, e.g. section H2 = `text-h3 md:text-h2`, page H1 =
+       * `text-h2 sm:text-h1 md:text-display`.
+       * ─────────────────────────────────────────────────────────────────── */
+      fontSize: {
+        eyebrow: "11.5px", // mono uppercase labels, pills, tiny tags
+        small: "13px", // captions, footnotes, meta lines
+        "body-sm": "14.5px", // buttons, nav, card and table copy
+        body: "15px", // default paragraph
+        "body-lg": "17px", // lead paragraphs, section subtitles (desktop)
+        h4: "20px", // card titles, small headings
+        h3: "26px", // subsection headings; section H2 on mobile
+        h2: "34px", // section H2 (desktop), large stats
+        h1: "44px", // page H1 (tablet), hero stats
+        display: "58px", // page H1 (desktop)
+      },
+
+      // One easing curve for transitions and reveals (ease-smooth)
+      transitionTimingFunction: {
+        smooth: "cubic-bezier(0.22, 1, 0.36, 1)",
       },
 
       /* ───────────────────────────────────────────────────────────────────
@@ -194,6 +230,16 @@ export default {
         "section-mask": "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)",
         // Blue highlight halo behind hero copy (~44 uses)
         "blue-halo": "radial-gradient(ellipse 55% 40% at 50% 0%, rgba(0,144,255,0.13) 0%, transparent 70%)",
+        // Static aqua glow centered behind the closing CTA banner copy
+        "cta-glow": "radial-gradient(circle, rgba(30,191,255,0.20) 0%, transparent 70%)",
+        // Brand-blue hero card: deep blue edges lightening toward the bottom centre
+        "hero-card-brand": `radial-gradient(ellipse 70% 60% at 50% 100%, ${brand[400]} 0%, ${brand[700]} 55%, ${brand[800]} 100%)`,
+        // White glow rising from the bottom edge of the brand-blue hero card
+        "hero-card-glow": "radial-gradient(ellipse 60% 50% at 50% 110%, rgba(255,255,255,0.32) 0%, transparent 70%)",
+        // Illustration panel inside a white card: soft white glow from the top edge
+        "illustration-panel": "radial-gradient(120% 80% at 50% 0%, #FFFFFF, rgba(255,255,255,0) 70%)",
+        // Solid blue use-case card (homepage "Store and serve user-generated content")
+        "use-case-card-blue": "linear-gradient(160deg, #1E8FEA 0%, #0A78E6 45%, #005FD6 100%)",
       },
       keyframes: {
         "accordion-down": {
@@ -212,7 +258,7 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-up": "fade-up 0.6s ease-out forwards",
+        "fade-up": "fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards",
       },
     },
   },

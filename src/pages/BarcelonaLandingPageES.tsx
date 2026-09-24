@@ -25,7 +25,7 @@ const CONTACT_SALES_HREF = "/lp/es/contacto";
 
 /** The modelled workload: 10 TB stored, 10 TB egress, 500K operations a month. */
 const WORKLOAD_TB = 10;
-// Prices stay in the site-wide USD format ("$4.99/TB") on the Spanish pages
+// Prices stay in the site-wide USD format ("$5.99/TB") on the Spanish pages
 // too, so the headline rate reads identically everywhere it appears.
 const FIL_ONE_TOTAL = `$${(PRICE_PER_TB * WORKLOAD_TB).toFixed(2)}`;
 
@@ -97,20 +97,15 @@ const FEATURES = [
   { icon: Plug, title: "Compatibilidad inmediata con S3", desc: "La misma API, los mismos SDK y herramientas. Conecta tu flujo de trabajo a nuestro endpoint y sigue trabajando." },
   { icon: ArrowsOut, title: "Sin cargos por egress", desc: "Cada lectura es gratis, así que tu factura se mantiene plana sin importar cuánto uses el servicio." },
   // Espacio fino antes del %, según la convención del SI y la RAE.
-  { icon: ShieldCheck, title: "Once nueves de durabilidad", desc: "99,999999999 % de durabilidad, replicada en varias ubicaciones y monitorizada permanentemente." },
-  { icon: Lock, title: "Object Lock y versionado", desc: "Modos de cumplimiento, periodos de retención y registros de auditoría a prueba de manipulaciones." },
+  { icon: ShieldCheck, title: "Once nueves de durabilidad", desc: "Diseñada para un 99,999999999 % de durabilidad y monitorizada permanentemente." },
+  { icon: Lock, title: "Object Lock y versionado", desc: "Retención en modo governance o compliance, y todas las versiones de cada objeto." },
   { icon: MapPin, title: "Tus datos nunca salen de la UE", desc: "La infraestructura de almacenamiento permanece dentro de las fronteras europeas." },
   { icon: Rocket, title: "Listo en cuestión de minutos", desc: "Genera tus claves de acceso, apunta tus herramientas a nuestro endpoint y empieza a subir datos." },
 ];
 
 const BarcelonaLandingPageES = () => {
   useLang("es");
-  useSeo({
-    title: `Fil One para Barcelona: Almacenamiento Europeo, ${PRICE_PER_TB_SHORT}, Sin Egress`,
-    description:
-      `Almacenamiento de objetos compatible con S3 para equipos en Barcelona. Soberanía de datos en la UE, cero comisiones de egress, a ${PRICE_PER_TB_SHORT}. Intégralo en tu stack actual en minutos.`,
-    canonical: "https://www.fil.one/lp/es/barcelona",
-  });
+  useSeo();
 
   const { ref: posRef, inView: posInView } = useInView({ threshold: 0.05 });
   const { ref: pricingRef, inView: pricingInView } = useInView({ threshold: 0.05 });

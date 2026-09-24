@@ -14,19 +14,19 @@ const USE_CASES = [
     icon: Plug,
     title: "S3-compatible from day one",
     description:
-      "Full S3 API compatibility, so your existing tools, SDKs, and workflows just connect.",
+      "S3 API compatibility, so your existing tools, SDKs, and workflows just connect.",
   },
   {
     icon: Database,
     title: "Eleven nines of durability",
     description:
-      "Distributed, redundant storage with 11 nines of durability and audit-ready integrity.",
+      "Redundant copies across independent locations protect every object from hardware and site failures.",
   },
   {
     icon: ArrowsLeftRight,
-    title: "Portability from day one",
+    title: "Portable by design",
     description:
-      "Multi-cloud by design, with data spread across an independent provider network.",
+      "Multi-cloud by design, with data stored on a distributed network.",
   },
   {
     icon: TrendUp,
@@ -38,7 +38,7 @@ const USE_CASES = [
     icon: Sliders,
     title: "Your data, under your control",
     description:
-      "Decide where your data lives and how it’s managed, with no single-provider lock-in.",
+      "Decide where your data lives and how it's managed, with no single-provider lock-in.",
   },
 ];
 
@@ -88,7 +88,7 @@ const UseCasesSection = ({ heading = "Enterprise storage made simple" }: { headi
             color: "#52525B",
           }}
         >
-          S3-compatible storage that's easy to set up and easier to scale, built for reliability, portability, and verifiable data integrity, without the egress bill.
+          S3-compatible storage that's easy to set up and easier to scale, built for reliability, portability, and a bill you can predict.
         </p>
       </div>
 
@@ -100,13 +100,13 @@ const UseCasesSection = ({ heading = "Enterprise storage made simple" }: { headi
         {USE_CASES.map(({ icon: Icon, title, description }) => (
           <div
             key={title}
-            className={`flex flex-col gap-5 p-8 rounded-2xl border border-black/[0.07] bg-white shadow-elevated reveal${cardsInView ? " in-view" : ""}`}
+            className={`flex flex-col gap-5 p-6 sm:p-8 rounded-2xl border border-black/[0.07] bg-white shadow-elevated reveal${cardsInView ? " in-view" : ""}`}
           >
-            <IconTile icon={Icon} size={26} className="h-14 w-14" />
+            <IconTile icon={Icon} size="lg" />
 
             {/* Text */}
             <div className="flex flex-col gap-2">
-              <h3 className="font-sans font-medium text-[18px] leading-[1.3] text-zinc-950 m-0">{title}</h3>
+              <h3 className="font-sans font-medium text-[18px] leading-[1.3] text-zinc-950 m-0 text-balance">{title}</h3>
               <p className="font-sans font-normal text-[14px] leading-[1.6] text-zinc-500 m-0">{description}</p>
             </div>
           </div>

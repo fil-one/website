@@ -20,10 +20,10 @@
  * value doesn't depend on the host the visitor is on, so a constant is correct
  * and pre-renders fine.
  */
-export const S3_ENDPOINT = "https://eu-west-1.s3.filonecontent.com";
+export const S3_ENDPOINT = "https://s3.eu-west-1.filonecontent.com";
 
 /**
  * The same endpoint without a scheme, for clients that want a bare host —
  * PyArrow's `endpoint_override`, rclone remotes, and similar.
  */
-export const S3_ENDPOINT_HOST = "eu-west-1.s3.filonecontent.com";
+export const S3_ENDPOINT_HOST = "s3.eu-west-1.filonecontent.com";

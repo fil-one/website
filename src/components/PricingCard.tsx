@@ -8,7 +8,7 @@ interface PricingCardProps {
   name: string;
   /** Short supporting line under the name */
   tagline: string;
-  /** Headline price — "$4.99" or text like "Custom pricing" */
+  /** Headline price — "$5.99" or text like "Custom pricing" */
   price: ReactNode;
   /** Unit shown next to a numeric price, e.g. "/ TB / month" */
   priceSuffix?: string;
@@ -67,7 +67,7 @@ const PricingCard = ({
           <span className="font-sans text-[14px] text-zinc-500 pb-1.5">{priceSuffix}</span>
         )}
       </div>
-      {priceNote && <p className="font-sans text-[13.5px] text-zinc-500">{priceNote}</p>}
+      {priceNote && <p className="font-sans text-[13.5px] text-zinc-500 text-pretty">{priceNote}</p>}
     </div>
 
     <div className="w-full h-px bg-black/[0.06]" />

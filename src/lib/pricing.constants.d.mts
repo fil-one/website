@@ -4,3 +4,5 @@ export const PRICE_AMOUNT: string;
 export const PRICE_DISPLAY: string;
 export const PRICE_PER_TB_SHORT: string;
 export const PRICE_PER_TB_MONTH: string;
+export const MONTHLY_MINIMUM: number;
+export const MONTHLY_MINIMUM_DISPLAY: string;

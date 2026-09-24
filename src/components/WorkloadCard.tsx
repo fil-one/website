@@ -36,7 +36,7 @@ const WorkloadCard = ({ workload, className = "", delayMs }: WorkloadCardProps) 
   >
     <div className="px-7 pt-7 pb-6">
       <Pill className="mb-4">{workload.tag}</Pill>
-      <h3 className="m-0 mb-2.5 font-sans font-medium text-[20px] leading-[1.3] tracking-[-0.02em] text-zinc-950">
+      <h3 className="m-0 mb-2.5 text-balance font-sans font-medium text-[20px] leading-[1.3] tracking-[-0.02em] text-zinc-950">
         {workload.title}
       </h3>
       <p className="m-0 font-sans text-[14px] leading-[1.65] text-zinc-500">{workload.desc}</p>

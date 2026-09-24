@@ -61,10 +61,17 @@
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 19%;
-    --input: 0 0% 23%;
+    --input: 240 4% 57%; /* #8D8D96, hovered text fields, radios, checkboxes: 3.29:1 on white (WCAG 1.4.11 needs 3:1) */
+    /* Resting text-field border (black/10). 1.25:1 on white, below WCAG 1.4.11's 3:1:
+       a deliberate design choice. Swap FIELD_INPUT_CLASS back to border-input to comply. */
+    --input-rest: 0 0% 0% / 0.1;
     --ring: 200 100% 76%;
 
     --radius: 0.75rem;
+
+    /* Motion: the one easing curve for transitions and reveals
+       (also available as the Tailwind `ease-smooth` utility) */
+    --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 
     /* Brand colors */
     --brand-cyan: #83eaff;
@@ -113,7 +120,7 @@
   background: linear-gradient(90deg, theme(colors.aqua.400) 0%, theme(colors.brand.500) 100%);
   padding: 1.5px;
   text-decoration: none;
-  transition: background 200ms ease;
+  transition: background 200ms var(--ease-smooth);
 }
 
 .btn-primary:hover {
@@ -130,6 +137,7 @@
   width: 100%;
   height: 100%;
   padding: 8px 20px;
+  transition: background-color 150ms var(--ease-smooth);
   font-family: 'Funnel Sans', sans-serif;
   font-weight: 500;
   font-size: 14.5px;
@@ -137,61 +145,31 @@
   white-space: nowrap;
 }
 
-/* Hero variant: a light-blue highlight flows evenly around the gradient border */
+/* Hero variant: a static gradient border drawn behind the white inner pill
+   (the border no longer animates; a looping glow distracted from the copy) */
 .btn-primary-glow {
   padding: 0;
   border: 1.5px solid transparent;
   background-image:
     linear-gradient(theme(colors.white), theme(colors.white)),
-    linear-gradient(
-      90deg,
-      theme(colors.aqua.400) 0%,
-      theme(colors.brand.500) 20%,
-      theme(colors.brand.500) 42%,
-      theme(colors.aqua.300) 50%,
-      theme(colors.brand.500) 58%,
-      theme(colors.brand.500) 80%,
-      theme(colors.aqua.400) 100%
-    );
+    linear-gradient(90deg, theme(colors.aqua.400) 0%, theme(colors.brand.500) 100%);
   background-origin: border-box;
   background-clip: padding-box, border-box;
-  background-size: 100% 100%, 260% 100%;
-  background-position: 0 0, 0% 0;
-  animation: btn-border-flow 3.2s linear infinite;
 }
 
-@keyframes btn-border-flow {
-  to { background-position: 0 0, -260% 0; }
-}
-
-/* Animated gradient text: a light band drifts through brand-blue text.
-   Reusable — apply to any text element; honors reduced motion below.
-   Colors reference the brand tokens; keyframe lives alongside this class so
-   Tailwind's JIT purge can't drop it (the animate-gradient-flow utility is
-   never emitted to markup). */
+/* Gradient text highlight for large headings. Static: every stop is
+   brand-500 or darker, so each point clears 3:1 on white for large text
+   (brand-500 is 3.3:1, brand-700 is 6.6:1). The class name is kept for
+   existing call sites. */
 .text-gradient-flow {
-  background-image: linear-gradient(
-    90deg,
-    theme(colors.brand.500) 0%,
-    theme(colors.brand.500) 30%,
-    theme(colors.brand.300) 50%,
-    theme(colors.brand.500) 70%,
-    theme(colors.brand.500) 100%
-  );
-  background-size: 200% 100%;
+  background-image: linear-gradient(90deg, theme(colors.brand.500) 0%, theme(colors.brand.700) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: gradient-flow 5s linear infinite;
 }
 
-@keyframes gradient-flow {
-  0% { background-position: 200% 0; }
-  100% { background-position: 0% 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .btn-primary-glow, .animate-gradient-flow, .text-gradient-flow { animation: none; }
+@media (forced-colors: active) {
+  .text-gradient-flow { color: CanvasText; background: none; }
 }
 
 /* Inner bg variant for grey (zinc-50) section backgrounds */
@@ -221,6 +199,16 @@
   background-color: theme(colors.zinc.600);
 }
 
+/* Secondary button variant for a brand-blue hero card */
+.btn-secondary.btn-secondary-brand {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: theme(colors.white);
+}
+
+.btn-secondary.btn-secondary-brand:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
 /* Arrow: always visible */
 .btn-arrow {
   opacity: 1;
@@ -242,7 +230,7 @@
   color: theme(colors.zinc.700);
   text-decoration: none;
   white-space: nowrap;
-  transition: background-color 150ms ease;
+  transition: background-color 150ms var(--ease-smooth);
 }
 
 .btn-secondary:hover {
@@ -257,23 +245,17 @@
 
 /* ── Scroll-reveal animations ───────────────────────────────────────────── */
 
-/* Keyframe used by hero (load-time) */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+/* Hero items (.hero-fade-1…4) render immediately: above-the-fold content is
+   never hidden behind an entrance animation. The class names stay as hooks. */
 
-/* Hero staggered items */
-.hero-fade-1 { animation: fadeUp 0.6s ease both; animation-delay: 0ms; }
-.hero-fade-2 { animation: fadeUp 0.6s ease both; animation-delay: 120ms; }
-.hero-fade-3 { animation: fadeUp 0.6s ease both; animation-delay: 240ms; }
-.hero-fade-4 { animation: fadeUp 0.6s ease both; animation-delay: 380ms; }
-
-/* Scroll-reveal: starts invisible, transitions in when .in-view added */
+/* Scroll-reveal: starts invisible, transitions in when .in-view added.
+   useInView marks elements that are already on screen at mount as in view
+   before first paint (with the transition suppressed), so only content
+   below the fold animates. */
 .reveal {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
+  transition: opacity 0.6s var(--ease-smooth), transform 0.6s var(--ease-smooth);
 }
 .reveal.in-view {
   opacity: 1;
@@ -288,33 +270,8 @@
 .reveal-group .reveal:nth-child(5) { transition-delay: 320ms; }
 .reveal-group .reveal:nth-child(6) { transition-delay: 400ms; }
 
-/* CTA banner: grid texture drifts slowly, glow breathes behind the copy */
-@keyframes cta-grid-drift {
-  from { background-position: 0 0; }
-  to   { background-position: 60px 60px; }
-}
-
-.cta-grid-drift {
-  animation: cta-grid-drift 30s linear infinite;
-}
-
-@keyframes cta-glow-pulse {
-  0%   { opacity: 0.5; transform: translate(0, 0) scale(1); }
-  25%  { opacity: 0.8; transform: translate(30px, -20px) scale(1.1); }
-  50%  { opacity: 1;   transform: translate(-10px, 25px) scale(1.15); }
-  75%  { opacity: 0.75; transform: translate(-30px, -15px) scale(1.05); }
-  100% { opacity: 0.5; transform: translate(0, 0) scale(1); }
-}
-
-.cta-glow-pulse {
-  animation: cta-glow-pulse 12s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cta-grid-drift, .cta-glow-pulse { animation: none; }
-}
-
-/* Pulsing ring for announcement badge "NEW" pill */
+/* Pulsing ring for announcement badge "NEW" pill. Plays a few times on load
+   and then stops, so nothing on the page loops indefinitely. */
 @keyframes badge-pulse {
   0%   { box-shadow: 0 0 0 0 rgba(0, 144, 255, 0.45); }
   70%  { box-shadow: 0 0 0 7px rgba(0, 144, 255, 0); }
@@ -322,7 +279,7 @@
 }
 
 .badge-pulse {
-  animation: badge-pulse 2.2s ease-out infinite;
+  animation: badge-pulse 2.2s var(--ease-smooth) 3;
 }
 
 /* Logo marquee: infinite horizontal scroll, fading into background on both sides */
@@ -348,8 +305,16 @@
   animation-duration: 75s;
 }
 
+/* WCAG 2.2.2: pause any marquee while the pointer is over it or focus is
+   inside it (put .marquee-pause on the track or any ancestor) */
+.marquee-pause:hover .marquee-track,
+.marquee-pause:focus-within .marquee-track,
+.marquee-track:hover,
+.marquee-track:focus-within {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-fade-1, .hero-fade-2, .hero-fade-3, .hero-fade-4 { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .badge-pulse { animation: none; }
   .marquee-track { animation: none; }
@@ -504,26 +469,37 @@ input[type="range"] {
   cursor: pointer;
 }
 
+/* Brand thumb: brand-600 fill (5.0:1 on white, clears the 3:1 non-text
+   contrast minimum) with a white ring so it reads on any track color */
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  background: #09090B;
-  border: 2px solid #ffffff;
+  background: theme(colors.brand.600);
+  border: 2px solid theme(colors.white);
   cursor: pointer;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 4px rgba(0, 112, 204, 0.35);
+  transition: box-shadow 150ms var(--ease-smooth);
 }
 
 input[type="range"]::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  background: #09090B;
-  border: 2px solid #ffffff;
+  background: theme(colors.brand.600);
+  border: 2px solid theme(colors.white);
   cursor: pointer;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 4px rgba(0, 112, 204, 0.35);
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  box-shadow: 0 0 0 5px rgba(0, 144, 255, 0.15);
+}
+
+input[type="range"]:hover::-moz-range-thumb {
+  box-shadow: 0 0 0 5px rgba(0, 144, 255, 0.15);
 }
 
 /* ── Skip navigation link ───────────────────────────────────────────────── */
@@ -557,10 +533,11 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ── Focus styles ───────────────────────────────────────────────────────── */
+/* No border-radius here: the outline follows each element's own radius, so
+   pill buttons keep a pill-shaped ring instead of snapping to 4px corners. */
 *:focus-visible {
-  outline: 2px solid #0090FF;
+  outline: 2px solid theme(colors.brand.500);
   outline-offset: 3px;
-  border-radius: 4px;
 }
 
 /* Buttons and links that already have visible hover states */
@@ -590,9 +567,17 @@ input[type="range"]::-moz-range-thumb {
   width: 100%;
   height: 4px;
   border-radius: 99px;
-  outline: none;
   cursor: pointer;
   background: theme(colors.zinc.200);
+}
+/* Keyboard focus: outline the track and ring the thumb (the global
+   *:focus-visible rule would otherwise be the only cue) */
+.calc-slider:focus {
+  outline: none;
+}
+.calc-slider:focus-visible {
+  outline: 2px solid theme(colors.brand.500);
+  outline-offset: 8px;
 }
 .calc-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -600,24 +585,29 @@ input[type="range"]::-moz-range-thumb {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: theme(colors.brand.500);
-  border: none;
-  box-shadow: 0 1px 6px rgba(0, 144, 255, 0.35);
+  background: theme(colors.brand.600);
+  border: 2px solid theme(colors.white);
+  box-shadow: 0 1px 6px rgba(0, 112, 204, 0.35);
   cursor: pointer;
-  transition: box-shadow 0.15s;
+  transition: box-shadow 150ms var(--ease-smooth);
 }
 .calc-slider::-moz-range-thumb {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: theme(colors.brand.500);
-  border: none;
-  box-shadow: 0 1px 6px rgba(0, 144, 255, 0.35);
+  background: theme(colors.brand.600);
+  border: 2px solid theme(colors.white);
+  box-shadow: 0 1px 6px rgba(0, 112, 204, 0.35);
   cursor: pointer;
 }
-.calc-slider:hover::-webkit-slider-thumb,
-.calc-slider:focus::-webkit-slider-thumb {
+.calc-slider:hover::-webkit-slider-thumb {
   box-shadow: 0 0 0 5px rgba(0, 144, 255, 0.12);
+}
+.calc-slider:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px theme(colors.white), 0 0 0 6px theme(colors.brand.500);
+}
+.calc-slider:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 4px theme(colors.white), 0 0 0 6px theme(colors.brand.500);
 }
 
 .calc-chip:hover {

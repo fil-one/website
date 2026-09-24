@@ -5,8 +5,6 @@ import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { SectionLabel } from "@/components/LandingPrimitives";
 import {
-  FIELD_INPUT_CLASS,
-  FormField,
   TextField,
   RadioField,
   Checkbox,
@@ -19,22 +17,22 @@ import {
   HS_MARKETING_SUBSCRIPTION_TYPE_ID,
   submitHubSpotForm,
 } from "@/lib/hubspot";
+import { validateFields, hasErrors, focusFirstInvalid, type FieldErrors } from "@/lib/formValidation";
 
+// Values are the HubSpot dropdown options (hyphenated); labels use en dashes.
 const DATA_OPTIONS = [
-  "0-1 TB",
-  "1-10 TB",
-  "10-100 TB",
-  "100-500 TB",
-  "500-1,000 TB",
-  "1+ PB",
+  { value: "0-1 TB", label: "0–1 TB" },
+  { value: "1-10 TB", label: "1–10 TB" },
+  { value: "10-100 TB", label: "10–100 TB" },
+  { value: "100-500 TB", label: "100–500 TB" },
+  { value: "500-1,000 TB", label: "500–1,000 TB" },
+  { value: "1+ PB", label: "1+ PB" },
 ];
 
+type ContactField = "firstname" | "lastname" | "company" | "email" | "dataStorage";
+
 const ContactSales = () => {
-  useSeo({
-    title: "Contact Sales · Fil One S3 Object Storage",
-    description: "Talk to the Fil One team about enterprise S3-compatible object storage pricing, volume discounts, and custom SLAs.",
-    canonical: "https://www.fil.one/contact-sales",
-  });
+  useSeo();
 
   const [form, setForm] = useState({
     firstname: "",
@@ -47,22 +45,31 @@ const ContactSales = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [radioError, setRadioError] = useState(false);
+  const [errors, setErrors] = useState<FieldErrors<ContactField>>({});
 
-  const set = (key: keyof typeof form) => (
+  const set = (key: ContactField) => (
     e: React.ChangeEvent<HTMLInputElement>
-  ) => setForm((f) => ({ ...f, [key]: e.target.value }));
+  ) => {
+    setForm((f) => ({ ...f, [key]: e.target.value }));
+    setErrors((errs) => ({ ...errs, [key]: undefined }));
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Manual validation for the custom radio group
-    if (!form.dataStorage) {
-      setRadioError(true);
+    const fieldErrors = validateFields<ContactField>({
+      firstname: { value: form.firstname, required: true },
+      lastname: { value: form.lastname, required: true },
+      company: { value: form.company, required: true },
+      email: { value: form.email, required: true, email: true },
+      dataStorage: { value: form.dataStorage, required: true, message: "Please select an option." },
+    });
+    setErrors(fieldErrors);
+    if (hasErrors(fieldErrors)) {
+      focusFirstInvalid(e.currentTarget);
       return;
     }
     setLoading(true);
     setError(null);
-    setRadioError(false);
 
     const result = await submitHubSpotForm({
       formGuid: HS_CONTACT_FORM_GUID,
@@ -107,7 +114,7 @@ const ContactSales = () => {
 
           {/* Header */}
           <div className="flex flex-col gap-3">
-            <SectionLabel>Contact Sales</SectionLabel>
+            <SectionLabel>Contact sales</SectionLabel>
             <h1 className="m-0 font-display font-medium text-[28px] md:text-[36px] leading-[1.15] tracking-[-0.02em] text-zinc-950">
               Talk to our team
             </h1>
@@ -119,11 +126,11 @@ const ContactSales = () => {
           <div className="h-px w-full bg-black/[0.07]" />
 
           {submitted ? (
-            <FormSuccess title="We'll be in touch soon.">
-              Thanks for reaching out. Our team will review your message and get back to you shortly.
+            <FormSuccess title="Thanks, we'll be in touch">
+              Our team will review your message and get back to you shortly.
             </FormSuccess>
           ) : (
-            <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-6" noValidate>
 
               {/* First / Last name row */}
               <div className="grid grid-cols-2 gap-4">
@@ -134,6 +141,7 @@ const ContactSales = () => {
                   value={form.firstname}
                   onChange={set("firstname")}
                   placeholder="Jane"
+                  error={errors.firstname}
                 />
                 <TextField
                   label="Last name"
@@ -142,6 +150,7 @@ const ContactSales = () => {
                   value={form.lastname}
                   onChange={set("lastname")}
                   placeholder="Smith"
+                  error={errors.lastname}
                 />
               </div>
 
@@ -152,6 +161,7 @@ const ContactSales = () => {
                 value={form.company}
                 onChange={set("company")}
                 placeholder="Acme Inc."
+                error={errors.company}
               />
 
               <TextField
@@ -161,6 +171,7 @@ const ContactSales = () => {
                 value={form.email}
                 onChange={set("email")}
                 placeholder="jane@acme.com"
+                error={errors.email}
               />
 
               <RadioField
@@ -169,8 +180,11 @@ const ContactSales = () => {
                 required
                 options={DATA_OPTIONS}
                 value={form.dataStorage}
-                onChange={(value) => { setForm((f) => ({ ...f, dataStorage: value })); setRadioError(false); }}
-                error={radioError ? "Please select an option." : undefined}
+                onChange={(value) => {
+                  setForm((f) => ({ ...f, dataStorage: value }));
+                  setErrors((errs) => ({ ...errs, dataStorage: undefined }));
+                }}
+                error={errors.dataStorage}
               />
 
               <div className="h-px w-full bg-black/[0.07]" />
@@ -190,7 +204,7 @@ const ContactSales = () => {
               <p className="font-sans font-normal text-[12.5px] leading-[1.7] text-zinc-500">
                 You can unsubscribe at any time. For more information, review our{" "}
                 <a href="/privacy" className="text-zinc-500 underline">Privacy Policy</a>.
-                By clicking submit, you consent to allow Fil One to store and process the information submitted.
+                {" "}By clicking submit, you consent to allow Fil One to store and process the information submitted.
               </p>
 
               {/* Submit */}

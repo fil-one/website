@@ -15,20 +15,20 @@ const config: LandingPageConfig = {
   },
 
   hero: {
-    badge: "For Web2 companies adding crypto payments or Web3 features",
+    badge: "For Web2 teams adding crypto",
     titleMaxWidth: 780,
     descriptionMaxWidth: 600,
     title: (
       <>
         Don't be a Web2 company
         <br />
-        <span className="text-brand-500">just playing with crypto.</span>
+        <span className="text-brand-500">just playing with crypto</span>
       </>
     ),
-    description: `S3-compatible object storage built on Filecoin infrastructure — not a relabeled hyperscaler bucket. No egress, no lock-in, one endpoint change. ${PRICE_PER_TB_SHORT} flat.`,
+    description: `S3-compatible object storage built on Filecoin infrastructure, not a relabeled hyperscaler bucket. No egress, no lock-in, one endpoint change. ${PRICE_PER_TB_SHORT} flat.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
-      { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -72,7 +72,7 @@ const config: LandingPageConfig = {
       {
         icon: Plug,
         title: "Endpoint swap · nothing else changes",
-        desc: "Fil One implements the S3 API. Swap the endpoint in your config. Your existing upload code, SDKs, and tooling connect immediately — no migration project, no new library.",
+        desc: "Fil One implements the S3 API. Swap the endpoint in your config. Your existing upload code, SDKs, and tooling connect immediately, with no migration project and no new library.",
       },
       {
         icon: Lock,
@@ -82,7 +82,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "No egress on reads",
-        desc: "Reading back transaction history, user data, or audit logs costs $0 in egress. Crypto products that read frequently — wallets, explorers, dashboards — pay for storage, not for reads.",
+        desc: "Reading back transaction history, user data, or audit logs costs $0 in egress. Crypto products that read frequently (wallets, explorers, dashboards) pay for storage, not for reads.",
       },
       {
         icon: ChartLine,
@@ -96,7 +96,7 @@ const config: LandingPageConfig = {
     heading: "Make the storage layer match the product.",
     subhead: "Free 1 TB evaluation. Change the endpoint in your config and store data on Filecoin infrastructure today.",
     cta: { label: "Start for free", href: signupUrl() },
-    secondaryCta: { label: "Talk to an expert", href: SALES_URL },
+    secondaryCta: { label: "Talk to sales", href: SALES_URL },
     note: TAGLINE,
   },
 };

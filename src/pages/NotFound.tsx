@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
 import { House, ArrowRight, BookOpen, Headset } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
+import { useSeo } from "@/hooks/useSeo";
 
 const LINKS = [
   {
@@ -29,9 +29,13 @@ const LINKS = [
 const NotFound = () => {
   const location = useLocation();
 
-  useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-  }, [location.pathname]);
+  // Unknown URLs are served index.html with a 200 (SPA fallback), so keep them
+  // out of the index and don't point them at the homepage canonical.
+  useSeo({
+    title: "Page not found · Fil One",
+    description: "The page you're looking for doesn't exist. It may have been moved or deleted.",
+    noindex: true,
+  });
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-white">

@@ -1,21 +1,23 @@
-# Fil One — Full Reference for AI Agents and Developers
+# Fil One: Full Reference for AI Agents and Developers
 
 > Fil One is the storage layer for AI agents. S3-compatible object storage built on
-> Filecoin with verifiable data integrity, no egress fees, and flat pricing at
-> $4.99/TB/month. Free 30-day trial, no credit card required.
+> Filecoin with no egress fees, no per-request charges, and flat pricing at
+> $5.99/TB/month. Free 30-day trial, no credit card required.
 
 ---
 
 ## What is Fil One?
 
-Fil One provides S3-compatible object storage backed by the Filecoin network. Every
-object stored on Fil One receives a cryptographic content identifier (CID) and is
-verified continuously via Filecoin's Proof of Spacetime (PoSt) — a cryptographic
-proof that data exists and is intact, checked approximately every 24 hours.
+Fil One provides S3-compatible object storage built on Filecoin. Each region is run
+by an independent storage operator: Europe (France) as `eu-west-1`, the default, and
+US East (Michigan) as `us-east-1`. More regions are on the way.
 
-This makes Fil One uniquely suited to AI agent workloads where data integrity and
-auditability matter: you can independently verify that your training data, model
-weights, or agent memory has not been altered or silently corrupted.
+Storage is designed for 11 nines of durability. Object lock (governance or
+compliance retention, set at bucket creation) and versioning protect data from
+being overwritten or deleted.
+
+Reads are free: there are no egress fees and no per-request charges, so agent
+workloads that read data often pay only for what they store.
 
 ---
 
@@ -29,11 +31,11 @@ creation) and the high-read retrieval phase (fetching source documents for conte
 injection) with no per-request charges.
 
 ```python
-import boto3
+import os, boto3
 
 s3 = boto3.client(
     "s3",
-    endpoint_url="https://eu-west-1.s3.filonecontent.com",
+    endpoint_url="https://s3.eu-west-1.filonecontent.com",
     aws_access_key_id=os.environ["FIL_ONE_ACCESS_KEY"],
     aws_secret_access_key=os.environ["FIL_ONE_SECRET_KEY"],
     region_name="eu-west-1",
@@ -56,16 +58,16 @@ source_text = obj["Body"].read().decode()
 
 Persist episodic memory, conversation history, task queues, scratchpads, and
 structured world-state between agent runs. Fil One is a durable key-value store
-accessible from any process with S3 credentials — no database required.
+accessible from any process with S3 credentials, with no database required.
 
 ```python
-import json, boto3
+import os, json, boto3
 
 class AgentMemory:
     def __init__(self, bucket: str, agent_id: str):
         self.s3 = boto3.client(
             "s3",
-            endpoint_url="https://eu-west-1.s3.filonecontent.com",
+            endpoint_url="https://s3.eu-west-1.filonecontent.com",
             aws_access_key_id=os.environ["FIL_ONE_ACCESS_KEY"],
             aws_secret_access_key=os.environ["FIL_ONE_SECRET_KEY"],
             region_name="eu-west-1",
@@ -119,7 +121,7 @@ evaluation, fine-tuning data collection, or compliance logging. Write as JSONL a
 read back in bulk with no egress cost.
 
 ```python
-import jsonlines, io, boto3
+import json
 
 def archive_trace(trace: dict, run_id: str, step: int):
     key = f"traces/{run_id}/{step:06d}.json"
@@ -142,17 +144,17 @@ def load_traces_for_eval(run_id: str) -> list[dict]:
 
 ### 5. Training and evaluation datasets
 
-Store JSONL, Parquet, CSV, or HDF5 datasets. Stream them back to training jobs at
-any throughput — no egress fee means iterating over datasets repeatedly costs only
-the storage price.
+Store JSONL, Parquet, CSV, or HDF5 datasets and stream them back to training jobs.
+No egress fee means iterating over datasets repeatedly costs only the storage price.
 
 ```python
+import os
 import pyarrow.parquet as pq
 import pyarrow.fs as pafs
 
 # PyArrow native S3 access (pass custom endpoint via S3FileSystem)
 fs = pafs.S3FileSystem(
-    endpoint_override="eu-west-1.s3.filonecontent.com",
+    endpoint_override="s3.eu-west-1.filonecontent.com",
     access_key=os.environ["FIL_ONE_ACCESS_KEY"],
     secret_key=os.environ["FIL_ONE_SECRET_KEY"],
     scheme="https",
@@ -167,11 +169,12 @@ table = pq.read_table("my-datasets/train/sft-v3.parquet", filesystem=fs)
 
 | Parameter | Value |
 |-----------|-------|
-| Endpoint URL | `https://eu-west-1.s3.filonecontent.com` |
-| Region | `eu-west-1` |
+| Endpoint URL | `https://s3.eu-west-1.filonecontent.com` (default region) |
+| Region | `eu-west-1` (Europe, France) |
+| Other regions | `us-east-1` (US East, Michigan) at `https://s3.us-east-1.filonecontent.com` |
 | Auth | AWS Signature V4 (Access Key ID + Secret Access Key) |
-| Protocol | HTTPS |
-| Path style | Both path-style and virtual-hosted-style supported |
+| Protocol | HTTPS only; HTTP is rejected |
+| Addressing | Path-style required; virtual-hosted-style is not supported |
 
 Fil One is compatible with any S3-compatible client or SDK:
 - **Python:** boto3, s3fs, fsspec, PyArrow S3FileSystem
@@ -185,7 +188,7 @@ Fil One is compatible with any S3-compatible client or SDK:
 ### Environment variable pattern (recommended)
 
 ```bash
-export FIL_ONE_ENDPOINT=https://eu-west-1.s3.filonecontent.com
+export FIL_ONE_ENDPOINT=https://s3.eu-west-1.filonecontent.com
 export FIL_ONE_REGION=eu-west-1
 export FIL_ONE_ACCESS_KEY=your_access_key_id
 export FIL_ONE_SECRET_KEY=your_secret_access_key
@@ -193,22 +196,16 @@ export FIL_ONE_SECRET_KEY=your_secret_access_key
 
 ---
 
-## Data integrity
+## Data protection
 
-Every object stored on Fil One:
-
-1. Receives a **CID (Content Identifier)** — a cryptographic hash of the object's
-   content using the IPLD data model
-2. Is sealed into a Filecoin sector and proven to exist via **Proof of Spacetime
-   (PoSt)** approximately every 24 hours
-3. Can be independently verified against its CID at any time — without trusting Fil
-   One as an intermediary
-
-This is particularly valuable for AI workloads:
-- Training datasets can be verified before a training run (no silent corruption)
-- Model checkpoints have provenance — you can prove which dataset version produced
-  which model
-- Inference logs are tamper-evident for compliance and audit purposes
+- **Durability:** designed for 11 nines
+- **Object lock:** governance or compliance retention, enabled when the bucket is
+  created. Useful for keeping inference logs and evaluation datasets unaltered for
+  a fixed period
+- **Versioning:** keep every version of an object, so an overwritten checkpoint or
+  dataset can be restored
+- **Encryption:** data is encrypted at rest, with keys held by the regional storage
+  operator. To hold your own keys, encrypt client-side before upload
 
 ---
 
@@ -216,39 +213,62 @@ This is particularly valuable for AI workloads:
 
 | Plan | Price | Notes |
 |------|-------|-------|
-| Pay-as-you-go | $4.99/TB/month | No egress fees, no API request fees |
-| Free trial | $0 | 30 days, 1 TB included, no credit card required |
+| Pay-as-you-go | $5.99/TB/month | No egress fees, no API request fees; $5.99 monthly minimum |
+| Free trial | $0 | 30 days, 1 TB storage and 2 TB egress included, no credit card required; upgrade to keep downloading after the egress allowance |
 | Business | Custom | 1, 3, or 5-year terms; capacity assurance; deployment SLAs |
 
-No egress fees means agent workloads that read data frequently — RAG pipelines,
-evaluation loops, inference servers pulling weights — pay only for storage, not for
+No egress fees means agent workloads that read data frequently (RAG pipelines,
+evaluation loops, inference servers pulling weights) pay only for storage, not for
 bandwidth.
+
+For comparison, published list rates (checked 2026-09-23):
+
+| Provider | Storage | Egress |
+|----------|---------|--------|
+| Fil One | $5.99/TB/month | $0 |
+| Wasabi | $7.99/TB/month | $0 |
+| Backblaze B2 | $6.95/TB/month | Free up to 3x stored data, then $10/TB |
+| Cloudflare R2 | $15/TB/month | $0 |
+| AWS S3 Standard (eu-west-1) | $23/TB/month (first 50 TB, tiered) | $90/TB (first 10 TB, tiered; first 100 GB free) |
 
 ---
 
 ## S3 API compatibility
 
-Fil One implements the S3 REST API. Supported operations include:
+Fil One implements the core of the S3 REST API. Supported in all regions:
 
-- Bucket: CreateBucket, DeleteBucket, ListBuckets, GetBucketLocation,
-  PutBucketCors, GetBucketCors
-- Object: PutObject, GetObject, DeleteObject, HeadObject, CopyObject,
-  ListObjectsV2, ListObjectVersions
+- Bucket: ListBuckets
+- Object: PutObject, GetObject (including range requests and `VersionId`),
+  DeleteObject, HeadObject, ListObjectsV2, ListObjectVersions
 - Multipart: CreateMultipartUpload, UploadPart, CompleteMultipartUpload,
   AbortMultipartUpload, ListMultipartUploads
-- Presigned URLs: GET and PUT presigned URLs supported
+- Presigned URLs: presigned GetObject and PutObject
+
+Region-dependent:
+
+- CreateBucket and DeleteBucket work in `us-east-1`. In `eu-west-1`, create and
+  delete buckets from the dashboard
+- CopyObject, object retention, and legal hold are confirmed in `us-east-1`
+
+The full, current list is in the
+[S3 compatibility reference](https://docs.fil.one/reference/s3-compatibility).
 
 ---
 
 ## Pages and documentation
 
-- [Homepage](https://www.fil.one) — product overview, feature comparison, pricing, FAQ
-- [Fil One for AI Agents](https://www.fil.one/lp/agents) — dedicated page for AI agent
-  developers; covers agent storage use cases, S3 connection examples, pricing, and
-  free trial details
-- [Documentation](https://docs.fil.one) — quickstart, SDK examples, API reference,
+- [Homepage](https://www.fil.one): product overview, feature comparison, pricing, FAQ
+- [Pricing](https://www.fil.one/pricing): flat per-TB rate and a cost calculator
+  comparing Fil One with AWS S3, Wasabi, Backblaze B2, and Cloudflare R2
+- [Solutions](https://www.fil.one/solutions): backups, AI training data, media
+  archives, research data, and logs
+- [Neoclouds](https://www.fil.one/neocloud): S3 object storage installed in a GPU
+  cloud's own facility, sold under the partner's brand
+- [Partners](https://www.fil.one/partners): channel, technology, and MSP partner programs
+- [About](https://www.fil.one/about): the team and company behind Fil One
+- [Documentation](https://docs.fil.one): quickstart, SDK examples, API reference,
   security, billing, limits
-- [Contact Sales](https://www.fil.one/contact-sales) — enterprise and high-volume
+- [Talk to sales](https://www.fil.one/contact-sales): enterprise and high-volume
   inquiries; also at sales@fil.one
 - [Privacy Policy](https://www.fil.one/privacy)
 - [Terms of Service](https://www.fil.one/terms)
