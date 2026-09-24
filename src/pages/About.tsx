@@ -20,13 +20,13 @@ const PRINCIPLES = [
     icon: Key,
     title: "You stay in control",
     description:
-      "You hold the keys and set the rules. We're custodians of your data, never gatekeepers.",
+      "You set the rules for your data. We're its custodians, never its gatekeepers.",
   },
   {
     icon: SealCheck,
-    title: "Trust is proven, not promised",
+    title: "Protection you can see",
     description:
-      "Every object carries a fingerprint, verified independently: proof, not promises.",
+      "Object lock and versioning keep data from being overwritten or deleted, on terms you set.",
   },
   {
     icon: DoorOpen,
@@ -146,10 +146,10 @@ const About = () => {
                 If you store serious data in the cloud, you know the bargain: your provider promises eleven nines of durability and asks you to trust it, egress fees punish you for using your own data, and staying longer only makes leaving more expensive.
               </p>
               <p className={BODY}>
-                We built Fil One because that bargain is backwards. Every file gets a cryptographic fingerprint, verified independently, so durability is something you can check, not a claim you have to trust. Pricing is one flat rate with zero egress fees, and because everything is S3-compatible, moving to or from Fil One is an endpoint change, not a migration project.
+                We built Fil One because that bargain is backwards. Pricing is one flat rate with zero egress fees, so reading your own data never costs extra. Object lock and versioning protect what you store. And because everything is S3-compatible, moving to or from Fil One is an endpoint change, not a migration project.
               </p>
               <p className={BODY}>
-                Behind the product is the team behind Filecoin, the world's largest decentralized storage network, live since 2020 with thousands of independent operators and exabytes of proven capacity. It's the same infrastructure trusted by the Internet Archive and the Smithsonian, so your data never depends on any single company staying honest. Not even us.
+                Behind the product is the team behind Filecoin, the world's largest decentralized storage network, live since 2020 with thousands of independent operators and exabytes of proven capacity. It's the same infrastructure trusted by the Internet Archive and the Smithsonian, and each Fil One region is run by an independent storage operator.
               </p>
             </div>
           </div>

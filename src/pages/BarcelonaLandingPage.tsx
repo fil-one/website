@@ -67,8 +67,8 @@ const STATS = [
 const FEATURES = [
   { icon: Plug, title: "Drop-in S3 compatibility", desc: "Same API, same SDKs, same tools. Point your existing workflow at our endpoint." },
   { icon: ArrowsOut, title: "Zero egress fees", desc: "Every read is free, so your bill stays flat no matter how busy the month." },
-  { icon: ShieldCheck, title: "Eleven nines of durability", desc: "99.999999999% durability, replicated across locations and monitored around the clock." },
-  { icon: Lock, title: "Object Lock and versioning", desc: "Compliance modes, retention periods, and tamper-evident audit logs." },
+  { icon: ShieldCheck, title: "Eleven nines of durability", desc: "Designed for 99.999999999% durability and monitored around the clock." },
+  { icon: Lock, title: "Object Lock and versioning", desc: "Governance or compliance retention, plus every version of every object." },
   { icon: MapPin, title: "Your data never leaves the EU", desc: "Storage stays within European borders, ready for your compliance reviews." },
   { icon: Rocket, title: "Up and running in minutes", desc: "Generate access keys, point your tools at our endpoint, and start uploading." },
 ];

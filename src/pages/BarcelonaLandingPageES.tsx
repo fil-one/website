@@ -97,8 +97,8 @@ const FEATURES = [
   { icon: Plug, title: "Compatibilidad inmediata con S3", desc: "La misma API, los mismos SDK y herramientas. Conecta tu flujo de trabajo a nuestro endpoint y sigue trabajando." },
   { icon: ArrowsOut, title: "Sin cargos por egress", desc: "Cada lectura es gratis, así que tu factura se mantiene plana sin importar cuánto uses el servicio." },
   // Espacio fino antes del %, según la convención del SI y la RAE.
-  { icon: ShieldCheck, title: "Once nueves de durabilidad", desc: "99,999999999 % de durabilidad, replicada en varias ubicaciones y monitorizada permanentemente." },
-  { icon: Lock, title: "Object Lock y versionado", desc: "Modos de cumplimiento, periodos de retención y registros de auditoría a prueba de manipulaciones." },
+  { icon: ShieldCheck, title: "Once nueves de durabilidad", desc: "Diseñada para un 99,999999999 % de durabilidad y monitorizada permanentemente." },
+  { icon: Lock, title: "Object Lock y versionado", desc: "Retención en modo governance o compliance, y todas las versiones de cada objeto." },
   { icon: MapPin, title: "Tus datos nunca salen de la UE", desc: "La infraestructura de almacenamiento permanece dentro de las fronteras europeas." },
   { icon: Rocket, title: "Listo en cuestión de minutos", desc: "Genera tus claves de acceso, apunta tus herramientas a nuestro endpoint y empieza a subir datos." },
 ];
