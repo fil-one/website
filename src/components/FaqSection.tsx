@@ -39,7 +39,7 @@ const faqs = [
   {
     question: "What counts as egress?",
     answer:
-      "Egress is any data transferred out of your bucket: to the internet, to another cloud, or to your own servers. On a paid plan it is free at any scale, and there are no per-request charges either. The 30-day trial includes 2 TB of egress.",
+      "Egress is any data transferred out of your bucket: to the internet, to another cloud, or to your own servers. On a paid plan it is free at any scale, and there are no per-request charges either. The 30-day trial includes 2 TB of egress. Upgrade to a paid plan to keep downloading after that.",
   },
   {
     question: "How is my bill calculated, and is there a minimum charge?",
