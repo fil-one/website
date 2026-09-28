@@ -93,11 +93,11 @@ const config: LandingPageConfig = {
       },
       {
         provider: "Wasabi",
-        values: { region: "us-east-1", storage: "$70", egress: "$0", api: "$0", total: "$70" },
+        values: { region: "us-east-1", storage: "$79.90", egress: "$0", api: "$0", total: "$79.90" },
       },
       {
         provider: "Backblaze B2",
-        values: { region: "us-west-002", storage: "$60", egress: "$0", api: "$0", total: "$60" },
+        values: { region: "us-west-002", storage: "$69.50", egress: "$0", api: "$0", total: "$69.50" },
       },
       {
         provider: "Fil One",
@@ -106,7 +106,7 @@ const config: LandingPageConfig = {
       },
     ],
     footnote:
-      "AWS S3 Standard, Google Cloud Storage Standard, and Azure Blob Hot egress and request fees taken from public US rate cards (Q2 2026). Storage shown at first-50 TB tier; egress at first-10 TB tier; ops at 500K mixed PUT/GET. Wasabi flat $6.99/TB; Backblaze B2 $6/TB with first 3× stored-volume egress included.",
+      "AWS S3 Standard, Google Cloud Storage Standard, and Azure Blob Hot egress and request fees taken from public US rate cards (Q2 2026). Storage shown at first-50 TB tier; egress at first-10 TB tier; ops at 500K mixed PUT/GET. Wasabi flat $7.99/TB; Backblaze B2 $6.95/TB with first 3× stored-volume egress included.",
   },
 
   workloads: {

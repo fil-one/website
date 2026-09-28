@@ -93,7 +93,7 @@ const config: LandingPageConfig = {
       },
       {
         provider: "Wasabi",
-        values: { tier: "Hot", storage: "$350", restore: "$0", catch: "90-day minimum retention" },
+        values: { tier: "Hot", storage: "$399.50", restore: "$0", catch: "90-day minimum retention" },
       },
       {
         provider: "Fil One",

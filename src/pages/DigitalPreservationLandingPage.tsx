@@ -12,7 +12,7 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 //   ~= $900/yr ~= $75/mo. All-in ~= $311/mo.
 // AWS Glacier Deep Archive: storage 10,240 GB x $0.00099/GB ~= $10/mo. Fixity read: 10 TB x
 //   ($0.02 retrieval + $0.09 egress) ~= $1,100/yr ~= $92/mo. All-in ~= $102/mo.
-// Wasabi: $6.99/TB = $70/mo, no retrieval/egress. Fil One: $5.99/TB = $59.90/mo, no retrieval/egress.
+// Wasabi: $7.99/TB = $79.90/mo, no retrieval/egress. Fil One: $5.99/TB = $59.90/mo, no retrieval/egress.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Preservation you can afford to check",
@@ -84,11 +84,11 @@ const config: LandingPageConfig = {
     rows: [
       { provider: "AWS S3 Standard", values: { storage: "$236", egress: "~$75", allIn: "$311" } },
       { provider: "AWS Glacier Deep Archive", values: { storage: "$10", egress: "~$92", allIn: "$102" } },
-      { provider: "Wasabi", values: { storage: "$70", egress: "$0", allIn: "$70" } },
+      { provider: "Wasabi", values: { storage: "$79.90", egress: "$0", allIn: "$79.90" } },
       { provider: "Fil One", isFilOne: true, values: { storage: "$59.90", egress: "$0", allIn: "$59.90" } },
     ],
     footnote:
-      "Scenario: 10 TB collection with one full fixity read per year, amortized monthly. AWS S3 Standard: ≈$236/mo storage ($0.023/GB) + ≈$75/mo amortized fixity (10 TB × $0.09/GB egress per year) ≈ $311/mo. AWS Glacier Deep Archive: ≈$10/mo storage ($0.00099/GB) + ≈$92/mo amortized fixity (10 TB × ($0.02 retrieval + $0.09 egress)/GB per year) ≈ $102/mo. Wasabi: $6.99/TB = $70/mo, no egress. Fil One: $5.99/TB = $59.90/mo, $0 egress. AWS and Wasabi rates from public US price cards, Q2 2026; figures indicative and rounded.",
+      "Scenario: 10 TB collection with one full fixity read per year, amortized monthly. AWS S3 Standard: ≈$236/mo storage ($0.023/GB) + ≈$75/mo amortized fixity (10 TB × $0.09/GB egress per year) ≈ $311/mo. AWS Glacier Deep Archive: ≈$10/mo storage ($0.00099/GB) + ≈$92/mo amortized fixity (10 TB × ($0.02 retrieval + $0.09 egress)/GB per year) ≈ $102/mo. Wasabi: $7.99/TB = $79.90/mo, no egress. Fil One: $5.99/TB = $59.90/mo, $0 egress. AWS and Wasabi rates from public US price cards, Q2 2026; figures indicative and rounded.",
   },
 
   features: {

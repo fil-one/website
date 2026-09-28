@@ -11,7 +11,7 @@ const TAGLINE = "No credit card required · No retrieval fees · Connects in min
 // AWS S3 Standard: $0.023/GB storage = $2,304/month (tiered); 10 TB restore = 10,240 GB x $0.09 = $922.
 // AWS Glacier Instant: storage 102,400 x $0.023 = $2,355; 10 TB restore = 10,240 x ($0.03+$0.09) = $1,229.
 // AWS Glacier Deep Archive: storage 102,400 x $0.00099 = $101; 10 TB restore = 10,240 x ($0.02+$0.09) = $1,126.
-// Wasabi: $6.99/TB = $699/month, $0 retrieval. Fil One: $5.99/TB = $599/month, $0 retrieval.
+// Wasabi: $7.99/TB = $799/month, $0 retrieval. Fil One: $5.99/TB = $599/month, $0 retrieval.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Know your archive works before you need it",
@@ -83,11 +83,11 @@ const config: LandingPageConfig = {
       { provider: "AWS S3 Standard", values: { storage: "$2,304", rate: "$0.09/GB egress", restore: "$922" } },
       { provider: "AWS Glacier Instant", values: { storage: "$2,355", rate: "$0.03 + $0.09/GB", restore: "$1,229" } },
       { provider: "AWS Glacier Deep Archive", values: { storage: "$101", rate: "$0.02 + $0.09/GB", restore: "$1,126" } },
-      { provider: "Wasabi", values: { storage: "$699", rate: "$0", restore: "$0" } },
+      { provider: "Wasabi", values: { storage: "$799", rate: "$0", restore: "$0" } },
       { provider: "Fil One", isFilOne: true, values: { storage: "$599", rate: "$0", restore: "$0" } },
     ],
     footnote:
-      "AWS S3 Standard and Glacier rates from public US rate card Q2 2026. S3 Standard storage: tiered $0.023/$0.022/GB; Glacier Instant $0.023/GB; Glacier Deep Archive $0.00099/GB. Retrieval: Deep Archive $0.02/GB + $0.09/GB egress. Restore cost computed: 10,240 GB × stated rates. Wasabi $6.99/TB. Fil One $5.99/TB, $0 retrieval, $0 egress.",
+      "AWS S3 Standard and Glacier rates from public US rate card Q2 2026. S3 Standard storage: tiered $0.023/$0.022/GB; Glacier Instant $0.023/GB; Glacier Deep Archive $0.00099/GB. Retrieval: Deep Archive $0.02/GB + $0.09/GB egress. Restore cost computed: 10,240 GB × stated rates. Wasabi $7.99/TB. Fil One $5.99/TB, $0 retrieval, $0 egress.",
   },
 
   features: {

@@ -11,7 +11,7 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 // AWS S3 Standard us-east-1: 10,240 GB x $0.023 storage + 10,240 GB x $0.09 egress
 //   = $235.52 + $921.60 = $1,157.12.
 // GCP: $0.020/GB storage + $0.12/GB egress (first 10 TB tier).
-// Azure: ~$0.018/GB storage + $0.087/GB egress. Wasabi $6.99/TB. Backblaze B2 $6/TB.
+// Azure: ~$0.018/GB storage + $0.087/GB egress. Wasabi $7.99/TB. Backblaze B2 $6.95/TB.
 // Fil One: 10 x $5.99 = $59.90, $0 egress.
 const config: LandingPageConfig = {
   seo: {
@@ -85,12 +85,12 @@ const config: LandingPageConfig = {
       { provider: "AWS S3 Standard", values: { storage: "$236", egress: "$922", total: "$1,157" } },
       { provider: "Google Cloud", values: { storage: "$205", egress: "$1,228", total: "$1,433" } },
       { provider: "Azure Blob (Hot)", values: { storage: "$184", egress: "$890", total: "$1,074" } },
-      { provider: "Wasabi", values: { storage: "$70", egress: "$0", total: "$70" } },
-      { provider: "Backblaze B2", values: { storage: "$60", egress: "$0", total: "$60" } },
+      { provider: "Wasabi", values: { storage: "$79.90", egress: "$0", total: "$79.90" } },
+      { provider: "Backblaze B2", values: { storage: "$69.50", egress: "$0", total: "$69.50" } },
       { provider: "Fil One", isFilOne: true, values: { storage: "$59.90", egress: "$0", total: "$59.90" } },
     ],
     footnote:
-      "AWS S3 Standard, Google Cloud Storage, Azure Blob Hot — public US rate cards Q2 2026. AWS: 10,240 GB × $0.023 storage + 10,240 GB × $0.09 egress. GCP: $0.020/GB storage + $0.12/GB egress first 10 TB. Azure: ~$0.018/GB storage + $0.087/GB egress. Wasabi $6.99/TB. Backblaze B2 $6/TB. Fil One $5.99/TB, $0 egress.",
+      "AWS S3 Standard, Google Cloud Storage, Azure Blob Hot — public US rate cards Q2 2026. AWS: 10,240 GB × $0.023 storage + 10,240 GB × $0.09 egress. GCP: $0.020/GB storage + $0.12/GB egress first 10 TB. Azure: ~$0.018/GB storage + $0.087/GB egress. Wasabi $7.99/TB. Backblaze B2 $6.95/TB. Fil One $5.99/TB, $0 egress.",
   },
 
   features: {
