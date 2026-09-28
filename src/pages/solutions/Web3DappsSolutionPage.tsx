@@ -67,7 +67,7 @@ const config: SolutionPageConfig = {
       {
         icon: CurrencyDollar,
         title: "Predictable, low-cost pricing",
-        body: "Flat $4.99/TB/month with no per-request fees and no egress charges as your dApp scales.",
+        body: "Flat $5.99/TB/month with no per-request fees and no egress charges as your dApp scales.",
       },
       {
         icon: Code,

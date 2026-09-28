@@ -55,10 +55,10 @@ const PRICING_ROWS: PriceComparisonRow[] = [
 const STATS = [
   { stat: PRICE_PER_TB_SHORT, label: "Flat monthly rate" },
   { stat: "$0", label: "Egress fees" },
-  // The 20× is the total bill, which is egress-driven, so it only holds for a
+  // The 19× is the total bill, which is egress-driven, so it only holds for a
   // read-heavy workload. The note names the one the pricing table models.
   {
-    stat: "20×",
+    stat: "19×",
     label: "Cheaper than AWS",
     note: `On ${WORKLOAD_TB} TB stored, ${WORKLOAD_TB} TB egress`,
   },

@@ -13,7 +13,7 @@ const config: SolutionPageConfig = {
   seo: {
     title: "Media & Archive Storage · Fil One",
     description:
-      "Low-cost, high-durability object storage for video, audio, and long-term archives. No egress fees, no retrieval penalties. $4.99/TB/month.",
+      "Low-cost, high-durability object storage for video, audio, and long-term archives. No egress fees, no retrieval penalties. $5.99/TB/month.",
     canonical: "https://www.fil.one/solutions/media-archive",
   },
   hero: {
@@ -39,7 +39,7 @@ const config: SolutionPageConfig = {
     tagline: "1 TB free for 30 days · No credit card required · No egress fees",
   },
   proof: [
-    "$4.99 / TB / month",
+    "$5.99 / TB / month",
     "No retrieval penalties",
     "S3-compatible",
     "Verifiable provenance",
@@ -62,7 +62,7 @@ const config: SolutionPageConfig = {
       {
         icon: Archive,
         title: "Long-term archive at low cost",
-        body: "$4.99/TB/month, no retrieval fees, no minimum storage duration. Cheaper than cold tiers that penalize you for accessing your own data.",
+        body: "$5.99/TB/month, no retrieval fees, no minimum storage duration. Cheaper than cold tiers that penalize you for accessing your own data.",
       },
       {
         icon: CurrencyDollar,
@@ -111,9 +111,9 @@ const config: SolutionPageConfig = {
     "How does data integrity verification work with Fil One?",
   ],
   cta: {
-    heading: "Cut your archive bill by up to 80%",
+    heading: "Cut your archive bill by up to 74%",
     subhead: "Start with 1 TB free. No credit card, no egress fees, no surprises.",
-    note: "S3-compatible · Verifiable integrity · $4.99/TB/month after trial",
+    note: "S3-compatible · Verifiable integrity · $5.99/TB/month after trial",
     cta: { label: "Start for free", href: signupUrl() },
   },
 };

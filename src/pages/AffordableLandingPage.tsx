@@ -11,8 +11,8 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 // 10 TB stored, 2 TB read/month, 100K GET operations.
 // AWS: 10,240x$0.023=$235.52 storage + 2,048x$0.09=$184.32 egress + 100Kx$0.0004/1K=$0.04 api ~ $420.
 // Google: 10,240x$0.020=$204.80 storage + 2,048x$0.12=$245.76 egress ~ $451.
-// Wasabi: 10TBx$6.99=$69.90 (90-day min billing), $0 egress. Backblaze B2: 10TBx$6=$60, $0 egress.
-// Fil One: 10TBx$4.99=$49.90, $0 egress, $0 api.
+// Wasabi: 10TBx$7.99=$79.90 (90-day min billing), $0 egress. Backblaze B2: 10TBx$6.95=$69.50, $0 egress.
+// Fil One: 10TBx$5.99=$59.90, $0 egress, $0 api.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Make storage your lowest line item",
@@ -84,12 +84,12 @@ const config: LandingPageConfig = {
     rows: [
       { provider: "AWS S3 Standard", values: { storage: "$236", egress: "$184", api: "$0.04", total: "$420" } },
       { provider: "Google Cloud", values: { storage: "$205", egress: "$246", api: "$0.05", total: "$451" } },
-      { provider: "Wasabi", values: { storage: "$70", egress: "$0", api: "$0", total: "$70" } },
-      { provider: "Backblaze B2", values: { storage: "$60", egress: "$0", api: "$0", total: "$60" } },
-      { provider: "Fil One", isFilOne: true, values: { storage: "$50", egress: "$0", api: "$0", total: "$50" } },
+      { provider: "Wasabi", values: { storage: "$79.90", egress: "$0", api: "$0", total: "$79.90" } },
+      { provider: "Backblaze B2", values: { storage: "$69.50", egress: "$0", api: "$0", total: "$69.50" } },
+      { provider: "Fil One", isFilOne: true, values: { storage: "$59.90", egress: "$0", api: "$0", total: "$59.90" } },
     ],
     footnote:
-      "Public US rate cards Q2 2026. AWS: 10,240 GB × $0.023 = $235.52 storage + 2,048 GB × $0.09 = $184.32 egress. Google: 10,240 × $0.020 = $204.80 + 2,048 × $0.12 = $245.76. Wasabi $6.99/TB, no egress. Backblaze B2 $6/TB, no egress. Fil One $4.99/TB, no egress, no per-request fees.",
+      "Public US rate cards Q2 2026. AWS: 10,240 GB × $0.023 = $235.52 storage + 2,048 GB × $0.09 = $184.32 egress. Google: 10,240 × $0.020 = $204.80 + 2,048 × $0.12 = $245.76. Wasabi $7.99/TB, no egress. Backblaze B2 $6.95/TB, no egress. Fil One $5.99/TB, no egress, no per-request fees.",
   },
 
   features: {

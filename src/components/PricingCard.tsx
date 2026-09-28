@@ -8,7 +8,7 @@ interface PricingCardProps {
   name: string;
   /** Short supporting line under the name */
   tagline: string;
-  /** Headline price — "$4.99" or text like "Custom pricing" */
+  /** Headline price — "$5.99" or text like "Custom pricing" */
   price: ReactNode;
   /** Unit shown next to a numeric price, e.g. "/ TB / month" */
   priceSuffix?: string;

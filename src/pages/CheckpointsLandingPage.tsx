@@ -10,7 +10,7 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 // 10 TB checkpoints stored, 5 TB eval reads/month.
 // AWS S3 Standard us-east-1 Q2 2026: storage 10,240 GB x $0.023 = $235.52,
 // egress 5,120 GB x $0.09 = $460.80. Total $680/mo (rounded).
-// Fil One: 10 TB x $4.99 = $49.90, egress $0.
+// Fil One: 10 TB x $5.99 = $59.90, egress $0.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Stop deleting checkpoints you'll want back",
@@ -79,10 +79,10 @@ const config: LandingPageConfig = {
     ],
     rows: [
       { provider: "AWS S3 Standard", values: { breakdown: "$230 storage + $450 egress", total: "$680/mo" } },
-      { provider: "Fil One", isFilOne: true, values: { breakdown: "10 TB × $4.99 — egress $0", total: "$49.90/mo" } },
+      { provider: "Fil One", isFilOne: true, values: { breakdown: "10 TB × $5.99 — egress $0", total: "$59.90/mo" } },
     ],
     footnote:
-      "AWS S3 Standard us-east-1 Q2 2026: $0.023/GB storage, $0.09/GB egress. Computed from stated inputs — 10,240 GB × $0.023 = $235.52 storage; 5,120 GB × $0.09 = $460.80 egress. Fil One: 10 TB × $4.99 = $49.90, egress $0.",
+      "AWS S3 Standard us-east-1 Q2 2026: $0.023/GB storage, $0.09/GB egress. Computed from stated inputs — 10,240 GB × $0.023 = $235.52 storage; 5,120 GB × $0.09 = $460.80 egress. Fil One: 10 TB × $5.99 = $59.90, egress $0.",
   },
 
   features: {
@@ -103,7 +103,7 @@ const config: LandingPageConfig = {
       {
         icon: Database,
         title: "Keep every run",
-        desc: "10 TB of checkpoints costs $49.90/month. 100 TB costs $499. The rate stays flat. Deleting early runs to save money stops being a decision.",
+        desc: "10 TB of checkpoints costs $59.90/month. 100 TB costs $599. The rate stays flat. Deleting early runs to save money stops being a decision.",
       },
       {
         icon: ChartLine,

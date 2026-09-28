@@ -8,11 +8,16 @@ import { COMPETITORS, PRICE_PER_TB, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 const PRICING_HREF = "/pricing";
 
 /**
- * Headline storage savings vs AWS S3, derived from the shared competitor table
- * so the teaser never drifts from the /pricing page it links to.
+ * Headline savings vs AWS S3 on the whole bill, for a workload that reads as
+ * much as it stores each month (AWS storage + egress per TB against Fil One's
+ * flat rate). Derived from the shared competitor table so the teaser never
+ * drifts from the /pricing page it links to. Reading more only widens the gap,
+ * hence "up to".
  */
 const aws = COMPETITORS.find((c) => c.name === "AWS S3");
-const AWS_SAVINGS_PCT = aws ? Math.round((aws.storagePricePerTB / PRICE_PER_TB - 1) * 100) : 0;
+const AWS_SAVINGS_PCT = aws
+  ? Math.round((1 - PRICE_PER_TB / (aws.storagePricePerTB + aws.egressPricePerTB)) * 100)
+  : 0;
 
 /**
  * Compact pricing-teaser band that replaces the inline calculator on the
@@ -33,7 +38,8 @@ const PricingTeaserSection = () => {
           Up to <span className="text-brand-500">{AWS_SAVINGS_PCT}% cheaper</span> than AWS S3
         </SectionHeading>
         <SectionSub maxWidth={520}>
-          Flat {PRICE_PER_TB_MONTH}, no egress fees.
+          Flat {PRICE_PER_TB_MONTH}, no egress fees. Compared with AWS S3 storage and egress for a
+          workload that reads as much as it stores each month.
         </SectionSub>
         <Button
           variant="primary"

@@ -9,7 +9,7 @@ const TAGLINE = "Enterprise and embedding terms available · Contact-led";
 
 // Scale cost comparison. AWS S3 Standard us-east-1 Q2 2026: tiered storage
 // $0.023/GB first 50 TB, $0.022/GB next 450 TB, $0.021/GB over 500 TB.
-// Fil One $4.99/TB flat. Storage only; egress additional on AWS, $0 on Fil One.
+// Fil One $5.99/TB flat. Storage only; egress additional on AWS, $0 on Fil One.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Go global. Skip the multi-year build.",
@@ -81,10 +81,10 @@ const config: LandingPageConfig = {
     ],
     rows: [
       { provider: "AWS S3 Standard", values: { t10: "$236", t100: "$2,304", t500: "$11,315", t1000: "$22,067" } },
-      { provider: "Fil One", isFilOne: true, values: { t10: "$50", t100: "$499", t500: "$2,495", t1000: "$4,990" } },
+      { provider: "Fil One", isFilOne: true, values: { t10: "$59.90", t100: "$599", t500: "$2,995", t1000: "$5,990" } },
     ],
     footnote:
-      "AWS S3 Standard us-east-1 Q2 2026: tiered storage $0.023/GB first 50 TB, $0.022/GB next 450 TB, $0.021/GB over 500 TB. Fil One $4.99/TB flat. Storage only; egress additional on AWS, $0 on Fil One.",
+      "AWS S3 Standard us-east-1 Q2 2026: tiered storage $0.023/GB first 50 TB, $0.022/GB next 450 TB, $0.021/GB over 500 TB. Fil One $5.99/TB flat. Storage only; egress additional on AWS, $0 on Fil One.",
   },
 
   features: {
@@ -114,7 +114,7 @@ const config: LandingPageConfig = {
       {
         icon: ChartLine,
         title: "Flat pricing that scales linearly",
-        desc: `${PRICE_PER_TB_SHORT} regardless of volume. At 1 PB, that is $4,990/month — a number you can build a product margin on. No tier waterfall to model.`,
+        desc: `${PRICE_PER_TB_SHORT} regardless of volume. At 1 PB, that is $5,990/month — a number you can build a product margin on. No tier waterfall to model.`,
       },
     ],
   },

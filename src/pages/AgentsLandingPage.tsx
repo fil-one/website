@@ -20,7 +20,7 @@ const DOCS_URL = "https://docs.fil.one";
 
 // ─── Comparison table data ─────────────────────────────────────────────────────
 const COMPARISON_ROWS = [
-  { item: "Storage",           aws: "$0.023/GB/month (~$23/TB)", filone: `~$0.005/GB/month (${PRICE_PER_TB_SHORT})` },
+  { item: "Storage",           aws: "$0.023/GB/month (~$23/TB)", filone: `~$0.006/GB/month (${PRICE_PER_TB_SHORT})` },
   { item: "PUT requests",      aws: "$0.005 per 1,000",          filone: "Included" },
   { item: "GET requests",      aws: "$0.0004 per 1,000",         filone: "Included" },
   { item: "Egress",            aws: "$0.09/GB",                  filone: "$0" },
