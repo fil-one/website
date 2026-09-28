@@ -12,7 +12,7 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 //   = $235.52 + $921.60 = $1,157.12.
 // GCP: $0.020/GB storage + $0.12/GB egress (first 10 TB tier).
 // Azure: ~$0.018/GB storage + $0.087/GB egress. Wasabi $6.99/TB. Backblaze B2 $6/TB.
-// Fil One: 10 x $4.99 = $49.90, $0 egress.
+// Fil One: 10 x $5.99 = $59.90, $0 egress.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Hyperscaler speed. Budget-tier bills.",
@@ -87,10 +87,10 @@ const config: LandingPageConfig = {
       { provider: "Azure Blob (Hot)", values: { storage: "$184", egress: "$890", total: "$1,074" } },
       { provider: "Wasabi", values: { storage: "$70", egress: "$0", total: "$70" } },
       { provider: "Backblaze B2", values: { storage: "$60", egress: "$0", total: "$60" } },
-      { provider: "Fil One", isFilOne: true, values: { storage: "$50", egress: "$0", total: "$50" } },
+      { provider: "Fil One", isFilOne: true, values: { storage: "$59.90", egress: "$0", total: "$59.90" } },
     ],
     footnote:
-      "AWS S3 Standard, Google Cloud Storage, Azure Blob Hot — public US rate cards Q2 2026. AWS: 10,240 GB × $0.023 storage + 10,240 GB × $0.09 egress. GCP: $0.020/GB storage + $0.12/GB egress first 10 TB. Azure: ~$0.018/GB storage + $0.087/GB egress. Wasabi $6.99/TB. Backblaze B2 $6/TB. Fil One $4.99/TB, $0 egress.",
+      "AWS S3 Standard, Google Cloud Storage, Azure Blob Hot — public US rate cards Q2 2026. AWS: 10,240 GB × $0.023 storage + 10,240 GB × $0.09 egress. GCP: $0.020/GB storage + $0.12/GB egress first 10 TB. Azure: ~$0.018/GB storage + $0.087/GB egress. Wasabi $6.99/TB. Backblaze B2 $6/TB. Fil One $5.99/TB, $0 egress.",
   },
 
   features: {

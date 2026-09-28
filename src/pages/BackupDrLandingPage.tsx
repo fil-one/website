@@ -98,7 +98,7 @@ const config: LandingPageConfig = {
       {
         provider: "Fil One",
         isFilOne: true,
-        values: { tier: "Hot", storage: "$250", restore: "$0", catch: "No retrieval. No egress." },
+        values: { tier: "Hot", storage: "$299.50", restore: "$0", catch: "No retrieval. No egress." },
       },
     ],
     footnote:

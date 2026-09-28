@@ -12,6 +12,7 @@ import {
   PRICE_PER_TB_SHORT,
   PRICE_PER_TB_MONTH,
   PRICE_AMOUNT,
+  PRICE_DISPLAY,
 } from "../src/lib/pricing.constants.mjs";
 
 export const BASE_URL = "https://www.fil.one";
@@ -99,7 +100,7 @@ export const ROUTE_META = {
             name: "How much does it cost to run an AI agent that makes 500,000 S3 requests per month?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: `On AWS S3, 100 GB storage + 500K PUT/GET requests + 100 GB egress costs roughly $14/month. On Fil One, the same workload costs $0.50 — just 100 GB of storage at ${PRICE_PER_TB_SHORT}, with requests and egress included at no charge.`,
+              text: `On AWS S3, 100 GB storage + 500K PUT/GET requests + 100 GB egress costs roughly $14/month. On Fil One, the same workload costs the ${PRICE_DISPLAY} monthly minimum: 100 GB of storage at ${PRICE_PER_TB_SHORT} falls under it, and requests and egress are included at no charge.`,
             },
           },
         ],
@@ -128,7 +129,7 @@ export const ROUTE_META = {
             name: "How much can I save switching from AWS S3 to Fil One?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "A team with 10 TB stored and 10 TB of reads per month pays roughly $1,151/month on AWS S3 (storage + egress + requests). The same workload on Fil One costs $50/month — a saving of over $1,100/month, or $13,200/year.",
+              text: "A team with 10 TB stored and 10 TB of reads per month pays roughly $1,151/month on AWS S3 (storage + egress + requests). The same workload on Fil One costs $59.90/month — a saving of over $1,090/month, or about $13,100/year.",
             },
           },
           {
@@ -136,7 +137,7 @@ export const ROUTE_META = {
             name: "How does Fil One compare to Cloudflare R2 for egress fees?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: `Both Fil One and Cloudflare R2 charge $0 for egress. Fil One's storage rate is ${PRICE_PER_TB_MONTH} versus R2's $15/TB/month — making Fil One roughly 3× cheaper on storage while matching R2 on egress.`,
+              text: `Both Fil One and Cloudflare R2 charge $0 for egress. Fil One's storage rate is ${PRICE_PER_TB_MONTH} versus R2's $15/TB/month — making Fil One roughly 2.5× cheaper on storage while matching R2 on egress.`,
             },
           },
           {
@@ -165,7 +166,7 @@ export const ROUTE_META = {
             name: "How much does it cost to store a RAG corpus on Fil One?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Just storage: your corpus size in TB × $4.99/month. A 1 TB corpus costs $4.99/month. There are no egress fees on document retrievals and no per-request charges, so retrieval-heavy workloads cost the same as idle ones.",
+              text: "Just storage: your corpus size in TB × $5.99/month. A 1 TB corpus costs $5.99/month. There are no egress fees on document retrievals and no per-request charges, so retrieval-heavy workloads cost the same as idle ones.",
             },
           },
           {
@@ -173,7 +174,7 @@ export const ROUTE_META = {
             name: "How much can I save vs. AWS S3 for a RAG pipeline?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "A 1 TB corpus read 5× per month costs $484/month on AWS S3 ($23.55 storage + $460 egress). On Fil One the same workload costs $4.99/month — a 97% reduction — because retrieval reads are included at no charge.",
+              text: "A 1 TB corpus read 5× per month costs $484/month on AWS S3 ($23.55 storage + $460 egress). On Fil One the same workload costs $5.99/month — a 98% reduction — because retrieval reads are included at no charge.",
             },
           },
           {
@@ -210,7 +211,7 @@ export const ROUTE_META = {
             name: "How much does it cost to store ML checkpoints on Fil One?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: `Flat ${PRICE_PER_TB_MONTH} with no egress fees. 10 TB of checkpoints costs $49.90/month; 100 TB costs $499/month. Evaluation runs that load checkpoints are included — reads cost nothing extra.`,
+              text: `Flat ${PRICE_PER_TB_MONTH} with no egress fees. 10 TB of checkpoints costs $59.90/month; 100 TB costs $599/month. Evaluation runs that load checkpoints are included — reads cost nothing extra.`,
             },
           },
           {
@@ -226,7 +227,7 @@ export const ROUTE_META = {
             name: "How does Fil One compare to AWS S3 for ML checkpoint storage?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "A team with 10 TB of checkpoints loading 5 TB for evals each month pays roughly $680/month on AWS S3 ($230 storage + $450 egress). On Fil One the same workload costs $49.90/month — the egress line disappears entirely.",
+              text: "A team with 10 TB of checkpoints loading 5 TB for evals each month pays roughly $680/month on AWS S3 ($230 storage + $450 egress). On Fil One the same workload costs $59.90/month — the egress line disappears entirely.",
             },
           },
           {
@@ -293,7 +294,7 @@ export const ROUTE_META = {
             name: "How much cheaper is Fil One than AWS S3?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: `A workload with 10 TB stored and 10 TB read per month costs roughly $1,158/month on AWS S3 (storage + egress + request fees). The same workload on Fil One costs $50/month — about 96% less — because Fil One charges a flat ${PRICE_PER_TB_MONTH} with $0 egress and $0 per request.`,
+              text: `A workload with 10 TB stored and 10 TB read per month costs roughly $1,158/month on AWS S3 (storage + egress + request fees). The same workload on Fil One costs $59.90/month — about 95% less — because Fil One charges a flat ${PRICE_PER_TB_MONTH} with $0 egress and $0 per request.`,
             },
           },
           {
@@ -471,7 +472,7 @@ export const ROUTE_META = {
   "/lp/ml-training": {
     title: "Fil One · Build around the clock",
     description:
-      `S3-compatible training-data storage at ${PRICE_PER_TB_SHORT} flat. No egress on dataset reads. 62× cheaper than AWS EFS. fsspec, PyArrow, and HuggingFace datasets work natively.`,
+      `S3-compatible training-data storage at ${PRICE_PER_TB_SHORT} flat. No egress on dataset reads. 51× cheaper than AWS EFS. fsspec, PyArrow, and HuggingFace datasets work natively.`,
   },
   "/lp/agent-knowledge-layer": {
     title: "Fil One · Turn Object Storage Into an Agent Knowledge Layer",

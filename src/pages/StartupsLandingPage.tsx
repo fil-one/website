@@ -80,7 +80,7 @@ const config: LandingPageConfig = {
     ],
     rows: [
       { provider: "AWS S3 Standard", values: { t1: "$69", t10: "$687", t50: "$3,428", t100: "$6,753" } },
-      { provider: "Fil One", isFilOne: true, values: { t1: "$5", t10: "$50", t50: "$250", t100: "$499" } },
+      { provider: "Fil One", isFilOne: true, values: { t1: "$5.99", t10: "$59.90", t50: "$299.50", t100: "$599" } },
     ],
     footnote:
       "AWS S3 Standard storage tiers and egress rates from public US Q2 2026 rate card. Egress estimated at 50% of stored volume read per month — conservative for an active product. Per-request fees not included.",

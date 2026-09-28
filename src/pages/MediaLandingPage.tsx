@@ -12,7 +12,7 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 //   Egress 50 TB: 10,240 GB x $0.09 + 40,960 GB x $0.085 = $921.60 + $3,481.60 = $4,403.20.
 // GCP: storage $205. Egress 50 TB: 10,240 x $0.12 + 40,960 x $0.11 = $1,228.80 + $4,505.60 = $5,734.40.
 // Azure Blob Hot: storage $184. Egress 50 TB: 10,240 x $0.087 + 40,960 x $0.083 = $890.88 + $3,399.68 = $4,290.56.
-// Wasabi $6.99/TB, Backblaze B2 $6/TB, both $0 egress. Fil One $4.99/TB, $0 egress.
+// Wasabi $6.99/TB, Backblaze B2 $6/TB, both $0 egress. Fil One $5.99/TB, $0 egress.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Your media library shouldn't bleed money on delivery",
@@ -86,10 +86,10 @@ const config: LandingPageConfig = {
       { provider: "Azure Blob (Hot)", values: { storage: "$184", egress: "$4,291", total: "$4,475" } },
       { provider: "Wasabi", values: { storage: "$70", egress: "$0", total: "$70" } },
       { provider: "Backblaze B2", values: { storage: "$60", egress: "$0", total: "$60" } },
-      { provider: "Fil One", isFilOne: true, values: { storage: "$50", egress: "$0", total: "$50" } },
+      { provider: "Fil One", isFilOne: true, values: { storage: "$59.90", egress: "$0", total: "$59.90" } },
     ],
     footnote:
-      "AWS S3 Standard us-east-1, GCP Standard, Azure Blob Hot East US — public US rate cards Q2 2026. AWS storage: 10,240 GB × $0.023 = $235.52. AWS egress 50 TB: 10,240 GB × $0.09 + 40,960 GB × $0.085 = $4,403.20. GCP egress 50 TB: 10,240 × $0.12 + 40,960 × $0.11 = $5,734.40. Azure egress 50 TB: 10,240 × $0.087 + 40,960 × $0.083 = $4,290.56. Wasabi $6.99/TB. Backblaze B2 $6/TB. Fil One $4.99/TB, $0 egress.",
+      "AWS S3 Standard us-east-1, GCP Standard, Azure Blob Hot East US — public US rate cards Q2 2026. AWS storage: 10,240 GB × $0.023 = $235.52. AWS egress 50 TB: 10,240 GB × $0.09 + 40,960 GB × $0.085 = $4,403.20. GCP egress 50 TB: 10,240 × $0.12 + 40,960 × $0.11 = $5,734.40. Azure egress 50 TB: 10,240 × $0.087 + 40,960 × $0.083 = $4,290.56. Wasabi $6.99/TB. Backblaze B2 $6/TB. Fil One $5.99/TB, $0 egress.",
   },
 
   features: {
@@ -109,7 +109,7 @@ const config: LandingPageConfig = {
       {
         icon: Database,
         title: "Store the full library",
-        desc: `At ${PRICE_PER_TB_SHORT} flat, a 10 TB media library costs $50/month. A 100 TB library costs $499. The rate per TB does not increase with library size.`,
+        desc: `At ${PRICE_PER_TB_SHORT} flat, a 10 TB media library costs $59.90/month. A 100 TB library costs $599. The rate per TB does not increase with library size.`,
       },
       {
         icon: Plug,

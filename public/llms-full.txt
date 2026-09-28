@@ -2,7 +2,7 @@
 
 > Fil One is the storage layer for AI agents. S3-compatible object storage built on
 > Filecoin with verifiable data integrity, no egress fees, and flat pricing at
-> $4.99/TB/month. Free 30-day trial, no credit card required.
+> $5.99/TB/month ($5.99/month minimum). Free 30-day trial, no credit card required.
 
 ---
 
@@ -216,7 +216,7 @@ This is particularly valuable for AI workloads:
 
 | Plan | Price | Notes |
 |------|-------|-------|
-| Pay-as-you-go | $4.99/TB/month | No egress fees, no API request fees |
+| Pay-as-you-go | $5.99/TB/month | $5.99/month minimum; no egress fees, no API request fees |
 | Free trial | $0 | 30 days, 1 TB included, no credit card required |
 | Business | Custom | 1, 3, or 5-year terms; capacity assurance; deployment SLAs |
 

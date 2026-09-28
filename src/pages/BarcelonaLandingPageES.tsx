@@ -25,7 +25,7 @@ const CONTACT_SALES_HREF = "/lp/es/contacto";
 
 /** The modelled workload: 10 TB stored, 10 TB egress, 500K operations a month. */
 const WORKLOAD_TB = 10;
-// Prices stay in the site-wide USD format ("$4.99/TB") on the Spanish pages
+// Prices stay in the site-wide USD format ("$5.99/TB") on the Spanish pages
 // too, so the headline rate reads identically everywhere it appears.
 const FIL_ONE_TOTAL = `$${(PRICE_PER_TB * WORKLOAD_TB).toFixed(2)}`;
 
@@ -84,10 +84,10 @@ const PRICING_ROWS: PriceComparisonRow[] = [
 const STATS = [
   { stat: PRICE_PER_TB_SHORT, label: "Precio fijo mensual" },
   { stat: "$0", label: "Costes por egress" },
-  // El 20× es sobre la factura total, que depende del egress, así que
+  // El 19× es sobre la factura total, que depende del egress, así que
   // solo se cumple con un uso intensivo de lectura. La nota indica el escenario.
   {
-    stat: "20×",
+    stat: "19×",
     label: "Más barato que AWS",
     note: `Con ${WORKLOAD_TB} TB de almacenamiento y ${WORKLOAD_TB} TB de egress`,
   },

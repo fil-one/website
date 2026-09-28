@@ -102,7 +102,7 @@ const config: LandingPageConfig = {
       {
         provider: "Fil One",
         isFilOne: true,
-        values: { region: "global", storage: "$50", egress: "$0", api: "$0", total: "$50" },
+        values: { region: "global", storage: "$59.90", egress: "$0", api: "$0", total: "$59.90" },
       },
     ],
     footnote:

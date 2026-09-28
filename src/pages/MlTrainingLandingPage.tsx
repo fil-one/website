@@ -11,11 +11,11 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 // AWS EFS (gp bursting): $0.30/GB = $307.20/TB -> 10 TB = $3,072/mo, no egress line.
 // AWS S3 Standard: $0.023/GB storage ($235.52) + 20 runs x 10,240 GB x $0.09/GB egress
 //   = $235.52 + $18,432 = $18,668/mo.
-// Fil One: 10 TB x $4.99 = $49.90, egress $0.
+// Fil One: 10 TB x $5.99 = $59.90, egress $0.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Build around the clock",
-    description: `S3-compatible training-data storage at ${PRICE_PER_TB_SHORT} flat. No egress on dataset reads. 62× cheaper than AWS EFS. fsspec, PyArrow, and HuggingFace datasets work natively.`,
+    description: `S3-compatible training-data storage at ${PRICE_PER_TB_SHORT} flat. No egress on dataset reads. 51× cheaper than AWS EFS. fsspec, PyArrow, and HuggingFace datasets work natively.`,
     canonical: "https://www.fil.one/lp/ml-training",
   },
 
@@ -83,10 +83,10 @@ const config: LandingPageConfig = {
     rows: [
       { provider: "AWS EFS (gp)", values: { rate: "$307/TB", egress: "N/A", total: "$3,072" } },
       { provider: "AWS S3 + 20 runs", values: { rate: "$23.55/TB", egress: "$0.09/GB", total: "$18,668" } },
-      { provider: "Fil One", isFilOne: true, values: { rate: PRICE_PER_TB_SHORT, egress: "$0", total: "$50" } },
+      { provider: "Fil One", isFilOne: true, values: { rate: PRICE_PER_TB_SHORT, egress: "$0", total: "$59.90" } },
     ],
     footnote:
-      "AWS EFS gp bursting us-east-1: $0.30/GB. AWS S3 Standard: $0.023/GB storage + $0.09/GB egress per read. Computed: EFS 10,240 GB × $0.30 = $3,072; S3 storage $235.52 + 20 runs × 10,240 GB × $0.09 = $18,432 egress. Fil One: 10 TB × $4.99 = $49.90, egress $0. Q2 2026 public rate cards.",
+      "AWS EFS gp bursting us-east-1: $0.30/GB. AWS S3 Standard: $0.023/GB storage + $0.09/GB egress per read. Computed: EFS 10,240 GB × $0.30 = $3,072; S3 storage $235.52 + 20 runs × 10,240 GB × $0.09 = $18,432 egress. Fil One: 10 TB × $5.99 = $59.90, egress $0. Q2 2026 public rate cards.",
   },
 
   features: {
@@ -100,8 +100,8 @@ const config: LandingPageConfig = {
     items: [
       {
         icon: ChartLine,
-        title: "62× cheaper than EFS",
-        desc: `AWS EFS costs $0.30/GB ($307/TB). Fil One costs ${PRICE_PER_TB_SHORT}. At 10 TB of training data, that is $3,072/month vs $50 — before a single training run reads a byte.`,
+        title: "51× cheaper than EFS",
+        desc: `AWS EFS costs $0.30/GB ($307/TB). Fil One costs ${PRICE_PER_TB_SHORT}. At 10 TB of training data, that is $3,072/month vs $59.90 — before a single training run reads a byte.`,
       },
       {
         icon: ArrowsOut,

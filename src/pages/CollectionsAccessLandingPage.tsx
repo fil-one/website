@@ -11,7 +11,7 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 // AWS S3 Standard: storage 10,240 GB x $0.023/GB ~= $236/mo. Egress: 5,120 GB x $0.09/GB
 //   ~= $461/mo. All-in ~= $697/mo.
 // Wasabi: $6.99/TB = $70/mo, egress free within fair-use policy.
-// Fil One: $4.99/TB = $50/mo, no egress fees, ever.
+// Fil One: $5.99/TB = $59.90/mo, no egress fees, ever.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Open the collection. Close the tab.",
@@ -82,10 +82,10 @@ const config: LandingPageConfig = {
     rows: [
       { provider: "AWS S3 Standard", values: { storage: "$236", egress: "$461", allIn: "$697" } },
       { provider: "Wasabi", values: { storage: "$70", egress: "$0", allIn: "$70" } },
-      { provider: "Fil One", isFilOne: true, values: { storage: "$50", egress: "$0", allIn: "$50" } },
+      { provider: "Fil One", isFilOne: true, values: { storage: "$59.90", egress: "$0", allIn: "$59.90" } },
     ],
     footnote:
-      "Scenario: 10 TB stored with 5 TB/month delivered to viewers (IIIF tiles, derivatives, downloads). AWS S3 Standard: ≈$236/mo storage ($0.023/GB) + 5 TB egress (5,120 GB × $0.09/GB) ≈ $461/mo ≈ $697/mo all-in. Wasabi: $6.99/TB = $70/mo, egress-free within fair-use limits; traffic-heavy collections may incur charges. Fil One: $4.99/TB = $50/mo, $0 egress. AWS and Wasabi rates from public US price cards, Q2 2026; figures indicative and rounded.",
+      "Scenario: 10 TB stored with 5 TB/month delivered to viewers (IIIF tiles, derivatives, downloads). AWS S3 Standard: ≈$236/mo storage ($0.023/GB) + 5 TB egress (5,120 GB × $0.09/GB) ≈ $461/mo ≈ $697/mo all-in. Wasabi: $6.99/TB = $70/mo, egress-free within fair-use limits; traffic-heavy collections may incur charges. Fil One: $5.99/TB = $59.90/mo, $0 egress. AWS and Wasabi rates from public US price cards, Q2 2026; figures indicative and rounded.",
   },
 
   features: {

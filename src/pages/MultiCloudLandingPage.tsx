@@ -85,7 +85,7 @@ const config: LandingPageConfig = {
       { provider: "Azure Blob (Hot)", values: { storage: "$1,843", rate: "up to $0.087/GB", exit: "$7,602" } },
       { provider: "Wasabi", values: { storage: "$700", rate: "$0", exit: "$0" } },
       { provider: "Backblaze B2", values: { storage: "$600", rate: "$0", exit: "$0" } },
-      { provider: "Fil One", isFilOne: true, values: { storage: "$499", rate: "$0", exit: "$0" } },
+      { provider: "Fil One", isFilOne: true, values: { storage: "$599", rate: "$0", exit: "$0" } },
     ],
     footnote:
       "Storage at 100 TB using published US rate cards, Q2 2026. AWS exit: 102,400 GB × $0.09 = $9,216. GCP exit: tiered — 10 TB @ $0.12 + 40 TB @ $0.11 + 50 TB @ $0.08 = $9,831. Azure exit: tiered — 10 TB @ $0.087 + 40 TB @ $0.083 + 50 TB @ $0.07 = $7,602. Wasabi, Backblaze B2, Fil One: $0 egress.",

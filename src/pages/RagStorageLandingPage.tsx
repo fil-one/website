@@ -10,7 +10,7 @@ const TAGLINE = "No credit card required · No per-request fees · Connects in m
 // 1 TB corpus, 5 TB of retrieval reads/month.
 // AWS S3 Standard us-east-1 Q2 2026: storage 1,024 GB x $0.023 = $23.55,
 // egress 5,120 GB x $0.09 = $460.80. Total $484.35.
-// Fil One: 1 TB x $4.99 = $4.99, egress $0.
+// Fil One: 1 TB x $5.99 = $5.99, egress $0.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · RAG corpus storage at flat cost",
@@ -79,10 +79,10 @@ const config: LandingPageConfig = {
     ],
     rows: [
       { provider: "AWS S3 Standard", values: { breakdown: "$23.55 storage + $460.80 egress", total: "$484/mo" } },
-      { provider: "Fil One", isFilOne: true, values: { breakdown: "1 TB × $4.99 — egress $0", total: "$4.99/mo" } },
+      { provider: "Fil One", isFilOne: true, values: { breakdown: "1 TB × $5.99 — egress $0", total: "$5.99/mo" } },
     ],
     footnote:
-      "AWS S3 Standard us-east-1 Q2 2026: $0.023/GB storage, $0.09/GB egress. Computed from stated inputs — 1,024 GB × $0.023 = $23.55 storage; 5,120 GB × $0.09 = $460.80 egress. Fil One: 1 TB × $4.99 = $4.99, egress $0.",
+      "AWS S3 Standard us-east-1 Q2 2026: $0.023/GB storage, $0.09/GB egress. Computed from stated inputs — 1,024 GB × $0.023 = $23.55 storage; 5,120 GB × $0.09 = $460.80 egress. Fil One: 1 TB × $5.99 = $5.99, egress $0.",
   },
 
   features: {
@@ -98,7 +98,7 @@ const config: LandingPageConfig = {
       {
         icon: Database,
         title: "Store the whole corpus",
-        desc: `At ${PRICE_PER_TB_SHORT} flat, a 1 TB document store is ${PRICE_DISPLAY}/month. A 10 TB corpus is $49.90. The storage price does not penalise breadth.`,
+        desc: `At ${PRICE_PER_TB_SHORT} flat, a 1 TB document store is ${PRICE_DISPLAY}/month. A 10 TB corpus is $59.90. The storage price does not penalise breadth.`,
       },
       {
         icon: ArrowsOut,

@@ -24,7 +24,7 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 // 10 TB stored, 10 TB read/month, 1M GET operations.
 // AWS S3 Standard us-east-1 Q2 2026: storage 10,240 GB x $0.023 = $235.52,
 // egress 10,240 GB x $0.09 = $921.60, ops 1,000,000 / 1,000 x $0.0004 = $0.40.
-// Fil One: 10 TB x $4.99 = $49.90, egress $0, ops $0.
+// Fil One: 10 TB x $5.99 = $59.90, egress $0, ops $0.
 const PRICING_COLUMNS: PriceComparisonColumn[] = [
   { key: "storage", header: "Storage" },
   { key: "egress", header: "Egress", colorByValue: true },
@@ -34,7 +34,7 @@ const PRICING_COLUMNS: PriceComparisonColumn[] = [
 
 const PRICING_ROWS: PriceComparisonRow[] = [
   { provider: "AWS S3 Standard", values: { storage: "$236", egress: "$922", api: "$0.40", total: "$1,158" } },
-  { provider: "Fil One", isFilOne: true, values: { storage: "$50", egress: "$0", api: "$0", total: "$50" } },
+  { provider: "Fil One", isFilOne: true, values: { storage: "$59.90", egress: "$0", api: "$0", total: "$59.90" } },
 ];
 
 const FEATURES = [
@@ -187,7 +187,7 @@ const MigrateFromS3LandingPage = () => {
               columns={PRICING_COLUMNS}
               rows={PRICING_ROWS}
               caption="Monthly cost for 10 TB stored, 10 TB read, AWS S3 Standard vs Fil One"
-              footnote="AWS S3 Standard us-east-1 Q2 2026: $0.023/GB storage, $0.09/GB internet egress, $0.0004/1K GET. Computed from stated inputs — 10,240 GB × $0.023 = $235.52 storage; 10,240 GB × $0.09 = $921.60 egress; 1M × $0.0004/1K = $0.40 ops. Fil One: 10 TB × $4.99 = $49.90, egress $0, ops $0."
+              footnote="AWS S3 Standard us-east-1 Q2 2026: $0.023/GB storage, $0.09/GB internet egress, $0.0004/1K GET. Computed from stated inputs — 10,240 GB × $0.023 = $235.52 storage; 10,240 GB × $0.09 = $921.60 egress; 1M × $0.0004/1K = $0.40 ops. Fil One: 10 TB × $5.99 = $59.90, egress $0, ops $0."
             />
           </div>
         </section>

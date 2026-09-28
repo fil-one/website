@@ -11,13 +11,13 @@
 export {
   /** Fil One storage price, in USD per TB per month. */
   PRICE_PER_TB,
-  /** The numeric amount as a string, e.g. "4.99" (for JSON-LD price fields). */
+  /** The numeric amount as a string, e.g. "5.99" (for JSON-LD price fields). */
   PRICE_AMOUNT,
-  /** The bare price with currency symbol, e.g. "$4.99". */
+  /** The bare price with currency symbol, e.g. "$5.99". */
   PRICE_DISPLAY,
-  /** The short per-TB rate, e.g. "$4.99/TB". */
+  /** The short per-TB rate, e.g. "$5.99/TB". */
   PRICE_PER_TB_SHORT,
-  /** The full per-TB rate for inline copy, e.g. "$4.99/TB/month". */
+  /** The full per-TB rate for inline copy, e.g. "$5.99/TB/month". */
   PRICE_PER_TB_MONTH,
 } from "./pricing.constants.mjs";
 

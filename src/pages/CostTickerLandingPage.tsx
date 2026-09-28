@@ -11,7 +11,7 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 // AWS: 10,240x$0.023 = $235.52 storage + 10,240x$0.09 = $921.60 egress ~ $1,157.
 // Google: 10,240x$0.020 = $204.80 + 10,240x$0.12 = $1,228.80 ~ $1,434.
 // Azure (Hot): ~$184 storage + 10,240x$0.087 = $890.88 ~ $1,075.
-// Fil One: 10x$4.99 = $49.90, $0 egress.
+// Fil One: 10x$5.99 = $59.90, $0 egress.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Watch the meter you're not paying",
@@ -84,10 +84,10 @@ const config: LandingPageConfig = {
       { provider: "AWS S3 Standard", values: { storage: "$236", egress: "$922", total: "$1,157" } },
       { provider: "Google Cloud", values: { storage: "$205", egress: "$1,229", total: "$1,434" } },
       { provider: "Azure Blob (Hot)", values: { storage: "$184", egress: "$891", total: "$1,075" } },
-      { provider: "Fil One", isFilOne: true, values: { storage: "$50", egress: "$0", total: "$50" } },
+      { provider: "Fil One", isFilOne: true, values: { storage: "$59.90", egress: "$0", total: "$59.90" } },
     ],
     footnote:
-      "Public US rate cards, Q2 2026. AWS: 10,240 GB × $0.023 = $235.52 storage + 10,240 GB × $0.09 = $921.60 egress. Google: $0.020/GB storage + $0.12/GB egress. Azure Hot: ~$0.018/GB storage + $0.087/GB egress. Fil One: $4.99/TB, $0 egress, no per-request fees.",
+      "Public US rate cards, Q2 2026. AWS: 10,240 GB × $0.023 = $235.52 storage + 10,240 GB × $0.09 = $921.60 egress. Google: $0.020/GB storage + $0.12/GB egress. Azure Hot: ~$0.018/GB storage + $0.087/GB egress. Fil One: $5.99/TB, $0 egress, no per-request fees.",
   },
 
   features: {

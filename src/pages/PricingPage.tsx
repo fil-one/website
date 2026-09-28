@@ -118,7 +118,7 @@ const PricingPage = () => {
 
         {/* ── CTA banner ───────────────────────────────────────────────────── */}
         <CtaBanner
-          heading="Up to 22× cheaper than AWS"
+          heading="Up to 19× cheaper than AWS"
           subhead={`${PRICE_DISPLAY}/TB, no egress fees, up and running in minutes.`}
           cta={{ label: "Start for free", href: signupUrl() }}
           note="No credit card required"

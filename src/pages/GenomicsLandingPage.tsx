@@ -10,7 +10,7 @@ const TAGLINE = "No credit card required · No egress fees · Connects in minute
 // 1 PB stored, 200 TB re-analysed per month. AWS S3 Standard us-east-1 Q2 2026:
 // tiered storage (first 50 TB $0.023/GB, next 450 TB $0.022/GB, over 500 TB
 // $0.021/GB) = $22,067.20 for 1,024,000 GB. Egress: 204,800 GB x $0.09 = $18,432.
-// Fil One: 1,000 TB x $4.99 = $4,990, egress $0.
+// Fil One: 1,000 TB x $5.99 = $5,990, egress $0.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Petabyte retention without the petabyte bill",
@@ -86,11 +86,11 @@ const config: LandingPageConfig = {
       {
         provider: "Fil One",
         isFilOne: true,
-        values: { storage1pb: "$4,990", egress200tb: "$0", total: "$4,990" },
+        values: { storage1pb: "$5,990", egress200tb: "$0", total: "$5,990" },
       },
     ],
     footnote:
-      "AWS S3 Standard us-east-1 Q2 2026 storage: tiered rates — first 50 TB $0.023/GB ($1,177.60), next 450 TB $0.022/GB ($10,137.60), over 500 TB $0.021/GB ($10,752.00) = $22,067.20 for 1,024,000 GB. AWS egress: 204,800 GB × $0.09 = $18,432. Fil One: 1,000 TB × $4.99 = $4,990, egress $0.",
+      "AWS S3 Standard us-east-1 Q2 2026 storage: tiered rates — first 50 TB $0.023/GB ($1,177.60), next 450 TB $0.022/GB ($10,137.60), over 500 TB $0.021/GB ($10,752.00) = $22,067.20 for 1,024,000 GB. AWS egress: 204,800 GB × $0.09 = $18,432. Fil One: 1,000 TB × $5.99 = $5,990, egress $0.",
   },
 
   features: {
