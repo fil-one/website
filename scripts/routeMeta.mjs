@@ -110,7 +110,7 @@ export const ROUTE_META = {
   "/lp/egress": {
     title: "Zero Egress Fee Object Storage · Fil One vs AWS S3, Backblaze, Wasabi",
     description:
-      "Stop paying egress fees. Fil One charges $0 for data transfer out — save thousands vs AWS S3 ($90+/TB) and Wasabi ($0.007/GB) with no API fees either.",
+      "Stop paying egress fees. Fil One charges $0 for data transfer out — save thousands vs AWS S3 ($90+/TB), with no API fees either.",
     jsonLd: [
       {
         "@context": "https://schema.org",

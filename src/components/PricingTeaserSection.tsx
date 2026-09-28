@@ -12,7 +12,7 @@ const PRICING_HREF = "/pricing";
  * so the teaser never drifts from the /pricing page it links to.
  */
 const aws = COMPETITORS.find((c) => c.name === "AWS S3");
-const AWS_SAVINGS_PCT = aws ? Math.round((aws.storagePricePerTB / PRICE_PER_TB - 1) * 100) : 0;
+const AWS_SAVINGS_PCT = aws ? Math.round((1 - PRICE_PER_TB / aws.storagePricePerTB) * 100) : 0;
 
 /**
  * Compact pricing-teaser band that replaces the inline calculator on the
