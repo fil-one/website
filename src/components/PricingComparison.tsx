@@ -3,12 +3,20 @@ import { bandedCost, type Competitor } from "@/lib/pricing";
 
 export type { Competitor };
 
+export type PricingComparisonTone = "light" | "dark";
+
 interface PricingComparisonProps {
   competitors: Competitor[];
   /** TB of data stored per month */
   storedTB: number;
   /** TB of egress per month */
   egressTB: number;
+  /**
+   * "light" (default): the site table on a white section. "dark": a rows-on-
+   * navy layout for the SpaceCard calculator, where the Fil One row is a solid
+   * brand bar and its $0 egress carries the fair-use asterisk.
+   */
+  tone?: PricingComparisonTone;
 }
 
 /** One competitor with its monthly costs resolved for the current inputs. */
@@ -18,8 +26,10 @@ type ComparisonRow = Competitor & {
   total: number;
 };
 
-// Semantic classes shared by both layouts (mobile cards + desktop table), so
-// the storage/egress colour rules live in exactly one place. Deliberately
+const usd = (n: number) => `$${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+// Semantic classes shared by both light layouts (mobile cards + desktop table),
+// so the storage/egress colour rules live in exactly one place. Deliberately
 // restrained: neutral zinc for every figure (no green/red), with weight marking
 // the Fil One row and brand-600 reserved for its total.
 const storageClass = (r: ComparisonRow) =>
@@ -37,14 +47,9 @@ const ProviderLabel = ({ row, className = "" }: { row: ComparisonRow; className?
   </div>
 );
 
-/**
- * Provider cost comparison for the pricing calculator. Resolves each provider's
- * monthly storage/egress/total once, then renders stacked cards on mobile and a
- * <Table> on tablet/desktop from the same rows — so the pricing maths and the
- * conditional colour logic are never duplicated across the two responsive views.
- */
-const PricingComparison = ({ competitors, storedTB, egressTB }: PricingComparisonProps) => {
-  const rows: ComparisonRow[] = competitors
+/** Resolve every provider's monthly cost for the inputs, cheapest first. */
+const resolveRows = (competitors: Competitor[], storedTB: number, egressTB: number): ComparisonRow[] =>
+  competitors
     .map((c) => {
       const storage = bandedCost(storedTB, c.storagePricePerTB, c.storageTiers);
       const freeEgressTB = (c.freeEgressTB ?? 0) + (c.freeEgressMultiplier ?? 0) * storedTB;
@@ -53,6 +58,51 @@ const PricingComparison = ({ competitors, storedTB, egressTB }: PricingCompariso
       return { ...c, storage, egress, total: storage + egress };
     })
     .sort((a, b) => a.total - b.total);
+
+/** The dark layout: a header row and one bar per provider, Fil One in solid brand. */
+const DarkComparison = ({ rows }: { rows: ComparisonRow[] }) => (
+  <div className="flex flex-col rounded-2xl border border-white/[0.12] bg-white/[0.04] p-2 font-sans">
+    <div className={"hidden grid-cols-[1.6fr_1fr_1fr_1fr] px-4 pb-3 pt-2.5 font-mono text-eyebrow uppercase tracking-[0.06em] text-white/55 md:grid"}>
+      <span>Provider</span>
+      <span>Storage</span>
+      <span>Egress</span>
+      <span>Monthly total</span>
+    </div>
+    {rows.map((r, i) => (
+      <div
+        key={r.name}
+        className={`grid grid-cols-2 gap-y-1 px-4 py-3.5 text-[14.5px] md:grid-cols-[1.6fr_1fr_1fr_1fr] md:gap-y-0 ${
+          r.isFilOne ? "rounded-[10px] bg-brand-700 text-white" : `text-white/[0.82] ${i > 0 ? "border-t border-white/10" : ""}`
+        }`}
+      >
+        <span className="col-span-2 font-medium md:col-span-1">
+          {r.name}
+          {r.region && <span className={`ml-2 text-[12.5px] ${r.isFilOne ? "text-white/80" : "text-white/50"}`}>{r.region}</span>}
+        </span>
+        <span className="text-[12.5px] text-white/60 md:hidden">Storage</span>
+        <span className="text-right font-mono md:text-left">{usd(r.storage)}</span>
+        <span className="text-[12.5px] text-white/60 md:hidden">Egress</span>
+        <span className="text-right font-mono md:text-left">
+          {usd(r.egress)}
+          {r.isFilOne && "*"}
+        </span>
+        <span className="text-[12.5px] text-white/60 md:hidden">Monthly total</span>
+        <span className="text-right font-mono font-medium md:text-left">{usd(r.total)}</span>
+      </div>
+    ))}
+  </div>
+);
+
+/**
+ * Provider cost comparison for the pricing calculator. Resolves each provider's
+ * monthly storage/egress/total once, then renders stacked cards on mobile and a
+ * <Table> on tablet/desktop from the same rows — so the pricing maths and the
+ * conditional colour logic are never duplicated across the two responsive views.
+ */
+const PricingComparison = ({ competitors, storedTB, egressTB, tone = "light" }: PricingComparisonProps) => {
+  const rows = resolveRows(competitors, storedTB, egressTB);
+
+  if (tone === "dark") return <DarkComparison rows={rows} />;
 
   return (
     <>

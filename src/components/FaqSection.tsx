@@ -3,12 +3,19 @@ import { CaretDown } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 import JsonLd from "@/components/JsonLd";
 import SectionHeader from "@/components/SectionHeader";
+import TextLink from "@/components/TextLink";
+import { SectionHeading, SectionLabel } from "@/components/LandingPrimitives";
 import { trackEvent, trackDocsClick } from "@/lib/analytics";
 import { PRICE_DISPLAY, MONTHLY_MINIMUM_DISPLAY } from "@/lib/pricing";
 import { consoleOrigin } from "@/lib/console-url";
 import { S3_ENDPOINT_HOST } from "@/lib/s3-endpoint";
 
-const faqs = [
+export interface FaqItem {
+  question: string;
+  answer: ReactNode;
+}
+
+const faqs: FaqItem[] = [
   {
     question: "Is Fil One compatible with my existing tools?",
     answer: (
@@ -109,7 +116,7 @@ function answerToText(node: ReactNode): string {
   return "";
 }
 
-const buildFaqSchema = (items: typeof faqs) => ({
+const buildFaqSchema = (items: FaqItem[]) => ({
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: items.map((faq) => ({
@@ -126,36 +133,64 @@ const buildFaqSchema = (items: typeof faqs) => ({
 
 interface FaqSectionProps {
   include?: string[]; // if provided, only show FAQs whose question is in this list
+  /** A page-specific list instead of the shared site FAQs (e.g. billing questions). */
+  items?: FaqItem[];
+  /** Eyebrow above the heading. */
+  label?: string;
+  /** Section heading. */
+  title?: string;
+  /**
+   * "stack" (default): centred heading above the list. "side": heading in a
+   * left column beside the list on desktop, with an optional link under it.
+   */
+  layout?: "stack" | "side";
+  /** Link under the heading in the side layout, e.g. to the docs. */
+  sideLink?: { label: string; href: string; external?: boolean; onClick?: () => void };
 }
 
-const FaqSection = ({ include }: FaqSectionProps = {}) => {
-  const visibleFaqs = include ? faqs.filter((f) => include.includes(f.question)) : faqs;
+const FaqSection = ({ include, items, label = "FAQ", title = "Frequently asked questions", layout = "stack", sideLink }: FaqSectionProps = {}) => {
+  const source = items ?? faqs;
+  const visibleFaqs = include ? source.filter((f) => include.includes(f.question)) : source;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { ref: headingRef, inView: headingInView } = useInView();
   const { ref: listRef, inView: listInView } = useInView({ threshold: 0.04 });
 
   const faqSchema = buildFaqSchema(visibleFaqs);
+  const side = layout === "side";
 
   return (
     <>
     <JsonLd data={faqSchema} />
     <section
       id="faq"
-      className="flex flex-col gap-12 items-center px-5 md:px-8 py-24 md:py-32 w-full"
+      className={`flex w-full flex-col items-center px-5 py-24 md:px-8 md:py-32${side ? "" : " gap-12"}`}
       style={{ backgroundColor: "#FFFFFF" }}
     >
+    <div className={side ? "grid w-full max-w-container grid-cols-1 gap-10 lg:grid-cols-[320px_1fr] lg:items-start lg:gap-16" : "contents"}>
       {/* Heading */}
-      <SectionHeader
-        ref={headingRef}
-        className={`w-full max-w-[560px] reveal${headingInView ? " in-view" : ""}`}
-        label="FAQ"
-        title="Frequently asked questions"
-      />
+      {side ? (
+        <div ref={headingRef} className={`flex flex-col gap-3.5 reveal${headingInView ? " in-view" : ""}`}>
+          <SectionLabel>{label}</SectionLabel>
+          <SectionHeading>{title}</SectionHeading>
+          {sideLink && (
+            <TextLink href={sideLink.href} tone="brand" external={sideLink.external} onClick={sideLink.onClick} className="mt-1">
+              {sideLink.label}
+            </TextLink>
+          )}
+        </div>
+      ) : (
+        <SectionHeader
+          ref={headingRef}
+          className={`w-full max-w-[560px] reveal${headingInView ? " in-view" : ""}`}
+          label={label}
+          title={title}
+        />
+      )}
 
       {/* FAQ list */}
       <div
         ref={listRef}
-        className={`w-full max-w-container-prose reveal${listInView ? " in-view" : ""}`}
+        className={`w-full reveal${side ? "" : " max-w-container-prose"}${listInView ? " in-view" : ""}`}
       >
         {visibleFaqs.map((faq, i) => {
           const isOpen = openIndex === i;
@@ -233,6 +268,7 @@ const FaqSection = ({ include }: FaqSectionProps = {}) => {
         {/* Bottom border */}
         <div style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }} />
       </div>
+    </div>
     </section>
     </>
   );

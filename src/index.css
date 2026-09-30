@@ -609,6 +609,24 @@ input[type="range"]:hover::-moz-range-thumb {
 .calc-slider:focus-visible::-moz-range-thumb {
   box-shadow: 0 0 0 4px theme(colors.white), 0 0 0 6px theme(colors.brand.500);
 }
+/* On the navy calculator card the track is a translucent white line and the
+   thumb keeps its brand fill, with a white ring instead of a white border. */
+.calc-slider-dark {
+  background: rgba(255, 255, 255, 0.2);
+}
+.calc-slider-dark::-webkit-slider-thumb {
+  background: theme(colors.brand.500);
+  border-color: theme(colors.white);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+.calc-slider-dark::-moz-range-thumb {
+  background: theme(colors.brand.500);
+  border-color: theme(colors.white);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+.calc-slider-dark:focus-visible {
+  outline-color: theme(colors.brand.300);
+}
 
 .calc-chip:hover {
   background-color: rgba(0, 0, 0, 0.08) !important;

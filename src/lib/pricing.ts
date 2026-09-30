@@ -60,7 +60,14 @@ export interface Competitor {
 }
 
 /** Cost of `tb` terabytes under a flat rate or, when given, volume bands. */
-export const bandedCost = (tb: number, flatRate: number, tiers?: RateTier[]): number => {
+/**
+ * When the competitor list rates below were last checked against each
+ * provider's public pricing page. Shown in the calculator's fine print, so
+ * update it whenever the rates are rechecked.
+ */
+export const RATES_CHECKED_ON = "23 September 2026";
+
+export const bandedCost =(tb: number, flatRate: number, tiers?: RateTier[]): number => {
   if (!tiers) return tb * flatRate;
   let cost = 0;
   let floor = 0;
