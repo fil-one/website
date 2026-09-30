@@ -4,7 +4,7 @@ import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPr
 import { useInView } from "@/hooks/useInView";
 
 /** Base path of the workloads page; each card links to a section anchor on it. */
-export const WORKLOADS_PATH = "/solutions";
+export const WORKLOADS_PATH = "/workloads";
 
 export const WORKLOADS = [
   { id: "training", title: "AI training & models", description: "Offload finished checkpoints and datasets. Rehydrate at multi-Gbps." },

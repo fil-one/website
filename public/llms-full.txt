@@ -260,7 +260,7 @@ The full, current list is in the
 - [Homepage](https://www.fil.one): product overview, feature comparison, pricing, FAQ
 - [Pricing](https://www.fil.one/pricing): flat per-TB rate and a cost calculator
   comparing Fil One with AWS S3, Wasabi, Backblaze B2, and Cloudflare R2
-- [Solutions](https://www.fil.one/solutions): backups, AI training data, media
+- [Bring a workload](https://www.fil.one/workloads): AI training, data lakes, backup, media
   archives, research data, and logs
 - [Neoclouds](https://www.fil.one/neocloud): S3 object storage installed in a GPU
   cloud's own facility, sold under the partner's brand

@@ -24,7 +24,7 @@ interface NavLinkItem {
 // The two doors in (bring a workload, host a zone), then pricing, then the
 // reading exits. Partners and About live in the footer. Docs is external.
 const NAV_LINKS: readonly NavLinkItem[] = [
-  { href: "/solutions", label: { en: "Bring a workload", es: "Trae una carga de trabajo" } },
+  { href: "/workloads", label: { en: "Bring a workload", es: "Trae una carga de trabajo" } },
   { href: "/neocloud", label: { en: "Host a zone", es: "Aloja una zona" } },
   { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
   { href: "https://docs.fil.one", external: true, label: "Docs" },

@@ -111,6 +111,9 @@ export default {
         // Space black — the announcement bar and the darkest surfaces
         space: "#070B14",
 
+        // Schematic panel — the navy "how it flows" diagrams and their nodes
+        schematic: { DEFAULT: "#111A2E", node: "#1A2440" },
+
         // Deep navy — code blocks and dark sections
         navy: {
           700: "#123255",

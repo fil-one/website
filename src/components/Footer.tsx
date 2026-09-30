@@ -28,7 +28,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
       id: "product",
       title: { en: "Product", es: "Producto" },
       items: [
-        { href: "/solutions", label: { en: "Bring a workload", es: "Trae una carga de trabajo" } },
+        { href: "/workloads", label: { en: "Bring a workload", es: "Trae una carga de trabajo" } },
         { href: "/neocloud", label: { en: "Host a zone", es: "Aloja una zona" } },
         { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
       ],

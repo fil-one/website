@@ -108,7 +108,7 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
 - [Homepage](https://www.fil.one): Product overview, feature comparison, pricing, and FAQ
 - [Pricing](https://www.fil.one/pricing): Flat per-TB rate and a cost calculator
   comparing Fil One with AWS S3, Wasabi, Backblaze B2, and Cloudflare R2
-- [Solutions](https://www.fil.one/solutions): Backups, AI training data, media
+- [Bring a workload](https://www.fil.one/workloads): AI training, data lakes, backup, media
   archives, research data, and logs
 - [Neoclouds](https://www.fil.one/neocloud): S3 object storage installed in a GPU
   cloud's own facility, sold under the partner's brand

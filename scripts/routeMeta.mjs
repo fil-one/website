@@ -337,10 +337,10 @@ export const ROUTE_META = {
     description:
       "Apply to the Fil One partner program. Resell, integrate, or bundle S3-compatible cloud storage with your business.",
   },
-  "/solutions": {
-    title: "Solutions · Fil One",
+  "/workloads": {
+    title: "Bring a workload · Fil One",
     description:
-      `Backups, AI training data, media archives, research data, and logs on one S3-compatible platform. ${PRICE_PER_TB_MONTH}, no egress fees.`,
+      `Move finished checkpoints, data lakes, backups, footage and logs to Fil One at ${PRICE_PER_TB_MONTH}, and pull them back at multi-Gbps with no egress fees.`,
   },
   "/about": {
     title: "About · Fil One",
