@@ -55,6 +55,11 @@ const faqs = [
     ),
   },
   {
+    question: "How durable is my data?",
+    answer:
+      "Fil One is designed for eleven nines (99.999999999%) of durability. Every object is erasure coded across independent storage providers, so the loss of drives or a whole site does not lose data, and integrity is checked continuously.",
+  },
+  {
     question: "Where is my data stored?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>

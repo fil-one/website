@@ -237,6 +237,12 @@ export default {
         "section-mask": "radial-gradient(ellipse 80% 90% at 50% 50%, black 0%, transparent 80%)",
         // Blue highlight halo behind hero copy (~44 uses)
         "blue-halo": "radial-gradient(ellipse 55% 40% at 50% 0%, rgba(0,144,255,0.13) 0%, transparent 70%)",
+        // Space black with a blue horizon: the site's darkest card (Why Fil One, Host a zone)
+        "space-horizon": "radial-gradient(75% 60% at 50% 108%, #0A5FD6 0%, #0A2450 42%, #070B14 100%)",
+        // Soft blue glow rising from the bottom edge of a space-horizon card
+        "horizon-glow": "radial-gradient(55% 40% at 50% 105%, rgba(56,166,255,0.45) 0%, transparent 70%)",
+        // Blue tint laid over the drive photograph (Teams card, Host a zone)
+        "drives-tint": "linear-gradient(180deg, rgba(0,85,204,0.55) 0%, rgba(0,70,170,0.65) 45%, rgba(0,50,125,0.92) 100%)",
         // Static aqua glow centered behind the closing CTA banner copy
         "cta-glow": "radial-gradient(circle, rgba(30,191,255,0.20) 0%, transparent 70%)",
         // Brand-blue hero card: deep blue edges lightening toward the bottom centre

@@ -1,32 +1,23 @@
 import { useEffect } from "react";
 import PlatformNavbar from "@/components/PlatformNavbar";
-import { Button } from "@/components/Button";
-import { HeroHeading } from "@/components/LandingPrimitives";
-import { trackCtaClick } from "@/lib/analytics";
+import Hero from "@/components/Hero";
 import DashboardPreview from "@/components/DashboardPreview";
+import ProofStrip from "@/components/ProofStrip";
+import WhySection from "@/components/WhySection";
+import WorkloadsGrid from "@/components/WorkloadsGrid";
+import TeamsSection from "@/components/TeamsSection";
+import DevelopersSection from "@/components/DevelopersSection";
 import { PressBar } from "@/components/PressBar";
-import StatGridSection from "@/components/StatGridSection";
-import UseCasesSection from "@/components/UseCasesSection";
-import IntegrationsSection from "@/components/IntegrationsSection";
-import StorageUseCasesSection from "@/components/StorageUseCasesSection";
-import ComparisonSection from "@/components/ComparisonSection";
-import EnterpriseSection from "@/components/EnterpriseSection";
-import PartnersSection from "@/components/PartnersSection";
 import FaqSection from "@/components/FaqSection";
 import CtaBanner from "@/components/CtaBanner";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import { useScrollTracking } from "@/hooks/useScrollTracking";
-import { PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
+import { PRICE_DISPLAY } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
-const SIGNUP_URL = signupUrl();
-
-const STATS = [
-  { stat: PRICE_DISPLAY, label: "Per TB / month" },
-  { stat: "$0", label: "Egress fees" },
-  { stat: "11 nines", label: "Durability" },
-];
+const DOCS_URL = "https://docs.fil.one";
 
 const Home = () => {
   const { heroEndRef } = useScrollTracking();
@@ -44,88 +35,64 @@ const Home = () => {
     <div className="min-h-screen overflow-x-hidden bg-white">
       <PlatformNavbar />
       <main id="main-content">
-        <div className="relative isolate bg-white">
-          {/* Brand-blue hero card: a prototype of Cloudflare's full-bleed hero
-              treatment in Fil One's own brand blue instead of a white/grid hero. */}
-          <section className="relative w-full pt-[67px] md:pt-[75px] px-2 md:px-4 max-w-none mx-auto">
-            <div
-              className="relative isolate flex flex-col items-center overflow-hidden rounded-[28px] bg-hero-card-brand px-5 pb-36 pt-36 md:rounded-[32px] md:px-8 md:pb-52 md:pt-52"
-            >
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 -z-10 opacity-[0.15] [mask-image:radial-gradient(ellipse_80%_75%_at_50%_50%,black_40%,transparent_100%)] [-webkit-mask-image:radial-gradient(ellipse_80%_75%_at_50%_50%,black_40%,transparent_100%)]"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,${encodeURIComponent('<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="#fff" stroke-width="1"/></svg>')}")`,
-                  backgroundSize: "48px 48px",
-                  backgroundPosition: "center top",
-                }}
-              />
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 -z-10 pointer-events-none bg-hero-card-glow"
-              />
-
-              <div className="flex flex-col items-center gap-6 w-full hero-fade-1">
-                <HeroHeading
-                  tone="brand"
-                  title={<>Sovereign storage<br />for the AI era</>}
-                  description={<>Choose where your data lives, pay one flat rate per TB, and access it<br />with no egress fees. All with your existing S3 tools.</>}
-                  titleMaxWidth={520}
-                  descriptionMaxWidth={620}
-                />
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-10 hero-fade-2">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  href={SIGNUP_URL}
-                  onClick={() => trackCtaClick("Start for free", SIGNUP_URL, "primary")}
-                >
-                  Start for free
-                </Button>
-              </div>
-
-              <p className="mt-4 hero-fade-3 text-center font-sans text-[13px] font-normal leading-[1.5] text-white">
-                1&nbsp;TB free for 30 days · No credit card required
-              </p>
-            </div>
-          </section>
-          <div className="mt-10 md:mt-16">
-            <PressBar />
-          </div>
-          <div className="mt-6 md:mt-10">
-            <DashboardPreview />
-          </div>
-        </div>
-
-        {/* Stats */}
-        <div ref={heroEndRef}>
-          <StatGridSection
-            label="By the numbers"
-            heading="No surprises"
-            description={`Flat ${PRICE_PER_TB_MONTH} for storage, with no egress fees and no API charges.`}
-            stats={STATS}
+        <div className="relative isolate overflow-hidden bg-white">
+          <Hero
+            grid
+            glow
+            title={<>S3 object storage that lives where your data works.</>}
+            description="Fast reads, predictable pricing and the freedom to move your data without lock-in or egress penalties."
+            titleMaxWidth={820}
+            descriptionMaxWidth={620}
+            ctas={[
+              {
+                label: "Start for free",
+                href: signupUrl(),
+                variant: "primary",
+                size: "lg",
+                glow: true,
+                onClick: () => trackCtaClick("Start for free", signupUrl(), "primary"),
+              },
+              {
+                label: "Explore the docs",
+                href: DOCS_URL,
+                variant: "secondary",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                onClick: () => trackDocsClick(DOCS_URL),
+              },
+            ]}
+            tagline={<>1&nbsp;TB free for 30 days · No credit card required</>}
           />
+          <DashboardPreview />
         </div>
 
-        {/* Features — what it does */}
-        <UseCasesSection heading="S3 storage made simple" />
+        {/* Proof strip: the three numbers, on the hairline under the console */}
+        <div ref={heroEndRef} className="w-full px-5 md:px-8">
+          <div className="mx-auto w-full max-w-container border-t border-black/[0.08] pt-8">
+            <ProofStrip
+              items={[
+                { figure: "Multi-Gbps", label: "Sustained reads" },
+                { figure: "$0", label: "Egress and API requests", note: "Subject to fair use." },
+                { figure: PRICE_DISPLAY, label: "Per TB per month" },
+              ]}
+            />
+          </div>
+        </div>
 
-        {/* Integrations — works with your existing stack */}
-        <IntegrationsSection tone="grey" />
+        {/* Why Fil One — the page's one dark card */}
+        <WhySection />
 
-        {/* Use cases — what you build with it */}
-        <StorageUseCasesSection />
+        {/* Workloads — five doors into the workloads page */}
+        <WorkloadsGrid />
 
-        {/* Comparison — how it stacks up */}
-        <ComparisonSection bordered />
+        {/* Teams — Enterprise and Neoclouds, side by side */}
+        <TeamsSection />
 
-        {/* Enterprise — the "and if you need more than self-serve" step after pricing */}
-        <EnterpriseSection />
+        {/* Developers — change the endpoint, keep your code */}
+        <DevelopersSection />
 
-        {/* Partners — the other non-self-serve audience, straight after enterprise */}
-        <PartnersSection />
+        {/* Press — Fast Company and "Also featured in", on the tint band */}
+        <PressBar tone="tint" />
 
         {/* FAQ — objection handling, right before the CTA */}
         <FaqSection />

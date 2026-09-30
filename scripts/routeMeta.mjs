@@ -52,7 +52,7 @@ export const ROUTE_META = {
   "/": {
     title: "Fil One · S3 object storage built for the AI era",
     description:
-      `S3-compatible object storage on Filecoin. ${PRICE_PER_TB_MONTH}, no egress fees, designed for 11 nines of durability.`,
+      `S3-compatible object storage that lives where your data works. ${PRICE_PER_TB_MONTH}, no egress fees, sovereign by design.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -61,7 +61,7 @@ export const ROUTE_META = {
         url: "https://www.fil.one",
         logo: "https://www.fil.one/fil-one-logo.svg",
         description:
-          "S3-compatible object storage built on Filecoin. Designed for 11 nines of durability, with no egress fees and no per-request charges.",
+          "S3-compatible object storage built on Filecoin. Sovereign by design, with no egress fees and no per-request charges.",
       },
       {
         "@context": "https://schema.org",
