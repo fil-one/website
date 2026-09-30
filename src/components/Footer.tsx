@@ -28,8 +28,8 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
       id: "product",
       title: { en: "Product", es: "Producto" },
       items: [
-        { href: "/solutions", label: { en: "Solutions", es: "Soluciones" } },
-        { href: "/neocloud", label: "Neoclouds" },
+        { href: "/solutions", label: { en: "Bring a workload", es: "Trae una carga de trabajo" } },
+        { href: "/neocloud", label: { en: "Host a zone", es: "Aloja una zona" } },
         { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
       ],
     },
@@ -67,8 +67,8 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
 
   const l = (value: Localized) => localize(value, lang);
   const tagline = lang === "es"
-    ? "Almacenamiento de objetos S3 diseñado para la era de la IA."
-    : "S3 object storage built for the AI era.";
+    ? "Una filial de propiedad exclusiva de la Filecoin Foundation."
+    : "A wholly owned subsidiary of the Filecoin Foundation.";
   const copyright = lang === "es"
     ? "© 2026 Fil One. Todos los derechos reservados."
     : "© 2026 Fil One. All rights reserved.";

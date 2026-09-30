@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { useInView } from "@/hooks/useInView";
 import { Button } from "@/components/Button";
 import { GRID_SVG_WHITE, SECTION_H2_SIZE } from "@/components/LandingPrimitives";
+import ctaWindow from "../assets/cta-window.webp";
 
 interface CtaBannerProps {
   heading: ReactNode;
@@ -23,6 +24,11 @@ interface CtaBannerProps {
    * preceding section is grey rather than white.
    */
   surface?: "white" | "grey";
+  /**
+   * "window": the space-station window photograph behind the copy (the site's
+   * closing image), instead of the navy gradient with grid and glow.
+   */
+  image?: "window";
 }
 
 /**
@@ -39,6 +45,7 @@ const CtaBanner = ({
   headingMaxWidth = 480,
   subheadMaxWidth = 460,
   surface = "white",
+  image,
 }: CtaBannerProps) => {
   const { ref, inView } = useInView({ threshold: 0.05 });
 
@@ -47,19 +54,26 @@ const CtaBanner = ({
       className={`px-5 md:px-8 pb-24 md:pb-32 pt-0 w-full ${surface === "grey" ? "bg-zinc-50" : "bg-white"}`}
     >
       <div ref={ref} className={`w-full max-w-container mx-auto reveal${inView ? " in-view" : ""}`}>
-        <div className="relative overflow-hidden rounded-3xl text-center bg-dark-section px-6 md:px-12 py-16 md:py-section">
-          {/* White grid texture (static) */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 pointer-events-none bg-[length:60px_60px] [mask-image:theme(backgroundImage.section-mask)] [-webkit-mask-image:theme(backgroundImage.section-mask)]"
-            style={{ backgroundImage: `url("data:image/svg+xml,${GRID_SVG_WHITE}")` }}
-          />
+        <div
+          className={`relative overflow-hidden rounded-3xl text-center px-6 md:px-12 py-16 md:py-section ${image === "window" ? "bg-space bg-cover bg-no-repeat md:min-h-[480px] md:flex md:flex-col md:justify-center" : "bg-dark-section"}`}
+          style={image === "window" ? { backgroundImage: `url(${ctaWindow})`, backgroundPosition: "center 58%" } : undefined}
+        >
+          {image !== "window" && (
+            <>
+              {/* White grid texture (static) */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 pointer-events-none bg-[length:60px_60px] [mask-image:theme(backgroundImage.section-mask)] [-webkit-mask-image:theme(backgroundImage.section-mask)]"
+                style={{ backgroundImage: `url("data:image/svg+xml,${GRID_SVG_WHITE}")` }}
+              />
 
-          {/* Soft static glow behind the copy */}
-          <div
-            aria-hidden="true"
-            className="absolute top-1/2 left-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 pointer-events-none bg-cta-glow"
-          />
+              {/* Soft static glow behind the copy */}
+              <div
+                aria-hidden="true"
+                className="absolute top-1/2 left-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 pointer-events-none bg-cta-glow"
+              />
+            </>
+          )}
 
           <div className="relative">
             <h2

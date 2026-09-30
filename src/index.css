@@ -88,7 +88,7 @@
 
 @layer base {
   html {
-    scroll-padding-top: 58px;
+    scroll-padding-top: theme(spacing.header);
   }
 
   * {

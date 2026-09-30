@@ -60,7 +60,7 @@ const PricingPage = () => {
       <main id="main-content">
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
-        <section className="px-5 md:px-8 pt-[58px] md:pt-[94px] pb-16 md:pb-24 w-full bg-white">
+        <section className="px-5 md:px-8 pt-header md:pt-header-md pb-16 md:pb-24 w-full bg-white">
           <div className="flex flex-col items-center gap-10 w-full max-w-container mx-auto pt-16 md:pt-24">
             <HeroHeading
               title={<>The <span className="text-gradient-flow">cheapest S3-compatible</span> storage solution</>}

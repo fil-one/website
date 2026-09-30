@@ -52,8 +52,8 @@ describe("shell localization", () => {
   });
 
   it.each([
-    ["en", { solution: "Solutions", group: "Resources", utility: "Pricing" }],
-    ["es", { solution: "Soluciones", group: "Recursos", utility: "Precios" }],
+    ["en", { solution: "Bring a workload", group: "Resources", utility: "Pricing" }],
+    ["es", { solution: "Trae una carga de trabajo", group: "Recursos", utility: "Precios" }],
   ] as const)("resolves %s copy in the component that declares it", (lang, copy) => {
     const { nav, footer } = renderShell(lang);
     // Navbar's own lists — scoped to <nav> so the footer cannot satisfy these.

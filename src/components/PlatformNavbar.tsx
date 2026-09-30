@@ -7,7 +7,8 @@ import { Button } from "@/components/Button";
 import Icon, { type IconProps } from "@/components/Icon";
 import FloatingSupportButton from "@/components/FloatingSupportButton";
 import { localize, type Lang, type Localized } from "@/lib/i18n";
-import { signupUrl } from "@/lib/console-url";
+import { consoleUrl, signupUrl } from "@/lib/console-url";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 /** One entry in a nav or footer link list. */
 interface NavLinkItem {
@@ -20,16 +21,14 @@ interface NavLinkItem {
 
 
 
-// Grouped product → ecosystem → company/content, with the external Docs
-// link last since it's the one exit point off the marketing site.
+// The two doors in (bring a workload, host a zone), then pricing, then the
+// reading exits. Partners and About live in the footer. Docs is external.
 const NAV_LINKS: readonly NavLinkItem[] = [
-  { href: "/solutions", label: { en: "Solutions", es: "Soluciones" } },
-  { href: "/neocloud", label: { en: "Neoclouds", es: "Neoclouds" } },
+  { href: "/solutions", label: { en: "Bring a workload", es: "Trae una carga de trabajo" } },
+  { href: "/neocloud", label: { en: "Host a zone", es: "Aloja una zona" } },
   { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
-  { href: "/partners", label: "Partners" },
-  { href: "/about", label: { en: "About", es: "Nosotros" } },
-  { href: "/blog", label: "Blog" },
   { href: "https://docs.fil.one", external: true, label: "Docs" },
+  { href: "/blog", label: "Blog" },
 ];
 
 /** Top-level nav item (dropdown trigger or plain link) — shared so both match. */
@@ -85,6 +84,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
   const t = lang === "es"
     ? {
         skipToContent: "Saltar al contenido principal",
+        signIn: "Iniciar sesión",
         contactSales: "Contactar con ventas",
         startForFree: "Empieza gratis",
         closeMenu: "Cerrar menú",
@@ -92,6 +92,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
       }
     : {
         skipToContent: "Skip to main content",
+        signIn: "Sign in",
         contactSales: "Talk to sales",
         startForFree: "Start for free",
         closeMenu: "Close menu",
@@ -103,8 +104,10 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
       <a href="#main-content" className="skip-link">{t.skipToContent}</a>
 
-      {/* Main navbar */}
-      <nav className="fixed left-0 right-0 top-0 z-50 px-5 border-b border-black/[0.06] bg-white/85 backdrop-blur-[20px] md:px-8">
+      {/* Fixed header: announcement bar, then the navbar. Page offsets use the `header` spacing token. */}
+      <div className="fixed left-0 right-0 top-0 z-50">
+      <AnnouncementBar lang={lang} />
+      <nav className="px-5 border-b border-black/[0.06] bg-white/85 backdrop-blur-[20px] md:px-8">
         <div className="mx-auto flex h-[58px] w-full items-center justify-between gap-4 lg:gap-5 xl:gap-8">
           {/* Logo */}
           <a href="/" className="flex h-11 shrink-0 items-center no-underline">
@@ -128,14 +131,17 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
             ))}
           </div>
 
-          {/* Desktop right CTAs */}
+          {/* Desktop right: sign in, then the two CTAs */}
           <div className="hidden lg:flex items-center gap-2.5 shrink-0">
+            <a href={consoleUrl("/login")} className={`${NAV_ITEM_CLASS} text-zinc-600`}>
+              {t.signIn}
+            </a>
             {/* The longer Spanish labels don't fit beside the links at 1024px, so the
                 sales button waits for xl there (it's still in the mobile menu and page CTAs). */}
             <Button href={contactSalesHref} variant="secondary" className={lang === "es" ? "!hidden xl:!inline-flex" : undefined}>
               {t.contactSales}
             </Button>
-            <Button href={signupUrl()} variant="primary" size="sm">
+            <Button href={signupUrl()} variant="primary" size="sm" glow>
               {t.startForFree}
             </Button>
           </div>
@@ -155,7 +161,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
         {/* Mobile menu */}
         {mobileOpen && (
           // Full-bleed (cancels the nav's side padding) and fills the rest of the viewport, so no page shows around or below it
-          <div id={MOBILE_MENU_ID} className="-mx-5 flex h-[calc(100dvh-58px)] flex-col gap-0.5 overflow-y-auto overscroll-contain border-t border-black/[0.06] bg-white px-5 py-3 md:-mx-8 md:px-8 lg:hidden">
+          <div id={MOBILE_MENU_ID} className="-mx-5 flex h-[calc(100dvh-theme(spacing.header))] flex-col gap-0.5 overflow-y-auto overscroll-contain border-t border-black/[0.06] bg-white px-5 py-3 md:-mx-8 md:px-8 lg:hidden">
             {NAV_LINKS.map(({ label, href, external }) => (
               <a
                 key={href}
@@ -169,6 +175,10 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                 {external && <Icon icon={ArrowUpRight} size={11} className="mt-px text-zinc-600" aria-hidden="true" />}
               </a>
             ))}
+
+            <a href={consoleUrl("/login")} onClick={() => setMobileOpen(false)} className={`${MOBILE_ROW_CLASS} -mx-3`}>
+              {t.signIn}
+            </a>
 
             <div className="mt-1 flex flex-col gap-2 border-t border-black/[0.06] pt-3 sm:grid sm:grid-cols-2">
               <Button href={contactSalesHref} variant="secondary" fullWidth onClick={() => setMobileOpen(false)}>
@@ -186,6 +196,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
           </div>
         )}
       </nav>
+      </div>
 
       <FloatingSupportButton href={supportHref} />
     </>

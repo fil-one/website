@@ -131,10 +131,11 @@ const Home = () => {
         <FaqSection />
 
         <CtaBanner
-          heading="S3 object storage built for the AI era"
-          headingMaxWidth={640}
-          subheadMaxWidth={600}
-          subhead="Try Fil One for 30 days with 1 TB included and no credit card required. Or talk to our team about enterprise pricing or migrating your existing storage."
+          image="window"
+          heading="Bring a workload."
+          headingMaxWidth={560}
+          subheadMaxWidth={440}
+          subhead="1 TB free for 30 days, no credit card. Prefer to talk first? sales@fil.one"
           cta={{
             label: "Start for free",
             href: signupUrl(),

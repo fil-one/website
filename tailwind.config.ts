@@ -108,6 +108,9 @@ export default {
           DEFAULT: "#1EBFFF",
         },
 
+        // Space black — the announcement bar and the darkest surfaces
+        space: "#070B14",
+
         // Deep navy — code blocks and dark sections
         navy: {
           700: "#123255",
@@ -200,6 +203,10 @@ export default {
       // Vertical rhythm for dark hero/CTA sections — the repeated `py-[104px]`
       spacing: {
         section: "104px",
+        // Fixed header = announcement bar (40px) + navbar (58px); pages offset by this.
+        header: "98px",
+        // Header plus the breathing room heroes add on desktop.
+        "header-md": "134px",
       },
 
       // Card elevation — the two shadows behind nearly every card (~53 + ~33 uses).

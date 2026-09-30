@@ -79,7 +79,7 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-white">
       <PlatformNavbar />
-      <main id="main-content" className="pt-[58px] md:pt-[94px]">
+      <main id="main-content" className="pt-header md:pt-header-md">
         <section className="px-5 pb-20 pt-10 sm:px-6 md:px-8 md:pb-section md:pt-16">
           <div className="mx-auto max-w-container">
             <header className="mb-10 md:mb-14">
