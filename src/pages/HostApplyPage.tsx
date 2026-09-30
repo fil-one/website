@@ -143,7 +143,7 @@ const NeocloudApplyPage = () => {
             <FormSuccess
               title="Thanks, we'll be in touch"
               align="center"
-              action={<a href="/neocloud" className="btn-secondary">Back to Neoclouds</a>}
+              action={<a href="/host" className="btn-secondary">Back to Host a zone</a>}
             >
               We'll review your details and reach out within 2 business days.
             </FormSuccess>

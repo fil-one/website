@@ -25,7 +25,7 @@ interface NavLinkItem {
 // reading exits. Partners and About live in the footer. Docs is external.
 const NAV_LINKS: readonly NavLinkItem[] = [
   { href: "/workloads", label: { en: "Bring a workload", es: "Trae una carga de trabajo" } },
-  { href: "/neocloud", label: { en: "Host a zone", es: "Aloja una zona" } },
+  { href: "/host", label: { en: "Host a zone", es: "Aloja una zona" } },
   { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
   { href: "https://docs.fil.one", external: true, label: "Docs" },
   { href: "/blog", label: "Blog" },

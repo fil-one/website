@@ -77,7 +77,7 @@ Marketing forms submit to HubSpot via the [Forms API v3](https://developers.hubs
 - **Contact Sales**: `/contact-sales` and `/lp/es/contacto`
 - **Support**: `/support` and `/lp/es/soporte`
 - **Partner Apply**: `/partners/apply`
-- **Neocloud Apply**: `/neocloud/apply`. Its GPU and timeline fields are custom properties; the internal names and objects are listed at the top of `NeocloudApplyPage.tsx`.
+- **Neocloud Apply**: `/host/apply`. Its GPU and timeline fields are custom properties; the internal names and objects are listed at the top of `NeocloudApplyPage.tsx`.
 
 Portal ID and form GUIDs are centralised in `src/lib/hubspot.ts`. Every Forms-API `<form>` needs `data-hs-do-not-collect`, or HubSpot also logs a duplicate "non-HubSpot form" submission.
 

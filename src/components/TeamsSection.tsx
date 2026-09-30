@@ -6,7 +6,7 @@ import drivesRack from "../assets/drives-rack.webp";
 
 const QUOTE_HREF = "/contact-sales";
 /** The Host a zone page. */
-export const HOST_HREF = "/neocloud";
+export const HOST_HREF = "/host";
 
 const ENTERPRISE_POINTS = [
   "Reserved capacity for 1, 3 or 5 years with SLAs",

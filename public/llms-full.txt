@@ -262,7 +262,7 @@ The full, current list is in the
   comparing Fil One with AWS S3, Wasabi, Backblaze B2, and Cloudflare R2
 - [Bring a workload](https://www.fil.one/workloads): AI training, data lakes, backup, media
   archives, research data, and logs
-- [Neoclouds](https://www.fil.one/neocloud): S3 object storage installed in a GPU
+- [Host a zone](https://www.fil.one/host): S3 object storage installed in a GPU
   cloud's own facility, sold under the partner's brand
 - [Partners](https://www.fil.one/partners): channel, technology, and MSP partner programs
 - [About](https://www.fil.one/about): the team and company behind Fil One

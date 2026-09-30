@@ -3,7 +3,7 @@ import { SectionHeading, SectionLabel, SectionSub } from "@/components/LandingPr
 import { useInView } from "@/hooks/useInView";
 import { trackCtaClick } from "@/lib/analytics";
 
-const PARTNERS_HREF = "/neocloud";
+const PARTNERS_HREF = "/host";
 
 /**
  * Light-touch partner door — one message, no mechanics. The full pitch
