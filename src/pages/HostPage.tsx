@@ -237,7 +237,7 @@ const HostPage = () => {
           <div className="mx-auto flex w-full max-w-container flex-col gap-10">
             <div className="flex max-w-[760px] flex-col gap-3.5">
               <SectionLabel>The pilot</SectionLabel>
-              <SectionHeading size="text-h2 md:text-h1">One workload. One site. Start small.</SectionHeading>
+              <SectionHeading size="text-h2 md:text-h1">One workload. One site. Start earning.</SectionHeading>
               <SectionSub>Pick the workload that annoys you most: checkpoint sprawl, dataset reloads, a backup target you overpay for.</SectionSub>
             </div>
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
