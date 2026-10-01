@@ -89,6 +89,8 @@
 @layer base {
   html {
     scroll-padding-top: theme(spacing.header);
+    /* In-page links (#how, #teams, #calculator) glide instead of jumping. */
+    scroll-behavior: smooth;
   }
 
   * {
@@ -315,6 +317,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .badge-pulse { animation: none; }
   .marquee-track { animation: none; }
