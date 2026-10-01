@@ -10,9 +10,17 @@ export interface CodeSnippet {
   code: string;
 }
 
-// Syntax highlighter for light backgrounds — safe: code is hardcoded, not user input.
-// Colors are a code-editor theme, intentionally separate from the brand tokens.
-function highlight(raw: string, lang: SyntaxLang): string {
+export type CodeTone = "light" | "dark";
+
+// Editor palettes, one per tone. Intentionally separate from the brand tokens.
+const PALETTE: Record<CodeTone, { comment: string; string: string; keyword: string; text: string }> = {
+  light: { comment: "#6B7280", string: "#0D9488", keyword: "#7C3AED", text: "#374151" },
+  dark: { comment: "#71717A", string: "#5EEAD4", keyword: "#C4B5FD", text: "#E4E4E7" },
+};
+
+// Syntax highlighter — safe: code is hardcoded, not user input.
+function highlight(raw: string, lang: SyntaxLang, tone: CodeTone): string {
+  const c = PALETTE[tone];
   const s = raw
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -21,15 +29,15 @@ function highlight(raw: string, lang: SyntaxLang): string {
   // Whole-line comments: return early so string/keyword regex can't corrupt the span attribute
   const trimmed = s.trimStart();
   if (lang === "python" && trimmed.startsWith("#")) {
-    return `<span style="color:#6B7280;font-style:italic">${s}</span>`;
+    return `<span style="color:${c.comment};font-style:italic">${s}</span>`;
   }
   if ((lang === "typescript" || lang === "go") && trimmed.startsWith("//")) {
-    return `<span style="color:#6B7280;font-style:italic">${s}</span>`;
+    return `<span style="color:${c.comment};font-style:italic">${s}</span>`;
   }
 
   let out = s;
   // strings
-  out = out.replace(/("(?:[^"\\]|\\.)*")/g, '<span style="color:#0D9488">$1</span>');
+  out = out.replace(/("(?:[^"\\]|\\.)*")/g, `<span style="color:${c.string}">$1</span>`);
   // keywords
   const kw =
     lang === "python"
@@ -37,13 +45,15 @@ function highlight(raw: string, lang: SyntaxLang): string {
       : lang === "typescript"
       ? /\b(import|from|export|const|let|var|await|async|new|for|of|do|while|if|else|return|true|false|null|undefined)\b/g
       : /\b(import|func|var|const|return|if|else|for|range|go|defer|type|struct|interface)\b/g;
-  out = out.replace(kw, '<span style="color:#7C3AED">$1</span>');
+  out = out.replace(kw, `<span style="color:${c.keyword}">$1</span>`);
   return out;
 }
 
 interface CodeBlockProps {
   /** One entry per language tab; the first is selected initially. */
   snippets: CodeSnippet[];
+  /** "light" (default): white card. "dark": zinc-950 card for grey or white sections. */
+  tone?: CodeTone;
   className?: string;
 }
 
@@ -52,7 +62,8 @@ interface CodeBlockProps {
  * highlighting. Chrome uses the design tokens; the highlight palette is a
  * separate code-editor theme.
  */
-const CodeBlock = ({ snippets, className = "" }: CodeBlockProps) => {
+const CodeBlock = ({ snippets, tone = "light", className = "" }: CodeBlockProps) => {
+  const dark = tone === "dark";
   const [active, setActive] = useState<SyntaxLang>(snippets[0].lang);
   const [copied, setCopied] = useState(false);
 
@@ -67,14 +78,14 @@ const CodeBlock = ({ snippets, className = "" }: CodeBlockProps) => {
 
   return (
     <div
-      className={`w-full overflow-hidden rounded-2xl border border-black/[0.07] bg-white${className ? ` ${className}` : ""}`}
+      className={`w-full overflow-hidden rounded-2xl border ${dark ? "border-black/[0.08] bg-zinc-950" : "border-black/[0.07] bg-white"}${className ? ` ${className}` : ""}`}
       style={{
         // Bespoke code-block shadow — no matching token.
         boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(0,0,0,0.05)",
       }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-black/[0.06] px-5 py-3">
+      <div className={`flex items-center justify-between border-b px-5 py-3 ${dark ? "border-zinc-800" : "border-black/[0.06]"}`}>
         {/* Language tabs */}
         <div className="flex items-center gap-0.5">
           {snippets.map(({ lang, label }) => (
@@ -84,7 +95,7 @@ const CodeBlock = ({ snippets, className = "" }: CodeBlockProps) => {
               aria-pressed={active === lang}
               aria-label={`Show ${label} example`}
               className={`cursor-pointer rounded-md px-2.5 py-1 font-mono text-[12px] transition-all ${
-                active === lang ? "bg-zinc-100 text-zinc-950" : "text-zinc-500"
+                active === lang ? (dark ? "bg-zinc-800 text-white" : "bg-zinc-100 text-zinc-950") : (dark ? "text-zinc-400" : "text-zinc-500")
               }`}
             >
               {label}
@@ -96,7 +107,7 @@ const CodeBlock = ({ snippets, className = "" }: CodeBlockProps) => {
         <button
           onClick={handleCopy}
           className={`flex cursor-pointer items-center gap-1.5 rounded-md px-1.5 py-1 font-sans text-[12.5px] transition-opacity hover:opacity-70 ${
-            copied ? "text-brand-500" : "text-zinc-500"
+            copied ? "text-brand-400" : dark ? "text-zinc-400" : "text-zinc-500"
           }`}
         >
           <Icon icon={copied ? Check : Copy} size={13} />
@@ -107,13 +118,13 @@ const CodeBlock = ({ snippets, className = "" }: CodeBlockProps) => {
       {/* Code with line numbers */}
       <pre className="m-0 overflow-x-auto py-5 font-mono text-[13px] leading-[1.75]">
         {lines.map((line, i) => (
-          <div key={i} className="flex px-5 hover:bg-black/[0.02] transition-colors">
-            <span aria-hidden="true" className="min-w-9 shrink-0 select-none pr-5 text-right text-[12px] text-zinc-300">
+          <div key={i} className={`flex px-5 transition-colors ${dark ? "hover:bg-white/[0.03]" : "hover:bg-black/[0.02]"}`}>
+            <span aria-hidden="true" className={`min-w-9 shrink-0 select-none pr-5 text-right text-[12px] ${dark ? "text-zinc-600" : "text-zinc-300"}`}>
               {i + 1}
             </span>
             <span
-              style={{ color: "#374151" }}
-              dangerouslySetInnerHTML={{ __html: highlight(line, active) }}
+              style={{ color: PALETTE[tone].text }}
+              dangerouslySetInnerHTML={{ __html: highlight(line, active, tone) }}
             />
           </div>
         ))}

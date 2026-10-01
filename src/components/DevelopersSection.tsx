@@ -74,7 +74,7 @@ const DevelopersSection = () => {
             Fil One speaks the S3 API. Your SDKs, CLIs and backup tools work as they are.
           </SectionSub>
         </div>
-        <CodeBlock snippets={SNIPPETS} />
+        <CodeBlock snippets={SNIPPETS} tone="dark" />
         <TextLink href={DOCS_URL} tone="brand" arrow external onClick={() => trackDocsClick(DOCS_URL)}>
           All integrations in the docs
         </TextLink>
