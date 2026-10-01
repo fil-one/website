@@ -1,8 +1,13 @@
 import { MapPin, Key, Certificate, ShieldCheck, type Icon as PhosphorIcon } from "@phosphor-icons/react";
 import Icon from "@/components/Icon";
+import { Button } from "@/components/Button";
 import SpaceCard from "@/components/SpaceCard";
 import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
 import { useInView } from "@/hooks/useInView";
+import { trackCtaClick } from "@/lib/analytics";
+import { signupUrl } from "@/lib/console-url";
+
+const SALES_HREF = "/contact-sales";
 
 interface Reason {
   icon: PhosphorIcon;
@@ -77,6 +82,15 @@ const WhySection = () => {
                   )}
                 </div>
               ))}
+            </div>
+            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <Button variant="primary" tone="dark" href={signupUrl()} onClick={() => trackCtaClick("Start for free", signupUrl(), "primary")}>
+                Start for free
+              </Button>
+              <Button variant="secondary" tone="dark" href={SALES_HREF} onClick={() => trackCtaClick("Talk to sales", SALES_HREF, "secondary")}>
+                Talk to sales
+              </Button>
+              <span className="font-sans text-[13.5px] text-white/50 sm:ml-2">1 TB free for 30 days · No credit card required</span>
             </div>
           </div>
         </SpaceCard>
