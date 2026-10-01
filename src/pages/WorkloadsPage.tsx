@@ -1,7 +1,6 @@
 import { useEffect, useState, type MouseEvent } from "react";
 import { Archive, Brain, Database, FilmStrip, ShieldCheck, type Icon as PhosphorIcon } from "@phosphor-icons/react";
 import Icon from "@/components/Icon";
-import IconTile from "@/components/IconTile";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -217,8 +216,11 @@ const WorkloadsPage = () => {
                   {i % 2 === 1 && (
                     <div aria-hidden="true" className="absolute inset-y-0 -left-[100vw] -right-[100vw] -z-10 bg-zinc-50" />
                   )}
+                  {/* Watermark: the workload's icon, large and faint, so each section has its own silhouette */}
+                  <div aria-hidden="true" className={`pointer-events-none absolute right-0 hidden text-brand-700 opacity-[0.06] md:block ${i === 0 ? "top-10" : "top-16"}`}>
+                    <Icon icon={w.icon} size={160} weight="regular" />
+                  </div>
                   <div className="flex max-w-[640px] flex-col gap-3.5">
-                    <IconTile icon={w.icon} size="lg" className="mb-1" />
                     <SectionHeading>{w.title}</SectionHeading>
                     <SectionSub maxWidth={640}>{w.body}</SectionSub>
                   </div>
