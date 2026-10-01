@@ -68,7 +68,7 @@ const HostPage = () => {
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 -z-10 [mask-image:theme(backgroundImage.hero-grid-mask)] [-webkit-mask-image:theme(backgroundImage.hero-grid-mask)]"
-            style={{ backgroundImage: `url("data:image/svg+xml,${GRID_SVG}")`, backgroundSize: "60px 60px", backgroundPosition: "center top" }}
+            style={{ backgroundImage: `url("data:image/svg+xml,${GRID_SVG}")`, backgroundSize: "60px 60px", backgroundPosition: "center 30px" }}
           />
           <div className="mx-auto grid w-full max-w-container grid-cols-1 items-center gap-10 px-5 pb-16 pt-14 md:px-8 md:pt-20 lg:grid-cols-[1fr_600px] lg:gap-12">
             <div className="flex flex-col gap-5 hero-fade-1">

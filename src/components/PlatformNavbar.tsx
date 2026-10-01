@@ -105,7 +105,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
       {/* Fixed header: announcement bar, then the navbar. Page offsets use the `header` spacing token. */}
       <div className="fixed left-0 right-0 top-0 z-50">
-      <nav className="px-5 border-b border-black/[0.06] bg-white/85 backdrop-blur-[20px] md:px-8">
+      <nav className="px-5 border-b border-black/[0.13] bg-white/85 backdrop-blur-[20px] md:px-8">
         <div className="mx-auto flex h-[58px] w-full max-w-container-wide items-center justify-between gap-4 lg:gap-5 xl:gap-8">
           {/* Left: logo and the page links as one group */}
           <div className="flex items-center gap-8 xl:gap-10">
@@ -141,7 +141,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
             <Button href={contactSalesHref} variant="secondary" className={lang === "es" ? "!hidden xl:!inline-flex" : undefined}>
               {t.contactSales}
             </Button>
-            <Button href={signupUrl()} variant="primary" size="sm" glow>
+            <Button href={signupUrl()} variant="primary" size="sm" tone="dark" glow>
               {t.startForFree}
             </Button>
           </div>

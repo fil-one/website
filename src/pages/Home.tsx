@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Hero from "@/components/Hero";
-import AnnouncementBadge from "@/components/AnnouncementBadge";
 import DashboardPreview from "@/components/DashboardPreview";
 import ProofStrip from "@/components/ProofStrip";
 import WhySection from "@/components/WhySection";
@@ -19,9 +18,6 @@ import { PRICE_DISPLAY } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
 const DOCS_URL = "https://docs.fil.one";
-
-/** The launch post, promoted in the hero until Monday's post replaces it. */
-const LAUNCH_POST_HREF = "/blog/introducing-fil-one-s3-compatible-storage-built-for-the-ai-era";
 
 const Home = () => {
   const { heroEndRef } = useScrollTracking();
@@ -43,11 +39,7 @@ const Home = () => {
           <Hero
             grid
             glow
-            badge={
-              <a href={LAUNCH_POST_HREF} className="no-underline" onClick={() => trackCtaClick("Introducing Fil One", LAUNCH_POST_HREF, "secondary")}>
-                <AnnouncementBadge pill="New">Introducing Fil One: S3 storage built for the AI era →</AnnouncementBadge>
-              </a>
-            }
+            contentClassName="!pt-16 md:!pt-[104px]"
             title={
               <>
                 S3 object storage that lives <span className="text-brand-500">where your data works.</span>

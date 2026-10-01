@@ -78,7 +78,7 @@ const Hero = ({
         style={{
           backgroundImage: `url("data:image/svg+xml,${GRID_SVG}")`,
           backgroundSize: "60px 60px",
-          backgroundPosition: "center top",
+          backgroundPosition: "center 30px",
         }}
       />
     )}
