@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { trackEvent } from "@/lib/analytics";
+import { trackCtaClick, trackEvent } from "@/lib/analytics";
+import TextLink from "@/components/TextLink";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
@@ -18,6 +19,9 @@ import {
   submitHubSpotForm,
 } from "@/lib/hubspot";
 import { validateFields, hasErrors, focusFirstInvalid, type FieldErrors } from "@/lib/formValidation";
+
+/** Partners have their own application; point them there before the sales form. */
+const PARTNER_APPLY_HREF = "/partners/apply";
 
 // Values are the HubSpot dropdown options (hyphenated); labels use en dashes.
 const DATA_OPTIONS = [
@@ -121,6 +125,15 @@ const ContactSales = () => {
             <p className="m-0 font-sans font-normal text-[15px] leading-[1.6] text-zinc-500">
               Tell us about your use case and we'll get back to you shortly.
             </p>
+            <TextLink
+              href={PARTNER_APPLY_HREF}
+              tone="brand"
+              arrow
+              className="mt-1 self-start"
+              onClick={() => trackCtaClick("Apply to the partner program", PARTNER_APPLY_HREF, "secondary")}
+            >
+              Want to partner with Fil One? Apply here
+            </TextLink>
           </div>
 
           <div className="h-px w-full bg-black/[0.07]" />

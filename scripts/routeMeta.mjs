@@ -320,7 +320,7 @@ export const ROUTE_META = {
   "/partners": {
     title: "Partners · Fil One",
     description:
-      "Channel, technology, and MSP partner programs for Fil One. Resell, integrate, or bundle S3-compatible cloud storage with your business.",
+      "Sell, build on or run Fil One storage. One partner program with four roles: channel, technology, managed service and data center.",
   },
   "/host": {
     title: "Host a zone · Fil One",
