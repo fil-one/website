@@ -68,9 +68,9 @@ const ZoneDiagram = () => (
         <span className="pb-3">
           <SectionLabel tone="dark">Your building</SectionLabel>
         </span>
-        <Node title="Your compute" sub="AI, HPC, analytics and app workloads" tag="YOURS" />
+        <Node title="Compute" sub="AI, HPC, analytics and app workloads" tag="YOURS" />
         <div className="h-2" />
-        <Node title="Your WEKA / VAST scratch" sub="Hot working set, checkpoints in flight" tag="YOURS" />
+        <Node title="WEKA / VAST scratch" sub="Hot working set, checkpoints in flight" tag="YOURS" />
         <VArrow label="cross-connect" />
         <Node title="Fil One Capacity · HDD" sub="Archives, backups, completed jobs, logs" tag="OURS" fil>
           <span className="mt-2 font-mono text-[11px] tracking-[0.04em] text-white/90">&lt;1 ms · no internet path · no egress meter</span>
