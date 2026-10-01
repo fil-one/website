@@ -67,8 +67,8 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
 
   const l = (value: Localized) => localize(value, lang);
   const tagline = lang === "es"
-    ? "Una filial de propiedad exclusiva de la Filecoin Foundation."
-    : "A wholly owned subsidiary of the Filecoin Foundation.";
+    ? "Soberano por diseño. Optimizado para la IA."
+    : "Sovereign by design. Optimized for AI.";
   const copyright = lang === "es"
     ? "© 2026 Fil One. Todos los derechos reservados."
     : "© 2026 Fil One. All rights reserved.";
@@ -79,7 +79,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
         {/* Top row */}
         <div className="flex flex-col md:flex-row md:justify-between gap-10 md:gap-0">
           {/* Left: logo + tagline */}
-          <div className="flex flex-col gap-3 items-start max-w-[220px]">
+          <div className="flex flex-col gap-3 items-start max-w-[320px]">
             <a href="/" className="no-underline">
               <img src={filOneLogo} alt="Fil One" className="block h-[18px] w-auto" />
             </a>
