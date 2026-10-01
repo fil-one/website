@@ -194,7 +194,6 @@ const HostPage = () => {
                 <p className="m-0 font-sans text-[16px] leading-[1.6] text-white/[0.82]">
                   in egress. Scratch holds the working set it was bought for, and the same 100 TB becomes a line on your invoice.
                 </p>
-                <p className="m-0 font-sans text-[12px] text-white/50">Subject to fair use.</p>
               </div>
             </div>
           </div>
