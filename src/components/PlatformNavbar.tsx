@@ -108,9 +108,9 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
       <div className="fixed left-0 right-0 top-0 z-50">
       <AnnouncementBar lang={lang} />
       <nav className="px-5 border-b border-black/[0.06] bg-white/85 backdrop-blur-[20px] md:px-8">
-        <div className="mx-auto flex h-[58px] w-full items-center justify-between gap-4 lg:gap-5 xl:gap-8">
+        <div className="mx-auto flex h-[58px] w-full max-w-container-wide items-center justify-between gap-4 lg:gap-5 xl:gap-8">
           {/* Left: logo and the page links as one group */}
-          <div className="flex items-center gap-5 xl:gap-7">
+          <div className="flex items-center gap-8 xl:gap-10">
           <a href="/" className="flex h-11 shrink-0 items-center no-underline">
             <img src={filOneLogo} alt="Fil One" className="block h-5 w-auto" />
           </a>
