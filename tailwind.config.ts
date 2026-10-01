@@ -206,10 +206,10 @@ export default {
       // Vertical rhythm for dark hero/CTA sections — the repeated `py-[104px]`
       spacing: {
         section: "104px",
-        // Fixed header = announcement bar (40px) + navbar (58px); pages offset by this.
-        header: "98px",
+        // Fixed navbar height; pages offset by this.
+        header: "58px",
         // Header plus the breathing room heroes add on desktop.
-        "header-md": "134px",
+        "header-md": "94px",
       },
 
       // Card elevation — the two shadows behind nearly every card (~53 + ~33 uses).

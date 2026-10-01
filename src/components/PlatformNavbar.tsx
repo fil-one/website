@@ -8,7 +8,6 @@ import Icon, { type IconProps } from "@/components/Icon";
 import FloatingSupportButton from "@/components/FloatingSupportButton";
 import { localize, type Lang, type Localized } from "@/lib/i18n";
 import { consoleUrl, signupUrl } from "@/lib/console-url";
-import AnnouncementBar from "@/components/AnnouncementBar";
 
 /** One entry in a nav or footer link list. */
 interface NavLinkItem {
@@ -106,7 +105,6 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
 
       {/* Fixed header: announcement bar, then the navbar. Page offsets use the `header` spacing token. */}
       <div className="fixed left-0 right-0 top-0 z-50">
-      <AnnouncementBar lang={lang} />
       <nav className="px-5 border-b border-black/[0.06] bg-white/85 backdrop-blur-[20px] md:px-8">
         <div className="mx-auto flex h-[58px] w-full max-w-container-wide items-center justify-between gap-4 lg:gap-5 xl:gap-8">
           {/* Left: logo and the page links as one group */}
