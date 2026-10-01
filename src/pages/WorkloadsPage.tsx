@@ -201,9 +201,14 @@ const WorkloadsPage = () => {
                   </div>
                   <FeatureList items={w.points} className="max-w-[560px]" />
                   <FlowCard from={w.from} steps={w.steps} note={<>{w.note} $0 egress subject to fair use.</>} />
-                  <TextLink href={DOCS_URL} tone="brand" external onClick={() => trackDocsClick(DOCS_URL)}>
-                    Read the docs ↗
-                  </TextLink>
+                  <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+                    <TextLink href={signupUrl()} tone="brand" onClick={() => trackCtaClick("Start with 1 TB free", signupUrl(), "secondary")}>
+                      Start with 1 TB free →
+                    </TextLink>
+                    <TextLink href={DOCS_URL} external onClick={() => trackDocsClick(DOCS_URL)}>
+                      Read the docs ↗
+                    </TextLink>
+                  </div>
                 </section>
               ))}
             </div>
