@@ -71,7 +71,7 @@ const Home = () => {
         </div>
 
         {/* Proof strip: the three numbers, on the hairline under the console */}
-        <div ref={heroEndRef} className="w-full px-5 md:px-8">
+        <div ref={heroEndRef} className="relative z-10 -mt-8 w-full px-5 md:-mt-28 md:px-8">
           <div className="mx-auto w-full max-w-container border-t border-black/[0.08] pt-8">
             <ProofStrip
               items={[
