@@ -96,23 +96,25 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
 
 ## Pricing
 
-- **Pay-as-you-go:** $5.99/TB/month, no egress fees, no API request fees
+- **Pay as you go:** $5.99/TB/month, no egress fees (subject to fair use), no API
+  request or retrieval fees
 - **Monthly minimum:** $5.99
-- **Business plan:** custom pricing for enterprises; 1, 3, or 5-year terms with
-  capacity assurance and deployment SLAs
+- **Reserved capacity:** custom pricing; 1, 3 or 5-year terms with capacity
+  assurance and deployment SLAs, guided migration and invoicing
 - **Free trial:** 30 days, 1 TB storage and 2 TB egress included, no credit card
   required. Upgrade to a paid plan to keep downloading after the egress allowance
 
 ## Pages
 
 - [Homepage](https://www.fil.one): Product overview, feature comparison, pricing, and FAQ
-- [Pricing](https://www.fil.one/pricing): Flat per-TB rate and a cost calculator
-  comparing Fil One with AWS S3, Wasabi, Backblaze B2, and Cloudflare R2
-- [Bring a workload](https://www.fil.one/workloads): AI training, data lakes, backup, media
-  archives, research data, and logs
+- [Pricing](https://www.fil.one/pricing): Flat per-TB rate, a cost calculator
+  comparing Fil One with AWS S3, Wasabi, Backblaze B2 and Cloudflare R2, and a billing FAQ
+- [Bring a workload](https://www.fil.one/workloads): AI training and models, data lakes
+  and ETL, backup and archive, media, and security logs
 - [Host a zone](https://www.fil.one/host): S3 object storage installed in a GPU
   cloud's own facility, sold under the partner's brand
-- [Partners](https://www.fil.one/partners): Channel, technology, and MSP partner programs
+- [Partners](https://www.fil.one/partners): One partner program with four roles: channel,
+  technology, managed service and data center (Host a zone)
 - [About](https://www.fil.one/about): The team and company behind Fil One
 - [Talk to sales](https://www.fil.one/contact-sales): Enterprise and high-volume inquiries;
   also reachable at sales@fil.one

@@ -90,7 +90,7 @@
     },
     {
       "source": "/solutions/ransomware",
-      "destination": "/",
+      "destination": "/workloads#backup",
       "permanent": true
     },
     {
@@ -115,7 +115,7 @@
     },
     {
       "source": "/products/archival",
-      "destination": "/",
+      "destination": "/workloads#backup",
       "permanent": true
     },
     {
@@ -140,7 +140,7 @@
     },
     {
       "source": "/solutions/archival",
-      "destination": "/",
+      "destination": "/workloads#backup",
       "permanent": true
     },
     {
@@ -175,7 +175,7 @@
     },
     {
       "source": "/enterprise",
-      "destination": "/",
+      "destination": "/#teams",
       "permanent": true
     },
     {

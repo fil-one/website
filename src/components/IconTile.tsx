@@ -6,7 +6,7 @@ interface IconTileProps {
   icon: PhosphorIcon;
   /**
    * "sm" (default): 40px tile, 20px icon, for lists and compact cards
-   * (Enterprise, RoleCard, "Built for reselling"). "lg": 56px tile, 28px
+   * (TeamsSection, the partner roles, "Built for reselling"). "lg": 56px tile, 28px
    * icon, for FeatureCard. Both use the same regular stroke weight.
    */
   size?: "sm" | "lg";
