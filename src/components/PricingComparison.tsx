@@ -14,7 +14,7 @@ interface PricingComparisonProps {
   /**
    * "light" (default): the site table on a white section. "dark": a rows-on-
    * navy layout for the SpaceCard calculator, where the Fil One row is a solid
-   * brand bar and its $0 egress carries the fair-use asterisk.
+   * brand bar.
    */
   tone?: PricingComparisonTone;
 }
@@ -84,7 +84,6 @@ const DarkComparison = ({ rows }: { rows: ComparisonRow[] }) => (
         <span className="text-[12.5px] text-white/60 md:hidden">Egress</span>
         <span className="text-right font-mono md:text-left">
           {usd(r.egress)}
-          {r.isFilOne && "*"}
         </span>
         <span className="text-[12.5px] text-white/60 md:hidden">Monthly total</span>
         <span className="text-right font-mono font-medium md:text-left">{usd(r.total)}</span>

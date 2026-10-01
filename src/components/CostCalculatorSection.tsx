@@ -105,7 +105,7 @@ const CostCalculatorSection = ({ competitors, id, tone = "light" }: CostCalculat
               <PricingComparison competitors={competitors} storedTB={storedTB} egressTB={egressTB} tone="dark" />
 
               <p className="m-0 max-w-[880px] font-sans text-[12.5px] leading-[1.6] text-white/50">
-                {FINE_PRINT} *Fil One egress subject to fair use.
+                {FINE_PRINT} Fil One egress is subject to fair use.
               </p>
             </div>
           </SpaceCard>
