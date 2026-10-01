@@ -39,7 +39,11 @@ const Home = () => {
           <Hero
             grid
             glow
-            title={<>S3 object storage that lives where your data works.</>}
+            title={
+              <>
+                S3 object storage that lives <span className="text-brand-500">where your data works.</span>
+              </>
+            }
             description="Fast reads, predictable pricing and the freedom to move your data without lock-in or egress penalties."
             titleMaxWidth={820}
             descriptionMaxWidth={620}
