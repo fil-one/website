@@ -263,12 +263,6 @@ const HostPage = () => {
                 </div>
               ))}
             </div>
-            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <Button variant="primary" href={HOST_APPLY_HREF} onClick={() => trackCtaClick("Start a pilot", HOST_APPLY_HREF, "primary")}>
-                Start a pilot
-              </Button>
-              <span className="font-sans text-[13.5px] text-zinc-500">A name on the workload and an hour with your infra team is enough to begin.</span>
-            </div>
           </div>
         </section>
 
