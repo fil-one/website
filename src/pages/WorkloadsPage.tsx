@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
+import { Archive, Brain, Database, FilmStrip, ShieldCheck, type Icon as PhosphorIcon } from "@phosphor-icons/react";
+import Icon from "@/components/Icon";
+import IconTile from "@/components/IconTile";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -17,6 +20,7 @@ const CONTACT_HREF = "/contact-sales";
 
 interface Workload {
   id: string;
+  icon: PhosphorIcon;
   nav: string;
   title: string;
   body: string;
@@ -33,6 +37,7 @@ interface Workload {
 const WORKLOADS: Workload[] = [
   {
     id: "training",
+    icon: Brain,
     nav: "AI training and models",
     title: "AI training and model work",
     body: "Your NVMe holds the batch in flight. Finished checkpoints and the datasets you aren't training on today move to Fil One, then stream back at multi-Gbps when the next run needs them.",
@@ -46,6 +51,7 @@ const WORKLOADS: Workload[] = [
   },
   {
     id: "lakes",
+    icon: Database,
     nav: "Data lakes and ETL",
     title: "Data lakes and ETL",
     body: "Keep hot tables and the query cache on your fastest storage. The files behind them (Parquet, ORC, Avro, CSV and JSON), plus raw history and older partitions, live on Fil One, where full scans don't come with an egress bill.",
@@ -59,6 +65,7 @@ const WORKLOADS: Workload[] = [
   },
   {
     id: "backup",
+    icon: Archive,
     nav: "Backup and archive",
     title: "Backup and archive",
     body: "Production stays on your primary storage. Every backup and archive copy goes to Fil One, ready to restore without a retrieval fee. Turn on Object Lock when copies need to be immutable.",
@@ -72,6 +79,7 @@ const WORKLOADS: Workload[] = [
   },
   {
     id: "media",
+    icon: FilmStrip,
     nav: "Media",
     title: "Media",
     body: "Keep the project you're cutting on fast local or shared storage. Masters, raw footage and finished projects move to Fil One and come back into the edit at multi-Gbps, with no transfer fees.",
@@ -85,6 +93,7 @@ const WORKLOADS: Workload[] = [
   },
   {
     id: "logs",
+    icon: ShieldCheck,
     nav: "Security logs",
     title: "Security and audit logs",
     body: "Recent events stay in your SIEM for live detection. Older logs move to Fil One, ready for threat hunts, forensics and audits. Add Object Lock for tamper-proof retention.",
@@ -108,6 +117,17 @@ const PATTERN = [
 const WorkloadsPage = () => {
   useSeo();
   const [active, setActive] = useState(WORKLOADS[0].id);
+
+  // Side-nav clicks glide to the section instead of jumping, and keep the
+  // hash in the URL so the link still copies. Respects reduced-motion.
+  const goTo = (id: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    window.history.replaceState(null, "", `#${id}`);
+  };
 
   // Highlight the side-nav entry for the section in view: the last section
   // whose top has passed the upper 40% of the viewport.
@@ -175,11 +195,13 @@ const WorkloadsPage = () => {
                 <a
                   key={w.id}
                   href={`#${w.id}`}
+                  onClick={goTo(w.id)}
                   aria-current={active === w.id ? "location" : undefined}
-                  className={`block rounded-lg px-3 py-2 font-sans text-[14px] no-underline transition-colors ${
+                  className={`flex items-center gap-2.5 rounded-lg px-3 py-2 font-sans text-[14px] no-underline transition-colors ${
                     active === w.id ? "bg-brand-50 font-medium text-brand-700" : "text-zinc-600 hover:bg-black/[0.03]"
                   }`}
                 >
+                  <Icon icon={w.icon} size={16} className={active === w.id ? "text-brand-600" : "text-zinc-400"} />
                   {w.nav}
                 </a>
               ))}
@@ -196,6 +218,7 @@ const WorkloadsPage = () => {
                     <div aria-hidden="true" className="absolute inset-y-0 -left-[100vw] -right-[100vw] -z-10 bg-zinc-50" />
                   )}
                   <div className="flex max-w-[640px] flex-col gap-3.5">
+                    <IconTile icon={w.icon} size="lg" className="mb-1" />
                     <SectionHeading>{w.title}</SectionHeading>
                     <SectionSub maxWidth={640}>{w.body}</SectionSub>
                   </div>
