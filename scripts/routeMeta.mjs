@@ -328,7 +328,7 @@ export const ROUTE_META = {
       "Extend your cloud and sell the storage. Fil One installs and runs S3 object storage in your data center, and you resell it under your own brand.",
   },
   "/host/apply": {
-    title: "Talk to our neocloud team · Fil One",
+    title: "Talk to an engineer · Fil One",
     description:
       "Tell us about your GPU cloud and talk to our team about adding Fil One object storage in your own data center.",
   },
