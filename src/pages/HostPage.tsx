@@ -139,6 +139,9 @@ const HostPage = () => {
                     </div>
                   ))}
                 </div>
+                <a href="#how" className="self-start font-sans text-[14px] font-medium text-white underline decoration-white/50 underline-offset-[3px] transition-colors hover:decoration-white">
+                  See how a zone fixes this →
+                </a>
               </div>
             </SpaceCard>
           </div>
@@ -161,6 +164,12 @@ const HostPage = () => {
                   </div>
                 </div>
               ))}
+            </div>
+            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <Button variant="primary" href={HOST_APPLY_HREF} onClick={() => trackCtaClick("Talk to an engineer", HOST_APPLY_HREF, "primary")}>
+                Talk to an engineer
+              </Button>
+              <span className="font-sans text-[13.5px] text-zinc-500">We fund and run the hardware. You resell it under your brand.</span>
             </div>
           </div>
         </section>
@@ -194,6 +203,9 @@ const HostPage = () => {
                 <p className="m-0 font-sans text-[16px] leading-[1.6] text-white/[0.82]">
                   in egress. Scratch holds the working set it was bought for, and the same 100 TB becomes a line on your invoice.
                 </p>
+                <Button variant="primary" tone="dark" href={HOST_APPLY_HREF} className="mt-2 self-start" onClick={() => trackCtaClick("Price a zone", HOST_APPLY_HREF, "primary")}>
+                  Price a zone
+                </Button>
               </div>
             </div>
           </div>
@@ -227,6 +239,9 @@ const HostPage = () => {
                   </span>
                 </div>
               ))}
+              <Button variant="primary" href={HOST_APPLY_HREF} className="mt-6 self-start" onClick={() => trackCtaClick("Request wholesale pricing", HOST_APPLY_HREF, "primary")}>
+                Request wholesale pricing
+              </Button>
             </div>
           </div>
         </section>
@@ -247,6 +262,12 @@ const HostPage = () => {
                   <p className="m-0 font-sans text-[14px] leading-[1.6] text-zinc-600">{b}</p>
                 </div>
               ))}
+            </div>
+            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <Button variant="primary" href={HOST_APPLY_HREF} onClick={() => trackCtaClick("Start a pilot", HOST_APPLY_HREF, "primary")}>
+                Start a pilot
+              </Button>
+              <span className="font-sans text-[13.5px] text-zinc-500">A name on the workload and an hour with your infra team is enough to begin.</span>
             </div>
           </div>
         </section>
