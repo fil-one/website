@@ -109,7 +109,8 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
       <AnnouncementBar lang={lang} />
       <nav className="px-5 border-b border-black/[0.06] bg-white/85 backdrop-blur-[20px] md:px-8">
         <div className="mx-auto flex h-[58px] w-full items-center justify-between gap-4 lg:gap-5 xl:gap-8">
-          {/* Logo */}
+          {/* Left: logo and the page links as one group */}
+          <div className="flex items-center gap-5 xl:gap-7">
           <a href="/" className="flex h-11 shrink-0 items-center no-underline">
             <img src={filOneLogo} alt="Fil One" className="block h-5 w-auto" />
           </a>
@@ -129,6 +130,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                 {external && <Icon icon={ArrowUpRight} size={11} className="mt-px text-zinc-600" aria-hidden="true" />}
               </a>
             ))}
+          </div>
           </div>
 
           {/* Desktop right: sign in, then the two CTAs */}
