@@ -126,7 +126,17 @@
 }
 
 .btn-primary:hover {
-  background: linear-gradient(90deg, theme(colors.aqua.300) 0%, theme(colors.aqua.400) 100%);
+  background-image: linear-gradient(90deg, theme(colors.brand.500) 0%, theme(colors.brand.700) 100%);
+}
+
+/* Hover fills the pill with a brand tint so the change reads on white, where
+   the ring alone is easy to miss. Dark pills go solid brand blue. */
+.btn-primary:hover .btn-primary-inner {
+  background: theme(colors.brand.50);
+}
+
+.btn-primary-dark:hover .btn-primary-inner {
+  background: theme(colors.brand.600);
 }
 
 .btn-primary-inner {
@@ -157,6 +167,12 @@
     linear-gradient(90deg, theme(colors.aqua.400) 0%, theme(colors.brand.500) 100%);
   background-origin: border-box;
   background-clip: padding-box, border-box;
+}
+
+.btn-primary-glow:hover {
+  background-image:
+    linear-gradient(theme(colors.brand.50), theme(colors.brand.50)),
+    linear-gradient(90deg, theme(colors.brand.500) 0%, theme(colors.brand.700) 100%);
 }
 
 /* Gradient text highlight for large headings. Static: every stop is
