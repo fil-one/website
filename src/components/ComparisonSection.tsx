@@ -184,9 +184,9 @@ const Footnote = () => (
     ))}
   </p>
   <p className="font-sans text-small leading-[1.6] text-zinc-500 m-0">
-    * Subject to reasonable use.{" "}
+    * Subject to{" "}
     <a href={FOOTNOTE_HREF} className="text-zinc-600 underline underline-offset-2 hover:text-brand-600">
-      See what that means
+      reasonable use
     </a>
     .
   </p>
