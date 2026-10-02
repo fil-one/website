@@ -17,7 +17,7 @@ export const HS_CONTACT_FORM_GUID = "f7684332-cc69-4d56-bd8d-12a2b730bceb";
 /** Partner Apply form */
 export const HS_PARTNER_FORM_GUID = "b18ae776-5b6f-42fa-a6aa-10ce63a36cb5";
 
-/** Neocloud application form (fields listed in NeocloudApplyPage.tsx) */
+/** Neocloud application form (fields listed in HostApplyPage.tsx) */
 export const HS_NEOCLOUD_FORM_GUID = "65ce81c3-07a6-43ef-ab82-95437dba3a3b";
 
 /** Support form */

@@ -148,7 +148,7 @@ const HostPage = () => {
         </div>
 
         {/* The product */}
-        <section id="how" className="w-full scroll-mt-header px-5 py-24 md:px-8">
+        <section id="how" className="w-full px-5 py-24 md:px-8">
           <div ref={product.ref} className={`mx-auto flex w-full max-w-container flex-col gap-10 reveal${product.inView ? " in-view" : ""}`}>
             <div className="flex max-w-[760px] flex-col gap-3.5">
               <SectionLabel>The product</SectionLabel>

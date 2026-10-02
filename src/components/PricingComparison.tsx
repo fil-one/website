@@ -117,16 +117,16 @@ const PricingComparison = ({ competitors, storedTB, egressTB, tone = "light" }: 
             <ProviderLabel row={r} className="mb-3" />
             <div className="grid grid-cols-2 gap-y-2 text-body-sm">
               <span className="text-zinc-600">Storage</span>
-              <span className={`text-right ${storageClass(r)}`}>${r.storage.toFixed(2)}</span>
+              <span className={`text-right ${storageClass(r)}`}>{usd(r.storage)}</span>
               <span className="text-zinc-600">Egress</span>
-              <span className={`text-right ${egressClass(r)}`}>${r.egress.toFixed(2)}</span>
+              <span className={`text-right ${egressClass(r)}`}>{usd(r.egress)}</span>
               <span className="text-zinc-600 font-semibold pt-2 border-t border-black/[0.07] mt-1">Total / month</span>
               <span
                 className={`text-right font-bold pt-2 border-t border-black/[0.07] mt-1 ${
                   r.isFilOne ? "text-brand-600" : "text-zinc-950"
                 }`}
               >
-                ${r.total.toFixed(2)}
+                {usd(r.total)}
               </span>
             </div>
           </div>
@@ -148,8 +148,8 @@ const PricingComparison = ({ competitors, storedTB, egressTB, tone = "light" }: 
               <Table.Cell>
                 <ProviderLabel row={r} />
               </Table.Cell>
-              <Table.Cell className={`text-body ${storageClass(r)}`}>${r.storage.toFixed(2)}</Table.Cell>
-              <Table.Cell className={`text-body ${egressClass(r)}`}>${r.egress.toFixed(2)}</Table.Cell>
+              <Table.Cell className={`text-body ${storageClass(r)}`}>{usd(r.storage)}</Table.Cell>
+              <Table.Cell className={`text-body ${egressClass(r)}`}>{usd(r.egress)}</Table.Cell>
               <Table.Cell>
                 <span
                   className={
@@ -158,7 +158,7 @@ const PricingComparison = ({ competitors, storedTB, egressTB, tone = "light" }: 
                       : "text-body-lg font-normal text-zinc-600"
                   }
                 >
-                  ${r.total.toFixed(2)}
+                  {usd(r.total)}
                 </span>
               </Table.Cell>
             </Table.Row>

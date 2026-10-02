@@ -211,7 +211,7 @@ const WorkloadsPage = () => {
                 <section
                   key={w.id}
                   id={w.id}
-                  className={`relative z-0 flex scroll-mt-header flex-col gap-7 pb-[88px] ${i === 0 ? "pt-14" : "pt-20"}`}
+                  className={`relative z-0 flex flex-col gap-7 pb-[88px] ${i === 0 ? "pt-14" : "pt-20"}`}
                 >
                   {i % 2 === 1 && (
                     <div aria-hidden="true" className="absolute inset-y-0 -left-[100vw] -right-[100vw] -z-10 bg-zinc-50" />

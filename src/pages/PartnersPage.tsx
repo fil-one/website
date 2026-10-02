@@ -131,7 +131,7 @@ const PartnersPage = () => {
         {/* Partner roles */}
         <div className="w-full px-5 pt-24 md:px-8">
           <div ref={roles.ref} className={`mx-auto w-full max-w-container reveal${roles.inView ? " in-view" : ""}`}>
-            <SpaceCard id="roles" className="scroll-mt-header">
+            <SpaceCard id="roles" className="">
               <div className="flex flex-col gap-12">
                 <div className="flex max-w-[760px] flex-col gap-4">
                   <SectionLabel tone="dark">Partner roles</SectionLabel>

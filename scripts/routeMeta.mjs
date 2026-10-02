@@ -52,7 +52,7 @@ export const ROUTE_META = {
   "/": {
     title: "Fil One · S3 object storage built for the AI era",
     description:
-      `S3-compatible object storage that lives where your data works. ${PRICE_PER_TB_MONTH}, no egress fees, sovereign by design.`,
+      `S3-compatible object storage that lives where your data works. ${PRICE_PER_TB_MONTH}, no egress penalties, sovereign by design.`,
     jsonLd: [
       {
         "@context": "https://schema.org",
@@ -61,14 +61,14 @@ export const ROUTE_META = {
         url: "https://www.fil.one",
         logo: "https://www.fil.one/fil-one-logo.svg",
         description:
-          "S3-compatible object storage built on Filecoin. Sovereign by design, with no egress fees and no per-request charges.",
+          "S3-compatible object storage built on Filecoin. Sovereign by design, with no egress penalties and no per-request charges.",
       },
       {
         "@context": "https://schema.org",
         "@type": "Product",
         name: "Fil One Object Storage",
         description:
-          "S3-compatible object storage on Filecoin with no egress fees, no per-request charges, and object lock with versioning.",
+          "S3-compatible object storage on Filecoin with no egress penalties, no per-request charges, and object lock with versioning.",
         brand: { "@type": "Brand", name: "Fil One" },
         offers: {
           "@type": "Offer",
@@ -340,7 +340,7 @@ export const ROUTE_META = {
   "/workloads": {
     title: "Bring a workload · Fil One",
     description:
-      `Move finished checkpoints, data lakes, backups, footage and logs to Fil One at ${PRICE_PER_TB_MONTH}, and pull them back at multi-Gbps with no egress fees.`,
+      `Move finished checkpoints, data lakes, backups, footage and logs to Fil One at ${PRICE_PER_TB_MONTH}, and pull them back at multi-Gbps with no egress penalties.`,
   },
   "/about": {
     title: "About · Fil One",

@@ -198,7 +198,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
       </nav>
       </div>
 
-      <FloatingSupportButton href={supportHref} />
+      <FloatingSupportButton href={supportHref} label={lang === "es" ? "Soporte" : "Support"} />
     </>
   );
 };

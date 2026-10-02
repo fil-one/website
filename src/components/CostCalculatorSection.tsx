@@ -60,23 +60,28 @@ const Slider = ({ id, label, value, min, max, onChange, dark }: SliderProps) => 
  * provider comparison. Shared by the pricing page and the /lp/price landing
  * page, which differ in which competitors they pass in and in tone.
  */
+const EGRESS_CAP_MULTIPLE = 10;
+
 const CostCalculatorSection = ({ competitors, id, tone = "light" }: CostCalculatorSectionProps) => {
   const [storedTB, setStoredTB] = useState(10);
   const [egressTB, setEgressTB] = useState(10);
   const { ref, inView } = useInView({ threshold: 0.05 });
   const dark = tone === "dark";
+  // Egress far above storage is the pattern the reasonable-use policy excludes,
+  // so the comparison runs at no more than 10x stored.
+  const comparedEgressTB = Math.min(egressTB, storedTB * EGRESS_CAP_MULTIPLE);
 
   const sliders = (
     <div className={`mx-auto flex w-full flex-col gap-6 sm:flex-row${dark ? " max-w-[720px] sm:mx-0" : " max-w-container-narrow"}`}>
       <Slider id="calc-storage" label="Storage" value={storedTB} min={1} max={500} onChange={setStoredTB} dark={dark} />
-      <Slider id="calc-egress" label="Monthly egress" value={egressTB} min={0} max={500} onChange={setEgressTB} dark={dark} />
+      <Slider id="calc-egress" label="Monthly egress" value={comparedEgressTB} min={0} max={Math.min(500, storedTB * EGRESS_CAP_MULTIPLE)} onChange={setEgressTB} dark={dark} />
     </div>
   );
 
   if (dark) {
-    const multiple = timesCheaperThanAws(storedTB, egressTB);
+    const multiple = timesCheaperThanAws(storedTB, comparedEgressTB);
     return (
-      <section id={id} className="w-full scroll-mt-header px-5 md:px-8">
+      <section id={id} className="w-full px-5 md:px-8">
         <div ref={ref} className={`mx-auto w-full max-w-container reveal${inView ? " in-view" : ""}`}>
           <SpaceCard>
             <div className="flex flex-col gap-10">
@@ -95,14 +100,14 @@ const CostCalculatorSection = ({ competitors, id, tone = "light" }: CostCalculat
                     {multiple}× less
                   </span>
                   <span className="font-sans text-[14px] text-white/65">
-                    than AWS S3 at {storedTB} TB stored and {egressTB} TB served
+                    than AWS S3 at {storedTB} TB stored and {comparedEgressTB} TB served
                   </span>
                 </div>
               </div>
 
               {sliders}
 
-              <PricingComparison competitors={competitors} storedTB={storedTB} egressTB={egressTB} tone="dark" />
+              <PricingComparison competitors={competitors} storedTB={storedTB} egressTB={comparedEgressTB} tone="dark" />
 
               <p className="m-0 max-w-[880px] font-sans text-[12.5px] leading-[1.6] text-white/50">
                 {FINE_PRINT} Fil One egress is subject to reasonable use.
@@ -126,7 +131,7 @@ const CostCalculatorSection = ({ competitors, id, tone = "light" }: CostCalculat
         {sliders}
 
         {/* Results: stacked cards on mobile, table on tablet / desktop */}
-        <PricingComparison competitors={competitors} storedTB={storedTB} egressTB={egressTB} />
+        <PricingComparison competitors={competitors} storedTB={storedTB} egressTB={comparedEgressTB} />
 
         <p className="text-small leading-[1.6] text-center text-zinc-500">{FINE_PRINT}</p>
       </div>

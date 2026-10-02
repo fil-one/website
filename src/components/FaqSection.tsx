@@ -153,7 +153,10 @@ const FaqSection = ({ include, items, label = "FAQ", title = "Frequently asked q
       const hash = window.location.hash.slice(1);
       if (!hash) return;
       const i = visibleFaqs.findIndex((f) => f.id === hash);
-      if (i >= 0) setOpenIndex(i);
+      if (i < 0) return;
+      setOpenIndex(i);
+      // Re-align once the panel has opened, since opening shifts the layout.
+      requestAnimationFrame(() => document.getElementById(hash)?.scrollIntoView({ block: "start" }));
     };
     openFromHash();
     window.addEventListener("hashchange", openFromHash);
@@ -207,7 +210,7 @@ const FaqSection = ({ include, items, label = "FAQ", title = "Frequently asked q
             <div
               key={faq.question}
               id={faq.id}
-              style={{ borderTop: "1px solid rgba(0,0,0,0.07)", scrollMarginTop: 96 }}
+              style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}
             >
               <button
                 id={buttonId}

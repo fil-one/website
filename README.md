@@ -66,7 +66,7 @@ npm run dev
 
 Every route is declared once in `src/routes.tsx`. The router, the prerender list, and `sitemap.xml` all derive from it. Each route's title and description live in `scripts/routeMeta.mjs`, which the prerender bakes into static HTML and `useSeo` reads at runtime. `src/test/route-seo-parity.test.ts` fails CI if a route has no metadata.
 
-Main pages: `/`, `/pricing`, `/solutions`, `/neocloud`, `/partners`, `/about`, `/blog`, `/support`, `/contact-sales`, plus the legal pages. `/lp/*` pages are campaign landing pages: they're `noindex`, left out of the sitemap, and never linked from the main site. Retired URLs are 301'd in `vercel.json`.
+Main pages: `/`, `/pricing`, `/workloads`, `/host`, `/partners`, `/about`, `/blog`, `/support`, `/contact-sales`, plus the legal pages. `/lp/*` pages are campaign landing pages: they're `noindex`, left out of the sitemap, and never linked from the main site. Retired URLs are 301'd in `vercel.json`.
 
 When copy changes a claim, also update `public/llms.txt` and `public/llms-full.txt`. They're maintained by hand.
 

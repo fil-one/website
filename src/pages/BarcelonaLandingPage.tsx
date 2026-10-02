@@ -15,7 +15,7 @@ import PriceComparisonTable, {
   type PriceComparisonColumn,
   type PriceComparisonRow,
 } from "@/components/PriceComparisonTable";
-import { PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { PRICE_PER_TB, PRICE_PER_TB_SHORT, timesCheaperThanAws } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
 const SIGNUP_URL = signupUrl();
@@ -58,7 +58,7 @@ const STATS = [
   // The 20× is the total bill, which is egress-driven, so it only holds for a
   // read-heavy workload. The note names the one the pricing table models.
   {
-    stat: "20×",
+    stat: `${Math.floor(timesCheaperThanAws(WORKLOAD_TB, WORKLOAD_TB))}×`,
     label: "Cheaper than AWS",
     note: `On ${WORKLOAD_TB} TB stored, ${WORKLOAD_TB} TB egress`,
   },

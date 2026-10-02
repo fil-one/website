@@ -16,7 +16,7 @@ import PriceComparisonTable, {
   type PriceComparisonColumn,
   type PriceComparisonRow,
 } from "@/components/PriceComparisonTable";
-import { PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { PRICE_PER_TB, PRICE_PER_TB_SHORT, timesCheaperThanAws } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
 const SIGNUP_URL = signupUrl();
@@ -87,7 +87,7 @@ const STATS = [
   // El 20× es sobre la factura total, que depende del egress, así que
   // solo se cumple con un uso intensivo de lectura. La nota indica el escenario.
   {
-    stat: "20×",
+    stat: `${Math.floor(timesCheaperThanAws(WORKLOAD_TB, WORKLOAD_TB))}×`,
     label: "Más barato que AWS",
     note: `Con ${WORKLOAD_TB} TB de almacenamiento y ${WORKLOAD_TB} TB de egress`,
   },
@@ -238,7 +238,7 @@ const BarcelonaLandingPageES = () => {
             </>
           }
           description="Compatible con la API de S3. Si funciona con AWS, funciona con nosotros."
-          ctaLabel="Ver documentación →"
+          ctaLabel="Ver documentación"
         />
 
         {/* ── CTA Banner ────────────────────────────────────────────────────── */}
