@@ -122,7 +122,7 @@ const PartnersPage = () => {
                 </div>
               ))}
             </div>
-            <p className="m-0 font-sans text-eyebrow text-zinc-500">*Egress subject to fair use.</p>
+            <p className="m-0 font-sans text-eyebrow text-zinc-500">*Egress subject to reasonable use.</p>
           </div>
         </section>
 

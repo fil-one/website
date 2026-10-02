@@ -3,7 +3,7 @@
 > Fil One is the storage layer for AI agents. S3-compatible object storage built
 > on Filecoin, designed for the data patterns of autonomous agents: high-frequency
 > writes, large retrieval sets, and long-lived persistence.
-> Flat pricing at $5.99/TB/month. No egress fees. No per-request charges.
+> Flat pricing at $5.99/TB/month. No egress penalties. No per-request charges.
 > Free 30-day trial, no credit card required.
 
 ## Why AI agents use Fil One
@@ -86,7 +86,7 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
 
 ## Key differentiators vs AWS S3, Backblaze B2, Wasabi, and Cloudflare R2
 
-- **No egress fees, no API request charges:** agents that read data frequently
+- **No egress penalties, no API request charges:** agents that read data frequently
   (retrieval loops, tool calls, eval pipelines) pay only for storage
 - **Independent regional operators:** each region is run by an independent storage
   operator, and the standard S3 API means no lock-in
@@ -96,7 +96,7 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
 
 ## Pricing
 
-- **Pay as you go:** $5.99/TB/month, no egress fees (subject to fair use), no API
+- **Pay as you go:** $5.99/TB/month, no egress penalties (subject to reasonable use), no API
   request or retrieval fees
 - **Monthly minimum:** $5.99
 - **Reserved capacity:** custom pricing; 1, 3 or 5-year terms with capacity

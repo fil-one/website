@@ -1,7 +1,7 @@
 # Fil One: Full Reference for AI Agents and Developers
 
 > Fil One is the storage layer for AI agents. S3-compatible object storage built on
-> Filecoin with no egress fees, no per-request charges, and flat pricing at
+> Filecoin with no egress penalties, no per-request charges, and flat pricing at
 > $5.99/TB/month. Free 30-day trial, no credit card required.
 
 ---
@@ -16,7 +16,7 @@ Storage is designed for 11 nines of durability. Object lock (governance or
 compliance retention, set at bucket creation) and versioning protect data from
 being overwritten or deleted.
 
-Reads are free: there are no egress fees and no per-request charges, so agent
+Reads are free: there are no egress penalties and no per-request charges, so agent
 workloads that read data often pay only for what they store.
 
 ---
@@ -145,7 +145,7 @@ def load_traces_for_eval(run_id: str) -> list[dict]:
 ### 5. Training and evaluation datasets
 
 Store JSONL, Parquet, CSV, or HDF5 datasets and stream them back to training jobs.
-No egress fee means iterating over datasets repeatedly costs only the storage price.
+No egress penalty means iterating over datasets repeatedly costs only the storage price.
 
 ```python
 import os
@@ -213,11 +213,11 @@ export FIL_ONE_SECRET_KEY=your_secret_access_key
 
 | Plan | Price | Notes |
 |------|-------|-------|
-| Pay as you go | $5.99/TB/month | No egress fees (subject to fair use), no API request or retrieval fees; $5.99 monthly minimum |
+| Pay as you go | $5.99/TB/month | No egress penalties (subject to reasonable use), no API request or retrieval fees; $5.99 monthly minimum |
 | Free trial | $0 | 30 days, 1 TB storage and 2 TB egress included, no credit card required; upgrade to keep downloading after the egress allowance |
 | Reserved capacity | Custom | 1, 3 or 5-year terms; capacity assurance; deployment SLAs; guided migration and invoicing |
 
-No egress fees means agent workloads that read data frequently (RAG pipelines,
+No egress penalties means agent workloads that read data frequently (RAG pipelines,
 evaluation loops, inference servers pulling weights) pay only for storage, not for
 bandwidth.
 

@@ -73,7 +73,7 @@ const ZoneDiagram = () => (
         <Node title="WEKA / VAST scratch" sub="Hot working set, checkpoints in flight" tag="YOURS" />
         <VArrow label="cross-connect" />
         <Node title="Fil One Capacity · HDD" sub="Archives, backups, completed jobs, logs" tag="OURS" fil>
-          <span className="mt-2 font-mono text-[11px] tracking-[0.04em] text-white/90">&lt;1 ms · no internet path · no egress meter</span>
+          <span className="mt-2 font-mono text-[11px] tracking-[0.04em] text-white/90">&lt;1 ms · no internet path · no egress charge</span>
         </Node>
       </div>
 

@@ -32,7 +32,7 @@ const PRINCIPLES = [
     icon: DoorOpen,
     title: "Leaving should always be free",
     description:
-      "No egress fees, no proprietary formats. The exit door always stays open.",
+      "No egress penalties, no proprietary formats. The exit door always stays open.",
   },
 ];
 
@@ -98,7 +98,7 @@ const About = () => {
           grid
           badge={<Pill>About Fil One</Pill>}
           title={<>We believe your data <span className="text-brand-500">belongs to you</span></>}
-          description="Fil One was built by the team behind Filecoin, the world's largest decentralized storage network. We make cloud storage you can verify, access without egress fees, and leave anytime, so you decide what happens to it."
+          description="Fil One was built by the team behind Filecoin, the world's largest decentralized storage network. We make cloud storage you can verify, access without egress penalties, and leave anytime, so you decide what happens to it."
           titleMaxWidth={620}
           descriptionMaxWidth={600}
           contentClassName="pb-16 md:pb-20"
@@ -146,7 +146,7 @@ const About = () => {
                 If you store serious data in the cloud, you know the bargain: your provider promises eleven nines of durability and asks you to trust it, egress fees punish you for using your own data, and staying longer only makes leaving more expensive.
               </p>
               <p className={BODY}>
-                We built Fil One because that bargain is backwards. Pricing is one flat rate with zero egress fees, so reading your own data never costs extra. Object lock and versioning protect what you store. And because everything is S3-compatible, moving to or from Fil One is an endpoint change, not a migration project.
+                We built Fil One because that bargain is backwards. Pricing is one flat rate with no egress penalties, so reading your own data never costs extra. Object lock and versioning protect what you store. And because everything is S3-compatible, moving to or from Fil One is an endpoint change, not a migration project.
               </p>
               <p className={BODY}>
                 Behind the product is the team behind Filecoin, the world's largest decentralized storage network, live since 2020 with thousands of independent operators and exabytes of proven capacity. It's the same infrastructure trusted by the Internet Archive and the Smithsonian, and each Fil One region is run by an independent storage operator.

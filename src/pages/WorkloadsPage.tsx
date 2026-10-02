@@ -40,7 +40,7 @@ const WORKLOADS: Workload[] = [
     nav: "AI training and models",
     title: "AI training and model work",
     body: "Your NVMe holds the batch in flight. Finished checkpoints and the datasets you aren't training on today move to Fil One, then stream back at multi-Gbps when the next run needs them.",
-    points: ["NVMe freed up for the working set", "Versioned datasets you can reproduce", "Rehydrate with no egress fee"],
+    points: ["NVMe freed up for the working set", "Versioned datasets you can reproduce", "Rehydrate with no egress penalty"],
     from: { title: "NVMe or scratch", detail: "Active training set, checkpoints in flight" },
     steps: [
       { label: "Offload finished work", node: { title: "Fil One bucket, versioned", detail: "Finished checkpoints, dataset versions, eval results", fil: true } },
@@ -96,11 +96,11 @@ const WORKLOADS: Workload[] = [
     nav: "Security logs",
     title: "Security and audit logs",
     body: "Recent events stay in your SIEM for live detection. Older logs move to Fil One, ready for threat hunts, forensics and audits. Add Object Lock for tamper-proof retention.",
-    points: ["Object Lock for tamper-proof retention", "No API request charges on high-volume writes", "Read back for forensics and audits with no egress fees"],
+    points: ["Object Lock for tamper-proof retention", "No API request charges on high-volume writes", "Read back for forensics and audits with no egress penalties"],
     from: { title: "SIEM and observability", detail: "Recent events in your SIEM and observability stack" },
     steps: [
       { label: "Age out", node: { title: "Log bucket on Fil One", detail: "Everything past your hot window", fil: true } },
-      { label: "Read back · $0 egress", node: { title: "Threat hunts, forensics, audits", detail: "Read back with no egress fees" } },
+      { label: "Read back · $0 egress", node: { title: "Threat hunts, forensics, audits", detail: "Read back with no egress penalties" } },
     ],
     note: "Keep security logs as long as your compliance rules require, at one flat price.",
   },
@@ -109,7 +109,7 @@ const WORKLOADS: Workload[] = [
 const PATTERN = [
   { figure: "One class", label: "Same bucket type for every workload" },
   { figure: PRICE_DISPLAY, label: "Per TB per month, flat" },
-  { figure: "$0 egress", label: "No API, retrieval or exit fees. Subject to fair use." },
+  { figure: "$0 egress", label: "No API, retrieval or exit fees. Subject to reasonable use." },
   { figure: "Multi-Gbps", label: "Sustained reads, not archive retrieval" },
 ];
 
@@ -225,7 +225,7 @@ const WorkloadsPage = () => {
                     <SectionSub maxWidth={640}>{w.body}</SectionSub>
                   </div>
                   <FeatureList items={w.points} className="max-w-[560px]" />
-                  <FlowCard from={w.from} steps={w.steps} note={<>{w.note} $0 egress subject to fair use.</>} />
+                  <FlowCard from={w.from} steps={w.steps} note={<>{w.note} $0 egress subject to reasonable use.</>} />
                   <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
                     <TextLink href={signupUrl()} tone="brand" onClick={() => trackCtaClick("Start with 1 TB free", signupUrl(), "secondary")}>
                       Start with 1 TB free →

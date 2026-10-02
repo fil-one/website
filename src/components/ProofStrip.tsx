@@ -5,7 +5,7 @@ export interface ProofFigure {
   figure: ReactNode;
   /** What the figure is. */
   label: string;
-  /** Optional small qualifier under the label, e.g. "Subject to fair use." */
+  /** Optional small qualifier under the label, e.g. "Subject to reasonable use." */
   note?: string;
 }
 

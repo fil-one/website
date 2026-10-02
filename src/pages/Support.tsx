@@ -41,7 +41,7 @@ const FAQS = [
   },
   {
     q: "Are there any hidden fees on top of the storage price?",
-    a: "No. Fil One charges a flat rate per TB stored per month with no egress fees, no API request charges, and no retrieval penalties. What you see is what you pay.",
+    a: "No. Fil One charges a flat rate per TB stored per month with no egress penalties, no API request charges, and no retrieval penalties. What you see is what you pay.",
   },
   {
     q: "How do I migrate from Storacha or another S3-compatible provider?",

@@ -5,7 +5,7 @@ import FeatureCard from "@/components/FeatureCard";
 
 const FEATURES = [
   { icon: Plug,        title: "Drop-in S3 compatibility",     desc: "Same API, same SDKs, same tools. Point your existing workflow at our endpoint." },
-  { icon: ArrowsOut,   title: "Zero egress fees",             desc: "Every read is free, so your bill stays flat no matter how busy the month." },
+  { icon: ArrowsOut,   title: "No egress penalties",             desc: "Every read is free, so your bill stays flat no matter how busy the month." },
   { icon: ShieldCheck, title: "Eleven nines of durability",   desc: "99.999999999% durability, replicated across locations and monitored around the clock." },
   { icon: Lock,        title: "Object Lock and versioning",   desc: "Compliance modes and retention periods keep every object protected." },
   { icon: SignOut,     title: "No lock-in",                   desc: "Leave whenever you want, no exit fees. Export everything with the standard S3 API." },
