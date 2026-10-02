@@ -130,19 +130,13 @@
 }
 
 /* Hover fills the pill with a brand tint so the change reads on white, where
-   the ring alone is easy to miss. Dark pills thicken the ring instead. */
+   the ring alone is easy to miss. Dark pills shift to the space navy. */
 .btn-primary:hover .btn-primary-inner {
   background: theme(colors.brand.50);
 }
 
 .btn-primary-dark:hover .btn-primary-inner {
-  background: theme(colors.zinc.950);
-}
-
-/* The dark pill keeps its fill and thickens its ring instead: a 2px halo
-   outside the existing 1.5px ring, so nothing shifts in the layout. */
-.btn-primary-dark:hover {
-  box-shadow: 0 0 0 2px theme(colors.brand.400);
+  background: theme(colors.navy.800);
 }
 
 .btn-primary-inner {
