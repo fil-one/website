@@ -97,7 +97,7 @@ const Home = () => {
         {/* Developers — change the endpoint, keep your code */}
         <DevelopersSection />
 
-        {/* Customers — cleared quotes, name and company only */}
+        {/* Quotes — cleared, name and company only */}
         <TestimonialsSection />
 
         {/* Press — Fast Company and "Also featured in", on the tint band */}

@@ -1,5 +1,5 @@
 import { Quotes } from "@phosphor-icons/react";
-import { SectionLabel, SectionHeading } from "@/components/LandingPrimitives";
+import { SectionHeading } from "@/components/LandingPrimitives";
 import { useInView } from "@/hooks/useInView";
 
 interface Testimonial {
@@ -28,8 +28,8 @@ const TESTIMONIALS: Testimonial[] = [
 ];
 
 /**
- * Customer quotes on the homepage: one card per cleared quote, name and
- * company in text (no logos, so no logo permissions needed).
+ * Cleared quotes on the homepage: one card each, name and company in text
+ * (no logos, so no logo permissions needed). Not labelled as customers.
  */
 const TestimonialsSection = () => {
   const { ref, inView } = useInView({ threshold: 0.05 });
@@ -38,8 +38,7 @@ const TestimonialsSection = () => {
     <section className="w-full px-5 pb-24 md:px-8 md:pb-32">
       <div ref={ref} className={`mx-auto flex w-full max-w-container flex-col gap-10 reveal${inView ? " in-view" : ""}`}>
         <div className="flex flex-col items-center gap-3 text-center">
-          <SectionLabel>Customers</SectionLabel>
-          <SectionHeading>Built for teams with real data.</SectionHeading>
+          <SectionHeading>What builders are saying.</SectionHeading>
         </div>
         <div className={`grid grid-cols-1 gap-4 ${cols}`}>
           {TESTIMONIALS.map((t) => (
