@@ -54,6 +54,7 @@ const BILLING_FAQS: FaqItem[] = [
       "Egress is any data transferred out of your bucket: to the internet, to another cloud or to your own servers. On a paid plan there is no egress charge, subject to reasonable use, and no per-request charges either. The 30-day trial includes 2 TB of egress.",
   },
   {
+    id: "reasonable-use",
     question: "What does reasonable use mean?",
     answer:
       "Training reads, restores, full scans and rehydration are what the storage is for, and they fall well within reasonable use. The reasonable-use policy covers cases object storage is not designed for: CDN-like use cases, where egress runs at many times the amount stored, month after month. For those, the standard setup is to put a CDN in front of the Fil One bucket, using Fil One as the CDN origin. If a workload is heading toward that pattern, we will contact you first. Storage on a cross-connect in your own facility never touches the internet, so the policy does not apply there.",

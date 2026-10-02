@@ -1,4 +1,4 @@
-import { useState, isValidElement, type ReactNode } from "react";
+import { useEffect, useState, isValidElement, type ReactNode } from "react";
 import { CaretDown } from "@phosphor-icons/react";
 import { useInView } from "@/hooks/useInView";
 import JsonLd from "@/components/JsonLd";
@@ -13,6 +13,8 @@ import { S3_ENDPOINT_HOST } from "@/lib/s3-endpoint";
 export interface FaqItem {
   question: string;
   answer: ReactNode;
+  /** Anchor id, so a link elsewhere on the site can open this question. */
+  id?: string;
 }
 
 const faqs: FaqItem[] = [
@@ -49,6 +51,7 @@ const faqs: FaqItem[] = [
       "Egress is any data transferred out of your bucket: to the internet, to another cloud, or to your own servers. On a paid plan there is no egress charge, subject to reasonable use, and there are no per-request charges either. The 30-day trial includes 2 TB of egress. Upgrade to a paid plan to keep downloading after that.",
   },
   {
+    id: "reasonable-use",
     question: "What does reasonable use mean?",
     answer:
       "Training reads, restores, full scans and rehydration are what the storage is for, and they fall well within reasonable use. The reasonable-use policy covers cases object storage is not designed for: CDN-like use cases, where egress runs at many times the amount stored, month after month. For those, the standard setup is to put a CDN in front of the Fil One bucket, using Fil One as the CDN origin. If a workload is heading toward that pattern, we will contact you first. Storage on a cross-connect in your own facility never touches the internet, so the policy does not apply there.",
@@ -144,6 +147,18 @@ const FaqSection = ({ include, items, label = "FAQ", title = "Frequently asked q
   const source = items ?? faqs;
   const visibleFaqs = include ? source.filter((f) => include.includes(f.question)) : source;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  // A link to #<item id> opens that question and scrolls to it.
+  useEffect(() => {
+    const openFromHash = () => {
+      const hash = window.location.hash.slice(1);
+      if (!hash) return;
+      const i = visibleFaqs.findIndex((f) => f.id === hash);
+      if (i >= 0) setOpenIndex(i);
+    };
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => window.removeEventListener("hashchange", openFromHash);
+  }, [visibleFaqs]);
   const { ref: headingRef, inView: headingInView } = useInView();
   const { ref: listRef, inView: listInView } = useInView({ threshold: 0.04 });
 
@@ -191,7 +206,8 @@ const FaqSection = ({ include, items, label = "FAQ", title = "Frequently asked q
           return (
             <div
               key={faq.question}
-              style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}
+              id={faq.id}
+              style={{ borderTop: "1px solid rgba(0,0,0,0.07)", scrollMarginTop: 96 }}
             >
               <button
                 id={buttonId}

@@ -11,6 +11,8 @@ interface ComparisonRow {
   /** Renders the values large, for the headline price row. */
   emphasis?: boolean;
   cells: Record<ProviderKey, string>;
+  /** Footnote marker on Fil One's value; the note itself links to the FAQ. */
+  filoneFootnote?: boolean;
 }
 
 /** Desktop column order: competitors left to right, Fil One in the card at the right. */
@@ -59,8 +61,9 @@ const comparisonRows: ComparisonRow[] = [
       backblaze: `Free up to ${B2.freeEgressMultiplier}× the data stored, then ${perGB(B2.egressPricePerTB)}`,
       wasabi: "Free while monthly egress stays at or below stored volume",
       r2: "Free",
-      filone: "Free, subject to reasonable use",
+      filone: "Free",
     },
+    filoneFootnote: true,
   },
   {
     feature: "Request and API charges",
@@ -110,14 +113,28 @@ const comparisonRows: ComparisonRow[] = [
  * competitors in grey, so the eye lands on our terms without a glyph
  * grading anyone.
  */
+const FOOTNOTE_HREF = "#reasonable-use";
+
+const FootnoteMark = () => (
+  <a
+    href={FOOTNOTE_HREF}
+    aria-label="See what reasonable use means"
+    className="ml-0.5 align-super text-[10px] text-zinc-500 no-underline hover:text-brand-600"
+  >
+    1
+  </a>
+);
+
 const CellContent = ({
   text,
   isFilOne,
   emphasis,
+  footnote,
 }: {
   text: string;
   isFilOne: boolean;
   emphasis?: boolean;
+  footnote?: boolean;
 }) =>
   emphasis ? (
     <span
@@ -134,6 +151,7 @@ const CellContent = ({
       }`}
     >
       {text}
+      {footnote && <FootnoteMark />}
     </span>
   );
 
@@ -146,7 +164,11 @@ const sources: { label: string; href: string }[] = [
 
 const Footnote = () => (
   <p className="font-sans text-small leading-[1.6] text-zinc-500 m-0">
-    Competitors' published list prices and published policies, checked 2 October 2026. AWS S3
+    <sup className="text-[10px]">1</sup>{" "}
+    <a href={FOOTNOTE_HREF} className="text-zinc-600 underline underline-offset-2 hover:text-brand-600">
+      Subject to reasonable use
+    </a>
+    . Competitors' published list prices and published policies, checked 2 October 2026. AWS S3
     Standard and request rates for Europe (Ireland, eu-west-1); Backblaze B2, Wasabi pay as you go and
     Cloudflare R2 Standard at list. Per-TB figures use 1 TB = 1,000 GB. Vendors change their terms,
     so check before you commit:{" "}
@@ -253,6 +275,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
                           text={row.cells[provider.key]}
                           isFilOne={isFilOne}
                           emphasis={row.emphasis}
+                          footnote={isFilOne && row.filoneFootnote}
                         />
                       </div>
                     );
@@ -326,6 +349,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
                         text={row.cells[provider.key]}
                         isFilOne={isFilOne}
                         emphasis={row.emphasis}
+                        footnote={isFilOne && row.filoneFootnote}
                       />
                     </div>
                   </div>
