@@ -7,6 +7,7 @@ import { SectionLabel } from "@/components/LandingPrimitives";
 import FaqSection, { type FaqItem } from "@/components/FaqSection";
 import PricingCard from "@/components/PricingCard";
 import ProofStrip from "@/components/ProofStrip";
+import ComparisonSection from "@/components/ComparisonSection";
 import CostCalculatorSection from "@/components/CostCalculatorSection";
 import CtaBanner from "@/components/CtaBanner";
 import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
@@ -165,6 +166,9 @@ const PricingPage = () => {
 
         {/* ── Calculator ───────────────────────────────────────────────────── */}
         <CostCalculatorSection id="calculator" competitors={COMPETITORS} tone="dark" />
+
+        {/* ── Comparison table ── terms side by side, after the number */}
+        <ComparisonSection />
 
         {/* ── Billing FAQ ──────────────────────────────────────────────────── */}
         <FaqSection
