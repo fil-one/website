@@ -119,9 +119,9 @@ const FootnoteMark = () => (
   <a
     href={FOOTNOTE_HREF}
     aria-label="See what reasonable use means"
-    className="ml-0.5 align-super text-[10px] text-zinc-500 no-underline hover:text-brand-600"
+    className="ml-0.5 text-zinc-500 no-underline hover:text-brand-600"
   >
-    1
+    *
   </a>
 );
 
@@ -163,12 +163,9 @@ const sources: { label: string; href: string }[] = [
 ];
 
 const Footnote = () => (
+  <div className="flex flex-col gap-2">
   <p className="font-sans text-small leading-[1.6] text-zinc-500 m-0">
-    <sup className="text-[10px]">1</sup>{" "}
-    <a href={FOOTNOTE_HREF} className="text-zinc-600 underline underline-offset-2 hover:text-brand-600">
-      Subject to reasonable use
-    </a>
-    . Competitors' published list prices and published policies, checked 2 October 2026. AWS S3
+    Competitors' published list prices and published policies, checked 2 October 2026. AWS S3
     Standard and request rates for Europe (Ireland, eu-west-1); Backblaze B2, Wasabi pay as you go and
     Cloudflare R2 Standard at list. Per-TB figures use 1 TB = 1,000 GB. Vendors change their terms,
     so check before you commit:{" "}
@@ -186,6 +183,14 @@ const Footnote = () => (
       </span>
     ))}
   </p>
+  <p className="font-sans text-small leading-[1.6] text-zinc-500 m-0">
+    * Subject to reasonable use.{" "}
+    <a href={FOOTNOTE_HREF} className="text-zinc-600 underline underline-offset-2 hover:text-brand-600">
+      See what that means
+    </a>
+    .
+  </p>
+  </div>
 );
 
 const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
