@@ -163,7 +163,7 @@ const sources: { label: string; href: string }[] = [
 ];
 
 const Footnote = () => (
-  <div className="flex flex-col gap-2">
+  <div className="flex flex-col gap-1">
   <p className="font-sans text-small leading-[1.6] text-zinc-500 m-0">
     Competitors' published list prices and published policies, checked 2 October 2026. AWS S3
     Standard and request rates for Europe (Ireland, eu-west-1); Backblaze B2, Wasabi pay as you go and
