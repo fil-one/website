@@ -64,7 +64,7 @@ const faqs: FaqItem[] = [
   {
     question: "How durable is my data?",
     answer:
-      "Fil One is designed for eleven nines (99.999999999%) of durability. Every object is erasure coded across independent storage providers, so the loss of drives or a whole site does not lose data, and integrity is checked continuously.",
+      "Every object is erasure coded across independent drives, so losing drives does not lose data.",
   },
   {
     question: "Where is my data stored?",
