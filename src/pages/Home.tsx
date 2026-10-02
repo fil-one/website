@@ -8,6 +8,7 @@ import WorkloadsGrid from "@/components/WorkloadsGrid";
 import TeamsSection from "@/components/TeamsSection";
 import DevelopersSection from "@/components/DevelopersSection";
 import { PressBar } from "@/components/PressBar";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import FaqSection from "@/components/FaqSection";
 import CtaBanner from "@/components/CtaBanner";
 import Footer from "@/components/Footer";
@@ -77,7 +78,7 @@ const Home = () => {
             <ProofStrip
               items={[
                 { figure: "Multi-Gbps", label: "Sustained reads" },
-                { figure: "$0", label: "Egress and API requests", note: "Subject to fair use." },
+                { figure: "$0", label: "Egress and API requests", note: "Subject to reasonable use." },
                 { figure: PRICE_DISPLAY, label: "Per TB per month" },
               ]}
             />
@@ -95,6 +96,9 @@ const Home = () => {
 
         {/* Developers — change the endpoint, keep your code */}
         <DevelopersSection />
+
+        {/* Customers — cleared quotes, name and company only */}
+        <TestimonialsSection />
 
         {/* Press — Fast Company and "Also featured in", on the tint band */}
         <PressBar tone="tint" />
