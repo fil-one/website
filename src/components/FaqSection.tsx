@@ -62,11 +62,6 @@ const faqs: FaqItem[] = [
     ),
   },
   {
-    question: "How durable is my data?",
-    answer:
-      "Every object is erasure coded across independent drives, so losing drives does not lose data.",
-  },
-  {
     question: "Where is my data stored?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
