@@ -2,7 +2,7 @@ import { useInView } from "@/hooks/useInView";
 import { signupUrl } from "@/lib/console-url";
 import { COMPETITORS, PRICE_DISPLAY, type Competitor } from "@/lib/pricing";
 import filOneLogo from "@/assets/fil-one-logo.svg";
-import { SectionHeading } from "@/components/LandingPrimitives";
+import { SectionLabel, SectionHeading } from "@/components/LandingPrimitives";
 
 type ProviderKey = "aws" | "backblaze" | "wasabi" | "r2" | "filone";
 
@@ -186,7 +186,8 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
         ref={headingRef}
         className={`flex flex-col gap-3 items-center text-center w-full max-w-[600px] reveal${headingInView ? " in-view" : ""}`}
       >
-        <SectionHeading>The fine print, side by side.</SectionHeading>
+        <SectionLabel>Comparison</SectionLabel>
+        <SectionHeading>Why Fil One.</SectionHeading>
       </div>
 
       {/* Table */}
