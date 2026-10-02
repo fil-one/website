@@ -32,10 +32,6 @@ const QUICK_LINKS = [
 
 const FAQS = [
   {
-    q: "Does Fil One support IPFS or CIDs?",
-    a: "No. Fil One is S3-compatible object storage. It does not support IPFS retrieval or content addressing via CIDs. If you need IPFS pinning or CID-based access, take a look at Filecoin Open Cloud (FOC).",
-  },
-  {
     q: "Can I make a bucket public?",
     a: "Public buckets are not currently supported. To share individual files, you can generate a presigned URL from the dashboard or via the S3 API. This gives time-limited access to a specific object without making the entire bucket public.",
   },
