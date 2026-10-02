@@ -1,42 +1,96 @@
 import { useEffect } from "react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
 import { useSeo } from "@/hooks/useSeo";
-import { HeroHeading } from "@/components/LandingPrimitives";
-import FaqSection from "@/components/FaqSection";
-import { PressBar } from "@/components/PressBar";
+import { SectionLabel } from "@/components/LandingPrimitives";
+import FaqSection, { type FaqItem } from "@/components/FaqSection";
 import PricingCard from "@/components/PricingCard";
-import StatGridSection from "@/components/StatGridSection";
+import ProofStrip from "@/components/ProofStrip";
+import ComparisonSection from "@/components/ComparisonSection";
 import CostCalculatorSection from "@/components/CostCalculatorSection";
 import CtaBanner from "@/components/CtaBanner";
-import { COMPETITORS, PRICE_DISPLAY, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
+import { COMPETITORS, MONTHLY_MINIMUM_DISPLAY, PRICE_DISPLAY } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
-// ─── Pricing tiers ─────────────────────────────────────────────────────────────
+const DOCS_URL = "https://docs.fil.one";
+const SALES_HREF = "/contact-sales";
+
+// ─── Plans ─────────────────────────────────────────────────────────────────────
 const PAYGO_FEATURES = [
-  "1 TB free for 30 days",
-  "Pay monthly",
-  `${PRICE_DISPLAY}/month minimum`,
-  "No egress or API request fees",
-  "Data integrity guarantees",
+  "1 TB free for 30 days, no credit card",
+  "No API charges or retrieval fees",
+  "Object Lock and versioning included",
+  `${MONTHLY_MINIMUM_DISPLAY} monthly minimum`,
 ];
 
-const BUSINESS_FEATURES = [
-  "Purchase in 1, 3, or 5-year increments",
-  "No egress or API request fees",
-  "Data integrity guarantees",
+const RESERVED_FEATURES = [
+  "Commit for 1, 3 or 5 years",
   "Capacity assurance and deployment SLAs",
+  "Everything in Pay as you go",
+  "Guided migration and invoicing",
 ];
 
+const FEES = [
+  { figure: "$0", label: "Egress", note: "Subject to reasonable use." },
+  { figure: "$0", label: "API requests" },
+  { figure: "$0", label: "Retrieval fees" },
+];
+
+// ─── Billing FAQ ───────────────────────────────────────────────────────────────
+const BILLING_FAQS: FaqItem[] = [
+  {
+    question: "How is my bill calculated?",
+    answer: `You pay ${PRICE_DISPLAY} per TB stored per month, and nothing for egress, API requests or retrieval, subject to reasonable use. There are no tiers to move between and no minimum storage duration.`,
+  },
+  {
+    question: "Is there a minimum charge?",
+    answer: `Yes, ${MONTHLY_MINIMUM_DISPLAY} a month. Store under 1 TB and you pay the minimum; store more and you pay per TB for what you use.`,
+  },
+  {
+    question: "What counts as egress?",
+    answer:
+      "Egress is any data transferred out of your bucket: to the internet, to another cloud or to your own servers. On a paid plan there is no egress charge, subject to reasonable use, and no per-request charges either. The 30-day trial includes 2 TB of egress.",
+  },
+  {
+    id: "reasonable-use",
+    question: "What does reasonable use mean?",
+    answer:
+      "Training reads, restores, full scans and rehydration are what the storage is for, and they fall well within reasonable use. The reasonable-use policy covers cases object storage is not designed for: CDN-like use cases, where egress runs at many times the amount stored, month after month. For those, the standard setup is to put a CDN in front of the Fil One bucket, using Fil One as the CDN origin. If a workload is heading toward that pattern, we will contact you first. Storage on a cross-connect in your own facility never touches the internet, so the policy does not apply there.",
+  },
+  {
+    question: "What's included in the free trial?",
+    answer:
+      "1 TB of storage and 2 TB of egress for 30 days, with no credit card required. Every feature is included, so you can test Object Lock, versioning and your own tooling before you pay anything. Upgrade to a paid plan to keep going after that.",
+  },
+  {
+    question: "How does reserved capacity work?",
+    answer: (
+      <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
+        <p>
+          Commit to a capacity for 1, 3 or 5 years and we price it for you, with capacity assurance and deployment SLAs, guided migration and invoicing. Everything in Pay as you go is included.{" "}
+          <a href={SALES_HREF} className="faq-link">Talk to sales</a> and we will put a quote together.
+        </p>
+      </div>
+    ),
+  },
+  {
+    question: "How can I pay?",
+    answer: (
+      <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
+        <p>
+          Pay as you go is billed monthly in USD. Reserved capacity is invoiced. We do not currently accept FIL; if paying in FIL is a hard requirement,{" "}
+          <a href={SALES_HREF} className="faq-link">get in touch</a> and we can explore options depending on your storage volume.
+        </p>
+      </div>
+    ),
+  },
+];
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 const PricingPage = () => {
-  useSeo({
-    title: "Pricing · Fil One",
-    description:
-      `S3-compatible object storage at ${PRICE_DISPLAY}/TB with no egress fees. See how much you could save compared to AWS, Google Cloud, and Azure.`,
-    canonical: "https://www.fil.one/pricing",
-  });
+  useSeo();
 
   // Deep links like /pricing#calculator arrive as a full page load; the target
   // section only exists after render, so scroll to it once on mount.
@@ -50,80 +104,92 @@ const PricingPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-white">
+    <div className="min-h-screen overflow-x-clip bg-white">
       <PlatformNavbar />
 
       <main id="main-content">
-
-        {/* ── Hero ─────────────────────────────────────────────────────────── */}
-        <section className="px-5 md:px-8 pt-[58px] md:pt-[94px] pb-16 md:pb-24 w-full bg-white">
-          <div className="flex flex-col items-center gap-10 w-full max-w-container mx-auto pt-16 md:pt-24">
-            <HeroHeading
-              title={<>The <span className="text-gradient-flow">cheapest S3-compatible</span> storage solution.</>}
-              description="One flat rate per TB. No egress fees and no API charges."
-              titleMaxWidth={800}
-              descriptionMaxWidth={520}
-            />
-
-            {/* Pricing cards */}
-            <div className="flex flex-col md:flex-row gap-4 w-full max-w-[800px]">
+        {/* ── Hero + plans ─────────────────────────────────────────────────── */}
+        <div className="relative isolate overflow-hidden bg-white">
+          <Hero
+            grid
+            glow
+            badge={<SectionLabel>Pricing</SectionLabel>}
+            title={
+              <>
+                Serious performance.
+                <br />
+                <span className="text-brand-500">Simple pricing.</span>
+              </>
+            }
+            description={`One flat rate: ${PRICE_DISPLAY} per TB per month for S3-compatible storage. No API charges, no retrieval fees, no surprises.`}
+            titleMaxWidth={780}
+            descriptionMaxWidth={640}
+            contentClassName="pb-6"
+          >
+            <div className="mt-14 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
               <PricingCard
-                name="Pay-as-you-go"
+                name="Pay as you go"
                 tagline="For teams getting started"
                 price={PRICE_DISPLAY}
-                priceSuffix="/ TB / month"
-                priceNote="Free for the first 30 days."
+                priceSuffix="per TB per month"
                 features={PAYGO_FEATURES}
-                cta={{ label: "Start for free", href: signupUrl(), variant: "primary" }}
+                cta={{
+                  label: "Start for free",
+                  href: signupUrl(),
+                  variant: "primary",
+                  onClick: () => trackCtaClick("Start for free", signupUrl(), "primary"),
+                }}
                 highlighted
               />
               <PricingCard
-                name="Business"
-                tagline="For enterprises with scale"
-                price="Custom pricing"
-                priceSize={32}
-                priceNote="Ideal for predictable storage needs or compliance-driven requirements."
-                features={BUSINESS_FEATURES}
-                cta={{ label: "Contact sales", href: "/contact-sales", variant: "secondary" }}
+                name="Reserved capacity"
+                tagline="For teams at scale"
+                price="Custom"
+                features={RESERVED_FEATURES}
+                cta={{
+                  label: "Talk to sales",
+                  href: SALES_HREF,
+                  variant: "secondary",
+                  onClick: () => trackCtaClick("Talk to sales", SALES_HREF, "secondary"),
+                }}
               />
             </div>
+          </Hero>
+        </div>
+
+        {/* ── No hidden fees ───────────────────────────────────────────────── */}
+        <section className="w-full px-5 pb-24 pt-10 md:px-8">
+          <div className="mx-auto flex w-full max-w-container flex-col items-center gap-5 border-t border-black/[0.08] pt-8">
+            <SectionLabel>No hidden fees</SectionLabel>
+            <ProofStrip items={FEES} />
           </div>
         </section>
 
-        {/* ── No hidden fees ───────────────────────────────────────────────── */}
-        <StatGridSection
-          label="What's included"
-          heading="No hidden fees"
-          description={`${PRICE_PER_TB_MONTH} for storage capacity. Everything else is included.`}
-          stats={[
-            { stat: "$0", label: "Egress fees" },
-            { stat: "$0", label: "API request fees" },
-            { stat: "$0", label: "Exit fees" },
-          ]}
+        {/* ── Calculator ───────────────────────────────────────────────────── */}
+        <CostCalculatorSection id="calculator" competitors={COMPETITORS} tone="dark" />
+
+        {/* ── Comparison table ── terms side by side, after the number */}
+        <ComparisonSection />
+
+        {/* ── Billing FAQ ──────────────────────────────────────────────────── */}
+        <FaqSection
+          items={BILLING_FAQS}
+          layout="side"
+          label="Billing FAQ"
+          title="Questions about pricing"
+          sideLink={{ label: "More answers in the docs ↗", href: DOCS_URL, external: true, onClick: () => trackDocsClick(DOCS_URL) }}
         />
-
-        {/* ── Cost calculator ───────────────────────────────────────────────── */}
-        <CostCalculatorSection id="calculator" competitors={COMPETITORS} />
-
-        {/* ── Publications ─────────────────────────────────────────────────── */}
-        <PressBar tone="grey" />
-
-        {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-        <FaqSection include={[
-          "What counts as egress?",
-          "How is my bill calculated?",
-          "Do you offer annual or reserved capacity plans?",
-          "Where is my data stored?",
-        ]} />
 
         {/* ── CTA banner ───────────────────────────────────────────────────── */}
         <CtaBanner
-          heading="Up to 22× cheaper than AWS"
-          subhead={`${PRICE_DISPLAY}/TB, no egress fees, up and running in minutes.`}
-          cta={{ label: "Start for free", href: signupUrl() }}
-          note="No credit card required"
+          image="window"
+          heading="Bring a workload."
+          headingMaxWidth={560}
+          subheadMaxWidth={460}
+          subhead="1 TB free for 30 days, no credit card. Prefer to talk first? Talk to sales."
+          cta={{ label: "Start for free", href: signupUrl(), onClick: () => trackCtaClick("Start for free", signupUrl(), "primary") }}
+          secondaryCta={{ label: "Talk to sales", href: SALES_HREF, onClick: () => trackCtaClick("Talk to sales", SALES_HREF, "secondary") }}
         />
-
       </main>
 
       <Footer />

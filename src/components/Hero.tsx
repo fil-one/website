@@ -69,7 +69,7 @@ const Hero = ({
   const ctaMargin = hasSlot ? "mt-14" : "mt-10";
   const taglineFade = hasSlot ? "hero-fade-4" : "hero-fade-3";
   return (
-  <section className={`relative w-full pt-[58px] md:pt-[94px]${glow || grid ? " isolate" : ""}`}>
+  <section className={`relative w-full pt-header md:pt-header-md${glow || grid ? " isolate" : ""}`}>
     {glow && <div aria-hidden="true" className="absolute inset-0 pointer-events-none -z-10 bg-blue-halo" />}
     {grid && (
       <div
@@ -78,7 +78,7 @@ const Hero = ({
         style={{
           backgroundImage: `url("data:image/svg+xml,${GRID_SVG}")`,
           backgroundSize: "60px 60px",
-          backgroundPosition: "center top",
+          backgroundPosition: "center 30px",
         }}
       />
     )}

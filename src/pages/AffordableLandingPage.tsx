@@ -1,18 +1,21 @@
 import { ArrowsOut, ChartLine, Plug, Database } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
-import { PRICE_DISPLAY, PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { PRICE_DISPLAY, PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
 
+/** Whole-dollar amount, e.g. "$1,157". */
+const usd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
+
 // What you actually pay on each provider for a simple 10 TB workload, light reads.
-// 10 TB stored, 2 TB read/month, 100K GET operations.
-// AWS: 10,240x$0.023=$235.52 storage + 2,048x$0.09=$184.32 egress + 100Kx$0.0004/1K=$0.04 api ~ $420.
-// Google: 10,240x$0.020=$204.80 storage + 2,048x$0.12=$245.76 egress ~ $451.
-// Wasabi: 10TBx$6.99=$69.90 (90-day min billing), $0 egress. Backblaze B2: 10TBx$6=$60, $0 egress.
-// Fil One: 10TBx$4.99=$49.90, $0 egress, $0 api.
+// 10 TB stored, 2 TB read/month, 100K GET operations. Competitor rates match COMPETITORS.
+// AWS eu-west-1: 10,240x$0.023=$235.52 storage + 2,048x$0.09=$184.32 egress + 100Kx$0.0004/1K=$0.04 api ~ $420.
+// Cloudflare R2: 10TBx$15=$150, $0 egress. Wasabi: 10TBx$7.99=$79.90 (90-day min billing), $0 egress.
+// Backblaze B2: 10TBx$6.95=$69.50, 2 TB read is inside the free 3x egress allowance.
+// Fil One: 10TBxPRICE_PER_TB, $0 egress, $0 api.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Make storage your lowest line item",
@@ -28,13 +31,13 @@ const config: LandingPageConfig = {
       <>
         Make storage your lowest line item
         <br />
-        <span className="text-brand-500">and the last thing you worry about.</span>
+        <span className="text-brand-500">and the last thing you worry about</span>
       </>
     ),
     description: `${PRICE_PER_TB_SHORT} flat. No egress fees, no per-request charges, no confusing billing tiers. Buckets and retrieval work exactly as you expect.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
-      { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -54,13 +57,13 @@ const config: LandingPageConfig = {
         label: "Egress surprise",
         tone: "danger",
         catch: "The biggest line comes from reading your data.",
-        body: "At $0.09/GB, downloading 2 TB from AWS costs $184 — 78% of the $236 storage charge for that 10 TB dataset. The bill for 'storing' data is smaller than the bill for using it.",
+        body: "At $0.09/GB, downloading 2 TB from AWS costs $184, 78% of the $236 storage charge for that 10 TB dataset. The bill for 'storing' data is smaller than the bill for using it.",
       },
       {
         label: "The switch friction",
         tone: "brand",
         catch: "Migration looks hard. It isn't.",
-        body: "Teams stay on expensive storage because switching seems like a project. Fil One implements the same S3 API — any tool that writes S3 today connects with a one-line config change.",
+        body: "Teams stay on expensive storage because switching seems like a project. Fil One implements the same S3 API, so any tool that writes S3 today connects with a one-line config change.",
       },
     ],
   },
@@ -83,13 +86,13 @@ const config: LandingPageConfig = {
     ],
     rows: [
       { provider: "AWS S3 Standard", values: { storage: "$236", egress: "$184", api: "$0.04", total: "$420" } },
-      { provider: "Google Cloud", values: { storage: "$205", egress: "$246", api: "$0.05", total: "$451" } },
-      { provider: "Wasabi", values: { storage: "$70", egress: "$0", api: "$0", total: "$70" } },
-      { provider: "Backblaze B2", values: { storage: "$60", egress: "$0", api: "$0", total: "$60" } },
-      { provider: "Fil One", isFilOne: true, values: { storage: "$50", egress: "$0", api: "$0", total: "$50" } },
+      { provider: "Cloudflare R2", values: { storage: "$150", egress: "$0", api: "$0", total: "$150" } },
+      { provider: "Wasabi", values: { storage: "$80", egress: "$0", api: "$0", total: "$80" } },
+      { provider: "Backblaze B2", values: { storage: "$70", egress: "$0", api: "$0", total: "$70" } },
+      { provider: "Fil One", isFilOne: true, values: { storage: usd(10 * PRICE_PER_TB), egress: "$0", api: "$0", total: usd(10 * PRICE_PER_TB) } },
     ],
     footnote:
-      "Public US rate cards Q2 2026. AWS: 10,240 GB × $0.023 = $235.52 storage + 2,048 GB × $0.09 = $184.32 egress. Google: 10,240 × $0.020 = $204.80 + 2,048 × $0.12 = $245.76. Wasabi $6.99/TB, no egress. Backblaze B2 $6/TB, no egress. Fil One $4.99/TB, no egress, no per-request fees.",
+      `Public list rates, September 2026. AWS S3 eu-west-1: 10,240 GB × $0.023 = $235.52 storage + 2,048 GB × $0.09 = $184.32 egress. Cloudflare R2 $15/TB, no egress; reads fall inside its free monthly operations. Wasabi $7.99/TB, no egress. Backblaze B2 $6.95/TB; egress is free up to 3× stored, then $10/TB. Fil One ${PRICE_DISPLAY}/TB, no egress, no per-request fees.`,
   },
 
   features: {
@@ -109,7 +112,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "No egress fees",
-        desc: "Reads are included in flat storage. Download your own data as many times as you need — $0 in egress.",
+        desc: "Reads are included in flat storage. Download your own data as many times as you need for $0 in egress.",
       },
       {
         icon: Plug,
@@ -128,7 +131,7 @@ const config: LandingPageConfig = {
     heading: "One number. No surprises.",
     subhead: "Free 1 TB evaluation. Swap the endpoint in your S3 config and check the invoice at the end of the trial.",
     cta: { label: "Start for free", href: signupUrl() },
-    secondaryCta: { label: "Talk to an expert", href: SALES_URL },
+    secondaryCta: { label: "Talk to sales", href: SALES_URL },
     note: TAGLINE,
   },
 };

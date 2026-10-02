@@ -8,7 +8,7 @@ const SALES_URL = "/contact-sales";
 const TAGLINE = "No credit card required · No per-request fees · Connects in minutes";
 
 // Per-request math, 100M PUT/month.
-// AWS S3: $0.005/1K = $500. Google Cloud: $0.05/10K Class A = $500. Azure: $0.055/10K = $550.
+// AWS S3 eu-west-1: $0.005/1K = $500.
 // Wasabi, Backblaze B2, Fil One: $0 per request.
 const config: LandingPageConfig = {
   seo: {
@@ -18,20 +18,20 @@ const config: LandingPageConfig = {
   },
 
   hero: {
-    badge: "For platform & observability teams",
+    badge: "For platform and observability teams",
     titleMaxWidth: 760,
     descriptionMaxWidth: 580,
     title: (
       <>
         Stop sampling your logs
         <br />
-        <span className="text-brand-500">to save money.</span>
+        <span className="text-brand-500">to save money</span>
       </>
     ),
-    description: `S3-compatible storage at ${PRICE_PER_TB_SHORT} flat. No per-request fees, no egress. Keep every event, every span, every audit trail — without watching the PUT counter.`,
+    description: `S3-compatible storage at ${PRICE_PER_TB_SHORT} flat. No per-request fees, no egress. Keep every event, every span, every audit trail, without watching the PUT counter.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
-      { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -39,7 +39,7 @@ const config: LandingPageConfig = {
   problem: {
     label: "The trap",
     heading: "Logs are billed per write. Logs are written constantly.",
-    sub: "Hyperscaler object storage charges per PUT. A logging pipeline writes by definition. The cheapest way to make the bill smaller is to keep fewer logs — and the price paid for that decision is paid later, in the incident postmortem you cannot reconstruct.",
+    sub: "Hyperscaler object storage charges per PUT. A logging pipeline writes by definition. The cheapest way to make the bill smaller is to keep fewer logs, and the price paid for that decision is paid later, in the incident postmortem you cannot reconstruct.",
     items: [
       {
         label: "What you write",
@@ -51,7 +51,7 @@ const config: LandingPageConfig = {
         label: "What you store",
         tone: "danger",
         catch: "Storage is the smaller line.",
-        body: "10 TB of compressed log data per month is normal for a mid-size platform. Add storage at $0.023/GB and egress for any query that reads back — the bill closes in on $750 a month before you draw a single dashboard.",
+        body: "10 TB of compressed log data per month is normal for a mid-size platform. Add storage at $0.023/GB and egress for any query that reads back, and the bill closes in on $750 a month before you draw a single dashboard.",
       },
       {
         label: "What you give up",
@@ -69,7 +69,7 @@ const config: LandingPageConfig = {
         A logging sink that <span className="text-brand-500">doesn't bill per event.</span>
       </>
     ),
-    sub: "Vector, Fluent Bit, Logstash, OpenTelemetry — anything that already writes S3 — gets a new endpoint. The PUT counter stops mattering.",
+    sub: "Vector, Fluent Bit, Logstash, OpenTelemetry: anything that already writes S3 gets a new endpoint. The PUT counter stops mattering.",
     subMaxWidth: 620,
     caption: "Per-request cost at 100M PUTs/month, by provider",
     columns: [
@@ -78,14 +78,12 @@ const config: LandingPageConfig = {
     ],
     rows: [
       { provider: "AWS S3 Standard", values: { rate: "$0.005 / 1K PUT", total: "$500.00" } },
-      { provider: "Google Cloud", values: { rate: "$0.05 / 10K Class A", total: "$500.00" } },
-      { provider: "Azure Blob", values: { rate: "$0.055 / 10K writes", total: "$550.00" } },
       { provider: "Wasabi", values: { rate: "$0 per request", total: "$0" } },
       { provider: "Backblaze B2", values: { rate: "$0 per request", total: "$0" } },
       { provider: "Fil One", isFilOne: true, values: { rate: "$0 per request", total: "$0" } },
     ],
     footnote:
-      "Public US rate cards, Q2 2026. Storage and egress not included in this line — they are extra on the metered tiers, and zero on Fil One.",
+      "AWS S3 Standard eu-west-1 and public provider rate cards, Q2 2026. Storage and egress not included in this line. They are extra on the metered tiers, and egress is zero on Fil One.",
   },
 
   features: {
@@ -101,12 +99,12 @@ const config: LandingPageConfig = {
       {
         icon: Database,
         title: "No per-request fees",
-        desc: "PUT, GET, LIST, HEAD — all included. The line item that dominates a logging workload on AWS does not exist here.",
+        desc: "PUT, GET, LIST, HEAD: all included. The line item that dominates a logging workload on AWS does not exist here.",
       },
       {
         icon: Plug,
         title: "S3-compatible logging",
-        desc: "Vector, Fluent Bit, Logstash, OpenTelemetry collectors, Loki — all of them write S3. Point them at the Fil One endpoint and ship.",
+        desc: "Vector, Fluent Bit, Logstash, OpenTelemetry collectors, Loki: all of them write S3. Point them at the Fil One endpoint and ship.",
       },
       {
         icon: ChartLine,
@@ -125,7 +123,7 @@ const config: LandingPageConfig = {
     heading: "Keep every log.",
     subhead: "Free 1 TB evaluation. Point your existing collector at the endpoint and watch the request line zero out.",
     cta: { label: "Start for free", href: signupUrl() },
-    secondaryCta: { label: "Talk to an expert", href: SALES_URL },
+    secondaryCta: { label: "Talk to sales", href: SALES_URL },
     note: TAGLINE,
   },
 };

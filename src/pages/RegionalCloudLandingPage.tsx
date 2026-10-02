@@ -15,20 +15,20 @@ const config: LandingPageConfig = {
   },
 
   hero: {
-    badge: "For teams building regional or sovereign cloud offerings",
+    badge: "For regional and sovereign clouds",
     titleMaxWidth: 800,
     descriptionMaxWidth: 580,
     title: (
       <>
         Offer production-grade storage
         <br />
-        <span className="text-brand-500">without building it.</span>
+        <span className="text-brand-500">without building it</span>
       </>
     ),
     description: "S3-compatible object storage infrastructure you can embed in your cloud product. SLA-backed, partner-ready, flat pricing.",
     ctas: [
-      { label: "Talk to our team", href: SALES_URL, variant: "primary" },
-      { label: "Evaluate the API", href: signupUrl(), variant: "secondary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "primary" },
+      { label: "Start for free", href: signupUrl(), variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -36,7 +36,7 @@ const config: LandingPageConfig = {
   problem: {
     label: "Build vs buy",
     heading: "Storage infrastructure is a capex commitment, not a feature.",
-    sub: "Building durable, S3-compatible object storage from scratch requires hardware capex, operational headcount, and years of iteration. Partners who embed Fil One skip that — and launch with a production-grade storage layer on day one.",
+    sub: "Building durable, S3-compatible object storage from scratch requires hardware capex, operational headcount, and years of iteration. Partners who embed Fil One skip that and launch with a production-grade storage layer on day one.",
     items: [
       {
         label: "The build cost",
@@ -66,12 +66,12 @@ const config: LandingPageConfig = {
         What your cloud <span className="text-brand-500">runs on.</span>
       </>
     ),
-    sub: "SLA-backed capacity, full S3 compatibility, and flat pricing — the storage layer your customers see is standard S3, no custom integration required.",
+    sub: "SLA-backed capacity, full S3 compatibility, and flat pricing. The storage layer your customers see is standard S3, no custom integration required.",
     items: [
       {
         icon: Plug,
         title: "S3-compatible API",
-        desc: "Your customers use standard S3 tooling — the same SDKs, CLIs, and integrations they already run. No custom adapters.",
+        desc: "Your customers use standard S3 tooling: the same SDKs, CLIs, and integrations they already run. No custom adapters.",
       },
       {
         icon: ShieldCheck,
@@ -81,12 +81,12 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "No egress penalty",
-        desc: "Your customers move data in and out without egress fees. The cost model does not penalise usage — predictable for them and for you.",
+        desc: "Your customers move data in and out without egress fees. The cost model does not penalize usage, so it stays predictable for them and for you.",
       },
       {
         icon: ChartLine,
         title: "Flat, predictable pricing",
-        desc: `${PRICE_PER_TB_MONTH}, no egress, no per-request fees. Simple cost modelling for your own pricing layer.`,
+        desc: `${PRICE_PER_TB_MONTH}, no egress, no per-request fees. Simple cost modeling for your own pricing layer.`,
       },
     ],
   },
@@ -94,8 +94,8 @@ const config: LandingPageConfig = {
   cta: {
     heading: "Your cloud. Our storage layer underneath.",
     subhead: "Talk to the Fil One partnerships team about embedding the storage layer in your cloud product. Enterprise and multi-year terms available.",
-    cta: { label: "Talk to our team", href: SALES_URL },
-    secondaryCta: { label: "Evaluate the API", href: signupUrl() },
+    cta: { label: "Talk to sales", href: SALES_URL },
+    secondaryCta: { label: "Start for free", href: signupUrl() },
     note: "Partner and enterprise terms available · sales@fil.one",
   },
 };

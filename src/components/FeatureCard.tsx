@@ -25,17 +25,17 @@ interface FeatureCardProps {
  */
 const FeatureCard = ({ icon, title, description, badge, cta, className = "" }: FeatureCardProps) => (
   <div
-    className={`flex flex-col gap-5 p-8 rounded-2xl border border-black/[0.07] bg-white shadow-elevated${
+    className={`flex flex-col gap-5 p-6 sm:p-8 rounded-2xl border border-black/[0.07] bg-white shadow-elevated${
       className ? ` ${className}` : ""
     }`}
   >
     <div className="flex items-center justify-between gap-3">
-      <IconTile icon={icon} size={26} className="h-14 w-14" />
+      <IconTile icon={icon} size="lg" />
       {badge && <Pill tone="neutral" className="whitespace-nowrap">{badge}</Pill>}
     </div>
     <div className="flex flex-1 flex-col gap-2">
-      <h3 className="font-sans font-medium text-[18px] leading-[1.3] text-zinc-950 m-0">{title}</h3>
-      <p className="font-sans font-normal text-[14px] leading-[1.6] text-zinc-500 m-0">{description}</p>
+      <h3 className="font-sans font-medium text-body-lg leading-[1.3] text-zinc-950 m-0 text-balance">{title}</h3>
+      <p className="font-sans font-normal text-body-sm leading-[1.6] text-zinc-500 m-0 text-pretty">{description}</p>
     </div>
     {cta && (
       <TextLink href={cta.href} tone="brand" arrow className="mt-1 self-start">

@@ -1,13 +1,7 @@
 import { lazy, Suspense } from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import type { ReactNode } from "react";
 import { routeDefs, notFoundLoad } from "./routes";
-
-const queryClient = new QueryClient();
 
 // Built once at module scope — lazy() must not be re-created on every render,
 // or React remounts (and re-fetches) the chunk on each render pass.
@@ -15,18 +9,11 @@ const lazyRoutes = routeDefs.map(({ path, load }) => ({ path, Component: lazy(lo
 const NotFound = lazy(notFoundLoad);
 
 /**
- * Providers wrapper — no router dependency.
- * Used both by the client entry (App) and the SSR entry (entry-server.tsx).
+ * App-wide providers wrapper — no router dependency. Currently empty (no page
+ * uses a query client, toasts or tooltips); kept as the single place to add
+ * one. Used both by the client entry (App) and the SSR entry (entry-server.tsx).
  */
-export const AppShell = ({ children }: { children: ReactNode }) => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      {children}
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+export const AppShell = ({ children }: { children: ReactNode }) => <>{children}</>;
 
 /**
  * Client routes — each page is a separate lazy chunk, so a visitor only

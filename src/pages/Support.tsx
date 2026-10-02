@@ -15,6 +15,7 @@ import {
   FormError,
 } from "@/components/FormControls";
 import { HS_SUPPORT_FORM_GUID, submitHubSpotForm } from "@/lib/hubspot";
+import { validateFields, hasErrors, focusFirstInvalid, type FieldErrors } from "@/lib/formValidation";
 import { S3_ENDPOINT_HOST } from "@/lib/s3-endpoint";
 
 const CATEGORY_OPTIONS = [
@@ -31,16 +32,12 @@ const QUICK_LINKS = [
 
 const FAQS = [
   {
-    q: "Does Fil One support IPFS or CIDs?",
-    a: "No. Fil One is S3-compatible object storage. It does not support IPFS retrieval or content addressing via CIDs. If you need IPFS pinning or CID-based access, take a look at Filecoin Open Cloud (FOC).",
-  },
-  {
     q: "Can I make a bucket public?",
     a: "Public buckets are not currently supported. To share individual files, you can generate a presigned URL from the dashboard or via the S3 API. This gives time-limited access to a specific object without making the entire bucket public.",
   },
   {
     q: "Are there any hidden fees on top of the storage price?",
-    a: "No. Fil One charges a flat rate per TB stored per month with no egress fees, no API request charges, and no retrieval penalties. What you see is what you pay.",
+    a: "No. Fil One charges a flat rate per TB stored per month with no egress penalties, no API request charges, and no retrieval penalties. What you see is what you pay.",
   },
   {
     q: "How do I migrate from Storacha or another S3-compatible provider?",
@@ -53,11 +50,7 @@ const FAQS = [
 ];
 
 const Support = () => {
-  useSeo({
-    title: "Support · Fil One S3 Object Storage",
-    description: "Get help from the Fil One support team. Submit a request and we'll get back to you shortly.",
-    canonical: "https://www.fil.one/support",
-  });
+  useSeo();
 
   const [form, setForm] = useState({
     firstname: "",
@@ -70,14 +63,17 @@ const Support = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [categoryError, setCategoryError] = useState(false);
+  const [errors, setErrors] = useState<FieldErrors<keyof typeof form>>({});
 
   const set = (key: keyof Omit<typeof form, "categories">) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => setForm((f) => ({ ...f, [key]: e.target.value }));
+  ) => {
+    setForm((f) => ({ ...f, [key]: e.target.value }));
+    setErrors((errs) => ({ ...errs, [key]: undefined }));
+  };
 
   const toggleCategory = (value: string) => {
-    setCategoryError(false);
+    setErrors((errs) => ({ ...errs, categories: undefined }));
     setForm((f) => ({
       ...f,
       categories: f.categories.includes(value)
@@ -86,15 +82,23 @@ const Support = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (form.categories.length === 0) {
-      setCategoryError(true);
+    const fieldErrors = validateFields<keyof typeof form>({
+      firstname: { value: form.firstname, required: true },
+      lastname: { value: form.lastname },
+      email: { value: form.email, required: true, email: true },
+      company: { value: form.company },
+      content: { value: form.content, required: true },
+      categories: { value: form.categories, required: true, message: "Please select at least one category." },
+    });
+    setErrors(fieldErrors);
+    if (hasErrors(fieldErrors)) {
+      focusFirstInvalid(e.currentTarget);
       return;
     }
     setLoading(true);
     setError(null);
-    setCategoryError(false);
 
     const result = await submitHubSpotForm({
       formGuid: HS_SUPPORT_FORM_GUID,
@@ -107,6 +111,12 @@ const Support = () => {
         { objectTypeId: "0-5", name: "content", value: form.content },
         { objectTypeId: "0-5", name: "hs_ticket_category", value: form.categories.join(";") },
       ],
+      legalConsentOptions: {
+        consent: {
+          consentToProcess: true,
+          text: "By clicking submit, you consent to allow Fil One to store and process the information submitted.",
+        },
+      },
     });
 
     setLoading(false);
@@ -168,11 +178,11 @@ const Support = () => {
           </div>
 
           {submitted ? (
-            <FormSuccess title="We'll be in touch soon.">
-              Thanks for reaching out. Our team will review your request and get back to you shortly.
+            <FormSuccess title="Thanks, we'll be in touch">
+              Our team will review your request and get back to you shortly.
             </FormSuccess>
           ) : (
-            <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-6" noValidate>
 
               {/* First / Last name row */}
               <div className="grid grid-cols-2 gap-4">
@@ -183,6 +193,7 @@ const Support = () => {
                   value={form.firstname}
                   onChange={set("firstname")}
                   placeholder="Jane"
+                  error={errors.firstname}
                 />
                 <TextField
                   label="Last name"
@@ -202,6 +213,7 @@ const Support = () => {
                   value={form.email}
                   onChange={set("email")}
                   placeholder="jane@acme.com"
+                  error={errors.email}
                 />
                 <TextField
                   label="Company name"
@@ -219,6 +231,7 @@ const Support = () => {
                 onChange={set("content")}
                 placeholder="Describe your issue or question…"
                 rows={5}
+                error={errors.content}
               />
 
               <CheckboxField
@@ -227,7 +240,7 @@ const Support = () => {
                 options={CATEGORY_OPTIONS}
                 values={form.categories}
                 onToggle={toggleCategory}
-                error={categoryError ? "Please select at least one category." : undefined}
+                error={errors.categories}
               />
 
               <div className="h-px w-full bg-black/[0.07]" />
@@ -236,6 +249,7 @@ const Support = () => {
               <p className="font-sans font-normal text-[13px] leading-[1.7] text-zinc-500">
                 Fil One needs the contact information you provide to us to contact you about our products and services. You may unsubscribe from these communications at any time. For information on how to unsubscribe, as well as our privacy practices and commitment to protecting your privacy, please review our{" "}
                 <a href="/privacy" className="text-zinc-500 underline">Privacy Policy</a>.
+                {" "}By clicking submit, you consent to allow Fil One to store and process the information submitted.
               </p>
 
               {/* Response time */}

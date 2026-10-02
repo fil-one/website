@@ -1,11 +1,16 @@
 import { ArrowsOut, ChartLine, Plug } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
-import { PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
+import { PRICE_DISPLAY, PRICE_PER_TB, PRICE_PER_TB_SHORT, PRICE_PER_TB_MONTH } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
+
+/** Whole-dollar amount, e.g. "$60". */
+const usd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
+
+const FIL_10TB = usd(10 * PRICE_PER_TB);
 
 const config: LandingPageConfig = {
   seo: {
@@ -15,20 +20,20 @@ const config: LandingPageConfig = {
   },
 
   hero: {
-    badge: "For teams whose bill is driven by reading, not storing",
+    badge: "For read-heavy workloads",
     titleMaxWidth: 720,
     descriptionMaxWidth: 560,
     title: (
       <>
         Your storage is cheap.
         <br />
-        <span className="text-brand-500">Using it isn't.</span>
+        <span className="text-brand-500">Using it isn't</span>
       </>
     ),
     description: `S3-compatible object storage at ${PRICE_PER_TB_SHORT} flat. No egress. No per-request fees. Read your warehouse, eval set, or media library as often as your team needs to.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
-      { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -60,7 +65,10 @@ const config: LandingPageConfig = {
   },
 
   // Scenario: 10 TB stored + 10 TB read per month + 500K object operations.
-  // USD, computed from published rate cards (US, Q2 2026) — see the footnote.
+  // USD, computed from published list rates (AWS eu-west-1, September 2026); see the footnote.
+  // AWS: 10,240 GB x $0.023 = $236 storage; (10,240 - 100 free) GB x $0.09 = $913 egress; 500K x $0.005/1K = $2.50 ops.
+  // Cloudflare R2: 10 x $15 = $150; ops within the free monthly allowance. Wasabi: 10 x $7.99 = $80.
+  // Backblaze B2: 10 x $6.95 = $69.50; 10 TB read is inside the free 3x egress allowance.
   comparison: {
     label: "The comparison",
     heading: (
@@ -68,7 +76,7 @@ const config: LandingPageConfig = {
         Read 10 TB a month. <span className="text-brand-500">See where it lands.</span>
       </>
     ),
-    sub: "A 10 TB dataset, read in full each month, with 500,000 object operations. Same workload, six providers. Storage is a small slice; egress is the bill.",
+    sub: "A 10 TB dataset, read in full each month, with 500,000 object operations. Same workload, five providers. On AWS, storage is a small slice and egress is the bill.",
     subMaxWidth: 620,
     caption: "Monthly cost for a 10 TB dataset read in full each month, by provider",
     columns: [
@@ -81,32 +89,28 @@ const config: LandingPageConfig = {
     rows: [
       {
         provider: "AWS S3 Standard",
-        values: { region: "us-east-1", storage: "$236", egress: "$913", api: "$2.50", total: "$1,151" },
+        values: { region: "eu-west-1", storage: "$236", egress: "$913", api: "$2.50", total: "$1,151" },
       },
       {
-        provider: "Google Cloud Storage",
-        values: { region: "us multi-region", storage: "$205", egress: "$1,228", api: "$2.50", total: "$1,436" },
-      },
-      {
-        provider: "Azure Blob (Hot)",
-        values: { region: "East US", storage: "$184", egress: "$882", api: "$2.70", total: "$1,069" },
+        provider: "Cloudflare R2",
+        values: { region: "automatic", storage: "$150", egress: "$0", api: "$0", total: "$150" },
       },
       {
         provider: "Wasabi",
-        values: { region: "us-east-1", storage: "$70", egress: "$0", api: "$0", total: "$70" },
+        values: { region: "all regions", storage: "$80", egress: "$0", api: "$0", total: "$80" },
       },
       {
         provider: "Backblaze B2",
-        values: { region: "us-west-002", storage: "$60", egress: "$0", api: "$0", total: "$60" },
+        values: { region: "all regions", storage: "$70", egress: "$0", api: "$0", total: "$70" },
       },
       {
         provider: "Fil One",
         isFilOne: true,
-        values: { region: "global", storage: "$50", egress: "$0", api: "$0", total: "$50" },
+        values: { region: "global", storage: FIL_10TB, egress: "$0", api: "$0", total: FIL_10TB },
       },
     ],
     footnote:
-      "AWS S3 Standard, Google Cloud Storage Standard, and Azure Blob Hot egress and request fees taken from public US rate cards (Q2 2026). Storage shown at first-50 TB tier; egress at first-10 TB tier; ops at 500K mixed PUT/GET. Wasabi flat $6.99/TB; Backblaze B2 $6/TB with first 3× stored-volume egress included.",
+      `Published list rates, September 2026. AWS S3 Standard eu-west-1: storage at the first-50 TB tier, egress at the first-10 TB tier after 100 GB free, ops at 500K PUT requests. Cloudflare R2 $15/TB with no egress fees; 500K ops fall inside its free monthly allowance. Wasabi $7.99/TB with no egress fees under its reasonable-use policy. Backblaze B2 $6.95/TB with egress free up to 3× stored, then $10/TB. Fil One ${PRICE_DISPLAY}/TB, no egress or request fees.`,
   },
 
   workloads: {
@@ -128,7 +132,7 @@ const config: LandingPageConfig = {
             ],
           },
           {
-            label: "Annualised egress alone",
+            label: "Annualized egress alone",
             rows: [
               { name: "Fil One", val: "$0", win: true },
               { name: "AWS S3", val: "$10,956" },
@@ -222,7 +226,7 @@ const config: LandingPageConfig = {
     valueSize: "lg",
     items: [
       { icon: ArrowsOut, label: "Egress", value: "$0", note: "Read as often as you want." },
-      { icon: ChartLine, label: "Per-request fees", value: "$0", note: "PUT, GET, LIST — all included." },
+      { icon: ChartLine, label: "Per-request fees", value: "$0", note: "PUT, GET, and LIST are all included." },
       { icon: Plug, label: "S3 compatibility", value: "Drop-in", note: "Point your SDK at the endpoint." },
     ],
   },
@@ -232,7 +236,7 @@ const config: LandingPageConfig = {
     subhead: "Free 1 TB evaluation bucket. Drop your existing S3 endpoint in and run the same queries.",
     headingMaxWidth: 560,
     cta: { label: "Start for free", href: signupUrl() },
-    secondaryCta: { label: "Talk to an expert", href: SALES_URL },
+    secondaryCta: { label: "Talk to sales", href: SALES_URL },
     note: TAGLINE,
   },
 };
