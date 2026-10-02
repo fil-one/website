@@ -35,7 +35,7 @@ const TestimonialsSection = () => {
   const { ref, inView } = useInView({ threshold: 0.05 });
   const cols = TESTIMONIALS.length >= 3 ? "lg:grid-cols-3" : "md:grid-cols-2";
   return (
-    <section className="w-full px-5 pb-24 md:px-8 md:pb-32">
+    <section className="w-full px-5 py-24 md:px-8 md:py-32">
       <div ref={ref} className={`mx-auto flex w-full max-w-container flex-col gap-10 reveal${inView ? " in-view" : ""}`}>
         <div className="flex flex-col items-center gap-3 text-center">
           <SectionHeading>What builders are saying.</SectionHeading>
