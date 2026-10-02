@@ -214,7 +214,7 @@ const ComparisonSection = ({ bordered = false }: { bordered?: boolean }) => {
         className={`flex flex-col gap-3 items-center text-center w-full max-w-[600px] reveal${headingInView ? " in-view" : ""}`}
       >
         <SectionLabel>Comparison</SectionLabel>
-        <SectionHeading>Why Fil One.</SectionHeading>
+        <SectionHeading>Simple pricing. Fewer surprises.</SectionHeading>
       </div>
 
       {/* Table */}
