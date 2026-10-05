@@ -1,17 +1,22 @@
 import { ArrowsOut, CurrencyDollar, Plug, Lock } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
-import { PRICE_DISPLAY, PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { PRICE_DISPLAY, PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
 const SALES_URL = "/contact-sales";
 
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
 
+/** Whole-dollar amount, e.g. "$60". */
+const usd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
+
+const FIL_10TB = usd(10 * PRICE_PER_TB);
+
 // Access comparison scenario: 10 TB stored, 5 TB/month delivered (IIIF tiles, downloads).
-// AWS S3 Standard: storage 10,240 GB x $0.023/GB ~= $236/mo. Egress: 5,120 GB x $0.09/GB
+// AWS S3 Standard eu-west-1: storage 10,240 GB x $0.023/GB ~= $236/mo. Egress: 5,120 GB x $0.09/GB
 //   ~= $461/mo. All-in ~= $697/mo.
-// Wasabi: $6.99/TB = $70/mo, egress free within fair-use policy.
-// Fil One: $4.99/TB = $50/mo, no egress fees, ever.
+// Wasabi: 10 TB x $7.99 = $80/mo, egress free within fair-use policy.
+// Fil One: 10 TB x PRICE_PER_TB, no egress fees, ever.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Open the collection. Close the tab.",
@@ -20,20 +25,20 @@ const config: LandingPageConfig = {
   },
 
   hero: {
-    badge: "For digital collections & IIIF publishing",
+    badge: "For IIIF and digital collections",
     titleMaxWidth: 820,
     descriptionMaxWidth: 580,
     title: (
       <>
         Open the collection.
         <br />
-        <span className="text-brand-500">Close the tab.</span>
+        <span className="text-brand-500">Close the tab</span>
       </>
     ),
     description: `Flat ${PRICE_PER_TB_SHORT}. Serve IIIF imagery and downloads at $0 egress, no matter how many people open it.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
-      { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -41,7 +46,7 @@ const config: LandingPageConfig = {
   problem: {
     label: "The access penalty",
     heading: "You digitized it to be seen. Then access became the expensive part.",
-    sub: "On metered storage, every view of a high-resolution image is an egress charge. The more your collection is used, the more it costs — so open access starts to feel like a budget liability.",
+    sub: "On metered storage, every view of a high-resolution image is an egress charge. The more your collection is used, the more it costs, so open access starts to feel like a budget liability.",
     items: [
       {
         label: "Popularity is a penalty",
@@ -53,13 +58,13 @@ const config: LandingPageConfig = {
         label: "The unpredictable invoice",
         tone: "danger",
         catch: "You cannot budget a number you cannot predict.",
-        body: "Egress depends on traffic you do not control — a viral object, a linked syllabus, a scraper. A storage line that should be flat becomes a variable you reconcile every month and cannot forecast for the year.",
+        body: "Egress depends on traffic you do not control: a viral object, a linked syllabus, a scraper. A storage line that should be flat becomes a variable you reconcile every month and cannot forecast for the year.",
       },
       {
         label: "Access controls as cost control",
         tone: "brand",
         catch: "Rationing access to manage a bill.",
-        body: "Teams throttle resolution, gate downloads, or cache aggressively — not to support preservation, but to keep egress down. The mission is open access; the pricing model quietly works against it.",
+        body: "Teams throttle resolution, gate downloads, or cache aggressively, not to support preservation but to keep egress down. The mission is open access; the pricing model quietly works against it.",
       },
     ],
   },
@@ -81,17 +86,17 @@ const config: LandingPageConfig = {
     ],
     rows: [
       { provider: "AWS S3 Standard", values: { storage: "$236", egress: "$461", allIn: "$697" } },
-      { provider: "Wasabi", values: { storage: "$70", egress: "$0", allIn: "$70" } },
-      { provider: "Fil One", isFilOne: true, values: { storage: "$50", egress: "$0", allIn: "$50" } },
+      { provider: "Wasabi", values: { storage: "$80", egress: "$0", allIn: "$80" } },
+      { provider: "Fil One", isFilOne: true, values: { storage: FIL_10TB, egress: "$0", allIn: FIL_10TB } },
     ],
     footnote:
-      "Scenario: 10 TB stored with 5 TB/month delivered to viewers (IIIF tiles, derivatives, downloads). AWS S3 Standard: ≈$236/mo storage ($0.023/GB) + 5 TB egress (5,120 GB × $0.09/GB) ≈ $461/mo ≈ $697/mo all-in. Wasabi: $6.99/TB = $70/mo, egress-free within fair-use limits; traffic-heavy collections may incur charges. Fil One: $4.99/TB = $50/mo, $0 egress. AWS and Wasabi rates from public US price cards, Q2 2026; figures indicative and rounded.",
+      `Scenario: 10 TB stored with 5 TB/month delivered to viewers (IIIF tiles, derivatives, downloads). AWS S3 Standard (eu-west-1): ≈$236/mo storage ($0.023/GB) + 5 TB egress (5,120 GB × $0.09/GB) ≈ $461/mo ≈ $697/mo all-in. Wasabi: $7.99/TB = $80/mo, egress-free under its reasonable-use policy, which expects monthly egress to stay below your stored amount. Fil One: ${PRICE_DISPLAY}/TB = ${FIL_10TB}/mo, $0 egress. Published list rates, September 2026; figures indicative and rounded.`,
   },
 
   features: {
     label: "Access without the meter",
     heading: <><span className="text-brand-500">Open access far and wide.</span> The bill does not move.</>,
-    sub: "$0 egress, IIIF compatibility, and immutable masters — access without a per-view tax.",
+    sub: "$0 egress, IIIF compatibility, and immutable masters. Access without a per-view tax.",
     items: [
       {
         icon: ArrowsOut,
@@ -101,12 +106,12 @@ const config: LandingPageConfig = {
       {
         icon: CurrencyDollar,
         title: `Flat ${PRICE_PER_TB_SHORT}`,
-        desc: `One rate for storage, nothing for delivery. The bill is your stored TBs times ${PRICE_DISPLAY} — predictable enough to put in a budget line that holds for years.`,
+        desc: `One rate for storage, nothing for delivery. The bill is your stored TBs times ${PRICE_DISPLAY}, predictable enough to put in a budget line that holds for years.`,
       },
       {
         icon: Plug,
         title: "IIIF server compatible",
-        desc: "Serve directly from the standard S3 API that IIIF image servers like Cantaloupe and IIPImage already read. Point the tile source at Fil One — no re-architecture.",
+        desc: "Serve directly from the standard S3 API that IIIF image servers like Cantaloupe and IIPImage already read. Point the tile source at Fil One with no re-architecture.",
       },
       {
         icon: Lock,
@@ -118,9 +123,9 @@ const config: LandingPageConfig = {
 
   cta: {
     heading: "Open access, flat bill.",
-    subhead: "Start for free with 1 TB. Point your IIIF server at Fil One and serve the collection — at zero egress cost.",
+    subhead: "Start for free with 1 TB. Point your IIIF server at Fil One and serve the collection at zero egress cost.",
     cta: { label: "Start for free", href: signupUrl() },
-    secondaryCta: { label: "Talk to an expert", href: SALES_URL },
+    secondaryCta: { label: "Talk to sales", href: SALES_URL },
     note: TAGLINE,
   },
 };

@@ -83,7 +83,7 @@ const HighlightPill = ({ label }: { label: string }) => (
  * table, so the numbers stay readable on a phone. Only one of the two layouts
  * is in the accessibility tree at a time (the other is `display: none`).
  *
- * Distinct from `ComparisonSection`, which is the check/cross feature matrix.
+ * A price table, not a check/cross feature matrix.
  */
 const PriceComparisonTable = ({
   columns,

@@ -15,20 +15,20 @@ const config: LandingPageConfig = {
   },
 
   hero: {
-    badge: "For EU teams with data residency and control requirements",
+    badge: "For EU data control",
     titleMaxWidth: 760,
     descriptionMaxWidth: 580,
     title: (
       <>
         Your data,
         <br />
-        <span className="text-brand-500">under your control.</span>
+        <span className="text-brand-500">under your control</span>
       </>
     ),
     description: "S3-compatible storage with an EU region endpoint and $0 exit egress. Control means your data stays in the region you chose, and leaving doesn't cost you anything.",
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
-      { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
@@ -36,14 +36,14 @@ const config: LandingPageConfig = {
   problem: {
     label: "The control gap",
     heading: "Hyperscalers offer regions. They don't offer an easy way out.",
-    sub: "Selecting an EU region on AWS or Google Cloud controls where data is written by default. It gives you a contractual assurance, but leaving on your own terms still comes with a metered exit bill.",
+    sub: "Selecting an EU region on AWS controls where data is written by default. It gives you a contractual assurance, but leaving on your own terms still comes with a metered exit bill.",
     subMaxWidth: 620,
     items: [
       {
         label: "The region illusion",
         tone: "warning",
         catch: "A region setting is not the whole story.",
-        body: "Cloud providers replicate, migrate, and process data across infrastructure according to their own operational needs. An EU region bucket stays in EU storage — but the operational boundary is defined by the vendor, not you.",
+        body: "Cloud providers replicate, migrate, and process data across infrastructure according to their own operational needs. An EU region bucket stays in EU storage, but the operational boundary is defined by the vendor, not you.",
       },
       {
         label: "The exit penalty",
@@ -55,7 +55,7 @@ const config: LandingPageConfig = {
         label: "The audit assumption",
         tone: "brand",
         catch: "Compliance asks where data lives, not just where you say it does.",
-        body: "Audit and regulatory frameworks increasingly ask for a specific, documented region and a workable exit path — not a vendor SLA promise. An EU endpoint with $0 exit egress gives you both to point to.",
+        body: "Audit and regulatory frameworks increasingly ask for a specific, documented region and a workable exit path, not a vendor SLA promise. An EU endpoint with $0 exit egress gives you both to point to.",
       },
     ],
   },
@@ -67,23 +67,23 @@ const config: LandingPageConfig = {
         Control that is <span className="text-brand-500">structural, not contractual.</span>
       </>
     ),
-    sub: "An EU endpoint, a free exit, and standard S3 tooling — the concrete pieces that make control real.",
+    sub: "An EU endpoint, a free exit, and standard S3 tooling: the concrete pieces that make control real.",
     columns: 3,
     items: [
       {
         icon: ShieldCheck,
         title: "Encryption at rest and in transit",
-        desc: "TLS protects data moving to and from the endpoint, and objects are encrypted at rest by the storage gateway — always on, no configuration required.",
+        desc: "TLS protects data moving to and from the endpoint, and objects are encrypted at rest by the storage gateway. Always on, no configuration required.",
       },
       {
         icon: ArrowsOut,
         title: "No exit egress",
-        desc: "$0 to move data out. Portability is not penalised. You can leave without an exit bill — which means staying is a choice, not a lock-in.",
+        desc: "$0 to move data out. Portability is not penalized. You can leave without an exit bill, which means staying is a choice, not a lock-in.",
       },
       {
         icon: Plug,
         title: "S3-compatible tooling",
-        desc: "Standard S3 API — your existing SDKs, CLIs, and audit tooling work without custom adapters. Control does not require a new stack.",
+        desc: "Standard S3 API, so your existing SDKs, CLIs, and audit tooling work without custom adapters. Control does not require a new stack.",
       },
     ],
   },
@@ -92,7 +92,7 @@ const config: LandingPageConfig = {
     heading: "Your data. Your region. No exit bill.",
     subhead: "Free 1 TB on the EU endpoint. Point your existing S3 tools and confirm your data stays in eu-west-1.",
     cta: { label: "Start for free", href: signupUrl() },
-    secondaryCta: { label: "Talk to an expert", href: SALES_URL },
+    secondaryCta: { label: "Talk to sales", href: SALES_URL },
     note: TAGLINE,
   },
 };

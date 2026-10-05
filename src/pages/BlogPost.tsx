@@ -68,7 +68,7 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen bg-white">
       <PlatformNavbar />
-      <main id="main-content" className="pt-[58px] md:pt-[94px]">
+      <main id="main-content" className="pt-header md:pt-header-md">
         {loading ? (
           <div className="mx-auto min-h-[60vh] max-w-container-prose px-5 py-20 text-sm text-zinc-500 md:px-8" aria-live="polite">Loading article…</div>
         ) : loadError ? (

@@ -25,19 +25,14 @@ const CARDS = [
 ];
 
 const PriceLandingPage = () => {
-  useSeo({
-    title: `Fil One · ${PRICE_PER_TB_MONTH}. Switch and save.`,
-    description:
-      `Compare flat-rate S3-compatible storage side by side. Fil One is ${PRICE_PER_TB_SHORT} with $0 egress and no per-request fees. Wasabi is $7.99/TB and Backblaze B2 $6.95/TB.`,
-    canonical: "https://www.fil.one/lp/price",
-  });
+  useSeo();
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-white">
       <PlatformNavbar />
       <main id="main-content">
 
-        {/* Hero — price comparison in the shared Hero's children slot */}
+        {/* Hero: price comparison in the shared Hero's children slot */}
         <Hero
           glow
           grid
@@ -46,7 +41,7 @@ const PriceLandingPage = () => {
           titleMaxWidth={720}
           ctas={[
             {
-              label: "Try 30 days for free",
+              label: "Start for free",
               href: signupUrl(),
               variant: "primary",
               size: "lg",
@@ -66,8 +61,8 @@ const PriceLandingPage = () => {
                     : "border border-black/[0.06] bg-white py-7 shadow-elevated")
                 }
               >
-                {/* Logo row — fixed height so all three logos share a baseline.
-                    Competitor marks keep brand colour but are dimmed so Fil One
+                {/* Logo row: fixed height so all three logos share a baseline.
+                    Competitor marks keep brand color but are dimmed so Fil One
                     stays the visual focus. */}
                 <div className="flex h-6 items-center justify-center">
                   <img
@@ -77,7 +72,7 @@ const PriceLandingPage = () => {
                   />
                 </div>
 
-                {/* Price row — number + suffix share a baseline */}
+                {/* Price row: number + suffix share a baseline */}
                 <div className="flex items-end justify-center gap-1.5">
                   <span
                     className={
@@ -127,7 +122,7 @@ const PriceLandingPage = () => {
         <CtaBanner
           heading="The lowest-cost S3 object storage"
           subhead={`${PRICE_DISPLAY}/TB, no egress fees, up and running in minutes.`}
-          cta={{ label: "Try 30 days for free", href: signupUrl() }}
+          cta={{ label: "Start for free", href: signupUrl() }}
           note="No credit card required"
         />
       </main>

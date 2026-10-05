@@ -1,4 +1,5 @@
 import { forwardRef, type ReactNode } from "react";
+import { SectionHeading, SectionLabel, SectionSub } from "@/components/LandingPrimitives";
 
 interface SectionHeaderProps {
   /** Small uppercase mono eyebrow above the title (optional). */
@@ -17,7 +18,8 @@ interface SectionHeaderProps {
 
 /**
  * Standard centered section header: mono eyebrow label + display heading + body subtitle.
- * Replaces the hand-rolled label/h2/p block duplicated across homepage and landing sections.
+ * A thin composition of the LandingPrimitives SectionLabel / SectionHeading /
+ * SectionSub, so every section header shares one type scale.
  * Forwards a ref to the container so callers can attach a `useInView` observer for reveal.
  */
 const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
@@ -27,19 +29,9 @@ const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
       id={id}
       className={`mx-auto flex flex-col items-center gap-3 text-center${className ? ` ${className}` : ""}`}
     >
-      {label && (
-        <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.08em] text-zinc-500">
-          {label}
-        </span>
-      )}
-      <h2 className="m-0 font-display text-[26px] font-medium leading-[1.2] tracking-[-0.02em] text-zinc-950 md:text-[32px]">
-        {title}
-      </h2>
-      {subtitle && (
-        <p className="m-0 font-sans text-[15px] font-normal leading-[1.6] text-zinc-500 md:text-[16px]">
-          {subtitle}
-        </p>
-      )}
+      {label && <SectionLabel>{label}</SectionLabel>}
+      <SectionHeading>{title}</SectionHeading>
+      {subtitle && <SectionSub maxWidth={560}>{subtitle}</SectionSub>}
     </div>
   )
 );

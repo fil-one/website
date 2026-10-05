@@ -1,7 +1,9 @@
 import Table from "@/components/Table";
-import type { Competitor } from "@/lib/pricing";
+import { bandedCost, type Competitor } from "@/lib/pricing";
 
 export type { Competitor };
+
+export type PricingComparisonTone = "light" | "dark";
 
 interface PricingComparisonProps {
   competitors: Competitor[];
@@ -9,6 +11,12 @@ interface PricingComparisonProps {
   storedTB: number;
   /** TB of egress per month */
   egressTB: number;
+  /**
+   * "light" (default): the site table on a white section. "dark": a rows-on-
+   * navy layout for the SpaceCard calculator, where the Fil One row is a solid
+   * brand bar.
+   */
+  tone?: PricingComparisonTone;
 }
 
 /** One competitor with its monthly costs resolved for the current inputs. */
@@ -18,22 +26,69 @@ type ComparisonRow = Competitor & {
   total: number;
 };
 
-// Semantic classes shared by both layouts (mobile cards + desktop table), so
-// the storage/egress colour rules live in exactly one place.
+const usd = (n: number) => `$${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+// Semantic classes shared by both light layouts (mobile cards + desktop table),
+// so the storage/egress colour rules live in exactly one place. Deliberately
+// restrained: neutral zinc for every figure (no green/red), with weight marking
+// the Fil One row and brand-600 reserved for its total.
 const storageClass = (r: ComparisonRow) =>
   r.isFilOne ? "text-zinc-950 font-semibold" : "text-zinc-600 font-normal";
 
 const egressClass = (r: ComparisonRow) =>
-  `${r.isFilOne ? "font-semibold" : "font-normal"} ${
-    r.egress === 0 ? "text-success-600" : r.isFilOne ? "text-zinc-950" : "text-danger-600"
-  }`;
+  r.isFilOne ? "text-zinc-950 font-semibold" : "text-zinc-600 font-normal";
 
 const ProviderLabel = ({ row, className = "" }: { row: ComparisonRow; className?: string }) => (
   <div className={`flex items-center gap-2 flex-wrap${className ? ` ${className}` : ""}`}>
-    <span className={`text-[16px] ${row.isFilOne ? "font-bold text-brand-600" : "font-medium text-zinc-950"}`}>
+    <span className={`text-body-lg ${row.isFilOne ? "font-semibold" : "font-medium"} text-zinc-950`}>
       {row.name}
     </span>
-    {row.region && <span className="font-sans text-[13px] text-zinc-500">{row.region}</span>}
+    {row.region && <span className="font-sans text-small text-zinc-600">{row.region}</span>}
+  </div>
+);
+
+/** Resolve every provider's monthly cost for the inputs, cheapest first. */
+const resolveRows = (competitors: Competitor[], storedTB: number, egressTB: number): ComparisonRow[] =>
+  competitors
+    .map((c) => {
+      const storage = bandedCost(storedTB, c.storagePricePerTB, c.storageTiers);
+      const freeEgressTB = (c.freeEgressTB ?? 0) + (c.freeEgressMultiplier ?? 0) * storedTB;
+      const billableEgressTB = Math.max(0, egressTB - freeEgressTB);
+      const egress = bandedCost(billableEgressTB, c.egressPricePerTB, c.egressTiers);
+      return { ...c, storage, egress, total: storage + egress };
+    })
+    .sort((a, b) => a.total - b.total);
+
+/** The dark layout: a header row and one bar per provider, Fil One in solid brand. */
+const DarkComparison = ({ rows }: { rows: ComparisonRow[] }) => (
+  <div className="flex flex-col rounded-2xl border border-white/[0.12] bg-white/[0.04] p-2 font-sans">
+    <div className={"hidden grid-cols-[1.6fr_1fr_1fr_1fr] px-4 pb-3 pt-2.5 font-mono text-eyebrow uppercase tracking-[0.06em] text-white/55 md:grid"}>
+      <span>Provider</span>
+      <span>Storage</span>
+      <span>Egress</span>
+      <span>Monthly total</span>
+    </div>
+    {rows.map((r, i) => (
+      <div
+        key={r.name}
+        className={`grid grid-cols-2 gap-y-1 px-4 py-3.5 text-[14.5px] md:grid-cols-[1.6fr_1fr_1fr_1fr] md:gap-y-0 ${
+          r.isFilOne ? "rounded-[10px] bg-brand-700 text-white" : `text-white/[0.82] ${i > 0 ? "border-t border-white/10" : ""}`
+        }`}
+      >
+        <span className="col-span-2 font-medium md:col-span-1">
+          {r.name}
+          {r.region && <span className={`ml-2 text-[12.5px] ${r.isFilOne ? "text-white/80" : "text-white/50"}`}>{r.region}</span>}
+        </span>
+        <span className="text-[12.5px] text-white/60 md:hidden">Storage</span>
+        <span className="text-right font-mono md:text-left">{usd(r.storage)}</span>
+        <span className="text-[12.5px] text-white/60 md:hidden">Egress</span>
+        <span className="text-right font-mono md:text-left">
+          {usd(r.egress)}
+        </span>
+        <span className="text-[12.5px] text-white/60 md:hidden">Monthly total</span>
+        <span className="text-right font-mono font-medium md:text-left">{usd(r.total)}</span>
+      </div>
+    ))}
   </div>
 );
 
@@ -43,16 +98,10 @@ const ProviderLabel = ({ row, className = "" }: { row: ComparisonRow; className?
  * <Table> on tablet/desktop from the same rows — so the pricing maths and the
  * conditional colour logic are never duplicated across the two responsive views.
  */
-const PricingComparison = ({ competitors, storedTB, egressTB }: PricingComparisonProps) => {
-  const rows: ComparisonRow[] = competitors
-    .map((c) => {
-      const storage = c.storagePricePerTB * storedTB;
-      const freeEgressTB = (c.freeEgressMultiplier ?? 0) * storedTB;
-      const billableEgressTB = Math.max(0, egressTB - freeEgressTB);
-      const egress = c.egressPricePerTB * billableEgressTB;
-      return { ...c, storage, egress, total: storage + egress };
-    })
-    .sort((a, b) => a.total - b.total);
+const PricingComparison = ({ competitors, storedTB, egressTB, tone = "light" }: PricingComparisonProps) => {
+  const rows = resolveRows(competitors, storedTB, egressTB);
+
+  if (tone === "dark") return <DarkComparison rows={rows} />;
 
   return (
     <>
@@ -62,22 +111,22 @@ const PricingComparison = ({ competitors, storedTB, egressTB }: PricingCompariso
           <div
             key={r.name}
             className={`rounded-2xl p-4 font-sans ${
-              r.isFilOne ? "bg-brand-50 border border-brand-500/25" : "bg-white border border-black/[0.07]"
+              r.isFilOne ? "bg-zinc-50 border border-zinc-300" : "bg-white border border-black/[0.07]"
             }`}
           >
             <ProviderLabel row={r} className="mb-3" />
-            <div className="grid grid-cols-2 gap-y-2 text-[14px]">
-              <span className="text-zinc-500">Storage</span>
-              <span className={`text-right ${storageClass(r)}`}>${r.storage.toFixed(2)}</span>
-              <span className="text-zinc-500">Egress</span>
-              <span className={`text-right ${egressClass(r)}`}>${r.egress.toFixed(2)}</span>
-              <span className="text-zinc-500 font-semibold pt-2 border-t border-black/[0.07] mt-1">Total / month</span>
+            <div className="grid grid-cols-2 gap-y-2 text-body-sm">
+              <span className="text-zinc-600">Storage</span>
+              <span className={`text-right ${storageClass(r)}`}>{usd(r.storage)}</span>
+              <span className="text-zinc-600">Egress</span>
+              <span className={`text-right ${egressClass(r)}`}>{usd(r.egress)}</span>
+              <span className="text-zinc-600 font-semibold pt-2 border-t border-black/[0.07] mt-1">Total / month</span>
               <span
                 className={`text-right font-bold pt-2 border-t border-black/[0.07] mt-1 ${
                   r.isFilOne ? "text-brand-600" : "text-zinc-950"
                 }`}
               >
-                ${r.total.toFixed(2)}
+                {usd(r.total)}
               </span>
             </div>
           </div>
@@ -95,21 +144,21 @@ const PricingComparison = ({ competitors, storedTB, egressTB }: PricingCompariso
         </Table.Head>
         <Table.Body>
           {rows.map((r) => (
-            <Table.Row key={r.name} className={r.isFilOne ? "bg-brand-50" : "bg-transparent"}>
+            <Table.Row key={r.name} className={r.isFilOne ? "bg-zinc-50" : "bg-transparent"}>
               <Table.Cell>
                 <ProviderLabel row={r} />
               </Table.Cell>
-              <Table.Cell className={`text-base ${storageClass(r)}`}>${r.storage.toFixed(2)}</Table.Cell>
-              <Table.Cell className={`text-base ${egressClass(r)}`}>${r.egress.toFixed(2)}</Table.Cell>
+              <Table.Cell className={`text-body ${storageClass(r)}`}>{usd(r.storage)}</Table.Cell>
+              <Table.Cell className={`text-body ${egressClass(r)}`}>{usd(r.egress)}</Table.Cell>
               <Table.Cell>
                 <span
                   className={
                     r.isFilOne
-                      ? "text-[19px] font-bold text-brand-600"
-                      : "text-[16px] font-normal text-zinc-600"
+                      ? "text-body-lg font-semibold text-brand-600"
+                      : "text-body-lg font-normal text-zinc-600"
                   }
                 >
-                  ${r.total.toFixed(2)}
+                  {usd(r.total)}
                 </span>
               </Table.Cell>
             </Table.Row>

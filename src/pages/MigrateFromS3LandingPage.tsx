@@ -13,18 +13,22 @@ import PriceComparisonTable, {
   type PriceComparisonRow,
 } from "@/components/PriceComparisonTable";
 import TextLink from "@/components/TextLink";
-import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { PRICE_DISPLAY, PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
 const SALES_URL = "/contact-sales";
 
+/** Whole-dollar display for a monthly total, e.g. 59.9 -> "$60". */
+const usd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
+const FIL_ONE_10TB = 10 * PRICE_PER_TB;
+
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
 
 // 10 TB stored, 10 TB read/month, 1M GET operations.
-// AWS S3 Standard us-east-1 Q2 2026: storage 10,240 GB x $0.023 = $235.52,
+// AWS S3 Standard eu-west-1 Q2 2026: storage 10,240 GB x $0.023 = $235.52,
 // egress 10,240 GB x $0.09 = $921.60, ops 1,000,000 / 1,000 x $0.0004 = $0.40.
-// Fil One: 10 TB x $4.99 = $49.90, egress $0, ops $0.
+// Fil One: 10 TB x PRICE_PER_TB, egress $0, ops $0.
 const PRICING_COLUMNS: PriceComparisonColumn[] = [
   { key: "storage", header: "Storage" },
   { key: "egress", header: "Egress", colorByValue: true },
@@ -34,7 +38,11 @@ const PRICING_COLUMNS: PriceComparisonColumn[] = [
 
 const PRICING_ROWS: PriceComparisonRow[] = [
   { provider: "AWS S3 Standard", values: { storage: "$236", egress: "$922", api: "$0.40", total: "$1,158" } },
-  { provider: "Fil One", isFilOne: true, values: { storage: "$50", egress: "$0", api: "$0", total: "$50" } },
+  {
+    provider: "Fil One",
+    isFilOne: true,
+    values: { storage: usd(FIL_ONE_10TB), egress: "$0", api: "$0", total: usd(FIL_ONE_10TB) },
+  },
 ];
 
 const FEATURES = [
@@ -60,7 +68,7 @@ const FEATURES = [
   },
 ];
 
-const BOTO3_CODE = `# Before — AWS S3
+const BOTO3_CODE = `# Before · AWS S3
 s3 = boto3.client(
     "s3",
     region_name="us-east-1",
@@ -75,7 +83,7 @@ s3 = boto3.client(
     region_name="eu-west-1",
 )`;
 
-const NODE_CODE = `// Before — AWS S3
+const NODE_CODE = `// Before · AWS S3
 const s3 = new S3Client({ region: "us-east-1" });
 
 // After · Fil One
@@ -89,11 +97,7 @@ const s3 = new S3Client({
 });`;
 
 const MigrateFromS3LandingPage = () => {
-  useSeo({
-    title: "Fil One · Leaving S3 is a config change, not a rewrite",
-    description: `Same SDK. New endpoint. Lower bill. Point your existing S3 tools at Fil One and cut storage costs to ${PRICE_PER_TB_SHORT} flat with $0 egress.`,
-    canonical: "https://www.fil.one/lp/migrate-from-s3",
-  });
+  useSeo();
 
   const { ref: codeRef, inView: codeInView } = useInView({ threshold: 0.05 });
   const { ref: tableRef, inView: tableInView } = useInView({ threshold: 0.05 });
@@ -114,7 +118,7 @@ const MigrateFromS3LandingPage = () => {
           contentClassName="pb-20 md:pb-28"
           badge={
             <div className="inline-flex items-center rounded-full border border-brand/20 bg-brand-50 px-3.5 py-2.5 text-center max-w-[90vw]">
-              <span className="whitespace-nowrap font-sans text-[13.5px] font-medium leading-none text-brand-600">
+              <span className="text-balance font-sans text-[13.5px] font-medium leading-[1.3] text-brand-600 sm:whitespace-nowrap sm:leading-none">
                 For teams on AWS S3 looking to reduce storage costs
               </span>
             </div>
@@ -123,7 +127,7 @@ const MigrateFromS3LandingPage = () => {
             <>
               Leaving S3 is a config change,
               <br />
-              <span className="text-brand-500">not a rewrite.</span>
+              <span className="text-brand-500">not a rewrite</span>
             </>
           }
           description={
@@ -131,12 +135,12 @@ const MigrateFromS3LandingPage = () => {
           }
           ctas={[
             { label: "Start for free", href: signupUrl(), variant: "primary" },
-            { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+            { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
           ]}
           tagline={TAGLINE}
         />
 
-        {/* ── Code block — the endpoint swap ──────────────────────────────── */}
+        {/* ── Code block: the endpoint swap ───────────────────────────────── */}
         <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-zinc-50">
           <div
             ref={codeRef}
@@ -148,7 +152,7 @@ const MigrateFromS3LandingPage = () => {
                 Change the endpoint. <span className="text-brand-500">Nothing else.</span>
               </SectionHeading>
               <SectionSub maxWidth={620}>
-                Fil One implements the S3 API. The code that works on AWS works here — PutObject, GetObject, ListObjectsV2, multipart upload, presigned URLs.
+                Fil One implements the S3 API. The code that works on AWS works here: PutObject, GetObject, ListObjectsV2, multipart upload, presigned URLs.
               </SectionSub>
             </div>
 
@@ -187,7 +191,7 @@ const MigrateFromS3LandingPage = () => {
               columns={PRICING_COLUMNS}
               rows={PRICING_ROWS}
               caption="Monthly cost for 10 TB stored, 10 TB read, AWS S3 Standard vs Fil One"
-              footnote="AWS S3 Standard us-east-1 Q2 2026: $0.023/GB storage, $0.09/GB internet egress, $0.0004/1K GET. Computed from stated inputs — 10,240 GB × $0.023 = $235.52 storage; 10,240 GB × $0.09 = $921.60 egress; 1M × $0.0004/1K = $0.40 ops. Fil One: 10 TB × $4.99 = $49.90, egress $0, ops $0."
+              footnote={`AWS S3 Standard eu-west-1 Q2 2026: $0.023/GB storage, $0.09/GB internet egress, $0.0004/1K GET. Computed from stated inputs: 10,240 GB × $0.023 = $235.52 storage; 10,240 GB × $0.09 = $921.60 egress; 1M × $0.0004/1K = $0.40 ops. Fil One: 10 TB × ${PRICE_DISPLAY} = $${FIL_ONE_10TB.toFixed(2)}, egress $0, ops $0.`}
             />
           </div>
         </section>
@@ -206,7 +210,7 @@ const MigrateFromS3LandingPage = () => {
             </div>
             <div
               ref={featuresRef}
-              className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full reveal-group reveal${featuresInView ? " in-view" : ""}`}
+              className={`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 w-full reveal-group reveal${featuresInView ? " in-view" : ""}`}
             >
               {FEATURES.map(({ icon, title, desc }) => (
                 <FeatureCard
@@ -226,7 +230,7 @@ const MigrateFromS3LandingPage = () => {
           heading="Same SDK. New endpoint. Lower bill."
           subhead="Free 1 TB evaluation. Change two lines and run the same workload. The egress line will not be there."
           cta={{ label: "Start for free", href: signupUrl() }}
-          secondaryCta={{ label: "Talk to an expert", href: SALES_URL }}
+          secondaryCta={{ label: "Talk to sales", href: SALES_URL }}
           note={TAGLINE}
           surface="grey"
         />

@@ -19,20 +19,23 @@ interface PillProps {
   className?: string;
 }
 
+// Every pair clears 4.5:1 at the pill's small size: brand-600 on brand-50
+// 4.7:1, white on brand-600 5.0:1, zinc-600 on zinc-100 7.0:1, white on
+// success-700 5.0:1.
 const TONE_CLASSES: Record<PillTone, Record<PillVariant, string>> = {
   brand: {
     soft: "border border-brand/20 bg-brand-50 text-brand-600",
-    solid: "bg-brand-500 text-white",
+    solid: "bg-brand-600 text-white",
   },
   // For status pills with no brand meaning (e.g. "Coming soon" on a card that
   // isn't itself a highlight) — neutral zinc instead of brand-tinted.
   neutral: {
-    soft: "border border-black/[0.08] bg-zinc-100 text-zinc-500",
-    solid: "bg-zinc-500 text-white",
+    soft: "border border-black/[0.08] bg-zinc-100 text-zinc-600",
+    solid: "bg-zinc-600 text-white",
   },
   success: {
     soft: "border border-success-600/20 bg-success-50 text-success-700",
-    solid: "bg-success-600 text-white",
+    solid: "bg-success-700 text-white",
   },
   // warning-700 / danger-700 on their own 50 tints; the 600 steps land under
   // AA at this size, and the pill text is 11px.
@@ -60,7 +63,7 @@ const Pill = ({
   className = "",
 }: PillProps) => (
   <span
-    className={`inline-flex items-center rounded-full px-2 py-[3px] font-mono text-[11px] font-medium uppercase leading-[1.4] tracking-[0.06em] ${
+    className={`inline-flex items-center rounded-full px-2 py-[3px] font-mono text-eyebrow font-medium uppercase leading-[1.4] tracking-[0.06em] ${
       wrap ? "max-w-full text-center text-balance" : "whitespace-nowrap"
     } ${TONE_CLASSES[tone][variant]}${pulse ? " badge-pulse" : ""}${className ? ` ${className}` : ""}`}
   >

@@ -3,8 +3,8 @@ import PressMarquee from "@/components/PressMarquee";
 const PUBLICATIONS = ["CNBC", "Bloomberg", "Yahoo Finance", "VentureBeat"];
 
 interface PressBarProps {
-  /** white (default) or the standard grey section treatment (zinc-50 + zinc-100 borders) */
-  tone?: "white" | "grey";
+  /** white (default), the standard grey section treatment, or the pale-blue tint band */
+  tone?: "white" | "grey" | "tint";
 }
 
 /**
@@ -15,7 +15,7 @@ interface PressBarProps {
 export const PressBar = ({ tone = "white" }: PressBarProps) => (
   <section
     className={`flex flex-col items-center gap-12 px-5 py-16 md:py-20 w-full ${
-      tone === "grey" ? "bg-zinc-50 border-y border-zinc-100" : "bg-white"
+      tone === "grey" ? "bg-zinc-50 border-y border-zinc-100" : tone === "tint" ? "bg-brand-50 border-y border-brand-500/[0.12]" : "bg-white"
     }`}
   >
     <p className="max-w-[620px] text-center font-display text-[24px] font-medium leading-[1.45] tracking-[-0.015em] text-zinc-500">
@@ -26,7 +26,7 @@ export const PressBar = ({ tone = "white" }: PressBarProps) => (
 
     <div className="flex flex-col items-center gap-4 w-full">
       <p className="font-sans text-[12.5px] font-normal text-zinc-500">
-        And it has also been featured in
+        Also featured in
       </p>
       <PressMarquee items={PUBLICATIONS} />
     </div>

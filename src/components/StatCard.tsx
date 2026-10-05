@@ -24,9 +24,9 @@ const StatCard = ({ stat, label, note, className }: StatCardProps) => (
       className ? ` ${className}` : ""
     }`}
   >
-    <p className="m-0 font-display font-medium text-[36px] text-brand-500 tracking-[-0.02em]">{stat}</p>
-    <p className="m-0 font-sans font-semibold text-[16px] text-zinc-950">{label}</p>
-    {note && <p className="m-0 mt-1 font-sans text-[12.5px] leading-[1.45] text-zinc-500">{note}</p>}
+    <p className="m-0 font-display font-medium text-h2 text-brand-500 tracking-[-0.02em]">{stat}</p>
+    <p className="m-0 font-sans font-semibold text-body-lg text-zinc-950">{label}</p>
+    {note && <p className="m-0 mt-1 font-sans text-small leading-[1.45] text-zinc-500">{note}</p>}
   </div>
 );
 

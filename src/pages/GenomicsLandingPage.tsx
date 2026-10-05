@@ -1,16 +1,20 @@
 import { ArrowsOut, ChartLine, CurrencyDollar, Lock } from "@phosphor-icons/react";
 import LandingPage, { type LandingPageConfig } from "@/components/LandingPage";
-import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
+import { PRICE_DISPLAY, PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
 const SALES_URL = "/contact-sales";
 
+/** Whole-dollar display for a monthly total, e.g. 5990 -> "$5,990". */
+const usd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
+const FIL_ONE_1PB = usd(1000 * PRICE_PER_TB);
+
 const TAGLINE = "No credit card required · No egress fees · Connects in minutes";
 
-// 1 PB stored, 200 TB re-analysed per month. AWS S3 Standard us-east-1 Q2 2026:
+// 1 PB stored, 200 TB re-analyzed per month. AWS S3 Standard eu-west-1 Q2 2026:
 // tiered storage (first 50 TB $0.023/GB, next 450 TB $0.022/GB, over 500 TB
 // $0.021/GB) = $22,067.20 for 1,024,000 GB. Egress: 204,800 GB x $0.09 = $18,432.
-// Fil One: 1,000 TB x $4.99 = $4,990, egress $0.
+// Fil One: 1,000 TB x PRICE_PER_TB, egress $0.
 const config: LandingPageConfig = {
   seo: {
     title: "Fil One · Petabyte retention without the petabyte bill",
@@ -19,45 +23,45 @@ const config: LandingPageConfig = {
   },
 
   hero: {
-    badge: "For genomics and research teams with long-retention datasets",
+    badge: "For genomics and research",
     titleMaxWidth: 800,
     descriptionMaxWidth: 580,
     title: (
       <>
         Petabyte retention
         <br />
-        <span className="text-brand-500">without the petabyte bill.</span>
+        <span className="text-brand-500">without the petabyte bill</span>
       </>
     ),
     description: `S3-compatible storage at ${PRICE_PER_TB_SHORT} flat, with zero egress fees so re-analysis doesn't cost extra. Keep the whole dataset, for years.`,
     ctas: [
       { label: "Start for free", href: signupUrl(), variant: "primary" },
-      { label: "Talk to an expert", href: SALES_URL, variant: "secondary" },
+      { label: "Talk to sales", href: SALES_URL, variant: "secondary" },
     ],
     tagline: TAGLINE,
   },
 
   problem: {
     label: "The problem",
-    heading: "Petabyte datasets cost petabytes to keep and petabytes to re-analyse.",
-    sub: "Genomics data is produced once but analysed repeatedly, often years later as pipelines improve. Standard storage pricing charges again on every analysis.",
+    heading: "Petabyte datasets cost petabytes to keep and petabytes to re-analyze.",
+    sub: "Genomics data is produced once but analyzed repeatedly, often years later as pipelines improve. Standard storage pricing charges again on every analysis.",
     items: [
       {
         label: "The storage bill",
         tone: "warning",
         catch: "1 PB on AWS costs $22,067/month.",
-        body: "AWS S3 Standard at tiered rates — $0.023/GB for the first 50 TB, $0.022 for the next 450 TB, $0.021 after — adds up to $22,067/month for a single petabyte. Before a single analysis read.",
+        body: "AWS S3 Standard at tiered rates ($0.023/GB for the first 50 TB, $0.022 for the next 450 TB, $0.021 after) adds up to $22,067/month for a single petabyte. Before a single analysis read.",
       },
       {
         label: "The re-analysis cost",
         tone: "danger",
         catch: "Running a new pipeline means paying egress again.",
-        body: "Re-analysing 200 TB of sequencing data with a new variant-calling pipeline incurs 204,800 GB × $0.09 = $18,432 in egress on AWS. Teams plan re-analysis cycles around the egress cost, not the science.",
+        body: "Re-analyzing 200 TB of sequencing data with a new variant-calling pipeline incurs 204,800 GB × $0.09 = $18,432 in egress on AWS. Teams plan re-analysis cycles around the egress cost, not the science.",
       },
       {
         label: "The access delay",
         tone: "brand",
-        catch: "Cold storage means waiting to analyse.",
+        catch: "Cold storage means waiting to analyze.",
         body: "Archive tiers save on storage but add retrieval delays and fees before a dataset is usable again. A five-year-old dataset should be as fast to query as one uploaded yesterday.",
       },
     ],
@@ -67,12 +71,12 @@ const config: LandingPageConfig = {
     label: "The numbers",
     heading: (
       <>
-        1 PB stored. <span className="text-brand-500">200 TB re-analysed per month.</span>
+        1 PB stored. <span className="text-brand-500">200 TB re-analyzed per month.</span>
       </>
     ),
-    sub: "Monthly storage for 1 PB plus egress for 200 TB of analysis reads. Computed from public US rate cards, Q2 2026.",
+    sub: "Monthly storage for 1 PB plus egress for 200 TB of analysis reads. Computed from public AWS eu-west-1 rate cards, Q2 2026.",
     subMaxWidth: 620,
-    caption: "Monthly cost for 1 PB stored, 200 TB re-analysed, by provider",
+    caption: "Monthly cost for 1 PB stored, 200 TB re-analyzed, by provider",
     columns: [
       { key: "storage1pb", header: "1 PB storage/mo" },
       { key: "egress200tb", header: "200 TB egress/mo", colorByValue: true },
@@ -86,11 +90,11 @@ const config: LandingPageConfig = {
       {
         provider: "Fil One",
         isFilOne: true,
-        values: { storage1pb: "$4,990", egress200tb: "$0", total: "$4,990" },
+        values: { storage1pb: FIL_ONE_1PB, egress200tb: "$0", total: FIL_ONE_1PB },
       },
     ],
     footnote:
-      "AWS S3 Standard us-east-1 Q2 2026 storage: tiered rates — first 50 TB $0.023/GB ($1,177.60), next 450 TB $0.022/GB ($10,137.60), over 500 TB $0.021/GB ($10,752.00) = $22,067.20 for 1,024,000 GB. AWS egress: 204,800 GB × $0.09 = $18,432. Fil One: 1,000 TB × $4.99 = $4,990, egress $0.",
+      `AWS S3 Standard eu-west-1 Q2 2026 storage: tiered rates, first 50 TB $0.023/GB ($1,177.60), next 450 TB $0.022/GB ($10,137.60), over 500 TB $0.021/GB ($10,752.00) = $22,067.20 for 1,024,000 GB. AWS egress: 204,800 GB × $0.09 = $18,432. Fil One: 1,000 TB × ${PRICE_DISPLAY} = ${FIL_ONE_1PB}, egress $0.`,
   },
 
   features: {
@@ -110,7 +114,7 @@ const config: LandingPageConfig = {
       {
         icon: ArrowsOut,
         title: "No egress on analysis",
-        desc: "Re-analysing the dataset from a new pipeline, re-running variant calling, or sharing data with collaborators costs $0 in egress. The cost is the bytes you keep.",
+        desc: "Re-analyzing the dataset from a new pipeline, re-running variant calling, or sharing data with collaborators costs $0 in egress. The cost is the bytes you keep.",
       },
       {
         icon: ChartLine,
@@ -129,7 +133,7 @@ const config: LandingPageConfig = {
     heading: "Keep the whole dataset. For years.",
     subhead: "Free 1 TB evaluation. Upload a dataset slice and confirm your existing analysis tooling connects without modification.",
     cta: { label: "Start for free", href: signupUrl() },
-    secondaryCta: { label: "Talk to an expert", href: SALES_URL },
+    secondaryCta: { label: "Talk to sales", href: SALES_URL },
     note: TAGLINE,
   },
 };
