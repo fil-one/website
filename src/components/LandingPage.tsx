@@ -38,7 +38,7 @@ export interface LandingPageConfig {
   hero: {
     /**
      * Sentence-length audience line above the heading, wrapped in a Pill
-     * automatically. Pass a ReactNode instead (e.g. AnnouncementBadge) for a
+     * automatically. Pass a ReactNode instead (e.g. a custom pill) for a
      * custom badge, such as a "Coming soon" feature announcement.
      */
     badge?: ReactNode;

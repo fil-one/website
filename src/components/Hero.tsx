@@ -16,7 +16,7 @@ export interface HeroCta {
 }
 
 interface HeroProps {
-  /** Self-contained badge node above the heading (e.g. AnnouncementBadge or a soft pill). */
+  /** Self-contained badge node above the heading (e.g. a SectionLabel or a soft pill). */
   badge?: ReactNode;
   /** Display heading; accepts highlighted spans and <br/>. */
   title: ReactNode;
