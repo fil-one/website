@@ -42,7 +42,7 @@ const FAQS = [
   },
   {
     q: "¿Cómo migro desde Storacha u otro proveedor compatible con S3?",
-    a: `Fil One es totalmente compatible con S3, así que herramientas como rclone funcionan sin configuración adicional. Apunta rclone a ${S3_ENDPOINT_HOST} con tus credenciales de Fil One y sincroniza tus datos. Si necesitas ayuda con una migración más grande, escríbenos y te guiaremos.`,
+    a: `Fil One es compatible con S3, así que herramientas como rclone funcionan sin configuración adicional. Apunta rclone a ${S3_ENDPOINT_HOST} con tus credenciales de Fil One y sincroniza tus datos. Si necesitas ayuda con una migración más grande, escríbenos y te guiaremos.`,
   },
   {
     q: "¿Puedo pagar con tokens FIL?",
