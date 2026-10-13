@@ -333,10 +333,6 @@
   animation-duration: 75s;
 }
 
-/* WCAG 2.2.2: pause any marquee while the pointer is over it or focus is
-   inside it (put .marquee-pause on the track or any ancestor) */
-.marquee-pause:hover .marquee-track,
-.marquee-pause:focus-within .marquee-track,
 /* Flow schematic: a soft pulse travels along each arrow, so the diagram reads
    as data moving out to Fil One and back. The second arrow runs half a beat
    later (delay set inline). */
@@ -350,6 +346,10 @@
   animation: flow-pulse 2.4s var(--ease-smooth) infinite;
 }
 
+/* WCAG 2.2.2: pause any marquee while the pointer is over it or focus is
+   inside it (put .marquee-pause on the track or any ancestor) */
+.marquee-pause:hover .marquee-track,
+.marquee-pause:focus-within .marquee-track,
 .marquee-track:hover,
 .marquee-track:focus-within {
   animation-play-state: paused;
