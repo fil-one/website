@@ -16,7 +16,7 @@ interface SpaceCardProps {
 const SpaceCard = ({ children, id, className = "" }: SpaceCardProps) => (
   <section
     id={id}
-    className={`relative w-full overflow-hidden rounded-3xl bg-space-horizon px-6 py-16 md:px-12 md:py-24${className ? ` ${className}` : ""}`}
+    className={`relative w-full overflow-hidden rounded-3xl bg-space-horizon p-6 md:p-12${className ? ` ${className}` : ""}`}
   >
     <div
       aria-hidden="true"

@@ -1,4 +1,4 @@
-import { MapPin, Key, Certificate, ShieldCheck, type Icon as PhosphorIcon } from "@phosphor-icons/react";
+import { ArrowRight, MapPin, Key, Certificate, ShieldCheck, type Icon as PhosphorIcon } from "@phosphor-icons/react";
 import Icon from "@/components/Icon";
 import { Button } from "@/components/Button";
 import SpaceCard from "@/components/SpaceCard";
@@ -13,7 +13,7 @@ interface Reason {
   icon: PhosphorIcon;
   title: string;
   description: string;
-  link?: { label: string; href: string };
+  link?: { lead: string; label: string; href: string };
 }
 
 const REASONS: Reason[] = [
@@ -21,7 +21,7 @@ const REASONS: Reason[] = [
     icon: MapPin,
     title: "Close to your compute",
     description: "Zones run in the EU and US today. New zones go where your GPUs already run.",
-    link: { label: "Need a zone somewhere new? Tell us where →", href: "#teams" },
+    link: { lead: "Need a zone somewhere new?", label: "Tell us where", href: "/host" },
   },
   {
     icon: Key,
@@ -73,23 +73,31 @@ const WhySection = () => {
                     <p className="m-0 font-sans text-[14px] leading-[1.6] text-white/60">{description}</p>
                   </div>
                   {link && (
-                    <a
-                      href={link.href}
-                      className="font-sans text-[14px] font-medium text-white underline decoration-white/50 underline-offset-[3px] transition-colors hover:decoration-white"
-                    >
-                      {link.label}
-                    </a>
+                    <p className="m-0 font-sans text-[14px] font-medium text-white">
+                      {link.lead}{" "}
+                      <a
+                        href={link.href}
+                        className="group inline-flex items-center gap-1 whitespace-nowrap text-white no-underline"
+                      >
+                        <span className="underline decoration-white/50 underline-offset-[3px] transition-colors group-hover:decoration-white">
+                          {link.label}
+                        </span>
+                        <Icon icon={ArrowRight} size={14} className="transition-transform group-hover:translate-x-0.5" />
+                      </a>
+                    </p>
                   )}
                 </div>
               ))}
             </div>
-            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <Button variant="primary" tone="dark" href={signupUrl()} onClick={() => trackCtaClick("Start for free", signupUrl(), "primary")}>
-                Start for free
-              </Button>
-              <Button variant="secondary" tone="dark" href={SALES_HREF} onClick={() => trackCtaClick("Talk to sales", SALES_HREF, "secondary")}>
-                Talk to sales
-              </Button>
+            <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:text-left">
+              <div className="flex items-center gap-3">
+                <Button variant="primary" size="sm" tone="dark" href={signupUrl()} onClick={() => trackCtaClick("Start for free", signupUrl(), "primary")}>
+                  Start for free
+                </Button>
+                <Button variant="secondary" tone="dark" href={SALES_HREF} onClick={() => trackCtaClick("Talk to sales", SALES_HREF, "secondary")}>
+                  Talk to sales
+                </Button>
+              </div>
               <span className="font-sans text-[13.5px] text-white/50 sm:ml-2">1 TB free for 30 days · No credit card required</span>
             </div>
           </div>
