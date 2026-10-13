@@ -10,6 +10,7 @@ import TextLink from "@/components/TextLink";
 import CtaBanner from "@/components/CtaBanner";
 import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
 import { useSeo } from "@/hooks/useSeo";
+import { useInView } from "@/hooks/useInView";
 import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 import { PRICE_DISPLAY } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
@@ -113,9 +114,41 @@ const PATTERN = [
   { figure: "Multi-Gbps", label: "Sustained reads, not archive retrieval" },
 ];
 
+/**
+ * One workload: heading, points, the flow schematic and its two links. Fades up as it scrolls in; a hairline separates it from the
+ * one above, so the page stays one continuous surface beside the sticky nav.
+ */
+const WorkloadSection = ({ workload: w, index }: { workload: Workload; index: number }) => {
+  const { ref, inView } = useInView({ threshold: 0.08 });
+  return (
+    <section
+      id={w.id}
+      className={`flex flex-col gap-7 py-14 md:py-20 ${index === 0 ? "!pt-14" : "border-t border-black/[0.07]"}`}
+    >
+      <div ref={ref} className={`flex flex-col gap-7 reveal${inView ? " in-view" : ""}`}>
+        <div className="flex max-w-[640px] flex-col gap-3.5">
+          <SectionHeading>{w.title}</SectionHeading>
+          <SectionSub maxWidth={640}>{w.body}</SectionSub>
+        </div>
+        <FeatureList items={w.points} className="max-w-[560px]" />
+        <FlowCard from={w.from} steps={w.steps} note={<>{w.note} $0 egress subject to reasonable use.</>} />
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <TextLink href={signupUrl()} tone="brand" arrow onClick={() => trackCtaClick("Start with 1 TB free", signupUrl(), "secondary")}>
+            Start with 1 TB free
+          </TextLink>
+          <TextLink href={DOCS_URL} external arrow onClick={() => trackDocsClick(DOCS_URL)}>
+            Read the docs
+          </TextLink>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const WorkloadsPage = () => {
   useSeo();
   const [active, setActive] = useState(WORKLOADS[0].id);
+  const { ref: patternRef, inView: patternInView } = useInView();
 
   // Side-nav clicks glide to the section instead of jumping, and keep the
   // hash in the URL so the link still copies. Respects reduced-motion.
@@ -175,18 +208,18 @@ const WorkloadsPage = () => {
             titleMaxWidth={780}
             descriptionMaxWidth={680}
             ctas={[
-              { label: "Start for free", href: signupUrl(), variant: "primary", size: "lg", glow: true, onClick: () => trackCtaClick("Start for free", signupUrl(), "primary") },
+              { label: "Start for free", href: signupUrl(), variant: "primary", size: "sm", glow: true, onClick: () => trackCtaClick("Start for free", signupUrl(), "primary") },
               { label: "Talk to an engineer", href: CONTACT_HREF, variant: "secondary", onClick: () => trackCtaClick("Talk to an engineer", CONTACT_HREF, "secondary") },
             ]}
             tagline={<>1&nbsp;TB free for 30 days · No credit card required</>}
-            contentClassName="pb-10"
+            contentClassName="pb-16 md:pb-24"
           />
         </div>
 
         {/* Sticky side nav + the five sections */}
         <section className="w-full px-5 md:px-8">
           <div className="mx-auto grid w-full max-w-container grid-cols-1 items-start gap-8 lg:grid-cols-[224px_1fr] lg:gap-16">
-            <aside className="z-10 hidden lg:sticky lg:top-[calc(theme(spacing.header)+24px)] lg:flex lg:flex-col lg:gap-1 lg:pt-14">
+            <aside className="z-10 hidden lg:sticky lg:top-[calc(theme(spacing.header)+24px)] lg:mb-20 lg:flex lg:flex-col lg:gap-1 lg:pt-14">
               <span className="px-3 pb-2.5">
                 <SectionLabel>Workloads</SectionLabel>
               </span>
@@ -208,45 +241,21 @@ const WorkloadsPage = () => {
 
             <div className="flex flex-col">
               {WORKLOADS.map((w, i) => (
-                <section
-                  key={w.id}
-                  id={w.id}
-                  className={`relative z-0 flex flex-col gap-7 pb-[88px] ${i === 0 ? "pt-14" : "pt-20"}`}
-                >
-                  {i % 2 === 1 && (
-                    <div aria-hidden="true" className="absolute inset-y-0 -left-[100vw] -right-[100vw] -z-10 bg-zinc-50" />
-                  )}
-                  {/* Watermark: the workload's icon, large and faint, so each section has its own silhouette */}
-                  <div aria-hidden="true" className={`pointer-events-none absolute right-0 hidden text-brand-700 md:block ${i % 2 === 1 ? "opacity-[0.06]" : "opacity-[0.08]"} ${i === 0 ? "top-24" : "top-[120px]"}`}>
-                    <Icon icon={w.icon} size={160} weight="regular" />
-                  </div>
-                  <div className="flex max-w-[640px] flex-col gap-3.5">
-                    <SectionHeading>{w.title}</SectionHeading>
-                    <SectionSub maxWidth={640}>{w.body}</SectionSub>
-                  </div>
-                  <FeatureList items={w.points} className="max-w-[560px]" />
-                  <FlowCard from={w.from} steps={w.steps} note={<>{w.note} $0 egress subject to reasonable use.</>} />
-                  <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-                    <TextLink href={signupUrl()} tone="brand" onClick={() => trackCtaClick("Start with 1 TB free", signupUrl(), "secondary")}>
-                      Start with 1 TB free →
-                    </TextLink>
-                    <TextLink href={DOCS_URL} external onClick={() => trackDocsClick(DOCS_URL)}>
-                      Read the docs ↗
-                    </TextLink>
-                  </div>
-                </section>
+                <WorkloadSection key={w.id} workload={w} index={i} />
               ))}
             </div>
           </div>
         </section>
 
-        {/* The pattern: one storage class, every workload */}
-        <section className="mt-2 w-full border-y border-brand-500/[0.12] bg-brand-50 px-5 py-20 md:px-8">
-          <div className="mx-auto flex w-full max-w-container flex-col gap-10">
+        {/* The pattern: one storage class, every workload. Stays on the page's
+            white surface so nothing switches background under the nav. */}
+        <section className="w-full px-5 md:px-8">
+          <div
+            ref={patternRef}
+            className={`mx-auto flex w-full max-w-container flex-col gap-10 border-t border-black/[0.07] pt-14 md:pt-20 reveal${patternInView ? " in-view" : ""}`}
+          >
             <div className="flex max-w-[700px] flex-col gap-3.5">
-              <SectionLabel>
-                <span className="text-brand-600">The pattern</span>
-              </SectionLabel>
+              <SectionLabel>The pattern</SectionLabel>
               <SectionHeading size="text-h2 md:text-h1">
                 One storage class.
                 <br />
@@ -258,7 +267,7 @@ const WorkloadsPage = () => {
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {PATTERN.map(({ figure, label }) => (
-                <div key={figure} className="flex flex-col gap-2 rounded-2xl border border-brand-500/[0.18] bg-white p-6 shadow-elevated">
+                <div key={figure} className="flex flex-col gap-2 rounded-2xl border border-black/[0.07] bg-white p-6 shadow-elevated">
                   <span className="font-display text-[30px] font-medium leading-none tracking-[-0.02em] text-zinc-950">{figure}</span>
                   <span className="font-sans text-[14px] leading-[1.4] text-zinc-600">{label}</span>
                 </div>

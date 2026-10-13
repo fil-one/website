@@ -39,9 +39,14 @@ const Node = ({ title, detail, fil }: FlowNode) => (
   </div>
 );
 
-const Arrow = ({ label }: { label: string }) => (
+const Arrow = ({ label, index }: { label: string; index: number }) => (
   <div className="relative mx-2.5 hidden h-px w-[124px] shrink-0 bg-brand-300/45 md:block">
     <span className="absolute -right-px -top-1 border-[4.5px] border-transparent border-l-[7px] border-l-brand-300" />
+    <span
+      aria-hidden="true"
+      className="flow-pulse absolute -top-[2.5px] h-1.5 w-1.5 rounded-full bg-brand-200 shadow-[0_0_8px_2px_rgba(56,166,255,0.7)]"
+      style={{ animationDelay: `${index * 1.2}s` }}
+    />
     <span className="absolute bottom-2.5 left-1/2 w-[136px] -translate-x-1/2 text-center font-mono text-[11px] font-medium uppercase leading-[1.4] tracking-[0.06em] text-brand-300">
       {label}
     </span>
@@ -63,9 +68,9 @@ const FlowCard = ({ label = "How it flows", from, steps, note, className = "" }:
     </SectionLabel>
     <div className="flex flex-col items-stretch gap-3 pt-6 md:flex-row md:items-center md:gap-0">
       <Node {...from} />
-      {steps.map(({ label: stepLabel, node }) => (
+      {steps.map(({ label: stepLabel, node }, i) => (
         <div key={stepLabel} className="contents">
-          <Arrow label={stepLabel} />
+          <Arrow label={stepLabel} index={i} />
           <span className="text-center font-mono text-[11px] font-medium uppercase tracking-[0.06em] text-brand-300 md:hidden">
             ↓ {stepLabel}
           </span>

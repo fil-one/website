@@ -48,6 +48,8 @@ const TeamsSection = () => {
           style={{ backgroundImage: `url(${drivesRack})`, backgroundPosition: "center 30%" }}
         >
           <div aria-hidden="true" className="absolute inset-0 bg-drives-tint" />
+          {/* Extra shade so the small mono label clears 4.5:1 over the brightest drive LEDs */}
+          <div aria-hidden="true" className="absolute inset-0 bg-navy-950/50" />
           <div className="relative flex h-full flex-col gap-4">
             <SectionLabel tone="dark">Neoclouds and data centers</SectionLabel>
             <h3 className="m-0 font-display text-[24px] font-medium leading-[1.2] tracking-[-0.02em] text-white">Extend your cloud</h3>

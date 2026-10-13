@@ -139,6 +139,16 @@
   background: theme(colors.navy.800);
 }
 
+/* Solid dark pill (navbar): the wrapper takes the inner fill, so the 1.5px
+   gradient ring disappears without changing the button's size. */
+.btn-primary-solid {
+  background: theme(colors.zinc.950);
+}
+
+.btn-primary-solid:hover {
+  background: theme(colors.navy.800);
+}
+
 .btn-primary-inner {
   display: inline-flex;
   align-items: center;
@@ -327,6 +337,19 @@
    inside it (put .marquee-pause on the track or any ancestor) */
 .marquee-pause:hover .marquee-track,
 .marquee-pause:focus-within .marquee-track,
+/* Flow schematic: a soft pulse travels along each arrow, so the diagram reads
+   as data moving out to Fil One and back. The second arrow runs half a beat
+   later (delay set inline). */
+@keyframes flow-pulse {
+  0% { left: 0; opacity: 0; }
+  15% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { left: calc(100% - 6px); opacity: 0; }
+}
+.flow-pulse {
+  animation: flow-pulse 2.4s var(--ease-smooth) infinite;
+}
+
 .marquee-track:hover,
 .marquee-track:focus-within {
   animation-play-state: paused;
@@ -337,6 +360,7 @@
   .reveal { opacity: 1; transform: none; transition: none; }
   .badge-pulse { animation: none; }
   .marquee-track { animation: none; }
+  .flow-pulse { display: none; }
 }
 
 /* ── HubSpot blog article content ───────────────────────────────────────── */

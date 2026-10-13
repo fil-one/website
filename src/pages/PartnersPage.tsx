@@ -1,7 +1,8 @@
-import { Code, CurrencyDollar, Globe, ShieldCheck, Stack, Users, type Icon as PhosphorIcon } from "@phosphor-icons/react";
+import { ArrowRight, Code, CurrencyDollar, Globe, ShieldCheck, Stack, Users, type Icon as PhosphorIcon } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import Icon from "@/components/Icon";
 import IconTile from "@/components/IconTile";
 import SpaceCard from "@/components/SpaceCard";
 import TextLink from "@/components/TextLink";
@@ -97,7 +98,7 @@ const PartnersPage = () => {
             titleMaxWidth={820}
             descriptionMaxWidth={640}
             ctas={[
-              { label: "Become a partner", href: PARTNER_APPLY_HREF, variant: "primary", size: "lg", glow: true, onClick: () => trackCtaClick("Become a partner", PARTNER_APPLY_HREF, "primary") },
+              { label: "Become a partner", href: PARTNER_APPLY_HREF, variant: "primary", size: "sm", glow: true, onClick: () => trackCtaClick("Become a partner", PARTNER_APPLY_HREF, "primary") },
               { label: "Find your role", href: "#roles", variant: "secondary", onClick: () => trackCtaClick("Find your role", "#roles", "secondary") },
             ]}
             contentClassName="pb-16 md:pb-20"
@@ -159,9 +160,10 @@ const PartnersPage = () => {
                       <a
                         href={link.href}
                         onClick={() => trackCtaClick(link.label, link.href, "secondary")}
-                        className="mt-auto inline-flex items-center gap-1 pt-3 font-sans text-[14px] font-medium text-white no-underline transition-opacity hover:opacity-70"
+                        className="group mt-auto inline-flex items-center gap-1 pt-3 font-sans text-[14px] font-medium text-white no-underline transition-opacity hover:opacity-70"
                       >
-                        {link.label} →
+                        {link.label}
+                        <Icon icon={ArrowRight} size={14} className="transition-transform group-hover:translate-x-0.5" />
                       </a>
                     </div>
                   ))}

@@ -54,7 +54,7 @@ const Home = () => {
                 label: "Start for free",
                 href: signupUrl(),
                 variant: "primary",
-                size: "lg",
+                size: "sm",
                 glow: true,
                 onClick: () => trackCtaClick("Start for free", signupUrl(), "primary"),
               },
@@ -111,7 +111,7 @@ const Home = () => {
           heading="Bring a workload."
           headingMaxWidth={560}
           subheadMaxWidth={440}
-          subhead="1 TB free for 30 days, no credit card. Prefer to talk first? sales@fil.one"
+          subhead="1 TB free for 30 days, no credit card. Prefer to talk first? Talk to sales."
           cta={{
             label: "Start for free",
             href: signupUrl(),

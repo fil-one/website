@@ -119,7 +119,7 @@ export const HeroHeading = ({
     </h1>
     {description && (
       <p
-        className={`m-0 text-pretty font-sans text-body md:text-body-lg leading-[1.65] ${tone === "brand" ? "text-white/90" : "text-zinc-500"}`}
+        className={`m-0 text-balance font-sans text-body md:text-body-lg leading-[1.65] ${tone === "brand" ? "text-white/90" : "text-zinc-500"}`}
         style={descriptionMaxWidth ? { maxWidth: descriptionMaxWidth } : undefined}
       >
         {description}

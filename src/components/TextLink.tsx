@@ -1,4 +1,4 @@
-import { ArrowRight } from "@phosphor-icons/react";
+import { ArrowRight, ArrowUpRight } from "@phosphor-icons/react";
 import type { ReactNode } from "react";
 import Icon from "@/components/Icon";
 
@@ -9,7 +9,7 @@ interface TextLinkProps {
   children: ReactNode;
   /** muted = secondary grey link (default); brand = accented blue link */
   tone?: TextLinkTone;
-  /** show a trailing arrow (rendered via the shared Icon) */
+  /** show a trailing arrow (rendered via the shared Icon); external links get ↗ */
   arrow?: boolean;
   onClick?: () => void;
   external?: boolean;
@@ -23,18 +23,24 @@ const TONE_CLASSES: Record<TextLinkTone, string> = {
 };
 
 /**
- * Tertiary text link (not a button). Uses font/zinc/brand tokens. The brand
- * tone optionally shows a trailing arrow rendered through the shared <Icon>.
+ * Tertiary text link (not a button). Uses font/zinc/brand tokens. Optionally
+ * shows a trailing arrow rendered through the shared <Icon>, nudged on hover.
  */
 const TextLink = ({ href, children, tone = "muted", arrow = false, onClick, external = false, className = "" }: TextLinkProps) => (
   <a
     href={href}
     onClick={onClick}
-    className={`inline-flex items-center gap-1.5 whitespace-nowrap font-sans no-underline transition-opacity hover:opacity-70 ${TONE_CLASSES[tone]}${className ? ` ${className}` : ""}`}
+    className={`group inline-flex items-center gap-1.5 whitespace-nowrap font-sans no-underline transition-opacity hover:opacity-70 ${TONE_CLASSES[tone]}${className ? ` ${className}` : ""}`}
     {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
   >
     {children}
-    {arrow && <Icon icon={ArrowRight} size={14} />}
+    {arrow && (
+      <Icon
+        icon={external ? ArrowUpRight : ArrowRight}
+        size={14}
+        className={`transition-transform ${external ? "group-hover:-translate-y-0.5 group-hover:translate-x-0.5" : "group-hover:translate-x-0.5"}`}
+      />
+    )}
   </a>
 );
 

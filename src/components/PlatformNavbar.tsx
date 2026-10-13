@@ -141,7 +141,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
             <Button href={contactSalesHref} variant="secondary" className={lang === "es" ? "!hidden xl:!inline-flex" : undefined}>
               {t.contactSales}
             </Button>
-            <Button href={signupUrl()} variant="primary" size="sm" tone="dark" glow>
+            <Button href={signupUrl()} variant="primary" size="sm" tone="dark" className="btn-primary-solid">
               {t.startForFree}
             </Button>
           </div>

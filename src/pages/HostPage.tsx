@@ -1,4 +1,4 @@
-import { Gauge, ArrowLineRight, Target, MapPin, Globe, HardDrives, Code, type Icon as PhosphorIcon } from "@phosphor-icons/react";
+import { ArrowRight, Gauge, ArrowLineRight, Target, MapPin, Globe, HardDrives, Code, type Icon as PhosphorIcon } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/Button";
@@ -70,7 +70,7 @@ const HostPage = () => {
             className="pointer-events-none absolute inset-0 -z-10 [mask-image:theme(backgroundImage.hero-grid-mask)] [-webkit-mask-image:theme(backgroundImage.hero-grid-mask)]"
             style={{ backgroundImage: `url("data:image/svg+xml,${GRID_SVG}")`, backgroundSize: "60px 60px", backgroundPosition: "center 30px" }}
           />
-          <div className="mx-auto grid w-full max-w-container grid-cols-1 items-center gap-10 px-5 pb-16 pt-14 md:px-8 md:pt-20 lg:grid-cols-[1fr_600px] lg:gap-12">
+          <div className="mx-auto grid w-full max-w-container grid-cols-1 items-center gap-10 px-5 pb-16 pt-14 md:px-8 md:pt-20 xl:grid-cols-[1fr_560px] xl:gap-12">
             <div className="flex flex-col gap-5 hero-fade-1">
               <SectionLabel>Neoclouds and data centers</SectionLabel>
               <h1 className="m-0 font-display text-h1 font-medium leading-[1.08] tracking-[-0.025em] text-zinc-950 md:text-[52px]">
@@ -139,8 +139,11 @@ const HostPage = () => {
                     </div>
                   ))}
                 </div>
-                <a href="#how" className="self-start font-sans text-[14px] font-medium text-white underline decoration-white/50 underline-offset-[3px] transition-colors hover:decoration-white">
-                  See how a zone fixes this →
+                <a href="#how" className="group inline-flex items-center gap-1 self-start font-sans text-[14px] font-medium text-white no-underline">
+                  <span className="underline decoration-white/50 underline-offset-[3px] transition-colors group-hover:decoration-white">
+                    See how a zone fixes this
+                  </span>
+                  <Icon icon={ArrowRight} size={14} className="transition-transform group-hover:translate-x-0.5" />
                 </a>
               </div>
             </SpaceCard>
@@ -182,7 +185,9 @@ const HostPage = () => {
             style={{ backgroundImage: `url(${drivesRack})`, backgroundPosition: "center 30%" }}
           >
             <div aria-hidden="true" className="absolute inset-0 bg-drives-tint" />
-            <div className="relative grid grid-cols-1 items-center gap-10 px-6 py-14 md:px-12 md:py-20 lg:grid-cols-2 lg:gap-16">
+            {/* Extra shade so the small mono label clears 4.5:1 over the brightest drive LEDs */}
+            <div aria-hidden="true" className="absolute inset-0 bg-navy-950/50" />
+            <div className="relative grid grid-cols-1 items-center gap-10 p-6 md:p-12 lg:grid-cols-2 lg:gap-16">
               <div className="flex flex-col gap-5">
                 <SectionLabel tone="dark">Today · read back from another region</SectionLabel>
                 <SectionHeading tone="dark" size="text-h2 md:text-h1">The egress meter goes to zero.</SectionHeading>
@@ -200,7 +205,7 @@ const HostPage = () => {
                   <span className="text-brand-300">On a cross-connect in your own building</span>
                 </SectionLabel>
                 <span className="font-display text-[72px] font-medium leading-[0.95] text-white md:text-[88px]">$0</span>
-                <p className="m-0 font-sans text-[16px] leading-[1.6] text-white/[0.82]">
+                <p className="m-0 text-balance font-sans text-[16px] leading-[1.6] text-white/[0.82]">
                   in egress. Scratch holds the working set it was bought for, and the same 100 TB becomes a line on your invoice.
                 </p>
                 <Button variant="primary" tone="dark" href={HOST_APPLY_HREF} className="mt-2 self-start" onClick={() => trackCtaClick("Price a zone", HOST_APPLY_HREF, "primary")}>
