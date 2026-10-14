@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { useInView } from "@/hooks/useInView";
 import { useSeo } from "@/hooks/useSeo";
 import { PRICE_DISPLAY, PRICE_PER_TB, PRICE_PER_TB_SHORT } from "@/lib/pricing";
-import { ArrowUpRight, ShieldCheck, Plug, TrendUp, CurrencyDollar, LockOpen, HardDrives } from "@phosphor-icons/react";
+import { ArrowUpRight, ShieldCheck, Plug, CurrencyDollar, LockOpen, HardDrives } from "@phosphor-icons/react";
 import Hero from "@/components/Hero";
 import { SectionLabel, SectionHeading, SectionSub } from "@/components/LandingPrimitives";
 import { Button } from "@/components/Button";
@@ -155,14 +155,8 @@ const USE_CASES = [
   {
     icon: Plug,
     title: "A storage tool your agent can call directly",
-    description: "Give your agent read/write/list access to your buckets without hand-writing the S3 glue. The Agent Toolkit exposes storage as a native tool you drop into Claude Desktop, Cursor, or your framework via MCP, so the agent reaches storage through a clean interface, and the data stays in buckets you own, not a third-party SaaS.",
-    badge: "Agent Toolkit coming soon",
-  },
-  {
-    icon: TrendUp,
-    title: "A queryable knowledge base over your buckets",
-    description: "Point a retrieval agent at a bucket and query it in plain language. Files index as they land; semantic search runs on your own model keys. Store the whole corpus at volume: flat pricing makes a large document set a storage cost, not a per-query tax.",
-    badge: "RAG coming soon",
+    description: "Give your agent read/write/list access to your buckets without hand-writing the S3 glue. The Fil One MCP server exposes storage as a native tool you drop into Claude Desktop, Cursor, or any MCP-compatible framework, so the agent reaches storage through a clean interface, and the data stays in buckets you own, not a third-party SaaS.",
+    badge: "MCP server coming soon",
   },
 ];
 
@@ -408,7 +402,7 @@ const AgentsLandingPage = () => {
               </SectionSub>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 reveal-group">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 reveal-group">
               {USE_CASES.map(({ icon, title, description, badge, cta }) => (
                 <div
                   key={title}
