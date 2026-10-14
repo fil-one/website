@@ -48,8 +48,8 @@ const PRICING_ROWS: PriceComparisonRow[] = [
 const FEATURES = [
   {
     icon: Plug,
-    title: "Full S3 API parity",
-    desc: "PutObject, GetObject, DeleteObject, ListObjectsV2, multipart upload, presigned URLs, and bucket operations all work as on AWS. Existing S3 code connects without modification.",
+    title: "S3 API compatible",
+    desc: "PutObject, GetObject, DeleteObject, ListObjectsV2, multipart upload and presigned URLs work as they do on AWS. Point your client at the endpoint and switch on path-style addressing.",
   },
   {
     icon: ArrowsOut,
@@ -74,13 +74,16 @@ s3 = boto3.client(
     region_name="us-east-1",
 )
 
-# After · Fil One (no other changes)
+# After · Fil One (new endpoint, path-style addressing)
+from botocore.config import Config
+
 s3 = boto3.client(
     "s3",
     endpoint_url="${S3_ENDPOINT}",
     aws_access_key_id=os.environ["FIL_ACCESS_KEY"],
     aws_secret_access_key=os.environ["FIL_SECRET_KEY"],
     region_name="eu-west-1",
+    config=Config(s3={"addressing_style": "path"}),
 )`;
 
 const NODE_CODE = `// Before · AWS S3
@@ -90,6 +93,7 @@ const s3 = new S3Client({ region: "us-east-1" });
 const s3 = new S3Client({
   endpoint: "${S3_ENDPOINT}",
   region: "eu-west-1",
+  forcePathStyle: true,
   credentials: {
     accessKeyId: process.env.FIL_ONE_ACCESS_KEY,
     secretAccessKey: process.env.FIL_ONE_SECRET_KEY,
@@ -149,10 +153,10 @@ const MigrateFromS3LandingPage = () => {
             <div className="flex flex-col gap-3">
               <SectionLabel>The migration</SectionLabel>
               <SectionHeading>
-                Change the endpoint. <span className="text-brand-500">Nothing else.</span>
+                Change the endpoint. <span className="text-brand-500">Keep your code.</span>
               </SectionHeading>
               <SectionSub maxWidth={620}>
-                Fil One implements the S3 API. The code that works on AWS works here: PutObject, GetObject, ListObjectsV2, multipart upload, presigned URLs.
+                Fil One implements the S3 API. Set the endpoint, turn on path-style addressing, and the code that works on AWS works here: PutObject, GetObject, ListObjectsV2, multipart upload, presigned URLs.
               </SectionSub>
             </div>
 
@@ -164,7 +168,7 @@ const MigrateFromS3LandingPage = () => {
             <div className="max-w-[680px] rounded-2xl border border-black/[0.07] bg-white p-6">
               <p className="m-0 mb-2 font-sans font-medium text-[14px] text-zinc-950">What is compatible</p>
               <p className="m-0 font-sans text-[13.5px] leading-[1.65] text-zinc-500">
-                PutObject, GetObject, DeleteObject, HeadObject, CopyObject, ListObjectsV2, CreateBucket, DeleteBucket, multipart upload, presigned URLs. Standard Auth v4 signing. For a full compatibility list, see{" "}
+                PutObject, GetObject, DeleteObject, HeadObject, CopyObject, ListObjectsV2, multipart upload, presigned URLs. Standard Auth v4 signing with path-style addressing. CreateBucket and DeleteBucket work over the API in US East (Michigan); in Europe (France), create and delete buckets in the dashboard. For the full compatibility list, see{" "}
                 <TextLink href="https://docs.fil.one" tone="brand" external className="inline">
                   docs.fil.one
                 </TextLink>
@@ -202,7 +206,7 @@ const MigrateFromS3LandingPage = () => {
             <div className="flex flex-col gap-3 items-center text-center">
               <SectionLabel>What carries over</SectionLabel>
               <SectionHeading>
-                S3 parity. <span className="text-brand-500">Lower bill.</span>
+                Same S3 API. <span className="text-brand-500">Lower bill.</span>
               </SectionHeading>
               <SectionSub maxWidth={560}>
                 The same tools, the same APIs, the same integration patterns. The line items that dominated the invoice do not exist here.
