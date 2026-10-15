@@ -49,8 +49,51 @@
 
     <!-- Privacy-friendly analytics by Plausible --><script async src="https://plausible.io/js/pa-8JEjI3yHVgSQg5aIoliva.js"></script><script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
 
-    <!-- Unify intent tracking -->
-    <script>!function(){var e=["identify","page","startAutoPage","stopAutoPage","startAutoIdentify","stopAutoIdentify"];function t(o){return Object.assign([],e.reduce(function(r,n){return r[n]=function(){return o.push([n,[].slice.call(arguments)]),o},r},{}))}window.unify||(window.unify=t(window.unify)),window.unifyBrowser||(window.unifyBrowser=t(window.unifyBrowser));var n=document.createElement("script");n.async=!0,n.setAttribute("src","https://tag.unifyintent.com/v1/YAQn6DqaDp1t4jkXxVxH9x/script.js"),n.setAttribute("data-api-key","wk_9ePcXoiZ_5iXmeM1Mt5z4yeLPV4tmDyTkdgdJgjtZ"),n.setAttribute("id","unifytag"),(document.body||document.head).appendChild(n)}();</script>
+    <!-- Consent-gated trackers. CookieYes loads via GTM, too late to block
+         scripts written into this file, so these only load once the matching
+         CookieYes category is accepted (saved cookie on return visits, or the
+         cookieyes_consent_update event when the visitor clicks the banner).
+           Unify intent tracking -> "advertisement"
+           HubSpot tracking (hubspotutk, used by form submissions) -> "analytics" -->
+    <script>!function(){var e=["identify","page","startAutoPage","stopAutoPage","startAutoIdentify","stopAutoIdentify"];function t(o){return Object.assign([],e.reduce(function(r,n){return r[n]=function(){return o.push([n,[].slice.call(arguments)]),o},r},{}))}window.unify||(window.unify=t(window.unify)),window.unifyBrowser||(window.unifyBrowser=t(window.unifyBrowser))}();
+    (function () {
+      var loaded = {};
+      var loaders = {
+        advertisement: function () {
+          var n = document.createElement("script");
+          n.async = true;
+          n.src = "https://tag.unifyintent.com/v1/YAQn6DqaDp1t4jkXxVxH9x/script.js";
+          n.setAttribute("data-api-key", "wk_9ePcXoiZ_5iXmeM1Mt5z4yeLPV4tmDyTkdgdJgjtZ");
+          n.id = "unifytag";
+          (document.body || document.head).appendChild(n);
+        },
+        analytics: function () {
+          var n = document.createElement("script");
+          n.async = true;
+          n.defer = true;
+          n.src = "https://js.hs-scripts.com/51191454.js";
+          n.id = "hs-script-loader";
+          (document.body || document.head).appendChild(n);
+        }
+      };
+      function load(category) {
+        if (loaded[category] || !loaders[category]) return;
+        loaded[category] = true;
+        loaders[category]();
+      }
+      // cookieyes-consent looks like "consentid:…,consent:yes,…,analytics:yes,advertisement:no,…"
+      var match = document.cookie.match(/(?:^|;\s*)cookieyes-consent=([^;]*)/);
+      if (match) {
+        decodeURIComponent(match[1]).split(",").forEach(function (pair) {
+          var kv = pair.split(":");
+          if (kv[1] === "yes") load(kv[0]);
+        });
+      }
+      document.addEventListener("cookieyes_consent_update", function (event) {
+        var accepted = (event.detail && event.detail.accepted) || [];
+        accepted.forEach(load);
+      });
+    })();</script>
   </head>
 
   <body>
@@ -61,7 +104,5 @@
 
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- HubSpot tracking code — required for form submission workflows & email sequences -->
-    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51191454.js"></script>
   </body>
 </html>
