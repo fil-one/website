@@ -4,23 +4,17 @@ import Footer from "@/components/Footer";
 import { useSeo } from "@/hooks/useSeo";
 import {
   ShieldCheck,
-  Certificate,
   LockKey,
   Lock,
-  Key,
-  Buildings,
-  FileText,
-  Question,
-  Bug,
-  Cube,
-  Eye,
-  ArrowsClockwise,
   SealCheck,
-  MapPin,
-  UserCircleGear,
+  Certificate,
+  FileText,
   Globe,
-  Stack,
-  ClockCounterClockwise,
+  Heartbeat,
+  IdentificationBadge,
+  SquaresFour,
+  Check,
+  Clock,
   Pulse,
   Envelope,
   LockSimple,
@@ -28,166 +22,167 @@ import {
   type Icon as PhosphorIcon,
 } from "@phosphor-icons/react";
 import { trackCtaClick } from "@/lib/analytics";
-import { Button } from "@/components/Button";
+import Hero from "@/components/Hero";
+import CtaBanner from "@/components/CtaBanner";
 import Icon from "@/components/Icon";
-import FaqAccordion, { type FaqItem } from "@/components/FaqAccordion";
+import IconTile from "@/components/IconTile";
+import FeatureCard from "@/components/FeatureCard";
 import Pill from "@/components/Pill";
+import TextLink from "@/components/TextLink";
+import FaqAccordion, { type FaqItem } from "@/components/FaqAccordion";
+import { TRUST_DOCUMENTS, trustRequestHref } from "@/lib/trustDocuments";
+import { SectionHeading, SectionLabel, SectionSub } from "@/components/LandingPrimitives";
 
 const SECURITY_EMAIL = "security@fil.one";
-const requestHref = (subject: string) => `mailto:${SECURITY_EMAIL}?subject=${encodeURIComponent(subject)}`;
+const LEGAL_EMAIL = "legal@fil.one";
 
 const TABS = [
-  { id: "verifiable", label: "Verifiable storage" },
-  { id: "compliance", label: "Compliance" },
-  { id: "protection", label: "Data protection" },
+  { id: "infrastructure", label: "Infrastructure" },
+  { id: "frameworks", label: "Frameworks" },
+  { id: "controls", label: "Built-in controls" },
   { id: "resources", label: "Resources" },
   { id: "faq", label: "FAQ" },
 ];
 
-interface Feature {
-  icon: PhosphorIcon;
-  title: string;
-  description: ReactNode;
-}
-
-type Status = "inherited" | "supported" | "planned";
-
 // Status labels are deliberately literal. Never add a "Certified" status until
 // Fil One itself holds a dated report we can hand to a customer.
-// Dots are decorative; the label carries the meaning.
-const STATUS: Record<Status, { label: string; dot: string }> = {
-  inherited: { label: "Data center level", dot: "bg-success-600" },
-  supported: { label: "Supported", dot: "bg-brand-500" },
-  planned: { label: "On our roadmap", dot: "bg-zinc-400" },
+// HIPAA, CJIS and GDPR aren't certifications, so they read "Supported".
+type Status = "supported" | "progress";
+
+const STATUS: Record<Status, { label: string; tone: "success" | "neutral" }> = {
+  supported: { label: "Supported", tone: "success" },
+  progress: { label: "In progress", tone: "neutral" },
 };
 
-function InlineLink({ href, children, external = false }: { href: string; children: ReactNode; external?: boolean }) {
-  return (
-    <a
-      href={href}
-      className="group inline-flex items-center gap-1 whitespace-nowrap font-medium text-zinc-950 no-underline transition-colors hover:text-brand-600"
-      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-    >
-      {children}
-      <Icon icon={ArrowRight} size={13} className="transition-transform group-hover:translate-x-0.5" />
-    </a>
-  );
+interface Framework {
+  id: string;
+  name: string;
+  kind: string;
+  icon: PhosphorIcon;
+  status: Status;
+  summary: string;
+  points: string[];
+  /** Available frameworks: the document and how to request it. */
+  doc?: string;
+  cta?: { label: string; href: string };
+  /** In-progress frameworks: which document is coming, and when. Replaces doc and cta. */
+  pending?: string;
 }
 
-const VERIFIABLE: Feature[] = [
+// TODO(confirm before publishing): every status below with Legal and
+// Compliance. HIPAA assumes a signed BAA template exists; CJIS "Supported"
+// assumes the Security Addendum and personnel requirements are met; GDPR
+// assumes a DPA exists; SOC 2, ISO 27001 and NIST stay "In progress" only
+// while an auditor or compliance platform is engaged.
+const FRAMEWORKS: Framework[] = [
   {
-    icon: ArrowsClockwise,
-    title: "Continuous proofs",
-    description: "Storage providers prove, again and again, that they still hold your data.",
-  },
-  {
-    icon: Cube,
-    title: "Public record",
-    description: "Every proof is recorded on the Filecoin blockchain, open for anyone to check.",
-  },
-  {
-    icon: Eye,
-    title: "Verify without downloading",
-    description: "Confirm your data is intact without pulling it back or taking our word for it.",
-  },
-  {
-    icon: Stack,
-    title: "Independent providers",
-    description: "Objects are erasure coded across independent providers, so none is a single point of failure.",
-  },
-];
-
-// TODO(confirm before publishing): SOC 2 for Fil One itself stays "planned"
-// until an auditor or compliance platform is engaged; only then move it to an
-// "In progress" status. GDPR assumes a DPA exists and Legal has signed off.
-const FRAMEWORKS: { name: string; status: Status; description: string; request?: { label: string; subject: string } }[] = [
-  {
-    name: "ISO 27001",
-    status: "inherited",
-    description: "The data center facilities behind every region are ISO 27001 certified.",
-    request: { label: "Request certificate", subject: "Data center ISO 27001 certificate" },
-  },
-  {
-    name: "SOC 2",
-    status: "inherited",
-    description: "Our data center facilities undergo SOC 2 audits.",
-    request: { label: "Request report", subject: "Data center SOC 2 report" },
-  },
-  {
-    name: "PCI DSS",
-    status: "inherited",
-    description: "The facilities we run on are certified to PCI DSS standards.",
-  },
-  {
-    name: "GDPR",
+    id: "hipaa",
+    name: "HIPAA / HITECH",
+    kind: "US health data",
+    icon: Heartbeat,
     status: "supported",
-    description: "Keep personal data in the EU with our Europe region.",
-    request: { label: "Request DPA", subject: "Data processing agreement (DPA)" },
+    summary: "Rules for protecting health information, with HITECH adding breach notification duties. Sign a BAA with Fil One before storing any PHI.",
+    points: [
+      "Business Associate Agreement on request",
+      "Encryption at rest (AES-256) and TLS in transit",
+      "Object lock for tamper-proof retention",
+    ],
+    doc: "BAA",
+    cta: { label: "Request a BAA", href: trustRequestHref("baa") },
   },
   {
-    name: "SOC 2 for Fil One",
-    status: "planned",
-    description: "An independent audit of Fil One's own controls, beyond our facilities.",
+    id: "cjis",
+    name: "CJIS Security Policy",
+    kind: "US criminal justice data",
+    icon: IdentificationBadge,
+    status: "supported",
+    summary: "FBI requirements for systems that store or process criminal justice information (CJI).",
+    points: ["Encryption in transit and at rest", "Immutable retention with object lock"],
+    doc: "Security Addendum",
+    cta: { label: "Talk to sales", href: "/contact-sales" },
   },
-];
-
-const PROTECTION: Feature[] = [
-  { icon: LockKey, title: "Encrypted at rest", description: "Every object is encrypted with AES-256 by default, with nothing to configure." },
-  { icon: Lock, title: "Encrypted in transit", description: "Every request to Fil One runs over TLS." },
-  { icon: SealCheck, title: "Object lock", description: "Make objects immutable for a retention period you set, in every region." },
-  { icon: ClockCounterClockwise, title: "Versioning", description: "Keep prior versions so an overwrite or delete is never final." },
-  { icon: ArrowsClockwise, title: "Built for durability", description: "Designed for 11 nines of durability." },
-  { icon: Key, title: "Customer-held keys", description: "Encrypt client-side with standard S3 tooling and we store only ciphertext." },
-];
-
-const ACCESS: Feature[] = [
-  { icon: Key, title: "Bucket-scoped keys", description: "Give people, pipelines and agents keys scoped to a single bucket." },
-  { icon: UserCircleGear, title: "Roles and policies", description: "Role-based access and bucket policies control who can do what." },
-  { icon: Globe, title: "Region-scoped keys", description: "Each access key works in one region only." },
-  { icon: MapPin, title: "Data residency", description: "Choose Europe (France) or US East (Michigan). Data stays in its region." },
-];
-
-const INFRASTRUCTURE: Feature[] = [
-  { icon: Certificate, title: "Certified facilities", description: "Data centers certified to ISO 27001, SOC 2, and PCI DSS." },
-  { icon: Buildings, title: "Independent operators", description: "Each region is run by an independent storage operator." },
   {
-    icon: Pulse,
-    title: "Public status",
-    description: (
-      <>
-        Live availability for every region.{" "}
-        <InlineLink href="https://status.fil.one" external>View status</InlineLink>
-      </>
-    ),
+    id: "gdpr",
+    name: "GDPR",
+    kind: "EU data protection",
+    icon: Globe,
+    status: "supported",
+    summary: "You are the controller for personal data you store, and Fil One processes it on your instructions. The Europe region keeps data in the EU.",
+    points: ["Store in the Europe region to keep data in jurisdiction", "Data Processing Addendum"],
+    doc: "DPA and subprocessors",
+    cta: { label: "Request DPA", href: trustRequestHref("dpa") },
+  },
+  {
+    id: "soc2",
+    name: "SOC 2 Type II",
+    kind: "AICPA attestation",
+    icon: ShieldCheck,
+    status: "progress",
+    summary: "An independent audit of how security, availability and confidentiality controls operate over time, not just on one day.",
+    points: ["Storage runs in data centers with SOC 2 reports", "Encryption at rest and in transit, on by default"],
+    pending: "Report available under NDA after the audit",
+  },
+  {
+    id: "iso27001",
+    name: "ISO/IEC 27001",
+    kind: "Information security management",
+    icon: Certificate,
+    status: "progress",
+    summary: "The international standard for running an information security management system (ISMS) with documented risk treatment.",
+    points: ["Facilities certified to ISO 27001", "Role-based access and bucket-scoped keys"],
+    pending: "Certificate available once certified",
+  },
+  {
+    id: "nist",
+    name: "NIST SP 800-53",
+    kind: "Federal security controls",
+    icon: SquaresFour,
+    status: "progress",
+    summary: "The US federal catalog of security and privacy controls, used by agencies and their vendors.",
+    points: ["Access control: scoped keys and bucket policies", "System integrity: object lock and versioning"],
+    pending: "Control mapping available once complete",
   },
 ];
 
-interface Resource {
-  title: string;
-  /** Public resources link straight through; the rest are requested by email. */
-  href?: string;
-}
+const HERO_BADGES = [
+  { id: "hipaa", label: "HIPAA / HITECH" },
+  { id: "cjis", label: "CJIS" },
+  { id: "gdpr", label: "GDPR" },
+  { id: "soc2", label: "SOC 2 Type II" },
+  { id: "iso27001", label: "ISO/IEC 27001" },
+  { id: "nist", label: "NIST 800-53" },
+];
 
-// TODO(confirm before publishing): every locked item must be something we can
-// actually send within a few business days of a request.
-const RESOURCES: Resource[] = [
-  { title: "Privacy Policy", href: "/privacy" },
-  { title: "Terms of Use", href: "/terms" },
-  { title: "Service Level Agreement", href: "/sla" },
-  { title: "Acceptable Use Policy", href: "/aup" },
-  { title: "Data center ISO 27001 certificate" },
-  { title: "Data center SOC 2 report" },
-  { title: "Data processing agreement (DPA)" },
-  { title: "Subprocessor list" },
-  { title: "Security questionnaire (CAIQ, SIG Lite, or your own)" },
+// FeatureCard descriptions must fit two lines.
+const CONTROLS: { icon: PhosphorIcon; title: string; description: string }[] = [
+  { icon: LockKey, title: "Encrypted at rest", description: "AES-256 on every object. Or encrypt client-side yourself." },
+  { icon: Lock, title: "TLS on every request", description: "All traffic to the S3 endpoint runs over TLS." },
+  { icon: SealCheck, title: "Object lock and versioning", description: "Turn on per bucket for compliance retention." },
+  { icon: ShieldCheck, title: "Cryptographic proof", description: "Verify your data is stored, without downloading it." },
+];
+
+const RESOURCE_GROUPS: { heading: string; items: { title: string; href: string; requested?: boolean }[] }[] = [
+  {
+    heading: "Public policies",
+    items: [
+      { title: "Privacy Policy", href: "/privacy" },
+      { title: "Terms of Use", href: "/terms" },
+      { title: "Service Level Agreement", href: "/sla" },
+      { title: "Acceptable Use Policy", href: "/aup" },
+    ],
+  },
+  {
+    heading: "Available on request",
+    items: TRUST_DOCUMENTS.map(({ value, label }) => ({ title: label, href: trustRequestHref(value), requested: true })),
+  },
 ];
 
 // TODO(confirm before publishing): answers mirror the site FAQ and the
-// compliance statuses above; keep them in sync if either changes.
+// framework statuses above; keep them in sync if either changes.
 const FAQS: FaqItem[] = [
   {
     q: "Is Fil One SOC 2 certified?",
-    a: "Not yet as a company. The data center facilities that host Fil One are certified to ISO 27001, SOC 2, and PCI DSS, and we can share their reports on request. An audit of Fil One's own controls is on our roadmap.",
+    a: "Not yet as a company. The data center facilities that host Fil One are certified to ISO 27001, SOC 2, and PCI DSS, and we can share their reports on request. A SOC 2 Type II attestation for Fil One itself is in progress.",
   },
   {
     q: "How can I verify my data is stored?",
@@ -203,58 +198,45 @@ const FAQS: FaqItem[] = [
   },
   {
     q: "How do I request security documents?",
-    a: `Email ${SECURITY_EMAIL} with the documents you need, such as facility reports, our DPA, or a completed questionnaire.`,
+    a: "Use the request form linked from Resources on this page to ask for facility reports, our DPA or BAA, the subprocessor list, or a completed questionnaire.",
   },
 ];
 
-/**
- * One trust-center section: an icon eyebrow and a two-tone statement on the
- * left (dark lead sentence, muted continuation), detail on the right. Sections
- * are separated by a single hairline instead of cards.
- */
+const HEADER_LINK = "inline-flex items-center gap-1.5 text-zinc-600 underline underline-offset-2 hover:text-brand-600";
+
+/** Section shell: eyebrow, heading and optional sub, then content. */
 const Section = ({
   id,
-  icon,
   eyebrow,
-  lead,
-  body,
+  title,
+  sub,
+  className = "",
   children,
 }: {
   id: string;
-  icon: PhosphorIcon;
   eyebrow: string;
-  lead: string;
-  body: string;
+  title: ReactNode;
+  sub?: ReactNode;
+  className?: string;
   children: ReactNode;
 }) => (
-  <section id={id} aria-labelledby={`${id}-label`} className="scroll-mt-[104px] border-t border-black/[0.07] first:border-t-0">
-    <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 lg:gap-16 py-16 md:py-24">
-      <div className="flex flex-col gap-4 lg:max-w-[400px]">
-        <h2 id={`${id}-label`} className="inline-flex items-center gap-2 font-sans font-medium text-body-sm text-brand-600 m-0">
-          <Icon icon={icon} size={16} />
-          {eyebrow}
-        </h2>
-        <p className="font-display font-medium text-[19px] md:text-[21px] leading-[1.45] tracking-[-0.01em] m-0 text-pretty">
-          <span className="text-zinc-950">{lead}</span> <span className="text-zinc-500">{body}</span>
-        </p>
+  <section id={id} aria-labelledby={`${id}-heading`} className={`scroll-mt-[104px] px-5 md:px-8 py-20 md:py-28 w-full ${className}`}>
+    <div className="flex flex-col gap-10 md:gap-12 w-full max-w-container mx-auto">
+      <div className="flex flex-col gap-4">
+        <SectionLabel>{eyebrow}</SectionLabel>
+        <SectionHeading id={`${id}-heading`}>{title}</SectionHeading>
+        {sub && <SectionSub maxWidth={640}>{sub}</SectionSub>}
       </div>
-      <div className="min-w-0">{children}</div>
+      {children}
     </div>
   </section>
 );
 
-const FeatureGrid = ({ items }: { items: Feature[] }) => (
-  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-9 list-none p-0 m-0">
-    {items.map(({ icon, title, description }) => (
-      <li key={title} className="flex flex-col gap-2">
-        <h3 className="inline-flex items-center gap-2 font-sans font-medium text-body text-zinc-950 m-0">
-          <Icon icon={icon} size={17} className="text-zinc-500" />
-          {title}
-        </h3>
-        <p className="font-sans text-body-sm leading-[1.6] text-zinc-500 m-0">{description}</p>
-      </li>
-    ))}
-  </ul>
+const CheckItem = ({ icon, iconClass, children }: { icon: PhosphorIcon; iconClass: string; children: ReactNode }) => (
+  <li className="flex gap-2.5 font-sans text-body-sm leading-[1.55] text-zinc-700">
+    <Icon icon={icon} size={18} className={`mt-px shrink-0 ${iconClass}`} />
+    {children}
+  </li>
 );
 
 const TrustPage = () => {
@@ -265,191 +247,252 @@ const TrustPage = () => {
       <PlatformNavbar />
       <main id="main-content">
 
-        {/* Company header */}
-        <header className="w-full border-b border-black/[0.07] bg-white pt-header">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between px-5 md:px-8 pt-10 pb-8 md:pt-16 md:pb-10 w-full max-w-container mx-auto">
-            <div className="flex flex-col gap-4 max-w-[640px]">
-              <Pill className="self-start">Trust center</Pill>
-              <h1 className="font-display font-medium text-h2 md:text-h1 tracking-[-0.02em] leading-[1.1] text-zinc-950 m-0">
-                Fil One Trust Center
-              </h1>
-              <p className="font-sans text-body md:text-body-lg leading-[1.6] text-zinc-600 m-0">
-                Fil One is S3-compatible object storage built on Filecoin. Storage is backed by cryptographic proof, not just promises. Here is how we protect your data, and an honest view of where our compliance stands today.
-              </p>
-              <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 list-none p-0 m-0 font-sans text-body-sm">
-                <li>
-                  <a href={`mailto:${SECURITY_EMAIL}`} className="inline-flex items-center gap-1.5 text-zinc-600 underline underline-offset-2 hover:text-brand-600">
-                    <Icon icon={Envelope} size={16} /> {SECURITY_EMAIL}
-                  </a>
-                </li>
-                <li>
-                  <a href="/privacy" className="inline-flex items-center gap-1.5 text-zinc-600 underline underline-offset-2 hover:text-brand-600">
-                    <Icon icon={FileText} size={16} /> Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="https://status.fil.one" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-zinc-600 underline underline-offset-2 hover:text-brand-600">
-                    <Icon icon={Pulse} size={16} /> System status
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <Button
-              variant="primary"
-              tone="zinc"
-              href={requestHref("Security documentation request")}
-              onClick={() => trackCtaClick("Request documents", `mailto:${SECURITY_EMAIL}`, "primary")}
-              className="self-start md:self-auto shrink-0"
-            >
-              Request documents
-            </Button>
-          </div>
-        </header>
-
-        {/* Section nav */}
-        <nav aria-label="Trust center sections" className="sticky top-header z-40 w-full border-b border-black/[0.07] bg-white/85 backdrop-blur-[20px]">
-          <ul className="flex gap-7 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden px-5 md:px-8 w-full max-w-container mx-auto list-none m-0">
-            {TABS.map(({ id, label }) => (
-              <li key={id} className="shrink-0">
-                <a href={`#${id}`} className="block py-3 font-sans text-[13.5px] text-zinc-500 no-underline transition-colors hover:text-zinc-950">
+        <Hero
+          glow
+          grid
+          badge={<Pill>Trust center</Pill>}
+          title={<>Compliance you can check,<br className="hidden sm:block" /> <span className="text-brand-500">not just trust</span></>}
+          titleMaxWidth={860}
+          description="How Fil One supports the frameworks your compliance teams ask about."
+          descriptionMaxWidth={640}
+          contentClassName="pb-16 md:pb-20"
+        >
+          <ul aria-label="Frameworks" className="mt-10 flex flex-wrap justify-center gap-2.5 list-none p-0 m-0">
+            {HERO_BADGES.map(({ id, label }) => (
+              <li key={id}>
+                <a
+                  href={`#${id}`}
+                  className="inline-flex items-center gap-2 min-h-[44px] px-4 rounded-full border border-black/[0.08] bg-white/70 font-mono text-[13px] text-zinc-700 no-underline transition-colors hover:border-brand/30 hover:text-zinc-950"
+                >
+                  <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-brand-500" />
                   {label}
                 </a>
               </li>
             ))}
           </ul>
-        </nav>
+        </Hero>
 
-        <div className="px-5 md:px-8 w-full max-w-container mx-auto">
-
-          <Section
-            id="verifiable"
-            icon={ShieldCheck}
-            eyebrow="Verifiable storage"
-            lead="Proof, not promises."
-            body="An audit shows a provider's controls looked right on the day it ran. On Filecoin, storage is proven continuously, with cryptographic proofs anyone can check."
-          >
-            {/* TODO: link to the docs page that explains how to check a proof, once it exists. */}
-            <FeatureGrid items={VERIFIABLE} />
-          </Section>
-
-          <Section
-            id="compliance"
-            icon={Certificate}
-            eyebrow="Compliance"
-            lead="An honest view of where we stand."
-            body="We label every framework by what holds today. Data center level means the facilities that host our infrastructure hold the certification, not Fil One as a company."
-          >
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-9 list-none p-0 m-0">
-              {FRAMEWORKS.map(({ name, status, description, request }) => (
-                <li key={name} className="flex flex-col gap-2">
-                  <h3 className="font-sans font-medium text-body text-zinc-950 m-0">{name}</h3>
-                  <span className="inline-flex items-center gap-2 font-sans text-small text-zinc-600">
-                    <span aria-hidden className={`h-1.5 w-1.5 rounded-full ${STATUS[status].dot}`} />
-                    {STATUS[status].label}
-                  </span>
-                  <p className="font-sans text-body-sm leading-[1.6] text-zinc-500 m-0">
-                    {description}
-                    {request && (
-                      <>
-                        {" "}
-                        <InlineLink href={requestHref(`Request: ${request.subject}`)}>{request.label}</InlineLink>
-                      </>
-                    )}
-                  </p>
-                </li>
-              ))}
+        {/* Section nav, with the contact and policy links pinned opposite the tabs */}
+        <div className="sticky top-header z-40 w-full border-y border-black/[0.07] bg-white/85 backdrop-blur-[20px]">
+          <div className="px-5 md:px-8 w-full">
+          <div className="flex items-center justify-between gap-8 w-full max-w-container mx-auto">
+            <nav aria-label="Trust center sections" className="min-w-0">
+              <ul className="flex gap-7 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden list-none p-0 m-0">
+                {TABS.map(({ id, label }) => (
+                  <li key={id} className="shrink-0">
+                    <a href={`#${id}`} className="block py-3 font-sans text-[13.5px] text-zinc-600 no-underline transition-colors hover:text-zinc-950">
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            {/* Below lg these links live in the footer and the closing CTA instead. */}
+            <ul aria-label="Trust center links" className="hidden lg:flex shrink-0 items-center gap-5 list-none p-0 m-0 font-sans text-[13.5px]">
+              <li>
+                <a href={`mailto:${SECURITY_EMAIL}`} className={HEADER_LINK}>
+                  <Icon icon={Envelope} size={15} /> {SECURITY_EMAIL}
+                </a>
+              </li>
+              <li>
+                <a href="/privacy" className={HEADER_LINK}>
+                  <Icon icon={FileText} size={15} /> Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a href="https://status.fil.one" target="_blank" rel="noopener noreferrer" className={HEADER_LINK}>
+                  <Icon icon={Pulse} size={15} /> System status
+                </a>
+              </li>
             </ul>
-          </Section>
-
-          <Section
-            id="protection"
-            icon={LockKey}
-            eyebrow="Data protection"
-            lead="Encrypted and immutable by default."
-            body="Your data is encrypted at rest and in transit with nothing to configure, and object lock keeps it from being changed or deleted."
-          >
-            <FeatureGrid items={PROTECTION} />
-          </Section>
-
-          <Section
-            id="access"
-            icon={Key}
-            eyebrow="Access and residency"
-            lead="You decide who gets in, and where data lives."
-            body="Scope every key to the narrowest access it needs, and pin each bucket to the region your policy requires."
-          >
-            <FeatureGrid items={ACCESS} />
-          </Section>
-
-          <Section
-            id="infrastructure"
-            icon={Buildings}
-            eyebrow="Infrastructure"
-            lead="Independent operators, certified facilities."
-            body="Fil One runs in professionally operated data centers, and each region is run by an independent storage operator."
-          >
-            <FeatureGrid items={INFRASTRUCTURE} />
-          </Section>
-
-          <Section
-            id="resources"
-            icon={FileText}
-            eyebrow="Resources"
-            lead="Everything your review needs."
-            body="Our policies are public. Facility reports, our DPA, the subprocessor list, and questionnaire answers are available on request."
-          >
-            <ul className="list-none p-0 m-0 border-t border-black/[0.07]">
-              {RESOURCES.map(({ title, href }) => (
-                <li key={title} className="border-b border-black/[0.07]">
-                  <a
-                    href={href ?? requestHref(`Request: ${title}`)}
-                    className="group flex items-center justify-between gap-4 py-3.5 font-sans text-body-sm text-zinc-950 no-underline"
-                  >
-                    <span className="transition-colors group-hover:text-brand-600">{title}</span>
-                    {href ? (
-                      <Icon icon={ArrowRight} size={14} className="shrink-0 text-zinc-500 transition-transform group-hover:translate-x-0.5 group-hover:text-zinc-950" />
-                    ) : (
-                      <span className="inline-flex items-center gap-1.5 shrink-0 text-small text-zinc-500 transition-colors group-hover:text-zinc-950">
-                        <Icon icon={LockSimple} size={13} />
-                        Request
-                      </span>
-                    )}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </Section>
-
-          <Section
-            id="faq"
-            icon={Question}
-            eyebrow="FAQ"
-            lead="Common questions."
-            body="The answers security teams ask for most. For anything else, email us."
-          >
-            <div className="border-b border-black/[0.07]">
-              <FaqAccordion items={FAQS} idPrefix="trust-faq" />
-            </div>
-          </Section>
-
-          {/* TODO(confirm before publishing): response window and safe-harbor wording with Engineering and Legal. */}
-          <Section
-            id="disclosure"
-            icon={Bug}
-            eyebrow="Responsible disclosure"
-            lead="Found a vulnerability?"
-            body="We'll acknowledge your report, keep you updated, and credit you once it's fixed if you'd like. Please give us a reasonable chance to fix it before disclosing publicly."
-          >
-            <div className="flex flex-col gap-2">
-              <h3 className="font-sans font-medium text-body text-zinc-950 m-0">Report it to our security team</h3>
-              <p className="font-sans text-body-sm leading-[1.6] text-zinc-500 m-0">
-                Include a description of the issue and steps to reproduce it.{" "}
-                <InlineLink href={requestHref("Vulnerability report")}>{SECURITY_EMAIL}</InlineLink>
-              </p>
-            </div>
-          </Section>
-
+          </div>
+          </div>
         </div>
+
+        <Section
+          id="infrastructure"
+          eyebrow="Infrastructure"
+          title="Certified where your data lives"
+          sub="Compliance comes down to scope. Ours covers two: the data centers that store your objects, and the network and software Fil One runs on top of them."
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="flex flex-col gap-5 p-8 md:p-10 rounded-2xl border border-success-600/20 bg-success-50">
+              <div className="flex items-start justify-between gap-3">
+                <SectionLabel>Data centers</SectionLabel>
+                <Pill tone="success">Current</Pill>
+              </div>
+              <div className="flex flex-col gap-2">
+                <span className="font-display font-medium text-[56px] md:text-[72px] leading-none tracking-[-0.04em] text-zinc-950">100%</span>
+                <span className="font-sans text-body md:text-body-lg leading-[1.5] text-zinc-700">of Fil One storage runs in certified data centers.</span>
+              </div>
+              <ul className="flex flex-col gap-2.5 list-none p-0 m-0">
+                <CheckItem icon={Check} iconClass="text-success-700">ISO/IEC 27001 certified</CheckItem>
+                <CheckItem icon={Check} iconClass="text-success-700">SOC 2 Type II attested</CheckItem>
+                <CheckItem icon={Check} iconClass="text-success-700">PCI DSS certified</CheckItem>
+              </ul>
+            </div>
+
+            <div className="flex flex-col gap-5 p-8 md:p-10 rounded-2xl border border-black/[0.07] bg-white shadow-elevated">
+              <div className="flex items-start justify-between gap-3">
+                <SectionLabel>Fil One</SectionLabel>
+                <Pill tone="neutral">In progress</Pill>
+              </div>
+              <h3 className="font-display font-medium text-h4 md:text-[28px] leading-[1.2] tracking-[-0.02em] text-zinc-950 m-0">
+                The network and the software, audited too
+              </h3>
+              <p className="font-sans text-body-sm md:text-body leading-[1.65] text-zinc-500 m-0">
+                Fil One runs the network and writes the software that stores your data. We're now pursuing the same attestations for Fil One itself.
+              </p>
+              <ul className="flex flex-col gap-2.5 list-none p-0 m-0">
+                <CheckItem icon={Clock} iconClass="text-zinc-500">ISO/IEC 27001 certification</CheckItem>
+                <CheckItem icon={Clock} iconClass="text-zinc-500">SOC 2 Type II attestation</CheckItem>
+              </ul>
+            </div>
+          </div>
+        </Section>
+
+        <Section
+          id="frameworks"
+          eyebrow="Frameworks"
+          title={<>Where our <span className="text-brand-500">network and software</span> stand</>}
+          sub="Every framework your compliance team asks about, and its status today."
+          className="bg-zinc-50 border-y border-black/[0.05]"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {FRAMEWORKS.map(({ id, name, kind, icon, status, summary, points, doc, cta, pending }) => (
+              <article
+                key={id}
+                id={id}
+                aria-labelledby={`${id}-name`}
+                className={`scroll-mt-[120px] flex flex-col gap-5 px-6 pt-6 sm:px-8 sm:pt-8 pb-5 rounded-2xl border border-black/[0.07] bg-white shadow-elevated`}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <IconTile icon={icon} />
+                  <Pill tone={STATUS[status].tone}>{STATUS[status].label}</Pill>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <h3 id={`${id}-name`} className="font-sans font-medium text-body-lg leading-[1.3] text-zinc-950 m-0">{name}</h3>
+                  <span className="font-sans text-small text-zinc-500">{kind}</span>
+                </div>
+                <p className="font-sans text-body-sm leading-[1.6] text-zinc-500 m-0 text-pretty">{summary}</p>
+                <ul className="flex flex-col gap-2.5 list-none p-0 m-0">
+                  {points.map((p) => (
+                    <CheckItem key={p} icon={Check} iconClass="text-brand-600">{p}</CheckItem>
+                  ))}
+                </ul>
+                <div className="mt-auto flex flex-wrap items-center justify-between gap-3 min-h-[42px] pt-5 border-t border-black/[0.07]">
+                  {pending ? (
+                    <span className="inline-flex items-center gap-1.5 font-sans text-small text-zinc-500">
+                      <Icon icon={Clock} size={14} className="shrink-0" />
+                      {pending}
+                    </span>
+                  ) : (
+                    <>
+                      <span className="font-sans text-small text-zinc-500">{doc}</span>
+                      {cta && (
+                        <TextLink
+                          href={cta.href}
+                          tone="brand"
+                          arrow
+                          onClick={() => trackCtaClick(cta.label, cta.href, "secondary")}
+                        >
+                          {cta.label}
+                        </TextLink>
+                      )}
+                    </>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </Section>
+
+        <Section
+          id="controls"
+          eyebrow="Built-in controls"
+          title="Security built in"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            {CONTROLS.map(({ icon, title, description }) => (
+              <FeatureCard key={title} icon={icon} title={title} description={description} />
+            ))}
+          </div>
+        </Section>
+
+        <Section
+          id="resources"
+          eyebrow="Resources"
+          title="Everything your review needs"
+          sub="Our policies are public. Facility reports, our DPA, the subprocessor list, and questionnaire answers are available on request."
+          className="bg-zinc-50 border-y border-black/[0.05]"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {RESOURCE_GROUPS.map(({ heading, items }) => (
+              <div key={heading} className="flex flex-col gap-3">
+                <h3 className="font-sans font-medium text-body-sm text-zinc-950 m-0">{heading}</h3>
+                <ul className="list-none p-0 m-0 border-t border-black/[0.07]">
+                  {items.map(({ title, href, requested }) => (
+                    <li key={title} className="border-b border-black/[0.07]">
+                      <a
+                        href={href}
+                        className="group flex items-center justify-between gap-4 py-3.5 font-sans text-body-sm text-zinc-700 no-underline"
+                      >
+                        <span className="transition-colors group-hover:text-brand-600">{title}</span>
+                        {!requested ? (
+                          <Icon icon={ArrowRight} size={14} className="shrink-0 text-zinc-500 transition-transform group-hover:translate-x-0.5 group-hover:text-zinc-950" />
+                        ) : (
+                          <span className="inline-flex items-center gap-1.5 shrink-0 text-small text-zinc-500 transition-colors group-hover:text-zinc-950">
+                            <Icon icon={LockSimple} size={13} />
+                            Request
+                          </span>
+                        )}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        {/* FAQ: heading on the left, questions on the right */}
+        <section id="faq" aria-labelledby="faq-heading" className="scroll-mt-[104px] px-5 md:px-8 py-20 md:py-28 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] gap-10 lg:gap-16 w-full max-w-container mx-auto">
+            <div className="flex flex-col gap-4">
+              <SectionLabel>FAQ</SectionLabel>
+              <SectionHeading id="faq-heading">Common questions</SectionHeading>
+              <SectionSub maxWidth={360}>The answers security teams ask for most.<br />Can't find yours?</SectionSub>
+              <TextLink
+                href="/contact-sales"
+                tone="brand"
+                arrow
+                className="self-start"
+                onClick={() => trackCtaClick("Talk to sales", "/contact-sales", "secondary")}
+              >
+                Talk to sales
+              </TextLink>
+            </div>
+            <FaqAccordion items={FAQS} idPrefix="trust-faq" />
+          </div>
+        </section>
+
+        <CtaBanner
+          heading="Talk to our team"
+          subhead="Questions about security, compliance, or a BAA? Our team can walk your reviewers through it."
+          cta={{
+            label: "Talk to sales",
+            href: "/contact-sales",
+            onClick: () => trackCtaClick("Talk to sales", "/contact-sales", "primary"),
+          }}
+          note={
+            <>
+              Security questions: <a href={`mailto:${SECURITY_EMAIL}`} className="text-white underline underline-offset-2">{SECURITY_EMAIL}</a>
+              {" · "}
+              Legal terms: <a href={`mailto:${LEGAL_EMAIL}`} className="text-white underline underline-offset-2">{LEGAL_EMAIL}</a>
+            </>
+          }
+        />
+
       </main>
       <Footer />
     </div>

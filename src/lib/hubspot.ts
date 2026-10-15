@@ -20,6 +20,12 @@ export const HS_PARTNER_FORM_GUID = "b18ae776-5b6f-42fa-a6aa-10ce63a36cb5";
 /** Neocloud application form (fields listed in HostApplyPage.tsx) */
 export const HS_NEOCLOUD_FORM_GUID = "65ce81c3-07a6-43ef-ab82-95437dba3a3b";
 
+/**
+ * Trust center document request form (TrustRequestPage.tsx).
+ * TODO: replace with the real GUID once the HubSpot form exists.
+ */
+export const HS_TRUST_REQUEST_FORM_GUID = "YOUR_HUBSPOT_FORM_ID";
+
 /** Support form */
 export const HS_SUPPORT_FORM_GUID = "44da45a4-b99b-4886-988a-70e27308322d";
 

@@ -191,4 +191,9 @@ export const ROUTE_META = {
     description:
       "How Fil One protects your data: cryptographic proof of storage, encryption by default, certified data centers, and an honest view of our compliance status.",
   },
+  "/trust/request": {
+    title: "Request security documents · Fil One",
+    description:
+      "Request Fil One security documents for your review: data center certifications, our DPA, the subprocessor list, and security questionnaires.",
+  },
 };
