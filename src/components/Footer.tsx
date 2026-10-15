@@ -50,6 +50,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
         { href: "https://docs.fil.one", label: { en: "Documentation", es: "Documentación" } },
         { href: supportHref, label: { en: "Support", es: "Soporte" } },
         { href: "https://status.fil.one", label: { en: "Status", es: "Estado" } },
+        { href: "/trust", label: { en: "Trust center", es: "Centro de confianza" } },
         { href: "https://filecoin.io", label: "Filecoin" },
       ],
     },
