@@ -107,9 +107,9 @@ const FRAMEWORKS: Framework[] = [
     kind: "EU data protection",
     icon: Globe,
     status: "supported",
-    summary: "You are the controller for personal data you store, and Fil One processes it on your instructions. The Europe region keeps data in the EU.",
-    points: ["Store in the Europe region to keep data in jurisdiction", "Data Processing Addendum"],
-    doc: "DPA and subprocessors",
+    summary: "You are the controller for personal data you store, and Fil One processes it on your instructions. Buckets placed in Europe keep data in the EU.",
+    points: ["Place buckets in Europe to keep data in jurisdiction", "Data Processing Addendum"],
+    doc: "DPA",
     cta: { label: "Request DPA", href: trustRequestHref("dpa") },
   },
   {
@@ -182,7 +182,7 @@ const RESOURCE_GROUPS: { heading: string; items: { title: string; href: string; 
 const FAQS: FaqItem[] = [
   {
     q: "Is Fil One SOC 2 certified?",
-    a: "Not yet as a company. The data center facilities that host Fil One are certified to ISO 27001, SOC 2, and PCI DSS, and we can share their reports on request. A SOC 2 Type II attestation for Fil One itself is in progress.",
+    a: "Not yet as a company. The data center facilities that host Fil One are certified to ISO 27001, SOC 2, and PCI DSS. A SOC 2 Type II attestation for Fil One itself is in progress.",
   },
   {
     q: "How can I verify my data is stored?",
@@ -194,11 +194,11 @@ const FAQS: FaqItem[] = [
   },
   {
     q: "Where is my data stored?",
-    a: "You choose Europe (France) or US East (Michigan) when you create a bucket. A bucket's region is fixed at creation, so data written there stays there.",
+    a: "You choose whether each bucket is placed in Europe or the US when you create it. Placement is fixed at creation, so data written to a bucket stays where you put it.",
   },
   {
     q: "How do I request security documents?",
-    a: "Use the request form linked from Resources on this page to ask for facility reports, our DPA or BAA, the subprocessor list, or a completed questionnaire.",
+    a: "Use the request form linked from Resources on this page to ask for our DPA or a BAA.",
   },
 ];
 
@@ -423,7 +423,7 @@ const TrustPage = () => {
           id="resources"
           eyebrow="Resources"
           title="Everything your review needs"
-          sub="Our policies are public. Facility reports, our DPA, the subprocessor list, and questionnaire answers are available on request."
+          sub="Our policies are public. Our DPA and BAA are available on request."
           className="bg-zinc-50 border-y border-black/[0.05]"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -478,7 +478,7 @@ const TrustPage = () => {
 
         <CtaBanner
           heading="Talk to our team"
-          subhead="Questions about security, compliance, or a BAA? Our team can walk your reviewers through it."
+          subhead="Questions about security, compliance, or need a document? Our team can take care of you."
           cta={{
             label: "Talk to sales",
             href: "/contact-sales",

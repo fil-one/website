@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ArrowLeft, LockSimple } from "@phosphor-icons/react";
+import { ArrowLeft } from "@phosphor-icons/react";
 import { trackEvent } from "@/lib/analytics";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
@@ -61,8 +61,6 @@ const TrustRequestPage = () => {
     }));
     setErrors((errs) => ({ ...errs, documents: undefined }));
   };
-
-  const needsNda = form.documents.some((d) => TRUST_DOCUMENTS.find((doc) => doc.value === d)?.nda);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -155,7 +153,6 @@ const TrustRequestPage = () => {
             >
               {/* TODO(confirm before publishing): the response window with whoever owns these requests. */}
               We'll send your documents to {form.email} within a few business days.
-              {needsNda && " Reports shared under NDA come after the NDA is signed."}
             </FormSuccess>
           ) : (
             <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-6" noValidate>
@@ -168,13 +165,6 @@ const TrustRequestPage = () => {
                 onToggle={toggleDocument}
                 error={errors.documents}
               />
-
-              {needsNda && (
-                <p className="m-0 flex gap-2.5 rounded-xl border border-black/[0.07] bg-zinc-50 px-4 py-3 font-sans text-[13.5px] leading-[1.6] text-zinc-600">
-                  <Icon icon={LockSimple} size={16} className="mt-0.5 shrink-0 text-zinc-500" />
-                  The data center SOC 2 report is shared under NDA. We'll send you one to sign first.
-                </p>
-              )}
 
               <div className="h-px w-full bg-black/[0.07]" />
 
@@ -228,7 +218,7 @@ const TrustRequestPage = () => {
                 rows={4}
                 value={form.note}
                 onChange={set("note")}
-                placeholder="For example, the questionnaire format your team uses"
+                placeholder="For example, your company's legal entity name"
               />
 
               <div className="h-px w-full bg-black/[0.07]" />

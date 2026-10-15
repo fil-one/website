@@ -194,6 +194,6 @@ export const ROUTE_META = {
   "/trust/request": {
     title: "Request security documents · Fil One",
     description:
-      "Request Fil One security documents for your review: data center certifications, our DPA, the subprocessor list, and security questionnaires.",
+      "Request Fil One security documents for your review, including our data processing agreement (DPA) and a Business Associate Agreement (BAA).",
   },
 };
