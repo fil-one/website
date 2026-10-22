@@ -20,7 +20,7 @@ import Icon from "@/components/Icon";
 import IconTile from "@/components/IconTile";
 import CtaBanner from "@/components/CtaBanner";
 import { TextField, SubmitButton, FormSuccess, FormError } from "@/components/FormControls";
-import { HS_EVENT_RSVP_FORM_GUID, submitHubSpotForm } from "@/lib/hubspot";
+import { submitEventRsvp } from "@/lib/eventRsvp";
 import { validateFields, hasErrors, focusFirstInvalid, type FieldErrors } from "@/lib/formValidation";
 import { trackCtaClick, trackEvent } from "@/lib/analytics";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
@@ -174,8 +174,12 @@ const EMPTY_RSVP: Record<RsvpField, string> = {
   dietary: "",
 };
 
+/** Event key written to the sheet's "event" column. */
+const RSVP_EVENT = "madrid-2026-11-12";
+
 const RsvpForm = () => {
   const [form, setForm] = useState(EMPTY_RSVP);
+  const [honeypot, setHoneypot] = useState("");
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -205,25 +209,7 @@ const RsvpForm = () => {
     setLoading(true);
     setError(null);
 
-    const result = await submitHubSpotForm({
-      formGuid: HS_EVENT_RSVP_FORM_GUID,
-      pageName: "Madrid tapas evening RSVP",
-      fields: [
-        { objectTypeId: "0-1", name: "firstname", value: form.firstname },
-        { objectTypeId: "0-1", name: "lastname", value: form.lastname },
-        { objectTypeId: "0-1", name: "email", value: form.email },
-        { objectTypeId: "0-1", name: "company", value: form.company },
-        { objectTypeId: "0-1", name: "jobtitle", value: form.jobtitle },
-        { objectTypeId: "0-1", name: "event_invited_by", value: form.invitedBy },
-        { objectTypeId: "0-1", name: "event_dietary_requirements", value: form.dietary },
-      ],
-      legalConsentOptions: {
-        consent: {
-          consentToProcess: true,
-          text: "By submitting this RSVP, you consent to allow Fil One to store and process your details for this event.",
-        },
-      },
-    });
+    const result = await submitEventRsvp({ event: RSVP_EVENT, ...form, website: honeypot });
 
     setLoading(false);
     if (!result.ok) {
@@ -251,7 +237,17 @@ const RsvpForm = () => {
   }
 
   return (
+    // data-hs-do-not-collect stops the HubSpot tracking script also logging
+    // this form; RSVPs go only to the sheet.
     <form onSubmit={handleSubmit} data-hs-do-not-collect="true" className="flex flex-col gap-6" noValidate>
+      {/* Honeypot: off-screen and skipped by keyboard and screen readers, so
+          only bots fill it. The sheet script drops any RSVP that has it set. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label>
+          Website
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
+        </label>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <TextField label="First name" required autoComplete="given-name" value={form.firstname} onChange={set("firstname")} error={errors.firstname} />
         <TextField label="Last name" required autoComplete="family-name" value={form.lastname} onChange={set("lastname")} error={errors.lastname} />
