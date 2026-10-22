@@ -5,10 +5,12 @@
  */
 
 /**
- * The Apps Script web app URL (ends in /exec). Empty until the script is
- * deployed; until then every RSVP fails with the generic error.
+ * The Apps Script web app URL. Use the plain /macros/s/<id>/exec form, not the
+ * /a/macros/<domain>/ form the Apps Script editor shows to Workspace users,
+ * which can send visitors outside that domain to a Google sign-in page.
  */
-export const RSVP_ENDPOINT = "";
+export const RSVP_ENDPOINT =
+  "https://script.google.com/macros/s/AKfycby09Z7lsI4WrHoUL_xwzoeQ9ndeFiJO3VaxmhDIFN1YgASRPiiTuahIEqt_jcDHh6S3dg/exec";
 
 export interface EventRsvp {
   /** Which event the row belongs to, so one sheet can hold several events. */
