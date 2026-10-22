@@ -389,8 +389,30 @@ const MadridEventLandingPage = () => {
           </div>
         </section>
 
+        {/* ── RSVP ─────────────────────────────────────────────────────────── */}
+        <section id="rsvp" className="px-5 md:px-8 py-24 md:py-32 w-full bg-white scroll-mt-24">
+          <div
+            ref={rsvpView.ref}
+            className={`grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 lg:gap-16 items-start w-full max-w-container mx-auto reveal${rsvpView.inView ? " in-view" : ""}`}
+          >
+            <div className="flex flex-col gap-3">
+              <SectionLabel>RSVP</SectionLabel>
+              <SectionHeading>
+                Save your <span className="text-brand-500">seat at the table</span>
+              </SectionHeading>
+              <SectionSub maxWidth={280}>
+                Capacity is limited. RSVP to confirm your invitation; if the evening is full, we'll add you to the
+                waitlist and let you know as soon as a place opens up.
+              </SectionSub>
+            </div>
+            <div className={`${CARD_CLASS} p-6 sm:p-8`}>
+              <RsvpForm />
+            </div>
+          </div>
+        </section>
+
         {/* ── About Fil One ────────────────────────────────────────────────── */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-white">
+        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-zinc-50">
           <div
             ref={aboutView.ref}
             className={`flex flex-col gap-10 w-full max-w-container mx-auto reveal${aboutView.inView ? " in-view" : ""}`}
@@ -407,7 +429,7 @@ const MadridEventLandingPage = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="rounded-2xl border border-black/[0.07] bg-zinc-50 p-6 sm:p-8 flex flex-col gap-4">
+              <div className="rounded-2xl border border-black/[0.07] bg-white p-6 sm:p-8 flex flex-col gap-4">
                 <SectionLabel>The problem · Legacy cloud storage</SectionLabel>
                 <h3 className="m-0 font-sans font-medium text-h4 text-zinc-950">A few giant data centers, far from the data</h3>
                 <ul className="m-0 pl-5 flex flex-col gap-2 list-disc marker:text-zinc-400">
@@ -450,7 +472,7 @@ const MadridEventLandingPage = () => {
         </section>
 
         {/* ── Price vs. the alternatives ───────────────────────────────────── */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-zinc-50">
+        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-white">
           <div
             ref={priceView.ref}
             className={`grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 lg:gap-16 items-start w-full max-w-container mx-auto reveal${priceView.inView ? " in-view" : ""}`}
@@ -494,7 +516,7 @@ const MadridEventLandingPage = () => {
         </section>
 
         {/* ── Fil One and Bonum in Spain ───────────────────────────────────── */}
-        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-white">
+        <section className="px-5 md:px-8 py-24 md:py-32 w-full bg-zinc-50">
           <div
             ref={spainView.ref}
             className={`flex flex-col gap-10 w-full max-w-container mx-auto reveal${spainView.inView ? " in-view" : ""}`}
@@ -522,7 +544,7 @@ const MadridEventLandingPage = () => {
         </section>
 
         {/* ── Hosts ────────────────────────────────────────────────────────── */}
-        <section id="hosts" className="px-5 md:px-8 py-24 md:py-32 w-full bg-zinc-50">
+        <section id="hosts" className="px-5 md:px-8 py-24 md:py-32 w-full bg-white">
           <div
             ref={hostsView.ref}
             className={`flex flex-col gap-10 w-full max-w-container mx-auto reveal${hostsView.inView ? " in-view" : ""}`}
@@ -556,28 +578,6 @@ const MadridEventLandingPage = () => {
                 </li>
               ))}
             </ul>
-          </div>
-        </section>
-
-        {/* ── RSVP ─────────────────────────────────────────────────────────── */}
-        <section id="rsvp" className="px-5 md:px-8 py-24 md:py-32 w-full bg-white scroll-mt-24">
-          <div
-            ref={rsvpView.ref}
-            className={`grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 lg:gap-16 items-start w-full max-w-container mx-auto reveal${rsvpView.inView ? " in-view" : ""}`}
-          >
-            <div className="flex flex-col gap-3">
-              <SectionLabel>RSVP</SectionLabel>
-              <SectionHeading>
-                Save your <span className="text-brand-500">seat at the table</span>
-              </SectionHeading>
-              <SectionSub maxWidth={280}>
-                Capacity is limited. RSVP to confirm your invitation; if the evening is full, we'll add you to the
-                waitlist and let you know as soon as a place opens up.
-              </SectionSub>
-            </div>
-            <div className={`${CARD_CLASS} p-6 sm:p-8`}>
-              <RsvpForm />
-            </div>
           </div>
         </section>
 
