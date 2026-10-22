@@ -316,10 +316,10 @@ const MadridEventLandingPage = () => {
                 pitch: just good food, good company and a chance to continue the conversations we started this week.
               </p>
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-4 hero-fade-2">
+                {/* Default size, no glow: next to a secondary button the large
+                    glowing primary stands taller (same rule as CtaBanner). */}
                 <Button
                   variant="primary"
-                  size="lg"
-                  glow
                   href={RSVP_HREF}
                   onClick={() => trackCtaClick("RSVP", RSVP_HREF, "primary")}
                 >
