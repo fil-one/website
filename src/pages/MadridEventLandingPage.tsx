@@ -26,6 +26,7 @@ import { trackCtaClick, trackEvent } from "@/lib/analytics";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
 import jamesPhoto from "@/assets/team-james-kurz.jpg";
 import rwPhoto from "@/assets/team-rw-holleman.jpg";
+import pepoPhoto from "@/assets/host-pepo-pinar.webp";
 
 // ─── Event ────────────────────────────────────────────────────────────────────
 
@@ -156,7 +157,7 @@ interface Host {
 const HOSTS: Host[] = [
   { initials: "JK", name: "James Kurz", role: "Chief Strategy Officer, Fil One", isFilOne: true, photo: jamesPhoto },
   { initials: "RH", name: "R.W. Holleman", role: "Head of Revenue, Fil One", isFilOne: true, photo: rwPhoto },
-  { initials: "PP", name: "Pepo Piñar", role: "Bonum", isFilOne: false },
+  { initials: "PP", name: "Pepo Piñar", role: "Bonum", isFilOne: false, photo: pepoPhoto },
   { initials: "MG", name: "Miguel Gambra", role: "Bonum", isFilOne: false },
 ];
 
@@ -555,23 +556,23 @@ const MadridEventLandingPage = () => {
                 Meet <span className="text-brand-500">your hosts</span>
               </SectionHeading>
             </div>
-            <ul className="m-0 p-0 list-none grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <ul className="m-0 p-0 list-none grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {HOSTS.map(({ initials, name, role, isFilOne, photo }) => (
-                <li key={name} className={`${CARD_CLASS} p-6 flex flex-col gap-4`}>
+                <li key={name} className={`${CARD_CLASS} overflow-hidden flex flex-col`}>
                   {/* Empty alt: the name is printed right below the photo. */}
                   {photo ? (
-                    <img src={photo} alt="" width={48} height={48} className="h-12 w-12 shrink-0 rounded-full object-cover" />
+                    <img src={photo} alt="" loading="lazy" className="aspect-square w-full object-cover bg-zinc-100" />
                   ) : (
                     <span
                       aria-hidden="true"
-                      className={`flex h-12 w-12 items-center justify-center rounded-full font-display font-medium text-[16px] ${
-                        isFilOne ? "bg-brand-50 text-brand-600" : "bg-zinc-100 text-zinc-600"
+                      className={`flex aspect-square w-full items-center justify-center font-display font-medium text-[40px] sm:text-[56px] ${
+                        isFilOne ? "bg-brand-50 text-brand-600" : "bg-zinc-100 text-zinc-500"
                       }`}
                     >
                       {initials}
                     </span>
                   )}
-                  <div className="flex flex-col gap-0.5">
+                  <div className="flex flex-col gap-0.5 p-4 sm:p-5">
                     <p className="m-0 font-sans font-semibold text-body-sm text-zinc-950">{name}</p>
                     <p className="m-0 font-sans text-small text-zinc-500">{role}</p>
                   </div>
