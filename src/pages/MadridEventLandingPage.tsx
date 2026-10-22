@@ -24,7 +24,7 @@ import { submitEventRsvp } from "@/lib/eventRsvp";
 import { validateFields, hasErrors, focusFirstInvalid, type FieldErrors } from "@/lib/formValidation";
 import { trackCtaClick, trackEvent } from "@/lib/analytics";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
-import jamesPhoto from "@/assets/team-james-kurz.jpg";
+import jamesPhoto from "@/assets/host-james-kurz.webp";
 import rwPhoto from "@/assets/team-rw-holleman.jpg";
 import pepoPhoto from "@/assets/host-pepo-pinar.webp";
 
