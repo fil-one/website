@@ -31,7 +31,7 @@ import rwPhoto from "@/assets/host-rw-holleman.webp";
 import pepoPhoto from "@/assets/host-pepo-pinar.webp";
 
 /**
- * The Madrid tapas evening page, rendered in English at /lp/madrid and in
+ * The Madrid aperitivo evening page, rendered in English at /lp/madrid and in
  * Spanish at /lp/es/madrid. Both routes share this one component so a change
  * to the layout or the event details lands in both languages at once; only the
  * copy below differs.
@@ -43,6 +43,7 @@ const RSVP_HREF = "#rsvp";
 const CODE_OF_CONDUCT_HREF = "https://github.com/filecoin-project/community/blob/master/CODE_OF_CONDUCT.md";
 /** Where guests send cancellations, so their place goes to the waitlist. */
 const HOSTS_EMAIL = "sales@fil.one";
+const MAP_HREF = "https://www.google.com/maps/search/?api=1&query=Vinology+Zurbano+Calle+de+Zurbano+13+28010+Madrid";
 /** Event key written to the sheet's "event" column, the same in both languages. */
 const RSVP_EVENT = "madrid-2026-11-12";
 
@@ -171,22 +172,27 @@ const hostsEmailLink = (
 const COPY: Record<Lang, MadridEventCopy> = {
   en: {
     hero: {
-      badge: "Tapas evening · Madrid · 12 November",
+      badge: "Aperitivo evening · Madrid · 12 November",
       title: (
         <>
           Introducing <span className="text-brand-500">Fil One</span> to Spain
         </>
       ),
       description:
-        "Join the Fil One and Bonum teams for a relaxed evening of tapas and drinks in Madrid. No slides, no pitch: just good food, good company and a chance to continue the conversations we started this week.",
+        "Join the Fil One and Bonum teams for a relaxed evening of drinks and aperitivos in Madrid. No slides, no pitch: just good food, good company and a chance to continue the conversations we started this week.",
       rsvp: "RSVP",
       addToCalendar: "Add to calendar",
       tagline: "Free to attend · Limited capacity · RSVP to confirm your place or join the waitlist",
       detailsLabel: "The details",
       details: [
-        { icon: CalendarBlank, title: "Thursday, 12 November 2026", body: "From 17:30" },
-        { icon: MapPin, title: "Venue to be announced", body: "Madrid. We'll share the address soon." },
-        { icon: BowlFood, title: "An evening of tapas, in person", body: "Free to attend" },
+        { icon: CalendarBlank, title: "Thursday, 12 November 2026", body: "5:30pm to 8pm" },
+        {
+          icon: MapPin,
+          title: "Vinology Zurbano",
+          body: "Calle de Zurbano, 13, Chamberí, 28010 Madrid",
+          link: { label: "Map", href: MAP_HREF },
+        },
+        { icon: BowlFood, title: "An evening of aperitivos, in person", body: "Free to attend" },
         { icon: Users, title: "Limited capacity", body: "RSVP to secure your invitation or join the waitlist" },
       ],
     },
@@ -198,7 +204,11 @@ const COPY: Record<Lang, MadridEventCopy> = {
         </>
       ),
       items: [
-        { icon: BowlFood, title: "Tapas and drinks", body: "Good Spanish food and drinks in Madrid, at a venue we'll announce soon." },
+        {
+          icon: BowlFood,
+          title: "Drinks and aperitivos",
+          body: "Good Spanish food and drinks at Vinology Zurbano, in Madrid's Chamberí.",
+        },
         {
           icon: ChatCircle,
           title: "Meet the teams",
@@ -343,8 +353,8 @@ const COPY: Record<Lang, MadridEventCopy> = {
           question: "What if I can't make it?",
           answer: (
             <>
-              Please write to your hosts at {hostsEmailLink} so we can free up your place for someone on the waitlist.
-              If you'd still like to hear more about Fil One,{" "}
+              Please write to your hosts at {hostsEmailLink}, and let the person who invited you know, so we can free up
+              your place for someone on the waitlist. If you'd still like to hear more about Fil One,{" "}
               <a href={HREFS.en.contact} className={LINK_CLASS}>
                 book a call with an expert
               </a>{" "}
@@ -365,7 +375,7 @@ const COPY: Record<Lang, MadridEventCopy> = {
     },
     cta: {
       heading: "Nos vemos en Madrid",
-      subhead: "Thursday, 12 November from 17:30 in Madrid. Venue to be announced.",
+      subhead: "Thursday, 12 November, 5:30pm to 8pm, at Vinology Zurbano (Calle de Zurbano, 13), Madrid.",
       rsvp: "RSVP",
       talkToExpert: "Talk to an expert",
       note: "Free to attend · Limited capacity · Waitlist available",
@@ -374,22 +384,27 @@ const COPY: Record<Lang, MadridEventCopy> = {
 
   es: {
     hero: {
-      badge: "Tapas en Madrid · 12 de noviembre",
+      badge: "Aperitivos en Madrid · 12 de noviembre",
       title: (
         <>
           <span className="text-brand-500">Fil One</span> llega a España
         </>
       ),
       description:
-        "Ven a pasar una tarde relajada de tapas y copas en Madrid con los equipos de Fil One y Bonum. Sin presentaciones ni discursos comerciales: solo buena comida, buena compañía y la ocasión de seguir con las conversaciones que hemos empezado esta semana.",
+        "Ven a pasar una tarde relajada de aperitivos y copas en Madrid con los equipos de Fil One y Bonum. Sin presentaciones ni discursos comerciales: solo buena comida, buena compañía y la ocasión de seguir con las conversaciones que hemos empezado esta semana.",
       rsvp: "Confirmar asistencia",
       addToCalendar: "Añadir al calendario",
       tagline: "Evento gratuito · Plazas limitadas · Confirma tu asistencia o apúntate a la lista de espera",
       detailsLabel: "Información práctica",
       details: [
-        { icon: CalendarBlank, title: "Jueves, 12 de noviembre de 2026", body: "A partir de las 17:30" },
-        { icon: MapPin, title: "Lugar por confirmar", body: "Madrid. Muy pronto compartiremos la dirección." },
-        { icon: BowlFood, title: "Una tarde de tapas, en persona", body: "Evento gratuito" },
+        { icon: CalendarBlank, title: "Jueves, 12 de noviembre de 2026", body: "De 17:30h a 20h" },
+        {
+          icon: MapPin,
+          title: "Vinology Zurbano",
+          body: "Calle de Zurbano, 13, Chamberí, 28010 Madrid",
+          link: { label: "Ver mapa", href: MAP_HREF },
+        },
+        { icon: BowlFood, title: "Una tarde de aperitivos, en persona", body: "Evento gratuito" },
         {
           icon: Users,
           title: "Aforo limitado",
@@ -407,12 +422,12 @@ const COPY: Record<Lang, MadridEventCopy> = {
       items: [
         {
           icon: BowlFood,
-          title: "De tapas",
-          body: "Buena cocina de aquí y unas copas en Madrid, en un local que anunciaremos muy pronto.",
+          title: "De aperitivos",
+          body: "Buena cocina de aquí y unas copas en Vinology Zurbano, en pleno Chamberí.",
         },
         {
           icon: ChatCircle,
-          title: "Los equipos, de cerca",
+          title: "Conoce nuestro equipo",
           body: "Pasa un rato con quienes están detrás de Fil One y Bonum, sin una mesa de reuniones de por medio.",
         },
         {
@@ -426,14 +441,14 @@ const COPY: Record<Lang, MadridEventCopy> = {
       label: "Confirmación de asistencia",
       heading: (
         <>
-          Resérvate <span className="text-brand-500">un hueco</span>
+          Reserva <span className="text-brand-500">tu plaza</span>
         </>
       ),
-      sub: "El aforo es limitado. Confirma tu asistencia para asegurarte una plaza; si ya está todo lleno, te apuntamos a la lista de espera y te avisamos en cuanto haya un hueco.",
+      sub: "El aforo es limitado. Confirma tu asistencia para asegurar tu plaza; si ya está todo lleno, te apuntamos a la lista de espera y te avisamos en cuanto haya una plaza disponible.",
     },
     form: {
       firstname: "Nombre",
-      lastname: "Apellidos",
+      lastname: "Apellido",
       email: "Correo de trabajo",
       company: "Empresa",
       jobtitle: "Cargo",
@@ -445,9 +460,9 @@ const COPY: Record<Lang, MadridEventCopy> = {
       privacyLink: "Política de privacidad",
       conductNote: "Al asistir, aceptas el",
       conductLink: "código de conducta",
-      successTitle: "¡Gracias! Ya tenemos tu respuesta",
+      successTitle: "¡Gracias por inscribirte!",
       successBody:
-        "Te escribiremos para confirmarte la plaza. Si ya está todo lleno, pasas a la lista de espera y te avisamos en cuanto haya un hueco.",
+        "Te escribiremos para confirmar tu plaza en el evento. Si ya hemos alcanzado el aforo máximo, te incluiremos en la lista de espera y te avisaremos en cuanto quede una plaza libre.",
     },
     hosts: {
       label: "Anfitriones",
@@ -470,15 +485,15 @@ const COPY: Record<Lang, MadridEventCopy> = {
       problemPoints: [
         "Un solo centro de datos suele dar servicio a todo un continente, lejos de los clientes y de sus servidores.",
         "La redundancia se paga a base de copias completas: si quieres que tus datos sobrevivan a la pérdida de un edificio, toca pagar otra copia.",
-        "Backblaze y Wasabi no tienen región en España: si quieres redundancia, tus datos acaban fuera del país.",
+        "Backblaze y Wasabi no tienen región en España, por lo que los datos resilientes salen del país.",
       ],
       solutionLabel: "La solución · Fil One",
-      solutionTitle: "Muchos emplazamientos pequeños, unidos en una sola región soberana",
+      solutionTitle: "Muchos sitios pequeños, unidos en una sola región soberana",
       solutionPoints: [
         { lead: "Más rápido:", body: "en el mismo edificio que las GPU o a un paso." },
         {
           lead: "Más resiliente:",
-          body: "con erasure coding, los datos se reparten entre varios centros de datos; si cae uno, siguen ahí.",
+          body: "con erasure coding, los datos se reparten entre varios centros de datos; si cae uno, siguen en otros.",
         },
         { lead: "Soberano:", body: "tus datos se quedan en España, bajo la legislación española y de la UE." },
       ],
@@ -494,10 +509,10 @@ const COPY: Record<Lang, MadridEventCopy> = {
       label: "Comparativa de precios",
       heading: (
         <>
-          Cuánto cuesta seguir en pie si <span className="text-brand-500">pierdes un centro de datos</span>
+          Cuánto cuesta seguir en pie <span className="text-brand-500">si pierdes un centro de datos</span>
         </>
       ),
-      sub: "Precio de lista por TB y mes para que tus datos sigan disponibles aunque caiga uno de los centros de datos.",
+      sub: "Lista de precio de TB por mes para que tus datos sigan disponibles aunque caiga uno de los centros de datos.",
       rows: [
         {
           provider: "Amazon S3 Standard",
@@ -516,13 +531,13 @@ const COPY: Record<Lang, MadridEventCopy> = {
         },
       ],
       caption:
-        "Precios de lista a octubre de 2026. No incluyen cargos por egress ni por solicitudes. Con el plan Sovereign, los datos se reparten entre varios centros de datos de Fil One en España.",
+        "Lista de precios a octubre de 2026. No incluyen cargos por egress ni por solicitudes. Con el plan Sovereign, los datos se reparten entre varios centros de datos de Fil One en España.",
     },
     spain: {
       label: "Fil One y Bonum en España",
       heading: (
         <>
-          Datos de aquí, <span className="text-brand-500">guardados aquí</span>
+          Datos de España, <span className="text-brand-500">guardados en España</span>
         </>
       ),
       sub: "Fil One funciona como una única región S3 repartida entre centros de datos asociados, sujeta a la legislación española y de la UE. En España lo comercializa Bonum, un grupo tecnológico al servicio del mundo hispanohablante desde 1999.",
@@ -561,8 +576,8 @@ const COPY: Record<Lang, MadridEventCopy> = {
           question: "¿Y si al final no puedo ir?",
           answer: (
             <>
-              Escríbenos a {hostsEmailLink} para que podamos ceder tu plaza a alguien de la lista de espera. Y si aun así
-              quieres saber más sobre Fil One,{" "}
+              Escríbenos a {hostsEmailLink} y avisa también a la persona que te invitó, para que podamos ceder tu plaza a
+              alguien de la lista de espera. Y si aun así quieres saber más sobre Fil One,{" "}
               <a href={HREFS.es.contact} className={LINK_CLASS}>
                 concierta una llamada con un experto
               </a>{" "}
@@ -583,7 +598,7 @@ const COPY: Record<Lang, MadridEventCopy> = {
     },
     cta: {
       heading: "Nos vemos en Madrid",
-      subhead: "El jueves 12 de noviembre, a partir de las 17:30, en Madrid. Lugar por confirmar.",
+      subhead: "El jueves 12 de noviembre, de 17:30h a 20h, en Vinology Zurbano (Calle de Zurbano, 13), Madrid.",
       rsvp: "Confirmar asistencia",
       talkToExpert: "Hablar con un experto",
       note: "Evento gratuito · Plazas limitadas · Lista de espera si se llena",
