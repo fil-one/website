@@ -149,6 +149,17 @@ export const ROUTE_META = {
     description:
       `Compare flat-rate S3-compatible storage side by side. Fil One is ${PRICE_PER_TB_SHORT} with $0 egress and no per-request fees. Wasabi is $7.99/TB and Backblaze B2 $6.95/TB.`,
   },
+  "/lp/madrid": {
+    title: "Tapas evening in Madrid, 12 November · Fil One",
+    description:
+      "Join the Fil One and Bonum teams for tapas and drinks in Madrid on 12 November from 17:30. Venue to be announced. Free to attend, limited capacity.",
+  },
+  "/lp/es/madrid": {
+    lang: "es",
+    title: "Tarde de tapas en Madrid, 12 de noviembre · Fil One",
+    description:
+      "Tapas y copas con los equipos de Fil One y Bonum en Madrid, el 12 de noviembre, desde las 17:30. Lugar por confirmar. Evento gratuito, aforo limitado.",
+  },
 
   // ── Product / solutions / marketing pages ─────────────────────────────────
   "/pricing": {
