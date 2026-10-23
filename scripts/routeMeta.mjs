@@ -197,4 +197,14 @@ export const ROUTE_META = {
     description:
       "Fil One exists to put you back in control of your data. Learn who we are, why we built S3-compatible storage on Filecoin, and the principles behind it.",
   },
+  "/trust": {
+    title: "Trust center · Fil One",
+    description:
+      "How Fil One protects your data: cryptographic proof of storage, encryption by default, certified data centers, and an honest view of our compliance status.",
+  },
+  "/trust/request": {
+    title: "Request security documents · Fil One",
+    description:
+      "Request Fil One security documents for your review, including our data processing agreement (DPA) and a Business Associate Agreement (BAA).",
+  },
 };
