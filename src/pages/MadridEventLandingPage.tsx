@@ -25,7 +25,7 @@ import { validateFields, hasErrors, focusFirstInvalid, type FieldErrors } from "
 import { trackCtaClick, trackEvent } from "@/lib/analytics";
 import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
 import jamesPhoto from "@/assets/host-james-kurz.webp";
-import rwPhoto from "@/assets/team-rw-holleman.jpg";
+import rwPhoto from "@/assets/host-rw-holleman.webp";
 import pepoPhoto from "@/assets/host-pepo-pinar.webp";
 
 // ─── Event ────────────────────────────────────────────────────────────────────
