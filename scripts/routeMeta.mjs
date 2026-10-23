@@ -152,7 +152,13 @@ export const ROUTE_META = {
   "/lp/madrid": {
     title: "Tapas evening in Madrid, 12 November · Fil One",
     description:
-      "Join the Fil One and Bonum teams for tapas and drinks at Restaurante Bancal, Madrid, on 12 November from 17:30. Free to attend, limited capacity.",
+      "Join the Fil One and Bonum teams for tapas and drinks in Madrid on 12 November from 17:30. Venue to be announced. Free to attend, limited capacity.",
+  },
+  "/lp/es/madrid": {
+    lang: "es",
+    title: "Tarde de tapas en Madrid, 12 de noviembre · Fil One",
+    description:
+      "Tapas y copas con los equipos de Fil One y Bonum en Madrid, el 12 de noviembre, desde las 17:30. Lugar por confirmar. Evento gratuito, aforo limitado.",
   },
 
   // ── Product / solutions / marketing pages ─────────────────────────────────

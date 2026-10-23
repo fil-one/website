@@ -22,11 +22,11 @@ END:DAYLIGHT
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:fil-one-madrid-2026-11-12@fil.one
-DTSTAMP:20261022T000000Z
+DTSTAMP:20261023T000000Z
 DTSTART;TZID=Europe/Madrid:20261112T173000
 DTEND;TZID=Europe/Madrid:20261112T210000
 SUMMARY:Fil One and Bonum: tapas evening in Madrid
-LOCATION:Restaurante Bancal\, C. de Serrano\, 95\, Chamartín\, 28006 Madrid
+LOCATION:Madrid (venue to be announced)
 DESCRIPTION:An evening of tapas and drinks with the Fil One and Bonum teams. https://www.fil.one/lp/madrid
 URL:https://www.fil.one/lp/madrid
 END:VEVENT

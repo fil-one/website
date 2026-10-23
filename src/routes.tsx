@@ -32,6 +32,7 @@ export const routeDefs: RouteDef[] = [
   { path: "/lp/migrate-from-s3", load: () => import("./pages/MigrateFromS3LandingPage") },
   { path: "/lp/price", load: () => import("./pages/PriceLandingPage") },
   { path: "/lp/madrid", load: () => import("./pages/MadridEventLandingPage") },
+  { path: "/lp/es/madrid", load: () => import("./pages/MadridEventLandingPageES") },
   { path: "/pricing", load: () => import("./pages/PricingPage") },
   { path: "/about", load: () => import("./pages/About") },
   { path: "/workloads", load: () => import("./pages/WorkloadsPage") },

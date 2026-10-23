@@ -4,6 +4,8 @@
  * script and its setup steps are in scripts/apps-script/event-rsvp.gs.
  */
 
+import type { FormLang } from "@/lib/formValidation";
+
 /**
  * The Apps Script web app URL. Use the plain /macros/s/<id>/exec form, not the
  * /a/macros/<domain>/ form the Apps Script editor shows to Workspace users,
@@ -32,20 +34,28 @@ export interface RsvpSubmitResult {
   error?: string;
 }
 
-const MESSAGES = {
-  email: "We couldn't accept that email address. Please check it and try again.",
-  generic: "Something went wrong and your RSVP wasn't sent. Please try again in a moment.",
-  network: "We couldn't reach our servers. Please check your connection and try again.",
+const MESSAGES: Record<FormLang, { email: string; generic: string; network: string }> = {
+  en: {
+    email: "We couldn't accept that email address. Please check it and try again.",
+    generic: "Something went wrong and your RSVP wasn't sent. Please try again in a moment.",
+    network: "We couldn't reach our servers. Please check your connection and try again.",
+  },
+  es: {
+    email: "Esa dirección de correo no parece válida. Revísala y vuelve a intentarlo.",
+    generic: "Algo ha fallado y no se ha enviado tu respuesta. Vuelve a intentarlo en un momento.",
+    network: "No hemos podido conectar con nuestros servidores. Comprueba tu conexión y vuelve a intentarlo.",
+  },
 };
 
 /**
  * Post an RSVP to the sheet. Resolves to `{ ok: true }` or `{ ok: false, error }`
- * with visitor-facing copy; never throws.
+ * with visitor-facing copy in `lang`; never throws.
  */
-export async function submitEventRsvp(rsvp: EventRsvp): Promise<RsvpSubmitResult> {
+export async function submitEventRsvp(rsvp: EventRsvp, lang: FormLang = "en"): Promise<RsvpSubmitResult> {
+  const messages = MESSAGES[lang];
   if (!RSVP_ENDPOINT) {
     console.error("RSVP_ENDPOINT is not set; see scripts/apps-script/event-rsvp.gs");
-    return { ok: false, error: MESSAGES.generic };
+    return { ok: false, error: messages.generic };
   }
   try {
     const res = await fetch(RSVP_ENDPOINT, {
@@ -58,10 +68,10 @@ export async function submitEventRsvp(rsvp: EventRsvp): Promise<RsvpSubmitResult
     const body: { ok?: boolean; error?: string } = await res.json().catch(() => ({}));
     if (!res.ok || !body.ok) {
       console.error("RSVP submission error:", res.status, body);
-      return { ok: false, error: body.error === "invalid_email" ? MESSAGES.email : MESSAGES.generic };
+      return { ok: false, error: body.error === "invalid_email" ? messages.email : messages.generic };
     }
     return { ok: true };
   } catch {
-    return { ok: false, error: MESSAGES.network };
+    return { ok: false, error: messages.network };
   }
 }
