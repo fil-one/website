@@ -779,16 +779,19 @@ const MadridEventPage = ({ lang }: { lang: Lang }) => {
               <p className="m-0 max-w-[520px] font-sans text-body md:text-body-lg leading-[1.65] text-zinc-500 text-pretty">
                 {t.hero.description}
               </p>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-4 hero-fade-2">
+              {/* On phones the two buttons split the row in equal halves, so the
+                  longer Spanish labels still fit side by side. */}
+              <div className="grid grid-cols-2 sm:flex items-center gap-3 mt-4 w-full sm:w-auto hero-fade-2">
                 {/* Default size, no glow: next to a secondary button the large
                     glowing primary stands taller (same rule as CtaBanner). */}
-                <Button variant="primary" href={RSVP_HREF} onClick={trackRsvp}>
+                <Button variant="primary" href={RSVP_HREF} onClick={trackRsvp} fullWidth>
                   {t.hero.rsvp}
                 </Button>
                 <Button
                   variant="secondary"
                   href={hrefs.calendar}
                   download
+                  fullWidth
                   onClick={() => trackCtaClick("Add to calendar", hrefs.calendar, "secondary")}
                 >
                   {t.hero.addToCalendar}
