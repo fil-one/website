@@ -29,6 +29,7 @@ import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
 import jamesPhoto from "@/assets/host-james-kurz.webp";
 import rwPhoto from "@/assets/host-rw-holleman.webp";
 import pepoPhoto from "@/assets/host-pepo-pinar.webp";
+import miguelPhoto from "@/assets/host-miguel-gambra.webp";
 
 /**
  * The Madrid tapas evening page, rendered in English at /lp/madrid and in
@@ -92,7 +93,7 @@ const HOSTS: Host[] = [
   { initials: "JK", name: "James Kurz", role: "Chief Strategy Officer, Fil One", isFilOne: true, photo: jamesPhoto },
   { initials: "RH", name: "R.W. Holleman", role: "Head of Revenue, Fil One", isFilOne: true, photo: rwPhoto },
   { initials: "PP", name: "Pepo Piñar", role: "Bonum", isFilOne: false, photo: pepoPhoto },
-  { initials: "MG", name: "Miguel Gambra", role: "Bonum", isFilOne: false },
+  { initials: "MG", name: "Miguel Gambra", role: "Bonum", isFilOne: false, photo: miguelPhoto },
 ];
 
 // ─── Copy ─────────────────────────────────────────────────────────────────────
