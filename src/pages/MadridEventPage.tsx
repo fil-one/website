@@ -29,9 +29,10 @@ import { PRICE_PER_TB_SHORT } from "@/lib/pricing";
 import jamesPhoto from "@/assets/host-james-kurz.webp";
 import rwPhoto from "@/assets/host-rw-holleman.webp";
 import pepoPhoto from "@/assets/host-pepo-pinar.webp";
+import miguelPhoto from "@/assets/host-miguel-gambra.webp";
 
 /**
- * The Madrid aperitivo evening page, rendered in English at /lp/madrid and in
+ * The Madrid tapas evening page, rendered in English at /lp/madrid and in
  * Spanish at /lp/es/madrid. Both routes share this one component so a change
  * to the layout or the event details lands in both languages at once; only the
  * copy below differs.
@@ -92,7 +93,7 @@ const HOSTS: Host[] = [
   { initials: "JK", name: "James Kurz", role: "Chief Strategy Officer, Fil One", isFilOne: true, photo: jamesPhoto },
   { initials: "RH", name: "R.W. Holleman", role: "Head of Revenue, Fil One", isFilOne: true, photo: rwPhoto },
   { initials: "PP", name: "Pepo Piñar", role: "Bonum", isFilOne: false, photo: pepoPhoto },
-  { initials: "MG", name: "Miguel Gambra", role: "Bonum", isFilOne: false },
+  { initials: "MG", name: "Miguel Gambra", role: "Bonum", isFilOne: false, photo: miguelPhoto },
 ];
 
 // ─── Copy ─────────────────────────────────────────────────────────────────────
@@ -172,17 +173,17 @@ const hostsEmailLink = (
 const COPY: Record<Lang, MadridEventCopy> = {
   en: {
     hero: {
-      badge: "Aperitivo evening · Madrid · 12 November",
+      badge: "Tapas evening · Madrid · 12 November",
       title: (
         <>
           Introducing <span className="text-brand-500">Fil One</span> to Spain
         </>
       ),
       description:
-        "Join the Fil One and Bonum teams for a relaxed evening of drinks and aperitivos in Madrid. No slides, no pitch: just good food, good company and a chance to continue the conversations we started this week.",
+        "Join the Fil One and Bonum teams for a relaxed evening of drinks and tapas in Madrid. No slides, no pitch: just good food, good company and a chance to continue the conversations we started this week.",
       rsvp: "RSVP",
       addToCalendar: "Add to calendar",
-      tagline: "Free to attend · Limited capacity · RSVP to confirm your place or join the waitlist",
+      tagline: "Invite-only event · Limited capacity · RSVP to confirm your place or join the waitlist",
       detailsLabel: "The details",
       details: [
         { icon: CalendarBlank, title: "Thursday, 12 November 2026", body: "5:30pm to 8pm" },
@@ -192,7 +193,7 @@ const COPY: Record<Lang, MadridEventCopy> = {
           body: "Calle de Zurbano, 13, Chamberí, 28010 Madrid",
           link: { label: "Map", href: MAP_HREF },
         },
-        { icon: BowlFood, title: "An evening of aperitivos, in person", body: "Free to attend" },
+        { icon: BowlFood, title: "An evening of tapas, in person", body: "Invite-only event" },
         { icon: Users, title: "Limited capacity", body: "RSVP to secure your invitation or join the waitlist" },
       ],
     },
@@ -206,7 +207,7 @@ const COPY: Record<Lang, MadridEventCopy> = {
       items: [
         {
           icon: BowlFood,
-          title: "Drinks and aperitivos",
+          title: "Drinks and tapas",
           body: "Good Spanish food and drinks at Vinology Zurbano, in Madrid's Chamberí.",
         },
         {
@@ -378,23 +379,23 @@ const COPY: Record<Lang, MadridEventCopy> = {
       subhead: "Thursday, 12 November, 5:30pm to 8pm, at Vinology Zurbano (Calle de Zurbano, 13), Madrid.",
       rsvp: "RSVP",
       talkToExpert: "Talk to an expert",
-      note: "Free to attend · Limited capacity · Waitlist available",
+      note: "Invite-only event · Limited capacity · Waitlist available",
     },
   },
 
   es: {
     hero: {
-      badge: "Aperitivos en Madrid · 12 de noviembre",
+      badge: "Tapas en Madrid · 12 de noviembre",
       title: (
         <>
           <span className="text-brand-500">Fil One</span> llega a España
         </>
       ),
       description:
-        "Ven a pasar una tarde relajada de aperitivos y copas en Madrid con los equipos de Fil One y Bonum. Sin presentaciones ni discursos comerciales: solo buena comida, buena compañía y la ocasión de seguir con las conversaciones que hemos empezado esta semana.",
+        "Ven a pasar una tarde relajada de tapas y copas en Madrid con los equipos de Fil One y Bonum. Sin presentaciones ni discursos comerciales: solo buena comida, buena compañía y la ocasión de seguir con las conversaciones que hemos empezado esta semana.",
       rsvp: "Confirmar asistencia",
       addToCalendar: "Añadir al calendario",
-      tagline: "Evento gratuito · Plazas limitadas · Confirma tu asistencia o apúntate a la lista de espera",
+      tagline: "Evento solo con invitación · Plazas limitadas · Confirma tu asistencia o apúntate a la lista de espera",
       detailsLabel: "Información práctica",
       details: [
         { icon: CalendarBlank, title: "Jueves, 12 de noviembre de 2026", body: "De 17:30h a 20h" },
@@ -404,7 +405,7 @@ const COPY: Record<Lang, MadridEventCopy> = {
           body: "Calle de Zurbano, 13, Chamberí, 28010 Madrid",
           link: { label: "Ver mapa", href: MAP_HREF },
         },
-        { icon: BowlFood, title: "Una tarde de aperitivos, en persona", body: "Evento gratuito" },
+        { icon: BowlFood, title: "Una tarde de tapas, en persona", body: "Evento solo con invitación" },
         {
           icon: Users,
           title: "Aforo limitado",
@@ -422,7 +423,7 @@ const COPY: Record<Lang, MadridEventCopy> = {
       items: [
         {
           icon: BowlFood,
-          title: "De aperitivos",
+          title: "De tapas",
           body: "Buena cocina de aquí y unas copas en Vinology Zurbano, en pleno Chamberí.",
         },
         {
@@ -601,7 +602,7 @@ const COPY: Record<Lang, MadridEventCopy> = {
       subhead: "El jueves 12 de noviembre, de 17:30h a 20h, en Vinology Zurbano (Calle de Zurbano, 13), Madrid.",
       rsvp: "Confirmar asistencia",
       talkToExpert: "Hablar con un experto",
-      note: "Evento gratuito · Plazas limitadas · Lista de espera si se llena",
+      note: "Evento solo con invitación · Plazas limitadas · Lista de espera si se llena",
     },
   },
 };
