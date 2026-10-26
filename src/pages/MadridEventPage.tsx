@@ -707,18 +707,28 @@ const RsvpForm = ({ lang }: { lang: Lang }) => {
 
       <div className="flex flex-col gap-3">
         <SubmitButton loading={loading}>{loading ? t.sending : t.submit}</SubmitButton>
-        <p className="m-0 font-sans text-small leading-[1.6] text-zinc-500 text-center">
-          {t.privacyNote}{" "}
-          <a href="/privacy" className="text-zinc-500 underline">
-            {t.privacyLink}
-          </a>
-          <br />
-          {t.conductNote}{" "}
-          <a href={CODE_OF_CONDUCT_HREF} target="_blank" rel="noopener noreferrer" className="text-zinc-500 underline">
-            {t.conductLink}
-          </a>
-          .
-        </p>
+        {/* One sentence per line, and links that never break across lines, so
+            a narrow screen doesn't leave half a link on a line of its own. */}
+        <div className="flex flex-col gap-1 font-sans text-[13px] leading-[1.5] text-zinc-500 text-center">
+          <p className="m-0">
+            {t.privacyNote}{" "}
+            <a href="/privacy" className="text-zinc-500 underline whitespace-nowrap">
+              {t.privacyLink}
+            </a>
+          </p>
+          <p className="m-0">
+            {t.conductNote}{" "}
+            <a
+              href={CODE_OF_CONDUCT_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-500 underline whitespace-nowrap"
+            >
+              {t.conductLink}
+            </a>
+            .
+          </p>
+        </div>
       </div>
       {error && <FormError>{error}</FormError>}
     </form>
