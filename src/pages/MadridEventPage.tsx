@@ -707,18 +707,28 @@ const RsvpForm = ({ lang }: { lang: Lang }) => {
 
       <div className="flex flex-col gap-3">
         <SubmitButton loading={loading}>{loading ? t.sending : t.submit}</SubmitButton>
-        <p className="m-0 font-sans text-small leading-[1.6] text-zinc-500 text-center">
-          {t.privacyNote}{" "}
-          <a href="/privacy" className="text-zinc-500 underline">
-            {t.privacyLink}
-          </a>
-          <br />
-          {t.conductNote}{" "}
-          <a href={CODE_OF_CONDUCT_HREF} target="_blank" rel="noopener noreferrer" className="text-zinc-500 underline">
-            {t.conductLink}
-          </a>
-          .
-        </p>
+        {/* One sentence per line, and links that never break across lines, so
+            a narrow screen doesn't leave half a link on a line of its own. */}
+        <div className="flex flex-col gap-1 font-sans text-[13px] leading-[1.5] text-zinc-500 text-center">
+          <p className="m-0">
+            {t.privacyNote}{" "}
+            <a href="/privacy" className="text-zinc-500 underline whitespace-nowrap">
+              {t.privacyLink}
+            </a>
+          </p>
+          <p className="m-0">
+            {t.conductNote}{" "}
+            <a
+              href={CODE_OF_CONDUCT_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-500 underline whitespace-nowrap"
+            >
+              {t.conductLink}
+            </a>
+            .
+          </p>
+        </div>
       </div>
       {error && <FormError>{error}</FormError>}
     </form>
@@ -779,16 +789,19 @@ const MadridEventPage = ({ lang }: { lang: Lang }) => {
               <p className="m-0 max-w-[520px] font-sans text-body md:text-body-lg leading-[1.65] text-zinc-500 text-pretty">
                 {t.hero.description}
               </p>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-4 hero-fade-2">
+              {/* On phones the two buttons split the row in equal halves, so the
+                  longer Spanish labels still fit side by side. */}
+              <div className="grid grid-cols-2 sm:flex items-center gap-3 mt-4 w-full sm:w-auto hero-fade-2">
                 {/* Default size, no glow: next to a secondary button the large
                     glowing primary stands taller (same rule as CtaBanner). */}
-                <Button variant="primary" href={RSVP_HREF} onClick={trackRsvp}>
+                <Button variant="primary" href={RSVP_HREF} onClick={trackRsvp} fullWidth>
                   {t.hero.rsvp}
                 </Button>
                 <Button
                   variant="secondary"
                   href={hrefs.calendar}
                   download
+                  fullWidth
                   onClick={() => trackCtaClick("Add to calendar", hrefs.calendar, "secondary")}
                 >
                   {t.hero.addToCalendar}
