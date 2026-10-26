@@ -22,14 +22,14 @@ END:DAYLIGHT
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:fil-one-madrid-2026-11-12@fil.one
-DTSTAMP:20261023T120000Z
+DTSTAMP:20261026T120000Z
 DTSTART;TZID=Europe/Madrid:20261112T173000
 DTEND;TZID=Europe/Madrid:20261112T200000
-SEQUENCE:1
-SUMMARY:Fil One y Bonum: tarde de aperitivos en Madrid
+SEQUENCE:2
+SUMMARY:Fil One y Bonum: tarde de tapas en Madrid
 LOCATION:Vinology Zurbano\, Calle de Zurbano\, 13\, Chamberí\, 28010 Madri
  d\, España
-DESCRIPTION:Una tarde de aperitivos y copas con los equipos de Fil One y Bo
+DESCRIPTION:Una tarde de tapas y copas con los equipos de Fil One y Bo
  num. https://www.fil.one/lp/es/madrid
 URL:https://www.fil.one/lp/es/madrid
 END:VEVENT

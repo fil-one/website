@@ -22,14 +22,14 @@ END:DAYLIGHT
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:fil-one-madrid-2026-11-12@fil.one
-DTSTAMP:20261023T120000Z
+DTSTAMP:20261026T120000Z
 DTSTART;TZID=Europe/Madrid:20261112T173000
 DTEND;TZID=Europe/Madrid:20261112T200000
-SEQUENCE:1
-SUMMARY:Fil One and Bonum: aperitivo evening in Madrid
+SEQUENCE:2
+SUMMARY:Fil One and Bonum: tapas evening in Madrid
 LOCATION:Vinology Zurbano\, Calle de Zurbano\, 13\, Chamberí\, 28010 Madri
  d\, Spain
-DESCRIPTION:An evening of drinks and aperitivos with the Fil One and Bonum 
+DESCRIPTION:An evening of drinks and tapas with the Fil One and Bonum 
  teams. https://www.fil.one/lp/madrid
 URL:https://www.fil.one/lp/madrid
 END:VEVENT
