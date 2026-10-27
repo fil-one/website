@@ -212,6 +212,16 @@
       "source": "/neocloud/apply",
       "destination": "/host/apply",
       "permanent": true
+    },
+    {
+      "source": "/lp/madrid",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/lp/es/madrid",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "rewrites": [
