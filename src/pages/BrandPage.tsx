@@ -34,13 +34,9 @@ const SYMBOLS: AssetVariant[] = [
   { file: "fil-one-symbol-white", name: "White", use: "Single color, for dark or blue backgrounds.", surface: "bg-space" },
 ];
 
-const COLORS = [
-  { name: "Brand blue", hex: "#0090FF", role: "Primary. The symbol, highlights, and accents.", swatch: "bg-brand-500", text: "text-zinc-950" },
-  { name: "Deep blue", hex: "#0055CC", role: "Links, pressed states, and blue text on white.", swatch: "bg-brand-700", text: "text-white" },
-  { name: "Aqua", hex: "#1EBFFF", role: "Gradient accent paired with brand blue.", swatch: "bg-aqua-400", text: "text-zinc-950" },
-  { name: "Space", hex: "#070B14", role: "The darkest surfaces and announcement bars.", swatch: "bg-space", text: "text-white" },
-  { name: "Navy", hex: "#041525", role: "Dark sections and code blocks.", swatch: "bg-navy-900", text: "text-white" },
-  { name: "Ink", hex: "#09090B", role: "Headings and body text.", swatch: "bg-zinc-950", text: "text-white" },
+const BRAND_COLOR = [
+  { format: "HEX", value: "#0090FF" },
+  { format: "RGB", value: "0, 144, 255" },
 ];
 
 const TYPEFACES = [
@@ -232,26 +228,26 @@ const BrandPage = () => {
           <div className={SECTION}>
             <div className="flex flex-col gap-3 max-w-[560px]">
               <SectionLabel>Color</SectionLabel>
-              <SectionHeading id="brand-color">Color palette</SectionHeading>
-              <SectionSub>Brand blue leads. Dark surfaces stay deep and cool, and text sits in near-black ink.</SectionSub>
+              <SectionHeading id="brand-color">Brand blue</SectionHeading>
+              <SectionSub>One color carries the brand. It's the color of the symbol and the accent across everything we make.</SectionSub>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {COLORS.map((color) => (
-                <div key={color.hex} className={`${CARD} flex flex-col`}>
-                  <div className={`flex h-32 items-end justify-between p-4 ${color.swatch} ${color.text}`}>
-                    <span className="font-mono text-body-sm font-medium">{color.hex}</span>
-                    <CopyButton
-                      value={color.hex}
-                      label={`Copy ${color.name} hex code ${color.hex}`}
-                      className={color.text === "text-white" ? "bg-white/15 hover:bg-white/25" : "bg-black/10 hover:bg-black/15"}
-                    />
+            <div className={`${CARD} grid grid-cols-1 md:grid-cols-[1.4fr_1fr]`}>
+              <div className="h-40 md:h-auto md:min-h-[220px] bg-brand-500" aria-hidden="true" />
+              <dl className="m-0 flex flex-col justify-center divide-y divide-black/[0.07] px-6 md:px-8">
+                {BRAND_COLOR.map(({ format, value }) => (
+                  <div key={format} className="flex flex-col gap-1 py-5">
+                    <dt className="font-mono text-eyebrow font-medium uppercase tracking-[0.08em] text-zinc-500">{format}</dt>
+                    <dd className="m-0 flex items-center justify-between gap-4">
+                      <span className="font-mono text-body-lg font-medium text-zinc-950">{value}</span>
+                      <CopyButton
+                        value={value}
+                        label={`Copy brand blue ${format} value ${value}`}
+                        className="border border-black/[0.1] text-zinc-700 hover:bg-zinc-50"
+                      />
+                    </dd>
                   </div>
-                  <div className="flex flex-col gap-1 p-5">
-                    <p className="m-0 font-sans font-medium text-body text-zinc-950">{color.name}</p>
-                    <p className="m-0 font-sans text-body-sm leading-[1.5] text-zinc-600">{color.role}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </dl>
             </div>
           </div>
         </section>
