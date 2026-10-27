@@ -26,7 +26,7 @@ const LOGOS: AssetVariant[] = [
   { file: "fil-one-logo", name: "Full color", use: "The default. Use it on white and light backgrounds.", surface: "bg-white" },
   { file: "fil-one-logo-reversed", name: "Reversed", use: "Full color for dark backgrounds.", surface: "bg-space" },
   { file: "fil-one-logo-black", name: "Black", use: "Single color, for print and light backgrounds.", surface: "bg-zinc-100" },
-  { file: "fil-one-logo-white", name: "White", use: "Single color, for brand blue and photography.", surface: "bg-brand-500" },
+  { file: "fil-one-logo-white", name: "White", use: "Single color, for Fil One blue and photography.", surface: "bg-brand-500" },
 ];
 
 const SYMBOLS: AssetVariant[] = [
