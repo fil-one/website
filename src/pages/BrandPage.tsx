@@ -126,7 +126,7 @@ const AssetCard = ({ asset, aspect }: { asset: AssetVariant; aspect: string }) =
 
 /** One section beside the side nav; a hairline separates it from the one above, as on /workloads. */
 const BrandSection = ({ id, title, sub, first = false, children }: { id: string; title: string; sub: string; first?: boolean; children: ReactNode }) => (
-  <section id={id} aria-labelledby={`${id}-heading`} className={`flex scroll-mt-header-md flex-col gap-10 py-14 md:py-20 ${first ? "" : "border-t border-black/[0.07]"}`}>
+  <section id={id} aria-labelledby={`${id}-heading`} className={`flex scroll-mt-header-md flex-col gap-10 py-14 md:py-20 ${first ? "!pt-14" : "border-t border-black/[0.07]"}`}>
     <div className="flex max-w-[560px] flex-col gap-3">
       <SectionHeading id={`${id}-heading`}>{title}</SectionHeading>
       <SectionSub>{sub}</SectionSub>
