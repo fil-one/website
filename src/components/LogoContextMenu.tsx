@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { ArrowRight, Check, Copy } from "@phosphor-icons/react";
+import { Check, Copy } from "@phosphor-icons/react";
 import Icon from "@/components/Icon";
 import { copyText, fetchText } from "@/lib/clipboard";
 import type { Lang } from "@/lib/i18n";
@@ -16,7 +16,7 @@ const COPY = {
 
 // Item corners sit inside the menu's 6px padding, so they round 6px less than the menu (16px).
 const ITEM =
-  "flex w-full items-center gap-2.5 rounded-[10px] px-3 py-2 text-left font-sans text-body-sm text-zinc-950 no-underline outline-none transition-colors hover:bg-black/[0.04] focus-visible:bg-black/[0.04]";
+  "flex w-full items-center justify-between gap-2.5 rounded-[10px] px-3 py-2 text-left font-sans text-body-sm text-zinc-950 no-underline outline-none transition-colors hover:bg-black/[0.04] focus-visible:bg-black/[0.04]";
 
 interface LogoContextMenuProps {
   lang?: Lang;
@@ -115,11 +115,10 @@ const LogoContextMenu = ({ lang = "en", children }: LogoContextMenuProps) => {
             className="fixed z-[60] flex flex-col rounded-2xl border border-black/[0.07] bg-white p-1.5 shadow-dropdown"
           >
             <button type="button" role="menuitem" onClick={copyLogo} className={ITEM}>
-              <Icon icon={copied ? Check : Copy} size={16} className="text-zinc-500" />
               <span aria-live="polite">{copied ? t.copied : t.copy}</span>
+              <Icon icon={copied ? Check : Copy} size={16} className="text-zinc-500" />
             </button>
             <a role="menuitem" href={BRAND_HREF} onClick={() => close()} className={ITEM}>
-              <Icon icon={ArrowRight} size={16} className="text-zinc-500" />
               {t.brand}
             </a>
           </div>,
