@@ -39,30 +39,6 @@ const BRAND_COLOR = [
   { format: "RGB", value: "0, 144, 255" },
 ];
 
-const TYPEFACES = [
-  {
-    name: "Aspekta",
-    role: "Display and headings",
-    sample: "Storage you can verify",
-    sampleClass: "font-display font-medium text-h3 md:text-h2 tracking-[-0.02em]",
-    href: "https://github.com/ivodolenc/aspekta",
-  },
-  {
-    name: "Funnel Sans",
-    role: "Body copy and interface",
-    sample: "S3-compatible object storage with no egress penalties.",
-    sampleClass: "font-sans text-body-lg",
-    href: "https://fonts.google.com/specimen/Funnel+Sans",
-  },
-  {
-    name: "DM Mono",
-    role: "Labels, eyebrows, and code",
-    sample: "PUT s3://my-bucket/model.safetensors",
-    sampleClass: "font-mono text-body-sm",
-    href: "https://fonts.google.com/specimen/DM+Mono",
-  },
-];
-
 const DOS = [
   "Use the files from this kit as they are",
   "Leave clear space around the logo at least half the height of the symbol",
@@ -145,7 +121,7 @@ const BrandPage = () => {
           grid
           badge={<Pill>Brand kit</Pill>}
           title={<>Everything you need to <span className="text-brand-500">show Fil One</span></>}
-          description="Logos, colors, and type for anyone writing about Fil One, building on it, or partnering with us. Download the full kit or grab individual files below."
+          description="Our logo, symbol, and brand color for anyone writing about Fil One, building on it, or partnering with us. Download the full kit or grab individual files below."
           titleMaxWidth={640}
           descriptionMaxWidth={580}
           ctas={[
@@ -248,36 +224,6 @@ const BrandPage = () => {
                   </div>
                 ))}
               </dl>
-            </div>
-          </div>
-        </section>
-
-        {/* Typography */}
-        <section className="w-full bg-white" aria-labelledby="brand-type">
-          <div className={SECTION}>
-            <div className="flex flex-col gap-3 max-w-[560px]">
-              <SectionLabel>Typography</SectionLabel>
-              <SectionHeading id="brand-type">Typefaces</SectionHeading>
-              <SectionSub>Three free typefaces, each with one job.</SectionSub>
-            </div>
-            <div className="flex flex-col gap-4">
-              {TYPEFACES.map((face) => (
-                <div key={face.name} className={`${CARD} grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 md:gap-10 p-6 md:p-8 md:items-center`}>
-                  <div className="flex flex-col gap-1">
-                    <p className="m-0 font-sans font-medium text-body text-zinc-950">{face.name}</p>
-                    <p className="m-0 font-sans text-body-sm text-zinc-600">{face.role}</p>
-                    <a
-                      href={face.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-1 font-sans text-body-sm font-medium text-brand-600 no-underline hover:opacity-70"
-                    >
-                      Get the font<span className="sr-only"> {face.name} (opens in a new tab)</span>
-                    </a>
-                  </div>
-                  <p className={`m-0 leading-[1.3] text-zinc-950 break-words ${face.sampleClass}`}>{face.sample}</p>
-                </div>
-              ))}
             </div>
           </div>
         </section>
