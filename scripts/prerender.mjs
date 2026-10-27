@@ -141,7 +141,6 @@ const HREFLANG_GROUPS = [
   { en: "/lp/barcelona", es: "/lp/es/barcelona" },
   { en: "/contact-sales", es: "/lp/es/contacto" },
   { en: "/support", es: "/lp/es/soporte" },
-  { en: "/lp/madrid", es: "/lp/es/madrid" },
 ];
 
 /** route path → array of { hreflang, href }, built once from HREFLANG_GROUPS. */
