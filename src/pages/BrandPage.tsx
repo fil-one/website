@@ -1,6 +1,5 @@
 import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
-import { Aperture, Check, Copy, DownloadSimple, Palette, Signature } from "@phosphor-icons/react";
-import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
+import { Check, Copy, DownloadSimple } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -44,10 +43,10 @@ const BRAND_COLOR = [
 const CARD = "rounded-2xl border border-black/[0.07] bg-white shadow-elevated-sm overflow-hidden";
 
 /** The page's sections, in order; drives the sticky side nav. */
-const SECTIONS: { id: string; nav: string; icon: PhosphorIcon }[] = [
-  { id: "logo", nav: "Logo", icon: Signature },
-  { id: "symbol", nav: "Symbol", icon: Aperture },
-  { id: "color", nav: "Brand color", icon: Palette },
+const SECTIONS: { id: string; nav: string }[] = [
+  { id: "logo", nav: "Logo" },
+  { id: "symbol", nav: "Symbol" },
+  { id: "color", nav: "Brand color" },
 ];
 
 /** Copies `value` and briefly confirms; the live region announces it to screen readers. */
@@ -109,12 +108,12 @@ const AssetCard = ({ asset, aspect }: { asset: AssetVariant; aspect: string }) =
         className="absolute right-3 top-3 border border-black/[0.08] bg-white text-zinc-700 shadow-elevated-sm opacity-0 transition-opacity hover:bg-zinc-50 focus-visible:opacity-100 group-hover:opacity-100 [@media(hover:none)]:opacity-100"
       />
     </div>
-    <div className="flex flex-col gap-3 p-5">
+    <div className="flex flex-1 flex-col gap-3 p-5">
       <div className="flex flex-col gap-1">
         <p className="m-0 font-sans font-medium text-body text-zinc-950">{asset.name}</p>
         <p className="m-0 font-sans text-body-sm leading-[1.5] text-zinc-600">{asset.use}</p>
       </div>
-      <div className="flex gap-2">
+      <div className="mt-auto flex gap-2">
         {(["svg", "png"] as const).map((ext) => (
           <a
             key={ext}
@@ -227,7 +226,6 @@ const BrandPage = () => {
                     active === s.id ? "bg-brand-50 font-medium text-brand-700" : "text-zinc-600 hover:bg-black/[0.03]"
                   }`}
                 >
-                  <Icon icon={s.icon} size={16} className={active === s.id ? "text-brand-600" : "text-zinc-400"} />
                   {s.nav}
                 </a>
               ))}
