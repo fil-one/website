@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Check, Copy, DownloadSimple } from "@phosphor-icons/react";
+import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
+import { Aperture, Check, Copy, DownloadSimple, Palette, Signature } from "@phosphor-icons/react";
+import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -41,7 +42,13 @@ const BRAND_COLOR = [
 ];
 
 const CARD = "rounded-2xl border border-black/[0.07] bg-white shadow-elevated-sm overflow-hidden";
-const SECTION = "flex flex-col gap-10 px-5 md:px-8 py-16 md:py-24 w-full max-w-container mx-auto";
+
+/** The page's sections, in order; drives the sticky side nav. */
+const SECTIONS: { id: string; nav: string; icon: PhosphorIcon }[] = [
+  { id: "logo", nav: "Logo", icon: Signature },
+  { id: "symbol", nav: "Symbol", icon: Aperture },
+  { id: "color", nav: "Brand color", icon: Palette },
+];
 
 /** Copies `value` and briefly confirms; the live region announces it to screen readers. */
 const CopyButton = ({
@@ -125,11 +132,61 @@ const AssetCard = ({ asset, aspect }: { asset: AssetVariant; aspect: string }) =
   </div>
 );
 
+/** One section beside the side nav; a hairline separates it from the one above, as on /workloads. */
+const BrandSection = ({ id, title, sub, first = false, children }: { id: string; title: string; sub: string; first?: boolean; children: ReactNode }) => (
+  <section id={id} aria-labelledby={`${id}-heading`} className={`flex scroll-mt-header-md flex-col gap-10 py-14 md:py-20 ${first ? "" : "border-t border-black/[0.07]"}`}>
+    <div className="flex max-w-[560px] flex-col gap-3">
+      <SectionHeading id={`${id}-heading`}>{title}</SectionHeading>
+      <SectionSub>{sub}</SectionSub>
+    </div>
+    {children}
+  </section>
+);
+
 const BrandPage = () => {
   useSeo();
+  const [active, setActive] = useState(SECTIONS[0].id);
+
+  // Side-nav clicks glide to the section instead of jumping, and keep the
+  // hash in the URL so the link still copies. Respects reduced-motion.
+  const goTo = (id: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    window.history.replaceState(null, "", `#${id}`);
+  };
+
+  // Highlight the side-nav entry for the section in view: the last section
+  // whose top has passed the upper 40% of the viewport.
+  useEffect(() => {
+    const sections = SECTIONS.map((s) => document.getElementById(s.id)).filter((el): el is HTMLElement => !!el);
+    if (!sections.length) return;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const line = window.innerHeight * 0.4;
+      let current = sections[0].id;
+      for (const el of sections) if (el.getBoundingClientRect().top <= line) current = el.id;
+      setActive(current);
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-white">
+    <div className="min-h-screen overflow-x-clip bg-white">
       <PlatformNavbar />
       <main id="main-content">
         <Hero
@@ -153,66 +210,69 @@ const BrandPage = () => {
           contentClassName="pb-16 md:pb-20"
         />
 
-        {/* Logo */}
-        <section className="w-full bg-white" aria-labelledby="brand-logo">
-          <div className={SECTION}>
-            <div className="flex flex-col gap-3 max-w-[560px]">
-              <SectionLabel>Logo</SectionLabel>
-              <SectionHeading id="brand-logo">The logo</SectionHeading>
-              <SectionSub>The symbol and wordmark together. Reach for this first whenever there's room for it.</SectionSub>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {LOGOS.map((asset) => (
-                <AssetCard key={asset.file} asset={asset} aspect="aspect-[2/1]" />
+        {/* Sticky side nav + the sections */}
+        <div className="w-full px-5 md:px-8">
+          <div className="mx-auto grid w-full max-w-container grid-cols-1 items-start gap-8 lg:grid-cols-[224px_1fr] lg:gap-16">
+            <nav aria-label="Brand kit sections" className="z-10 hidden lg:sticky lg:top-[calc(theme(spacing.header)+24px)] lg:mb-20 lg:flex lg:flex-col lg:gap-1 lg:pt-14">
+              <span className="px-3 pb-2.5">
+                <SectionLabel>Brand kit</SectionLabel>
+              </span>
+              {SECTIONS.map((s) => (
+                <a
+                  key={s.id}
+                  href={`#${s.id}`}
+                  onClick={goTo(s.id)}
+                  aria-current={active === s.id ? "location" : undefined}
+                  className={`flex items-center gap-2.5 rounded-lg px-3 py-2 font-sans text-[14px] no-underline transition-colors ${
+                    active === s.id ? "bg-brand-50 font-medium text-brand-700" : "text-zinc-600 hover:bg-black/[0.03]"
+                  }`}
+                >
+                  <Icon icon={s.icon} size={16} className={active === s.id ? "text-brand-600" : "text-zinc-400"} />
+                  {s.nav}
+                </a>
               ))}
-            </div>
-          </div>
-        </section>
+            </nav>
 
-        {/* Symbol */}
-        <section className="w-full bg-white" aria-labelledby="brand-symbol">
-          <div className={SECTION}>
-            <div className="flex flex-col gap-3 max-w-[560px]">
-              <SectionLabel>Symbol</SectionLabel>
-              <SectionHeading id="brand-symbol">The symbol</SectionHeading>
-              <SectionSub>The mark on its own, for square and small spaces where the full logo won't fit.</SectionSub>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {SYMBOLS.map((asset) => (
-                <AssetCard key={asset.file} asset={asset} aspect="aspect-[4/3]" />
-              ))}
-            </div>
-          </div>
-        </section>
+            <div className="flex min-w-0 flex-col">
+              <BrandSection id="logo" title="The logo" sub="The symbol and wordmark together. Reach for this first whenever there's room for it." first>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {LOGOS.map((asset) => (
+                    <AssetCard key={asset.file} asset={asset} aspect="aspect-[2/1]" />
+                  ))}
+                </div>
+              </BrandSection>
 
-        {/* Color */}
-        <section className="w-full bg-white" aria-labelledby="brand-color">
-          <div className={SECTION}>
-            <div className="flex flex-col gap-3 max-w-[560px]">
-              <SectionLabel>Color</SectionLabel>
-              <SectionHeading id="brand-color">Brand blue</SectionHeading>
-              <SectionSub>One color carries the brand. It's the color of the symbol and the accent across everything we make.</SectionSub>
-            </div>
-            <div className={`${CARD} grid grid-cols-1 md:grid-cols-[1.4fr_1fr]`}>
-              <div className="h-40 md:h-auto md:min-h-[220px] bg-brand-500" aria-hidden="true" />
-              <dl className="m-0 flex flex-col justify-center divide-y divide-black/[0.07] px-6 md:px-8">
-                {BRAND_COLOR.map(({ format, value }) => (
-                  <div key={format} className="flex flex-col gap-1 py-5">
-                    <dt className="font-mono text-eyebrow font-medium uppercase tracking-[0.08em] text-zinc-500">{format}</dt>
-                    <dd className="m-0 flex items-center justify-between gap-4">
-                      <span className="font-mono text-body-lg font-medium text-zinc-950">{value}</span>
-                      <CopyButton
-                        value={value}
-                        label={`Copy brand blue ${format} value ${value}`}
-                        className="border border-black/[0.1] text-zinc-700 hover:bg-zinc-50"
-                      />
-                    </dd>
-                  </div>
-                ))}
-              </dl>
+              <BrandSection id="symbol" title="The symbol" sub="The mark on its own, for square and small spaces where the full logo won't fit.">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {SYMBOLS.map((asset) => (
+                    <AssetCard key={asset.file} asset={asset} aspect="aspect-[4/3]" />
+                  ))}
+                </div>
+              </BrandSection>
+
+              <BrandSection id="color" title="Brand blue" sub="One color carries the brand. It's the color of the symbol and the accent across everything we make.">
+                <div className={`${CARD} grid grid-cols-1 md:grid-cols-[1.4fr_1fr]`}>
+                  <div className="h-40 md:h-auto md:min-h-[220px] bg-brand-500" aria-hidden="true" />
+                  <dl className="m-0 flex flex-col justify-center divide-y divide-black/[0.07] px-6 md:px-8">
+                    {BRAND_COLOR.map(({ format, value }) => (
+                      <div key={format} className="flex flex-col gap-1 py-5">
+                        <dt className="font-mono text-eyebrow font-medium uppercase tracking-[0.08em] text-zinc-500">{format}</dt>
+                        <dd className="m-0 flex items-center justify-between gap-4">
+                          <span className="font-mono text-body-lg font-medium text-zinc-950">{value}</span>
+                          <CopyButton
+                            value={value}
+                            label={`Copy brand blue ${format} value ${value}`}
+                            className="border border-black/[0.1] text-zinc-700 hover:bg-zinc-50"
+                          />
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </BrandSection>
             </div>
           </div>
-        </section>
+        </div>
 
         <CtaBanner
           heading="Need something that isn't here?"
