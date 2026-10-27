@@ -9,6 +9,7 @@ import Icon from "@/components/Icon";
 import { SectionHeading, SectionLabel, SectionSub } from "@/components/LandingPrimitives";
 import { useSeo } from "@/hooks/useSeo";
 import { trackCtaClick } from "@/lib/analytics";
+import { copyText, fetchText } from "@/lib/clipboard";
 
 const KIT_HREF = "/brand/fil-one-brand-kit.zip";
 
@@ -68,15 +69,7 @@ const CopyButton = ({
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
-      if (typeof value === "string") {
-        await navigator.clipboard.writeText(value);
-      } else if (typeof ClipboardItem !== "undefined") {
-        // Hand the clipboard a pending blob so Safari keeps the click's user activation across the fetch.
-        const blob = value().then((t) => new Blob([t], { type: "text/plain" }));
-        await navigator.clipboard.write([new ClipboardItem({ "text/plain": blob })]);
-      } else {
-        await navigator.clipboard.writeText(await value());
-      }
+      await copyText(value);
       setCopied(true);
       setTimeout(() => setCopied(false), 1600);
     } catch {
@@ -102,7 +95,7 @@ const AssetCard = ({ asset, aspect }: { asset: AssetVariant; aspect: string }) =
       <img src={`/brand/${asset.file}.svg`} alt={`Fil One ${asset.name.toLowerCase()} ${asset.file.includes("symbol") ? "symbol" : "logo"}`} className="max-h-[42%] max-w-[62%]" loading="lazy" />
       {/* Revealed on hover or keyboard focus; always shown on touch screens, which can't hover. */}
       <CopyButton
-        value={() => fetch(`/brand/${asset.file}.svg`).then((r) => r.text())}
+        value={fetchText(`/brand/${asset.file}.svg`)}
         label={`Copy ${asset.name} ${asset.file.includes("symbol") ? "symbol" : "logo"} SVG code`}
         iconOnly
         className="absolute right-3 top-3 border border-black/[0.08] bg-white text-zinc-700 shadow-elevated-sm opacity-0 transition-opacity hover:bg-zinc-50 focus-visible:opacity-100 group-hover:opacity-100 [@media(hover:none)]:opacity-100"

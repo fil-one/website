@@ -6,6 +6,7 @@ import { trackDocsClick } from "@/lib/analytics";
 import { Button } from "@/components/Button";
 import Icon, { type IconProps } from "@/components/Icon";
 import FloatingSupportButton from "@/components/FloatingSupportButton";
+import LogoContextMenu from "@/components/LogoContextMenu";
 import { localize, type Lang, type Localized } from "@/lib/i18n";
 import { consoleUrl, signupUrl } from "@/lib/console-url";
 
@@ -109,9 +110,9 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
         <div className="mx-auto flex h-[58px] w-full max-w-container-wide items-center justify-between gap-4 lg:gap-5 xl:gap-8">
           {/* Left: logo and the page links as one group */}
           <div className="flex items-center gap-8 xl:gap-10">
-          <a href="/" className="flex h-11 shrink-0 items-center no-underline">
+          <LogoContextMenu lang={lang}>
             <img src={filOneLogo} alt="Fil One" className="block h-5 w-auto" />
-          </a>
+          </LogoContextMenu>
 
           {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-0.5 xl:gap-2">
