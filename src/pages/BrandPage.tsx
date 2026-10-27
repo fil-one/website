@@ -250,7 +250,7 @@ const BrandPage = () => {
                 </div>
               </BrandSection>
 
-              <BrandSection id="color" title="Brand blue" sub="Our primary color, used for the symbol and key accents.">
+              <BrandSection id="color" title="Fil One blue" sub="Our primary color, used for the symbol and key accents.">
                 <div className={`${CARD} grid grid-cols-1 md:grid-cols-[1.4fr_1fr]`}>
                   <div className="h-40 md:h-auto md:min-h-[220px] bg-brand-500" aria-hidden="true" />
                   <dl className="m-0 flex flex-col justify-center divide-y divide-black/[0.07] px-6 md:px-8">
@@ -261,7 +261,7 @@ const BrandPage = () => {
                           <span className="font-mono text-body-lg font-medium text-zinc-950">{value}</span>
                           <CopyButton
                             value={value}
-                            label={`Copy brand blue ${format} value ${value}`}
+                            label={`Copy Fil One blue ${format} value ${value}`}
                             className="border border-black/[0.1] text-zinc-700 hover:bg-zinc-50"
                           />
                         </dd>
