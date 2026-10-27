@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, Copy, DownloadSimple, X } from "@phosphor-icons/react";
+import { Check, Copy, DownloadSimple } from "@phosphor-icons/react";
 import PlatformNavbar from "@/components/PlatformNavbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -37,31 +37,40 @@ const SYMBOLS: AssetVariant[] = [
 const BRAND_COLOR = [
   { format: "HEX", value: "#0090FF" },
   { format: "RGB", value: "0, 144, 255" },
-];
-
-const DOS = [
-  "Use the files from this kit as they are",
-  "Leave clear space around the logo at least half the height of the symbol",
-  "Keep the logo at least 96px wide on screen, and the symbol at least 16px",
-  "Pick the variant with the most contrast against its background",
-];
-
-const DONTS = [
-  "Recolor, stretch, rotate, or outline the logo",
-  "Add shadows, gradients, or other effects",
-  "Rearrange the symbol and wordmark or set the wordmark in another font",
-  "Place the logo on busy images without enough contrast",
+  { format: "OKLCH", value: "oklch(64.93% 0.193 251.78)" },
 ];
 
 const CARD = "rounded-2xl border border-black/[0.07] bg-white shadow-elevated-sm overflow-hidden";
 const SECTION = "flex flex-col gap-10 px-5 md:px-8 py-16 md:py-24 w-full max-w-container mx-auto";
 
 /** Copies `value` and briefly confirms; the live region announces it to screen readers. */
-const CopyButton = ({ value, label, className = "" }: { value: string; label: string; className?: string }) => {
+const CopyButton = ({
+  value,
+  label,
+  text = "Copy",
+  iconOnly = false,
+  className = "",
+}: {
+  /** The text to copy, or a loader for text fetched on click (e.g. an SVG file). */
+  value: string | (() => Promise<string>);
+  label: string;
+  text?: string;
+  /** Show only the icon; the text stays in the live region for screen readers. */
+  iconOnly?: boolean;
+  className?: string;
+}) => {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(value);
+      if (typeof value === "string") {
+        await navigator.clipboard.writeText(value);
+      } else if (typeof ClipboardItem !== "undefined") {
+        // Hand the clipboard a pending blob so Safari keeps the click's user activation across the fetch.
+        const blob = value().then((t) => new Blob([t], { type: "text/plain" }));
+        await navigator.clipboard.write([new ClipboardItem({ "text/plain": blob })]);
+      } else {
+        await navigator.clipboard.writeText(await value());
+      }
       setCopied(true);
       setTimeout(() => setCopied(false), 1600);
     } catch {
@@ -73,18 +82,25 @@ const CopyButton = ({ value, label, className = "" }: { value: string; label: st
       type="button"
       onClick={copy}
       aria-label={label}
-      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-sans text-small font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full font-sans text-small font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 ${iconOnly ? "h-9 w-9 justify-center" : "px-3 py-1.5"} ${className}`}
     >
-      <Icon icon={copied ? Check : Copy} size={14} />
-      <span aria-live="polite">{copied ? "Copied" : "Copy"}</span>
+      <Icon icon={copied ? Check : Copy} size={iconOnly ? 16 : 14} />
+      <span aria-live="polite" className={iconOnly ? "sr-only" : undefined}>{copied ? "Copied" : text}</span>
     </button>
   );
 };
 
 const AssetCard = ({ asset, aspect }: { asset: AssetVariant; aspect: string }) => (
   <div className={`${CARD} flex flex-col`}>
-    <div className={`flex items-center justify-center ${aspect} ${asset.surface} border-b border-black/[0.07]`}>
+    <div className={`group relative flex items-center justify-center ${aspect} ${asset.surface} border-b border-black/[0.07]`}>
       <img src={`/brand/${asset.file}.svg`} alt={`Fil One ${asset.name.toLowerCase()} ${asset.file.includes("symbol") ? "symbol" : "logo"}`} className="max-h-[42%] max-w-[62%]" loading="lazy" />
+      {/* Revealed on hover or keyboard focus; always shown on touch screens, which can't hover. */}
+      <CopyButton
+        value={() => fetch(`/brand/${asset.file}.svg`).then((r) => r.text())}
+        label={`Copy ${asset.name} ${asset.file.includes("symbol") ? "symbol" : "logo"} SVG code`}
+        iconOnly
+        className="absolute right-3 top-3 border border-black/[0.08] bg-white text-zinc-700 shadow-elevated-sm opacity-0 transition-opacity hover:bg-zinc-50 focus-visible:opacity-100 group-hover:opacity-100 [@media(hover:none)]:opacity-100"
+      />
     </div>
     <div className="flex flex-col gap-3 p-5">
       <div className="flex flex-col gap-1">
@@ -154,7 +170,7 @@ const BrandPage = () => {
         </section>
 
         {/* Symbol */}
-        <section className="w-full bg-zinc-50" aria-labelledby="brand-symbol">
+        <section className="w-full bg-white" aria-labelledby="brand-symbol">
           <div className={SECTION}>
             <div className="flex flex-col gap-3 max-w-[560px]">
               <SectionLabel>Symbol</SectionLabel>
@@ -169,38 +185,8 @@ const BrandPage = () => {
           </div>
         </section>
 
-        {/* Usage */}
-        <section className="w-full bg-white" aria-labelledby="brand-usage">
-          <div className={SECTION}>
-            <div className="flex flex-col gap-3 max-w-[560px]">
-              <SectionLabel>Usage</SectionLabel>
-              <SectionHeading id="brand-usage">Using the logo</SectionHeading>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                { title: "Do", items: DOS, icon: Check, tone: "bg-success-50 text-success-700" },
-                { title: "Don't", items: DONTS, icon: X, tone: "bg-danger-50 text-danger-700" },
-              ].map(({ title, items, icon, tone }) => (
-                <div key={title} className={`${CARD} flex flex-col gap-5 p-6 md:p-8`}>
-                  <h3 className="m-0 font-display font-medium text-h4 text-zinc-950">{title}</h3>
-                  <ul className="m-0 flex list-none flex-col gap-3 p-0">
-                    {items.map((item) => (
-                      <li key={item} className="flex items-start gap-3 font-sans text-body leading-[1.55] text-zinc-600">
-                        <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${tone}`} aria-hidden="true">
-                          <Icon icon={icon} size={12} weight="bold" />
-                        </span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Color */}
-        <section className="w-full bg-zinc-50" aria-labelledby="brand-color">
+        <section className="w-full bg-white" aria-labelledby="brand-color">
           <div className={SECTION}>
             <div className="flex flex-col gap-3 max-w-[560px]">
               <SectionLabel>Color</SectionLabel>
@@ -232,14 +218,9 @@ const BrandPage = () => {
           heading="Need something that isn't here?"
           subhead="Reach out for co-marketing, partner assets, or press requests and we'll get you what you need."
           cta={{
-            label: "Talk to sales",
-            href: "/contact-sales",
-            onClick: () => trackCtaClick("Talk to sales", "/contact-sales", "primary"),
-          }}
-          secondaryCta={{
             label: "Support",
             href: "/support",
-            onClick: () => trackCtaClick("Support", "/support", "secondary"),
+            onClick: () => trackCtaClick("Support", "/support", "primary"),
           }}
         />
       </main>

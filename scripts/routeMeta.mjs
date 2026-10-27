@@ -184,7 +184,7 @@ export const ROUTE_META = {
   "/brand": {
     title: "Brand kit · Fil One",
     description:
-      "Download the Fil One logo, symbol, and brand color, with simple guidelines for using them in press, partner, and product materials.",
+      "Download the Fil One logo and symbol as SVG or PNG, plus the brand color, for press, partner, and product materials.",
   },
   "/about": {
     title: "About · Fil One",
