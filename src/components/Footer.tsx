@@ -39,6 +39,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
       items: [
         { href: "/partners", label: "Partners" },
         { href: "/about", label: { en: "About", es: "Nosotros" } },
+        { href: "/brand", label: { en: "Brand kit", es: "Kit de marca" } },
         { href: contactSalesHref, label: { en: "Talk to sales", es: "Contactar con ventas" } },
       ],
     },

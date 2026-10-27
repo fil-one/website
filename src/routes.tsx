@@ -33,6 +33,7 @@ export const routeDefs: RouteDef[] = [
   { path: "/lp/price", load: () => import("./pages/PriceLandingPage") },
   { path: "/pricing", load: () => import("./pages/PricingPage") },
   { path: "/about", load: () => import("./pages/About") },
+  { path: "/brand", load: () => import("./pages/BrandPage") },
   { path: "/workloads", load: () => import("./pages/WorkloadsPage") },
   { path: "/partners", load: () => import("./pages/PartnersPage") },
   { path: "/host", load: () => import("./pages/HostPage") },

@@ -181,6 +181,11 @@ export const ROUTE_META = {
     description:
       `Move finished checkpoints, data lakes, backups, footage and logs to Fil One at ${PRICE_PER_TB_MONTH}, and pull them back at multi-Gbps with no egress penalties.`,
   },
+  "/brand": {
+    title: "Brand kit · Fil One",
+    description:
+      "Download the Fil One logo, symbol, colors, and typefaces, with simple guidelines for using them in press, partner, and product materials.",
+  },
   "/about": {
     title: "About · Fil One",
     description:
