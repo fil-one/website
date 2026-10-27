@@ -81,9 +81,6 @@ const DONTS = [
   "Place the logo on busy images without enough contrast",
 ];
 
-const BOILERPLATE =
-  "Fil One is S3-compatible object storage built on Filecoin, the world's largest decentralized storage network. It is sovereign by design, with no egress penalties and no per-request charges, so teams can store, serve, and move their data on their own terms.";
-
 const CARD = "rounded-2xl border border-black/[0.07] bg-white shadow-elevated-sm overflow-hidden";
 const SECTION = "flex flex-col gap-10 px-5 md:px-8 py-16 md:py-24 w-full max-w-container mx-auto";
 
@@ -285,30 +282,6 @@ const BrandPage = () => {
                   <p className={`m-0 leading-[1.3] text-zinc-950 break-words ${face.sampleClass}`}>{face.sample}</p>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Name and boilerplate */}
-        <section className="w-full bg-zinc-50" aria-labelledby="brand-name">
-          <div className={SECTION}>
-            <div className="flex flex-col gap-3 max-w-[560px]">
-              <SectionLabel>Name</SectionLabel>
-              <SectionHeading id="brand-name">Writing about Fil One</SectionHeading>
-              <SectionSub>
-                Write Fil One as two words, with a capital F and a capital O. Not FilOne, Fil-One, or FIL ONE.
-              </SectionSub>
-            </div>
-            <div className={`${CARD} flex flex-col gap-4 p-6 md:p-8`}>
-              <div className="flex items-center justify-between gap-4">
-                <h3 className="m-0 font-display font-medium text-h4 text-zinc-950">Boilerplate</h3>
-                <CopyButton
-                  value={BOILERPLATE}
-                  label="Copy the Fil One boilerplate"
-                  className="border border-black/[0.1] text-zinc-700 hover:bg-zinc-50"
-                />
-              </div>
-              <p className="m-0 max-w-container-prose font-sans text-body md:text-body-lg leading-[1.65] text-zinc-600">{BOILERPLATE}</p>
             </div>
           </div>
         </section>
