@@ -234,7 +234,7 @@ const BrandPage = () => {
             </nav>
 
             <div className="flex min-w-0 flex-col">
-              <BrandSection id="logo" title="The logo" sub="The symbol and wordmark together. Reach for this first whenever there's room for it." first>
+              <BrandSection id="logo" title="The logo" sub="The symbol and wordmark together. Use it whenever there's room." first>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {LOGOS.map((asset) => (
                     <AssetCard key={asset.file} asset={asset} aspect="aspect-[2/1]" />
@@ -242,7 +242,7 @@ const BrandPage = () => {
                 </div>
               </BrandSection>
 
-              <BrandSection id="symbol" title="The symbol" sub="The mark on its own, for square and small spaces where the full logo won't fit.">
+              <BrandSection id="symbol" title="The symbol" sub="The mark on its own, for square and small spaces.">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {SYMBOLS.map((asset) => (
                     <AssetCard key={asset.file} asset={asset} aspect="aspect-[4/3]" />
@@ -250,7 +250,7 @@ const BrandPage = () => {
                 </div>
               </BrandSection>
 
-              <BrandSection id="color" title="Brand blue" sub="One color carries the brand. It's the color of the symbol and the accent across everything we make.">
+              <BrandSection id="color" title="Brand blue" sub="The color of the symbol and the accent across everything we make.">
                 <div className={`${CARD} grid grid-cols-1 md:grid-cols-[1.4fr_1fr]`}>
                   <div className="h-40 md:h-auto md:min-h-[220px] bg-brand-500" aria-hidden="true" />
                   <dl className="m-0 flex flex-col justify-center divide-y divide-black/[0.07] px-6 md:px-8">
