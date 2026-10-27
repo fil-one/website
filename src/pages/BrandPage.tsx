@@ -250,7 +250,7 @@ const BrandPage = () => {
                 </div>
               </BrandSection>
 
-              <BrandSection id="color" title="Brand blue" sub="The color of the symbol and the accent across everything we make.">
+              <BrandSection id="color" title="Brand blue" sub="Our primary color, used for the symbol and key accents.">
                 <div className={`${CARD} grid grid-cols-1 md:grid-cols-[1.4fr_1fr]`}>
                   <div className="h-40 md:h-auto md:min-h-[220px] bg-brand-500" aria-hidden="true" />
                   <dl className="m-0 flex flex-col justify-center divide-y divide-black/[0.07] px-6 md:px-8">
