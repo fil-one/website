@@ -16,7 +16,7 @@ vi.mock("@/components/PlatformNavbar", () => ({ default: () => <nav /> }));
 vi.mock("@/components/Footer", () => ({ default: () => <footer /> }));
 
 const BASE: LandingPageConfig = {
-  seo: { title: "t", description: "d", canonical: "https://www.fil.one/lp/test" },
+  seo: { title: "t", description: "d", canonical: "https://www.filone.com/lp/test" },
   hero: {
     title: "Title",
     description: "Description",

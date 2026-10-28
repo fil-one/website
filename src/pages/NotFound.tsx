@@ -15,7 +15,7 @@ const LINKS = [
     icon: BookOpen,
     label: "Documentation",
     description: "Guides, API reference, quickstarts",
-    href: "https://docs.fil.one",
+    href: "https://docs.filone.com",
     external: true,
   },
   {

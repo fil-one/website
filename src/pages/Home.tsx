@@ -18,7 +18,7 @@ import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 import { PRICE_DISPLAY } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
-const DOCS_URL = "https://docs.fil.one";
+const DOCS_URL = "https://docs.filone.com";
 
 const Home = () => {
   const { heroEndRef } = useScrollTracking();

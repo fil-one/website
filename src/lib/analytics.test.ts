@@ -38,13 +38,13 @@ describe("analytics", () => {
 
   describe("trackCtaClick", () => {
     it('sends "CTA Click" with label, page, destination, variant', () => {
-      trackCtaClick("Sign up", "https://app.fil.one", "primary");
+      trackCtaClick("Sign up", "https://app.filone.com", "primary");
 
       expect(plausibleSpy).toHaveBeenCalledWith("CTA Click", {
         props: {
           label: "Sign up",
           page: window.location.pathname,
-          destination: "https://app.fil.one",
+          destination: "https://app.filone.com",
           variant: "primary",
         },
       });
@@ -61,12 +61,12 @@ describe("analytics", () => {
 
   describe("trackDocsClick", () => {
     it('sends "Docs Click" with page and link_url', () => {
-      trackDocsClick("https://docs.fil.one/quickstart");
+      trackDocsClick("https://docs.filone.com/quickstart");
 
       expect(plausibleSpy).toHaveBeenCalledWith("Docs Click", {
         props: {
           page: window.location.pathname,
-          link_url: "https://docs.fil.one/quickstart",
+          link_url: "https://docs.filone.com/quickstart",
         },
       });
     });

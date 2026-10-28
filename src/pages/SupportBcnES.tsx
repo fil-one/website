@@ -27,7 +27,7 @@ const CATEGORY_OPTIONS = [
 ];
 
 const QUICK_LINKS = [
-  { label: "Documentación", sub: "Guías, referencia de API y SDKs", href: "https://docs.fil.one" },
+  { label: "Documentación", sub: "Guías, referencia de API y SDKs", href: "https://docs.filone.com" },
   { label: "Estado", sub: "Estado del sistema y disponibilidad en tiempo real", href: "https://status.fil.one" },
 ];
 

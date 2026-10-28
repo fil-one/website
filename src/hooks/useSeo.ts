@@ -14,7 +14,7 @@ interface SeoProps {
    */
   title?: string;
   description?: string;
-  /** Full canonical URL e.g. https://www.fil.one/. Derived from the route when omitted. */
+  /** Full canonical URL e.g. https://www.filone.com/. Derived from the route when omitted. */
   canonical?: string;
   ogImage?: string;
   /** Adds <meta name="robots" content="noindex"> and drops the canonical link. */

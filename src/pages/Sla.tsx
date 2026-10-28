@@ -12,7 +12,7 @@ const Sla = () => {
     title: "Service Level Agreement · Fil One",
     description:
       "The Fil One Object Storage Service Level Agreement: uptime commitment, service credit tiers, and how to request credits.",
-    canonical: "https://www.fil.one/sla",
+    canonical: "https://www.filone.com/sla",
   });
 
   return (

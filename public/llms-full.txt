@@ -251,24 +251,24 @@ Region-dependent:
 - CopyObject, object retention, and legal hold are confirmed in `us-east-1`
 
 The full, current list is in the
-[S3 compatibility reference](https://docs.fil.one/reference/s3-compatibility).
+[S3 compatibility reference](https://docs.filone.com/reference/s3-compatibility).
 
 ---
 
 ## Pages and documentation
 
-- [Homepage](https://www.fil.one): product overview, feature comparison, pricing, FAQ
-- [Pricing](https://www.fil.one/pricing): flat per-TB rate and a cost calculator
+- [Homepage](https://www.filone.com): product overview, feature comparison, pricing, FAQ
+- [Pricing](https://www.filone.com/pricing): flat per-TB rate and a cost calculator
   comparing Fil One with AWS S3, Wasabi, Backblaze B2, and Cloudflare R2
-- [Bring a workload](https://www.fil.one/workloads): AI training and models, data lakes
+- [Bring a workload](https://www.filone.com/workloads): AI training and models, data lakes
   and ETL, backup and archive, media, and security logs
-- [Host a zone](https://www.fil.one/host): S3 object storage installed in a GPU
+- [Host a zone](https://www.filone.com/host): S3 object storage installed in a GPU
   cloud's own facility, sold under the partner's brand
-- [Partners](https://www.fil.one/partners): channel, technology, and MSP partner programs
-- [About](https://www.fil.one/about): the team and company behind Fil One
-- [Documentation](https://docs.fil.one): quickstart, SDK examples, API reference,
+- [Partners](https://www.filone.com/partners): channel, technology, and MSP partner programs
+- [About](https://www.filone.com/about): the team and company behind Fil One
+- [Documentation](https://docs.filone.com): quickstart, SDK examples, API reference,
   security, billing, limits
-- [Talk to sales](https://www.fil.one/contact-sales): enterprise and high-volume
+- [Talk to sales](https://www.filone.com/contact-sales): enterprise and high-volume
   inquiries; also at sales@fil.one
-- [Privacy Policy](https://www.fil.one/privacy)
-- [Terms of Service](https://www.fil.one/terms)
+- [Privacy Policy](https://www.filone.com/privacy)
+- [Terms of Service](https://www.filone.com/terms)

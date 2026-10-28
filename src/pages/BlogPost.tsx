@@ -59,8 +59,8 @@ const BlogPost = () => {
   useSeo({
     title: post ? `${post.title} · Fil One` : "Blog · Fil One",
     description: post?.excerpt || "Ideas and practical guidance from Fil One.",
-    canonical: `https://www.fil.one/blog/${slug}`,
-    ogImage: post?.featuredImage || "https://www.fil.one/og-image.png",
+    canonical: `https://www.filone.com/blog/${slug}`,
+    ogImage: post?.featuredImage || "https://www.filone.com/og-image.png",
   });
 
   const publishedLabel = formatPostDate(post?.publishedAt);

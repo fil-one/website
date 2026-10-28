@@ -1,6 +1,6 @@
 # Fil One website
 
-Marketing site for [Fil One](https://www.fil.one), S3-compatible object storage built on Filecoin.
+Marketing site for [Fil One](https://www.filone.com), S3-compatible object storage built on Filecoin.
 
 ## Tech stack
 
@@ -105,17 +105,17 @@ Deployed on **Vercel**. Pushing to `main` triggers a production deployment autom
 
 ### Demo-alias domain
 
-`fil.one` keeps landing on blocklists, and the `.one` TLD itself is flagged, which breaks live demos. The same deployment is therefore also served from **`filone.ai`** — an alias whose only value is an unflagged reputation. `fil.one` remains the canonical, public, indexed domain.
+`fil.one` keeps landing on blocklists, and the `.one` TLD itself is flagged, which breaks live demos. The same deployment is therefore also served from **`filone.ai`** — an alias whose only value is an unflagged reputation. `filone.com` is the canonical, public, indexed domain.
 
 `filone.ai` and `www.filone.ai` are attached to this Vercel project alongside the `fil.one` hostnames. The console is served on `app.filone.ai` from the same CloudFront distribution — see `PROD_CONSOLE_ALIAS_HOSTS` in `fil-one/fil-one`, `packages/shared/src/constants.ts`. DNS for the whole zone lives in `environments/prod/filone-ai.tf` in `fil-one/infrastructure`.
 
-**The alias must stay out of search results.** `vercel.json` sends `X-Robots-Tag: noindex, nofollow` for `(www.)?filone.ai` via a host-conditional `has` rule, placed first so it applies regardless of whether Vercel evaluates `headers` cumulatively or first-match. Canonicals need no special handling: `index.html` and `useSeo` already emit absolute `https://www.fil.one/…` URLs on every host, so the alias points search engines at the canonical domain by itself. **Do not** add a `Disallow` for the alias in `robots.txt` — that would stop crawlers fetching the page at all, so they would never see the `noindex` header, and the two mechanisms would cancel out. The `has.value` pattern is unanchored, so it also matches a host merely containing the alias; that only ever over-applies `noindex`, which is the safe direction.
+**The alias must stay out of search results.** `vercel.json` sends `X-Robots-Tag: noindex, nofollow` for `(www.)?filone.ai` via a host-conditional `has` rule, placed first so it applies regardless of whether Vercel evaluates `headers` cumulatively or first-match. Canonicals need no special handling: `index.html` and `useSeo` already emit absolute `https://www.filone.com/…` URLs on every host, so the alias points search engines at the canonical domain by itself. **Do not** add a `Disallow` for the alias in `robots.txt` — that would stop crawlers fetching the page at all, so they would never see the `noindex` header, and the two mechanisms would cancel out. The `has.value` pattern is unanchored, so it also matches a host merely containing the alias; that only ever over-applies `noindex`, which is the safe direction.
 
-**Console links must follow the host.** Use `signupUrl()` for sign-up CTAs, or `consoleUrl(path)` / `consoleOrigin()` for any other console destination, all from `src/lib/console-url.ts`. Never hardcode `https://app.fil.one`, or a visitor on the alias is sent to the domain the alias exists to avoid.
+**Console links must follow the host.** Use `signupUrl()` for sign-up CTAs, or `consoleUrl(path)` / `consoleOrigin()` for any other console destination, all from `src/lib/console-url.ts`. Never hardcode a console origin such as `https://app.filone.com`, or a visitor on the alias is sent to the domain the alias exists to avoid.
 
 Keep the alias unadvertised: no public links, no marketing references, and do not add it to Search Console.
 
 Two things about `filone.ai` worth knowing before you change anything here:
 
 - It is also the domain every production Auth0 email is sent from, and a HubSpot campaign sender. Reputation damage earned by pages served here lands on the domain that delivers password resets, so treat a phishing report against the alias as a mail-deliverability incident too.
-- **`docs.fil.one` and `status.fil.one` links still leave the alias.** There is nothing to point them at — those subdomains do not exist on `filone.ai` — so on a network that blocks the `.one` TLD, clicking "docs" from an alias page fails. Known and accepted; fixing it means provisioning the subdomains on the docs Vercel project and Instatus.
+- **`status.fil.one` links still leave the alias.** There is nothing to point them at — that subdomain does not exist on `filone.ai` — so on a network that blocks the `.one` TLD, clicking "status" from an alias page fails. Known and accepted; it goes away when the status page moves to `status.filone.com`.

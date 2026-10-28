@@ -169,8 +169,8 @@ const MigrateFromS3LandingPage = () => {
               <p className="m-0 mb-2 font-sans font-medium text-[14px] text-zinc-950">What is compatible</p>
               <p className="m-0 font-sans text-[13.5px] leading-[1.65] text-zinc-500">
                 PutObject, GetObject, DeleteObject, HeadObject, CopyObject, ListObjectsV2, multipart upload, presigned URLs. Standard Auth v4 signing with path-style addressing. CreateBucket and DeleteBucket work over the API in US East (Michigan); in Europe (France), create and delete buckets in the dashboard. For the full compatibility list, see{" "}
-                <TextLink href="https://docs.fil.one" tone="brand" external className="inline">
-                  docs.fil.one
+                <TextLink href="https://docs.filone.com" tone="brand" external className="inline">
+                  docs.filone.com
                 </TextLink>
                 .
               </p>

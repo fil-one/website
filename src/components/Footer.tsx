@@ -48,7 +48,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
       title: { en: "Resources", es: "Recursos" },
       items: [
         { href: "/blog", label: "Blog" },
-        { href: "https://docs.fil.one", label: { en: "Documentation", es: "Documentación" } },
+        { href: "https://docs.filone.com", label: { en: "Documentation", es: "Documentación" } },
         { href: supportHref, label: { en: "Support", es: "Soporte" } },
         { href: "https://status.fil.one", label: { en: "Status", es: "Estado" } },
         { href: "https://filecoin.io", label: "Filecoin" },
@@ -97,7 +97,7 @@ const Footer = ({ lang = "en", supportHref = "/support", contactSalesHref = "/co
                     key={href}
                     href={href}
                     {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    onClick={href.includes("docs.fil.one") ? () => trackDocsClick(href) : undefined}
+                    onClick={href.includes("docs.filone.com") ? () => trackDocsClick(href) : undefined}
                     className="-my-1.5 py-1.5 font-sans text-small font-normal leading-[1.4] text-zinc-600 no-underline transition-colors duration-150 ease-smooth hover:text-zinc-950"
                   >
                     {l(label)}
