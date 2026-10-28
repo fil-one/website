@@ -215,6 +215,10 @@ describe("GET /blog/rss.xml", () => {
     expect(response.headers["content-type"]).toContain("application/rss+xml");
     expect(response.body).toContain("<title>My post</title>");
     expect(response.body).toContain("<link>https://www.filone.com/blog/my-post</link>");
+    // GUIDs stay on the feed's original origin so subscribers don't see old posts again.
+    expect(response.body).toContain(
+      '<guid isPermaLink="false">https://www.fil.one/blog/my-post</guid>',
+    );
     expect(response.body).toContain("<category>Product launches</category>");
     expect(response.body).toContain("<pubDate>Wed, 01 Jul 2026 09:00:00 GMT</pubDate>");
     // Nothing unescaped and no draft/internal fields leaked.

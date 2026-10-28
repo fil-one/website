@@ -29,8 +29,8 @@ describe("console-url", () => {
     expect(consoleOrigin()).toBe("https://app.filone.com");
   });
 
-  // The point of the whole change: a visitor on the demo alias must not be sent
-  // to the console on the domain the alias exists to avoid.
+  // The point of the alias: a visitor on it stays on the alias's own console, and is
+  // never sent to a console on another domain.
   it.for([["filone.ai"], ["www.filone.ai"], ["FILONE.AI"]])(
     "keeps visitors on the alias console when served from %s",
     ([hostname]) => {
@@ -43,6 +43,7 @@ describe("console-url", () => {
     ["an unrelated host", "example.com"],
     ["a suffix attack", "filone.ai.example.com"],
     ["a host merely containing the alias", "notfilone.ai"],
+    ["the previous canonical site", "www.fil.one"],
     ["local development", "localhost"],
   ])("falls back to the canonical console for %s", ([, hostname]) => {
     servedFrom(hostname);
