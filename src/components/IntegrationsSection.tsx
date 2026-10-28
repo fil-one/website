@@ -76,7 +76,7 @@ const IntegrationsSection = ({
           </div>
         </div>
 
-        <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+        <a href="https://docs.filone.com" target="_blank" rel="noopener noreferrer" className="btn-secondary">
           {ctaLabel}
           <ArrowUpRight size={14} weight="bold" aria-hidden="true" />
         </a>

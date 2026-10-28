@@ -27,7 +27,7 @@ const NAV_LINKS: readonly NavLinkItem[] = [
   { href: "/workloads", label: { en: "Bring a workload", es: "Trae una carga de trabajo" } },
   { href: "/host", label: { en: "Host a zone", es: "Aloja una zona" } },
   { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
-  { href: "https://docs.fil.one", external: true, label: "Docs" },
+  { href: "https://docs.filone.com", external: true, label: "Docs" },
   { href: "/blog", label: "Blog" },
 ];
 
@@ -167,7 +167,7 @@ const PlatformNavbar = ({
                 href={href}
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 aria-current={isCurrent(pathname, href) ? "page" : undefined}
-                onClick={() => { if (href.includes("docs.fil.one")) trackDocsClick(href); }}
+                onClick={() => { if (href.includes("docs.filone.com")) trackDocsClick(href); }}
                 className={`${NAV_ITEM_CLASS} ${isCurrent(pathname, href) ? NAV_ITEM_ACTIVE_CLASS : "text-zinc-600"}`}
               >
                 {l(label)}
@@ -220,7 +220,7 @@ const PlatformNavbar = ({
                 href={href}
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 aria-current={isCurrent(pathname, href) ? "page" : undefined}
-                onClick={() => { setMobileOpen(false); if (href.includes("docs.fil.one")) trackDocsClick(href); }}
+                onClick={() => { setMobileOpen(false); if (href.includes("docs.filone.com")) trackDocsClick(href); }}
                 className={`${MOBILE_ROW_CLASS} -mx-3 gap-1${isCurrent(pathname, href) ? " bg-black/[0.04] font-medium" : ""}`}
               >
                 {l(label)}

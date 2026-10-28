@@ -40,7 +40,7 @@ export function trackCtaClick(
   });
 }
 
-/** Track a click on any docs.fil.one link. */
+/** Track a click on any docs.filone.com link. */
 export function trackDocsClick(linkUrl: string) {
   trackEvent("Docs Click", {
     page: window.location.pathname,

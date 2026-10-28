@@ -51,7 +51,7 @@ const makeResponse = () => ({
 const request = (overrides = {}) => ({
   method: "GET",
   url: "/api/test",
-  headers: { host: "www.fil.one", "x-forwarded-proto": "https" },
+  headers: { host: "www.filone.com", "x-forwarded-proto": "https" },
   query: {},
   ...overrides,
 });
@@ -214,7 +214,11 @@ describe("GET /blog/rss.xml", () => {
     expect(response.statusCode).toBe(200);
     expect(response.headers["content-type"]).toContain("application/rss+xml");
     expect(response.body).toContain("<title>My post</title>");
-    expect(response.body).toContain("<link>https://www.fil.one/blog/my-post</link>");
+    expect(response.body).toContain("<link>https://www.filone.com/blog/my-post</link>");
+    // GUIDs stay on the feed's original origin so subscribers don't see old posts again.
+    expect(response.body).toContain(
+      '<guid isPermaLink="false">https://www.fil.one/blog/my-post</guid>',
+    );
     expect(response.body).toContain("<category>Product launches</category>");
     expect(response.body).toContain("<pubDate>Wed, 01 Jul 2026 09:00:00 GMT</pubDate>");
     // Nothing unescaped and no draft/internal fields leaked.
@@ -236,15 +240,15 @@ describe("GET /blog/:slug (request-time meta)", () => {
   const SHELL = `<!doctype html><html lang="en"><head>
     <title>Fil One | S3 object storage built for the AI era</title>
     <meta name="description" content="default" />
-    <link rel="canonical" href="https://www.fil.one/" />
+    <link rel="canonical" href="https://www.filone.com/" />
     <meta property="og:title" content="default" />
     <meta property="og:description" content="default" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.fil.one/" />
-    <meta property="og:image" content="https://www.fil.one/og-image.png" />
+    <meta property="og:url" content="https://www.filone.com/" />
+    <meta property="og:image" content="https://www.filone.com/og-image.png" />
     <meta name="twitter:title" content="default" />
     <meta name="twitter:description" content="default" />
-    <meta name="twitter:image" content="https://www.fil.one/og-image.png" />
+    <meta name="twitter:image" content="https://www.filone.com/og-image.png" />
     <!--META_JSON_LD--></head><body><div id="root"></div></body></html>`;
 
   it("injects the article's title, canonical, og:type and JSON-LD", async () => {
@@ -262,7 +266,7 @@ describe("GET /blog/:slug (request-time meta)", () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toContain("<title>My post · Fil One</title>");
-    expect(response.body).toContain('href="https://www.fil.one/blog/my-post"');
+    expect(response.body).toContain('href="https://www.filone.com/blog/my-post"');
     expect(response.body).toContain('content="article"');
     expect(response.body).toContain('"@type":"BlogPosting"');
     expect(response.body).toContain('<div id="root"></div>');
@@ -323,7 +327,7 @@ describe("GET /blog/:slug (request-time meta)", () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toContain("<title>My post · Fil One</title>");
     expect(response.body).toContain('property="og:image"');
-    expect(response.body).toContain('property="og:url" content="https://www.fil.one/blog/my-post"');
+    expect(response.body).toContain('property="og:url" content="https://www.filone.com/blog/my-post"');
     expect(response.body).toContain('"@type":"BlogPosting"');
     // An insertion is a warning, not an error — it self-heals.
     expect(console.warn).toHaveBeenCalled();
