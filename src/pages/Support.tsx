@@ -27,7 +27,7 @@ const CATEGORY_OPTIONS = [
 
 const QUICK_LINKS = [
   { label: "Documentation", sub: "Guides, API reference & SDKs", href: "https://docs.filone.com" },
-  { label: "Status", sub: "Live system & uptime status", href: "https://status.fil.one" },
+  { label: "Status", sub: "Live system & uptime status", href: "https://status.filone.com" },
 ];
 
 const FAQS = [
