@@ -115,7 +115,4 @@ Two Vercel projects build this repo from `main`: `filone.com` serves `www.filone
 
 Keep the alias unadvertised: no public links, no marketing references, and do not add it to Search Console.
 
-Two things about `filone.ai` worth knowing before you change anything here:
-
-- It is also the domain every production Auth0 email is sent from, and a HubSpot campaign sender. Reputation damage earned by pages served here lands on the domain that delivers password resets, so treat a phishing report against the alias as a mail-deliverability incident too.
-- **`status.fil.one` links still leave the alias.** There is nothing to point them at — that subdomain does not exist on `filone.ai` — so on a network that blocks the `.one` TLD, clicking "status" from an alias page fails. Known and accepted; it goes away when the status page moves to `status.filone.com`.
+One thing about `filone.ai` worth knowing before you change anything here: it is also the domain every production Auth0 email is sent from, and a HubSpot campaign sender. Reputation damage earned by pages served here lands on the domain that delivers password resets, so treat a phishing report against the alias as a mail-deliverability incident too.
