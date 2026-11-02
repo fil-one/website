@@ -269,6 +269,6 @@ The full, current list is in the
 - [Documentation](https://docs.fil.one): quickstart, SDK examples, API reference,
   security, billing, limits
 - [Talk to sales](https://www.fil.one/contact-sales): enterprise and high-volume
-  inquiries; also at sales@fil.one
+  inquiries; also at sales@filone.com
 - [Privacy Policy](https://www.fil.one/privacy)
 - [Terms of Service](https://www.fil.one/terms)
