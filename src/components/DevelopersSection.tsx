@@ -5,7 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import { trackDocsClick } from "@/lib/analytics";
 import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
-const DOCS_URL = "https://docs.fil.one";
+const DOCS_URL = "https://docs.filone.com";
 
 const SNIPPETS: CodeSnippet[] = [
   {

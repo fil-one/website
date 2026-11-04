@@ -25,12 +25,12 @@ describe("console-url", () => {
   });
 
   it("uses the canonical console on the canonical site", () => {
-    servedFrom("www.fil.one");
-    expect(consoleOrigin()).toBe("https://app.fil.one");
+    servedFrom("www.filone.com");
+    expect(consoleOrigin()).toBe("https://app.filone.com");
   });
 
-  // The point of the whole change: a visitor on the demo alias must not be sent
-  // to the console on the domain the alias exists to avoid.
+  // The point of the alias: a visitor on it stays on the alias's own console, and is
+  // never sent to a console on another domain.
   it.for([["filone.ai"], ["www.filone.ai"], ["FILONE.AI"]])(
     "keeps visitors on the alias console when served from %s",
     ([hostname]) => {
@@ -43,10 +43,11 @@ describe("console-url", () => {
     ["an unrelated host", "example.com"],
     ["a suffix attack", "filone.ai.example.com"],
     ["a host merely containing the alias", "notfilone.ai"],
+    ["the previous canonical site", "www.fil.one"],
     ["local development", "localhost"],
   ])("falls back to the canonical console for %s", ([, hostname]) => {
     servedFrom(hostname);
-    expect(consoleOrigin()).toBe("https://app.fil.one");
+    expect(consoleOrigin()).toBe("https://app.filone.com");
   });
 
   it("appends the requested path", () => {
@@ -55,14 +56,14 @@ describe("console-url", () => {
   });
 
   it("returns the bare origin when given no path", () => {
-    servedFrom("www.fil.one");
-    expect(consoleOrigin()).toBe("https://app.fil.one");
+    servedFrom("www.filone.com");
+    expect(consoleOrigin()).toBe("https://app.filone.com");
   });
 
   it("builds the sign-up URL on the current host's console", () => {
     servedFrom("filone.ai");
     expect(signupUrl()).toBe("https://app.filone.ai/login?screen_hint=signup");
-    servedFrom("www.fil.one");
-    expect(signupUrl()).toBe("https://app.fil.one/login?screen_hint=signup");
+    servedFrom("www.filone.com");
+    expect(signupUrl()).toBe("https://app.filone.com/login?screen_hint=signup");
   });
 });
