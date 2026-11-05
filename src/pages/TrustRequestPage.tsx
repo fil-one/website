@@ -89,9 +89,8 @@ const TrustRequestPage = () => {
       fields: [
         { objectTypeId: "0-1", name: "firstname", value: form.firstname },
         { objectTypeId: "0-1", name: "lastname", value: form.lastname },
-        { objectTypeId: "0-1", name: "company", value: form.company },
+        { objectTypeId: "0-2", name: "name", value: form.company },
         { objectTypeId: "0-1", name: "email", value: form.email },
-        // TODO: match these to the HubSpot form's property names once it exists.
         // Multi-checkbox properties take semicolon-separated option values.
         { objectTypeId: "0-1", name: "trust_documents_requested", value: form.documents.join(";") },
         { objectTypeId: "0-1", name: "trust_request_note", value: form.note },
