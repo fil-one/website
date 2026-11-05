@@ -423,7 +423,7 @@ const TrustPage = () => {
           id="resources"
           eyebrow="Resources"
           title="Everything your review needs"
-          sub="Our policies are public. Our DPA and BAA are available on request."
+          sub="Our policies are public. DPA and BAA made available upon request."
           className="bg-zinc-50 border-y border-black/[0.05]"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
