@@ -26,7 +26,7 @@ const CONSOLE_ORIGIN_BY_SITE_HOST: Record<string, string> = {
 };
 
 /** Console origin for the canonical site and anything unrecognised. */
-const DEFAULT_CONSOLE_ORIGIN = "https://app.fil.one";
+const DEFAULT_CONSOLE_ORIGIN = "https://app.filone.com";
 
 /** The console origin matching the current site hostname. */
 export function consoleOrigin(): string {

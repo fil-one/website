@@ -35,6 +35,7 @@ export const routeDefs: RouteDef[] = [
   { path: "/about", load: () => import("./pages/About") },
   { path: "/trust", load: () => import("./pages/TrustPage") },
   { path: "/trust/request", load: () => import("./pages/TrustRequestPage") },
+  { path: "/brand", load: () => import("./pages/BrandPage") },
   { path: "/workloads", load: () => import("./pages/WorkloadsPage") },
   { path: "/partners", load: () => import("./pages/PartnersPage") },
   { path: "/host", load: () => import("./pages/HostPage") },

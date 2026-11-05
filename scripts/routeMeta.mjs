@@ -22,7 +22,7 @@ import {
   PRICE_AMOUNT,
 } from "../src/lib/pricing.constants.mjs";
 
-export const BASE_URL = "https://www.fil.one";
+export const BASE_URL = "https://www.filone.com";
 
 /**
  * /lp/* campaign pages are reachable but kept out of search: they ship
@@ -52,8 +52,8 @@ export const ROUTE_META = {
         "@context": "https://schema.org",
         "@type": "Organization",
         name: "Fil One",
-        url: "https://www.fil.one",
-        logo: "https://www.fil.one/fil-one-logo.svg",
+        url: "https://www.filone.com",
+        logo: "https://www.filone.com/fil-one-logo.svg",
         description:
           "S3-compatible object storage built on Filecoin. Sovereign by design, with no egress penalties and no per-request charges.",
       },
@@ -180,6 +180,11 @@ export const ROUTE_META = {
     title: "Bring a workload · Fil One",
     description:
       `Move finished checkpoints, data lakes, backups, footage and logs to Fil One at ${PRICE_PER_TB_MONTH}, and pull them back at multi-Gbps with no egress penalties.`,
+  },
+  "/brand": {
+    title: "Brand kit · Fil One",
+    description:
+      "Download the Fil One logo and symbol as SVG or PNG, plus the brand color, for press, partner, and product materials.",
   },
   "/about": {
     title: "About · Fil One",

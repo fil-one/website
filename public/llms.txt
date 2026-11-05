@@ -106,28 +106,28 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
 
 ## Pages
 
-- [Homepage](https://www.fil.one): Product overview, feature comparison, pricing, and FAQ
-- [Pricing](https://www.fil.one/pricing): Flat per-TB rate, a cost calculator
+- [Homepage](https://www.filone.com): Product overview, feature comparison, pricing, and FAQ
+- [Pricing](https://www.filone.com/pricing): Flat per-TB rate, a cost calculator
   comparing Fil One with AWS S3, Wasabi, Backblaze B2 and Cloudflare R2, and a billing FAQ
-- [Bring a workload](https://www.fil.one/workloads): AI training and models, data lakes
+- [Bring a workload](https://www.filone.com/workloads): AI training and models, data lakes
   and ETL, backup and archive, media, and security logs
-- [Host a zone](https://www.fil.one/host): S3 object storage installed in a GPU
+- [Host a zone](https://www.filone.com/host): S3 object storage installed in a GPU
   cloud's own facility, sold under the partner's brand
-- [Partners](https://www.fil.one/partners): One partner program with four roles: channel,
+- [Partners](https://www.filone.com/partners): One partner program with four roles: channel,
   technology, managed service and data center (Host a zone)
-- [About](https://www.fil.one/about): The team and company behind Fil One
-- [Talk to sales](https://www.fil.one/contact-sales): Enterprise and high-volume inquiries;
+- [About](https://www.filone.com/about): The team and company behind Fil One
+- [Talk to sales](https://www.filone.com/contact-sales): Enterprise and high-volume inquiries;
   also reachable at sales@fil.one
 
 ## Docs
 
-- [Full documentation](https://docs.fil.one): Quickstart, S3 compatibility reference,
+- [Full documentation](https://docs.filone.com): Quickstart, S3 compatibility reference,
   SDK examples, API reference, security, billing, and limits
 
 ## Optional
 
-- [Full reference for AI agents and developers](https://www.fil.one/llms-full.txt): SDK
+- [Full reference for AI agents and developers](https://www.filone.com/llms-full.txt): SDK
   examples, architecture patterns, multipart upload, presigned URLs, PyArrow/fsspec
   integration, and the supported S3 operations with regional caveats
-- [Privacy Policy](https://www.fil.one/privacy): Data handling and privacy practices
-- [Terms of Service](https://www.fil.one/terms): Terms governing use of the platform
+- [Privacy Policy](https://www.filone.com/privacy): Data handling and privacy practices
+- [Terms of Service](https://www.filone.com/terms): Terms governing use of the platform

@@ -117,7 +117,7 @@ const SectionHead = ({ copy, center = false }: { copy: SectionCopy; center?: boo
 const LandingPage = ({ config }: { config: LandingPageConfig }) => {
   const { seo, hero, problem, comparison, workloads, features, metrics, cta } = config;
 
-  useSeo({ ogImage: "https://www.fil.one/og-image.png", ...seo });
+  useSeo({ ogImage: "https://www.filone.com/og-image.png", ...seo });
 
   const problemView = useInView({ threshold: 0.05 });
   const comparisonView = useInView({ threshold: 0.05 });

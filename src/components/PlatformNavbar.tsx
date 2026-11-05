@@ -6,6 +6,7 @@ import { trackDocsClick } from "@/lib/analytics";
 import { Button } from "@/components/Button";
 import Icon, { type IconProps } from "@/components/Icon";
 import FloatingSupportButton from "@/components/FloatingSupportButton";
+import LogoContextMenu from "@/components/LogoContextMenu";
 import { localize, type Lang, type Localized } from "@/lib/i18n";
 import { consoleUrl, signupUrl } from "@/lib/console-url";
 
@@ -26,7 +27,7 @@ const NAV_LINKS: readonly NavLinkItem[] = [
   { href: "/workloads", label: { en: "Bring a workload", es: "Trae una carga de trabajo" } },
   { href: "/host", label: { en: "Host a zone", es: "Aloja una zona" } },
   { href: "/pricing", label: { en: "Pricing", es: "Precios" } },
-  { href: "https://docs.fil.one", external: true, label: "Docs" },
+  { href: "https://docs.filone.com", external: true, label: "Docs" },
   { href: "/blog", label: "Blog" },
 ];
 
@@ -47,6 +48,41 @@ const isCurrent = (pathname: string, href: string) =>
 
 const MOBILE_MENU_ID = "mobile-nav-menu";
 
+/** Each language's name in that language, for the switcher's accessible labels. */
+const LANGUAGE_NAMES: Record<Lang, string> = { en: "English", es: "Español" };
+
+/**
+ * EN/ES toggle linking to the same page in each language. Each option is a
+ * plain link, so it works without JavaScript and crawlers can follow it; the
+ * current language is marked with aria-current.
+ */
+const LanguageSwitcher = ({ lang, paths }: { lang: Lang; paths: Record<Lang, string> }) => (
+  <div
+    role="group"
+    aria-label={lang === "es" ? "Idioma" : "Language"}
+    className="flex shrink-0 items-center rounded-full border border-black/[0.08] bg-white p-0.5"
+  >
+    {(Object.keys(paths) as Lang[]).map((option) => {
+      const current = option === lang;
+      return (
+        <a
+          key={option}
+          href={paths[option]}
+          hrefLang={option}
+          lang={option}
+          aria-label={LANGUAGE_NAMES[option]}
+          aria-current={current ? "true" : undefined}
+          className={`flex h-7 min-w-[36px] items-center justify-center rounded-full px-2 font-mono text-eyebrow font-medium uppercase tracking-[0.06em] no-underline transition-colors ease-smooth ${
+            current ? "bg-zinc-950 text-white" : "text-zinc-600 hover:bg-black/[0.04] hover:text-zinc-950"
+          }`}
+        >
+          {option}
+        </a>
+      );
+    })}
+  </div>
+);
+
 
 interface PlatformNavbarProps {
   lang?: Lang;
@@ -54,9 +90,19 @@ interface PlatformNavbarProps {
   supportHref?: string;
   /** Override the "Talk to sales" CTA — defaults to the general /contact-sales page. */
   contactSalesHref?: string;
+  /**
+   * The current page's path in each language. When set, the bar shows an
+   * EN/ES switcher; pages without a translation leave it out.
+   */
+  languagePaths?: Record<Lang, string>;
 }
 
-const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHref = "/contact-sales" }: PlatformNavbarProps) => {
+const PlatformNavbar = ({
+  lang = "en",
+  supportHref = "/support",
+  contactSalesHref = "/contact-sales",
+  languagePaths,
+}: PlatformNavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { pathname } = useLocation();
 
@@ -109,9 +155,9 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
         <div className="mx-auto flex h-[58px] w-full max-w-container-wide items-center justify-between gap-4 lg:gap-5 xl:gap-8">
           {/* Left: logo and the page links as one group */}
           <div className="flex items-center gap-8 xl:gap-10">
-          <a href="/" className="flex h-11 shrink-0 items-center no-underline">
+          <LogoContextMenu lang={lang}>
             <img src={filOneLogo} alt="Fil One" className="block h-5 w-auto" />
-          </a>
+          </LogoContextMenu>
 
           {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-0.5 xl:gap-2">
@@ -121,7 +167,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                 href={href}
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 aria-current={isCurrent(pathname, href) ? "page" : undefined}
-                onClick={() => { if (href.includes("docs.fil.one")) trackDocsClick(href); }}
+                onClick={() => { if (href.includes("docs.filone.com")) trackDocsClick(href); }}
                 className={`${NAV_ITEM_CLASS} ${isCurrent(pathname, href) ? NAV_ITEM_ACTIVE_CLASS : "text-zinc-600"}`}
               >
                 {l(label)}
@@ -130,6 +176,11 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
             ))}
           </div>
           </div>
+
+          {/* Right: the language switcher (when the page has a translation),
+              then sign in and the CTAs on desktop or the hamburger on mobile */}
+          <div className="flex items-center gap-2 lg:gap-2.5 shrink-0">
+          {languagePaths && <LanguageSwitcher lang={lang} paths={languagePaths} />}
 
           {/* Desktop right: sign in, then the two CTAs */}
           <div className="hidden lg:flex items-center gap-2.5 shrink-0">
@@ -156,6 +207,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
           >
             <Icon icon={mobileOpen ? X : List} size={18} />
           </button>
+          </div>
         </div>
 
         {/* Mobile menu */}
@@ -168,7 +220,7 @@ const PlatformNavbar = ({ lang = "en", supportHref = "/support", contactSalesHre
                 href={href}
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 aria-current={isCurrent(pathname, href) ? "page" : undefined}
-                onClick={() => { setMobileOpen(false); if (href.includes("docs.fil.one")) trackDocsClick(href); }}
+                onClick={() => { setMobileOpen(false); if (href.includes("docs.filone.com")) trackDocsClick(href); }}
                 className={`${MOBILE_ROW_CLASS} -mx-3 gap-1${isCurrent(pathname, href) ? " bg-black/[0.04] font-medium" : ""}`}
               >
                 {l(label)}

@@ -17,7 +17,7 @@ import Table from "@/components/Table";
 import { signupUrl } from "@/lib/console-url";
 import { S3_ENDPOINT } from "@/lib/s3-endpoint";
 
-const DOCS_URL = "https://docs.fil.one";
+const DOCS_URL = "https://docs.filone.com";
 
 // ─── Comparison table data ─────────────────────────────────────────────────────
 const COMPARISON_ROWS = [
@@ -170,7 +170,7 @@ const NEXT_STEPS = [
     external: false,
   },
   {
-    href: "https://docs.fil.one",
+    href: "https://docs.filone.com",
     label: "Documentation",
     title: "Docs",
     body: "Quickstart, S3 compatibility reference, SDK examples, and API docs.",
@@ -361,7 +361,7 @@ const AgentsLandingPage = () => {
 
             <CodeBlock snippets={AGENT_SNIPPETS} />
 
-            <TextLink href="https://docs.fil.one/quickstart" tone="brand" arrow external>
+            <TextLink href="https://docs.filone.com/quickstart" tone="brand" arrow external>
               Full quickstart guide
             </TextLink>
           </div>
