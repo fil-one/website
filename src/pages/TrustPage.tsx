@@ -69,11 +69,8 @@ interface Framework {
   pending?: string;
 }
 
-// TODO(confirm before publishing): every status below with Legal and
-// Compliance. HIPAA assumes a signed BAA template exists; CJIS "Supported"
-// assumes the Security Addendum and personnel requirements are met; GDPR
-// assumes a DPA exists; SOC 2, ISO 27001 and NIST stay "In progress" only
-// while an auditor or compliance platform is engaged.
+// Statuses below were signed off by Legal (November 2026). Check with Legal
+// before changing any of them.
 const FRAMEWORKS: Framework[] = [
   {
     id: "hipaa",
@@ -177,8 +174,8 @@ const RESOURCE_GROUPS: { heading: string; items: { title: string; href: string; 
   },
 ];
 
-// TODO(confirm before publishing): answers mirror the site FAQ and the
-// framework statuses above; keep them in sync if either changes.
+// Answers mirror the site FAQ and the framework statuses above; keep them in
+// sync if either changes.
 const FAQS: FaqItem[] = [
   {
     q: "Is Fil One SOC 2 certified?",
