@@ -56,7 +56,7 @@ const AcceptableUsePolicy = () => {
 
       <LegalSection title="4. Regulated and Sensitive Data">
         <LegalP>
-          <strong>HIPAA.</strong> You need a signed Business Associate Agreement (BAA) with FIL One before storing any Protected Health Information (PHI). There are no exceptions. Reach out to <a href="mailto:compliance@fil.one">compliance@fil.one</a> to get that process started.
+          <strong>HIPAA.</strong> You need a signed Business Associate Agreement (BAA) with FIL One before storing any Protected Health Information (PHI). There are no exceptions. Reach out to <a href="mailto:compliance@filone.com">compliance@filone.com</a> to get that process started.
         </LegalP>
         <LegalP>
           <strong>PCI DSS.</strong> If payment cardholder data passes through or lives in your environment, PCI DSS compliance is your responsibility. FIL One does not certify any particular configuration as compliant.
@@ -80,10 +80,10 @@ const AcceptableUsePolicy = () => {
           Storing or distributing content that infringes someone else&rsquo;s copyright is not permitted. FIL One responds to valid takedown notices under the Digital Millennium Copyright Act (17 U.S.C. &sect; 512).
         </LegalP>
         <LegalP>
-          <strong>Submitting a takedown notice:</strong> Email <a href="mailto:legal@fil.one">legal@fil.one</a> with the subject line &ldquo;DMCA Notice.&rdquo; Your notice needs to include: (a) the copyrighted work at issue; (b) enough information to locate the infringing material; (c) your contact details; (d) a statement that you believe in good faith the use is unauthorized; and (e) a declaration, under penalty of perjury, that your information is accurate and you have authority to act.
+          <strong>Submitting a takedown notice:</strong> Email <a href="mailto:legal@filone.com">legal@filone.com</a> with the subject line &ldquo;DMCA Notice.&rdquo; Your notice needs to include: (a) the copyrighted work at issue; (b) enough information to locate the infringing material; (c) your contact details; (d) a statement that you believe in good faith the use is unauthorized; and (e) a declaration, under penalty of perjury, that your information is accurate and you have authority to act.
         </LegalP>
         <LegalP>
-          <strong>Disputing a takedown (counter-notice):</strong> If you believe your content was removed in error, send a counter-notice to <a href="mailto:legal@fil.one">legal@fil.one</a> including: (a) identification of what was taken down; (b) a statement under penalty of perjury that the removal was a mistake; and (c) your contact details and agreement to the jurisdiction of the relevant federal court.
+          <strong>Disputing a takedown (counter-notice):</strong> If you believe your content was removed in error, send a counter-notice to <a href="mailto:legal@filone.com">legal@filone.com</a> including: (a) identification of what was taken down; (b) a statement under penalty of perjury that the removal was a mistake; and (c) your contact details and agreement to the jurisdiction of the relevant federal court.
         </LegalP>
         <LegalP>
           Accounts that rack up multiple valid takedown notices are subject to suspension or permanent termination under our repeat infringer policy.
@@ -107,10 +107,10 @@ const AcceptableUsePolicy = () => {
 
       <LegalSection title="Contacts">
         <LegalList>
-          <li>Abuse / violations: <a href="mailto:legal@fil.one">legal@fil.one</a></li>
-          <li>DMCA notices: <a href="mailto:legal@fil.one">legal@fil.one</a> &mdash; Subject: &ldquo;DMCA Notice&rdquo;</li>
-          <li>Security disclosures: <a href="mailto:security@fil.one">security@fil.one</a></li>
-          <li>HIPAA BAA / compliance: <a href="mailto:legal@fil.one">legal@fil.one</a></li>
+          <li>Abuse / violations: <a href="mailto:legal@filone.com">legal@filone.com</a></li>
+          <li>DMCA notices: <a href="mailto:legal@filone.com">legal@filone.com</a> &mdash; Subject: &ldquo;DMCA Notice&rdquo;</li>
+          <li>Security disclosures: <a href="mailto:security@filone.com">security@filone.com</a></li>
+          <li>HIPAA BAA / compliance: <a href="mailto:legal@filone.com">legal@filone.com</a></li>
         </LegalList>
       </LegalSection>
     </LegalPage>

@@ -32,7 +32,7 @@ const faqs: FaqItem[] = [
     question: "How does Fil One approach security and compliance?",
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
-        <p>Objects are encrypted at rest by the storage gateway using AES256 (SSE-S3), and every request runs over TLS. It is on by default with nothing to configure. Keys are held by the regional storage operator that fulfills your bucket's region, so if your policy requires you to hold the keys yourself, encrypt client-side before upload with the standard S3 tooling and Fil One stores the ciphertext. Our services are delivered through top-tier data centers that are certified to ISO 27001, SOC 2, and PCI DSS standards. Reach out to <a href="mailto:security@fil.one" className="faq-link">security@fil.one</a> for compliance documentation or any other security questions.</p>
+        <p>Objects are encrypted at rest by the storage gateway using AES256 (SSE-S3), and every request runs over TLS. It is on by default with nothing to configure. Keys are held by the regional storage operator that fulfills your bucket's region, so if your policy requires you to hold the keys yourself, encrypt client-side before upload with the standard S3 tooling and Fil One stores the ciphertext. Our services are delivered through top-tier data centers that are certified to ISO 27001, SOC 2, and PCI DSS standards. Reach out to <a href="mailto:security@filone.com" className="faq-link">security@filone.com</a> for compliance documentation or any other security questions.</p>
       </div>
     ),
   },
@@ -41,7 +41,7 @@ const faqs: FaqItem[] = [
     answer: (
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
         <p>After you create an account and provision your first bucket, migrating to Fil One is straightforward with our S3-compatible interface. Integrate directly into your codebase with any S3-compatible SDK, or migrate your data with a single AWS CLI command.</p>
-        <p>Enterprise teams who want more hands-on support can work directly with our team through every step of migration. Reach out at <a href="mailto:sales@fil.one" className="faq-link">sales@fil.one</a> to get started.</p>
+        <p>Enterprise teams who want more hands-on support can work directly with our team through every step of migration. Reach out at <a href="mailto:sales@filone.com" className="faq-link">sales@filone.com</a> to get started.</p>
       </div>
     ),
   },

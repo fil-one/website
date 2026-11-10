@@ -33,8 +33,8 @@ import FaqAccordion, { type FaqItem } from "@/components/FaqAccordion";
 import { TRUST_DOCUMENTS, trustRequestHref } from "@/lib/trustDocuments";
 import { SectionHeading, SectionLabel, SectionSub } from "@/components/LandingPrimitives";
 
-const SECURITY_EMAIL = "security@fil.one";
-const LEGAL_EMAIL = "legal@fil.one";
+const SECURITY_EMAIL = "security@filone.com";
+const LEGAL_EMAIL = "legal@filone.com";
 
 const TABS = [
   { id: "infrastructure", label: "Infrastructure" },

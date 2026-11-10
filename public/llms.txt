@@ -117,7 +117,7 @@ aws s3 cp ./dataset.parquet s3://my-agent-bucket/datasets/train.parquet \
   technology, managed service and data center (Host a zone)
 - [About](https://www.filone.com/about): The team and company behind Fil One
 - [Talk to sales](https://www.filone.com/contact-sales): Enterprise and high-volume inquiries;
-  also reachable at sales@fil.one
+  also reachable at sales@filone.com
 
 ## Docs
 
