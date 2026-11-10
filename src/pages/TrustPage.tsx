@@ -297,7 +297,7 @@ const TrustPage = () => {
                 </a>
               </li>
               <li>
-                <a href="https://status.fil.one" target="_blank" rel="noopener noreferrer" className={HEADER_LINK}>
+                <a href="https://status.filone.com" target="_blank" rel="noopener noreferrer" className={HEADER_LINK}>
                   <Icon icon={Pulse} size={15} /> System status
                 </a>
               </li>
