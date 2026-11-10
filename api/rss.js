@@ -13,6 +13,11 @@ const FEED_DESCRIPTION =
   "Ideas and practical guidance on object storage, AI infrastructure, and the cost of moving data at scale.";
 const ITEM_LIMIT = 50;
 
+// Feed readers identify items by GUID, so a GUID must never change once published,
+// or subscribers see every post again. GUIDs keep the origin the feed launched on,
+// whatever host the site is canonical on now.
+const GUID_ORIGIN = "https://www.fil.one";
+
 const escapeXml = (value = "") =>
   String(value)
     .replace(/&/g, "&amp;")
@@ -41,7 +46,7 @@ const item = (post) => {
     "    <item>",
     `      <title>${escapeXml(post.name)}</title>`,
     `      <link>${escapeXml(url)}</link>`,
-    `      <guid isPermaLink="true">${escapeXml(url)}</guid>`,
+    `      <guid isPermaLink="false">${escapeXml(`${GUID_ORIGIN}/blog/${localSlug(post.slug)}`)}</guid>`,
     description ? `      <description>${escapeXml(description)}</description>` : "",
     published ? `      <pubDate>${published}</pubDate>` : "",
     ...(post.tags || []).map((tag) => `      <category>${escapeXml(tag.name)}</category>`),

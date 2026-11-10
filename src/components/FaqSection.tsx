@@ -24,7 +24,7 @@ const faqs: FaqItem[] = [
       <div className="flex flex-col gap-3 pb-5" style={{ fontFamily: "'Funnel Sans', sans-serif", fontWeight: 400, fontSize: 14, lineHeight: "1.65", color: "#71717A" }}>
         <p>Fil One speaks the S3 API, so you keep the SDK and CLI you already use. Point it at your region's endpoint, switch on path-style addressing, and authenticate with a Fil One access key. Everyday object work behaves the way your code expects: put, get, head, list, delete, presigned URLs, and multipart upload from your own SDK.</p>
         <p>Buckets are private by default. For the operation-by-operation detail, including the calls that differ between regions, see the S3 compatibility reference in the docs.</p>
-        <p>Read <a href="https://docs.fil.one" target="_blank" rel="noopener noreferrer" className="faq-link" onClick={() => trackDocsClick("https://docs.fil.one")}>Fil One docs</a>, <a href={consoleOrigin()} target="_blank" rel="noopener noreferrer" className="faq-link">access the app</a> to get started with no code required, or <a href="/contact-sales" className="faq-link">talk to someone on our team</a> to get started.</p>
+        <p>Read <a href="https://docs.filone.com" target="_blank" rel="noopener noreferrer" className="faq-link" onClick={() => trackDocsClick("https://docs.filone.com")}>Fil One docs</a>, <a href={consoleOrigin()} target="_blank" rel="noopener noreferrer" className="faq-link">access the app</a> to get started with no code required, or <a href="/contact-sales" className="faq-link">talk to someone on our team</a> to get started.</p>
       </div>
     ),
   },

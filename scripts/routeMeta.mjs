@@ -22,7 +22,7 @@ import {
   PRICE_AMOUNT,
 } from "../src/lib/pricing.constants.mjs";
 
-export const BASE_URL = "https://www.fil.one";
+export const BASE_URL = "https://www.filone.com";
 
 /**
  * /lp/* campaign pages are reachable but kept out of search: they ship
@@ -52,8 +52,8 @@ export const ROUTE_META = {
         "@context": "https://schema.org",
         "@type": "Organization",
         name: "Fil One",
-        url: "https://www.fil.one",
-        logo: "https://www.fil.one/fil-one-logo.svg",
+        url: "https://www.filone.com",
+        logo: "https://www.filone.com/fil-one-logo.svg",
         description:
           "S3-compatible object storage built on Filecoin. Sovereign by design, with no egress penalties and no per-request charges.",
       },
@@ -190,5 +190,15 @@ export const ROUTE_META = {
     title: "About · Fil One",
     description:
       "Fil One exists to put you back in control of your data. Learn who we are, why we built S3-compatible storage on Filecoin, and the principles behind it.",
+  },
+  "/trust": {
+    title: "Trust center · Fil One",
+    description:
+      "How Fil One protects your data: cryptographic proof of storage, encryption by default, certified data centers, and an honest view of our compliance status.",
+  },
+  "/trust/request": {
+    title: "Request security documents · Fil One",
+    description:
+      "Request Fil One security documents for your review, including our data processing agreement (DPA) and a Business Associate Agreement (BAA).",
   },
 };

@@ -14,7 +14,7 @@ import { trackCtaClick, trackDocsClick } from "@/lib/analytics";
 import { COMPETITORS, MONTHLY_MINIMUM_DISPLAY, PRICE_DISPLAY } from "@/lib/pricing";
 import { signupUrl } from "@/lib/console-url";
 
-const DOCS_URL = "https://docs.fil.one";
+const DOCS_URL = "https://docs.filone.com";
 const SALES_HREF = "/contact-sales";
 
 // ─── Plans ─────────────────────────────────────────────────────────────────────
